@@ -1,31 +1,56 @@
-# Hi, I'm Sunitha Kottayil 👋
+# 👋 Hi, I'm Sunitha Kottayil
 
-I'm a data technician ith a passion for data and Statistics. Welcome to my GitHub profile!
+<img align="right" src="https://avatars.githubusercontent.com/u/168712946?v=4" width="150" />
+
+Welcome to my GitHub profile! I'm a Data Technician with a deep passion for statistics, analytics, and software development. I enjoy transforming raw data into actionable insights and building user-focused solutions using Python, Power BI, and visualization tools.
+
+---
 
 ## 🔧 Technologies & Tools
-- Languages: Python , HTML
-- Tools: Github,Vs Code, Jupyter notebook, Thonny, Google collaboratory, Power BI
 
-## 🚀 Projects
-Here are some of my best projects:
+- **Languages**: Python, C#, HTML, TypeScript  
+- **Frameworks & Tools**: Power BI, Bootstrap, Git, VS Code, GitHub  
+- **Environments**: Jupyter Notebook, Thonny, Google Colab
 
-### [Quiz App](https://github.com/SunithaKottayil/Quiz-App)
-- An interactive quiz application that allows users to test their knowledge on various topics.
-- **Technologies**: Python, Tkinter, V S code 
-- [Read More](https://github.com/SunithaKottayil/Quiz-App)
+---
 
-### [Budget Planning Terminal App](https://github.com/SunithaKottayil/Budget-Planning-Tetminal-App)
-- A comprehensive budget planning application designed to help users manage their finances effectively.
-- **Technologies**:  V S code , Python
-- [Read More](https://github.com/SunithaKottayil/Budget-Planning-Tetminal-App)
+## 🚀 Featured Projects
 
-### [Personal Portfolio Website](https://github.com/SunithaKottayil/Personal-Portfolio)
-- A responsive personal portfolio website showcasing my skills, projects, and achievements.
-- **Technologies**: Python, Power B I , Tableau, SQL
-- [Read More](https://github.com/SunithaKottayil/Personal-Portfolio)
+### [📊 Budget Planning Terminal App](https://github.com/SunithaKottayil/Budget-Planning-Tetminal-App)
+Manage personal finances using Python-based terminal inputs with CSV integration.
 
-### [Data Analysis Project](https://github.com/SunithaKottayil/Data-Analysis-Project)
-- A project demonstrating data analysis and visualization techniques using Python and Power BI .
-- **Technologies**: Python, Pandas, Matplotlib, DAX
-- [Read More](https://github.com/SunithaKottayil/Data-Analysis-Project)
+### [🧠 Quiz App with Tkinter](https://github.com/SunithaKottayil/Quiz-App)
+An interactive quiz game created using Python and Tkinter GUI.
 
+### [🌐 Personal Portfolio Website](https://github.com/SunithaKottayil/Personal-Portfolio)
+Responsive portfolio site showcasing my tech stack, skills, and projects.
+
+### [📈 Data Analysis Project](https://github.com/SunithaKottayil/Data-Analysis-Project)
+Data visualization and analysis using Python, Pandas, Matplotlib, and Power BI.
+
+### [📁 PwC Virtual Internship Dashboard](https://github.com/SunithaKottayil/Pwc)
+Simulated internship project focused on customer churn and performance metrics.
+
+---
+
+## 📈 GitHub Stats
+
+![SunithaKottayil's GitHub stats](https://github-readme-stats.vercel.app/api?username=SunithaKottayil&show_icons=true&theme=default)
+
+---
+
+## 🌐 Let's Connect
+
+- [GitHub](https://github.com/SunithaKottayil)
+- [LinkedIn](#) <!-- Replace with your actual LinkedIn link -->
+- 📫 Email: [Your Email Here]
+
+---
+
+## 📝 Personal Tagline
+
+**Data Enthusiast | Python & C# Developer | Power BI Specialist | Git Advocate | Transforming Data into Stories**
+
+---
+
+> _Thanks for visiting! Feel free to check out my projects and connect with me._  
