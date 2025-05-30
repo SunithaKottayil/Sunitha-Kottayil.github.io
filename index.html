@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sunitha Kottayil | Portfolio</title>
+  <title>Sunitha Kottayil | Data Analyst & Developer</title>
   <style>
     body {
       font-family: 'Segoe UI', Arial, sans-serif;
@@ -13,12 +13,12 @@
       padding: 0;
     }
     .container {
-      max-width: 900px;
+      max-width: 920px;
       margin: 40px auto;
       background: #fff;
       border-radius: 14px;
       box-shadow: 0 2px 16px 0 rgba(44,62,80,0.12);
-      padding: 2rem 3rem 3rem 3rem;
+      padding: 2.5rem 3rem 3rem 3rem;
     }
     .avatar {
       width: 130px;
@@ -40,12 +40,13 @@
     }
     .section {
       margin-bottom: 2.5rem;
+      text-align: left;
     }
-    .skills, .projects {
+    .skills, .projects, .experience, .courses, .education, .personal-skills, .contact-list {
       list-style: none;
       padding-left: 0;
     }
-    .skills li {
+    .skills li, .personal-skills li {
       display: inline-block;
       background: #e3ecfa;
       color: #2c3e50;
@@ -54,7 +55,7 @@
       border-radius: 18px;
       font-size: 1em;
     }
-    .projects li {
+    .projects li, .experience li, .courses li, .education li {
       margin-bottom: 1em;
     }
     .projects a {
@@ -76,6 +77,20 @@
     .contact a:hover {
       background: #145a86;
     }
+    .subtitle {
+      color: #666;
+      font-size: 1.2em;
+      margin-bottom: 0.8em;
+    }
+    .date-location {
+      color: #888;
+      font-size: 0.98em;
+      margin-top: 0.2em;
+    }
+    .highlight {
+      color: #2980b9;
+      font-weight: bold;
+    }
     @media (max-width: 600px) {
       .container { padding: 1rem; }
       h1 { font-size: 1.4rem; }
@@ -87,45 +102,125 @@
   <div class="container" align="center">
     <img src="https://avatars.githubusercontent.com/u/168712946?v=4" alt="Sunitha Kottayil" class="avatar">
     <h1>Sunitha Kottayil</h1>
-    <p>Web Developer | Data Science Enthusiast | Open Source Contributor</p>
-    <div class="section">
-      <h2>About Me</h2>
+    <div class="subtitle">
+      Data Analyst | Aspiring Software Developer | Python & Power BI Specialist
+    </div>
+    <div class="section" style="text-align: center;">
       <p>
-        Hello! I'm Sunitha, passionate about creating elegant web solutions and exploring the world of data. I love building things that make a difference and enjoy collaborating on open source projects.
+        I am an enthusiastic data analyst and emerging software developer, skilled in <span class="highlight">Python, Power BI, SQL, and Microsoft Office Suite</span>. With practical experience in data analysis, visualization, and reporting, I excel at translating raw data into actionable business insights. My background in teaching and project management has sharpened my <span class="highlight">analytical, communication, and problem-solving</span> abilities. I am currently expanding my technical skill set by learning <span class="highlight">C#, TypeScript, and Git</span>. I am passionate about continuous learning and eager to contribute to innovative, data-driven solutions within collaborative teams.
       </p>
     </div>
+
     <div class="section">
-      <h2>Skills</h2>
+      <h2>Technical Skills</h2>
       <ul class="skills">
-        <li>Python</li>
+        <li>Python (Data Analysis & Scripting)</li>
+        <li>Pandas & Numpy</li>
+        <li>Power BI (DAX, Dashboards)</li>
+        <li>SQL (Fundamentals)</li>
+        <li>Excel (Advanced Functions)</li>
+        <li>C# (Learning)</li>
+        <li>TypeScript (Learning)</li>
         <li>JavaScript</li>
         <li>HTML5 & CSS3</li>
         <li>Jupyter Notebook</li>
         <li>Git & GitHub</li>
-        <li>Data Analysis</li>
-        <li>React</li>
-        <li>SQL</li>
+      </ul>
+      <ul>
+        <li><b>Data Analysis & Python:</b> Conducted end-to-end data analysis, implemented machine learning for predictive modeling and customer segmentation, and performed data cleaning and validation for improved business outcomes.</li>
+        <li><b>Power BI & Visualization:</b> Designed and maintained interactive dashboards, leveraging DAX for robust data modeling and advanced analytics.</li>
+        <li><b>Excel:</b> Applied advanced formulas, pivot tables, and data visualization for accurate and efficient reporting.</li>
+        <li><b>Project Management:</b> Coordinated tasks and timelines, ensuring successful, collaborative project delivery.</li>
       </ul>
     </div>
+
+    <div class="section">
+      <h2>Professional & Personal Skills</h2>
+      <ul class="personal-skills">
+        <li>Collaboration</li>
+        <li>Clear Communication</li>
+        <li>Adaptability</li>
+        <li>Problem Solving</li>
+        <li>Logical Reasoning</li>
+        <li>Mentorship</li>
+      </ul>
+      <ul>
+        <li><b>Collaboration:</b> Effective team player with experience building strong working relationships and achieving shared goals.</li>
+        <li><b>Communication:</b> Skilled at presenting complex technical information to diverse audiences.</li>
+        <li><b>Adaptability:</b> Quick to learn new technologies and adapt to changing environments.</li>
+        <li><b>Problem Solving:</b> Adept at identifying issues and implementing practical, data-driven solutions.</li>
+        <li><b>Mentorship:</b> Experienced in teaching and guiding beginners, especially in Python and data analysis projects.</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Project Experience</h2>
+      <ul class="experience">
+        <li>
+          <b>Data Analyst | Arla Foods, Viby</b> <span class="date-location">Feb 2024 – Jun 2024</span><br>
+          Completed a capstone project using advanced data analysis and visualization techniques on real-world business data for Arla Foods as part of a data analysis course.
+        </li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Voluntary & Teaching Experience</h2>
+      <ul class="experience">
+        <li>
+          <b>Python Instructor | ReDI School of Digital Integration</b> <span class="date-location">Aug 2024 – Present</span><br>
+          Teach Python for data analysis and project management, mentoring students through hands-on exercises and adapting lessons to diverse learning needs.
+        </li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Courses & Certifications</h2>
+      <ul class="courses">
+        <li><b>Data Analysis</b> | ReDI School of Digital Integration <span class="date-location">Feb 2024 – Jul 2024</span></li>
+        <li><b>Python for Data Science</b> | IBM SkillsBuild <span class="date-location">Mar 2024 – Jul 2024</span></li>
+        <li><b>Power BI Desktop</b> | Udemy <span class="date-location">Feb 2023 – Sep 2023</span></li>
+        <li><b>Computer Teachers Training</b> | Akshaya Centre, Kerala <span class="date-location">Mar 2021 – Dec 2021</span></li>
+        <li><b>Tally ERP</b> | <a href="https://tallyschool.com/" target="_blank">tallyschool.com</a> <span class="date-location">Feb 2020 – May 2020</span></li>
+      </ul>
+      <div class="date-location"><b>Career Break:</b> Jan 2022 – Feb 2023 &mdash; Supported an ill parent in India.</div>
+    </div>
+
+    <div class="section">
+      <h2>Education</h2>
+      <ul class="education">
+        <li><b>Data Technician (Programming)</b> | Aarhus Tech <span class="date-location">Jan 2025 – Present</span></li>
+        <li><b>HF Som Andetsprog</b> | Aarhus HF og VUC <span class="date-location">Jan 2024 – Jun 2024</span></li>
+        <li><b>Post Graduate Diploma in Montessori Education</b> | Aptitude Teachers Training Institute <span class="date-location">Jan 2020 – Dec 2020</span></li>
+        <li><b>EUX Grundforløb</b> | Aarhus Business College <span class="date-location">Aug 2018 – Jan 2020</span></li>
+        <li><b>Dansk Uddannelse 3</b> | Lærdansk, Denmark <span class="date-location">Aug 2015 – May 2018</span></li>
+        <li><b>Bachelor of Business Administration</b> | Calicut University, India <span class="date-location">Jun 2007 – Apr 2010</span></li>
+        <li><b>Additional Milestone:</b> Focused on family and pursued a Post Graduate Diploma in Banking and Finance (final exam not completed).</li>
+      </ul>
+    </div>
+
     <div class="section">
       <h2>Projects</h2>
       <ul class="projects" align="left">
         <li>
-          <a href="https://github.com/SunithaKottayil/Project1" target="_blank">Project One</a> – A web app that solves a real-world problem using modern JavaScript frameworks.
+          <a href="https://github.com/SunithaKottayil/Project1" target="_blank">Sales & Web Traffic Analysis</a> – Used Python and machine learning for business insights and marketing optimization.
         </li>
         <li>
-          <a href="https://github.com/SunithaKottayil/Project2" target="_blank">Project Two</a> – Data analysis project leveraging Jupyter and Python for insights.
+          <a href="https://github.com/SunithaKottayil/Project2" target="_blank">Power BI Dashboarding</a> – Designed dashboards with DAX for decision support.
         </li>
         <li>
-          <a href="https://github.com/SunithaKottayil/Project3" target="_blank">Project Three</a> – (Replace with your best project!)
+          <a href="https://github.com/SunithaKottayil/Project3" target="_blank">Teaching Python for Data Analysis</a> – Created and delivered beginner-friendly Python lessons focused on real data projects.
         </li>
       </ul>
     </div>
-    <div class="section contact">
+
+    <div class="section contact" style="text-align:center;">
       <h2>Contact</h2>
-      <a href="mailto:your.email@example.com">Email</a>
-      <a href="https://www.linkedin.com/in/yourprofile/" target="_blank">LinkedIn</a>
-      <a href="https://github.com/SunithaKottayil" target="_blank">GitHub</a>
+      <div class="contact-list">
+        <a href="mailto:your.email@example.com">Email</a>
+        <a href="https://www.linkedin.com/in/yourprofile/" target="_blank">LinkedIn</a>
+        <a href="https://github.com/SunithaKottayil" target="_blank">GitHub</a>
+      </div>
+      <p style="margin-top: 1em; color:#666; font-size:1em;">References available upon request.</p>
     </div>
   </div>
 </body>
