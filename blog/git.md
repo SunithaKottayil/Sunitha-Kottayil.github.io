@@ -99,3 +99,4 @@ That’s it! You’ve just learned the basics of Git. The best way to learn is t
 Git might feel strange at first, but soon it will become second nature. Happy coding!
 
 ---
+"Move git.md to blog folder"
