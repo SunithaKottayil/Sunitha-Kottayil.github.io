@@ -1000,6 +1000,41 @@
             </div>
         </section>
 
+        
+
+
+<!-- Add this HTML after your existing CTA buttons.Just replace the # with your actual blog URL -->
+<div class="blog-cta">
+    <a href="#" class="btn btn-blog">
+        📚 Read My Programming Tutorials
+    </a>
+</div>
+
+/* Add this CSS to your stylesheet */
+.blog-cta {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+}
+
+.btn-blog {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+    box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
+}
+
+.btn-blog:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 35px rgba(16, 185, 129, 0.4);
+}
+
+/* Add this to your mobile media query */
+@media (max-width: 768px) {
+    .blog-cta {
+        margin-top: 20px;
+    }
+}
+
         <!-- About Section -->
         <section id="about" class="section section-alt">
             <div class="container">
