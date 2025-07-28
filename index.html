@@ -3,15 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sunitha Kottayil - Data Analyst & Developer | Tech Learning Hub</title>
-    <meta name="description" content="Data Analyst and aspiring Software Developer specializing in Python, Power BI, and data visualization. Learn Git, GitHub, C#, TypeScript, HTML, CSS through practical tutorials.">
-    <meta name="keywords" content="Data Analyst, Software Developer, Python, Power BI, TypeScript, C#, Data Science, Portfolio">
-    <meta name="author" content="Sunitha Kottayil">
-    
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Sunitha Kottayil - Data Analyst & Software Developer">
-    <meta property="og:description" content="Professional portfolio showcasing expertise in data analysis, software development, and technical education">
-    <meta property="og:type" content="website">
+    <title>Sunitha Kottayil | Data Analyst & Software Developer</title>
+    <meta name="description" content="Experienced Data Analyst and Software Developer specializing in Python, Power BI, and modern web technologies. Transforming data into actionable insights.">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,12 +14,9 @@
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Prism.js for syntax highlighting -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
-    
     <style>
         :root {
-            /* Color Palette */
+            /* Modern Color Palette */
             --primary-50: #f0f9ff;
             --primary-100: #e0f2fe;
             --primary-200: #bae6fd;
@@ -45,20 +35,14 @@
             --secondary-400: #e879f9;
             --secondary-500: #d946ef;
             --secondary-600: #c026d3;
-            --secondary-700: #a21caf;
-            --secondary-800: #86198f;
-            --secondary-900: #701a75;
             
-            --accent-50: #f0fdf4;
-            --accent-100: #dcfce7;
-            --accent-200: #bbf7d0;
-            --accent-300: #86efac;
-            --accent-400: #4ade80;
-            --accent-500: #22c55e;
-            --accent-600: #16a34a;
-            --accent-700: #15803d;
-            --accent-800: #166534;
-            --accent-900: #14532d;
+            --accent-50: #ecfdf5;
+            --accent-100: #d1fae5;
+            --accent-200: #a7f3d0;
+            --accent-300: #6ee7b7;
+            --accent-400: #34d399;
+            --accent-500: #10b981;
+            --accent-600: #059669;
             
             /* Neutral Colors */
             --gray-50: #f8fafc;
@@ -71,12 +55,6 @@
             --gray-700: #334155;
             --gray-800: #1e293b;
             --gray-900: #0f172a;
-            
-            /* Semantic Colors */
-            --success: var(--accent-500);
-            --warning: #f59e0b;
-            --error: #ef4444;
-            --info: var(--primary-500);
             
             /* Typography */
             --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -93,31 +71,42 @@
             --space-3xl: 4rem;
             --space-4xl: 6rem;
             
+            /* Modern Gradients */
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --gradient-rainbow: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
+            --gradient-mesh: radial-gradient(at 40% 20%, hsla(28,100%,74%,1) 0px, transparent 50%),
+                            radial-gradient(at 80% 0%, hsla(189,100%,56%,1) 0px, transparent 50%),
+                            radial-gradient(at 0% 50%, hsla(355,100%,93%,1) 0px, transparent 50%),
+                            radial-gradient(at 80% 50%, hsla(340,100%,76%,1) 0px, transparent 50%),
+                            radial-gradient(at 0% 100%, hsla(22,100%,77%,1) 0px, transparent 50%),
+                            radial-gradient(at 80% 100%, hsla(242,100%,70%,1) 0px, transparent 50%),
+                            radial-gradient(at 0% 0%, hsla(343,100%,76%,1) 0px, transparent 50%);
+            
+            /* Shadows & Effects */
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+            --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+            --shadow-glow: 0 0 50px rgba(102, 126, 234, 0.3);
+            --shadow-neon: 0 0 5px theme('colors.cyan.400'), 0 0 20px theme('colors.cyan.400'), 0 0 35px theme('colors.cyan.400'), 0 0 50px theme('colors.cyan.400');
+            
             /* Border Radius */
             --radius-sm: 0.375rem;
             --radius-md: 0.5rem;
             --radius-lg: 0.75rem;
             --radius-xl: 1rem;
             --radius-2xl: 1.5rem;
+            --radius-3xl: 2rem;
             --radius-full: 9999px;
             
-            /* Shadows */
-            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-            --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
-            
-            /* Gradients */
-            --gradient-primary: linear-gradient(135deg, var(--primary-600) 0%, var(--primary-800) 100%);
-            --gradient-secondary: linear-gradient(135deg, var(--secondary-500) 0%, var(--secondary-700) 100%);
-            --gradient-accent: linear-gradient(135deg, var(--accent-400) 0%, var(--accent-600) 100%);
-            --gradient-rainbow: linear-gradient(135deg, var(--primary-500) 0%, var(--secondary-500) 50%, var(--accent-500) 100%);
-            
             /* Transitions */
-            --transition-fast: 0.15s ease-in-out;
-            --transition-normal: 0.3s ease-in-out;
-            --transition-slow: 0.5s ease-in-out;
+            --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
         }
 
         /* Dark Theme */
@@ -156,6 +145,24 @@
             -moz-osx-font-smoothing: grayscale;
         }
 
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--gray-100);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--gradient-primary);
+            border-radius: var(--radius-full);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--gradient-secondary);
+        }
+
         /* Utility Classes */
         .container {
             max-width: 1200px;
@@ -170,9 +177,6 @@
         }
 
         .text-center { text-align: center; }
-        .text-left { text-align: left; }
-        .text-right { text-align: right; }
-
         .flex { display: flex; }
         .flex-col { flex-direction: column; }
         .items-center { align-items: center; }
@@ -182,32 +186,30 @@
         .gap-md { gap: var(--space-md); }
         .gap-lg { gap: var(--space-lg); }
 
-        .hidden { display: none; }
-        .visible { display: block; }
+        /* Animated Background */
+        .bg-animated {
+            background: var(--gradient-mesh);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
 
-        /* Typography */
-        .text-xs { font-size: 0.75rem; }
-        .text-sm { font-size: 0.875rem; }
-        .text-base { font-size: 1rem; }
-        .text-lg { font-size: 1.125rem; }
-        .text-xl { font-size: 1.25rem; }
-        .text-2xl { font-size: 1.5rem; }
-        .text-3xl { font-size: 1.875rem; }
-        .text-4xl { font-size: 2.25rem; }
-        .text-5xl { font-size: 3rem; }
-        .text-6xl { font-size: 3.75rem; }
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
 
-        .font-light { font-weight: 300; }
-        .font-normal { font-weight: 400; }
-        .font-medium { font-weight: 500; }
-        .font-semibold { font-weight: 600; }
-        .font-bold { font-weight: 700; }
-        .font-extrabold { font-weight: 800; }
+        /* Glassmorphism */
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: var(--shadow-xl);
+        }
 
-        .text-primary { color: var(--primary-600); }
-        .text-secondary { color: var(--secondary-600); }
-        .text-accent { color: var(--accent-600); }
-        .text-muted { color: var(--gray-500); }
+        [data-theme="dark"] .glass {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
 
         /* Progress Bar */
         .progress-bar {
@@ -226,25 +228,25 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(248, 250, 252, 0.95);
+            background: rgba(248, 250, 252, 0.8);
             backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--gray-200);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
             z-index: 1000;
             transition: all var(--transition-normal);
         }
 
         .header.scrolled {
-            background: rgba(248, 250, 252, 0.98);
+            background: rgba(248, 250, 252, 0.95);
             box-shadow: var(--shadow-lg);
         }
 
         [data-theme="dark"] .header {
-            background: rgba(15, 23, 42, 0.95);
-            border-bottom-color: var(--gray-700);
+            background: rgba(15, 23, 42, 0.8);
+            border-bottom-color: rgba(255, 255, 255, 0.1);
         }
 
         [data-theme="dark"] .header.scrolled {
-            background: rgba(15, 23, 42, 0.98);
+            background: rgba(15, 23, 42, 0.95);
         }
 
         .nav {
@@ -264,10 +266,23 @@
             background-clip: text;
             text-decoration: none;
             transition: all var(--transition-normal);
+            position: relative;
         }
 
-        .logo:hover {
-            transform: scale(1.05);
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            transition: width var(--transition-normal);
+            border-radius: var(--radius-full);
+        }
+
+        .logo:hover::after {
+            width: 100%;
         }
 
         .nav-links {
@@ -284,35 +299,33 @@
             font-size: 0.95rem;
             position: relative;
             transition: all var(--transition-normal);
-            padding: var(--space-sm) 0;
+            padding: var(--space-sm) var(--space-md);
+            border-radius: var(--radius-lg);
         }
 
-        .nav-link::after {
+        .nav-link::before {
             content: '';
             position: absolute;
-            bottom: -2px;
+            top: 0;
             left: 0;
-            width: 0;
-            height: 2px;
+            right: 0;
+            bottom: 0;
             background: var(--gradient-primary);
-            transition: width var(--transition-normal);
-            border-radius: var(--radius-full);
+            opacity: 0;
+            border-radius: var(--radius-lg);
+            transition: opacity var(--transition-normal);
+            z-index: -1;
         }
 
-        .nav-link:hover::after,
-        .nav-link.active::after {
-            width: 100%;
+        .nav-link:hover::before,
+        .nav-link.active::before {
+            opacity: 0.1;
         }
 
         .nav-link:hover,
         .nav-link.active {
             color: var(--primary-600);
-        }
-
-        .nav-actions {
-            display: flex;
-            align-items: center;
-            gap: var(--space-md);
+            transform: translateY(-2px);
         }
 
         .theme-toggle {
@@ -320,32 +333,35 @@
             border: none;
             color: var(--gray-600);
             cursor: pointer;
-            padding: var(--space-sm);
-            border-radius: var(--radius-md);
+            padding: var(--space-md);
+            border-radius: var(--radius-full);
             transition: all var(--transition-normal);
-            font-size: 1.1rem;
+            font-size: 1.2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .theme-toggle::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-primary);
+            opacity: 0;
+            border-radius: var(--radius-full);
+            transition: opacity var(--transition-normal);
+            z-index: -1;
+        }
+
+        .theme-toggle:hover::before {
+            opacity: 0.1;
         }
 
         .theme-toggle:hover {
-            background: var(--gray-100);
             color: var(--primary-600);
-            transform: scale(1.1);
-        }
-
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--gray-700);
-            font-size: 1.5rem;
-            cursor: pointer;
-            padding: var(--space-sm);
-            border-radius: var(--radius-md);
-            transition: all var(--transition-normal);
-        }
-
-        .mobile-menu-btn:hover {
-            background: var(--gray-100);
+            transform: scale(1.1) rotate(180deg);
         }
 
         /* Hero Section */
@@ -353,26 +369,57 @@
             min-height: 100vh;
             display: flex;
             align-items: center;
-            background: linear-gradient(135deg, var(--primary-50) 0%, var(--gray-50) 50%, var(--secondary-50) 100%);
             position: relative;
             overflow: hidden;
             padding-top: 80px;
         }
 
-        .hero::before {
-            content: '';
+        .hero-bg {
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%230ea5e9' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            animation: float 20s ease-in-out infinite;
+            background: var(--gradient-mesh);
+            background-size: 400% 400%;
+            animation: gradientShift 20s ease infinite;
+            opacity: 0.1;
+        }
+
+        .hero-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--primary-500);
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .particle:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
+        .particle:nth-child(2) { top: 80%; left: 20%; animation-delay: 1s; }
+        .particle:nth-child(3) { top: 40%; left: 90%; animation-delay: 2s; }
+        .particle:nth-child(4) { top: 70%; left: 80%; animation-delay: 3s; }
+        .particle:nth-child(5) { top: 10%; left: 70%; animation-delay: 4s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-20px) rotate(120deg); }
+            66% { transform: translateY(10px) rotate(240deg); }
         }
 
         .hero-content {
             position: relative;
-            z-index: 1;
+            z-index: 2;
             max-width: 900px;
             margin: 0 auto;
             text-align: center;
@@ -382,20 +429,22 @@
             display: inline-flex;
             align-items: center;
             gap: var(--space-sm);
-            background: var(--primary-100);
+            background: var(--glass);
+            backdrop-filter: blur(20px);
             color: var(--primary-700);
-            padding: var(--space-sm) var(--space-lg);
+            padding: var(--space-md) var(--space-xl);
             border-radius: var(--radius-full);
             font-size: var(--text-sm);
             font-weight: 600;
             margin-bottom: var(--space-xl);
-            border: 1px solid var(--primary-200);
-            animation: pulse 2s infinite;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: pulse 3s infinite;
+            box-shadow: var(--shadow-lg);
         }
 
         .hero-title {
             font-family: var(--font-display);
-            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-size: clamp(2.5rem, 5vw, 5rem);
             font-weight: 800;
             margin-bottom: var(--space-lg);
             line-height: 1.1;
@@ -407,13 +456,30 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            animation: gradient-shift 3s ease-in-out infinite;
+            background-size: 400% 400%;
+            animation: gradientShift 3s ease-in-out infinite;
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero-name::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-rainbow);
+            opacity: 0.2;
+            filter: blur(20px);
+            z-index: -1;
+            animation: gradientShift 3s ease-in-out infinite;
         }
 
         .hero-subtitle {
-            font-size: 1.375rem;
+            font-size: 1.5rem;
             color: var(--gray-600);
-            margin-bottom: var(--space-lg);
+            margin-bottom: var(--space-xl);
             font-weight: 500;
             line-height: 1.4;
         }
@@ -436,51 +502,13 @@
             margin-bottom: var(--space-3xl);
         }
 
-        .hero-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: var(--space-xl);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: var(--space-lg);
-            background: rgba(255, 255, 255, 0.7);
-            border-radius: var(--radius-xl);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--gray-200);
-            transition: all var(--transition-normal);
-        }
-
-        .stat-item:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: var(--primary-600);
-            display: block;
-            font-family: var(--font-mono);
-        }
-
-        .stat-label {
-            font-size: var(--text-sm);
-            color: var(--gray-600);
-            font-weight: 500;
-            margin-top: var(--space-xs);
-        }
-
-        /* Buttons */
+        /* Enhanced Buttons */
         .btn {
             display: inline-flex;
             align-items: center;
             gap: var(--space-sm);
             padding: var(--space-lg) var(--space-2xl);
-            border-radius: var(--radius-xl);
+            border-radius: var(--radius-2xl);
             text-decoration: none;
             font-weight: 600;
             font-size: 1rem;
@@ -490,6 +518,7 @@
             position: relative;
             overflow: hidden;
             white-space: nowrap;
+            box-shadow: var(--shadow-lg);
         }
 
         .btn::before {
@@ -499,7 +528,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
             transition: left var(--transition-slow);
         }
 
@@ -510,46 +539,85 @@
         .btn-primary {
             background: var(--gradient-primary);
             color: white;
-            box-shadow: var(--shadow-lg);
+            box-shadow: var(--shadow-xl);
         }
 
         .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-xl);
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: var(--shadow-2xl), var(--shadow-glow);
         }
 
         .btn-secondary {
-            background: var(--gradient-secondary);
-            color: white;
-            box-shadow: var(--shadow-lg);
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            color: var(--gray-800);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .btn-secondary:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-xl);
-        }
-
-        .btn-outline {
-            background: transparent;
-            color: var(--primary-600);
-            border: 2px solid var(--primary-600);
-        }
-
-        .btn-outline:hover {
-            background: var(--primary-600);
+            background: var(--gradient-secondary);
             color: white;
-            transform: translateY(-2px);
+            transform: translateY(-4px) scale(1.05);
         }
 
-        .btn-ghost {
-            background: var(--gray-100);
-            color: var(--gray-700);
-            border: 1px solid var(--gray-200);
+        /* Stats Grid */
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: var(--space-xl);
+            max-width: 700px;
+            margin: 0 auto;
         }
 
-        .btn-ghost:hover {
-            background: var(--gray-200);
-            transform: translateY(-2px);
+        .stat-item {
+            text-align: center;
+            padding: var(--space-xl);
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border-radius: var(--radius-2xl);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all var(--transition-normal);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+            transform: scaleX(0);
+            transition: transform var(--transition-normal);
+        }
+
+        .stat-item:hover::before {
+            transform: scaleX(1);
+        }
+
+        .stat-item:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: var(--shadow-2xl);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+            font-family: var(--font-mono);
+        }
+
+        .stat-label {
+            font-size: var(--text-sm);
+            color: var(--gray-600);
+            font-weight: 500;
+            margin-top: var(--space-xs);
         }
 
         /* Sections */
@@ -568,14 +636,16 @@
 
         .section-badge {
             display: inline-block;
-            background: var(--primary-100);
+            background: var(--glass);
+            backdrop-filter: blur(20px);
             color: var(--primary-700);
             padding: var(--space-sm) var(--space-lg);
             border-radius: var(--radius-full);
             font-size: var(--text-sm);
             font-weight: 600;
             margin-bottom: var(--space-lg);
-            border: 1px solid var(--primary-200);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: var(--shadow-md);
         }
 
         .section-title {
@@ -596,20 +666,17 @@
             margin: 0 auto;
         }
 
-        .section-alt {
-            background: white;
-        }
-
-        /* Cards */
+        /* Enhanced Cards */
         .card {
-            background: white;
-            border: 1px solid var(--gray-200);
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: var(--radius-2xl);
             padding: var(--space-2xl);
             transition: all var(--transition-normal);
             position: relative;
             overflow: hidden;
-            box-shadow: var(--shadow-sm);
+            box-shadow: var(--shadow-lg);
         }
 
         .card::before {
@@ -629,35 +696,29 @@
         }
 
         .card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-2xl);
-            border-color: var(--primary-200);
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: var(--shadow-2xl), var(--shadow-glow);
+            border-color: rgba(255, 255, 255, 0.4);
         }
 
         .card-icon {
             width: 4rem;
             height: 4rem;
             background: var(--gradient-primary);
-            border-radius: var(--radius-xl);
+            border-radius: var(--radius-2xl);
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             font-size: 1.75rem;
             margin-bottom: var(--space-lg);
+            box-shadow: var(--shadow-lg);
+            transition: all var(--transition-normal);
         }
 
-        .card-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: var(--space-md);
-            color: var(--gray-900);
-        }
-
-        .card-description {
-            color: var(--gray-600);
-            line-height: 1.6;
-            margin-bottom: var(--space-lg);
+        .card:hover .card-icon {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: var(--shadow-xl);
         }
 
         /* Grid Layouts */
@@ -667,437 +728,112 @@
         }
 
         .grid-2 {
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
         }
 
         .grid-3 {
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         }
 
         .grid-4 {
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         }
 
-        /* Blog Styles */
-        .blog-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-            gap: var(--space-xl);
-        }
-
-        .blog-card {
-            background: white;
+        /* Enhanced Skills Section */
+        .skill-category {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: var(--radius-2xl);
-            box-shadow: var(--shadow-md);
-            overflow: hidden;
+            padding: var(--space-2xl);
             transition: all var(--transition-normal);
-            border: 1px solid var(--gray-200);
+            position: relative;
+            overflow: hidden;
         }
 
-        .blog-card:hover {
+        .skill-category::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-secondary);
+            transform: scaleX(0);
+            transition: transform var(--transition-normal);
+        }
+
+        .skill-category:hover::before {
+            transform: scaleX(1);
+        }
+
+        .skill-category:hover {
             transform: translateY(-8px);
             box-shadow: var(--shadow-2xl);
         }
 
-        .blog-image {
-            height: 220px;
-            background: var(--gradient-secondary);
+        .skill-tags {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 3rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .blog-content {
-            padding: var(--space-xl);
-        }
-
-        .blog-meta {
-            display: flex;
-            align-items: center;
-            gap: var(--space-lg);
-            margin-bottom: var(--space-md);
-            font-size: var(--text-sm);
-            color: var(--gray-500);
-        }
-
-        .blog-category {
-            background: var(--secondary-100);
-            color: var(--secondary-700);
-            padding: var(--space-xs) var(--space-md);
-            border-radius: var(--radius-full);
-            font-weight: 600;
-            font-size: var(--text-xs);
-            border: 1px solid var(--secondary-200);
-        }
-
-        .blog-title {
-            font-size: 1.375rem;
-            font-weight: 700;
-            margin-bottom: var(--space-md);
-            color: var(--gray-900);
-            line-height: 1.3;
-        }
-
-        .blog-title a {
-            color: inherit;
-            text-decoration: none;
-            transition: color var(--transition-normal);
-        }
-
-        .blog-title a:hover {
-            color: var(--primary-600);
-        }
-
-        .blog-excerpt {
-            color: var(--gray-600);
-            line-height: 1.6;
-            margin-bottom: var(--space-lg);
-        }
-
-        .blog-read-more {
-            color: var(--primary-600);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: var(--text-sm);
-            display: inline-flex;
-            align-items: center;
-            gap: var(--space-sm);
-            transition: all var(--transition-normal);
-        }
-
-        .blog-read-more:hover {
-            color: var(--primary-700);
-            gap: var(--space-md);
-        }
-
-        /* Blog Post Styles */
-        .blog-post {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: var(--space-3xl) 0;
-        }
-
-        .blog-post-header {
-            text-align: center;
-            margin-bottom: var(--space-3xl);
-            padding-bottom: var(--space-xl);
-            border-bottom: 2px solid var(--gray-200);
-        }
-
-        .blog-post-title {
-            font-family: var(--font-display);
-            font-size: clamp(2rem, 4vw, 3rem);
-            font-weight: 800;
-            margin-bottom: var(--space-lg);
-            color: var(--gray-900);
-            line-height: 1.2;
-        }
-
-        .blog-post-meta {
-            display: flex;
-            justify-content: center;
-            gap: var(--space-xl);
-            color: var(--gray-500);
-            font-size: var(--text-sm);
-            margin-bottom: var(--space-lg);
             flex-wrap: wrap;
+            gap: var(--space-sm);
         }
 
-        .blog-post-content {
+        .skill-tag {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
             color: var(--gray-700);
-            line-height: 1.8;
-            font-size: 1.125rem;
-        }
-
-        .blog-post-content h2 {
-            font-size: 2rem;
-            font-weight: 700;
-            margin: var(--space-3xl) 0 var(--space-lg) 0;
-            color: var(--gray-900);
-        }
-
-        .blog-post-content h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin: var(--space-xl) 0 var(--space-md) 0;
-            color: var(--gray-900);
-        }
-
-        .blog-post-content p {
-            margin-bottom: var(--space-lg);
-        }
-
-        .blog-post-content ul,
-        .blog-post-content ol {
-            margin-bottom: var(--space-lg);
-            padding-left: var(--space-xl);
-        }
-
-        .blog-post-content li {
-            margin-bottom: var(--space-sm);
-        }
-
-        .blog-post-content code {
-            background: var(--gray-100);
-            padding: var(--space-xs) var(--space-sm);
-            border-radius: var(--radius-sm);
-            font-family: var(--font-mono);
-            font-size: 0.9rem;
-        }
-
-        .blog-post-content pre {
-            background: var(--gray-900);
-            color: var(--gray-100);
-            padding: var(--space-xl);
-            border-radius: var(--radius-lg);
-            overflow-x: auto;
-            margin: var(--space-xl) 0;
-            font-family: var(--font-mono);
-            font-size: 0.9rem;
-            line-height: 1.5;
-            position: relative;
-        }
-
-        .blog-post-content blockquote {
-            border-left: 4px solid var(--primary-600);
-            padding-left: var(--space-xl);
-            margin: var(--space-xl) 0;
-            font-style: italic;
-            color: var(--gray-600);
-            background: var(--primary-50);
-            padding: var(--space-lg) var(--space-xl);
-            border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
-        }
-
-        /* Table of Contents */
-        .toc {
-            background: var(--gray-50);
-            border: 1px solid var(--gray-200);
-            border-radius: var(--radius-lg);
-            padding: var(--space-lg);
-            margin: var(--space-xl) 0;
-        }
-
-        .toc h4 {
-            font-size: 1.125rem;
-            font-weight: 600;
-            margin-bottom: var(--space-md);
-            color: var(--gray-900);
-        }
-
-        .toc ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .toc li {
-            margin-bottom: var(--space-sm);
-        }
-
-        .toc a {
-            color: var(--primary-600);
-            text-decoration: none;
-            font-size: 0.95rem;
-            transition: color var(--transition-normal);
-        }
-
-        .toc a:hover {
-            color: var(--primary-700);
-        }
-
-        /* Code Block with Copy Button */
-        .code-block {
-            position: relative;
-        }
-
-        .copy-btn {
-            position: absolute;
-            top: var(--space-md);
-            right: var(--space-md);
-            background: var(--gray-700);
-            color: white;
-            border: none;
-            padding: var(--space-sm) var(--space-md);
-            border-radius: var(--radius-sm);
-            font-size: var(--text-xs);
-            cursor: pointer;
-            transition: all var(--transition-normal);
-            opacity: 0.7;
-        }
-
-        .copy-btn:hover {
-            opacity: 1;
-            background: var(--gray-600);
-        }
-
-        .copy-btn.copied {
-            background: var(--success);
-        }
-
-        /* Newsletter Signup */
-        .newsletter {
-            background: var(--primary-50);
-            border: 1px solid var(--primary-200);
-            border-radius: var(--radius-lg);
-            padding: var(--space-xl);
-            margin: var(--space-2xl) 0;
-            text-align: center;
-        }
-
-        .newsletter h4 {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: var(--space-md);
-            color: var(--gray-900);
-        }
-
-        .newsletter p {
-            color: var(--gray-600);
-            margin-bottom: var(--space-lg);
-        }
-
-        .newsletter-form {
-            display: flex;
-            gap: var(--space-md);
-            max-width: 400px;
-            margin: 0 auto;
-        }
-
-        .newsletter-form input {
-            flex: 1;
-            padding: var(--space-md);
-            border: 1px solid var(--gray-300);
-            border-radius: var(--radius-md);
-            font-size: 0.95rem;
-        }
-
-        .newsletter-form button {
-            padding: var(--space-md) var(--space-lg);
-            background: var(--primary-600);
-            color: white;
-            border: none;
-            border-radius: var(--radius-md);
-            font-weight: 600;
-            cursor: pointer;
-            transition: background var(--transition-normal);
-        }
-
-        .newsletter-form button:hover {
-            background: var(--primary-700);
-        }
-
-        /* Related Posts */
-        .related-posts {
-            margin-top: var(--space-3xl);
-            padding-top: var(--space-xl);
-            border-top: 2px solid var(--gray-200);
-        }
-
-        .related-posts h3 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: var(--space-lg);
-            color: var(--gray-900);
-        }
-
-        .related-posts-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: var(--space-lg);
-        }
-
-        .related-post {
-            background: white;
-            border: 1px solid var(--gray-200);
-            border-radius: var(--radius-lg);
-            padding: var(--space-lg);
-            transition: all var(--transition-normal);
-        }
-
-        .related-post:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .related-post h4 {
-            font-size: 1.125rem;
-            font-weight: 600;
-            margin-bottom: var(--space-sm);
-        }
-
-        .related-post h4 a {
-            color: var(--gray-900);
-            text-decoration: none;
-            transition: color var(--transition-normal);
-        }
-
-        .related-post h4 a:hover {
-            color: var(--primary-600);
-        }
-
-        .related-post p {
-            color: var(--gray-600);
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-
-        /* Social Share */
-        .social-share {
-            margin: var(--space-2xl) 0;
-            padding: var(--space-lg);
-            background: var(--gray-50);
-            border-radius: var(--radius-lg);
-            text-align: center;
-        }
-
-        .social-share h4 {
-            font-size: 1.125rem;
-            font-weight: 600;
-            margin-bottom: var(--space-md);
-            color: var(--gray-900);
-        }
-
-        .social-share-buttons {
-            display: flex;
-            justify-content: center;
-            gap: var(--space-md);
-            flex-wrap: wrap;
-        }
-
-        .social-share-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: var(--space-sm);
             padding: var(--space-sm) var(--space-lg);
-            border-radius: var(--radius-md);
-            text-decoration: none;
+            border-radius: var(--radius-full);
+            font-size: var(--text-sm);
             font-weight: 500;
-            font-size: 0.9rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
             transition: all var(--transition-normal);
+            cursor: default;
         }
 
-        .social-share-btn.twitter {
-            background: #1da1f2;
+        .skill-tag:hover {
+            background: var(--gradient-primary);
             color: white;
-        }
-
-        .social-share-btn.linkedin {
-            background: #0077b5;
-            color: white;
-        }
-
-        .social-share-btn.facebook {
-            background: #1877f2;
-            color: white;
-        }
-
-        .social-share-btn:hover {
-            transform: translateY(-2px);
+            transform: translateY(-2px) scale(1.05);
             box-shadow: var(--shadow-md);
+        }
+
+        /* Contact Form */
+        .contact-form {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            padding: var(--space-2xl);
+            border-radius: var(--radius-2xl);
+            box-shadow: var(--shadow-xl);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: var(--space-lg);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: var(--radius-xl);
+            font-size: 1rem;
+            transition: all var(--transition-normal);
+            font-family: inherit;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            color: var(--gray-800);
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary-500);
+            box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.1);
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 140px;
         }
 
         /* Footer */
@@ -1105,6 +841,20 @@
             background: var(--gray-900);
             color: white;
             padding: var(--space-3xl) 0 var(--space-xl);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-mesh);
+            opacity: 0.1;
+            animation: gradientShift 20s ease infinite;
         }
 
         .footer-content {
@@ -1114,6 +864,8 @@
             flex-wrap: wrap;
             gap: var(--space-xl);
             margin-bottom: var(--space-xl);
+            position: relative;
+            z-index: 1;
         }
 
         .footer-logo {
@@ -1124,12 +876,8 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-        }
-
-        .footer-tagline {
-            color: var(--gray-400);
-            margin-top: var(--space-sm);
-            font-size: var(--text-sm);
+            background-size: 400% 400%;
+            animation: gradientShift 3s ease-in-out infinite;
         }
 
         .footer-social {
@@ -1142,29 +890,24 @@
             font-size: 1.5rem;
             transition: all var(--transition-normal);
             padding: var(--space-md);
-            border-radius: var(--radius-lg);
-            background: var(--gray-800);
+            border-radius: var(--radius-xl);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .footer-social a:hover {
             color: white;
-            background: var(--primary-600);
-            transform: translateY(-2px);
-        }
-
-        .footer-bottom {
-            padding-top: var(--space-xl);
-            border-top: 1px solid var(--gray-700);
-            text-align: center;
-            color: var(--gray-400);
-            font-size: var(--text-sm);
+            background: var(--gradient-primary);
+            transform: translateY(-4px) scale(1.1);
+            box-shadow: var(--shadow-xl);
         }
 
         /* Animations */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(50px);
             }
             to {
                 opacity: 1;
@@ -1172,36 +915,52 @@
             }
         }
 
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0px);
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-100px);
             }
-            50% {
-                transform: translateY(-20px);
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
             }
         }
 
         @keyframes pulse {
             0%, 100% {
                 transform: scale(1);
+                opacity: 1;
             }
             50% {
                 transform: scale(1.05);
+                opacity: 0.8;
             }
         }
 
-        @keyframes gradient-shift {
-            0%, 100% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink {
+            0%, 50% { border-color: transparent; }
+            51%, 100% { border-color: var(--primary-500); }
         }
 
         .fade-in {
             opacity: 0;
-            transform: translateY(30px);
+            transform: translateY(50px);
             transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
@@ -1212,7 +971,7 @@
 
         .slide-in-left {
             opacity: 0;
-            transform: translateX(-50px);
+            transform: translateX(-100px);
             transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
@@ -1223,7 +982,7 @@
 
         .slide-in-right {
             opacity: 0;
-            transform: translateX(50px);
+            transform: translateX(100px);
             transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
@@ -1232,59 +991,132 @@
             transform: translateX(0);
         }
 
-        /* Blog Page Styles */
-        .blog-page {
-            display: none;
-            min-height: 100vh;
-            padding-top: 80px;
-        }
-
-        .blog-page.active {
-            display: block;
-        }
-
-        .blog-filters {
-            display: flex;
-            justify-content: center;
-            gap: var(--space-md);
-            margin-bottom: var(--space-3xl);
-            flex-wrap: wrap;
-        }
-
-        .filter-btn {
-            background: var(--gray-100);
-            color: var(--gray-700);
-            border: none;
-            padding: var(--space-md) var(--space-xl);
-            border-radius: var(--radius-full);
-            font-weight: 500;
-            cursor: pointer;
+        /* Enhanced Projects */
+        .project-card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border-radius: var(--radius-2xl);
+            box-shadow: var(--shadow-xl);
+            overflow: hidden;
             transition: all var(--transition-normal);
-            border: 1px solid var(--gray-200);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
         }
 
-        .filter-btn.active,
-        .filter-btn:hover {
-            background: var(--primary-600);
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-primary);
+            opacity: 0;
+            transition: opacity var(--transition-normal);
+            z-index: -1;
+        }
+
+        .project-card:hover::before {
+            opacity: 0.05;
+        }
+
+        .project-card:hover {
+            transform: translateY(-16px) scale(1.02);
+            box-shadow: var(--shadow-2xl), var(--shadow-glow);
+        }
+
+        .project-image {
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             color: white;
-            border-color: var(--primary-600);
+            font-size: 4rem;
+            position: relative;
+            overflow: hidden;
+            background: var(--gradient-primary);
+        }
+
+        .project-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M20 20c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10zm10 0c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10z'/%3E%3C/g%3E%3C/svg%3E");
+            animation: float 10s ease-in-out infinite;
+        }
+
+        .project-content {
+            padding: var(--space-2xl);
+        }
+
+        .tech-tag {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            color: var(--primary-700);
+            padding: var(--space-sm) var(--space-md);
+            border-radius: var(--radius-lg);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all var(--transition-normal);
+        }
+
+        .tech-tag:hover {
+            background: var(--gradient-primary);
+            color: white;
             transform: translateY(-2px);
         }
 
-        .back-to-portfolio {
-            display: inline-flex;
-            align-items: center;
-            gap: var(--space-sm);
-            color: var(--primary-600);
-            text-decoration: none;
-            font-weight: 600;
-            margin-bottom: var(--space-xl);
+        /* Scroll to Top Button */
+        .scroll-to-top {
+            position: fixed;
+            bottom: var(--space-xl);
+            right: var(--space-xl);
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            font-size: 1.5rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: all var(--transition-normal);
+            z-index: 1000;
+            box-shadow: var(--shadow-xl);
+            backdrop-filter: blur(20px);
+        }
+
+        .scroll-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-to-top:hover {
+            transform: translateY(-8px) scale(1.1);
+            box-shadow: var(--shadow-2xl), var(--shadow-glow);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--gray-700);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: var(--space-md);
+            border-radius: var(--radius-lg);
             transition: all var(--transition-normal);
         }
 
-        .back-to-portfolio:hover {
-            color: var(--primary-700);
-            gap: var(--space-md);
+        .mobile-menu-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
         }
 
         /* Responsive Design */
@@ -1293,8 +1125,9 @@
                 padding: 0 var(--space-md);
             }
 
-            .blog-grid {
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            .grid-2,
+            .grid-3 {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -1321,61 +1154,14 @@
                 grid-template-columns: repeat(2, 1fr);
             }
 
-            .footer-content {
-                flex-direction: column;
-                text-align: center;
-            }
-
             .section {
                 padding: var(--space-2xl) 0;
-            }
-
-            .blog-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .blog-post {
-                padding: var(--space-xl) 0;
-            }
-
-            .blog-post-title {
-                font-size: 2rem;
-            }
-
-            .blog-post-meta {
-                flex-direction: column;
-                gap: var(--space-sm);
-            }
-
-            .newsletter-form {
-                flex-direction: column;
-            }
-
-            .social-share-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .related-posts-grid {
-                grid-template-columns: 1fr;
             }
         }
 
         @media (max-width: 480px) {
-            .container {
-                padding: 0 var(--space-md);
-            }
-
             .hero-title {
                 font-size: 2.5rem;
-            }
-
-            .hero-subtitle {
-                font-size: 1.125rem;
-            }
-
-            .section-title {
-                font-size: 2rem;
             }
 
             .hero-stats {
@@ -1388,49 +1174,13 @@
             }
         }
 
-        /* Scroll to Top Button */
-        .scroll-to-top {
-            position: fixed;
-            bottom: var(--space-xl);
-            right: var(--space-xl);
-            width: 50px;
-            height: 50px;
-            background: var(--gradient-primary);
-            color: white;
-            border: none;
-            border-radius: var(--radius-full);
-            cursor: pointer;
-            font-size: 1.25rem;
-            opacity: 0;
-            visibility: hidden;
-            transition: all var(--transition-normal);
-            z-index: 1000;
-            box-shadow: var(--shadow-lg);
+        /* Performance optimizations */
+        .will-change {
+            will-change: transform;
         }
 
-        .scroll-to-top.visible {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .scroll-to-top:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-xl);
-        }
-
-        /* Loading Animation */
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255,255,255,.3);
-            border-radius: 50%;
-            border-top-color: #fff;
-            animation: spin 1s ease-in-out infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+        .transform-gpu {
+            transform: translateZ(0);
         }
     </style>
 </head>
@@ -1443,12 +1193,11 @@
         <nav class="nav container">
             <a href="#home" class="logo">Sunitha Kottayil</a>
             <ul class="nav-links">
-                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#home" class="nav-link active">Home</a></li>
                 <li><a href="#about" class="nav-link">About</a></li>
                 <li><a href="#skills" class="nav-link">Skills</a></li>
                 <li><a href="#experience" class="nav-link">Experience</a></li>
                 <li><a href="#projects" class="nav-link">Projects</a></li>
-                <li><a href="#blog" class="nav-link">Blog</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
             <div class="nav-actions">
@@ -1463,9 +1212,17 @@
     </header>
 
     <!-- Main Content -->
-    <main id="main-content">
+    <main>
         <!-- Hero Section -->
         <section id="home" class="hero">
+            <div class="hero-bg"></div>
+            <div class="hero-particles">
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+            </div>
             <div class="container">
                 <div class="hero-content fade-in">
                     <div class="hero-badge">
@@ -1488,7 +1245,7 @@
                             <i class="fas fa-rocket"></i>
                             Explore My Work
                         </a>
-                        <a href="#contact" class="btn btn-outline">
+                        <a href="#contact" class="btn btn-secondary">
                             <i class="fas fa-paper-plane"></i>
                             Let's Connect
                         </a>
@@ -1496,19 +1253,19 @@
 
                     <div class="hero-stats">
                         <div class="stat-item">
-                            <span class="stat-number">50+</span>
+                            <span class="stat-number" data-count="50">0</span>
                             <span class="stat-label">Students Mentored</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-number">15+</span>
+                            <span class="stat-number" data-count="15">0</span>
                             <span class="stat-label">Projects Delivered</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-number">3+</span>
+                            <span class="stat-number" data-count="3">0</span>
                             <span class="stat-label">Years Experience</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-number">5+</span>
+                            <span class="stat-number" data-count="5">0</span>
                             <span class="stat-label">Technologies Mastered</span>
                         </div>
                     </div>
@@ -1517,7 +1274,7 @@
         </section>
 
         <!-- About Section -->
-        <section id="about" class="section section-alt">
+        <section id="about" class="section">
             <div class="container">
                 <div class="section-header fade-in">
                     <div class="section-badge">About Me</div>
@@ -1528,70 +1285,29 @@
                 </div>
                 
                 <div class="grid grid-2">
-                    <div class="slide-in-left">
-                        <p style="margin-bottom: var(--space-lg); color: var(--gray-600); font-size: 1.125rem; line-height: 1.8;">
-                            👋 Hello! I'm Sunitha, a <span style="background: linear-gradient(120deg, var(--primary-100) 0%, var(--primary-100) 100%); padding: 0.2rem 0.4rem; border-radius: var(--radius-sm); font-weight: 600; color: var(--primary-700);">data storyteller</span> who believes every dataset has a narrative waiting to be discovered. My journey began in education, but curiosity led me down the fascinating path of data analytics and software development.
-                        </p>
-                        
-                        <p style="margin-bottom: var(--space-lg); color: var(--gray-600); font-size: 1.125rem; line-height: 1.8;">
-                            What drives me? The magical moment when <span style="background: linear-gradient(120deg, var(--primary-100) 0%, var(--primary-100) 100%); padding: 0.2rem 0.4rem; border-radius: var(--radius-sm); font-weight: 600; color: var(--primary-700);">complex data transforms into clear, actionable insights</span> that drive real-world decisions. Currently expanding my technical arsenal as a Data Technician student, diving deep into Python, C#, and TypeScript.
-                        </p>
-                        
-                        <p style="margin-bottom: var(--space-lg); color: var(--gray-600); font-size: 1.125rem; line-height: 1.8;">
-                            As a <span style="background: linear-gradient(120deg, var(--primary-100) 0%, var(--primary-100) 100%); padding: 0.2rem 0.4rem; border-radius: var(--radius-sm); font-weight: 600; color: var(--primary-700);">Python instructor at ReDI School</span>, I've discovered my passion for making technology accessible. There's nothing quite like seeing someone's face light up when they write their first successful program or create their first data visualization!
-                        </p>
-
-                        <p style="color: var(--gray-600); font-size: 1.125rem; line-height: 1.8;">
-                            My approach combines <span style="background: linear-gradient(120deg, var(--primary-100) 0%, var(--primary-100) 100%); padding: 0.2rem 0.4rem; border-radius: var(--radius-sm); font-weight: 600; color: var(--primary-700);">analytical rigor with creative problem-solving</span>, always asking: "How can we make this data work better for people?" Whether it's building predictive models, designing intuitive dashboards, or teaching the next generation of developers, I'm committed to bridging the gap between complex technology and human understanding.
+                    <div class="card slide-in-left">
+                        <div class="card-icon">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <h3>My Journey</h3>
+                        <p>
+                            From education to tech, my path has been driven by curiosity and a passion for solving complex problems. 
+                            I believe every dataset has a story waiting to be discovered, and I'm here to tell those stories through code and insights.
                         </p>
                     </div>
                     
-                    <div class="slide-in-right">
-                        <div style="position: relative; padding-left: var(--space-2xl);">
-                            <div style="content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--gradient-primary); border-radius: var(--radius-full);"></div>
-                            
-                            <div style="position: relative; margin-bottom: var(--space-2xl); padding-left: var(--space-xl);">
-                                <div style="content: ''; position: absolute; left: -var(--space-xl); top: var(--space-sm); width: 16px; height: 16px; background: var(--primary-600); border-radius: var(--radius-full); border: 4px solid white; box-shadow: var(--shadow-md);"></div>
-                                <div style="font-size: var(--text-sm); color: var(--primary-600); font-weight: 700; margin-bottom: var(--space-xs); font-family: var(--font-mono);">2024 - Present</div>
-                                <div style="font-weight: 700; margin-bottom: var(--space-sm); color: var(--gray-900); font-size: 1.125rem;">Python Instructor & Data Technician Student</div>
-                                <div style="color: var(--gray-600); line-height: 1.6;">
-                                    Teaching Python fundamentals at ReDI School while mastering advanced programming concepts. 
-                                    Building bridges between education and technology, one student at a time.
-                                </div>
-                            </div>
-                            
-                            <div style="position: relative; margin-bottom: var(--space-2xl); padding-left: var(--space-xl);">
-                                <div style="content: ''; position: absolute; left: -var(--space-xl); top: var(--space-sm); width: 16px; height: 16px; background: var(--primary-600); border-radius: var(--radius-full); border: 4px solid white; box-shadow: var(--shadow-md);"></div>
-                                <div style="font-size: var(--text-sm); color: var(--primary-600); font-weight: 700; margin-bottom: var(--space-xs); font-family: var(--font-mono);">2024</div>
-                                <div style="font-weight: 700; margin-bottom: var(--space-sm); color: var(--gray-900); font-size: 1.125rem;">Data Analyst at Arla Foods</div>
-                                <div style="color: var(--gray-600); line-height: 1.6;">
-                                    Led a transformative capstone project, applying advanced analytics to enhance internal reporting 
-                                    and improve forecasting accuracy for Denmark's largest dairy company.
-                                </div>
-                            </div>
-                            
-                            <div style="position: relative; margin-bottom: var(--space-2xl); padding-left: var(--space-xl);">
-                                <div style="content: ''; position: absolute; left: -var(--space-xl); top: var(--space-sm); width: 16px; height: 16px; background: var(--primary-600); border-radius: var(--radius-full); border: 4px solid white; box-shadow: var(--shadow-md);"></div>
-                                <div style="font-size: var(--text-sm); color: var(--primary-600); font-weight: 700; margin-bottom: var(--space-xs); font-family: var(--font-mono);">2023</div>
-                                <div style="font-weight: 700; margin-bottom: var(--space-sm); color: var(--gray-900); font-size: 1.125rem;">Career Transformation</div>
-                                <div style="color: var(--gray-600); line-height: 1.6;">
-                                    Made the bold decision to transition from education to tech, driven by an insatiable 
-                                    curiosity for data and a passion for solving complex problems.
-                                </div>
-                            </div>
-                            
-                            <div style="position: relative; padding-left: var(--space-xl);">
-                                <div style="content: ''; position: absolute; left: -var(--space-xl); top: var(--space-sm); width: 16px; height: 16px; background: var(--primary-600); border-radius: var(--radius-full); border: 4px solid white; box-shadow: var(--shadow-md);"></div>
-                                <div style="font-size: var(--text-sm); color: var(--primary-600); font-weight: 700; margin-bottom: var(--space-xs); font-family: var(--font-mono);">2022</div>
-                                <div style="font-weight: 700; margin-bottom: var(--space-sm); color: var(--gray-900); font-size: 1.125rem;">The Spark</div>
-                                <div style="color: var(--gray-600); line-height: 1.6;">
-                                    Discovered the power of data analysis during a personal project, igniting a passion 
-                                    that would reshape my entire career trajectory.
-                                </div>
-                            </div>
+                    <div class="card slide-in-right">
+                        <div class="card-icon">
+                            <i class="fas fa-lightbulb"></i>
                         </div>
+                        <h3>My Philosophy</h3>
+                        <p>
+                            Technology should be accessible and meaningful. Whether I'm building predictive models, creating intuitive dashboards, 
+                            or teaching Python, I focus on bridging the gap between complex technology and human understanding.
+                        </p>
                     </div>
                 </div>
+            </div>
         </section>
 
         <!-- Skills Section -->
@@ -1605,71 +1321,46 @@
                     </p>
                 </div>
                 
-                <div class="grid grid-2">
-                    <div class="card fade-in">
-                        <h3 style="color: var(--secondary-600); font-weight: 700; margin-bottom: var(--space-lg); font-size: 1.375rem; display: flex; align-items: center; gap: var(--space-md);">
-                            <i class="fas fa-chart-line" style="font-size: 1.5rem; color: var(--secondary-500);"></i>
-                            Data Analysis & Visualization
-                        </h3>
-                        <div style="display: flex; flex-wrap: wrap; gap: var(--space-sm);">
-                            <span style="background: var(--gray-100); color: var(--gray-700); padding: var(--space-sm) var(--space-lg); border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 500; border: 1px solid var(--gray-200); transition: all var(--transition-normal); cursor: default;">Python (Pandas, NumPy, Matplotlib)</span>
-                            <span style="background: var(--gray-100); color: var(--gray-700); padding: var(--space-sm) var(--space-lg); border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 500; border: 1px solid var(--gray-200); transition: all var(--transition-normal); cursor: default;">Power BI & Advanced DAX</span>
-                            <span style="background: var(--gray-100); color: var(--gray-700); padding: var(--space-sm) var(--space-lg); border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 500; border: 1px solid var(--gray-200); transition: all var(--transition-normal); cursor: default;">SQL & Database Design</span>
-                            <span style="background: var(--gray-100); color: var(--gray-700); padding: var(--space-sm) var(--space-lg); border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 500; border: 1px solid var(--gray-200); transition: all var(--transition-normal); cursor: default;">Statistical Modeling</span>
-                            <span style="background: var(--gray-100); color: var(--gray-700); padding: var(--space-sm) var(--space-lg); border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 500; border: 1px solid var(--gray-200); transition: all var(--transition-normal); cursor: default;">Time Series Forecasting</span>
-                            <span style="background: var(--gray-100); color: var(--gray-700); padding: var(--space-sm) var(--space-lg); border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 500; border: 1px solid var(--gray-200); transition: all var(--transition-normal); cursor: default;">Data Cleaning & ETL</span>
-                            <span style="background: var(--gray-100); color: var(--gray-700); padding: var(--space-sm) var(--space-lg); border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 500; border: 1px solid var(--gray-200); transition: all var(--transition-normal); cursor: default;">Tableau</span>
+                <div class="grid grid-3">
+                    <div class="skill-category fade-in">
+                        <h3><i class="fas fa-chart-line" style="color: var(--primary-500); margin-right: var(--space-md);"></i>Data Analysis & Visualization</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Python (Pandas, NumPy)</span>
+                            <span class="skill-tag">Power BI & Advanced DAX</span>
+                            <span class="skill-tag">SQL & Database Design</span>
+                            <span class="skill-tag">Statistical Modeling</span>
+                            <span class="skill-tag">Time Series Forecasting</span>
+                            <span class="skill-tag">Data Cleaning & ETL</span>
+                            <span class="skill-tag">Advanced Excel & VBA</span>
+                            <span class="skill-tag">Tableau</span>
                         </div>
                     </div>
                     
-                    <div class="card fade-in">
-                        <h3 style="color: var(--secondary-600); font-weight: 700; margin-bottom: var(--space-lg); font-size: 1.375rem; display: flex; align-items: center; gap: var(--space-md);">
-                            <i class="fas fa-code" style="font-size: 1.5rem; color: var(--secondary-500);"></i>
-                            Software Development
-                        </h3>
-                        <div style="display: flex; flex-wrap: wrap; gap: var(--space-sm);">
-                            <span style="background: var(--gray-100); color: var(--gray-700); padding: var(--space-sm) var(--space-lg); border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 500; border: 1px solid var(--gray-200); transition: all var(--transition-normal); cursor: default;">Python (Advanced)</span>
-                            <span style="background: var(--gray-100); color: var(--gray-700); padding: var(--space-sm) var(--space-lg); border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 500; border: 1px solid var(--gray-200); transition: all var(--transition-normal); cursor: default;">C# & .NET Framework</span>
-                            <span style="background: var(--gray-100); color: var(--gray-700); padding: var(--space-sm) var(--space-lg); border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 500; border: 1px solid var(--gray-200); transition: all var(--transition-normal); cursor: default;">TypeScript & JavaScript</span>
-                            <span style="background: var(--gray-100); color: var(--gray-700); padding: var(--space-sm) var(--space-lg); border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 500; border: 1px solid var(--gray-200); transition: all var(--transition-normal); cursor: default;">HTML5 & CSS3</span>
-                            <span style="background: var(--gray-100); color: var(--gray-700); padding: var(--space-sm) var(--space-lg); border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 500; border: 1px solid var(--gray-200); transition: all var(--transition-normal); cursor: default;">React & Modern Frameworks</span>
-                            <span style="background: var(--gray-100); color: var(--gray-700); padding: var(--space-sm) var(--space-lg); border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 500; border: 1px solid var(--gray-200); transition: all var(--transition-normal); cursor: default;">Git & Version Control</span>
-                            <span style="background: var(--gray-100); color: var(--gray-700); padding: var(--space-sm) var(--space-lg); border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 500; border: 1px solid var(--gray-200); transition: all var(--transition-normal); cursor: default;">API Development</span>
-                            <span style="background: var(--gray-100); color: var(--gray-700); padding: var(--space-sm) var(--space-lg); border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 500; border: 1px solid var(--gray-200); transition: all var(--transition-normal); cursor: default;">Database Management</span>
+                    <div class="skill-category fade-in">
+                        <h3><i class="fas fa-code" style="color: var(--secondary-500); margin-right: var(--space-md);"></i>Software Development</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Python (Advanced)</span>
+                            <span class="skill-tag">C# & .NET Framework</span>
+                            <span class="skill-tag">TypeScript & JavaScript</span>
+                            <span class="skill-tag">HTML5 & CSS3</span>
+                            <span class="skill-tag">React & Modern Frameworks</span>
+                            <span class="skill-tag">Git & Version Control</span>
+                            <span class="skill-tag">API Development</span>
+                            <span class="skill-tag">Database Management</span>
                         </div>
                     </div>
                     
-                    <div class="card fade-in">
-                        <h3 style="color: var(--secondary-600); font-weight: 700; margin-bottom: var(--space-lg); font-size: 1.375rem; display: flex; align-items: center; gap: var(--space-md);">
-                            <i class="fas fa-tools" style="font-size: 1.5rem; color: var(--secondary-500);"></i>
-                            Tools & Platforms
-                        </h3>
-                        <div style="display: flex; flex-wrap: wrap; gap: var(--space-sm);">
-                            <span style="background: var(--gray-100); color: var(--gray-700); padding: var(--space-sm) var(--space-lg); border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 500; border: 1px solid var(--gray-200); transition: all var(--transition-normal); cursor: default;">Visual Studio Code</span>
-                            <span style="background: var(--gray-100); color: var(--gray-700); padding: var(--space-sm) var(--space-lg); border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 500; border: 1px solid var(--gray-200); transition: all var(--transition-normal); cursor: default;">Jupyter Notebooks</span>
-                            <span style="background: var(--gray-100); color: var(--gray-700); padding: var(--space-sm) var(--space-lg); border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 500; border: 1px solid var(--gray-200); transition: all var(--transition-normal); cursor: default;">Azure Cloud Services</span>
-                            <span style="background: var(--gray-100); color: var(--gray-700); padding: var(--space-sm) var(--space-lg); border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 500; border: 1px solid var(--gray-200); transition: all var(--transition-normal); cursor: default;">Docker & Containerization</span>
-                            <span style="background: var(--gray-100); color: var(--gray-700); padding: var(--space-sm) var(--space-lg); border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 500; border: 1px solid var(--gray-200); transition: all var(--transition-normal); cursor: default;">Power Platform</span>
-                            <span style="background: var(--gray-100); color: var(--gray-700); padding: var(--space-sm) var(--space-lg); border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 500; border: 1px solid var(--gray-200); transition: all var(--transition-normal); cursor: default;">Microsoft Office Suite</span>
-                            <span style="background: var(--gray-100); color: var(--gray-700); padding: var(--space-sm) var(--space-lg); border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 500; border: 1px solid var(--gray-200); transition: all var(--transition-normal); cursor: default;">Figma & Design Tools</span>
-                            <span style="background: var(--gray-100); color: var(--gray-700); padding: var(--space-sm) var(--space-lg); border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 500; border: 1px solid var(--gray-200); transition: all var(--transition-normal); cursor: default;">Agile & Scrum</span>
-                        </div>
-                    </div>
-                    
-                    <div class="card fade-in">
-                        <h3 style="color: var(--secondary-600); font-weight: 700; margin-bottom: var(--space-lg); font-size: 1.375rem; display: flex; align-items: center; gap: var(--space-md);">
-                            <i class="fas fa-users" style="font-size: 1.5rem; color: var(--secondary-500);"></i>
-                            Leadership & Communication
-                        </h3>
-                        <div style="display: flex; flex-wrap: wrap; gap: var(--space-sm);">
-                            <span style="background: var(--gray-100); color: var(--gray-700); padding: var(--space-sm) var(--space-lg); border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 500; border: 1px solid var(--gray-200); transition: all var(--transition-normal); cursor: default;">Technical Mentoring</span>
-                            <span style="background: var(--gray-100); color: var(--gray-700); padding: var(--space-sm) var(--space-lg); border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 500; border: 1px solid var(--gray-200); transition: all var(--transition-normal); cursor: default;">Cross-functional Collaboration</span>
-                            <span style="background: var(--gray-100); color: var(--gray-700); padding: var(--space-sm) var(--space-lg); border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 500; border: 1px solid var(--gray-200); transition: all var(--transition-normal); cursor: default;">Stakeholder Management</span>
-                            <span style="background: var(--gray-100); color: var(--gray-700); padding: var(--space-sm) var(--space-lg); border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 500; border: 1px solid var(--gray-200); transition: all var(--transition-normal); cursor: default;">Public Speaking</span>
-                            <span style="background: var(--gray-100); color: var(--gray-700); padding: var(--space-sm) var(--space-lg); border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 500; border: 1px solid var(--gray-200); transition: all var(--transition-normal); cursor: default;">Curriculum Development</span>
-                            <span style="background: var(--gray-100); color: var(--gray-700); padding: var(--space-sm) var(--space-lg); border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 500; border: 1px solid var(--gray-200); transition: all var(--transition-normal); cursor: default;">Project Management</span>
-                            <span style="background: var(--gray-100); color: var(--gray-700); padding: var(--space-sm) var(--space-lg); border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 500; border: 1px solid var(--gray-200); transition: all var(--transition-normal); cursor: default;">Problem-Solving</span>
-                            <span style="background: var(--gray-100); color: var(--gray-700); padding: var(--space-sm) var(--space-lg); border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 500; border: 1px solid var(--gray-200); transition: all var(--transition-normal); cursor: default;">Strategic Thinking</span>
+                    <div class="skill-category fade-in">
+                        <h3><i class="fas fa-users" style="color: var(--accent-500); margin-right: var(--space-md);"></i>Leadership & Communication</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Technical Mentoring</span>
+                            <span class="skill-tag">Cross-functional Collaboration</span>
+                            <span class="skill-tag">Stakeholder Management</span>
+                            <span class="skill-tag">Public Speaking</span>
+                            <span class="skill-tag">Curriculum Development</span>
+                            <span class="skill-tag">Project Management</span>
+                            <span class="skill-tag">Problem-Solving</span>
+                            <span class="skill-tag">Strategic Thinking</span>
                         </div>
                     </div>
                 </div>
@@ -1677,7 +1368,7 @@
         </section>
 
         <!-- Experience Section -->
-        <section id="experience" class="section section-alt">
+        <section id="experience" class="section">
             <div class="container">
                 <div class="section-header fade-in">
                     <div class="section-badge">Professional Journey</div>
@@ -1687,121 +1378,44 @@
                     </p>
                 </div>
                 
-                <div style="max-width: 1000px; margin: 0 auto;">
-                    <div style="display: grid; gap: var(--space-xl);">
-                        <div class="card fade-in">
-                            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: var(--space-lg); flex-wrap: wrap; gap: var(--space-md);">
-                                <div>
-                                    <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: var(--space-sm); color: var(--gray-900);">Python Instructor & Mentor</h3>
-                                    <p style="color: var(--accent-600); font-weight: 600; font-size: 1.125rem; margin: 0;">ReDI School of Digital Integration</p>
-                                </div>
-                                <span style="background: var(--accent-100); color: var(--accent-700); padding: var(--space-xs) var(--space-md); border-radius: var(--radius-full); font-size: var(--text-xs); font-weight: 600; border: 1px solid var(--accent-200);">Volunteer</span>
-                            </div>
-                            
-                            <div style="display: flex; gap: var(--space-lg); color: var(--gray-500); font-size: var(--text-sm); margin-bottom: var(--space-lg); flex-wrap: wrap;">
-                                <span style="display: flex; align-items: center; gap: var(--space-sm);">
-                                    <i class="fas fa-calendar"></i>
-                                    August 2024 – Present
-                                </span>
-                                <span style="display: flex; align-items: center; gap: var(--space-sm);">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                    Remote
-                                </span>
-                                <span style="display: flex; align-items: center; gap: var(--space-sm);">
-                                    <i class="fas fa-users"></i>
-                                    50+ Students
-                                </span>
-                            </div>
-                            
-                            <p style="color: var(--gray-600); margin-bottom: var(--space-lg); font-size: 1.05rem; line-height: 1.7;">
-                                Designed and delivered comprehensive Python curriculum for aspiring data scientists and developers. 
-                                Created engaging, hands-on learning experiences that bridge theoretical concepts with real-world applications. 
-                                Mentored diverse cohorts of students, helping them transition into tech careers with confidence and practical skills.
-                            </p>
-                            
-                            <div style="display: flex; flex-wrap: wrap; gap: var(--space-sm);">
-                                <span style="background: var(--gray-100); color: var(--gray-700); padding: var(--space-sm) var(--space-lg); border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 500; border: 1px solid var(--gray-200); transition: all var(--transition-normal); cursor: default;">Python Education</span>
-                                <span style="background: var(--gray-100); color: var(--gray-700); padding: var(--space-sm) var(--space-lg); border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 500; border: 1px solid var(--gray-200); transition: all var(--transition-normal); cursor: default;">Curriculum Design</span>
-                                <span style="background: var(--gray-100); color: var(--gray-700); padding: var(--space-sm) var(--space-lg); border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 500; border: 1px solid var(--gray-200); transition: all var(--transition-normal); cursor: default;">Student Mentoring</span>
-                                <span style="background: var(--gray-100); color: var(--gray-700); padding: var(--space-sm) var(--space-lg); border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 500; border: 1px solid var(--gray-200); transition: all var(--transition-normal); cursor: default;">Technical Communication</span>
-                            </div>
+                <div class="grid">
+                    <div class="card fade-in">
+                        <div class="card-icon">
+                            <i class="fas fa-chalkboard-teacher"></i>
                         </div>
-                        
-                        <div class="card fade-in">
-                            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: var(--space-lg); flex-wrap: wrap; gap: var(--space-md);">
-                                <div>
-                                    <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: var(--space-sm); color: var(--gray-900);">Data Analyst</h3>
-                                    <p style="color: var(--accent-600); font-weight: 600; font-size: 1.125rem; margin: 0;">Arla Foods</p>
-                                </div>
-                                <span style="background: var(--accent-100); color: var(--accent-700); padding: var(--space-xs) var(--space-md); border-radius: var(--radius-full); font-size: var(--text-xs); font-weight: 600; border: 1px solid var(--accent-200);">Project</span>
-                            </div>
-                            
-                            <div style="display: flex; gap: var(--space-lg); color: var(--gray-500); font-size: var(--text-sm); margin-bottom: var(--space-lg); flex-wrap: wrap;">
-                                <span style="display: flex; align-items: center; gap: var(--space-sm);">
-                                    <i class="fas fa-calendar"></i>
-                                    February 2024 – June 2024
-                                </span>
-                                <span style="display: flex; align-items: center; gap: var(--space-sm);">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                    Viby, Denmark
-                                </span>
-                                <span style="display: flex; align-items: center; gap: var(--space-sm);">
-                                    <i class="fas fa-chart-line"></i>
-                                    25% Accuracy Improvement
-                                </span>
-                            </div>
-                            
-                            <p style="color: var(--gray-600); margin-bottom: var(--space-lg); font-size: 1.05rem; line-height: 1.7;">
-                                Led a transformative capstone project focusing on advanced data analysis and business intelligence solutions. 
-                                Collaborated with cross-functional teams to develop predictive models and interactive dashboards that revolutionized 
-                                internal reporting capabilities and enhanced forecasting accuracy for one of Europe's largest dairy companies.
-                            </p>
-                            
-                            <div style="display: flex; flex-wrap: wrap; gap: var(--space-sm);">
-                                <span style="background: var(--gray-100); color: var(--gray-700); padding: var(--space-sm) var(--space-lg); border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 500; border: 1px solid var(--gray-200); transition: all var(--transition-normal); cursor: default;">Business Intelligence</span>
-                                <span style="background: var(--gray-100); color: var(--gray-700); padding: var(--space-sm) var(--space-lg); border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 500; border: 1px solid var(--gray-200); transition: all var(--transition-normal); cursor: default;">Predictive Modeling</span>
-                                <span style="background: var(--gray-100); color: var(--gray-700); padding: var(--space-sm) var(--space-lg); border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 500; border: 1px solid var(--gray-200); transition: all var(--transition-normal); cursor: default;">Dashboard Development</span>
-                                <span style="background: var(--gray-100); color: var(--gray-700); padding: var(--space-sm) var(--space-lg); border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 500; border: 1px solid var(--gray-200); transition: all var(--transition-normal); cursor: default;">Stakeholder Collaboration</span>
-                            </div>
+                        <h3>Python Instructor & Mentor</h3>
+                        <p style="color: var(--primary-600); font-weight: 600; margin-bottom: var(--space-md);">ReDI School of Digital Integration</p>
+                        <p style="color: var(--gray-500); margin-bottom: var(--space-lg);">August 2024 – Present</p>
+                        <p>
+                            Designed and delivered comprehensive Python curriculum for aspiring data scientists and developers. 
+                            Created engaging, hands-on learning experiences that bridge theoretical concepts with real-world applications.
+                        </p>
+                    </div>
+                    
+                    <div class="card fade-in">
+                        <div class="card-icon">
+                            <i class="fas fa-chart-bar"></i>
                         </div>
-
-                        <div class="card fade-in">
-                            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: var(--space-lg); flex-wrap: wrap; gap: var(--space-md);">
-                                <div>
-                                    <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: var(--space-sm); color: var(--gray-900);">Data Technician Student</h3>
-                                    <p style="color: var(--accent-600); font-weight: 600; font-size: 1.125rem; margin: 0;">Aarhus Tech</p>
-                                </div>
-                                <span style="background: var(--accent-100); color: var(--accent-700); padding: var(--space-xs) var(--space-md); border-radius: var(--radius-full); font-size: var(--text-xs); font-weight: 600; border: 1px solid var(--accent-200);">Education</span>
-                            </div>
-                            
-                            <div style="display: flex; gap: var(--space-lg); color: var(--gray-500); font-size: var(--text-sm); margin-bottom: var(--space-lg); flex-wrap: wrap;">
-                                <span style="display: flex; align-items: center; gap: var(--space-sm);">
-                                    <i class="fas fa-calendar"></i>
-                                    2023 – Present
-                                </span>
-                                <span style="display: flex; align-items: center; gap: var(--space-sm);">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                    Aarhus, Denmark
-                                </span>
-                                <span style="display: flex; align-items: center; gap: var(--space-sm);">
-                                    <i class="fas fa-code"></i>
-                                    Programming Focus
-                                </span>
-                            </div>
-                            
-                            <p style="color: var(--gray-600); margin-bottom: var(--space-lg); font-size: 1.05rem; line-height: 1.7;">
-                                Pursuing advanced certification in data technology with specialization in modern programming languages. 
-                                Gaining hands-on experience in software architecture, database design, and system integration while 
-                                maintaining academic excellence and applying learning through real-world projects.
-                            </p>
-                            
-                            <div style="display: flex; flex-wrap: wrap; gap: var(--space-sm);">
-                                <span style="background: var(--gray-100); color: var(--gray-700); padding: var(--space-sm) var(--space-lg); border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 500; border: 1px solid var(--gray-200); transition: all var(--transition-normal); cursor: default;">C# Programming</span>
-                                <span style="background: var(--gray-100); color: var(--gray-700); padding: var(--space-sm) var(--space-lg); border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 500; border: 1px solid var(--gray-200); transition: all var(--transition-normal); cursor: default;">TypeScript Development</span>
-                                <span style="background: var(--gray-100); color: var(--gray-700); padding: var(--space-sm) var(--space-lg); border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 500; border: 1px solid var(--gray-200); transition: all var(--transition-normal); cursor: default;">System Architecture</span>
-                                <span style="background: var(--gray-100); color: var(--gray-700); padding: var(--space-sm) var(--space-lg); border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 500; border: 1px solid var(--gray-200); transition: all var(--transition-normal); cursor: default;">Database Design</span>
-                            </div>
+                        <h3>Data Analyst</h3>
+                        <p style="color: var(--primary-600); font-weight: 600; margin-bottom: var(--space-md);">Arla Foods</p>
+                        <p style="color: var(--gray-500); margin-bottom: var(--space-lg);">February 2024 – June 2024</p>
+                        <p>
+                            Led a transformative capstone project focusing on advanced data analysis and business intelligence solutions. 
+                            Collaborated with cross-functional teams to develop predictive models and interactive dashboards.
+                        </p>
+                    </div>
+                    
+                    <div class="card fade-in">
+                        <div class="card-icon">
+                            <i class="fas fa-graduation-cap"></i>
                         </div>
+                        <h3>Data Technician Student</h3>
+                        <p style="color: var(--primary-600); font-weight: 600; margin-bottom: var(--space-md);">Aarhus Tech</p>
+                        <p style="color: var(--gray-500); margin-bottom: var(--space-lg);">2023 – Present</p>
+                        <p>
+                            Pursuing advanced certification in data technology with specialization in modern programming languages. 
+                            Gaining hands-on experience in software architecture, database design, and system integration.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -1818,104 +1432,74 @@
                     </p>
                 </div>
                 
-                <div style="display: grid; gap: var(--space-2xl);">
-                    <div class="card fade-in" style="display: grid; grid-template-columns: 1fr 1fr; gap: 0; overflow: hidden;">
-                        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); height: 300px; display: flex; align-items: center; justify-content: center; color: white; font-size: 4rem; position: relative; overflow: hidden;">
-                            <div style="text-align: center;">
-                                <i class="fas fa-calculator" style="font-size: 4rem; margin-bottom: 1rem; opacity: 0.9;"></i>
-                                <div style="font-size: 1.2rem; font-weight: 600;">Smart Finance</div>
-                            </div>
+                <div class="grid grid-2">
+                    <div class="project-card fade-in">
+                        <div class="project-image" style="background: var(--gradient-primary);">
+                            <i class="fas fa-calculator"></i>
                         </div>
-                        <div style="padding: var(--space-2xl); display: flex; flex-direction: column; justify-content: space-between;">
-                            <div>
-                                <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: var(--space-md); color: var(--gray-900);">Smart Budget Planning Terminal App</h3>
-                                <p style="color: var(--gray-600); margin-bottom: var(--space-lg); line-height: 1.6; font-size: 1.05rem;">
-                                    A sophisticated Python terminal application that revolutionizes personal financial management. 
-                                    Features intelligent expense categorization, predictive budget tracking, comprehensive financial 
-                                    reporting, and data visualization capabilities that help users make informed financial decisions.
-                                </p>
-                                <div style="display: flex; flex-wrap: wrap; gap: var(--space-sm); margin-bottom: var(--space-xl);">
-                                    <span style="background: var(--primary-100); color: var(--primary-700); padding: var(--space-sm) var(--space-md); border-radius: var(--radius-md); font-size: var(--text-sm); font-weight: 500; border: 1px solid var(--primary-200);">Python</span>
-                                    <span style="background: var(--primary-100); color: var(--primary-700); padding: var(--space-sm) var(--space-md); border-radius: var(--radius-md); font-size: var(--text-sm); font-weight: 500; border: 1px solid var(--primary-200);">Data Analysis</span>
-                                    <span style="background: var(--primary-100); color: var(--primary-700); padding: var(--space-sm) var(--space-md); border-radius: var(--radius-md); font-size: var(--text-sm); font-weight: 500; border: 1px solid var(--primary-200);">CLI Interface</span>
-                                    <span style="background: var(--primary-100); color: var(--primary-700); padding: var(--space-sm) var(--space-md); border-radius: var(--radius-md); font-size: var(--text-sm); font-weight: 500; border: 1px solid var(--primary-200);">Financial Modeling</span>
-                                    <span style="background: var(--primary-100); color: var(--primary-700); padding: var(--space-sm) var(--space-md); border-radius: var(--radius-md); font-size: var(--text-sm); font-weight: 500; border: 1px solid var(--primary-200);">Data Visualization</span>
-                                </div>
+                        <div class="project-content">
+                            <h3>Smart Budget Planning Terminal App</h3>
+                            <p style="margin-bottom: var(--space-lg);">
+                                A sophisticated Python terminal application that revolutionizes personal financial management 
+                                with intelligent expense categorization and predictive budget tracking.
+                            </p>
+                            <div style="display: flex; flex-wrap: wrap; gap: var(--space-sm); margin-bottom: var(--space-xl);">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">Data Analysis</span>
+                                <span class="tech-tag">CLI Interface</span>
+                                <span class="tech-tag">Financial Modeling</span>
                             </div>
                             <div style="display: flex; gap: var(--space-md);">
-                                <a href="https://github.com/SunithaKottayil/Budget-Planning-Tetminal-App" class="btn btn-outline" target="_blank" rel="noopener noreferrer">
+                                <a href="https://github.com/SunithaKottayil/Budget-Planning-Tetminal-App" class="btn btn-primary" target="_blank">
                                     <i class="fab fa-github"></i> View Code
                                 </a>
-                                <a href="#" class="btn btn-ghost">
-                                    <i class="fas fa-external-link-alt"></i> Live Demo
-                                </a>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="card fade-in" style="display: grid; grid-template-columns: 1fr 1fr; gap: 0; overflow: hidden;">
-                        <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); height: 300px; display: flex; align-items: center; justify-content: center; color: white; font-size: 4rem; position: relative; overflow: hidden;">
-                            <div style="text-align: center;">
-                                <i class="fas fa-chart-pie" style="font-size: 4rem; margin-bottom: 1rem; opacity: 0.9;"></i>
-                                <div style="font-size: 1.2rem; font-weight: 600;">Business Intelligence</div>
-                            </div>
+                    <div class="project-card fade-in">
+                        <div class="project-image" style="background: var(--gradient-secondary);">
+                            <i class="fas fa-chart-pie"></i>
                         </div>
-                        <div style="padding: var(--space-2xl); display: flex; flex-direction: column; justify-content: space-between;">
-                            <div>
-                                <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: var(--space-md); color: var(--gray-900);">PwC Virtual Internship Analytics Suite</h3>
-                                <p style="color: var(--gray-600); margin-bottom: var(--space-lg); line-height: 1.6; font-size: 1.05rem;">
-                                    An advanced Power BI dashboard ecosystem analyzing customer churn patterns, satisfaction metrics, 
-                                    and diversity trends. Created comprehensive visualizations and actionable business insights that 
-                                    drive strategic decision-making for enterprise-level operations.
-                                </p>
-                                <div style="display: flex; flex-wrap: wrap; gap: var(--space-sm); margin-bottom: var(--space-xl);">
-                                    <span style="background: var(--primary-100); color: var(--primary-700); padding: var(--space-sm) var(--space-md); border-radius: var(--radius-md); font-size: var(--text-sm); font-weight: 500; border: 1px solid var(--primary-200);">Power BI</span>
-                                    <span style="background: var(--primary-100); color: var(--primary-700); padding: var(--space-sm) var(--space-md); border-radius: var(--radius-md); font-size: var(--text-sm); font-weight: 500; border: 1px solid var(--primary-200);">Advanced DAX</span>
-                                    <span style="background: var(--primary-100); color: var(--primary-700); padding: var(--space-sm) var(--space-md); border-radius: var(--radius-md); font-size: var(--text-sm); font-weight: 500; border: 1px solid var(--primary-200);">Data Modeling</span>
-                                    <span style="background: var(--primary-100); color: var(--primary-700); padding: var(--space-sm) var(--space-md); border-radius: var(--radius-md); font-size: var(--text-sm); font-weight: 500; border: 1px solid var(--primary-200);">Business Intelligence</span>
-                                    <span style="background: var(--primary-100); color: var(--primary-700); padding: var(--space-sm) var(--space-md); border-radius: var(--radius-md); font-size: var(--text-sm); font-weight: 500; border: 1px solid var(--primary-200);">KPI Analysis</span>
-                                </div>
+                        <div class="project-content">
+                            <h3>PwC Virtual Internship Analytics Suite</h3>
+                            <p style="margin-bottom: var(--space-lg);">
+                                An advanced Power BI dashboard ecosystem analyzing customer churn patterns, satisfaction metrics, 
+                                and diversity trends with comprehensive visualizations.
+                            </p>
+                            <div style="display: flex; flex-wrap: wrap; gap: var(--space-sm); margin-bottom: var(--space-xl);">
+                                <span class="tech-tag">Power BI</span>
+                                <span class="tech-tag">Advanced DAX</span>
+                                <span class="tech-tag">Data Modeling</span>
+                                <span class="tech-tag">Business Intelligence</span>
                             </div>
                             <div style="display: flex; gap: var(--space-md);">
-                                <a href="https://github.com/SunithaKottayil/Pwc" class="btn btn-outline" target="_blank" rel="noopener noreferrer">
+                                <a href="https://github.com/SunithaKottayil/Pwc" class="btn btn-primary" target="_blank">
                                     <i class="fab fa-github"></i> View Project
                                 </a>
-                                <a href="#" class="btn btn-ghost">
-                                    <i class="fas fa-chart-bar"></i> Dashboard
-                                </a>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="card fade-in" style="display: grid; grid-template-columns: 1fr 1fr; gap: 0; overflow: hidden;">
-                        <div style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); height: 300px; display: flex; align-items: center; justify-content: center; color: white; font-size: 4rem; position: relative; overflow: hidden;">
-                            <div style="text-align: center;">
-                                <i class="fas fa-chart-line" style="font-size: 4rem; margin-bottom: 1rem; opacity: 0.9;"></i>
-                                <div style="font-size: 1.2rem; font-weight: 600;">Predictive Analytics</div>
-                            </div>
+                    <div class="project-card fade-in">
+                        <div class="project-image" style="background: var(--gradient-accent);">
+                            <i class="fas fa-chart-line"></i>
                         </div>
-                        <div style="padding: var(--space-2xl); display: flex; flex-direction: column; justify-content: space-between;">
-                            <div>
-                                <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: var(--space-md); color: var(--gray-900);">Advanced Time Series Forecasting Engine</h3>
-                                <p style="color: var(--gray-600); margin-bottom: var(--space-lg); line-height: 1.6; font-size: 1.05rem;">
-                                    A sophisticated ARIMA-based forecasting model utilizing airline passenger datasets to demonstrate 
-                                    statistical modeling expertise. Features comprehensive data preprocessing, model validation, 
-                                    and predictive analytics capabilities with interactive visualizations.
-                                </p>
-                                <div style="display: flex; flex-wrap: wrap; gap: var(--space-sm); margin-bottom: var(--space-xl);">
-                                    <span style="background: var(--primary-100); color: var(--primary-700); padding: var(--space-sm) var(--space-md); border-radius: var(--radius-md); font-size: var(--text-sm); font-weight: 500; border: 1px solid var(--primary-200);">Python</span>
-                                    <span style="background: var(--primary-100); color: var(--primary-700); padding: var(--space-sm) var(--space-md); border-radius: var(--radius-md); font-size: var(--text-sm); font-weight: 500; border: 1px solid var(--primary-200);">ARIMA Modeling</span>
-                                    <span style="background: var(--primary-100); color: var(--primary-700); padding: var(--space-sm) var(--space-md); border-radius: var(--radius-md); font-size: var(--text-sm); font-weight: 500; border: 1px solid var(--primary-200);">Statistical Analysis</span>
-                                    <span style="background: var(--primary-100); color: var(--primary-700); padding: var(--space-sm) var(--space-md); border-radius: var(--radius-md); font-size: var(--text-sm); font-weight: 500; border: 1px solid var(--primary-200);">Machine Learning</span>
-                                    <span style="background: var(--primary-100); color: var(--primary-700); padding: var(--space-sm) var(--space-md); border-radius: var(--radius-md); font-size: var(--text-sm); font-weight: 500; border: 1px solid var(--primary-200);">Predictive Analytics</span>
-                                </div>
+                        <div class="project-content">
+                            <h3>Advanced Time Series Forecasting Engine</h3>
+                            <p style="margin-bottom: var(--space-lg);">
+                                A sophisticated ARIMA-based forecasting model with comprehensive data preprocessing, 
+                                model validation, and predictive analytics capabilities.
+                            </p>
+                            <div style="display: flex; flex-wrap: wrap; gap: var(--space-sm); margin-bottom: var(--space-xl);">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">ARIMA Modeling</span>
+                                <span class="tech-tag">Statistical Analysis</span>
+                                <span class="tech-tag">Machine Learning</span>
                             </div>
                             <div style="display: flex; gap: var(--space-md);">
-                                <a href="https://github.com/SunithaKottayil/Time-series" class="btn btn-outline" target="_blank" rel="noopener noreferrer">
+                                <a href="https://github.com/SunithaKottayil/Time-series" class="btn btn-primary" target="_blank">
                                     <i class="fab fa-github"></i> Explore Model
-                                </a>
-                                <a href="#" class="btn btn-ghost">
-                                    <i class="fas fa-play"></i> Run Analysis
                                 </a>
                             </div>
                         </div>
@@ -1923,104 +1507,10 @@
                 </div>
                 
                 <div class="text-center" style="margin-top: var(--space-3xl);">
-                    <a href="https://github.com/SunithaKottayil" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+                    <a href="https://github.com/SunithaKottayil" class="btn btn-primary" target="_blank">
                         <i class="fab fa-github"></i>
                         Explore Complete Portfolio
                     </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Blog Section -->
-        <section id="blog" class="section section-alt">
-            <div class="container">
-                <div class="section-header fade-in">
-                    <div class="section-badge">Knowledge Sharing</div>
-                    <h2 class="section-title">
-                        <i class="fas fa-book-open" style="color: var(--primary-600); margin-right: 0.5rem;"></i>
-                        Tech Insights & Tutorials
-                    </h2>
-                    <p class="section-subtitle">
-                        Practical tutorials and insights to accelerate your journey in data science and software development
-                    </p>
-                </div>
-
-                <div class="blog-grid">
-                    <article class="blog-card fade-in">
-                        <div class="blog-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-                            <i class="fab fa-git-alt"></i>
-                        </div>
-                        <div class="blog-content">
-                            <div class="blog-meta">
-                                <span class="blog-category">Version Control</span>
-                                <span><i class="fas fa-clock"></i> 12 min read</span>
-                                <span><i class="fas fa-calendar"></i> Dec 15, 2024</span>
-                            </div>
-                            <h3 class="blog-title">
-                                <a href="#" onclick="showBlogPost('git-mastery')">Mastering Git: Essential Workflows for Data Scientists</a>
-                            </h3>
-                            <p class="blog-excerpt">
-                                A comprehensive guide to Git version control specifically tailored for data science workflows. 
-                                Learn advanced branching strategies, collaboration techniques, and best practices for managing complex data projects with real-world examples.
-                            </p>
-                            <a href="#" class="blog-read-more" onclick="showBlogPost('git-mastery')">
-                                Read Full Guide <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </article>
-
-                    <article class="blog-card fade-in">
-                        <div class="blog-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
-                            <i class="fab fa-python"></i>
-                        </div>
-                        <div class="blog-content">
-                            <div class="blog-meta">
-                                <span class="blog-category">Python</span>
-                                <span><i class="fas fa-clock"></i> 15 min read</span>
-                                <span><i class="fas fa-calendar"></i> Dec 10, 2024</span>
-                            </div>
-                            <h3 class="blog-title">
-                                <a href="#" onclick="showBlogPost('python-advanced')">Advanced Python Techniques for Data Analysis</a>
-                            </h3>
-                            <p class="blog-excerpt">
-                                Unlock the full potential of Python for data analysis with advanced pandas techniques, performance optimization, 
-                                and professional-grade data manipulation strategies that will elevate your analytical capabilities to the next level.
-                            </p>
-                            <a href="#" class="blog-read-more" onclick="showBlogPost('python-advanced')">
-                                Read Full Tutorial <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </article>
-
-                    <article class="blog-card fade-in">
-                        <div class="blog-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
-                            <i class="fas fa-chart-bar"></i>
-                        </div>
-                        <div class="blog-content">
-                            <div class="blog-meta">
-                                <span class="blog-category">Power BI</span>
-                                <span><i class="fas fa-clock"></i> 18 min read</span>
-                                <span><i class="fas fa-calendar"></i> Dec 5, 2024</span>
-                            </div>
-                            <h3 class="blog-title">
-                                <a href="#" onclick="showBlogPost('powerbi-mastery')">Building Enterprise-Grade Dashboards with Power BI</a>
-                            </h3>
-                            <p class="blog-excerpt">
-                                Master the art of creating compelling, interactive dashboards that drive business decisions. 
-                                Explore advanced DAX functions, data modeling techniques, and visualization best practices with step-by-step examples.
-                            </p>
-                            <a href="#" class="blog-read-more" onclick="showBlogPost('powerbi-mastery')">
-                                Read Full Guide <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </article>
-                </div>
-
-                <div class="text-center" style="margin-top: var(--space-3xl);">
-                    <button class="btn btn-primary" onclick="showBlogPage()">
-                        <i class="fas fa-book-open"></i>
-                        Explore All Articles
-                    </button>
                 </div>
             </div>
         </section>
@@ -2036,923 +1526,43 @@
                     </p>
                 </div>
                 
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3xl); align-items: start;">
+                <div class="grid grid-2">
                     <div class="slide-in-left">
-                        <h3 style="font-size: 1.75rem; font-weight: 700; margin-bottom: var(--space-lg); color: var(--gray-900);">Get in Touch</h3>
-                        <p style="color: var(--gray-600); margin-bottom: var(--space-xl); line-height: 1.7; font-size: 1.125rem;">
-                            I'm always excited to discuss innovative projects, share knowledge about data science and development, 
-                            or explore opportunities where technology can make a meaningful impact. Let's create something amazing together!
-                        </p>
-                        
-                        <div style="display: flex; align-items: center; gap: var(--space-lg); margin-bottom: var(--space-lg); padding: var(--space-lg); background: white; border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); transition: all var(--transition-normal); border: 1px solid var(--gray-200);">
-                            <div style="width: 3.5rem; height: 3.5rem; background: var(--gradient-primary); border-radius: var(--radius-xl); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.25rem;">
+                        <div class="card">
+                            <div class="card-icon">
                                 <i class="fas fa-envelope"></i>
                             </div>
-                            <div>
-                                <strong style="display: block; margin-bottom: 0.25rem;">Email</strong>
-                                <a href="mailto:vgsuniashok.email@example.com" style="color: var(--gray-600); text-decoration: none;">vgsuniashok.email@example.com</a>
-                            </div>
-                        </div>
-                        
-                        <div style="display: flex; align-items: center; gap: var(--space-lg); margin-bottom: var(--space-lg); padding: var(--space-lg); background: white; border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); transition: all var(--transition-normal); border: 1px solid var(--gray-200);">
-                            <div style="width: 3.5rem; height: 3.5rem; background: var(--gradient-secondary); border-radius: var(--radius-xl); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.25rem;">
-                                <i class="fas fa-map-marker-alt"></i>
-                            </div>
-                            <div>
-                                <strong style="display: block; margin-bottom: 0.25rem;">Location</strong>
-                                <span style="color: var(--gray-600);">Aarhus, Denmark</span>
-                            </div>
-                        </div>
-                        
-                        <div style="display: flex; align-items: center; gap: var(--space-lg); margin-bottom: var(--space-xl); padding: var(--space-lg); background: white; border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); transition: all var(--transition-normal); border: 1px solid var(--gray-200);">
-                            <div style="width: 3.5rem; height: 3.5rem; background: var(--gradient-accent); border-radius: var(--radius-xl); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.25rem;">
-                                <i class="fas fa-clock"></i>
-                            </div>
-                            <div>
-                                <strong style="display: block; margin-bottom: 0.25rem;">Response Time</strong>
-                                <span style="color: var(--gray-600);">Usually within 24 hours</span>
-                            </div>
-                        </div>
-                        
-                        <div style="margin-bottom: var(--space-xl);">
-                            <h4 style="font-size: 1.25rem; font-weight: 600; margin-bottom: var(--space-lg); color: var(--gray-900);">Connect Online</h4>
+                            <h3>Get in Touch</h3>
+                            <p style="margin-bottom: var(--space-xl);">
+                                I'm always excited to discuss innovative projects, share knowledge about data science and development, 
+                                or explore opportunities where technology can make a meaningful impact.
+                            </p>
                             <div style="display: flex; gap: var(--space-md); flex-wrap: wrap;">
-                                <a href="https://github.com/SunithaKottayil" class="btn btn-outline" target="_blank" rel="noopener noreferrer">
+                                <a href="https://github.com/SunithaKottayil" class="btn btn-primary" target="_blank">
                                     <i class="fab fa-github"></i> GitHub
                                 </a>
-                                <a href="https://www.linkedin.com/in/sunitha-kottayil" class="btn btn-outline" target="_blank" rel="noopener noreferrer">
+                                <a href="https://www.linkedin.com/in/sunitha-kottayil" class="btn btn-secondary" target="_blank">
                                     <i class="fab fa-linkedin"></i> LinkedIn
                                 </a>
                             </div>
                         </div>
-                        
-                        <div style="padding: 1.5rem; background: var(--primary-50); border: 1px solid var(--primary-200); border-radius: var(--radius-lg); border-left: 4px solid var(--primary-600);">
-                            <h4 style="margin-bottom: 0.5rem; color: var(--primary-700); font-weight: 600;">💡 Let's Discuss</h4>
-                            <ul style="list-style: none; padding: 0; color: var(--gray-600); font-size: 0.9rem;">
-                                <li style="margin-bottom: 0.5rem;">📊 Data analysis and visualization projects</li>
-                                <li style="margin-bottom: 0.5rem;">🐍 Python programming and teaching opportunities</li>
-                                <li style="margin-bottom: 0.5rem;">💼 Career transitions into tech</li>
-                                <li style="margin-bottom: 0.5rem;">🤝 Collaboration and mentoring</li>
-                                <li>🚀 Innovative solutions and ideas</li>
-                            </ul>
-                        </div>
                     </div>
                     
-                    <div class="slide-in-right" style="background: white; padding: var(--space-2xl); border-radius: var(--radius-2xl); box-shadow: var(--shadow-lg); border: 1px solid var(--gray-200);">
-                        <h3 style="font-size: 1.75rem; font-weight: 700; margin-bottom: var(--space-md); color: var(--gray-900);">Send a Message</h3>
-                        <p style="color: var(--gray-600); margin-bottom: var(--space-xl); line-height: 1.6;">I'll get back to you with thoughtful insights and solutions.</p>
+                    <div class="contact-form slide-in-right">
+                        <h3 style="margin-bottom: var(--space-md); color: var(--gray-900);">Send a Message</h3>
+                        <p style="color: var(--gray-600); margin-bottom: var(--space-xl);">I'll get back to you with thoughtful insights and solutions.</p>
                         
                         <form id="contact-form" onsubmit="handleFormSubmit(event)">
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg); margin-bottom: var(--space-lg);">
                                 <div>
-                                    <label for="name" style="display: block; margin-bottom: var(--space-sm); font-weight: 600; color: var(--gray-700); font-size: var(--text-sm);">Full Name *</label>
-                                    <input type="text" id="name" name="name" required placeholder="Your name" style="width: 100%; padding: var(--space-lg); border: 2px solid var(--gray-200); border-radius: var(--radius-lg); font-size: 1rem; transition: all var(--transition-normal); font-family: inherit; background: var(--gray-50);">
+                                    <label for="name" style="display: block; margin-bottom: var(--space-sm); font-weight: 600; color: var(--gray-700);">Full Name *</label>
+                                    <input type="text" id="name" name="name" required placeholder="Your name">
                                 </div>
                                 <div>
-                                    <label for="email" style="display: block; margin-bottom: var(--space-sm); font-weight: 600; color: var(--gray-700); font-size: var(--text-sm);">Email Address *</label>
-                                    <input type="email" id="email" name="email" required placeholder="your.email@example.com" style="width: 100%; padding: var(--space-lg); border: 2px solid var(--gray-200); border-radius: var(--radius-lg); font-size: 1rem; transition: all var(--transition-normal); font-family: inherit; background: var(--gray-50);">
+                                    <label for="email" style="display: block; margin-bottom: var(--space-sm); font-weight: 600; color: var(--gray-700);">Email Address *</label>
+                                    <input type="email" id="email" name="email" required placeholder="your.email@example.com">
                                 </div>
                             </div>
                             
                             <div style="margin-bottom: var(--space-lg);">
-                                <label for="subject" style="display: block; margin-bottom: var(--space-sm); font-weight: 600; color: var(--gray-700); font-size: var(--text-sm);">Subject</label>
-                                <input type="text" id="subject" name="subject" placeholder="What would you like to discuss?" style="width: 100%; padding: var(--space-lg); border: 2px solid var(--gray-200); border-radius: var(--radius-lg); font-size: 1rem; transition: all var(--transition-normal); font-family: inherit; background: var(--gray-50);">
-                            </div>
-                            
-                            <div style="margin-bottom: var(--space-xl);">
-                                <label for="message" style="display: block; margin-bottom: var(--space-sm); font-weight: 600; color: var(--gray-700); font-size: var(--text-sm);">Message *</label>
-                                <textarea id="message" name="message" required placeholder="Tell me about your project, ask a question, or just say hello!" style="width: 100%; min-height: 140px; padding: var(--space-lg); border: 2px solid var(--gray-200); border-radius: var(--radius-lg); font-size: 1rem; transition: all var(--transition-normal); font-family: inherit; resize: vertical; background: var(--gray-50);"></textarea>
-                            </div>
-                            
-                            <button type="submit" class="btn btn-primary" style="width: 100%;">
-                                <i class="fas fa-paper-plane"></i>
-                                Send Message
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Blog Page -->
-    <div id="blog-page" class="blog-page">
-        <div class="container" style="padding: var(--space-3xl) var(--space-lg);">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-3xl);">
-                <div>
-                    <a href="#" class="back-to-portfolio" onclick="hideBlogPage()">
-                        <i class="fas fa-arrow-left"></i> Back to Portfolio
-                    </a>
-                    <h1 style="font-family: var(--font-display); font-size: 3rem; font-weight: 800; margin: var(--space-md) 0; background: var(--gradient-rainbow); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Tech Insights Hub</h1>
-                    <p style="color: var(--gray-600); font-size: 1.125rem;">Practical tutorials, industry insights, and technical deep-dives</p>
-                </div>
-            </div>
-            
-            <div class="blog-filters">
-                <button class="filter-btn active" onclick="filterPosts('all')">All Posts</button>
-                <button class="filter-btn" onclick="filterPosts('python')">Python</button>
-                <button class="filter-btn" onclick="filterPosts('data-science')">Data Science</button>
-                <button class="filter-btn" onclick="filterPosts('web-dev')">Web Development</button>
-                <button class="filter-btn" onclick="filterPosts('tutorials')">Tutorials</button>
-            </div>
-
-            <div class="blog-grid">
-                <article class="blog-card" data-category="tutorials git">
-                    <div class="blog-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-                        <i class="fab fa-git-alt"></i>
-                    </div>
-                    <div class="blog-content">
-                        <div class="blog-meta">
-                            <span class="blog-category">Version Control</span>
-                            <span><i class="fas fa-clock"></i> 12 min read</span>
-                            <span><i class="fas fa-calendar"></i> Dec 15, 2024</span>
-                        </div>
-                        <h3 class="blog-title">
-                            <a href="#" onclick="showBlogPost('git-mastery')">Mastering Git: Essential Workflows for Data Scientists</a>
-                        </h3>
-                        <p class="blog-excerpt">
-                            A comprehensive guide to Git version control specifically tailored for data science workflows. 
-                            Learn advanced branching strategies and collaboration techniques.
-                        </p>
-                        <a href="#" class="blog-read-more" onclick="showBlogPost('git-mastery')">
-                            Read More <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </article>
-
-                <article class="blog-card" data-category="python data-science">
-                    <div class="blog-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
-                        <i class="fab fa-python"></i>
-                    </div>
-                    <div class="blog-content">
-                        <div class="blog-meta">
-                            <span class="blog-category">Python</span>
-                            <span><i class="fas fa-clock"></i> 15 min read</span>
-                            <span><i class="fas fa-calendar"></i> Dec 10, 2024</span>
-                        </div>
-                        <h3 class="blog-title">
-                            <a href="#" onclick="showBlogPost('python-advanced')">Advanced Python Techniques for Data Analysis</a>
-                        </h3>
-                        <p class="blog-excerpt">
-                            Unlock the full potential of Python for data analysis with advanced pandas techniques and performance optimization strategies.
-                        </p>
-                        <a href="#" class="blog-read-more" onclick="showBlogPost('python-advanced')">
-                            Read More <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </article>
-
-                <article class="blog-card" data-category="data-science">
-                    <div class="blog-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
-                        <i class="fas fa-chart-bar"></i>
-                    </div>
-                    <div class="blog-content">
-                        <div class="blog-meta">
-                            <span class="blog-category">Power BI</span>
-                            <span><i class="fas fa-clock"></i> 18 min read</span>
-                            <span><i class="fas fa-calendar"></i> Dec 5, 2024</span>
-                        </div>
-                        <h3 class="blog-title">
-                            <a href="#" onclick="showBlogPost('powerbi-mastery')">Building Enterprise-Grade Dashboards with Power BI</a>
-                        </h3>
-                        <p class="blog-excerpt">
-                            Master the art of creating compelling, interactive dashboards with advanced DAX functions and data modeling techniques.
-                        </p>
-                        <a href="#" class="blog-read-more" onclick="showBlogPost('powerbi-mastery')">
-                            Read More <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </article>
-
-                <article class="blog-card" data-category="web-dev tutorials">
-                    <div class="blog-image" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
-                        <i class="fab fa-js-square"></i>
-                    </div>
-                    <div class="blog-content">
-                        <div class="blog-meta">
-                            <span class="blog-category">TypeScript</span>
-                            <span><i class="fas fa-clock"></i> 14 min read</span>
-                            <span><i class="fas fa-calendar"></i> Nov 28, 2024</span>
-                        </div>
-                        <h3 class="blog-title">
-                            <a href="#" onclick="showBlogPost('typescript-guide')">TypeScript for Data Visualization: A Practical Guide</a>
-                        </h3>
-                        <p class="blog-excerpt">
-                            Learn how to leverage TypeScript's type system to build robust, maintainable data visualization applications with modern frameworks.
-                        </p>
-                        <a href="#" class="blog-read-more" onclick="showBlogPost('typescript-guide')">
-                            Read More <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </article>
-
-                <article class="blog-card" data-category="tutorials web-dev">
-                    <div class="blog-image" style="background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);">
-                        <i class="fab fa-html5"></i>
-                    </div>
-                    <div class="blog-content">
-                        <div class="blog-meta">
-                            <span class="blog-category">Web Development</span>
-                            <span><i class="fas fa-clock"></i> 10 min read</span>
-                            <span><i class="fas fa-calendar"></i> Nov 20, 2024</span>
-                        </div>
-                        <h3 class="blog-title">
-                            <a href="#" onclick="showBlogPost('modern-css')">Modern CSS Techniques for Data Dashboards</a>
-                        </h3>
-                        <p class="blog-excerpt">
-                            Discover cutting-edge CSS techniques for creating responsive, accessible, and visually stunning data dashboard interfaces.
-                        </p>
-                        <a href="#" class="blog-read-more" onclick="showBlogPost('modern-css')">
-                            Read More <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </article>
-
-                <article class="blog-card" data-category="data-science python">
-                    <div class="blog-image" style="background: linear-gradient(135deg, #d299c2 0%, #fef9d7 100%);">
-                        <i class="fas fa-robot"></i>
-                    </div>
-                    <div class="blog-content">
-                        <div class="blog-meta">
-                            <span class="blog-category">Machine Learning</span>
-                            <span><i class="fas fa-clock"></i> 20 min read</span>
-                            <span><i class="fas fa-calendar"></i> Nov 15, 2024</span>
-                        </div>
-                        <h3 class="blog-title">
-                            <a href="#" onclick="showBlogPost('ml-beginners')">Machine Learning for Beginners: A Practical Approach</a>
-                        </h3>
-                        <p class="blog-excerpt">
-                            Start your machine learning journey with practical examples, real datasets, and step-by-step implementations using Python and scikit-learn.
-                        </p>
-                        <a href="#" class="blog-read-more" onclick="showBlogPost('ml-beginners')">
-                            Read More <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </article>
-            </div>
-        </div>
-    </div>
-
-    <!-- Blog Post Pages -->
-    <div id="blog-post-git-mastery" class="blog-page">
-        <div class="container">
-            <div style="margin: var(--space-3xl) 0 var(--space-xl) 0;">
-                <a href="#" class="back-to-portfolio" onclick="showBlogPage()">
-                    <i class="fas fa-arrow-left"></i> Back to Blog
-                </a>
-            </div>
-            
-            <article class="blog-post">
-                <header class="blog-post-header">
-                    <h1 class="blog-post-title">Mastering Git: Essential Workflows for Data Scientists</h1>
-                    <div class="blog-post-meta">
-                        <span><i class="fas fa-user"></i> Sunitha Kottayil</span>
-                        <span><i class="fas fa-calendar"></i> December 15, 2024</span>
-                        <span><i class="fas fa-clock"></i> 12 min read</span>
-                        <span><i class="fas fa-tag"></i> Version Control, Git, Data Science</span>
-                    </div>
-                    <div style="display: flex; justify-content: center; gap: var(--space-sm); flex-wrap: wrap;">
-                        <span class="blog-category">Version Control</span>
-                        <span class="blog-category">Git</span>
-                        <span class="blog-category">Data Science</span>
-                    </div>
-                </header>
-                
-                <div class="blog-post-content">
-                    <div class="toc">
-                        <h4>Table of Contents</h4>
-                        <ul>
-                            <li><a href="#why-git-essential">Why Git is Essential for Data Scientists</a></li>
-                            <li><a href="#data-science-workflow">The Data Science Git Workflow</a></li>
-                            <li><a href="#essential-commands">Essential Git Commands</a></li>
-                            <li><a href="#handling-large-files">Handling Large Files and Data</a></li>
-                            <li><a href="#advanced-techniques">Advanced Techniques</a></li>
-                            <li><a href="#collaboration-practices">Collaboration Best Practices</a></li>
-                            <li><a href="#real-world-example">Real-World Example</a></li>
-                            <li><a href="#troubleshooting">Troubleshooting Common Issues</a></li>
-                        </ul>
-                    </div>
-
-                    <p>
-                        Version control is the backbone of any successful data science project, yet many data scientists struggle with Git's complexity. 
-                        This comprehensive guide will transform you from a Git novice to a version control virtuoso, specifically tailored for data science workflows.
-                    </p>
-
-                    <h2 id="why-git-essential">Why Git is Essential for Data Scientists</h2>
-                    <p>
-                        Data science projects are inherently iterative and experimental. You're constantly tweaking models, trying different approaches, 
-                        and collaborating with team members. Without proper version control, you'll find yourself drowning in files named 
-                        <code>analysis_final_v2_REALLY_FINAL.ipynb</code>.
-                    </p>
-
-                    <blockquote>
-                        "Git isn't just about code—it's about preserving the story of your analysis and enabling fearless experimentation."
-                    </blockquote>
-
-                    <h3 id="data-science-workflow">The Data Science Git Workflow</h3>
-                    <p>Here's a battle-tested workflow that I use for all my data science projects:</p>
-
-                    <div class="code-block">
-                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-                        <pre><code class="language-bash"># 1. Initialize your project
-git init
-git add README.md .gitignore
-git commit -m "Initial project setup"
-
-# 2. Create feature branches for experiments
-git checkout -b feature/customer-segmentation
-git checkout -b experiment/random-forest-model
-
-# 3. Regular commits with descriptive messages
-git add notebooks/exploratory_analysis.ipynb
-git commit -m "Add initial customer behavior analysis
-
-- Explored purchase patterns across demographics
-- Identified 3 distinct customer segments
-- Next: implement clustering algorithm"
-
-# 4. Merge successful experiments
-git checkout main
-git merge feature/customer-segmentation</code></pre>
-                    </div>
-
-                    <h3 id="essential-commands">Essential Git Commands for Data Scientists</h3>
-                    <p>Master these commands and you'll handle 90% of your version control needs:</p>
-
-                    <div class="code-block">
-                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-                        <pre><code class="language-bash"># Check what's changed
-git status
-git diff
-
-# Stage and commit changes
-git add .
-git commit -m "Descriptive commit message"
-
-# Branch management
-git branch                    # List branches
-git checkout -b new-feature   # Create and switch to branch
-git branch -d old-feature     # Delete branch
-
-# Collaboration
-git pull origin main          # Get latest changes
-git push origin feature-branch # Share your work
-
-# Time travel
-git log --oneline            # View commit history
-git checkout commit-hash     # Go back to specific commit
-git reset --hard HEAD~1      # Undo last commit (careful!)</code></pre>
-                    </div>
-
-                    <h3 id="handling-large-files">Handling Large Files and Data</h3>
-                    <p>
-                        Data files can be massive, and Git wasn't designed for large binary files. Here's how to handle them properly:
-                    </p>
-
-                    <div class="code-block">
-                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-                        <pre><code class="language-gitignore"># .gitignore for data science projects
-# Data files
-*.csv
-*.xlsx
-*.json
-*.parquet
-data/raw/
-data/processed/
-
-# Model files
-*.pkl
-*.joblib
-models/
-
-# Environment and cache
-.env
-__pycache__/
-.ipynb_checkpoints/
-.DS_Store
-
-# IDE files
-.vscode/
-.idea/</code></pre>
-                    </div>
-
-                    <h3 id="advanced-techniques">Advanced Techniques</h3>
-                    <p>Once you're comfortable with the basics, these advanced techniques will supercharge your workflow:</p>
-
-                    <ul>
-                        <li><strong>Interactive Staging:</strong> Use <code>git add -p</code> to stage specific parts of files</li>
-                        <li><strong>Stashing:</strong> Save work-in-progress with <code>git stash</code></li>
-                        <li><strong>Cherry-picking:</strong> Apply specific commits with <code>git cherry-pick</code></li>
-                        <li><strong>Rebasing:</strong> Clean up commit history with <code>git rebase -i</code></li>
-                    </ul>
-
-                    <h3 id="collaboration-practices">Collaboration Best Practices</h3>
-                    <p>Working with a team? Follow these golden rules:</p>
-
-                    <ol>
-                        <li><strong>Write meaningful commit messages:</strong> Future you will thank present you</li>
-                        <li><strong>Use feature branches:</strong> Keep main branch stable</li>
-                        <li><strong>Pull before you push:</strong> Avoid merge conflicts</li>
-                        <li><strong>Review code together:</strong> Use pull requests for knowledge sharing</li>
-                        <li><strong>Document your experiments:</strong> Include methodology in commit messages</li>
-                    </ol>
-
-                    <h2 id="real-world-example">Real-World Example: A/B Test Analysis</h2>
-                    <p>Let me show you how I used Git to manage a complex A/B test analysis project:</p>
-
-                    <div class="code-block">
-                        <button class="copyCode(this)">Copy</button>
-                        <pre><code class="language-bash"># Project structure
-ab-test-analysis/
-├── data/
-│   ├── raw/           # Original data (gitignored)
-│   └── processed/     # Cleaned data (gitignored)
-├── notebooks/
-│   ├── 01-data-exploration.ipynb
-│   ├── 02-statistical-analysis.ipynb
-│   └── 03-visualization.ipynb
-├── src/
-│   ├── data_processing.py
-│   └── statistical_tests.py
-├── reports/
-│   └── ab-test-results.md
-└── requirements.txt
-
-# Git workflow
-git checkout -b analysis/statistical-significance
-# Work on statistical analysis
-git add notebooks/02-statistical-analysis.ipynb
-git commit -m "Implement t-test and chi-square analysis
-
-- Added statistical significance testing
-- Confidence intervals: 95%
-- Sample size: 10,000 users per variant
-- Results: Variant B shows 12% improvement (p < 0.05)"
-
-git checkout -b visualization/results-dashboard
-# Create visualizations
-git add notebooks/03-visualization.ipynb
-git commit -m "Create comprehensive results dashboard
-
-- Interactive plots with Plotly
-- Statistical significance indicators
-- Business impact projections
-- Ready for stakeholder presentation"</code></pre>
-                    </div>
-
-                    <h3 id="troubleshooting">Troubleshooting Common Issues</h3>
-                    <p>Every data scientist encounters these Git challenges. Here's how to solve them:</p>
-
-                    <h4>Problem: Accidentally committed large data files</h4>
-                    <div class="code-block">
-                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-                        <pre><code class="language-bash"># Remove from Git but keep locally
-git rm --cached large_dataset.csv
-echo "large_dataset.csv" >> .gitignore
-git add .gitignore
-git commit -m "Remove large dataset from version control"</code></pre>
-                    </div>
-
-                    <h4>Problem: Need to undo last commit</h4>
-                    <div class="code-block">
-                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-                        <pre><code class="language-bash"># Undo commit but keep changes
-git reset --soft HEAD~1
-
-# Undo commit and discard changes (careful!)
-git reset --hard HEAD~1</code></pre>
-                    </div>
-
-                    <h4>Problem: Merge conflicts in Jupyter notebooks</h4>
-                    <div class="code-block">
-                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-                        <pre><code class="language-bash"># Install nbstripout to clean notebooks before committing
-pip install nbstripout
-nbstripout --install
-
-# This removes output and metadata, reducing conflicts</code></pre>
-                    </div>
-
-                    <div class="newsletter">
-                        <h4>📧 Stay Updated</h4>
-                        <p>Get the latest tutorials and insights delivered to your inbox</p>
-                        <form class="newsletter-form" onsubmit="handleNewsletterSubmit(event)">
-                            <input type="email" placeholder="your.email@example.com" required>
-                            <button type="submit">Subscribe</button>
-                        </form>
-                    </div>
-
-                    <h2>Next Steps</h2>
-                    <p>
-                        Mastering Git is a journey, not a destination. Start with the basics, practice regularly, and gradually incorporate 
-                        advanced techniques. Remember, the goal isn't to memorize every Git command—it's to develop a workflow that makes 
-                        your data science projects more organized, collaborative, and reproducible.
-                    </p>
-
-                    <p>
-                        Want to dive deeper? Check out my upcoming posts on advanced Git workflows, Git hooks for data validation, 
-                        and integrating Git with popular data science tools like DVC (Data Version Control).
-                    </p>
-
-                    <div class="social-share">
-                        <h4>Share this article</h4>
-                        <div class="social-share-buttons">
-                            <a href="#" class="social-share-btn twitter">
-                                <i class="fab fa-twitter"></i> Twitter
-                            </a>
-                            <a href="#" class="social-share-btn linkedin">
-                                <i class="fab fa-linkedin"></i> LinkedIn
-                            </a>
-                            <a href="#" class="social-share-btn facebook">
-                                <i class="fab fa-facebook"></i> Facebook
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="related-posts">
-                    <h3>Related Articles</h3>
-                    <div class="related-posts-grid">
-                        <div class="related-post">
-                            <h4><a href="#" onclick="showBlogPost('python-advanced')">Advanced Python Techniques for Data Analysis</a></h4>
-                            <p>Unlock the full potential of Python for data analysis with advanced pandas techniques and performance optimization.</p>
-                        </div>
-                        <div class="related-post">
-                            <h4><a href="#" onclick="showBlogPost('powerbi-mastery')">Building Enterprise-Grade Dashboards with Power BI</a></h4>
-                            <p>Master the art of creating compelling, interactive dashboards with advanced DAX functions.</p>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div>
-                    <div class="footer-logo">Sunitha Kottayil</div>
-                    <p class="footer-tagline">Transforming data into insights, code into solutions</p>
-                </div>
-                <div class="footer-social">
-                    <a href="https://github.com/SunithaKottayil" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-                        <i class="fab fa-github"></i>
-                    </a>
-                    <a href="https://www.linkedin.com/in/sunitha-kottayil" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
-                    <a href="mailto:vgsuniashok.email@example.com" aria-label="Email">
-                        <i class="fas fa-envelope"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>© 2024 Sunitha Kottayil. Crafted with passion using modern web technologies. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Scroll to Top Button -->
-    <button class="scroll-to-top" id="scroll-to-top" onclick="scrollToTop()" aria-label="Scroll to top">
-        <i class="fas fa-arrow-up"></i>
-    </button>
-
-    <!-- Prism.js for syntax highlighting -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
-
-    <script>
-        // Theme Toggle
-        function toggleTheme() {
-            const body = document.body;
-            const themeIcon = document.getElementById('theme-icon');
-            
-            if (body.getAttribute('data-theme') === 'dark') {
-                body.removeAttribute('data-theme');
-                themeIcon.className = 'fas fa-moon';
-                localStorage.setItem('theme', 'light');
-            } else {
-                body.setAttribute('data-theme', 'dark');
-                themeIcon.className = 'fas fa-sun';
-                localStorage.setItem('theme', 'dark');
-            }
-        }
-
-        // Load saved theme
-        document.addEventListener('DOMContentLoaded', function() {
-            const savedTheme = localStorage.getItem('theme');
-            const themeIcon = document.getElementById('theme-icon');
-            
-            if (savedTheme === 'dark') {
-                document.body.setAttribute('data-theme', 'dark');
-                themeIcon.className = 'fas fa-sun';
-            }
-        });
-
-        // Progress Bar
-        function updateProgressBar() {
-            const scrollTop = document.documentElement.scrollTop;
-            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrollProgress = (scrollTop / scrollHeight) * 100;
-            
-            document.getElementById('progress-bar').style.width = scrollProgress + '%';
-        }
-
-        // Header Scroll Effect
-        function handleHeaderScroll() {
-            const header = document.getElementById('header');
-            if (window.scrollY > 100) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        }
-
-        // Active Navigation Link
-        function updateActiveNavLink() {
-            const navLinks = document.querySelectorAll('.nav-link');
-            const sections = document.querySelectorAll('section[id]');
-            let current = '';
-
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (scrollY >= (sectionTop - 200)) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${current}`) {
-                    link.classList.add('active');
-                }
-            });
-        }
-
-        // Scroll to Top Button
-        function toggleScrollToTop() {
-            const scrollToTopBtn = document.getElementById('scroll-to-top');
-            if (window.scrollY > 300) {
-                scrollToTopBtn.classList.add('visible');
-            } else {
-                scrollToTopBtn.classList.remove('visible');
-            }
-        }
-
-        function scrollToTop() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        }
-
-        // Intersection Observer for animations
-        function initializeAnimations() {
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, observerOptions);
-
-            document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right').forEach(el => {
-                observer.observe(el);
-            });
-        }
-
-        // Smooth scrolling for navigation links
-        function initializeSmoothScrolling() {
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                });
-            });
-        }
-
-        // Blog functionality
-        function showBlogPage() {
-            document.getElementById('main-content').style.display = 'none';
-            document.getElementById('blog-page').classList.add('active');
-            
-            // Hide all blog posts
-            document.querySelectorAll('[id^="blog-post-"]').forEach(post => {
-                post.classList.remove('active');
-            });
-            
-            window.scrollTo(0, 0);
-        }
-
-        function hideBlogPage() {
-            document.getElementById('main-content').style.display = 'block';
-            document.getElementById('blog-page').classList.remove('active');
-            
-            // Hide all blog posts
-            document.querySelectorAll('[id^="blog-post-"]').forEach(post => {
-                post.classList.remove('active');
-            });
-            
-            window.scrollTo(0, 0);
-        }
-
-        function showBlogPost(postId) {
-            document.getElementById('main-content').style.display = 'none';
-            document.getElementById('blog-page').classList.remove('active');
-            
-            // Hide all blog posts
-            document.querySelectorAll('[id^="blog-post-"]').forEach(post => {
-                post.classList.remove('active');
-            });
-            
-            // Show the selected post
-            const targetPost = document.getElementById('blog-post-' + postId);
-            if (targetPost) {
-                targetPost.classList.add('active');
-            }
-            
-            window.scrollTo(0, 0);
-        }
-
-        function filterPosts(category) {
-            // Update filter buttons
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            event.target.classList.add('active');
-            
-            // Show/hide posts based on category
-            document.querySelectorAll('.blog-card').forEach(post => {
-                const postCategories = post.getAttribute('data-category');
-                if (category === 'all' || (postCategories && postCategories.includes(category))) {
-                    post.style.display = 'block';
-                } else {
-                    post.style.display = 'none';
-                }
-            });
-        }
-
-        // Copy code functionality
-        function copyCode(button) {
-            const codeBlock = button.nextElementSibling.querySelector('code');
-            const text = codeBlock.textContent;
-            
-            navigator.clipboard.writeText(text).then(() => {
-                const originalText = button.textContent;
-                button.textContent = 'Copied!';
-                button.classList.add('copied');
-                
-                setTimeout(() => {
-                    button.textContent = originalText;
-                    button.classList.remove('copied');
-                }, 2000);
-            });
-        }
-
-        // Newsletter submission
-        function handleNewsletterSubmit(event) {
-            event.preventDefault();
-            const email = event.target.querySelector('input[type="email"]').value;
-            alert(`Thank you for subscribing with ${email}! You'll receive updates on new tutorials and insights.`);
-            event.target.reset();
-        }
-
-        // Contact form submission
-        function handleFormSubmit(event) {
-            event.preventDefault();
-            
-            const formData = new FormData(event.target);
-            const name = formData.get('name');
-            const email = formData.get('email');
-            const subject = formData.get('subject');
-            const message = formData.get('message');
-            
-            // Show loading state
-            const submitBtn = event.target.querySelector('button[type="submit"]');
-            const originalText = submitBtn.innerHTML;
-            submitBtn.innerHTML = '<div class="loading"></div> Sending...';
-            submitBtn.disabled = true;
-            
-            // Simulate form submission
-            setTimeout(() => {
-                alert(`Thank you, ${name}! Your message has been received. I'll get back to you at ${email} as soon as possible.`);
-                event.target.reset();
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-            }, 2000);
-        }
-
-        // Event Listeners
-        window.addEventListener('scroll', () => {
-            updateProgressBar();
-            handleHeaderScroll();
-            updateActiveNavLink();
-            toggleScrollToTop();
-        });
-
-        // Initialize everything when DOM is loaded
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeAnimations();
-            initializeSmoothScrolling();
-            
-            // Initialize progress bar
-            updateProgressBar();
-            
-            // Add hover effects to cards
-            document.querySelectorAll('.card, .blog-card').forEach(card => {
-                card.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-8px)';
-                });
-                
-                card.addEventListener('mouseleave', function() {
-                    this.style.transform = 'translateY(0)';
-                });
-            });
-
-            // Add typing effect to hero name
-            const heroName = document.querySelector('.hero-name');
-            if (heroName) {
-                const text = heroName.textContent;
-                heroName.textContent = '';
-                let i = 0;
-                
-                function typeWriter() {
-                    if (i < text.length) {
-                        heroName.textContent += text.charAt(i);
-                        i++;
-                        setTimeout(typeWriter, 100);
-                    }
-                }
-                
-                setTimeout(typeWriter, 1000);
-            }
-
-            // Add focus styles for form inputs
-            document.querySelectorAll('input, textarea').forEach(input => {
-                input.addEventListener('focus', function() {
-                    this.style.borderColor = 'var(--primary-600)';
-                    this.style.boxShadow = '0 0 0 3px rgba(14, 165, 233, 0.1)';
-                    this.style.background = 'white';
-                });
-                
-                input.addEventListener('blur', function() {
-                    this.style.borderColor = 'var(--gray-200)';
-                    this.style.boxShadow = 'none';
-                    this.style.background = 'var(--gray-50)';
-                });
-            });
-
-            // Add hover effects to skill tags
-            document.querySelectorAll('.skill-tag').forEach(tag => {
-                tag.addEventListener('mouseenter', function() {
-                    this.style.background = 'var(--secondary-100)';
-                    this.style.color = 'var(--secondary-700)';
-                    this.style.borderColor = 'var(--secondary-200)';
-                    this.style.transform = 'translateY(-2px)';
-                });
-                
-                tag.addEventListener('mouseleave', function() {
-                    this.style.background = 'var(--gray-100)';
-                    this.style.color = 'var(--gray-700)';
-                    this.style.borderColor = 'var(--gray-200)';
-                    this.style.transform = 'translateY(0)';
-                });
-            });
-        });
-
-        // Performance optimization: Debounce scroll events
-        function debounce(func, wait) {
-            let timeout;
-            return function executedFunction(...args) {
-                const later = () => {
-                    clearTimeout(timeout);
-                    func(...args);
-                };
-                clearTimeout(timeout);
-                timeout = setTimeout(later, wait);
-            };
-        }
-
-        // Apply debouncing to scroll events
-        window.addEventListener('scroll', debounce(() => {
-            updateProgressBar();
-            handleHeaderScroll();
-            updateActiveNavLink();
-            toggleScrollToTop();
-        }, 10));
-    </script>
-</body>
-</html>
+                                <label for="subject" style="display: block; margin-bottom: var(--space-sm); font-weight: 600; color: var(--gray-
