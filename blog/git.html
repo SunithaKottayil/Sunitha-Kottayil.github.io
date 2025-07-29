@@ -1,102 +1,207 @@
-# Getting Started with Git: A Beginner’s Guide
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Getting Started with Git: A Beginner’s Guide</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f1f4f9;
+      margin: 0;
+      padding: 0;
+      color: #2c3e50;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 800px;
+      margin: 2em auto;
+      background: #fff;
+      border-radius: 10px;
+      padding: 2em;
+      box-shadow: 0 0 10px #ddd;
+    }
+    h1 {
+      text-align: center;
+      color: #34495e;
+    }
+    h2 {
+      color: #2c3e50;
+      border-bottom: 2px solid #2980b9;
+      padding-bottom: 0.3em;
+      margin-top: 1.5em;
+    }
+    p {
+      margin: 1em 0;
+    }
+    ul, ol {
+      margin-left: 1.5em;
+    }
+    .cmd {
+      background: #e9eaed;
+      border-radius: 5px;
+      padding: 1em;
+      margin: 1em 0;
+      font-family: monospace;
+      white-space: pre-wrap;
+    }
+    .tip {
+      background: #d5f5e3;
+      border-left: 6px solid #27ae60;
+      padding: 1em;
+      margin: 1em 0;
+      border-radius: 5px;
+    }
+    .diagram {
+      text-align: center;
+      margin: 2em 0;
+    }
+    .diagram img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    a {
+      color: #2980b9;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #ddd;
+      margin: 2em 0;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>👋 Getting Started with Git: A Beginner’s Guide</h1>
 
-Hello! If you’re curious about Git and want to learn how to use it for your coding projects, you’re in the right place. When I started with programming, Git seemed mysterious, but it quickly became one of my most valuable tools. Here’s how you can get started, step by step.
+  <p>Hello! If you’re curious about Git and want to learn how to use it for your coding projects, you’re in the right place. When I started with programming, Git seemed mysterious, but it quickly became one of my most valuable tools. Here’s how you can get started, step by step.</p>
 
----
+  <hr />
 
-## What is Git?
+  <h2>What is Git?</h2>
+  <p>Git is a tool that helps you keep track of changes to your files. Imagine writing a story and being able to go back to any previous version whenever you want. That’s what Git does for your code! You can also work with friends and never worry about losing your work.</p>
+  <p>For more details, check out the <a href="https://git-scm.com/docs/gittutorial" target="_blank" rel="noopener noreferrer">official Git tutorial</a>.</p>
 
-Git is a tool that helps you keep track of changes to your files. Imagine writing a story and being able to go back to any previous version whenever you want. That’s what Git does for your code! You can also work with friends and never worry about losing your work.
+  <div class="diagram">
+    <img src="https://raw.githubusercontent.com/github/explore/main/topics/git/git.png" alt="Git logo" width="80" />
+    <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub logo" width="80" />
+    <br /><small><strong>Git</strong> runs locally on your computer, and <strong>GitHub</strong> stores your projects in the cloud, making collaboration easy.</small>
+  </div>
 
-For more details, check out the [official Git tutorial](https://git-scm.com/docs/gittutorial).
+  <hr />
 
----
+  <h2>Step 1: Install Git</h2>
+  <ol>
+    <li>Go to <a href="https://git-scm.com/" target="_blank" rel="noopener noreferrer">git-scm.com</a> and download Git for your computer.</li>
+    <li>Follow the instructions to install it. The default settings are fine for most beginners.</li>
+  </ol>
 
-## Step 1: Install Git
-
-1. Go to [git-scm.com](https://git-scm.com/) and download Git for your computer.
-2. Follow the instructions to install it. The default settings are fine for most beginners.
-
----
-
-## Step 2: Set Up Your Identity
-
-After installing Git, open your terminal (Command Prompt, Terminal, or Git Bash) and enter:
-
-```bash
+  <h2>Step 2: Set Up Your Identity</h2>
+  <p>After installing Git, open your terminal (Command Prompt, Terminal, or Git Bash) and enter these commands. This tells Git who you are, so your work is recognized.</p>
+  <div class="cmd">
 git config --global user.name "Your Name"
 git config --global user.email "your@email.com"
-```
+  </div>
 
-This tells Git who you are, so your work is recognized.
+  <hr />
 
----
-
-## Step 3: Create Your First Project
-
-Let’s start a new project folder and turn it into a Git repository.
-
-```bash
+  <h2>Step 3: Create Your First Project</h2>
+  <p>Let’s start a new project folder and turn it into a Git repository that tracks changes.</p>
+  <div class="cmd">
 mkdir my-first-git-project
 cd my-first-git-project
 git init
-```
+  </div>
+  <p>You’ll see a message that Git has initialized your folder. Now Git is watching for changes!</p>
 
-You’ll see a message that Git has initialized your folder. Now Git is watching for changes!
-
----
-
-## Step 4: Add a File and Save Your Work
-
-Make a simple text file:
-
-```bash
+  <h2>Step 4: Add a File and Save Your Work</h2>
+  <p>Make a simple text file and tell Git to track it, then save your changes.</p>
+  <div class="cmd">
 echo "Hello, Git!" > hello.txt
-```
-
-Now, add the file to Git and commit (save) your changes:
-
-```bash
 git add hello.txt
 git commit -m "Add hello.txt with a greeting"
-```
+  </div>
+  <p><b>What these do:</b></p>
+  <ul>
+    <li><code>git add</code> tells Git to track the file.</li>
+    <li><code>git commit</code> saves a snapshot of your work.</li>
+  </ul>
 
-- `git add` tells Git to track the file.
-- `git commit` saves a snapshot of your work.
+  <div class="diagram">
+    <img src="https://i.imgur.com/BbgjRli.png" alt="Staging and committing illustration" width="400" />
+  </div>
 
----
+  <hr />
 
-## Step 5: Check the Status and History
-
-To see what’s going on, use these commands:
-
-```bash
+  <h2>Step 5: Check the Status and History</h2>
+  <p>See what’s going on in your project:</p>
+  <div class="cmd">
 git status
 git log
-```
+  </div>
+  <ul>
+    <li><code>git status</code> shows which files are being tracked or changed.</li>
+    <li><code>git log</code> lists your past commits so you can review changes over time.</li>
+  </ul>
 
-- `git status` shows which files are being tracked or changed.
-- `git log` lists your past commits.
+  <hr />
 
----
-
-## Step 6: Fix Mistakes
-
-If you ever mess up, don’t worry! Git can help you go back.
-
-```bash
+  <h2>Step 6: Fix Mistakes</h2>
+  <p>Messed up? No worries! Git lets you undo changes and restore files from your last saved version.</p>
+  <div class="cmd">
 git checkout hello.txt
-```
+  </div>
 
-This will restore the file to the last commit.
+  <hr />
 
----
+  <h2>Step 7: Connect to GitHub and Share Your Work</h2>
+  <p>To back up your code online and collaborate, follow these steps:</p>
+  <ol>
+    <li>Create a free account at <a href="https://github.com" target="_blank" rel="noopener noreferrer">github.com</a>.</li>
+    <li>Create a new repository (a "repo") on GitHub and copy its web URL.</li>
+    <li>Link your local folder to your GitHub repo and push your commits:</li>
+  </ol>
+  <div class="cmd">
+git remote add origin [YOUR-REPO-URL]
+git push -u origin main
+  </div>
 
-## Final Thoughts
+  <div class="diagram">
+    <img src="https://i.imgur.com/oy2t6Uc.png" alt="Pushing to GitHub" width="350" />
+    <br /><small>Push your work to the cloud & share your project!</small>
+  </div>
 
-That’s it! You’ve just learned the basics of Git. The best way to learn is to practice—try making changes, adding new files, and committing your work. If you want to dive deeper, the [official Git tutorial](https://git-scm.com/docs/gittutorial) is a great resource.
+  <hr />
 
-Git might feel strange at first, but soon it will become second nature. Happy coding!
+  <h2>Why Use Git?</h2>
+  <ul>
+    <li>Never lose your work — go back to any previous version easily.</li>
+    <li>Work together with friends without overwriting each other’s work.</li>
+    <li>Build your portfolio and show your projects to the world.</li>
+  </ul>
 
----
-"Move git.md to blog folder"
+  <h2>Extra Tips for Beginners</h2>
+  <ul>
+    <li>Use <code>git status</code> often to see the state of your files.</li>
+    <li>Think of every commit as a "save point" in a video game.</li>
+    <li>Try using branches to work on new features without affecting the main project.</li>
+  </ul>
+
+  <hr />
+
+  <h2>Final Thoughts</h2>
+  <p>That’s it! You’ve just learned the basics of Git in a simple, friendly way. The best way to learn is to practice—try making changes, adding files, and committing your work often.</p>
+  <p>Git might feel strange at first, but soon it will become second nature. Happy coding!</p>
+  <p>Learn more anytime at the <a href="https://git-scm.com/docs/gittutorial" target="_blank" rel="noopener noreferrer">official Git tutorial</a>.</p>
+
+  <div class="tip">
+    🚀 <strong>Congratulations!</strong> You’re ready to start using Git and GitHub for your projects. The more you explore, the more powerful Git becomes.
+  </div>
+</div>
+</body>
+</html>
