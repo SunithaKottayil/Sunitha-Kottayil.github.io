@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>C# Fundamentals - A Practical Guide</title>
+  <title>C# Programming Fundamentals - Complete Beginner's Guide</title>
   <style>
     * {
       margin: 0;
@@ -12,220 +12,362 @@
     }
     
     body {
-      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-      line-height: 1.6;
-      color: #2c3e50;
-      background: #fafafa;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, system-ui, sans-serif;
+      line-height: 1.7;
+      color: #2d3748;
+      background: #f7fafc;
     }
     
     .container {
-      max-width: 1000px;
+      max-width: 1100px;
       margin: 0 auto;
-      padding: 40px 20px;
+      padding: 0 20px;
       background: white;
+      box-shadow: 0 0 30px rgba(0,0,0,0.05);
       min-height: 100vh;
     }
     
     header {
-      border-bottom: 3px solid #3498db;
-      margin-bottom: 40px;
-      padding-bottom: 20px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 60px 40px;
+      text-align: center;
+      position: relative;
+    }
+    
+    header::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #4299e1, #3182ce);
     }
     
     h1 {
-      font-size: 2.2em;
-      color: #2c3e50;
-      margin-bottom: 10px;
-      font-weight: 600;
+      font-size: 2.5em;
+      font-weight: 700;
+      margin-bottom: 15px;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
     
     .subtitle {
-      color: #7f8c8d;
-      font-size: 1.1em;
+      font-size: 1.2em;
+      opacity: 0.95;
       margin-bottom: 20px;
+      font-weight: 300;
     }
     
     .author-info {
-      font-size: 0.9em;
-      color: #95a5a6;
-      font-style: italic;
+      font-size: 0.95em;
+      opacity: 0.8;
+      background: rgba(255,255,255,0.1);
+      padding: 10px 20px;
+      border-radius: 20px;
+      display: inline-block;
+    }
+    
+    .content {
+      padding: 50px 40px;
     }
     
     h2 {
-      color: #2c3e50;
-      font-size: 1.5em;
-      margin: 40px 0 20px 0;
-      padding-left: 15px;
-      border-left: 4px solid #3498db;
-      font-weight: 500;
+      color: #2d3748;
+      font-size: 1.8em;
+      margin: 50px 0 25px 0;
+      font-weight: 600;
+      position: relative;
+      padding-bottom: 10px;
+    }
+    
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, #4299e1, #3182ce);
+      border-radius: 2px;
     }
     
     h3 {
-      color: #34495e;
-      margin: 25px 0 15px 0;
-      font-weight: 500;
+      color: #4a5568;
+      font-size: 1.3em;
+      margin: 30px 0 15px 0;
+      font-weight: 600;
     }
     
     p {
+      margin-bottom: 20px;
+      font-size: 1.05em;
+      line-height: 1.8;
+    }
+    
+    .intro-section {
+      background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+      padding: 40px;
+      border-radius: 12px;
+      margin: 30px 0;
+      border: 1px solid #e2e8f0;
+    }
+    
+    .intro-section p {
+      font-size: 1.1em;
+      color: #4a5568;
       margin-bottom: 15px;
-      text-align: justify;
     }
     
     .code-block {
-      background: #f8f9fa;
-      border: 1px solid #e9ecef;
-      border-radius: 4px;
-      padding: 20px;
-      margin: 20px 0;
-      font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+      background: #1a202c;
+      color: #e2e8f0;
+      border-radius: 8px;
+      padding: 25px;
+      margin: 25px 0;
+      font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
       overflow-x: auto;
       position: relative;
       white-space: pre;
-      line-height: 1.4;
+      line-height: 1.6;
       font-size: 14px;
+      border: 1px solid #2d3748;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
     
     .code-block::before {
       content: "C#";
       position: absolute;
-      top: 5px;
-      right: 10px;
-      font-size: 0.8em;
-      color: #6c757d;
-      background: #e9ecef;
-      padding: 2px 8px;
-      border-radius: 3px;
+      top: 12px;
+      right: 15px;
+      font-size: 11px;
+      color: #a0aec0;
+      background: #2d3748;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-weight: 600;
     }
     
     .inline-code {
-      background: #f1f3f4;
-      padding: 2px 6px;
-      border-radius: 3px;
-      font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+      background: #edf2f7;
+      color: #2d3748;
+      padding: 3px 6px;
+      border-radius: 4px;
+      font-family: 'SF Mono', Monaco, Consolas, monospace;
       font-size: 0.9em;
-      color: #c7254e;
+      font-weight: 500;
+      border: 1px solid #e2e8f0;
     }
     
-    .note {
-      background: #e8f4f8;
-      border-left: 4px solid #17a2b8;
-      padding: 15px 20px;
-      margin: 20px 0;
-      border-radius: 0 4px 4px 0;
+    .info-box {
+      background: #ebf8ff;
+      border-left: 4px solid #3182ce;
+      padding: 20px 25px;
+      margin: 25px 0;
+      border-radius: 0 8px 8px 0;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     }
     
-    .note-title {
+    .info-box-title {
       font-weight: 600;
-      color: #0c5460;
-      margin-bottom: 8px;
-    }
-    
-    .warning {
-      background: #fff3cd;
-      border-left: 4px solid #ffc107;
-      padding: 15px 20px;
-      margin: 20px 0;
-      border-radius: 0 4px 4px 0;
-    }
-    
-    .warning-title {
-      font-weight: 600;
-      color: #856404;
-      margin-bottom: 8px;
-    }
-    
-    .practice-section {
-      background: #f8f9fa;
-      border: 1px solid #dee2e6;
-      border-radius: 6px;
-      padding: 25px;
-      margin: 30px 0;
-    }
-    
-    .practice-title {
-      color: #495057;
-      font-weight: 600;
-      margin-bottom: 15px;
+      color: #2c5282;
+      margin-bottom: 12px;
       font-size: 1.1em;
     }
     
+    .warning-box {
+      background: #fffaf0;
+      border-left: 4px solid #ed8936;
+      padding: 20px 25px;
+      margin: 25px 0;
+      border-radius: 0 8px 8px 0;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+    
+    .warning-box-title {
+      font-weight: 600;
+      color: #c05621;
+      margin-bottom: 12px;
+      font-size: 1.1em;
+    }
+    
+    .tip-box {
+      background: #f0fff4;
+      border-left: 4px solid #38a169;
+      padding: 20px 25px;
+      margin: 25px 0;
+      border-radius: 0 8px 8px 0;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+    
+    .tip-box-title {
+      font-weight: 600;
+      color: #2f855a;
+      margin-bottom: 12px;
+      font-size: 1.1em;
+    }
+    
+    .practice-section {
+      background: #f7fafc;
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 30px;
+      margin: 35px 0;
+    }
+    
+    .practice-title {
+      color: #2d3748;
+      font-weight: 700;
+      margin-bottom: 20px;
+      font-size: 1.2em;
+    }
+    
     ul, ol {
-      margin: 15px 0 15px 30px;
+      margin: 20px 0 20px 35px;
     }
     
     li {
-      margin-bottom: 8px;
+      margin-bottom: 12px;
+      font-size: 1.05em;
     }
     
-    .key-concepts {
+    .concepts-overview {
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       color: white;
-      padding: 25px;
-      border-radius: 8px;
-      margin: 30px 0;
+      padding: 40px;
+      border-radius: 12px;
+      margin: 40px 0;
+      box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
     }
     
-    .key-concepts h3 {
+    .concepts-overview h3 {
       color: white;
-      margin-bottom: 15px;
+      margin-bottom: 25px;
+      font-size: 1.5em;
+      text-align: center;
     }
     
     .concepts-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 15px;
-      margin-top: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 25px;
     }
     
-    .concept-item {
-      background: rgba(255, 255, 255, 0.1);
-      padding: 15px;
-      border-radius: 6px;
+    .concept-card {
+      background: rgba(255, 255, 255, 0.15);
+      padding: 25px;
+      border-radius: 8px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
     }
     
-    .concept-item h4 {
-      margin-bottom: 8px;
-      font-size: 1em;
+    .concept-card h4 {
+      margin-bottom: 12px;
+      font-size: 1.1em;
+      font-weight: 600;
     }
     
-    .concept-item p {
-      font-size: 0.9em;
+    .concept-card p {
+      font-size: 0.95em;
       margin: 0;
       opacity: 0.9;
+      line-height: 1.5;
     }
     
     .next-steps {
-      background: #28a745;
+      background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
       color: white;
-      padding: 25px;
-      border-radius: 8px;
-      margin: 40px 0;
+      padding: 40px;
+      border-radius: 12px;
+      margin: 50px 0;
+      box-shadow: 0 10px 25px rgba(72, 187, 120, 0.3);
     }
     
     .next-steps h3 {
       color: white;
-      margin-bottom: 15px;
+      margin-bottom: 20px;
+      font-size: 1.5em;
     }
     
     .next-steps ul {
-      margin-left: 20px;
+      margin-left: 25px;
     }
     
     .next-steps a {
-      color: #d4edda;
+      color: #c6f6d5;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    
+    .next-steps a:hover {
+      text-decoration: underline;
+    }
+    
+    .section-intro {
+      background: #f8f9fa;
+      padding: 25px;
+      border-radius: 8px;
+      margin: 20px 0;
+      border-left: 4px solid #6c757d;
+      font-style: italic;
+      color: #495057;
+    }
+    
+    .beginner-note {
+      background: linear-gradient(135deg, #fff5f5 0%, #fed7d7 100%);
+      border: 2px solid #fc8181;
+      padding: 20px;
+      border-radius: 10px;
+      margin: 20px 0;
+      text-align: center;
+    }
+    
+    .beginner-note-title {
+      color: #c53030;
+      font-weight: 700;
+      margin-bottom: 10px;
+      font-size: 1.1em;
+    }
+    
+    footer {
+      background: #2d3748;
+      color: #a0aec0;
+      padding: 40px;
+      text-align: center;
+      margin-top: 60px;
+    }
+    
+    footer p {
+      margin: 0;
+      font-size: 1.05em;
+      line-height: 1.6;
     }
     
     @media (max-width: 768px) {
       .container {
-        padding: 20px 15px;
+        padding: 0 10px;
+      }
+      
+      header {
+        padding: 40px 20px;
+      }
+      
+      .content {
+        padding: 30px 20px;
       }
       
       h1 {
-        font-size: 1.8em;
+        font-size: 2em;
       }
       
       .concepts-grid {
         grid-template-columns: 1fr;
+      }
+      
+      .code-block {
+        padding: 20px;
+        font-size: 13px;
       }
     }
   </style>
@@ -233,42 +375,53 @@
 <body>
   <div class="container">
     <header>
-      <h1>C# Fundamentals: A Practical Guide</h1>
-      <p class="subtitle">Learn C# programming through hands-on examples and real-world applications</p>
-      <div class="author-info">Last updated: January 2025 • Beginner to Intermediate Level</div>
+      <h1>C# Programming Fundamentals</h1>
+      <p class="subtitle">Your Complete Guide to Learning C# from Scratch</p>
+      <div class="author-info">Beginner-Friendly • Step-by-Step • Updated January 2025</div>
     </header>
 
-    <section>
-      <p>This guide covers the essential concepts you need to start programming in C#. Each section includes practical examples with properly formatted code that you can copy and run in your development environment. C# is a versatile language used for web development, desktop applications, games, and mobile apps.</p>
-    </section>
+    <div class="content">
+      <div class="intro-section">
+        <p><strong>Welcome to C# programming!</strong> This comprehensive guide will take you from complete beginner to confident C# programmer. We'll cover everything you need to know with clear explanations, practical examples, and hands-on exercises.</p>
+        <p>C# (pronounced "C-Sharp") is a modern, powerful programming language developed by Microsoft. It's used to build everything from desktop applications and websites to mobile apps and games. By the end of this guide, you'll have a solid foundation in C# programming.</p>
+      </div>
 
-    <div class="key-concepts">
-      <h3>What You'll Learn</h3>
-      <div class="concepts-grid">
-        <div class="concept-item">
-          <h4>Basic Syntax</h4>
-          <p>Variables, data types, and program structure</p>
-        </div>
-        <div class="concept-item">
-          <h4>Control Flow</h4>
-          <p>Conditions, loops, and decision making</p>
-        </div>
-        <div class="concept-item">
-          <h4>Methods</h4>
-          <p>Writing reusable code with functions</p>
-        </div>
-        <div class="concept-item">
-          <h4>Object-Oriented Programming</h4>
-          <p>Classes, objects, and encapsulation</p>
+      <div class="beginner-note">
+        <div class="beginner-note-title">📚 New to Programming?</div>
+        <p>Don't worry! This guide assumes no prior programming experience. We'll explain everything step by step, starting with the very basics. Take your time with each section and practice the examples.</p>
+      </div>
+
+      <div class="concepts-overview">
+        <h3>What You'll Master in This Guide</h3>
+        <div class="concepts-grid">
+          <div class="concept-card">
+            <h4>🔤 Basic Syntax & Variables</h4>
+            <p>Learn how to store and work with different types of data like numbers, text, and true/false values</p>
+          </div>
+          <div class="concept-card">
+            <h4>🔀 Control Flow</h4>
+            <p>Make your programs smart with decision-making and repeating actions based on conditions</p>
+          </div>
+          <div class="concept-card">
+            <h4>⚙️ Functions & Methods</h4>
+            <p>Organize your code into reusable pieces that make programming more efficient and cleaner</p>
+          </div>
+          <div class="concept-card">
+            <h4>🏗️ Object-Oriented Programming</h4>
+            <p>Create custom data types and build complex applications using classes and objects</p>
+          </div>
         </div>
       </div>
-    </div>
 
-    <h2>1. Getting Started - Your First Program</h2>
-    
-    <p>Every C# program starts with a <span class="inline-code">Main</span> method. This is where your code begins execution. Let's look at the classic "Hello World" example:</p>
+      <h2>1. Your First C# Program - Hello World!</h2>
+      
+      <div class="section-intro">
+        Every programming journey starts with a simple program that displays "Hello, World!" on the screen. This tradition helps you verify that your development environment is working and gives you a feel for the language's basic structure.
+      </div>
 
-    <div class="code-block">using System;
+      <p>Let's look at the most basic C# program. Don't worry about understanding every detail right now - we'll explain each part as we go through the guide.</p>
+
+      <div class="code-block">using System;
 
 class Program
 {
@@ -279,451 +432,391 @@ class Program
     }
 }</div>
 
-    <div class="note">
-      <div class="note-title">Understanding the Code</div>
+      <div class="info-box">
+        <div class="info-box-title">🔍 Breaking Down the Code</div>
+        <ul>
+          <li><span class="inline-code">using System;</span> - This tells C# we want to use built-in features like <span class="inline-code">Console.WriteLine</span></li>
+          <li><span class="inline-code">class Program</span> - Creates a container called "Program" to hold our code</li>
+          <li><span class="inline-code">static void Main()</span> - This is where your program starts running (the entry point)</li>
+          <li><span class="inline-code">Console.WriteLine()</span> - Displays text on the screen</li>
+          <li><span class="inline-code">{ }</span> - Curly braces group related code together</li>
+        </ul>
+      </div>
+
+      <div class="tip-box">
+        <div class="tip-box-title">💡 Try This!</div>
+        <p>Copy this code into a C# development environment (like Visual Studio or an online compiler) and run it. You should see "Hello, World!" and "Welcome to C# programming!" displayed on the screen.</p>
+      </div>
+
+      <h2>2. Variables and Data Types - Storing Information</h2>
+
+      <div class="section-intro">
+        Variables are like labeled boxes where you can store different types of information. Just like you might have separate boxes for books, clothes, and toys, C# has different data types for different kinds of information.
+      </div>
+
+      <h3>The Most Common Data Types</h3>
       <ul>
-        <li><span class="inline-code">using System;</span> - Imports the System namespace for basic functionality</li>
-        <li><span class="inline-code">class Program</span> - Defines a class named Program</li>
-        <li><span class="inline-code">static void Main()</span> - The entry point of your application</li>
-        <li><span class="inline-code">Console.WriteLine()</span> - Outputs text to the console</li>
+        <li><span class="inline-code">int</span> - Whole numbers like 42, -10, or 0</li>
+        <li><span class="inline-code">double</span> - Numbers with decimal points like 3.14, -2.5, or 100.0</li>
+        <li><span class="inline-code">string</span> - Text like "Hello", "John Smith", or "Programming is fun!"</li>
+        <li><span class="inline-code">bool</span> - True or false values (yes/no, on/off)</li>
+        <li><span class="inline-code">char</span> - Single characters like 'A', '5', or '!'</li>
       </ul>
-    </div>
 
-    <h2>2. Variables and Data Types</h2>
+      <p>Here's how to create and use variables in C#:</p>
 
-    <p>Variables are containers that store data. C# has several built-in data types, each designed for specific kinds of information:</p>
-
-    <h3>Common Data Types</h3>
-    <ul>
-      <li><span class="inline-code">int</span> - Whole numbers (-2,147,483,648 to 2,147,483,647)</li>
-      <li><span class="inline-code">double</span> - Decimal numbers with high precision</li>
-      <li><span class="inline-code">string</span> - Text data (sequences of characters)</li>
-      <li><span class="inline-code">bool</span> - True or false values</li>
-      <li><span class="inline-code">char</span> - Single characters</li>
-    </ul>
-
-    <div class="code-block">using System;
+      <div class="code-block">using System;
 
 class Program
 {
     static void Main()
     {
-        // Different data types
+        // Creating variables and giving them values
         int age = 25;
         double price = 19.99;
         string name = "Sarah Johnson";
         bool isStudent = true;
         char grade = 'A';
         
-        // Display the values
+        // Displaying the values on screen
         Console.WriteLine($"Name: {name}");
         Console.WriteLine($"Age: {age}");
         Console.WriteLine($"Price: ${price}");
         Console.WriteLine($"Is Student: {isStudent}");
         Console.WriteLine($"Grade: {grade}");
+        
+        // You can change variable values
+        age = 26;
+        Console.WriteLine($"New age: {age}");
     }
 }</div>
 
-    <div class="note">
-      <div class="note-title">String Interpolation</div>
-      <p>Notice the <span class="inline-code">$</span> before the string and the <span class="inline-code">{}</span> brackets. This is called string interpolation, a clean way to include variables inside strings.</p>
-    </div>
+      <div class="info-box">
+        <div class="info-box-title">🎯 String Interpolation Magic</div>
+        <p>Notice the <span class="inline-code">$</span> symbol before the quotes and the <span class="inline-code">{}</span> brackets around variable names? This is called <strong>string interpolation</strong> - it's a neat way to insert variable values directly into text. Much cleaner than older methods!</p>
+      </div>
 
-    <h2>3. User Input and Output</h2>
+      <div class="practice-section">
+        <div class="practice-title">🎯 Practice Exercise</div>
+        <p>Try creating variables for your own information:</p>
+        <ul>
+          <li>Your name (string)</li>
+          <li>Your age (int)</li>
+          <li>Your height in meters (double)</li>
+          <li>Whether you like pizza (bool)</li>
+          <li>Your favorite letter (char)</li>
+        </ul>
+        <p>Then display them all using <span class="inline-code">Console.WriteLine</span> with string interpolation!</p>
+      </div>
 
-    <p>Interactive programs need to get input from users and display results. C# provides simple methods for console input and output:</p>
+      <h2>3. Getting Input from Users</h2>
 
-    <div class="code-block">using System;
+      <div class="section-intro">
+        Real programs need to interact with users. Instead of just displaying information, we want to ask users questions and respond to their answers. This makes our programs dynamic and useful!
+      </div>
+
+      <p>C# provides simple methods to get input from users and display output:</p>
+
+      <div class="code-block">using System;
 
 class Program
 {
     static void Main()
     {
-        // Get user input
-        Console.Write("Enter your name: ");
+        // Ask the user for their name
+        Console.Write("What's your name? ");
         string userName = Console.ReadLine();
         
-        Console.Write("Enter your favorite number: ");
+        // Ask for their favorite number
+        Console.Write("What's your favorite number? ");
         string numberInput = Console.ReadLine();
         int favoriteNumber = int.Parse(numberInput);
         
-        // Process and display results
+        // Do something fun with the number
         int doubledNumber = favoriteNumber * 2;
         
-        Console.WriteLine($"\nHello, {userName}!");
+        // Show personalized results
+        Console.WriteLine($"\nHello, {userName}! Nice to meet you!");
         Console.WriteLine($"Your favorite number is {favoriteNumber}");
-        Console.WriteLine($"Double that number is {doubledNumber}");
+        Console.WriteLine($"Did you know that {favoriteNumber} × 2 = {doubledNumber}?");
+        Console.WriteLine($"That's pretty cool, {userName}!");
     }
 }</div>
 
-    <div class="warning">
-      <div class="warning-title">Input Conversion</div>
-      <p><span class="inline-code">Console.ReadLine()</span> always returns a string. Use <span class="inline-code">int.Parse()</span> or <span class="inline-code">Convert.ToInt32()</span> to convert strings to numbers.</p>
-    </div>
+      <div class="warning-box">
+        <div class="warning-box-title">⚠️ Important Note About Input</div>
+        <p><span class="inline-code">Console.ReadLine()</span> always gives you text (a string), even if the user types a number. When you need a number for calculations, you must convert it using <span class="inline-code">int.Parse()</span> for whole numbers or <span class="inline-code">double.Parse()</span> for decimals.</p>
+      </div>
 
-    <h2>4. Making Decisions with if/else</h2>
+      <div class="tip-box">
+        <div class="tip-box-title">💡 The Difference</div>
+        <ul>
+          <li><span class="inline-code">Console.Write()</span> - Displays text and keeps the cursor on the same line</li>
+          <li><span class="inline-code">Console.WriteLine()</span> - Displays text and moves to the next line</li>
+        </ul>
+      </div>
 
-    <p>Programs often need to make decisions based on different conditions. The <span class="inline-code">if/else</span> statement allows your program to choose different paths:</p>
+      <h2>4. Making Decisions with if/else</h2>
 
-    <div class="code-block">using System;
+      <div class="section-intro">
+        Programs become really powerful when they can make decisions. Just like you decide what to wear based on the weather, programs can choose what to do based on different conditions. This is where if/else statements shine!
+      </div>
+
+      <p>Let's create a program that gives different responses based on a person's age:</p>
+
+      <div class="code-block">using System;
 
 class Program
 {
     static void Main()
     {
-        Console.Write("Enter your age: ");
+        Console.Write("Please enter your age: ");
         int age = int.Parse(Console.ReadLine());
         
         if (age >= 18)
         {
-            Console.WriteLine("You are an adult.");
+            Console.WriteLine("You're an adult! 🎉");
             
             if (age >= 65)
             {
                 Console.WriteLine("You qualify for senior discounts!");
             }
+            else if (age >= 21)
+            {
+                Console.WriteLine("You can legally drink in the US!");
+            }
         }
         else if (age >= 13)
         {
-            Console.WriteLine("You are a teenager.");
+            Console.WriteLine("You're a teenager! 😎");
+            Console.WriteLine("High school years can be exciting!");
         }
         else
         {
-            Console.WriteLine("You are a child.");
+            Console.WriteLine("You're still a kid! 🧒");
+            Console.WriteLine("Enjoy your childhood - it's special!");
         }
         
-        // Multiple conditions
+        // Multiple conditions with AND (&&) and OR (||)
         if (age >= 16 && age < 18)
         {
-            Console.WriteLine("You can drive but can't vote yet.");
+            Console.WriteLine("You can drive but can't vote yet in most places.");
+        }
+        
+        if (age == 13 || age == 18 || age == 21)
+        {
+            Console.WriteLine("This is a milestone birthday! 🎂");
         }
     }
 }</div>
 
-    <div class="practice-section">
-      <div class="practice-title">Common Comparison Operators</div>
-      <ul>
-        <li><span class="inline-code">==</span> Equal to</li>
-        <li><span class="inline-code">!=</span> Not equal to</li>
-        <li><span class="inline-code">&gt;</span> Greater than</li>
-        <li><span class="inline-code">&lt;</span> Less than</li>
-        <li><span class="inline-code">&gt;=</span> Greater than or equal to</li>
-        <li><span class="inline-code">&lt;=</span> Less than or equal to</li>
-        <li><span class="inline-code">&amp;&amp;</span> Logical AND</li>
-        <li><span class="inline-code">||</span> Logical OR</li>
-      </ul>
-    </div>
+      <div class="practice-section">
+        <div class="practice-title">🔧 Comparison Operators You'll Use</div>
+        <ul>
+          <li><span class="inline-code">==</span> - Equal to (Is this exactly the same?)</li>
+          <li><span class="inline-code">!=</span> - Not equal to (Is this different?)</li>
+          <li><span class="inline-code">></span> - Greater than</li>
+          <li><span class="inline-code"><</span> - Less than</li>
+          <li><span class="inline-code">>=</span> - Greater than or equal to</li>
+          <li><span class="inline-code"><=</span> - Less than or equal to</li>
+          <li><span class="inline-code">&&</span> - AND (both conditions must be true)</li>
+          <li><span class="inline-code">||</span> - OR (at least one condition must be true)</li>
+        </ul>
+      </div>
 
-    <h2>5. Loops - Repeating Actions</h2>
+      <h2>5. Loops - Repeating Actions Efficiently</h2>
 
-    <p>Loops allow you to repeat code multiple times. This is essential for processing lists of data, creating menus, or performing repetitive tasks.</p>
+      <div class="section-intro">
+        Imagine having to write "I will not talk in class" 100 times by hand - that would be tedious! Loops let computers do repetitive tasks quickly and efficiently. They're one of the most powerful features in programming.
+      </div>
 
-    <h3>For Loops</h3>
-    <p>Use when you know how many times you want to repeat something:</p>
+      <h3>For Loops - When You Know How Many Times</h3>
+      <p>Use <strong>for loops</strong> when you know exactly how many times you want to repeat something:</p>
 
-    <div class="code-block">using System;
+      <div class="code-block">using System;
 
 class Program
 {
     static void Main()
     {
         // Count from 1 to 10
+        Console.WriteLine("Counting from 1 to 10:");
         for (int i = 1; i <= 10; i++)
         {
             Console.WriteLine($"Count: {i}");
         }
         
-        // Calculate factorial
-        Console.Write("\nEnter a number for factorial: ");
+        // Let's calculate a factorial (1 × 2 × 3 × ... × n)
+        Console.Write("\nEnter a number to calculate its factorial: ");
         int number = int.Parse(Console.ReadLine());
         int factorial = 1;
         
         for (int i = 1; i <= number; i++)
         {
-            factorial *= i;
+            factorial = factorial * i;  // Can also write: factorial *= i;
         }
         
-        Console.WriteLine($"Factorial of {number} is {factorial}");
+        Console.WriteLine($"The factorial of {number} is {factorial}");
+        
+        // Create a simple times table
+        Console.WriteLine($"\nTimes table for {number}:");
+        for (int i = 1; i <= 10; i++)
+        {
+            Console.WriteLine($"{number} × {i} = {number * i}");
+        }
     }
 }</div>
 
-    <h3>While Loops</h3>
-    <p>Use when you want to repeat until a condition changes:</p>
+      <h3>While Loops - When You Don't Know How Many Times</h3>
+      <p>Use <strong>while loops</strong> when you want to keep doing something until a certain condition changes:</p>
 
-    <div class="code-block">using System;
+      <div class="code-block">using System;
 
 class Program
 {
     static void Main()
     {
+        // Password guessing game
+        string correctPassword = "secret123";
+        string userPassword = "";
         int attempts = 0;
-        string password = "";
         
-        while (password != "secret123")
+        Console.WriteLine("🔐 Password Protected System");
+        Console.WriteLine("(Hint: The password is 'secret123')");
+        
+        while (userPassword != correctPassword)
         {
             attempts++;
             Console.Write($"Attempt {attempts} - Enter password: ");
-            password = Console.ReadLine();
+            userPassword = Console.ReadLine();
             
-            if (password != "secret123")
+            if (userPassword != correctPassword)
             {
-                Console.WriteLine("Incorrect password. Try again.");
+                Console.WriteLine("❌ Incorrect! Try again...");
             }
         }
         
-        Console.WriteLine($"Access granted! It took you {attempts} attempts.");
+        Console.WriteLine($"✅ Access granted! It took you {attempts} attempts.");
+        
+        // Number guessing game
+        Random random = new Random();
+        int secretNumber = random.Next(1, 11);  // Random number 1-10
+        int guess = 0;
+        
+        Console.WriteLine("\n🎯 Guess my number (between 1 and 10):");
+        
+        while (guess != secretNumber)
+        {
+            Console.Write("Your guess: ");
+            guess = int.Parse(Console.ReadLine());
+            
+            if (guess < secretNumber)
+            {
+                Console.WriteLine("Too low! Try higher.");
+            }
+            else if (guess > secretNumber)
+            {
+                Console.WriteLine("Too high! Try lower.");
+            }
+            else
+            {
+                Console.WriteLine("🎉 Congratulations! You got it!");
+            }
+        }
     }
 }</div>
 
-    <h2>6. Methods - Organizing Your Code</h2>
+      <div class="tip-box">
+        <div class="tip-box-title">🎯 Loop Tips for Beginners</div>
+        <ul>
+          <li><strong>For loops</strong> are great for counting and when you know the exact number of repetitions</li>
+          <li><strong>While loops</strong> are perfect for "keep doing this until something happens" situations</li>
+          <li>Always make sure your loop will eventually stop (avoid infinite loops!)</li>
+          <li>The variable <span class="inline-code">i</span> in for loops is just a convention - you can name it anything</li>
+        </ul>
+      </div>
 
-    <p>Methods (also called functions) help you organize code into reusable pieces. Instead of writing the same code multiple times, you can create a method and call it whenever needed.</p>
+      <h2>6. Methods - Organizing Your Code</h2>
 
-    <div class="code-block">using System;
+      <div class="section-intro">
+        As your programs get bigger, you'll want to organize your code into smaller, manageable pieces. Methods (also called functions) are like mini-programs that do specific tasks. Think of them as recipes - once you write a recipe, you can use it over and over!
+      </div>
+
+      <p>Here's how to create and use methods in C#:</p>
+
+      <div class="code-block">using System;
 
 class Program
 {
-    // Method to calculate area of a rectangle
+    // Method to calculate the area of a rectangle
     static double CalculateRectangleArea(double length, double width)
     {
-        return length * width;
+        double area = length * width;
+        return area;  // Send the result back
     }
     
-    // Method to greet a user
+    // Method to greet a user (doesn't return anything)
     static void GreetUser(string name, int age)
     {
         Console.WriteLine($"Hello, {name}!");
-        Console.WriteLine($"I see you are {age} years old.");
+        Console.WriteLine($"I see you're {age} years old.");
+        
+        if (age >= 18)
+        {
+            Console.WriteLine("You're an adult!");
+        }
+        else
+        {
+            Console.WriteLine("You're still young!");
+        }
     }
     
     // Method to check if a number is even
     static bool IsEven(int number)
     {
-        return number % 2 == 0;
+        return number % 2 == 0;  // % is the "remainder" operator
+    }
+    
+    // Method to find the larger of two numbers
+    static int FindLarger(int num1, int num2)
+    {
+        if (num1 > num2)
+        {
+            return num1;
+        }
+        else
+        {
+            return num2;
+        }
     }
     
     static void Main()
     {
         // Using our methods
+        Console.WriteLine("🏠 Rectangle Area Calculator");
         double area = CalculateRectangleArea(5.0, 3.0);
-        Console.WriteLine($"Rectangle area: {area}");
+        Console.WriteLine($"A 5×3 rectangle has an area of {area} square units");
         
+        Console.WriteLine("\n👋 User Greeting");
         GreetUser("Alice", 28);
         
+        Console.WriteLine("\n🔢 Number Tests");
         int testNumber = 7;
         if (IsEven(testNumber))
         {
-            Console.WriteLine($"{testNumber} is even");
+            Console.WriteLine($"{testNumber} is an even number");
         }
         else
         {
-            Console.WriteLine($"{testNumber} is odd");
+            Console.WriteLine($"{testNumber} is an odd number");
         }
-    }
-}</div>
-
-    <div class="note">
-      <div class="note-title">Method Components</div>
-      <ul>
-        <li><span class="inline-code">static</span> - Can be called without creating an object</li>
-        <li><span class="inline-code">void</span> - Returns nothing; other methods specify return type</li>
-        <li><span class="inline-code">Parameters</span> - Input values the method needs</li>
-        <li><span class="inline-code">return</span> - Sends a value back to the caller</li>
-      </ul>
-    </div>
-
-    <h2>7. Introduction to Classes and Objects</h2>
-
-    <p>Object-Oriented Programming (OOP) is a fundamental concept in C#. Classes are blueprints for creating objects, which combine data (properties) and behavior (methods).</p>
-
-    <div class="code-block">using System;
-
-// Define a class for representing a car
-class Car
-{
-    // Properties (data)
-    public string Make { get; set; }
-    public string Model { get; set; }
-    public int Year { get; set; }
-    public double Mileage { get; set; }
-    
-    // Constructor (runs when creating a new car)
-    public Car(string make, string model, int year)
-    {
-        Make = make;
-        Model = model;
-        Year = year;
-        Mileage = 0;
-    }
-    
-    // Methods (behavior)
-    public void Drive(double miles)
-    {
-        Mileage += miles;
-        Console.WriteLine($"Drove {miles} miles. Total mileage: {Mileage}");
-    }
-    
-    public void DisplayInfo()
-    {
-        Console.WriteLine($"{Year} {Make} {Model} - {Mileage:F1} miles");
-    }
-}
-
-class Program
-{
-    static void Main()
-    {
-        // Create objects (instances of the Car class)
-        Car myCar = new Car("Toyota", "Camry", 2020);
-        Car friendsCar = new Car("Honda", "Civic", 2019);
         
-        // Use the objects
-        myCar.DisplayInfo();
-        myCar.Drive(150.5);
-        myCar.Drive(75.2);
+        Console.WriteLine("\n📊 Finding the Larger Number");
+        int bigger = FindLarger(15, 23);
+        Console.WriteLine($"Between 15 and 23, the larger number is {bigger}");
         
-        friendsCar.DisplayInfo();
-        friendsCar.Drive(200.0);
-        
-        Console.WriteLine("\nFinal status:");
-        myCar.DisplayInfo();
-        friendsCar.DisplayInfo();
-    }
-}</div>
-
-    <div class="practice-section">
-      <div class="practice-title">Key OOP Concepts</div>
-      <ul>
-        <li><strong>Class</strong> - A blueprint that defines properties and methods</li>
-        <li><strong>Object</strong> - An instance of a class with actual data</li>
-        <li><strong>Properties</strong> - Data that belongs to the class</li>
-        <li><strong>Methods</strong> - Actions that the class can perform</li>
-        <li><strong>Constructor</strong> - Special method that runs when creating an object</li>
-      </ul>
-    </div>
-
-    <h2>8. Practical Example - Simple Calculator</h2>
-
-    <p>Let's combine everything we've learned to build a simple calculator program:</p>
-
-    <div class="code-block">using System;
-
-class Calculator
-{
-    public static double Add(double a, double b) => a + b;
-    public static double Subtract(double a, double b) => a - b;
-    public static double Multiply(double a, double b) => a * b;
-    
-    public static double Divide(double a, double b)
-    {
-        if (b != 0)
-            return a / b;
-        else
-        {
-            Console.WriteLine("Error: Cannot divide by zero!");
-            return 0;
-        }
-    }
-}
-
-class Program
-{
-    static void Main()
-    {
-        Console.WriteLine("=== Simple Calculator ===");
-        
-        while (true)
-        {
-            Console.WriteLine("\n1. Add");
-            Console.WriteLine("2. Subtract");
-            Console.WriteLine("3. Multiply");
-            Console.WriteLine("4. Divide");
-            Console.WriteLine("5. Exit");
-            Console.Write("Choose an operation (1-5): ");
-            
-            string choice = Console.ReadLine();
-            
-            if (choice == "5")
-            {
-                Console.WriteLine("Thanks for using the calculator!");
-                break;
-            }
-            
-            if (choice == "1" || choice == "2" || choice == "3" || choice == "4")
-            {
-                Console.Write("Enter first number: ");
-                double num1 = double.Parse(Console.ReadLine());
-                
-                Console.Write("Enter second number: ");
-                double num2 = double.Parse(Console.ReadLine());
-                
-                double result = 0;
-                string operation = "";
-                
-                switch (choice)
-                {
-                    case "1":
-                        result = Calculator.Add(num1, num2);
-                        operation = "+";
-                        break;
-                    case "2":
-                        result = Calculator.Subtract(num1, num2);
-                        operation = "-";
-                        break;
-                    case "3":
-                        result = Calculator.Multiply(num1, num2);
-                        operation = "*";
-                        break;
-                    case "4":
-                        result = Calculator.Divide(num1, num2);
-                        operation = "/";
-                        break;
-                }
-                
-                Console.WriteLine($"Result: {num1} {operation} {num2} = {result}");
-            }
-            else
-            {
-                Console.WriteLine("Invalid choice. Please try again.");
-            }
-        }
-    }
-}</div>
-
-    <div class="next-steps">
-      <h3>Continue Your Learning Journey</h3>
-      <p>You've covered the fundamentals! Here's what to explore next:</p>
-      <ul>
-        <li><strong>Arrays and Collections</strong> - Learn to work with lists and arrays of data</li>
-        <li><strong>Exception Handling</strong> - Make your programs robust with try-catch blocks</li>
-        <li><strong>File I/O</strong> - Read from and write to files</li>
-        <li><strong>LINQ</strong> - Query and manipulate data efficiently</li>
-        <li><strong>Advanced OOP</strong> - Inheritance, polymorphism, and interfaces</li>
-      </ul>
-      
-      <p><strong>Recommended Resources:</strong></p>
-      <ul>
-        <li><a href="https://learn.microsoft.com/en-us/dotnet/csharp/" target="_blank">Microsoft C# Documentation</a></li>
-        <li><a href="https://dotnetfiddle.net" target="_blank">DotNetFiddle</a> - Practice coding online</li>
-        <li><a href="https://docs.microsoft.com/en-us/dotnet/csharp/tour-of-csharp/" target="_blank">A Tour of C#</a></li>
-      </ul>
-    </div>
-
-    <div class="practice-section">
-      <div class="practice-title">Practice Exercises</div>
-      <p>Try building these programs to reinforce your learning:</p>
-      <ol>
-        <li><strong>Number Guessing Game</strong> - Computer picks a random number, user tries to guess it</li>
-        <li><strong>Grade Calculator</strong> - Input test scores and calculate letter grades</li>
-        <li><strong>Simple Banking System</strong> - Create accounts, deposit, withdraw money</li>
-        <li><strong>To-Do List</strong> - Add, remove, and display tasks</li>
-        <li><strong>Temperature Converter</strong> - Convert between Celsius, Fahrenheit, and Kelvin</li>
-      </ol>
-    </div>
-
-    <footer style="margin-top: 60px; padding-top: 30px; border-top: 1px solid #e9ecef; text-align: center; color: #6c757d;">
-      <p>Remember: The best way to learn programming is by writing code. Start with simple programs and gradually tackle more complex challenges. Don't be afraid to experiment and make mistakes – that's how you learn!</p>
-    </footer>
-  </div>
-</body>
-</html>
+        // Let's use methods in a practical way
+        Console.WriteLine("\n🧮 Let's calculate some areas!");
+        Console.Write("Enter rectangle length: ");
+        double length = double.Parse(Console.ReadLine());
+        Console.Write("Enter rectangle width: ");
