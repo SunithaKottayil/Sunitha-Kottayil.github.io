@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -761,3 +762,22 @@
                 navigator.clipboard.writeText(code).then(() => {
                     copyBtn.textContent = 'Copied!';
                     setTimeout(() => copyBtn.textContent = 'Copy', 2000);
+                });
+            };
+            block.style.position = 'relative';
+            block.appendChild(copyBtn);
+        });
+
+        // Smooth scrolling for table of contents links
+        document.querySelectorAll('.toc a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = document.querySelector(link.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
