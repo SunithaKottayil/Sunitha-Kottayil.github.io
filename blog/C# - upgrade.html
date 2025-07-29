@@ -2,168 +2,355 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Level Up Your C#: Intermediate to Advanced Tutorial</title>
+  <title>C# Masterclass: From Beginner to Advanced</title>
   <style>
-    body { font-family: Arial, sans-serif; background: #f2f6fa; color: #222; margin: 0; padding: 0; }
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f6fa;
+      color: #222;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
     .container {
-      max-width: 950px;
+      max-width: 900px;
       margin: 2em auto;
-      padding: 2em;
+      padding: 2.5em;
       background: #fff;
       border-radius: 12px;
-      box-shadow: 0 0 14px #92a5c0;
+      box-shadow: 0 0 15px #a0aec0;
     }
-    h1, h2 { color: #115293; }
-    h1 { text-align: center; }
+    h1, h2 {
+      color: #115293;
+      font-weight: 700;
+    }
+    h1 {
+      text-align: center;
+      font-size: 2.5em;
+      margin-bottom: 0.5em;
+    }
     h2 {
       margin-top: 2em;
       border-bottom: 2px solid #64b5f6;
-      padding-bottom: 0.3em;
+      padding-bottom: 0.4em;
+      font-size: 1.8em;
+    }
+    h3 {
+      margin-top: 1.5em;
       color: #1565c0;
     }
-    ul, ol { margin-left: 2em; }
-    .cmd {
-      background: #f0f4c3;
-      border-radius: 6px;
-      padding: 1em;
-      margin: 1em 0;
-      font-family: Consolas, monospace;
-      white-space: pre-wrap;
-      color: #1976d2;
+    p, ul, ol {
+      margin-top: 1em;
+      margin-bottom: 1em;
+      font-size: 1.05em;
     }
-    .tip, .fnote {
-      background: #f9fbe7;
-      border-left: 6px solid #aed581;
-      padding: 1em;
-      margin: 1em 0 1.5em 0;
-      border-radius: 7px;
-      font-size: 1em;
-    }
-    .diagram {
-      text-align: center;
-      margin: 2em 0;
-    }
-    .diagram img {
-      max-width: 90%;
-      height: auto;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(33,150,243,0.10);
-      background: #fff;
-      padding: 10px;
-    }
-    hr {
-      border: none;
-      border-top: 1px solid #b3e5fc;
-      margin: 2em 0 1.2em 0;
+    ul, ol {
+      margin-left: 2em;
     }
     code {
       background: #e3f2fd;
       color: #1976d2;
-      padding: 2px 4px;
+      font-family: Consolas, monospace;
+      padding: 2px 6px;
+      border-radius: 4px;
       font-size: 1em;
+    }
+    .cmd {
+      background: #f0f4c3;
+      border-radius: 8px;
+      padding: 1.1em 1.5em;
+      margin: 1.5em 0;
+      font-family: Consolas, monospace;
+      white-space: pre-wrap;
+      color: #1976d2;
+      box-shadow: 0 2px 8px rgba(33,150,243,0.12);
+    }
+    .tip, .fnote {
+      background: #f9fbe7;
+      border-left: 6px solid #aed581;
+      padding: 1.2em;
+      margin: 1.5em 0;
+      border-radius: 8px;
+      font-size: 1em;
+      color: #33691e;
+    }
+    .diagram {
+      text-align: center;
+      margin: 2.5em 0;
+    }
+    .diagram img {
+      max-width: 95%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(33,150,243,0.15);
+      background: #fff;
+      padding: 15px;
+    }
+    hr {
+      border: none;
+      border-top: 1.5px solid #b3e5fc;
+      margin: 3em 0;
+    }
+    a {
+      color: #1565c0;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    iframe {
+      border: 1.5px solid #90caf9;
+      border-radius: 10px;
+      width: 100%;
+      min-height: 460px;
+      margin: 1.5em 0;
+      display: block;
     }
     .quiz-block {
       background: #fffde7;
       border-left: 6px solid #ffd600;
-      padding: 1em;
-      border-radius: 7px;
+      padding: 1.3em;
+      border-radius: 10px;
       margin: 2em 0;
+      font-size: 1.1em;
+      color: #795548;
     }
     .quiz-block input[type="radio"] {
-      margin-right: 8px;
+      margin-right: 12px;
+      transform: scale(1.1);
+      vertical-align: middle;
     }
     .quiz-result {
-      font-weight: bold;
+      font-weight: 700;
       margin-top: 1em;
-    }
-    iframe {
-      border: 1px solid #90caf9;
-      border-radius: 8px;
-      min-height: 450px;
-      width: 100%;
-      margin: 1em 0;
-      display: block;
+      font-size: 1.1em;
     }
   </style>
 </head>
 
 <body>
-<div class="container">
-  <h1>🚀 C#: Next Level — From Intermediate to Advanced</h1>
-  <p>
-    You know the basics—variables, loops, classes. Now it's time to unlock C#'s powerful features to write robust, efficient, and professional code. This hands-on guide combines interactive code, real-world explanations, diagrams, and quizzes so you can confidently tackle serious projects!
-  </p>
+  <div class="container">
+    <h1>🚀 C# Masterclass: From Beginner to Advanced</h1>
+    <p>Welcome! This comprehensive guide covers C# programming from the very basics to advanced concepts, complete with code examples, diagrams, tips, and interactive quizzes to help you learn effectively and confidently.</p>
 
-  <hr/>
+    <hr />
 
-  <h2>1. Collections and LINQ</h2>
-  <p>Arrays are just the beginning. In real applications, you'll use advanced collections and <b>LINQ</b> for querying data.</p>
-
-  <b>Common Collections:</b>
-  <ul>
-    <li><code>List&lt;T&gt;</code>: Resizable arrays</li>
-    <li><code>Dictionary&lt;K,V&gt;</code>: Key-value lookup</li>
-    <li><code>HashSet&lt;T&gt;</code>: Unique-value collections</li>
-  </ul>
-  <p><b>LINQ</b> lets you filter and transform these collections neatly.</p>
-  <div class="cmd">
+    <h2>1. Getting Started: Your First C# Program</h2>
+    <p>Let’s jump right in with the classic "Hello, World!" program. Run this code in your IDE or explore the interactive example below:</p>
+    <div class="cmd">
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
-var numbers = new List&lt;int&gt; {1, 2, 3, 4, 5, 6, 7, 8};
-var even = numbers.Where(n =&gt; n % 2 == 0).ToList();
-Console.WriteLine(string.Join(", ", even)); // Output: 2, 4, 6, 8
-  </div>
-  <iframe src="https://dotnetfiddle.net/Widget/yVe4qA" allowfullscreen></iframe>
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.WriteLine("Hello, World!");
+    }
+}
+    </div>
+    <iframe src="https://dotnetfiddle.net/Widget/t8d8oe" allowfullscreen></iframe>
+    <div class="tip">Change "World" to your name and hit Run!</div>
 
-  <div class="quiz-block" id="quiz1">
-    <b>Quiz 1: What does <code>Where(n =&gt; n % 2 == 0)</code> do?</b>
-    <form>
-      <input type="radio" name="q1" value="0"/>Sorts the numbers<br>
-      <input type="radio" name="q1" value="1"/>Filters for even numbers<br>
-      <input type="radio" name="q1" value="0"/>Removes duplicates<br>
-      <button type="button" onclick="checkQuiz('quiz1', 1)">Check Answer</button>
-    </form>
-    <div class="quiz-result" id="quiz1-result"></div>
-  </div>
+    <div class="quiz-block" id="quiz1">
+      <b>Quiz 1: What does <code>Console.WriteLine("Hello, World!");</code> do?</b><br />
+      <form>
+        <input type="radio" name="q1" value="0"/> Declares a variable<br />
+        <input type="radio" name="q1" value="1"/> Outputs text to the screen<br />
+        <input type="radio" name="q1" value="0"/> Starts a loop<br />
+        <button type="button" onclick="checkQuiz('quiz1', 1)">Check Answer</button>
+      </form>
+      <div class="quiz-result" id="quiz1-result"></div>
+    </div>
 
-  <hr/>
+    <hr />
 
-  <h2>2. Properties, Encapsulation & Auto-Properties</h2>
-  <p>
-    Properties control access to data. The preferred, modern C# way is <b>auto-properties</b>:
-  </p>
-  <div class="cmd">
+    <h2>2. Fundamentals You Need to Know</h2>
+
+    <h3>2.1 Variables and Data Types</h3>
+    <p>Variables hold data, and C# has many types:</p>
+    <ul>
+      <li><code>int</code>: integers (e.g., <code>5</code>)</li>
+      <li><code>double</code>: decimal numbers (e.g., <code>3.14</code>)</li>
+      <li><code>string</code>: text (e.g., <code>"Hello"</code>)</li>
+      <li><code>bool</code>: true/false values</li>
+    </ul>
+    <div class="cmd">
+int age = 30;
+double price = 19.99;
+string name = "Alice";
+bool isMember = true;
+
+Console.WriteLine($"{name} | {age} years old | Price: {price}");
+    </div>
+
+    <iframe src="https://dotnetfiddle.net/Widget/f5unKG" allowfullscreen></iframe>
+
+    <div class="quiz-block" id="quiz2">
+      <b>Quiz 2: Which of these declares a string variable?</b><br />
+      <form>
+        <input type="radio" name="q2" value="1"/> string greeting = "Hi";<br />
+        <input type="radio" name="q2" value="0"/> int greeting = "Hi";<br />
+        <input type="radio" name="q2" value="0"/> bool greeting = "Hi";<br />
+        <button type="button" onclick="checkQuiz('quiz2', 1)">Check Answer</button>
+      </form>
+      <div class="quiz-result" id="quiz2-result"></div>
+    </div>
+
+    <h3>2.2 Input and Output</h3>
+    <p>Interact with users using <code>Console.ReadLine()</code> and <code>Console.Write*</code>:</p>
+    <div class="cmd">
+// Prompt for name:
+Console.Write("Enter your name: ");
+string userName = Console.ReadLine();
+Console.WriteLine("Hello, " + userName + "!");
+    </div>
+    <iframe src="https://dotnetfiddle.net/Widget/L5fCIS" allowfullscreen></iframe>
+
+    <div class="quiz-block" id="quiz3">
+      <b>Quiz 3: Which method reads user input?</b><br />
+      <form>
+        <input type="radio" name="q3" value="0"/> Console.Write()<br />
+        <input type="radio" name="q3" value="1"/> Console.ReadLine()<br />
+        <input type="radio" name="q3" value="0"/> Console.Input()<br />
+        <button type="button" onclick="checkQuiz('quiz3', 1)">Check Answer</button>
+      </form>
+      <div class="quiz-result" id="quiz3-result"></div>
+    </div>
+
+    <h3>2.3 Conditional Statements (if, else)</h3>
+    <div class="cmd">
+int age = 20;
+
+if(age >= 18)
+{
+    Console.WriteLine("Adult");
+}
+else
+{
+    Console.WriteLine("Minor");
+}
+    </div>
+    <iframe src="https://dotnetfiddle.net/Widget/55RA0G" allowfullscreen></iframe>
+
+    <div class="quiz-block" id="quiz4">
+      <b>Quiz 4: What does <code>if</code> do?</b><br />
+      <form>
+        <input type="radio" name="q4" value="0"/> Repeat code<br />
+        <input type="radio" name="q4" value="1"/> Run code only if a condition is true<br />
+        <input type="radio" name="q4" value="0"/> Define a function<br />
+        <button type="button" onclick="checkQuiz('quiz4', 1)">Check Answer</button>
+      </form>
+      <div class="quiz-result" id="quiz4-result"></div>
+    </div>
+
+    <h3>2.4 Loops (for & while)</h3>
+    <p>Repeat code blocks easily:</p>
+    <div class="cmd">
+// For loop example:
+for(int i = 1; i <= 3; i++)
+{
+    Console.WriteLine(i);
+}
+
+// While loop example:
+int count = 1;
+while(count <= 3)
+{
+    Console.WriteLine(count);
+    count++;
+}
+    </div>
+    <iframe src="https://dotnetfiddle.net/Widget/5cim7s" allowfullscreen></iframe>
+
+    <div class="quiz-block" id="quiz5">
+      <b>Quiz 5: Which loop is best for repeating a fixed number of times?</b><br />
+      <form>
+        <input type="radio" name="q5" value="1"/> for<br />
+        <input type="radio" name="q5" value="0"/> if<br />
+        <input type="radio" name="q5" value="0"/> catch<br />
+        <button type="button" onclick="checkQuiz('quiz5', 1)">Check Answer</button>
+      </form>
+      <div class="quiz-result" id="quiz5-result"></div>
+    </div>
+
+    <h3>2.5 Methods (Functions)</h3>
+    <p>Reusable blocks of code that make programs modular:</p>
+    <div class="cmd">
+static void Greet(string name)
+{
+    Console.WriteLine("Hello, " + name + "!");
+}
+
+Greet("Sam"); // Output: Hello, Sam!
+    </div>
+    <iframe src="https://dotnetfiddle.net/Widget/XxyJQC" allowfullscreen></iframe>
+
+    <div class="quiz-block" id="quiz6">
+      <b>Quiz 6: What is <code>static void Greet(string name)</code>?</b><br />
+      <form>
+        <input type="radio" name="q6" value="1"/> A method (function)<br />
+        <input type="radio" name="q6" value="0"/> A variable<br />
+        <input type="radio" name="q6" value="0"/> A loop<br />
+        <button type="button" onclick="checkQuiz('quiz6', 1)">Check Answer</button>
+      </form>
+      <div class="quiz-result" id="quiz6-result"></div>
+    </div>
+
+    <hr />
+
+    <h2>3. Object-Oriented Programming (OOP) Basics</h2>
+    <p>C# is an object-oriented language. Key ideas:</p>
+    <ul>
+      <li><b>Classes:</b> blueprints for creating objects.</li>
+      <li><b>Objects:</b> instances of classes.</li>
+      <li><b>Properties:</b> data stored in objects.</li>
+      <li><b>Methods:</b> actions objects can do.</li>
+    </ul>
+    <div class="cmd">
+class Car
+{
+    public string Model;
+    public void Start()
+    {
+        Console.WriteLine(Model + " started!");
+    }
+}
+
+Car myCar = new Car();
+myCar.Model = "Toyota";
+myCar.Start();
+// Output: Toyota started!
+    </div>
+    <iframe src="https://dotnetfiddle.net/Widget/dN0DKh" allowfullscreen></iframe>
+
+    <div class="tip">
+      OOP helps organize complex programs into manageable blueprints and objects.
+    </div>
+
+    <h3>Encapsulation & Properties</h3>
+    <div class="cmd">
 public class User
 {
     public string Name { get; set; } // auto-property
-    public int Age { get; private set; } // can set only inside the class
-
-    // Custom property logic - for validation:
-    private string _email;
-    public string Email
+    private int age;
+    
+    public int Age
     {
-        get { return _email; }
-        set
-        {
-            if (!value.Contains("@")) throw new ArgumentException("Invalid email.");
-            _email = value;
+        get { return age; }
+        set {
+          if (value >= 0) age = value;
+          else throw new ArgumentException("Age cannot be negative");
         }
     }
 }
-  </div>
+    </div>
 
-  <hr/>
-
-  <h2>3. Inheritance & Polymorphism</h2>
-  <p>
-    Inheritance allows you to build specialized classes from general blueprints; <b>polymorphism</b> makes using different objects through the same interface easy.
-  </p>
-  <div class="cmd">
+    <h3>Inheritance and Polymorphism</h3>
+    <p>Build class hierarchies and enable flexibility:</p>
+    <div class="cmd">
 public class Animal
 {
-    public virtual void Speak() { Console.WriteLine("Some generic animal noise"); }
+    public virtual void Speak() { Console.WriteLine("Animal sound"); }
 }
 
 public class Dog : Animal
@@ -173,29 +360,23 @@ public class Dog : Animal
 
 Animal pet = new Dog();
 pet.Speak(); // Output: Woof!
-  </div>
-  <iframe src="https://dotnetfiddle.net/Widget/j8Oyqg" allowfullscreen></iframe>
+    </div>
+    <iframe src="https://dotnetfiddle.net/Widget/j8Oyqg" allowfullscreen></iframe>
 
+    <div class="quiz-block" id="quiz7">
+      <b>Quiz 7: What does <code>virtual</code> do?</b><br />
+      <form>
+        <input type="radio" name="q7" value="1"/> Allows derived classes to override a method<br />
+        <input type="radio" name="q7" value="0"/> Declares a static method<br />
+        <input type="radio" name="q7" value="0"/> Hides the method from outside<br />
+        <button type="button" onclick="checkQuiz('quiz7', 1)">Check Answer</button>
+      </form>
+      <div class="quiz-result" id="quiz7-result"></div>
+    </div>
 
-  <div class="quiz-block" id="quiz2">
-    <b>Quiz 2: What does 'virtual' enable in C#?</b>
-    <form>
-      <input type="radio" name="q2" value="0"/>Declare a method as static<br>
-      <input type="radio" name="q2" value="1"/>Allow derived classes to override the method<br>
-      <input type="radio" name="q2" value="0"/>Hide a method from other classes<br>
-      <button type="button" onclick="checkQuiz('quiz2', 1)">Check Answer</button>
-    </form>
-    <div class="quiz-result" id="quiz2-result"></div>
-  </div>
-
-  <hr/>
-
-  <h2>4. Abstract Classes and Interfaces</h2>
-  <p>
-    <b>Abstract classes</b> force child classes to implement certain members. <b>Interfaces</b> define contracts, not implementation.
-  </p>
-  <div class="cmd">
-// Abstract Class Example
+    <h3>Abstract Classes & Interfaces</h3>
+    <div class="cmd">
+// Abstract class example
 public abstract class Shape
 {
     public abstract double Area();
@@ -206,9 +387,9 @@ public class Circle : Shape
     public double Radius { get; set; }
     public override double Area() => Math.PI * Radius * Radius;
 }
-  </div>
-  <div class="cmd">
-// Interface Example
+    </div>
+    <div class="cmd">
+// Interface example
 public interface IDrive
 {
     void Start();
@@ -217,19 +398,48 @@ public interface IDrive
 
 public class Car : IDrive
 {
-    public void Start() { Console.WriteLine("Engine started"); }
-    public void Stop() { Console.WriteLine("Stopped"); }
+    public void Start() { Console.WriteLine("Starting"); }
+    public void Stop() { Console.WriteLine("Stopping"); }
 }
-  </div>
+    </div>
 
-  <hr/>
+    <hr />
 
-  <h2>5. Delegates & Events</h2>
-  <p>
-    <b>Delegates</b> let you reference methods as variables. <b>Events</b> are for notification systems (Windows Forms, etc.).
-  </p>
-  <div class="cmd">
-// A delegate for functions with no parameters and no return type:
+    <h2>4. Collections and LINQ</h2>
+    <p>Powerful collection types and query syntax for working with data:</p>
+    <ul>
+      <li><code>List&lt;T&gt;</code> — dynamic arrays</li>
+      <li><code>Dictionary&lt;K, V&gt;</code> — key-value pairs</li>
+      <li><code>HashSet&lt;T&gt;</code> — unique items</li>
+    </ul>
+    <div class="cmd">
+using System.Collections.Generic;
+using System.Linq;
+
+var numbers = new List&lt;int&gt; {1,2,3,4,5,6};
+var evenNums = numbers.Where(n =&gt; n % 2 == 0).ToList();
+Console.WriteLine(string.Join(", ", evenNums)); 
+// Output: 2, 4, 6
+    </div>
+    <iframe src="https://dotnetfiddle.net/Widget/yVe4qA" allowfullscreen></iframe>
+
+    <div class="quiz-block" id="quiz8">
+      <b>Quiz 8: What does <code>Where(n =&gt; n % 2 == 0)</code> do?</b><br />
+      <form>
+        <input type="radio" name="q8" value="0"/> Sorts the numbers<br />
+        <input type="radio" name="q8" value="1"/> Filters for even numbers<br />
+        <input type="radio" name="q8" value="0"/> Removes duplicates<br />
+        <button type="button" onclick="checkQuiz('quiz8', 1)">Check Answer</button>
+      </form>
+      <div class="quiz-result" id="quiz8-result"></div>
+    </div>
+
+    <hr />
+
+    <h2>5. Delegates and Events</h2>
+    <p>Function pointers and event notification systems:</p>
+    <div class="cmd">
+// Delegate example
 public delegate void Notify();
 
 public class Process
@@ -239,152 +449,151 @@ public class Process
     public void Run()
     {
         Console.WriteLine("Running...");
-        OnDone?.Invoke(); // fire the event if any listener is attached!
+        OnDone?.Invoke();
     }
 }
-  </div>
+    </div>
+    <div class="diagram">
+      <img src="https://i.imgur.com/viWmccO.png" alt="Delegates and Events in C#" />
+      <br/>
+      <small>Delegates allow methods to be passed as parameters; events notify when actions occur.</small>
+    </div>
 
-  <div class="diagram">
-    <img src="https://i.imgur.com/viWmccO.png" alt="Delegates and Events in C#" />
-    <br/><small>Delegates act as customizable function pointers. Events notify when something happens!</small>
-  </div>
+    <hr />
 
-  <hr/>
-
-  <h2>6. Generics</h2>
-  <p>
-    Avoid code duplication and support type-safe operations using generics:
-  </p>
-  <div class="cmd">
+    <h2>6. Generics: Code Reuse with Type Safety</h2>
+    <div class="cmd">
 public class Box&lt;T&gt;
 {
-    public T Value;
+    public T Value { get; set; }
 }
 
-Box&lt;string&gt; bx = new Box&lt;string&gt;();
-bx.Value = "Hello C#";
-  </div>
+var box = new Box&lt;string&gt;();
+box.Value = "Hello Generics!";
+Console.WriteLine(box.Value);
+    </div>
 
-  <hr/>
+    <hr />
 
-  <h2>7. Exception Handling (Advanced)</h2>
-  <p>
-    Master exception types, custom exceptions, and <b>finally</b>.
-  </p>
-  <div class="cmd">
+    <h2>7. Exception Handling (Advanced)</h2>
+    <div class="cmd">
 try
 {
-    throw new InvalidOperationException("Something went wrong!");
+    throw new InvalidOperationException("Oops!");
 }
-catch (InvalidOperationException ex)
+catch(InvalidOperationException ex)
 {
     Console.WriteLine(ex.Message);
 }
 finally
 {
-    Console.WriteLine("Cleanup, even if there was an error!");
+    Console.WriteLine("Always runs, good for cleanup.");
 }
-  </div>
+    </div>
 
-  <hr/>
+    <hr />
 
-  <h2>8. Asynchronous Programming (<code>async/await</code>)</h2>
-  <p>
-    Use <b>async</b> and <b>await</b> for responsive, modern apps (no freezing UI).
-  </p>
-  <div class="cmd">
+    <h2>8. Asynchronous Programming (<code>async</code>/<code>await</code>)</h2>
+    <p>Useful for I/O-bound tasks to keep your apps responsive:</p>
+    <div class="cmd">
 using System.Threading.Tasks;
 
-public async Task DownloadDataAsync()
+public async Task DownloadAsync()
 {
-    Console.WriteLine("Start download");
-    await Task.Delay(2000); // simulates waiting for download
-    Console.WriteLine("Finished downloading");
+    Console.WriteLine("Starting download...");
+    await Task.Delay(2000);
+    Console.WriteLine("Download finished.");
 }
-  </div>
-  <div class="tip">
-    <b>Tip:</b> <code>await</code> lets your program do other work while waiting, perfect for web/API/database calls.
-  </div>
+    </div>
+    <div class="tip">
+      <b>Tip:</b> <code>await</code> lets your program continue doing other work while waiting.
+    </div>
 
-  <hr/>
+    <hr />
 
-  <h2>9. Files, Streams, and Serialization</h2>
-  <p>
-    Real-world applications read/write/move files and serialize/deserialize data.
-  </p>
-  <div class="cmd">
+    <h2>9. File Handling, Streams, and Serialization</h2>
+    <p>Read/write files and convert objects to/from JSON:</p>
+    <div class="cmd">
 using System.IO;
 
-File.WriteAllText("test.txt", "Hello, file!");
-string contents = File.ReadAllText("test.txt");
-Console.WriteLine(contents);
-  </div>
-  <div class="cmd">
+File.WriteAllText("hello.txt", "Hello, file!");
+string content = File.ReadAllText("hello.txt");
+Console.WriteLine(content);
+    </div>
+    <div class="cmd">
 using System.Text.Json;
-public class Person { public string Name {get;set;} }
-string json = JsonSerializer.Serialize(new Person() { Name = "Sam" });
-var person = JsonSerializer.Deserialize&lt;Person&gt;(json);
-Console.WriteLine(person.Name);
-  </div>
 
-  <hr/>
+public class Person { public string Name { get; set; } }
 
-  <h2>10. Dependency Injection & Design Patterns (Intro)</h2>
-  <p>
-    Professional C# often applies <b>dependency injection</b> for testable, flexible code, and uses famous <b>design patterns</b> (Singleton, Factory, Repository, etc.).
-  </p>
-  <div class="cmd">
-// Example: constructor injection
+string json = JsonSerializer.Serialize(new Person { Name = "Alice" });
+Person deserialized = JsonSerializer.Deserialize&lt;Person&gt;(json);
+Console.WriteLine(deserialized.Name);
+    </div>
+
+    <hr />
+
+    <h2>10. Dependency Injection & Design Patterns (Introduction)</h2>
+    <p>Write maintainable and testable code with dependency injection and design patterns:</p>
+    <div class="cmd">
+// Simple constructor injection:
+
 public class Logger
 {
-    public void Log(string msg) { Console.WriteLine(msg); }
+    public void Log(string message) => Console.WriteLine(message);
 }
+
 public class Service
 {
     private readonly Logger _logger;
-    public Service(Logger logger) { _logger = logger; }
-    public void DoWork() { _logger.Log("Working!"); }
-}
-// Usage
-var logger = new Logger();
-var service = new Service(logger); // DI in action!
-  </div>
-  <div class="tip">
-    <b>Learn More:</b> <a href="https://docs.microsoft.com/en-us/dotnet/core/extensions/dependency-injection" target="_blank">Microsoft DI Docs</a> | <a href="https://refactoring.guru/design-patterns/csharp" target="_blank">Design Patterns in C#</a>
-  </div>
-
-  <hr/>
-
-  <h2>Practice — Ready for Real Projects!</h2>
-  <ul>
-    <li>Build a <b>console TODO app</b> with classes, lists, save/load from file, async tasks.</li>
-    <li>Make a <b>calculator</b> supporting multiple inputs (try delegates!)</li>
-    <li>Implement a <b>mini inventory system</b> using OOP and LINQ queries.</li>
-  </ul>
-
-  <div class="fnote">
-    <b>Remember:</b> The best way to master C# is to build, experiment, break your own code, and try features in small projects! Use <a href="https://dotnetfiddle.net" target="_blank">dotnetfiddle.net</a> to experiment live.
-  </div>
-</div>
-
-<script>
-function checkQuiz(quizId, answerIndex) {
-  var quiz = document.getElementById(quizId);
-  var radios = quiz.getElementsByTagName('input');
-  var result = quiz.querySelector('.quiz-result');
-  for (var i = 0; i < radios.length; i++) {
-    if (radios[i].checked) {
-      if (parseInt(radios[i].value) === answerIndex) {
-        result.innerHTML = "✅ Correct!";
-      } else {
-        result.innerHTML = "❌ Try again!";
-      }
-      return;
+    public Service(Logger logger)
+    {
+        _logger = logger;
     }
-  }
-  result.innerHTML = "❗ Please select an answer!";
+    public void Execute() => _logger.Log("Service running...");
 }
-</script>
+
+// Usage:
+var logger = new Logger();
+var service = new Service(logger);
+service.Execute();
+    </div>
+    <div class="tip">
+      <b>Learn more:</b> <a href="https://docs.microsoft.com/en-us/dotnet/core/extensions/dependency-injection" target="_blank">Microsoft DI Docs</a> | <a href="https://refactoring.guru/design-patterns/csharp" target="_blank">Design Patterns in C#</a>
+    </div>
+
+    <hr />
+
+    <h2>Practice Projects to Master Concepts</h2>
+    <ul>
+      <li>Build a console TODO list app with classes, lists, and file saving/loading.</li>
+      <li>Create a simple calculator using delegates and input parsing.</li>
+      <li>Develop an inventory system using LINQ to query stock data.</li>
+      <li>Write a small game or simulation leveraging OOP and async features.</li>
+    </ul>
+
+    <div class="fnote">
+      <b>Remember:</b> The best way to learn C# deeply is by building, experimenting, breaking, and fixing code regularly. Use <a href="https://dotnetfiddle.net" target="_blank">dotnetfiddle.net</a> or Visual Studio to practice interactively.
+    </div>
+
+  </div>
+
+  <script>
+    function checkQuiz(quizId, answerIndex) {
+      const quiz = document.getElementById(quizId);
+      const radios = quiz.getElementsByTagName('input');
+      const result = quiz.querySelector('.quiz-result');
+      for (let i = 0; i < radios.length; i++) {
+        if (radios[i].checked) {
+          if (parseInt(radios[i].value) === answerIndex) {
+            result.innerHTML = "✅ Correct!";
+          } else {
+            result.innerHTML = "❌ Try again!";
+          }
+          return;
+        }
+      }
+      result.innerHTML = "❗ Please select an answer!";
+    }
+  </script>
 </body>
 </html>
-
