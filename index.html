@@ -1,17 +1,16 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sunitha Kottayil - Data Analyst & Developer | Tech Learning Hub</title>
-    <meta name="description" content="Data Analyst and aspiring Software Developer specializing in Python, Power BI, and data visualization. Learn Git, GitHub, C#, TypeScript, HTML, CSS through practical tutorials.">
+    <title>Sunitha Kottayil - Aspiring Full-Stack Developer & Data Specialist | Portfolio</title>
+    <meta name="description" content="Aspiring Full-Stack Developer with expertise in Python, C#, TypeScript, and data analytics. Former Data Analyst specializing in Power BI, SQL, and data visualization. Python instructor at ReDI School.">
     <meta name="keywords" content="Data Analyst, Software Developer, Python, Power BI, TypeScript, C#, Data Science, Portfolio">
     <meta name="author" content="Sunitha Kottayil">
     
     <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Sunitha Kottayil - Data Analyst & Software Developer">
-    <meta property="og:description" content="Professional portfolio showcasing expertise in data analysis, software development, and technical education">
+    <meta property="og:title" content="Sunitha Kottayil - Aspiring Full-Stack Developer & Data Specialist">
+    <meta property="og:description" content="Professional portfolio showcasing the journey from data analysis to full-stack development. Expertise in Python, C#, TypeScript, Power BI, and modern web technologies.">
     <meta property="og:type" content="website">
     
     <!-- Fonts -->
@@ -319,6 +318,7 @@
             position: relative;
             overflow: hidden;
             padding-top: 80px;
+            padding-bottom: var(--space-xl);
         }
 
         .hero::before {
@@ -381,13 +381,14 @@
         }
 
         .hero-description {
-            font-size: 1.125rem;
-            color: var(--gray-500);
-            margin-bottom: var(--space-2xl);
-            max-width: 700px;
+            font-size: 1.25rem;
+            color: var(--gray-600);
+            margin-bottom: var(--space-xl);
+            max-width: 800px;
             margin-left: auto;
             margin-right: auto;
-            line-height: 1.7;
+            line-height: 1.6;
+            font-weight: 400;
         }
 
         .hero-actions {
@@ -395,7 +396,7 @@
             gap: var(--space-lg);
             justify-content: center;
             flex-wrap: wrap;
-            margin-bottom: var(--space-3xl);
+            margin-bottom: var(--space-xl);
         }
 
         /* Buttons */
@@ -454,15 +455,126 @@
             transform: translateY(-2px);
         }
 
+        /* Blog CTA Button */
+        .blog-cta {
+            margin-top: var(--space-xl);
+            display: flex;
+            justify-content: center;
+        }
+
+        .btn-blog {
+            background: linear-gradient(135deg, var(--accent-500) 0%, var(--accent-700) 100%);
+            color: white;
+            box-shadow: var(--shadow-lg);
+            border: none;
+        }
+
+        .btn-blog:hover {
+            background: linear-gradient(135deg, var(--accent-600) 0%, var(--accent-800) 100%);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        /* Professional Enhancements */
+        .hero-badge {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .skill-tag {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-tag::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .skill-tag:hover::before {
+            left: 100%;
+        }
+
+        .project-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-image {
+            transition: all 0.5s ease;
+        }
+
+        .project-card:hover .project-image {
+            transform: scale(1.05);
+        }
+
+        .timeline-item::before {
+            animation: pulse 2s infinite;
+        }
+
+        /* Enhanced Typography */
+        .section-title {
+            background: linear-gradient(135deg, var(--primary-600) 0%, var(--secondary-600) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Professional Stats */
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-lg);
+            margin: var(--space-2xl) 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: var(--space-lg);
+            background: white;
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--gray-200);
+            transition: all var(--transition-normal);
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary-600);
+            margin-bottom: var(--space-sm);
+        }
+
+        .stat-label {
+            color: var(--gray-600);
+            font-weight: 600;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
         /* Sections */
         .section {
-            padding: var(--space-4xl) 0;
+            padding: var(--space-3xl) 0;
             position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
         }
 
         .section-header {
             text-align: center;
-            margin-bottom: var(--space-3xl);
+            margin-bottom: var(--space-2xl);
             max-width: 800px;
             margin-left: auto;
             margin-right: auto;
@@ -507,11 +619,12 @@
             background: white;
             border: 1px solid var(--gray-200);
             border-radius: var(--radius-2xl);
-            padding: var(--space-2xl);
+            padding: var(--space-xl);
             transition: all var(--transition-normal);
             position: relative;
             overflow: hidden;
             box-shadow: var(--shadow-sm);
+            height: 100%;
         }
 
         .card::before {
@@ -539,14 +652,18 @@
         /* Grid Layouts */
         .grid {
             display: grid;
-            gap: var(--space-xl);
+            gap: var(--space-lg);
         }
 
         .grid-2 {
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
         }
 
         .grid-3 {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+
+        .grid-4 {
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
         }
 
@@ -695,6 +812,7 @@
             .hero {
                 padding-top: 100px;
                 text-align: center;
+                min-height: 90vh;
             }
 
             .hero-actions {
@@ -709,6 +827,20 @@
 
             .section {
                 padding: var(--space-2xl) 0;
+                min-height: auto;
+            }
+
+            .grid-4 {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+
+            .hero-description {
+                font-size: 1.125rem;
+            }
+
+            .stats-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: var(--space-md);
             }
         }
 
@@ -973,68 +1105,39 @@
             <div class="container">
                 <div class="hero-content fade-in visible">
                     <div class="hero-badge">
-                        <i class="fas fa-sparkles"></i>
-                       Let's explore the world together 
+                        <i class="fas fa-rocket"></i>
+                        Transforming Data into Digital Solutions
                     </div>
                     <h1 class="hero-title">
                         Hello, I'm <span class="hero-name">Sunitha Kottayil</span>
                     </h1>
                     <p class="hero-subtitle">
-                        Data Analyst • Aspiring Software Developer • Python Instructor
+                        Aspiring Full-Stack Developer • Former Data Analyst • Python Instructor
                     </p>
                     <p class="hero-description">
-                        I bring together data insights and coding skills to create impactful solutions.
-                        As I move from analytics into full-stack development, I’m also sharing what I learn by teaching Python to aspiring softwareprofessionals.
+                        I transform complex data into actionable insights and build innovative web applications that make a difference. With expertise in Python, Power BI, and modern web technologies, I'm passionate about creating solutions that bridge the gap between data and user experience.
                     </p>
                     
                     <div class="hero-actions">
                         <a href="#projects" class="btn btn-primary">
                             <i class="fas fa-rocket"></i>
-                            Explore My Projects
+                            Explore My Work
                         </a>
                         <a href="#contact" class="btn btn-outline">
                             <i class="fas fa-paper-plane"></i>
                             Let's Connect
                         </a>
                     </div>
+                    
+                    <div class="blog-cta">
+                        <a href="#" class="btn btn-blog">
+                            <i class="fas fa-blog"></i>
+                            Read My Blog
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
-
-        
-
-
-<!-- Add this HTML after your existing CTA buttons.Just replace the # with your actual blog URL -->
-<div class="blog-cta">
-    <a href="https://yourblog.com" class="btn btn-blog">
-        📚 Read My Programming Tutorials
-    </a>
-</div>
-
-/* Add this CSS to your stylesheet */
-.blog-cta {
-    margin-top: 25px;
-    display: flex;
-    justify-content: center;
-}
-
-.btn-blog {
-    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-    color: white;
-    box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
-}
-
-.btn-blog:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 15px 35px rgba(16, 185, 129, 0.4);
-}
-
-/* Add this to your mobile media query */
-@media (max-width: 768px) {
-    .blog-cta {
-        margin-top: 20px;
-    }
-}
 
         <!-- About Section -->
         <section id="about" class="section section-alt">
@@ -1043,63 +1146,87 @@
                     <div class="section-badge">About Me</div>
                     <h2 class="section-title">Where Data Meets Innovation</h2>
                     <p class="section-subtitle">
-                        Empowering change through data and development—I'm a passionate analyst creating software that truly matters.
+                        From data insights to digital solutions—I'm an aspiring developer crafting web and mobile applications that make a difference.
                     </p>
                 </div>
                 
                 <div class="grid grid-2">
                     <div class="slide-in-left visible">
-                        <p style="margin-bottom: var(--space-lg); color: var(--gray-600); font-size: 1.125rem; line-height: 1.8;">
-                            👋 Hello ! I'm Sunitha, a <span style="background: linear-gradient(120deg, var(--primary-100) 0%, var(--primary-100) 100%); padding: 0.2rem 0.4rem; border-radius: var(--radius-sm); font-weight: 600; color: var(--primary-700);">data storyteller</span> who believes every dataset has a narrative waiting to be discovered. My journey began in education, but curiosity led me down the fascinating path of data analytics and software development.
+                        <p style="margin-bottom: var(--space-lg); color: var(--gray-600); font-size: 1.125rem; line-height: 1.7;">
+                            👋 Hi! I'm Sunitha, an <span style="background: linear-gradient(120deg, var(--primary-100) 0%, var(--primary-100) 100%); padding: 0.2rem 0.4rem; border-radius: var(--radius-sm); font-weight: 600; color: var(--primary-700);">aspiring full-stack developer</span> with a solid background in data analysis. My journey started in education, but my curiosity about technology led me to explore software development and data analytics.
                         </p>
                         
-                        <p style="margin-bottom: var(--space-lg); color: var(--gray-600); font-size: 1.125rem; line-height: 1.8;">
-                            What drives me? The magical moment when <span style="background: linear-gradient(120deg, var(--primary-100) 0%, var(--primary-100) 100%); padding: 0.2rem 0.4rem; border-radius: var(--radius-sm); font-weight: 600; color: var(--primary-700);">complex data transforms into clear, actionable insights</span> that drive real-world decisions. Currently expanding my technical arsenal as a Data Technician student, diving deep into Python, C#, and TypeScript.
+                        <p style="margin-bottom: var(--space-lg); color: var(--gray-600); font-size: 1.125rem; line-height: 1.7;">
+                            As a <span style="background: linear-gradient(120deg, var(--primary-100) 0%, var(--primary-100) 100%); padding: 0.2rem 0.4rem; border-radius: var(--radius-sm); font-weight: 600; color: var(--primary-700);">former data analyst</span>, I mastered Python, Power BI with DAX, SQL, Tableau, and Excel. This analytical foundation gives me a unique edge when building user-friendly applications that solve real problems.
                         </p>
                         
-                        <p style="margin-bottom: var(--space-lg); color: var(--gray-600); font-size: 1.125rem; line-height: 1.8;">
-                            As a <span style="background: linear-gradient(120deg, var(--primary-100) 0%, var(--primary-100) 100%); padding: 0.2rem 0.4rem; border-radius: var(--radius-sm); font-weight: 600; color: var(--primary-700);">Python instructor at ReDI School</span>, I've discovered my passion for making technology accessible. There's nothing quite like seeing someone's face light up when they write their first successful program or create their first data visualization!
+                        <p style="margin-bottom: var(--space-lg); color: var(--gray-600); font-size: 1.125rem; line-height: 1.7;">
+                            Currently, I'm <span style="background: linear-gradient(120deg, var(--primary-100) 0%, var(--primary-100) 100%); padding: 0.2rem 0.4rem; border-radius: var(--radius-sm); font-weight: 600; color: var(--primary-700);">training as a Data Technician</span> while teaching Python at ReDI School. I love seeing students' excitement when they create their first program or visualization!
                         </p>
 
-                        <p style="color: var(--gray-600); font-size: 1.125rem; line-height: 1.8;">
-                            My approach combines <span style="background: linear-gradient(120deg, var(--primary-100) 0%, var(--primary-100) 100%); padding: 0.2rem 0.4rem; border-radius: var(--radius-sm); font-weight: 600; color: var(--primary-700);">analytical rigor with creative problem-solving</span>, always asking: "How can we make this data work better for people?" Whether it's building predictive models, designing intuitive dashboards, or teaching the next generation of developers, I'm committed to bridging the gap between complex technology and human understanding.
+                        <p style="color: var(--gray-600); font-size: 1.125rem; line-height: 1.7;">
+                            My approach combines <span style="background: linear-gradient(120deg, var(--primary-100) 0%, var(--primary-100) 100%); padding: 0.2rem 0.4rem; border-radius: var(--radius-sm); font-weight: 600; color: var(--primary-700);">analytical thinking with creative problem-solving</span>. I always ask: "How can we make this technology work better for people?" Whether building web apps, mobile solutions, or teaching others, I'm committed to creating impactful solutions.
                         </p>
                     </div>
                     
                     <div class="slide-in-right visible">
                         <div class="about-timeline">
                             <div class="timeline-item">
-                                <div class="timeline-date">2024 - Present</div>
-                                <div class="timeline-title">Python Instructor & Data Technician Student</div>
+                                <div class="timeline-date">2025 - Present</div>
+                                <div class="timeline-title">Data Technician Trainee & Python Instructor</div>
                                 <div class="timeline-description">
-                                    Teaching Python fundamentals at ReDI School while mastering advanced programming concepts.
+                                    Starting my training journey with Arolink as a Data Technician trainee with Aarhus Tech, while continuing to inspire tech beginners as a Python instructor at ReDI School.
                                 </div>
                             </div>
                             
                             <div class="timeline-item">
                                 <div class="timeline-date">2024</div>
-                                <div class="timeline-title">Project Collaboration as Data Analyst at Arla Foods</div>
+                                <div class="timeline-title">Capstone Project: Arla Foods Collaboration</div>
                                 <div class="timeline-description">
-                                    Got an opportunity to collaborate with Denmark's largest dairy organisation and analyse two of their best selling brands using advanced data analytics and data visualisation using python and power BI.
-                                </div>
-                            </div>
-                            
-                            <div class="timeline-item">
-                                <div class="timeline-date">2023</div>
-                                <div class="timeline-title">Career Transformation</div>
-                                <div class="timeline-description">
-                                    Transition from economist to software development, driven by an insatiable curiosity for data and a passion for solving complex problems.
+                                    Applied my Python and Power BI expertise in a real-world setting, collaborating with Denmark's largest dairy organization to analyze their best-selling brands using advanced data analytics and visualization techniques.
                                 </div>
                             </div>
                             
                             <div class="timeline-item">
                                 <div class="timeline-date">2022</div>
-                                <div class="timeline-title">The Spark</div>
+                                <div class="timeline-title">The Learning Journey Begins</div>
                                 <div class="timeline-description">
-                                    Discovered the power of data analysis during a personal project, igniting a passion that would reshape my entire career trajectory.
+                                    Started Python programming as a gateway into the IT field, joining comprehensive data analysis courses at ReDI School, DataCamp, and Udemy to build a solid foundation in data science and programming.
+                                </div>
+                            </div>
+                            
+                            <div class="timeline-item">
+                                <div class="timeline-date">2020</div>
+                                <div class="timeline-title">The Spark: Discovering Data Visualization</div>
+                                <div class="timeline-description">
+                                    Explored the vast potential of advanced Excel and discovered Power BI, unlocking the power of data visualization for decision-making. This revelation ignited my passion for transforming raw data into meaningful insights.
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="section" style="background: linear-gradient(135deg, var(--primary-50) 0%, var(--secondary-50) 100%);">
+            <div class="container">
+                <div class="stats-container">
+                    <div class="stat-item fade-in visible">
+                        <div class="stat-number">4+</div>
+                        <div class="stat-label">Years Experience</div>
+                    </div>
+                    <div class="stat-item fade-in visible">
+                        <div class="stat-number">15+</div>
+                        <div class="stat-label">Projects Completed</div>
+                    </div>
+                    <div class="stat-item fade-in visible">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">Students Taught</div>
+                    </div>
+                    <div class="stat-item fade-in visible">
+                        <div class="stat-number">8+</div>
+                        <div class="stat-label">Technologies</div>
                     </div>
                 </div>
             </div>
@@ -1116,7 +1243,7 @@
                     </p>
                 </div>
                 
-                <div class="grid grid-2">
+                <div class="grid grid-4">
                     <div class="card fade-in visible skills-category">
                         <h3>
                             <i class="fas fa-chart-line"></i>
@@ -1159,11 +1286,8 @@
                             <span class="skill-tag">Visual Studio Code</span>
                             <span class="skill-tag">Jupyter Notebooks</span>
                             <span class="skill-tag">Azure Cloud Services</span>
-                            <span class="skill-tag">Docker & Containerization</span>
-                            <span class="skill-tag">Power Platform</span>
                             <span class="skill-tag">Microsoft Office Suite</span>
                             <span class="skill-tag">Figma & Design Tools</span>
-                            <span class="skill-tag">Agile & Scrum</span>
                         </div>
                     </div>
                     
@@ -1210,9 +1334,8 @@
                             <div>
                                 <h3 class="project-title">Smart Budget Planning Terminal App</h3>
                                 <p class="project-description">
-                                    A sophisticated Python terminal application that revolutionizes personal financial management. 
-                                    Features intelligent expense categorization, predictive budget tracking, comprehensive financial 
-                                    reporting, and data visualization capabilities that help users make informed financial decisions.
+                                    A Python terminal application for personal financial management with intelligent expense categorization, 
+                                    predictive budget tracking, and comprehensive reporting to help users make informed financial decisions.
                                 </p>
                                 <div class="project-tags">
                                     <span class="project-tag">Python</span>
@@ -1241,9 +1364,8 @@
                             <div>
                                 <h3 class="project-title">PwC Virtual Internship Analytics Suite</h3>
                                 <p class="project-description">
-                                    An advanced Power BI dashboard ecosystem analyzing customer churn patterns, satisfaction metrics, 
-                                    and diversity trends. Created comprehensive visualizations and actionable business insights that 
-                                    drive strategic decision-making for enterprise-level operations.
+                                    A Power BI dashboard ecosystem analyzing customer churn patterns, satisfaction metrics, and diversity trends 
+                                    with comprehensive visualizations and actionable business insights for strategic decision-making.
                                 </p>
                                 <div class="project-tags">
                                     <span class="project-tag">Power BI</span>
@@ -1272,9 +1394,8 @@
                             <div>
                                 <h3 class="project-title">Advanced Time Series Forecasting Engine</h3>
                                 <p class="project-description">
-                                    A sophisticated ARIMA-based forecasting model utilizing airline passenger datasets to demonstrate 
-                                    statistical modeling expertise. Features comprehensive data preprocessing, model validation, 
-                                    and predictive analytics capabilities with interactive visualizations.
+                                    An ARIMA-based forecasting model using airline passenger datasets with comprehensive data preprocessing, 
+                                    model validation, and predictive analytics capabilities with interactive visualizations.
                                 </p>
                                 <div class="project-tags">
                                     <span class="project-tag">Python</span>
@@ -1307,9 +1428,9 @@
             <div class="container">
                 <div class="section-header fade-in visible">
                     <div class="section-badge">Let's Connect</div>
-                    <h2 class="section-title">Ready to Collaborate?</h2>
+                    <h2 class="section-title">Ready to Create Something Great?</h2>
                     <p class="section-subtitle">
-                        Whether you're looking to discuss data projects, explore collaboration opportunities, or simply connect with a fellow tech enthusiast, I'd love to hear from you.
+                        Let's discuss your project, explore collaboration opportunities, or simply connect to share insights about technology and innovation.
                     </p>
                 </div>
                 
@@ -1317,8 +1438,7 @@
                     <div class="slide-in-left visible">
                         <h3 style="font-size: 1.75rem; font-weight: 700; margin-bottom: var(--space-lg); color: var(--gray-900);">Get in Touch</h3>
                         <p style="color: var(--gray-600); margin-bottom: var(--space-xl); line-height: 1.7; font-size: 1.125rem;">
-                            I'm always excited to discuss innovative projects, share knowledge about data science and development, 
-                            or explore opportunities where technology can make a meaningful impact. Let's create something amazing together!
+                            I'm excited to discuss projects, share knowledge about technology, or explore opportunities where we can create meaningful impact together.
                         </p>
                         
                         <div style="display: flex; align-items: center; gap: var(--space-lg); margin-bottom: var(--space-lg); padding: var(--space-lg); background: white; border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); transition: all var(--transition-normal); border: 1px solid var(--gray-200);">
@@ -1349,6 +1469,9 @@
                                 </a>
                                 <a href="https://www.linkedin.com/in/sunitha-kottayil" class="btn btn-outline" target="_blank" rel="noopener noreferrer">
                                     <i class="fab fa-linkedin"></i> LinkedIn
+                                </a>
+                                <a href="https://sunithakottayil.github.io/Sunitha-Kottayil.github.io/blog.html" class="btn btn-outline" target="_blank" rel="noopener noreferrer">
+                                    <i class="fas fa-blog"></i> Blog
                                 </a>
                             </div>
                         </div>
@@ -1405,6 +1528,9 @@
                     </a>
                     <a href="https://www.linkedin.com/in/sunitha-kottayil" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                         <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://sunithakottayil.github.io/Sunitha-Kottayil.github.io/blog.html" target="_blank" rel="noopener noreferrer" aria-label="Blog">
+                        <i class="fas fa-blog"></i>
                     </a>
                     <a href="mailto:vgsuniashok.email@example.com" aria-label="Email">
                         <i class="fas fa-envelope"></i>
@@ -1580,6 +1706,40 @@
                 
                 setTimeout(typeWriter, 1000);
             }
+
+            // Add counter animation for stats
+            function animateCounter(element, target, duration = 2000) {
+                let start = 0;
+                const increment = target / (duration / 16);
+                
+                function updateCounter() {
+                    start += increment;
+                    if (start < target) {
+                        element.textContent = Math.floor(start) + '+';
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        element.textContent = target + '+';
+                    }
+                }
+                
+                updateCounter();
+            }
+
+            // Trigger counter animation when stats come into view
+            const statNumbers = document.querySelectorAll('.stat-number');
+            const statsObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const target = parseInt(entry.target.textContent);
+                        animateCounter(entry.target, target);
+                        statsObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            statNumbers.forEach(stat => {
+                statsObserver.observe(stat);
+            });
 
             // Add focus styles for form inputs
             document.querySelectorAll('input, textarea').forEach(input => {
