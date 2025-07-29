@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Git for Beginners </title>
-    <meta name="description" content="A practical guide to getting started with Git version control">
+    <title>Git for Beginners - My Learning Journey</title>
+    <meta name="description" content="How I learned Git (and you can too)">
     <style>
         * {
             margin: 0;
@@ -13,493 +13,751 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: #fafafa;
+            font-family: Georgia, 'Times New Roman', serif;
+            line-height: 1.7;
+            color: #2c3e50;
+            background: #fdfdfd;
             margin: 0;
+            font-size: 18px;
         }
 
         .container {
-            max-width: 680px;
+            max-width: 720px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 30px 25px;
             background: white;
             min-height: 100vh;
+            box-shadow: 0 0 20px rgba(0,0,0,0.05);
         }
 
         /* Header */
         .header {
-            margin-bottom: 40px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #eee;
+            margin-bottom: 45px;
+            padding-bottom: 25px;
+            border-bottom: 2px solid #ecf0f1;
         }
 
         h1 {
-            font-size: 28px;
-            font-weight: 600;
-            color: #1a1a1a;
-            margin-bottom: 8px;
-            line-height: 1.3;
+            font-size: 32px;
+            font-weight: normal;
+            color: #2c3e50;
+            margin-bottom: 12px;
+            line-height: 1.2;
+            font-family: Georgia, serif;
         }
 
         .meta {
-            color: #666;
-            font-size: 14px;
-            margin-bottom: 15px;
+            color: #7f8c8d;
+            font-size: 15px;
+            margin-bottom: 20px;
+            font-style: italic;
         }
 
         .intro {
-            font-size: 16px;
-            color: #555;
+            font-size: 17px;
+            color: #34495e;
             background: #f8f9fa;
-            padding: 16px;
-            border-radius: 4px;
-            border-left: 3px solid #007acc;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+            font-style: italic;
+            line-height: 1.6;
         }
 
         /* Typography */
         h2 {
-            font-size: 22px;
-            font-weight: 600;
-            color: #1a1a1a;
-            margin: 35px 0 15px 0;
+            font-size: 26px;
+            font-weight: normal;
+            color: #2c3e50;
+            margin: 45px 0 20px 0;
+            font-family: Georgia, serif;
         }
 
         h3 {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 600;
-            color: #333;
-            margin: 25px 0 10px 0;
+            color: #34495e;
+            margin: 30px 0 15px 0;
         }
 
         p {
-            margin-bottom: 16px;
-            font-size: 15px;
-            line-height: 1.6;
+            margin-bottom: 18px;
+            line-height: 1.7;
         }
 
         ul, ol {
-            margin: 16px 0;
-            padding-left: 24px;
+            margin: 18px 0;
+            padding-left: 30px;
         }
 
         li {
-            margin-bottom: 6px;
-            font-size: 15px;
+            margin-bottom: 8px;
+            line-height: 1.6;
         }
 
-        /* Code */
+        /* Code styling */
         code {
-            background: #f5f5f5;
-            color: #e53e3e;
-            padding: 2px 6px;
-            border-radius: 3px;
-            font-family: 'Monaco', 'Menlo', monospace;
-            font-size: 13px;
-        }
-
-        .terminal {
-            background: #2d3748;
-            color: #e2e8f0;
-            border-radius: 6px;
-            padding: 16px;
-            margin: 20px 0;
-            font-family: 'Monaco', 'Menlo', monospace;
-            font-size: 14px;
-            line-height: 1.4;
-            overflow-x: auto;
-            position: relative;
-        }
-
-        .terminal::before {
-            content: "$ ";
-            color: #68d391;
+            background: #f1f2f6;
+            color: #c0392b;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
             font-weight: bold;
         }
 
-        /* Simple boxes */
+        .terminal {
+            background: #2f3640;
+            color: #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 15px;
+            line-height: 1.5;
+            overflow-x: auto;
+            border: 1px solid #57606f;
+        }
+
+        .terminal-header {
+            background: #57606f;
+            color: #fff;
+            padding: 8px 15px;
+            margin: -20px -20px 15px -20px;
+            border-radius: 8px 8px 0 0;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        /* Callout boxes */
+        .callout {
+            padding: 18px;
+            margin: 25px 0;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
         .note {
-            background: #fffbeb;
-            border: 1px solid #fbbf24;
-            border-radius: 4px;
-            padding: 14px;
-            margin: 20px 0;
-            font-size: 14px;
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-left: 5px solid #fdcb6e;
         }
 
         .tip {
-            background: #f0fff4;
-            border: 1px solid #38a169;
-            border-radius: 4px;
-            padding: 14px;
-            margin: 20px 0;
-            font-size: 14px;
+            background: #d1ecf1;
+            border: 1px solid #74b9ff;
+            border-left: 5px solid #0984e3;
+        }
+
+        .warning {
+            background: #f8d7da;
+            border: 1px solid #fd79a8;
+            border-left: 5px solid #e84393;
         }
 
         /* Links */
         a {
-            color: #007acc;
+            color: #2980b9;
             text-decoration: underline;
+            font-weight: normal;
         }
 
         a:hover {
-            color: #005a99;
+            color: #3498db;
         }
 
         /* Simple workflow */
         .workflow {
             background: #f8f9fa;
-            border: 1px solid #e9ecef;
-            border-radius: 6px;
-            padding: 20px;
-            margin: 24px 0;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 30px 0;
         }
 
         .workflow h4 {
-            margin-bottom: 12px;
-            font-size: 16px;
-            color: #333;
+            margin-bottom: 18px;
+            font-size: 18px;
+            color: #2c3e50;
+            text-align: center;
         }
 
         .steps {
             display: flex;
             flex-wrap: wrap;
-            gap: 16px;
+            gap: 20px;
+            justify-content: center;
         }
 
         .step {
             flex: 1;
-            min-width: 120px;
+            min-width: 140px;
+            max-width: 180px;
             text-align: center;
             background: white;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            padding: 12px 8px;
+            border: 2px solid #bdc3c7;
+            border-radius: 8px;
+            padding: 15px 10px;
         }
 
         .step-num {
-            background: #007acc;
+            background: #3498db;
             color: white;
-            width: 24px;
-            height: 24px;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-size: 12px;
+            font-size: 14px;
             font-weight: bold;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
 
         .step-text {
-            font-size: 13px;
-            color: #666;
+            font-size: 14px;
+            color: #7f8c8d;
+            font-weight: 600;
         }
 
-        /* Commands grid */
+        /* Commands section */
         .commands {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            margin: 20px 0;
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px 0;
         }
 
-        .command {
+        .command-item {
             background: white;
-            border: 1px solid #e0e0e0;
-            border-radius: 4px;
-            padding: 14px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .command-item:last-child {
+            margin-bottom: 0;
         }
 
         .command-name {
-            font-family: 'Monaco', 'Menlo', monospace;
-            font-size: 14px;
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
             font-weight: bold;
-            color: #007acc;
-            margin-bottom: 6px;
+            color: #2980b9;
+            margin-bottom: 8px;
         }
 
         .command-desc {
-            font-size: 13px;
-            color: #666;
-            line-height: 1.4;
+            font-size: 15px;
+            color: #7f8c8d;
+            line-height: 1.5;
         }
 
-        /* Simple comparison */
+        /* Comparison boxes */
         .comparison {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin: 24px 0;
+            gap: 25px;
+            margin: 30px 0;
         }
 
         .compare-box {
             background: #f8f9fa;
-            border: 1px solid #dee2e6;
-            border-radius: 4px;
-            padding: 16px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
         }
 
         .compare-title {
-            font-weight: 600;
-            margin-bottom: 10px;
-            font-size: 15px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 16px;
         }
 
-        .bad { border-left: 3px solid #dc3545; }
-        .good { border-left: 3px solid #28a745; }
+        .bad { 
+            border-left: 6px solid #e74c3c;
+            background: #fdf2f2;
+        }
+        .good { 
+            border-left: 6px solid #27ae60;
+            background: #f2fdf2;
+        }
+
+        /* My story section */
+        .story {
+            background: #f1f3f4;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 30px 0;
+            border-left: 5px solid #95a5a6;
+            font-style: italic;
+        }
+
+        .story-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #2c3e50;
+            font-style: normal;
+        }
+
+        /* Table of contents */
+        .toc {
+            background: #ecf0f1;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px 0;
+        }
+
+        .toc h4 {
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .toc ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .toc li {
+            margin-bottom: 8px;
+        }
+
+        .toc a {
+            color: #2980b9;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .toc a:hover {
+            text-decoration: underline;
+        }
 
         /* Footer */
         .footer {
-            margin-top: 50px;
-            padding-top: 30px;
-            border-top: 1px solid #eee;
+            margin-top: 60px;
+            padding-top: 35px;
+            border-top: 2px solid #ecf0f1;
             text-align: center;
-            color: #666;
-            font-size: 14px;
+            color: #7f8c8d;
+            font-size: 16px;
+            font-style: italic;
         }
 
         /* Responsive */
-        @media (max-width: 600px) {
+        @media (max-width: 768px) {
+            body {
+                font-size: 16px;
+            }
+            
             .container {
-                padding: 16px;
+                padding: 20px 15px;
             }
             
             h1 {
-                font-size: 24px;
+                font-size: 28px;
             }
             
             h2 {
-                font-size: 20px;
+                font-size: 22px;
             }
             
             .steps {
                 flex-direction: column;
             }
             
-            .commands {
-                grid-template-columns: 1fr;
-            }
-            
             .comparison {
                 grid-template-columns: 1fr;
             }
+        }
+
+        /* Copy button */
+        .copy-btn {
+            background: #74b9ff;
+            color: white;
+            border: none;
+            padding: 5px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
+            float: right;
+            margin-top: -5px;
+        }
+
+        .copy-btn:hover {
+            background: #0984e3;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header class="header">
-            <h1>Getting Started with Git</h1>
+            <h1>Learning Git: From Confusion to Clarity</h1>
             <div class="meta">
-                By Sunitha Kottayil • January 15, 2025 
+                Sunitha Kottayil • January 15, 2025 • Personal experiences included
             </div>
             <div class="intro">
-              Creating something cool and useful always means changing things up. Imagine a handy notebook that remembers every version and helps your whole team work smoothly together.
+                When I first heard about Git, I thought it was just another complicated developer tool I'd never understand. Boy, was I wrong! After struggling through my first few projects without version control (and losing work more times than I care to admit), I finally decided to bite the bullet and learn it properly. This guide is everything I wish someone had told me when I was starting out.
+            </div>
         </header>
 
+        <div class="toc">
+            <h4>What we'll cover</h4>
+            <ul>
+                <li><a href="#what-is-git">What exactly is Git?</a></li>
+                <li><a href="#installation">Getting Git on your computer</a></li>
+                <li><a href="#first-repo">Creating your first repository</a></li>
+                <li><a href="#workflow">The day-to-day workflow</a></li>
+                <li><a href="#mistakes">Fixing common mistakes</a></li>
+                <li><a href="#github">Sharing your work</a></li>
+                <li><a href="#tips">Things I learned the hard way</a></li>
+            </ul>
+        </div>
+
         <main>
-            <h2>What is Git anyway?</h2>
-            <p>Think of Git as a time machine for your code. Every time you make changes to your project, Git can take a "snapshot" of those changes. If something breaks later, you can easily go back to when everything was working.
-            Imagine you’re playing a video game where you can save your progress anytime. Git is like that save button—it takes a picture of your project each time you make changes.
-            If things go wrong, you can “rewind” back to a point where everything was working perfectly, just like loading a save file in a game!
+            <h2 id="what-is-git">What exactly is Git?</h2>
+            
+            <div class="story">
+                <div class="story-title">My "aha!" moment</div>
+                Picture this: I'm working on a website project, making changes left and right. Everything's going great until I decide to "improve" the navigation menu. Three hours later, I've broken everything and can't remember what I changed. I had to start over from scratch because I didn't have Git. That's when I realized I needed a better way to track my changes.
+            </div>
 
-            Simple definition:
-            "Git is a tool that saves every change you make to your project, so you can try new ideas safely, fix mistakes easily by going back to previous versions.".</p>
+            <p>Git is basically a time machine for your code. Think of it like the "Track Changes" feature in Microsoft Word, but way more powerful. Every time you save a version of your project (called a "commit"), Git remembers exactly what changed, when it changed, and who changed it.</p>
 
-            <p>Git is also great for collaboration. Multiple people can work on the same project without stepping on each other's toes.</p>
+            <p>Here's the thing that took me a while to understand: Git doesn't just save your files - it saves the <em>entire history</em> of your project. So if you mess something up, you can go back to any previous version. It's like having infinite undo buttons.</p>
 
             <div class="comparison">
                 <div class="compare-box bad">
-                    <div class="compare-title">❌ Without Git</div>
-                    <ul style="font-size: 13px; margin: 8px 0;">
-                        <li>project1.zip</li>
-                        <li>project_final.zip</li>
-                        <li>project_corrected.zip</li>
-                        <li>project_latest.zip</li>
+                    <div class="compare-title">❌ How I used to work</div>
+                    <ul style="font-size: 14px; margin: 10px 0;">
+                        <li>website_v1.zip</li>
+                        <li>website_v2_working.zip</li>
+                        <li>website_final_DONT_TOUCH.zip</li>
+                        <li>website_actually_final.zip</li>
+                        <li>website_for_real_this_time.zip</li>
                     </ul>
-                    <p style="font-size: 12px; color: #666; margin: 8px 0 0 0;">Sound familiar? </p>
+                    <p style="font-size: 13px; color: #666; margin: 8px 0 0 0;">This was my actual folder structure. Embarrassing? Yes. Effective? Absolutely not.</p>
                 </div>
                 <div class="compare-box good">
-                    <div class="compare-title">✅ With Git</div>
-                    <ul style="font-size: 13px; margin: 8px 0;">
-                        <li>One project folder</li>
-                        <li>Complete history</li>
-                        <li>Easy collaboration</li>
-                        <li>Never lose work</li>
+                    <div class="compare-title">✅ How I work now with Git</div>
+                    <ul style="font-size: 14px; margin: 10px 0;">
+                        <li>One clean project folder</li>
+                        <li>Complete change history</li>
+                        <li>Easy collaboration with teammates</li>
+                        <li>Never lose work again</li>
+                        <li>Can experiment without fear</li>
                     </ul>
-                    <p style="font-size: 12px; color: #666; margin: 8px 0 0 0;">Much better!</p>
+                    <p style="font-size: 13px; color: #666; margin: 8px 0 0 0;">So much cleaner and more professional!</p>
                 </div>
             </div>
 
-            <h2>Installing Git</h2>
-            <p>First things first, let's get Git installed on your computer:</p>
+            <h2 id="installation">Getting Git on your computer</h2>
+            
+            <p>The installation process is actually pretty straightforward, though it felt intimidating at first. Here's what worked for me on different systems:</p>
 
-            <ul>
-                <li><strong>Windows:</strong> Download the installer from <a href="https://git-scm.com/">git-scm.com</a> and follow the setup steps.</li>
-                <li><strong>Mac:</strong> Open Terminal and type <code>git</code>. If Git isn’t installed, you’ll be prompted to install the Xcode Command Line Tools. Alternatively, you can use Homebrew by running <code>brew install git</code>.</li>
-                <li><strong>Linux:</strong> Use your package manager to install Git. For example, on Debian or Ubuntu, run <code>sudo apt install git</code>.</li>
-            </ul>
+            <h3>Windows</h3>
+            <p>Go to <a href="https://git-scm.com/">git-scm.com</a> and download the installer. I recommend sticking with the default settings unless you have a specific reason to change them. The installer will also give you Git Bash, which is a terminal that works well with Git.</p>
 
-            <p>To check if it's installed correctly, open your terminal and type:</p>
+            <h3>Mac</h3>
+            <p>If you're on Mac, try typing <code>git</code> in Terminal first - you might already have it! If not, the system will prompt you to install the Xcode Command Line Tools. Alternatively, if you use Homebrew, just run <code>brew install git</code>.</p>
 
-            <div class="terminal">git --version</div>
+            <h3>Linux</h3>
+            <p>Most Linux distributions have Git in their package repositories. On Ubuntu or Debian, use <code>sudo apt install git</code>. On CentOS or Red Hat, try <code>sudo yum install git</code>.</p>
 
-            <div class="tip">
-                <strong>Tip:</strong> If you see a version number, you're good to go! If not, try restarting your terminal or computer.
+            <p>After installation, verify it worked by opening your terminal and typing:</p>
+
+            <div class="terminal">
+                <div class="terminal-header">Terminal</div>
+                git --version
             </div>
 
-            <h2>Setting up your identity</h2>
-            <p>Before you start using Git, you need to tell it who you are. This information gets attached to your commits:</p>
-
-            <div class="terminal">git config --global user.name "Your Name"<br>git config --global user.email "your@email.com"</div>
-
-            <div class="note">
-                <strong>Important:</strong> Use the same email that you'll use for GitHub or other Git hosting services.
+            <div class="tip callout">
+                <strong>Success looks like:</strong> You should see something like "git version 2.39.0" or similar. The exact version doesn't matter much - any recent version will work fine for learning.
             </div>
 
-            <h2>Your first repository</h2>
-            <p>A repository (or "repo") is just a fancy name for a project folder that Git is watching. Let's create one:</p>
+            <h2 id="first-repo">Setting up and creating your first repository</h2>
+            
+            <p>Before you start using Git, you need to introduce yourself. This information gets attached to every change you make, so people know who did what:</p>
 
-            <div class="terminal">mkdir my-first-project<br>cd my-first-project<br>git init</div>
+            <div class="terminal">
+                <div class="terminal-header">Set your identity</div>
+                git config --global user.name "Your Actual Name"<br>
+                git config --global user.email "your.email@example.com"
+            </div>
 
-            <p>Congratulations! You just created your first Git repository. The <code>git init</code> command creates a hidden <code>.git</code> folder that stores all the Git magic.</p>
+            <div class="note callout">
+                <strong>Pro tip:</strong> Use the same email address you plan to use for GitHub, GitLab, or wherever you'll host your code. This ensures your contributions are properly credited to your account.
+            </div>
 
-            <h2>The basic Git workflow</h2>
-            <p>Git has a simple three-step workflow:</p>
+            <p>Now let's create your first repository. A repository (or "repo" for short) is just a project folder that Git is keeping track of:</p>
+
+            <div class="terminal">
+                <div class="terminal-header">Create your first project</div>
+                mkdir my-learning-project<br>
+                cd my-learning-project<br>
+                git init
+            </div>
+
+            <div class="story">
+                <div class="story-title">What just happened?</div>
+                When you run <code>git init</code>, Git creates a hidden folder called <code>.git</code> inside your project. This folder contains all the magic - it's where Git stores the history of your project. You don't need to understand what's in there (I still don't fully understand it), but knowing it exists helps explain how Git works.
+            </div>
+
+            <h2 id="workflow">The day-to-day Git workflow</h2>
+            
+            <p>This is where Git clicked for me. Once I understood the basic workflow, everything else made sense. It's a simple three-step process:</p>
 
             <div class="workflow">
-                <h4>The Git Workflow</h4>
+                <h4>The Git Workflow (This is important!)</h4>
                 <div class="steps">
                     <div class="step">
                         <div class="step-num">1</div>
-                        <div class="step-text">Make changes</div>
+                        <div class="step-text">Edit your files normally</div>
                     </div>
                     <div class="step">
                         <div class="step-num">2</div>
-                        <div class="step-text">Stage files</div>
+                        <div class="step-text">Stage the changes</div>
                     </div>
                     <div class="step">
                         <div class="step-num">3</div>
-                        <div class="step-text">Commit changes</div>
+                        <div class="step-text">Commit with a message</div>
                     </div>
                 </div>
             </div>
 
-            <p>Let's try it out. First, create a simple file:</p>
+            <p>Let's walk through this with a real example. First, create a simple text file:</p>
 
-            <div class="terminal">"Hello, Git!" > README.md</div>
+            <div class="terminal">
+                <div class="terminal-header">Create a file</div>
+                echo "Hello, this is my first Git project!" > README.md
+            </div>
 
-            <p>Now let's see what Git thinks about our new file:</p>
+            <p>Now let's see what Git thinks about this new file:</p>
 
-            <div class="terminal">git status</div>
+            <div class="terminal">
+                <div class="terminal-header">Check the status</div>
+                git status
+            </div>
 
-            <p>Git will tell you that <code>README.md</code> is "untracked". To start tracking it, use <code>git add</code>:</p>
+            <p>Git will tell you that <code>README.md</code> is "untracked" - meaning Git sees the file but isn't keeping track of changes to it yet. To start tracking it, use <code>git add</code>:</p>
 
-            <div class="terminal">git add README.md</div>
+            <div class="terminal">
+                <div class="terminal-header">Stage the file</div>
+                git add README.md
+            </div>
 
-            <p>Now the file is "staged" – ready to be committed. Let's save this snapshot:</p>
+            <p>Now the file is "staged" - it's ready to be saved as part of your project's history. Let's save this snapshot:</p>
 
-            <div class="terminal">git commit -m "Add README file"</div>
+            <div class="terminal">
+                <div class="terminal-header">Save the snapshot</div>
+                git commit -m "Add README with project introduction"
+            </div>
 
-            <p>Great! You just made your first commit. The <code>-m</code> flag lets you add a message describing what you changed.</p>
+            <div class="tip callout">
+                <strong>About commit messages:</strong> The text after <code>-m</code> is your commit message. Make it descriptive! Future you (and your teammates) will thank you. Instead of "fixed stuff", write "Fix navigation menu not working on mobile devices".
+            </div>
 
-            <h2>Essential Git commands</h2>
-            <p>Here are the commands you'll use most often:</p>
+            <h2 id="essential-commands">Commands you'll use every day</h2>
+            
+            <p>After using Git for a while, I realized I use the same handful of commands 90% of the time:</p>
 
             <div class="commands">
-                <div class="command">
+                <div class="command-item">
                     <div class="command-name">git status</div>
-                    <div class="command-desc">See what's changed in your project</div>
+                    <div class="command-desc">Shows you what's changed, what's staged, and what's not tracked. I run this constantly - it's like asking Git "what's going on right now?"</div>
                 </div>
-                <div class="command">
+                <div class="command-item">
                     <div class="command-name">git add .</div>
-                    <div class="command-desc">Stage all changes for commit</div>
+                    <div class="command-desc">Stages all your changes at once. The dot means "everything in this folder". Super convenient for most cases.</div>
                 </div>
-                <div class="command">
-                    <div class="command-name">git commit -m "message"</div>
-                    <div class="command-desc">Save a snapshot with a description</div>
+                <div class="command-item">
+                    <div class="command-name">git commit -m "your message"</div>
+                    <div class="command-desc">Saves a snapshot of your staged changes with a descriptive message. Think of it as saving your game progress.</div>
                 </div>
-                <div class="command">
-                    <div class="command-name">git log</div>
-                    <div class="command-desc">View your commit history</div>
+                <div class="command-item">
+                    <div class="command-name">git log --oneline</div>
+                    <div class="command-desc">Shows a compact history of your commits. Great for seeing what you've been working on.</div>
+                </div>
+                <div class="command-item">
+                    <div class="command-name">git diff</div>
+                    <div class="command-desc">Shows exactly what changed in your files. Helpful for reviewing your work before committing.</div>
                 </div>
             </div>
 
-            <div class="tip">
-                <strong>Pro tip:</strong> Use <code>git status</code> frequently. It's like asking Git "what's going on?" and will help you understand what's happening.
+            <h2 id="mistakes">Fixing mistakes (we all make them!)</h2>
+            
+            <div class="story">
+                <div class="story-title">Learning from my mistakes</div>
+                I remember the first time I accidentally committed a file with sensitive information (an API key - oops!). I panicked and thought I'd have to start over. Turns out Git has solutions for almost every mistake you can make. Here are the ones that have saved me multiple times.
             </div>
 
-            <h2>Fixing mistakes</h2>
-            <p>Made a mistake? Don't panic! Git has several ways to fix things:</p>
-
-            <h3>Undo changes to a file (before staging)</h3>
-            <div class="terminal">git checkout -- filename.txt</div>
-
-            <h3>Unstage a file</h3>
-            <div class="terminal">git reset HEAD filename.txt</div>
-
-            <h3>Undo the last commit (but keep your changes)</h3>
-            <div class="terminal">git reset --soft HEAD~1</div>
-
-            <div class="note">
-                <strong>Be careful!</strong> Some Git commands can permanently delete your work. When in doubt, make a backup copy of your project first.
+            <h3>Oops, I changed a file but want to undo it</h3>
+            <p>If you've modified a file but haven't staged it yet, you can reset it back to the last committed version:</p>
+            
+            <div class="terminal">
+                <div class="terminal-header">Undo file changes</div>
+                git checkout -- filename.txt
             </div>
 
-            <h2>Sharing your work with GitHub</h2>
-            <p>Now for the fun part – putting your code online! GitHub is like Dropbox for programmers.</p>
+            <h3>I staged something by mistake</h3>
+            <p>If you ran <code>git add</code> on a file but want to unstage it:</p>
+            
+            <div class="terminal">
+                <div class="terminal-header">Unstage a file</div>
+                git reset HEAD filename.txt
+            </div>
+
+            <h3>I committed something but want to undo it</h3>
+            <p>This undoes your last commit but keeps your changes so you can fix them:</p>
+            
+            <div class="terminal">
+                <div class="terminal-header">Undo last commit (safely)</div>
+                git reset --soft HEAD~1
+            </div>
+
+            <div class="warning callout">
+                <strong>A word of caution:</strong> Be very careful with commands that include <code>--hard</code>. They can permanently delete your work! When in doubt, make a backup copy of your project folder first. I learned this the hard way.
+            </div>
+
+            <h2 id="github">Sharing your work with the world</h2>
+            
+            <p>This is where things get really exciting! GitHub is like Google Drive for code - it stores your projects online and makes them easy to share. Here's how to get your local Git repository onto GitHub:</p>
 
             <ol>
-                <li>Create a free account at <a href="https://github.com/">github.com</a></li>
-                <li>Click the "+" button and create a new repository</li>
-                <li>Give it the same name as your local project</li>
-                <li>Copy the repository URL and run these commands:</li>
+                <li><strong>Create a GitHub account</strong> - Go to <a href="https://github.com/">github.com</a> and sign up. It's free for public repositories.</li>
+                <li><strong>Create a new repository</strong> - Click the "+" button in the top right and select "New repository"</li>
+                <li><strong>Give it a name</strong> - I usually use the same name as my local project folder to keep things simple</li>
+                <li><strong>Connect your local repo to GitHub</strong> - Copy the repository URL from GitHub and run these commands:</li>
             </ol>
 
-            <div class="terminal">git remote add origin https://github.com/yourusername/my-first-project.git<br>git branch -M main<br>git push -u origin main</div>
-
-            <p>That's it! Your code is now online and backed up. You can view it by going to your repository URL.</p>
-
-            <h2>Working with others</h2>
-            <p>When working with a team, you'll need a few more commands:</p>
-
-            <div class="terminal">git pull origin main</div>
-            <p>This downloads any changes your teammates have made.</p>
-
-            <div class="terminal">git push origin main</div>
-            <p>This uploads your changes for others to see.</p>
-
-            <div class="tip">
-                <strong>Good habit:</strong> Always pull before you push. This ensures you have the latest changes before adding your own.
+            <div class="terminal">
+                <div class="terminal-header">Connect to GitHub</div>
+                git remote add origin https://github.com/yourusername/your-repo-name.git<br>
+                git branch -M main<br>
+                git push -u origin main
             </div>
 
-            <h2>Best practices</h2>
+            <p>That's it! Your code is now backed up online and you can share the GitHub URL with anyone.</p>
+
+            <div class="tip callout">
+                <strong>Understanding the commands:</strong> 
+                <ul style="margin-top: 10px;">
+                    <li><code>remote add origin</code> tells Git where your online repository is</li>
+                    <li><code>branch -M main</code> renames your main branch (some older tutorials use "master")</li>
+                    <li><code>push -u origin main</code> uploads your commits to GitHub</li>
+                </ul>
+            </div>
+
+            <h3>Working with others (or just keeping things synced)</h3>
+            <p>Once your code is on GitHub, you'll need these commands to stay in sync:</p>
+
+            <div class="terminal">
+                <div class="terminal-header">Download latest changes</div>
+                git pull origin main
+            </div>
+
+            <div class="terminal">
+                <div class="terminal-header">Upload your changes</div>
+                git push origin main
+            </div>
+
+            <div class="note callout">
+                <strong>Good habit:</strong> Always pull before you push. This grabs any changes that might have happened since you last synced and helps avoid conflicts.
+            </div>
+
+            <h2 id="tips">Things I learned the hard way</h2>
+            
+            <div class="story">
+                <div class="story-title">My biggest Git mistakes (so you don't repeat them)</div>
+                <ul>
+                    <li><strong>Committing huge files:</strong> I once committed a 500MB video file. GitHub wasn't happy. Use <code>.gitignore</code> files!</li>
+                    <li><strong>Terrible commit messages:</strong> "fixed stuff" tells you nothing. Be specific!</li>
+                    <li><strong>Not committing often enough:</strong> I used to work for days without committing. Then I'd lose work. Commit early, commit often!</li>
+                    <li><strong>Fear of breaking things:</strong> Git is designed to help you recover from mistakes. Don't be afraid to experiment!</li>
+                </ul>
+            </div>
+
+            <h3>Write better commit messages</h3>
+            <p>Good commit messages are like breadcrumbs for your future self. Here's what I've learned works well:</p>
+
+            <div class="comparison">
+                <div class="compare-box bad">
+                    <div class="compare-title">❌ Vague messages</div>
+                    <ul style="font-size: 14px;">
+                        <li>"fixed bug"</li>
+                        <li>"updated stuff"</li>
+                        <li>"changes"</li>
+                        <li>"idk"</li>
+                    </ul>
+                </div>
+                <div class="compare-box good">
+                    <div class="compare-title">✅ Clear, specific messages</div>
+                    <ul style="font-size: 14px;">
+                        <li>"Fix login form validation on signup page"</li>
+                        <li>"Add responsive design for mobile navigation"</li>
+                        <li>"Update API endpoint for user profiles"</li>
+                        <li>"Remove unused CSS from homepage"</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Use .gitignore files</h3>
+            <p>Create a file called <code>.gitignore</code> in your project root to tell Git which files to ignore. Here's a basic one I use for web projects:</p>
+
+            <div class="terminal">
+                <div class="terminal-header">Sample .gitignore file</div>
+                # Dependencies<br>
+                node_modules/<br>
+                vendor/<br><br>
+                # Environment files<br>
+                .env<br>
+                .env.local<br><br>
+                # System files<br>
+                .DS_Store<br>
+                Thumbs.db<br><br>
+                # Logs<br>
+                *.log
+            </div>
+
+            <h3>Commit frequently</h3>
+            <p>I used to think I needed to finish entire features before committing. Wrong! Commit whenever you've made a logical chunk of progress. It's like saving your document while writing - you wouldn't wait until the entire essay is done, right?</p>
+
+            <h2>What's next in your Git journey?</h2>
+            
+            <p>You now know enough Git to start using it in your projects! But there's so much more to explore:</p>
+
             <ul>
-                <li><strong>Commit often:</strong> Small, frequent commits are better than huge ones</li>
-                <li><strong>Write good commit messages:</strong> "Fix login bug" is better than "fixed stuff"</li>
-                <li><strong>Use .gitignore:</strong> Don't commit temporary files or passwords</li>
-                <li><strong>Learn branches:</strong> They let you experiment without breaking your main code</li>
+                <li><strong>Branching:</strong> Create separate "branches" to experiment with new features</li>
+                <li><strong>Merging:</strong> Combine changes from different branches</li>
+                <li><strong>Pull requests:</strong> Propose changes to other people's projects</li>
+                <li><strong>Git workflows:</strong> Team strategies for managing code</li>
+                <li><strong>Advanced commands:</strong> Rebasing, cherry-picking, and more</li>
             </ul>
 
-            <h2>What's next?</h2>
-            <p>You now know the basics of Git! Here's what to explore next:</p>
+            <div class="tip callout">
+                <strong>My advice:</strong> Don't try to learn everything at once. Start using basic Git for your projects, and gradually add new concepts as you need them. The best way to learn Git is by using it regularly, even for small personal projects.
+            </div>
 
-            <ul>
-                <li>Learn about branching and merging</li>
-                <li>Explore GitHub's features (issues, pull requests)</li>
-                <li>Practice with small personal projects</li>
-                <li>Contribute to open source projects</li>
-            </ul>
-
-            <div class="tip">
-                <strong>Remember:</strong> Git takes practice. Don't worry if it feels confusing at first – every developer went through the same learning curve!
+            <div class="story">
+                <div class="story-title">Final thoughts</div>
+                Git felt overwhelming when I started, but now I can't imagine coding without it. It's saved my bacon countless times and made collaboration so much easier. Start small, be patient with yourself, and don't be afraid to make mistakes - Git is there to help you recover from them. You've got this!
             </div>
         </main>
 
         <footer class="footer">
-            <p>Questions? Feel free to reach out on <a href="https://github.com/SunithaKottayil">GitHub</a> or <a href="https://linkedin.com/in/sunitha-kottayil">LinkedIn</a>.</p>
+            <p>Questions about Git? Found this helpful? I'd love to hear from you!<br>
+            Find me on <a href="https://github.com/SunithaKottayil">GitHub</a> or <a href="https://linkedin.com/in/sunitha-kottayil">LinkedIn</a>.</p>
         </footer>
     </div>
-</body>
-</html>
+
+    <script>
+        // Simple copy functionality for code blocks
+        document.querySelectorAll('.terminal').forEach(block => {
+            const copyBtn = document.createElement('button');
+            copyBtn.className = 'copy-btn';
+            copyBtn.textContent = 'Copy';
+            copyBtn.onclick = () => {
+                const code = block.textContent.replace(/Terminal\s*/, '').replace(/Copy/, '').trim();
+                navigator.clipboard.writeText(code).then(() => {
+                    copyBtn.textContent = 'Copied!';
+                    setTimeout(() => copyBtn.textContent = 'Copy', 2000);
