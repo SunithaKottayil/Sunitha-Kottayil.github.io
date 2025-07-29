@@ -136,173 +136,165 @@
             text-decoration: underline;
         }
 
-        /* Code styling */
-        code {
-            background: #f1f5f9;
-            color: #e53e3e;
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Consolas', monospace;
-            font-size: 14px;
-            font-weight: 600;
-        }
-
-        /* VS Code Dark Theme Terminal */
+        /* Realistic Terminal Screenshot Styling */
         .terminal {
-            background: #1e1e1e;
-            color: #cccccc;
-            border-radius: 6px;
+            background: #1d1f21;
+            color: #c5c8c6;
+            border-radius: 0;
             padding: 0;
             margin: 25px 0;
             overflow: hidden;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            box-shadow: 
+                0 0 0 1px #2f3129,
+                0 1px 0 0 #464940,
+                0 2px 0 0 #313431,
+                0 3px 0 0 #2c302d,
+                0 4px 0 0 #26292a,
+                0 5px 0 0 #202326,
+                0 6px 1px 0 rgba(16,16,16,0.4),
+                0 8px 5px 0 rgba(16,16,16,0.15),
+                0 12px 10px 0 rgba(16,16,16,0.15),
+                0 16px 20px 0 rgba(16,16,16,0.15);
             position: relative;
-            border: 1px solid #333333;
+            font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Consolas', 'Courier New', monospace;
+            border: 1px solid #1a1c1e;
         }
 
         .terminal-header {
-            background: #2d2d30;
-            padding: 8px 16px;
+            background: linear-gradient(to bottom, #504f4f 0%, #3c3c3c 50%, #2d2d2d 51%, #404040 100%);
+            padding: 8px 12px;
             display: flex;
             align-items: center;
             gap: 8px;
-            border-bottom: 1px solid #3e3e42;
-            font-size: 12px;
+            border-bottom: 1px solid #1e1e1e;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+            min-height: 28px;
         }
 
         .terminal-dot {
-            width: 12px;
-            height: 12px;
+            width: 13px;
+            height: 13px;
             border-radius: 50%;
-            margin-right: 4px;
+            border: 0.5px solid rgba(0,0,0,0.2);
+            position: relative;
+            box-shadow: 
+                inset 0 1px 0 rgba(255,255,255,0.2),
+                0 1px 1px rgba(0,0,0,0.3);
         }
 
-        .dot-red { background: #ff5f56; }
-        .dot-yellow { background: #ffbd2e; }
-        .dot-green { background: #27ca3f; }
+        .dot-red { 
+            background: linear-gradient(to bottom, #ff6159 0%, #ff3b30 50%, #ff2d20 51%, #ff453a 100%);
+        }
+
+        .dot-yellow { 
+            background: linear-gradient(to bottom, #ffbd2e 0%, #ff9500 50%, #ff8c00 51%, #ffa500 100%);
+        }
+
+        .dot-green { 
+            background: linear-gradient(to bottom, #28cd41 0%, #00c957 50%, #00b04f 51%, #32d74b 100%);
+        }
 
         .terminal-title {
-            color: #cccccc;
+            color: #c6c6c6;
             font-size: 13px;
             margin-left: 8px;
-            font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Consolas', monospace;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            font-weight: 500;
+            text-shadow: 0 1px 0 rgba(0,0,0,0.5);
         }
 
         .terminal-content {
-            padding: 16px 20px;
-            font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Consolas', monospace;
-            font-size: 14px;
-            line-height: 1.6;
-            background: #1e1e1e;
+            background: #1d1f21;
+            padding: 12px 16px 16px 16px;
+            font-family: 'SF Mono', 'Monaco', 'Menlo', 'Courier New', monospace;
+            font-size: 12px;
+            line-height: 1.4;
+            letter-spacing: 0;
+            white-space: pre;
+            overflow-x: auto;
         }
 
-        /* Git command syntax highlighting */
+        /* Realistic macOS Terminal Colors */
         .command-prompt {
-            color: #4ec9b0;
+            color: #718c00;
+            font-weight: normal;
+        }
+
+        .user-host {
+            color: #8959a8;
+            font-weight: normal;
+        }
+
+        .directory {
+            color: #3e999f;
             font-weight: normal;
         }
 
         .git-command {
-            color: #dcdcaa;
-            font-weight: 500;
+            color: #c5c8c6;
+            font-weight: normal;
         }
 
         .git-flag {
-            color: #9cdcfe;
+            color: #de935f;
+            font-weight: normal;
         }
 
         .git-string {
-            color: #ce9178;
-        }
-
-        .git-comment {
-            color: #6a9955;
-            font-style: italic;
+            color: #b5bd68;
+            font-weight: normal;
         }
 
         .git-output {
-            color: #d4d4d4;
+            color: #969896;
+            font-weight: normal;
         }
 
         .git-success {
-            color: #4ec9b0;
+            color: #718c00;
+            font-weight: normal;
         }
 
         .git-error {
-            color: #f44747;
+            color: #cc6666;
+            font-weight: normal;
         }
 
         .git-warning {
-            color: #ffcc02;
+            color: #f0c674;
+            font-weight: normal;
         }
 
         .git-branch {
-            color: #c586c0;
-            font-weight: 500;
+            color: #b294bb;
+            font-weight: normal;
         }
 
         .git-hash {
-            color: #ffd700;
-            font-weight: 500;
+            color: #f0c674;
+            font-weight: normal;
         }
 
         .git-file {
-            color: #9cdcfe;
+            color: #81a2be;
+            font-weight: normal;
         }
 
-        /* macOS Terminal Theme Alternative */
-        .terminal.macos {
-            background: #000000;
-            color: #ffffff;
-            border: 1px solid #555555;
-            border-radius: 8px;
+        .executable {
+            color: #c5c8c6;
+            font-weight: normal;
         }
 
-        .terminal.macos .terminal-header {
-            background: #e5e5e5;
-            color: #000000;
-            border-bottom: 1px solid #d0d0d0;
-            padding: 10px 16px;
-        }
-
-        .terminal.macos .terminal-title {
-            color: #000000;
-            font-weight: 500;
-        }
-
-        .terminal.macos .terminal-content {
-            background: #000000;
-            color: #ffffff;
-        }
-
-        .terminal.macos .command-prompt {
-            color: #00ff00;
-        }
-
-        .terminal.macos .git-command {
-            color: #ffffff;
-        }
-
-        .terminal.macos .git-flag {
-            color: #00bfff;
-        }
-
-        .terminal.macos .git-string {
-            color: #ffff00;
-        }
-
-        /* Ubuntu Terminal Theme Alternative */
+        /* Alternative: Ubuntu Terminal Theme */
         .terminal.ubuntu {
             background: #300a24;
             color: #ffffff;
-            border: 1px solid #5e2750;
-            border-radius: 6px;
+            border: 1px solid #2d0922;
         }
 
         .terminal.ubuntu .terminal-header {
-            background: #5e2750;
-            color: #ffffff;
-            border-bottom: 1px solid #8b4a7a;
+            background: linear-gradient(to bottom, #6b2c5c 0%, #5d2552 50%, #4f1e47 51%, #612b56 100%);
+            border-bottom: 1px solid #3d1631;
         }
 
         .terminal.ubuntu .terminal-title {
@@ -311,10 +303,19 @@
 
         .terminal.ubuntu .terminal-content {
             background: #300a24;
+            color: #ffffff;
         }
 
         .terminal.ubuntu .command-prompt {
             color: #8ae234;
+        }
+
+        .terminal.ubuntu .user-host {
+            color: #8ae234;
+        }
+
+        .terminal.ubuntu .directory {
+            color: #729fcf;
         }
 
         .terminal.ubuntu .git-command {
@@ -322,112 +323,129 @@
         }
 
         .terminal.ubuntu .git-flag {
-            color: #729fcf;
+            color: #ad7fa8;
         }
 
         .terminal.ubuntu .git-string {
             color: #fce94f;
         }
 
-        /* Improved syntax highlighting for different contexts */
-        .file-path {
-            color: #9cdcfe;
-            font-style: italic;
+        /* Copy button with realistic styling */
+        .copy-btn {
+            position: absolute;
+            top: 6px;
+            right: 8px;
+            background: linear-gradient(to bottom, #4a4a4a 0%, #3a3a3a 50%, #2d2d2d 51%, #383838 100%);
+            color: #d4d4d4;
+            border: 1px solid #2a2a2a;
+            padding: 4px 8px;
+            border-radius: 3px;
+            font-size: 11px;
+            cursor: pointer;
+            opacity: 0.8;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            text-shadow: 0 1px 0 rgba(0,0,0,0.5);
+            box-shadow: 
+                inset 0 1px 0 rgba(255,255,255,0.1),
+                0 1px 1px rgba(0,0,0,0.3);
         }
 
-        .line-number {
-            color: #858585;
-            user-select: none;
-            margin-right: 12px;
+        .copy-btn:hover {
+            opacity: 1;
+            background: linear-gradient(to bottom, #5a5a5a 0%, #4a4a4a 50%, #3d3d3d 51%, #484848 100%);
+        }
+
+        .copy-btn:active {
+            background: linear-gradient(to bottom, #2d2d2d 0%, #3a3a3a 50%, #4a4a4a 51%, #383838 100%);
+            box-shadow: 
+                inset 0 1px 2px rgba(0,0,0,0.3),
+                0 1px 0 rgba(255,255,255,0.1);
+        }
+
+        /* Windows Command Prompt Style Alternative */
+        .terminal.windows {
+            background: #000000;
+            color: #c0c0c0;
+            border: 2px outset #c0c0c0;
+            border-radius: 0;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+        }
+
+        .terminal.windows .terminal-header {
+            background: linear-gradient(to bottom, #0078d4 0%, #106ebe 100%);
+            color: #ffffff;
+            border-bottom: 1px solid #004578;
+            padding: 6px 8px;
+        }
+
+        .terminal.windows .terminal-title {
+            color: #ffffff;
+            font-family: 'Segoe UI', sans-serif;
             font-size: 12px;
         }
 
-        .directory {
-            color: #4ec9b0;
-            font-weight: 500;
+        .terminal.windows .terminal-content {
+            background: #000000;
+            color: #c0c0c0;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 12px;
         }
 
-        .executable {
-            color: #4ec9b0;
-            font-weight: bold;
+        .terminal.windows .command-prompt {
+            color: #c0c0c0;
         }
 
-        /* Terminal cursor animation */
-        .terminal-cursor {
-            display: inline-block;
-            width: 8px;
-            height: 16px;
-            background: #cccccc;
-            animation: blink 1s infinite;
-            margin-left: 2px;
-        }
-
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
-        }
-
-        /* Realistic IDE styling for code examples */
-        .ide-window {
+        /* iTerm2 Style Alternative */
+        .terminal.iterm {
             background: #1e1e1e;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-            margin: 25px 0;
+            color: #d4d4d4;
             border: 1px solid #333333;
+            border-radius: 6px;
         }
 
-        .ide-header {
+        .terminal.iterm .terminal-header {
             background: #2d2d30;
-            padding: 8px 16px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
             border-bottom: 1px solid #3e3e42;
+            padding: 8px 12px;
         }
 
-        .ide-tabs {
-            display: flex;
-            gap: 2px;
-        }
-
-        .ide-tab {
-            background: #2d2d30;
-            color: #cccccc;
-            padding: 6px 16px;
-            font-size: 13px;
-            border-radius: 4px 4px 0 0;
-            border: 1px solid #3e3e42;
-            border-bottom: none;
-            font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
-        }
-
-        .ide-tab.active {
+        .terminal.iterm .terminal-content {
             background: #1e1e1e;
-            border-color: #555555;
+            color: #d4d4d4;
+            font-family: 'SF Mono', 'Monaco', monospace;
         }
 
-        .ide-controls {
-            display: flex;
-            gap: 8px;
+        .terminal.iterm .command-prompt {
+            color: #4ec9b0;
         }
 
-        .ide-content {
-            background: #1e1e1e;
-            padding: 16px 0;
-            font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
-            font-size: 14px;
-            line-height: 1.5;
+        .terminal.iterm .git-command {
+            color: #dcdcaa;
         }
 
-        .ide-line {
-            display: flex;
-            padding: 0 20px;
-            margin: 0;
+        .terminal.iterm .git-flag {
+            color: #9cdcfe;
         }
 
-        .ide-line:hover {
-            background: #2a2a2a;
+        .terminal.iterm .git-string {
+            color: #ce9178;
+        }
+
+        /* Pixel-perfect font rendering */
+        .terminal-content {
+            -webkit-font-smoothing: subpixel-antialiased;
+            -moz-osx-font-smoothing: auto;
+            text-rendering: optimizeSpeed;
+        }
+
+        /* Realistic window shadow and depth */
+        .terminal {
+            transform: perspective(1000px) rotateX(1deg);
+        }
+
+        .terminal:hover {
+            transform: perspective(1000px) rotateX(0deg);
+            transition: transform 0.3s ease;
         }
 
         /* Diagrams */
@@ -944,14 +962,12 @@
                     <div class="terminal-dot dot-red"></div>
                     <div class="terminal-dot dot-yellow"></div>
                     <div class="terminal-dot dot-green"></div>
-                    <div class="terminal-title">Terminal</div>
+                    <div class="terminal-title">Terminal — -bash — 80×24</div>
                 </div>
-                <div class="terminal-content">
-<span class="command-prompt">user@macbook:</span><span class="directory">~</span><span class="command-prompt">$</span> <span class="git-command">git config</span> <span class="git-flag">--global</span> <span class="git-flag">user.name</span> <span class="git-string">"Your Full Name"</span>
-<span class="command-prompt">user@macbook:</span><span class="directory">~</span><span class="command-prompt">$</span> <span class="git-command">git config</span> <span class="git-flag">--global</span> <span class="git-flag">user.email</span> <span class="git-string">"your.email@example.com"</span>
-<span class="command-prompt">user@macbook:</span><span class="directory">~</span><span class="command-prompt">$</span> <span class="git-command">git config</span> <span class="git-flag">--global</span> <span class="git-flag">init.defaultBranch</span> <span class="git-string">main</span>
-<span class="command-prompt">user@macbook:</span><span class="directory">~</span><span class="command-prompt">$</span> <span class="git-command">git config</span> <span class="git-flag">--global</span> <span class="git-flag">core.editor</span> <span class="git-string">"code --wait"</span>
-                </div>
+                <div class="terminal-content"><span class="user-host">john@MacBook-Pro</span>:<span class="directory">~</span><span class="command-prompt">$</span> <span class="git-command">git config</span> <span class="git-flag">--global</span> <span class="git-flag">user.name</span> <span class="git-string">"Your Full Name"</span>
+<span class="user-host">john@MacBook-Pro</span>:<span class="directory">~</span><span class="command-prompt">$</span> <span class="git-command">git config</span> <span class="git-flag">--global</span> <span class="git-flag">user.email</span> <span class="git-string">"your.email@example.com"</span>
+<span class="user-host">john@MacBook-Pro</span>:<span class="directory">~</span><span class="command-prompt">$</span> <span class="git-command">git config</span> <span class="git-flag">--global</span> <span class="git-flag">init.defaultBranch</span> <span class="git-string">main</span>
+<span class="user-host">john@MacBook-Pro</span>:<span class="directory">~</span><span class="command-prompt">$</span> <span class="git-command">git config</span> <span class="git-flag">--global</span> <span class="git-flag">core.editor</span> <span class="git-string">"code --wait"</span></div>
                 <button class="copy-btn" onclick="copyCode(this)">Copy</button>
             </div>
 
@@ -965,17 +981,15 @@
                     <div class="terminal-dot dot-red"></div>
                     <div class="terminal-dot dot-yellow"></div>
                     <div class="terminal-dot dot-green"></div>
-                    <div class="terminal-title">Terminal</div>
+                    <div class="terminal-title">Terminal — -bash — 80×24</div>
                 </div>
-                <div class="terminal-content">
-<span class="command-prompt">user@macbook:</span><span class="directory">~</span><span class="command-prompt">$</span> <span class="git-command">git</span> <span class="git-flag">--version</span>
+                <div class="terminal-content"><span class="user-host">john@MacBook-Pro</span>:<span class="directory">~</span><span class="command-prompt">$</span> <span class="git-command">git</span> <span class="git-flag">--version</span>
 <span class="git-output">git version 2.39.0</span>
 
-<span class="command-prompt">user@macbook:</span><span class="directory">~</span><span class="command-prompt">$</span> <span class="git-command">git config</span> <span class="git-flag">--list</span> <span class="git-flag">--global</span>
+<span class="user-host">john@MacBook-Pro</span>:<span class="directory">~</span><span class="command-prompt">$</span> <span class="git-command">git config</span> <span class="git-flag">--list</span> <span class="git-flag">--global</span>
 <span class="git-output">user.name=Your Full Name</span>
 <span class="git-output">user.email=your.email@example.com</span>
-<span class="git-output">init.defaultbranch=main</span>
-                </div>
+<span class="git-output">init.defaultbranch=main</span></div>
                 <button class="copy-btn" onclick="copyCode(this)">Copy</button>
             </div>
 
@@ -987,20 +1001,18 @@
                     <div class="terminal-dot dot-red"></div>
                     <div class="terminal-dot dot-yellow"></div>
                     <div class="terminal-dot dot-green"></div>
-                    <div class="terminal-title">Terminal</div>
+                    <div class="terminal-title">Terminal — -bash — 80×24</div>
                 </div>
-                <div class="terminal-content">
-<span class="command-prompt">user@macbook:</span><span class="directory">~</span><span class="command-prompt">$</span> <span class="executable">mkdir</span> <span class="directory">my-project</span>
-<span class="command-prompt">user@macbook:</span><span class="directory">~</span><span class="command-prompt">$</span> <span class="executable">cd</span> <span class="directory">my-project</span>
-<span class="command-prompt">user@macbook:</span><span class="directory">~/my-project</span><span class="command-prompt">$</span> <span class="git-command">git init</span>
-<span class="git-success">Initialized empty Git repository in /Users/user/my-project/.git/</span>
+                <div class="terminal-content"><span class="user-host">john@MacBook-Pro</span>:<span class="directory">~</span><span class="command-prompt">$</span> <span class="executable">mkdir</span> <span class="directory">my-project</span>
+<span class="user-host">john@MacBook-Pro</span>:<span class="directory">~</span><span class="command-prompt">$</span> <span class="executable">cd</span> <span class="directory">my-project</span>
+<span class="user-host">john@MacBook-Pro</span>:<span class="directory">~/my-project</span><span class="command-prompt">$</span> <span class="git-command">git init</span>
+<span class="git-success">Initialized empty Git repository in /Users/john/my-project/.git/</span>
 
-<span class="command-prompt">user@macbook:</span><span class="directory">~/my-project</span><span class="command-prompt">$</span> <span class="executable">ls</span> <span class="git-flag">-la</span>
+<span class="user-host">john@MacBook-Pro</span>:<span class="directory">~/my-project</span><span class="command-prompt">$</span> <span class="executable">ls</span> <span class="git-flag">-la</span>
 <span class="git-output">total 0</span>
-<span class="git-output">drwxr-xr-x  3 user  staff   96 Jan 15 10:30 <span class="directory">.</span></span>
-<span class="git-output">drwxr-xr-x  5 user  staff  160 Jan 15 10:30 <span class="directory">..</span></span>
-<span class="git-output">drwxr-xr-x  9 user  staff  288 Jan 15 10:30 <span class="directory">.git</span></span>
-                </div>
+<span class="git-output">drwxr-xr-x  3 john  staff   96 Jan 15 10:30 </span><span class="directory">.</span>
+<span class="git-output">drwxr-xr-x  5 john  staff  160 Jan 15 10:30 </span><span class="directory">..</span>
+<span class="git-output">drwxr-xr-x  9 john  staff  288 Jan 15 10:30 </span><span class="directory">.git</span></div>
                 <button class="copy-btn" onclick="copyCode(this)">Copy</button>
             </div>
 
