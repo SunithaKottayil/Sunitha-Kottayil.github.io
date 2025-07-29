@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>TypeScript Masterclass: From Basics to Advanced</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f8fc;
+      color: #222;
+      margin: 0;
+      padding: 0 1.2em 3em 1.2em;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 900px;
+      margin: 2em auto;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 0 16px #a8bed8;
+      padding: 2.8em 3em;
+    }
+    h1, h2 {
+      color: #0277bd;
+      font-weight: 700;
+    }
+    h1 {
+      text-align: center;
+      font-size: 2.6em;
+      margin-bottom: 0.6em;
+    }
+    h2 {
+      margin-top: 2.2em;
+      border-bottom: 3px solid #4fc3f7;
+      padding-bottom: 0.4em;
+      font-size: 1.85em;
+    }
+    h3 {
+      margin-top: 1.5em;
+      color: #0288d1;
+    }
+    p, ul, ol {
+      margin-top: 1em;
+      margin-bottom: 1em;
+      font-size: 1.1em;
+      max-width: 850px;
+    }
+    ul, ol {
+      margin-left: 2.2em;
+    }
+    code {
+      background: #e1f5fe;
+      color: #01579b;
+      font-family: Consolas, monospace;
+      padding: 2px 7px;
+      border-radius: 5px;
+      font-size: 1em;
+    }
+    pre.cmd {
+      background: #bbdefb;
+      border-radius: 10px;
+      padding: 1.3em 1.6em;
+      font-family: Consolas, monospace;
+      font-size: 1em;
+      overflow-x: auto;
+      margin: 1.6em 0;
+      color: #01579b;
+      white-space: pre-wrap;
+      box-shadow: 0 3px 10px rgba(2,87,155,0.2);
+    }
+    .tip, .fnote {
+      background: #e1f5fe;
+      border-left: 6px solid #4fc3f7;
+      padding: 1.3em;
+      margin: 1.8em 0;
+      border-radius: 10px;
+      font-size: 1em;
+      color: #01579b;
+    }
+    .diagram {
+      text-align: center;
+      margin: 2.6em 0;
+    }
+    .diagram img {
+      max-width: 95%;
+      height: auto;
+      border-radius: 14px;
+      box-shadow: 0 5px 18px rgba(2,87,155,0.25);
+      background: #fff;
+      padding: 18px;
+    }
+    hr {
+      border: none;
+      border-top: 1.8px solid #81d4fa;
+      margin: 3.8em 0;
+    }
+    a {
+      color: #0277bd;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .quiz-block {
+      background: #e1f5fe;
+      border-left: 8px solid #4fc3f7;
+      padding: 1.5em 1.8em;
+      border-radius: 12px;
+      margin: 2.8em 0;
+      font-size: 1.15em;
+      color: #01579b;
+      max-width: 850px;
+    }
+    .quiz-block input[type="radio"] {
+      margin-right: 15px;
+      vertical-align: middle;
+      transform: scale(1.1);
+    }
+    .quiz-result {
+      font-weight: 700;
+      margin-top: 1.2em;
+      font-size: 1.15em;
+    }
+    iframe {
+      border: 1.8px solid #4fc3f7;
+      border-radius: 12px;
+      width: 100%;
+      min-height: 480px;
+      margin: 1.8em 0;
+      display: block;
+    }
+    button.check-btn {
+      background: #0277bd;
+      color: #fff;
+      border: none;
+      padding: 7.5px 26px;
+      font-size: 1.05em;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 12px;
+      transition: background 0.3s;
+    }
+    button.check-btn:hover {
+      background: #01579b;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🚀 TypeScript Masterclass: From Basics to Advanced</h1>
+    <p>Welcome to this friendly and clear TypeScript tutorial! Whether you're new to TypeScript or moving from JavaScript, this guide will help you master TypeScript's powerful features step-by-step with practical examples, diagrams, and quizzes.</p>
+
+    <hr />
+
+    <h2>1. What is TypeScript & Why Use It?</h2>
+    <p>TypeScript is a superset of JavaScript that adds <b>static types</b>—this means you can catch errors early and write more robust code. It compiles down to simple JavaScript that runs anywhere JavaScript runs.</p>
+    <p>Key benefits:</p>
+    <ul>
+      <li>Helps prevent many common bugs by typing variables and functions.</li>
+      <li>Improves IDE tooling: autocomplete, refactoring, and error detection.</li>
+      <li>Great for large projects and teams to maintain code quality.</li>
+      <li>Compatible with existing JavaScript libraries and frameworks.</li>
+    </ul>
+
+    <div class="diagram">
+      <img src="https://www.typescriptlang.org/assets/images/typescript-logo-256.png" alt="TypeScript Logo" width="140" />
+    </div>
+
+    <hr />
+
+    <h2>2. Setting Up TypeScript</h2>
+    <ol>
+      <li>Install <a href="https://nodejs.org" target="_blank" rel="noopener noreferrer">Node.js</a> (includes npm).</li>
+      <li>Open your command line and install TypeScript globally:
+        <pre class="cmd">npm install -g typescript</pre>
+      </li>
+      <li>Create a <code>tsconfig.json</code> to configure your project (optional but recommended):
+        <pre class="cmd">{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "strict": true
+  }
+}</pre>
+      </li>
+      <li>Compile your first file:
+        <pre class="cmd">tsc filename.ts</pre>
+      </li>
+    </ol>
+    <p>This generates plain JavaScript you can run in any JavaScript environment.</p>
+
+    <div class="tip">
+      Tip: Use <code>tsc --watch</code> to auto-compile on file changes during development.
+    </div>
+
+    <hr />
+
+    <h2>3. Basic Types</h2>
+    <p>TypeScript has several built-in types to declare your variables:</p>
+    <ul>
+      <li><code>string</code>: Text</li>
+      <li><code>number</code>: All numeric values</li>
+      <li><code>boolean</code>: <code>true</code> or <code>false</code></li>
+      <li><code>any</code>: Any kind of value (use sparingly)</li>
+      <li><code>unknown</code>: Like <code>any</code>, but safer</li>
+      <li><code>void</code>: For functions returning nothing</li>
+      <li><code>null</code> and <code>undefined</code></li>
+      <li><code>tuple</code>: Fixed-length arrays with typed elements</li>
+      <li><code>enum</code>: Named constants</li>
+    </ul>
+
+    <pre class="cmd">
+// Examples of type annotations
+let username: string = "Alice";
+let age: number = 28;
+let isActive: boolean = true;
+let data: any = "Surprise!";
+
+let tupleExample: [string, number];
+tupleExample = ["hello", 42];
+
+enum Color { Red, Green, Blue }
+let c: Color = Color.Green;
+
+console.log(username, age, isActive, tupleExample, c);
+    </pre>
+
+    <hr />
+
+    <h2>4. Functions in TypeScript</h2>
+    <p>Functions have typed parameters and return types:</p>
+    <pre class="cmd">
+// Function with typed parameters and return value
+function add(x: number, y: number): number {
+  return x + y;
+}
+
+console.log(add(5, 3)); // 8
+
+// Optional and default parameters
+function greet(name: string, msg: string = "Hello"): void {
+  console.log(`${msg}, ${name}!`);
+}
+
+greet("Alice");      // Hello, Alice!
+greet("Bob", "Hi");  // Hi, Bob
+    </pre>
+
+    <hr />
+
+    <h2>5. Interfaces & Types</h2>
+    <p>Define object shapes for better type safety:</p>
+    <pre class="cmd">
+// Interface example
+interface Person {
+  name: string;
+  age?: number;  // optional
+}
+
+function printPerson(p: Person) {
+  console.log(`Name: ${p.name}`);
+  if (p.age) console.log(`Age: ${p.age}`);
+}
+
+printPerson({ name: "Alice", age: 30 });
+printPerson({ name: "Bob" });
+    </pre>
+
+    <p>Type aliases provide similar functionality with some additional flexibility:</p>
+    <pre class="cmd">
+type Animal = {
+  species: string;
+  age: number;
+};
+
+const dog: Animal = { species: "Dog", age: 5 };
+console.log(dog);
+    </pre>
+
+    <hr />
+
+    <h2>6. Classes & Object-Oriented Programming</h2>
+    <p>TypeScript supports classes with strong typing, access modifiers, and more:</p>
+    <pre class="cmd">
+class Vehicle {
+  protected brand: string;
+
+  constructor(brand: string) {
+    this.brand = brand;
+  }
+
+  public honk(): void {
+    console.log(`${this.brand} goes beep beep!`);
+  }
+}
+
+class Car extends Vehicle {
+  private model: string;
+
+  constructor(brand: string, model: string) {
+    super(brand);
+    this.model = model;
+  }
+
+  public showModel(): void {
+    console.log(`Model: ${this.model}`);
+  }
+}
+
+const myCar = new Car("Toyota", "Corolla");
+myCar.honk();          // Toyota goes beep beep!
+myCar.showModel();     // Model: Corolla
+    </pre>
+
+    <hr />
+
+    <h2>7. Advanced Types</h2>
+    <ul>
+      <li>Union Types: variables that can hold multiple types.</li>
+      <li>Intersection Types: combine multiple types into one.</li>
+      <li>Type Guards: check types at runtime to narrow type.</li>
+      <li>Literal Types: restrict variable to exact values.</li>
+      <li>Mapped Types and Conditional Types (advanced utility types).</li>
+    </ul>
+    <pre class="cmd">
+// Union type example
+function printId(id: number | string) {
+  if (typeof id === "string") {
+    console.log(`ID (string): ${id.toUpperCase()}`);
+  } else {
+    console.log(`ID (number): ${id}`);
+  }
+}
+
+printId("abc123");
+printId(101);
+    </pre>
+
+    <hr />
+
+    <h2>8. Generics</h2>
+    <p>Write reusable and type-safe functions/classes:</p>
+    <pre class="cmd">
+function identity<T>(arg: T): T {
+  return arg;
+}
+
+let output1 = identity<string>("my String");
+let output2 = identity<number>(100);
+
+console.log(output1, output2);
+
+class Box<T> {
+  contents: T;
+  constructor(value: T) {
+    this.contents = value;
+  }
+}
+
+const box = new Box<number>(42);
+console.log(box.contents);
+    </pre>
+
+    <hr />
+
+    <h2>9. Modules & Namespaces</h2>
+    <p>Organize code into separate files and namespaces for modularity:</p>
+    <ul>
+      <li><code>export</code> and <code>import</code> to share code across files.</li>
+      <li>Namespaces group related code internally.</li>
+    </ul>
+
+    <pre class="cmd">
+// math.ts
+export function add(x: number, y: number): number {
+  return x + y;
+}
+
+// app.ts
+import { add } from './math';
+
+console.log(add(2, 3));
+    </pre>
+
+    <hr />
+
+    <h2>10. Async Programming (Promises & async/await)</h2>
+    <p>Handle asynchronous code gracefully with promises and async/await:</p>
+    <pre class="cmd">
+// Promise example
+function wait(ms: number): Promise<void> {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+wait(1000).then(() => console.log("Waited 1 second"));
+
+// Async/await example
+async function asyncCall() {
+  console.log("Start");
+  await wait(1500);
+  console.log("End");
+}
+
+asyncCall();
+    </pre>
+
+    <hr />
+
+    <h2>11. Exception Handling</h2>
+    <pre class="cmd">
+try {
+  throw new Error("Oops!");
+} catch (error) {
+  console.error("Caught error:", error.message);
+} finally {
+  console.log("Cleanup code always runs.");
+}
+    </pre>
+
+    <hr />
+
+    <h2>12. Decorators (Experimental)</h2>
+    <p>Decorators are special annotations for classes and methods (enable with compiler options):</p>
+    <pre class="cmd">
+// Simple class decorator example
+function sealed(constructor: Function) {
+  Object.seal(constructor);
+  Object.seal(constructor.prototype);
+}
+
+@sealed
+class Greeter {
+  greeting: string;
+  constructor(message: string) {
+    this.greeting = message;
+  }
+  greet() {
+    return "Hello, " + this.greeting;
+  }
+}
+    </pre>
+
+    <hr />
+
+    <h2>13. Best Practices & Tips</h2>
+    <ul>
+      <li>Always enable <code>strict</code> mode in <code>tsconfig.json</code> for better type safety.</li>
+      <li>Use interfaces for large or complex object shapes.</li>
+      <li>Prefer <code>const</code> and <code>let</code> over <code>var</code>.</li>
+      <li>Write small, reusable functions with clear types.</li>
+      <li>Use type aliases and utility types to reduce duplication.</li>
+      <li>Keep your code organized with modules and namespaces.</li>
+      <li>Practice with small projects and explore DefinitelyTyped for types of third-party libraries.</li>
+    </ul>
+
+    <hr />
+
+    <h2>Practice Quizzes</h2>
+
+    <div class="quiz-block" id="quiz1">
+      <b>Quiz 1: What does <code>let username: string = "Alice";</code> mean?</b><br />
+      <form>
+        <input type="radio" name="q1" value="1" id="q1a1"/><label for="q1a1"> Username is a variable of type string with initial value "Alice"</label><br />
+        <input type="radio" name="q1" value="0" id="q1a2"/><label for="q1a2"> Assigning number 1 to variable username</label><br />
+        <input type="radio" name="q1" value="0" id="q1a3"/><label for="q1a3"> A function declaration</label><br />
+        <button type="button" class="check-btn" onclick="checkQuiz('quiz1', 1)">Check Answer</button>
+      </form>
+      <div class="quiz-result" id="quiz1-result"></div>
+    </div>
+
+    <div class="quiz-block" id="quiz2">
+      <b>Quiz 2: Which of these is a correct TypeScript function definition?</b><br />
+      <form>
+        <input type="radio" name="q2" value="0" id="q2a1"/><label for="q2a1"> <code>function add(x, y): number {} </code></label><br />
+        <input type="radio" name="q2" value="1" id="q2a2"/><label for="q2a2"> <code>function add(x: number, y: number): number { return x + y; }</code></label><br />
+        <input type="radio" name="q2" value="0" id="q2a3"/><label for="q2a3"> <code>function add(x: number, y: number) -> number {}</code></label><br />
+        <button type="button" class="check-btn" onclick="checkQuiz('quiz2', 1)">Check Answer</button>
+      </form>
+      <div class="quiz-result" id="quiz2-result"></div>
+    </div>
+
+    <div class="quiz-block" id="quiz3">
+      <b>Quiz 3: What is the purpose of interfaces in TypeScript?</b><br />
+      <form>
+        <input type="radio" name="q3" value="1" id="q3a1"/><label for="q3a1"> Define a contract for object shapes and enforce type checking</label><br />
+        <input type="radio" name="q3" value="0" id="q3a2"/><label for="q3a2"> Hold values</label><br />
+        <input type="radio" name="q3" value="0" id="q3a3"/><label for="q3a3"> Replace classes</label><br />
+        <button type="button" class="check-btn" onclick="checkQuiz('quiz3', 1)">Check Answer</button>
+      </form>
+      <div class="quiz-result" id="quiz3-result"></div>
+    </div>
+
+    <div class="quiz-block" id="quiz4">
+      <b>Quiz 4: Which keyword is used to define a class in TypeScript?</b><br />
+      <form>
+        <input type="radio" name="q4" value="0" id="q4a1"/><label for="q4a1"> interface</label><br />
+        <input type="radio" name="q4" value="0" id="q4a2"/><label for="q4a2"> type</label><br />
+        <input type="radio" name="q4" value="1" id="q4a3"/><label for="q4a3"> class</label><br />
+        <button type="button" class="check-btn" onclick="checkQuiz('quiz4', 1)">Check Answer</button>
+      </form>
+      <div class="quiz-result" id="quiz4-result"></div>
+    </div>
+
+    <div class="quiz-block" id="quiz5">
+      <b>Quiz 5: How do you write an asynchronous function in TypeScript?</b><br />
+      <form>
+        <input type="radio" name="q5" value="0" id="q5a1"/><label for="q5a1"> function async() { }</label><br />
+        <input type="radio" name="q5" value="1" id="q5a2"/><label for="q5a2"> async function functionName() { }</label><br />
+        <input type="radio" name="q5" value="0" id="q5a3"/><label for="q5a3"> function async functionName() { }</label><br />
+        <button type="button" class="check-btn" onclick="checkQuiz('quiz5', 1)">Check Answer</button>
+      </form>
+      <div class="quiz-result" id="quiz5-result"></div>
+    </div>
+
+  </div>
+
+  <script>
+    function checkQuiz(quizId, correctValue) {
+      const quiz = document.getElementById(quizId);
+      const radios = quiz.getElementsByTagName('input');
+      const result = quiz.querySelector('.quiz-result');
+      for(let i=0; i < radios.length; i++) {
+        if(radios[i].checked) {
+          if(parseInt(radios[i].value) === correctValue) {
+            result.textContent = "✅ Correct!";
+          } else {
+            result.textContent = "❌ Try again!";
+          }
+          return;
+        }
+      }
+      result.textContent = "❗ Please select an answer!";
+    }
+  </script>
+</body>
+</html>
