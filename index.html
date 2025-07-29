@@ -455,24 +455,30 @@
             transform: translateY(-2px);
         }
 
-        /* Blog CTA Button */
+        /* Blog CTA Link */
         .blog-cta {
-            margin-top: var(--space-xl);
+            margin-top: var(--space-lg);
             display: flex;
             justify-content: center;
         }
 
-        .btn-blog {
-            background: linear-gradient(135deg, var(--accent-500) 0%, var(--accent-700) 100%);
-            color: white;
-            box-shadow: var(--shadow-lg);
-            border: none;
+        .blog-link {
+            color: var(--primary-600);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            transition: all var(--transition-normal);
+            padding: var(--space-sm) var(--space-md);
+            border-radius: var(--radius-md);
         }
 
-        .btn-blog:hover {
-            background: linear-gradient(135deg, var(--accent-600) 0%, var(--accent-800) 100%);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-xl);
+        .blog-link:hover {
+            color: var(--primary-700);
+            background: var(--primary-50);
+            transform: translateY(-1px);
         }
 
         /* Professional Enhancements */
@@ -1130,9 +1136,9 @@
                     </div>
                     
                     <div class="blog-cta">
-                        <a href="https://sunithakottayil.github.io/Sunitha-Kottayil.github.io/blog.html" class="btn btn-blog">
-                            <i class="fas fa-blog"></i>
-                            Read My Blog
+                        <a href="https://sunithakottayil.github.io/Sunitha-Kottayil.github.io/blog.html" class="blog-link">
+                            <i class="fas fa-graduation-cap"></i>
+                            Learn with me
                         </a>
                     </div>
                 </div>
