@@ -1,4 +1,2124 @@
-v<!DOCTYPE html>
+var memberStats = members.GroupBy(m => m.Type)
+            .Select(g => new { Type = g.Key, Count = g.Count() })
+            .ToList();
+        
+        Console.WriteLine("=== Library Report ===");
+        Console.WriteLine($"Total Books: {books.Count}");
+        Console.WriteLine($"Available Books: {availableBooks}");
+        Console.WriteLine($"Checked Out Books: {checkedOutBooks}");
+        Console.WriteLine($"Total Members: {members.Count}");
+        
+        Console.WriteLine("\nMember Distribution:");
+        foreach (var stat in memberStats)
+        {
+            Console.WriteLine($"  {stat.Type}: {stat.Count} members");
+        }
+        
+        Console.WriteLine("\nOverdue Books (checked out > 14 days):");
+        var overdueBooks = books.Where(b => b.Status == BookStatus.CheckedOut && 
+            b.CheckOutDate.HasValue && 
+            (DateTime.Now - b.CheckOutDate.Value).Days > 14).ToList();
+        
+        if (overdueBooks.Any())
+        {
+            foreach (var book in overdueBooks)
+            {
+                int daysOverdue = (DateTime.Now - book.CheckOutDate.Value).Days;
+                Console.WriteLine($"  {book.Title} - {daysOverdue} days overdue (Member: {book.CheckedOutBy})");
+            }
+        }
+        else
+        {
+            Console.WriteLine("  No overdue books");
+        }
+    }
+    
+    public void SaveData()
+    {
+        try
+        {
+            using (StreamWriter writer = new StreamWriter(dataFile))
+            {
+                writer.WriteLine("=== LIBRARY DATA ===");
+                writer.WriteLine($"Report Generated: {DateTime.Now:yyyy-MM-dd HH:mm:ss}");
+                writer.WriteLine();
+                
+                writer.WriteLine("BOOKS:");
+                foreach (var book in books)
+                {
+                    writer.WriteLine($"{book.Id}|{book.Title}|{book.Author}|{book.ISBN}|{book.Status}|{book.CheckedOutBy ?? ""}|{book.CheckOutDate?.ToString("yyyy-MM-dd") ?? ""}");
+                }
+                
+                writer.WriteLine();
+                writer.WriteLine("MEMBERS:");
+                foreach (var member in members)
+                {
+                    writer.WriteLine($"{member.MemberId}|{member.Name}|{member.Email}|{member.Type}|{member.JoinDate:yyyy-MM-dd}|{string.Join(",", member.CheckedOutBooks)}");
+                }
+            }
+            Console.WriteLine($"Data saved to {dataFile}");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error saving data: {ex.Message}");
+        }
+    }
+    
+    public void LoadData()
+    {
+        try
+        {
+            if (!File.Exists(dataFile))
+            {
+                Console.WriteLine("No saved data found. Using sample data.");
+                return;
+            }
+            
+            string[] lines = File.ReadAllLines(dataFile);
+            books.Clear();
+            members.Clear();
+            
+            bool readingBooks = false;
+            bool readingMembers = false;
+            
+            foreach (string line in lines)
+            {
+                if (line == "BOOKS:")
+                {
+                    readingBooks = true;
+                    readingMembers = false;
+                    continue;
+                }
+                else if (line == "MEMBERS:")
+                {
+                    readingBooks = false;
+                    readingMembers = true;
+                    continue;
+                }
+                else if (string.IsNullOrWhiteSpace(line) || line.StartsWith("="))
+                {
+                    continue;
+                }
+                
+                if (readingBooks)
+                {
+                    string[] parts = line.Split('|');
+                    if (parts.Length >= 4)
+                    {
+                        Book book = new Book(parts[0], parts[1], parts[2], parts[3]);
+                        if (parts.Length > 4 && Enum.TryParse<BookStatus>(parts[4], out BookStatus status))
+                        {
+                            book.Status = status;
+                            if (parts.Length > 5 && !string.IsNullOrEmpty(parts[5]))
+                            {
+                                book.CheckOut(parts[5]);
+                            }
+                        }
+                        books.Add(book);
+                    }
+                }
+                else if (readingMembers)
+                {
+                    string[] parts = line.Split('|');
+                    if (parts.Length >= 4)
+                    {
+                        if (Enum.TryParse<MemberType>(parts[3], out MemberType type))
+                        {
+                            LibraryMember member = new LibraryMember(parts[0], parts[1], parts[2], type);
+                            if (parts.Length > 5 && !string.IsNullOrEmpty(parts[5]))
+                            {
+                                string[] checkedOutBooks = parts[5].Split(',', StringSplitOptions.RemoveEmptyEntries);
+                                member.CheckedOutBooks.AddRange(checkedOutBooks);
+                            }
+                            members.Add(member);
+                        }
+                    }
+                }
+            }
+            Console.WriteLine("Data loaded successfully");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error loading data: {ex.Message}");
+            InitializeSampleData();
+        }
+    }
+}
+
+class LibraryManagementProgram
+{
+    static void Main()
+    {
+        LibrarySystem library = new LibrarySystem();
+        library.LoadData();
+        
+        Console.WriteLine("Welcome to the Library Management System!");
+        
+        while (true)
+        {
+            try
+            {
+                DisplayMenu();
+                string choice = Console.ReadLine();
+                
+                switch (choice)
+                {
+                    case "1":
+                        library.DisplayAllBooks();
+                        break;
+                    case "2":
+                        SearchBooksMenu(library);
+                        break;
+                    case "3":
+                        CheckOutBookMenu(library);
+                        break;
+                    case "4":
+                        CheckInBookMenu(library);
+                        break;
+                    case "5":
+                        AddBookMenu(library);
+                        break;
+                    case "6":
+                        library.DisplayAllMembers();
+                        break;
+                    case "7":
+                        AddMemberMenu(library);
+                        break;
+                    case "8":
+                        library.GenerateReport();
+                        break;
+                    case "9":
+                        library.SaveData();
+                        break;
+                    case "0":
+                        library.SaveData();
+                        Console.WriteLine("Thank you for using the Library Management System!");
+                        return;
+                    default:
+                        Console.WriteLine("Invalid choice. Please try again.");
+                        break;
+                }
+                
+                Console.WriteLine("\nPress any key to continue...");
+                Console.ReadKey();
+                Console.Clear();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
+            }
+        }
+    }
+    
+    static void DisplayMenu()
+    {
+        Console.WriteLine("\n=== Library Management System ===");
+        Console.WriteLine("1. Display All Books");
+        Console.WriteLine("2. Search Books");
+        Console.WriteLine("3. Check Out Book");
+        Console.WriteLine("4. Check In Book");
+        Console.WriteLine("5. Add New Book");
+        Console.WriteLine("6. Display All Members");
+        Console.WriteLine("7. Add New Member");
+        Console.WriteLine("8. Generate Report");
+        Console.WriteLine("9. Save Data");
+        Console.WriteLine("0. Exit");
+        Console.Write("Enter your choice: ");
+    }
+    
+    static void SearchBooksMenu(LibrarySystem library)
+    {
+        Console.Write("Enter search term (title, author, or ISBN): ");
+        string searchTerm = Console.ReadLine();
+        library.SearchBooks(searchTerm);
+    }
+    
+    static void CheckOutBookMenu(LibrarySystem library)
+    {
+        Console.Write("Enter Book ID: ");
+        string bookId = Console.ReadLine();
+        Console.Write("Enter Member ID: ");
+        string memberId = Console.ReadLine();
+        library.CheckOutBook(bookId, memberId);
+    }
+    
+    static void CheckInBookMenu(LibrarySystem library)
+    {
+        Console.Write("Enter Book ID: ");
+        string bookId = Console.ReadLine();
+        library.CheckInBook(bookId);
+    }
+    
+    static void AddBookMenu(LibrarySystem library)
+    {
+        Console.Write("Enter book title: ");
+        string title = Console.ReadLine();
+        Console.Write("Enter author: ");
+        string author = Console.ReadLine();
+        Console.Write("Enter ISBN: ");
+        string isbn = Console.ReadLine();
+        library.AddBook(title, author, isbn);
+    }
+    
+    static void AddMemberMenu(LibrarySystem library)
+    {
+        Console.Write("Enter member name: ");
+        string name = Console.ReadLine();
+        Console.Write("Enter email: ");
+        string email = Console.ReadLine();
+        Console.WriteLine("Select member type:");
+        Console.WriteLine("1. Student");
+        Console.WriteLine("2. Faculty");
+        Console.WriteLine("3. Public");
+        Console.Write("Enter choice (1-3): ");
+        
+        if (int.TryParse(Console.ReadLine(), out int typeChoice))
+        {
+            MemberType type = typeChoice switch
+            {
+                1 => MemberType.Student,
+                2 => MemberType.Faculty,
+                3 => MemberType.Public,
+                _ => MemberType.Public
+            };
+            library.AddMember(name, email, type);
+        }
+        else
+        {
+            Console.WriteLine("Invalid choice. Member type set to Public.");
+            library.AddMember(name, email, MemberType.Public);
+        }
+    }
+}</div>
+<parameter name="old_str">            .ToList    <h2>15. Practical Example - Complete Project</h2>
+
+    <p>Let's combine everything we've learned to build a comprehensive Library Management System:</p>
+
+    <div class="code-block">using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.IO;
+
+// Enums
+enum BookStatus
+{
+    Available,
+    CheckedOut,
+    Reserved,
+    Maintenance
+}
+
+enum MemberType
+{
+    Student,
+    Faculty,
+    Public
+}
+
+// Base classes and interfaces
+interface IBorrowable
+{
+    bool CanBorrow { get; }
+    void CheckOut(string memberId);
+    void CheckIn();
+}
+
+abstract class LibraryItem
+{
+    public string Id { get; protected set; }
+    public string Title { get; set; }
+    public DateTime DateAdded { get; protected set; }
+    
+    protected LibraryItem(string id, string title)
+    {
+        Id = id;
+        Title = title;
+        DateAdded = DateTime.Now;
+    }
+    
+    public abstract void DisplayInfo();
+}
+
+// Concrete classes
+class Book : LibraryItem, IBorrowable
+{
+    public string Author { get; set; }
+    public string ISBN { get; set; }
+    public BookStatus Status { get; set; }
+    public string CheckedOutBy { get; private set; }
+    public DateTime? CheckOutDate { get; private set; }
+    
+    public bool CanBorrow => Status == BookStatus.Available;
+    
+    public Book(string id, string title, string author, string isbn) 
+        : base(id, title)
+    {
+        Author = author;
+        ISBN = isbn;
+        Status = BookStatus.Available;
+    }
+    
+    public void CheckOut(string memberId)
+    {
+        if (!CanBorrow)
+        {
+            throw new InvalidOperationException($"Book {Title} is not available for checkout");
+        }
+        
+        Status = BookStatus.CheckedOut;
+        CheckedOutBy = memberId;
+        CheckOutDate = DateTime.Now;
+        Console.WriteLine($"Book '{Title}' checked out to member {memberId}");
+    }
+    
+    public void CheckIn()
+    {
+        Status = BookStatus.Available;
+        CheckedOutBy = null;
+        CheckOutDate = null;
+        Console.WriteLine($"Book '{Title}' checked in successfully");
+    }
+    
+    public override void DisplayInfo()
+    {
+        Console.WriteLine($"Book ID: {Id}");
+        Console.WriteLine($"Title: {Title}");
+        Console.WriteLine($"Author: {Author}");
+        Console.WriteLine($"ISBN: {ISBN}");
+        Console.WriteLine($"Status: {Status}");
+        if (CheckedOutBy != null)
+        {
+            Console.WriteLine($"Checked out by: {CheckedOutBy} on {CheckOutDate:yyyy-MM-dd}");
+        }
+    }
+}
+
+class LibraryMember
+{
+    public string MemberId { get; set; }
+    public string Name { get; set; }
+    public string Email { get; set; }
+    public MemberType Type { get; set; }
+    public DateTime JoinDate { get; set; }
+    public List<string> CheckedOutBooks { get; private set; }
+    
+    public int MaxBooksAllowed
+    {
+        get
+        {
+            return Type switch
+            {
+                MemberType.Student => 5,
+                MemberType.Faculty => 10,
+                MemberType.Public => 3,
+                _ => 3
+            };
+        }
+    }
+    
+    public LibraryMember(string memberId, string name, string email, MemberType type)
+    {
+        MemberId = memberId;
+        Name = name;
+        Email = email;
+        Type = type;
+        JoinDate = DateTime.Now;
+        CheckedOutBooks = new List<string>();
+    }
+    
+    public bool CanBorrowMore()
+    {
+        return CheckedOutBooks.Count < MaxBooksAllowed;
+    }
+    
+    public void DisplayInfo()
+    {
+        Console.WriteLine($"Member ID: {MemberId}");
+        Console.WriteLine($"Name: {Name}");
+        Console.WriteLine($"Email: {Email}");
+        Console.WriteLine($"Type: {Type}");
+        Console.WriteLine($"Join Date: {JoinDate:yyyy-MM-dd}");
+        Console.WriteLine($"Books checked out: {CheckedOutBooks.Count}/{MaxBooksAllowed}");
+    }
+}
+
+class LibrarySystem
+{
+    private List<Book> books;
+    private List<LibraryMember> members;
+    private string dataFile;
+    
+    public LibrarySystem()
+    {
+        books = new List<Book>();
+        members = new List<LibraryMember>();
+        dataFile = "library_data.txt";
+        InitializeSampleData();
+    }
+    
+    private void InitializeSampleData()
+    {
+        // Sample books
+        books.AddRange(new[]
+        {
+            new Book("B001", "The Great Gatsby", "F. Scott Fitzgerald", "978-0-7432-7356-5"),
+            new Book("B002", "To Kill a Mockingbird", "Harper Lee", "978-0-06-112008-4"),
+            new Book("B003", "1984", "George Orwell", "978-0-452-28423-4"),
+            new Book("B004", "Pride and Prejudice", "Jane Austen", "978-0-14-143951-8"),
+            new Book("B005", "The Catcher in the Rye", "J.D. Salinger", "978-0-316-76948-0")
+        });
+        
+        // Sample members
+        members.AddRange(new[]
+        {
+            new LibraryMember("M001", "Alice Johnson", "alice@email.com", MemberType.Student),
+            new LibraryMember("M002", "Bob Smith", "bob@email.com", MemberType.Faculty),
+            new LibraryMember("M003", "Charlie Brown", "charlie@email.com", MemberType.Public)
+        });
+    }
+    
+    public void AddBook(string title, string author, string isbn)
+    {
+        string newId = $"B{books.Count + 1:D3}";
+        Book newBook = new Book(newId, title, author, isbn);
+        books.Add(newBook);
+        Console.WriteLine($"Book added successfully with ID: {newId}");
+    }
+    
+    public void AddMember(string name, string email, MemberType type)
+    {
+        string newId = $"M{members.Count + 1:D3}";
+        LibraryMember newMember = new LibraryMember(newId, name, email, type);
+        members.Add(newMember);
+        Console.WriteLine($"Member added successfully with ID: {newId}");
+    }
+    
+    public void CheckOutBook(string bookId, string memberId)
+    {
+        try
+        {
+            Book book = books.FirstOrDefault(b => b.Id == bookId);
+            if (book == null)
+            {
+                Console.WriteLine("Book not found!");
+                return;
+            }
+            
+            LibraryMember member = members.FirstOrDefault(m => m.MemberId == memberId);
+            if (member == null)
+            {
+                Console.WriteLine("Member not found!");
+                return;
+            }
+            
+            if (!member.CanBorrowMore())
+            {
+                Console.WriteLine($"Member has reached borrowing limit ({member.MaxBooksAllowed} books)");
+                return;
+            }
+            
+            book.CheckOut(memberId);
+            member.CheckedOutBooks.Add(bookId);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
+        }
+    }
+    
+    public void CheckInBook(string bookId)
+    {
+        try
+        {
+            Book book = books.FirstOrDefault(b => b.Id == bookId);
+            if (book == null)
+            {
+                Console.WriteLine("Book not found!");
+                return;
+            }
+            
+            if (book.Status != BookStatus.CheckedOut)
+            {
+                Console.WriteLine("Book is not checked out!");
+                return;
+            }
+            
+            string memberId = book.CheckedOutBy;
+            LibraryMember member = members.FirstOrDefault(m => m.MemberId == memberId);
+            
+            book.CheckIn();
+            member?.CheckedOutBooks.Remove(bookId);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
+        }
+    }
+    
+    public void SearchBooks(string searchTerm)
+    {
+        var foundBooks = books.Where(b => 
+            b.Title.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+            b.Author.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+            b.ISBN.Contains(searchTerm, StringComparison.OrdinalIgnoreCase))
+            .ToList();
+        
+        if (foundBooks.Any())
+        {
+            Console.WriteLine($"Found {foundBooks.Count} book(s):");
+            foreach (var book in foundBooks)
+            {
+                Console.WriteLine($"- {book.Title} by {book.Author} (ID: {book.Id}, Status: {book.Status})");
+            }
+        }
+        else
+        {
+            Console.WriteLine("No books found matching your search.");
+        }
+    }
+    
+    public void DisplayAllBooks()
+    {
+        Console.WriteLine($"Total Books: {books.Count}");
+        Console.WriteLine("=" * 50);
+        
+        foreach (var book in books.OrderBy(b => b.Title))
+        {
+            book.DisplayInfo();
+            Console.WriteLine("-" * 30);
+        }
+    }
+    
+    public void DisplayAllMembers()
+    {
+        Console.WriteLine($"Total Members: {members.Count}");
+        Console.WriteLine("=" * 50);
+        
+        foreach (var member in members.OrderBy(m => m.Name))
+        {
+            member.DisplayInfo();
+            Console.WriteLine("-" * 30);
+        }
+    }
+    
+    public void GenerateReport()
+    {
+        int availableBooks = books.Count(b => b.Status == BookStatus.Available);
+        int checkedOutBooks = books.Count(b => b.Status == BookStatus.CheckedOut);
+        
+        var memberStats = members.GroupBy(m => m.Type)
+            .Select(g => new { Type = g.Key, Count = g.Count() })
+            .ToList    <h3>Abstract Classes</h3>
+    <p>Abstract classes provide a base implementation that derived classes must extend:</p>
+
+    <div class="code-block">using System;
+
+// Abstract base class
+abstract class Shape
+{
+    public string Name { get; protected set; }
+    public string Color { get; set; }
+    
+    protected Shape(string name)
+    {
+        Name = name;
+        Color = "White";
+    }
+    
+    // Abstract methods must be implemented by derived classes
+    public abstract double CalculateArea();
+    public abstract double CalculatePerimeter();
+    
+    // Virtual methods can be overridden
+    public virtual void DisplayInfo()
+    {
+        Console.WriteLine($"Shape: {Name}");
+        Console.WriteLine($"Color: {Color}");
+        Console.WriteLine($"Area: {CalculateArea():F2}");
+        Console.WriteLine($"Perimeter: {CalculatePerimeter():F2}");
+    }
+    
+    // Concrete method available to all derived classes
+    public void Paint(string newColor)
+    {
+        Color = newColor;
+        Console.WriteLine($"{Name} painted {newColor}");
+    }
+}
+
+class Circle : Shape
+{
+    public double Radius { get; set; }
+    
+    public Circle(double radius) : base("Circle")
+    {
+        Radius = radius;
+    }
+    
+    public override double CalculateArea()
+    {
+        return Math.PI * Radius * Radius;
+    }
+    
+    public override double CalculatePerimeter()
+    {
+        return 2 * Math.PI * Radius;
+    }
+    
+    public override void DisplayInfo()
+    {
+        base.DisplayInfo();
+        Console.WriteLine($"Radius: {Radius}");
+    }
+}
+
+class Rectangle : Shape
+{
+    public double Length { get; set; }
+    public double Width { get; set; }
+    
+    public Rectangle(double length, double width) : base("Rectangle")
+    {
+        Length = length;
+        Width = width;
+    }
+    
+    public override double CalculateArea()
+    {
+        return Length * Width;
+    }
+    
+    public override double CalculatePerimeter()
+    {
+        return 2 * (Length + Width);
+    }
+    
+    public override void DisplayInfo()
+    {
+        base.DisplayInfo();
+        Console.WriteLine($"Length: {Length}, Width: {Width}");
+    }
+}
+
+class Triangle : Shape
+{
+    public double Base { get; set; }
+    public double Height { get; set; }
+    public double SideA { get; set; }
+    public double SideB { get; set; }
+    
+    public Triangle(double baseLength, double height, double sideA, double sideB) : base("Triangle")
+    {
+        Base = baseLength;
+        Height = height;
+        SideA = sideA;
+        SideB = sideB;
+    }
+    
+    public override double CalculateArea()
+    {
+        return 0.5 * Base * Height;
+    }
+    
+    public override double CalculatePerimeter()
+    {
+        return Base + SideA + SideB;
+    }
+    
+    public override void DisplayInfo()
+    {
+        base.DisplayInfo();
+        Console.WriteLine($"Base: {Base}, Height: {Height}");
+    }
+}
+
+class ShapeProgram
+{
+    static void Main()
+    {
+        // Cannot instantiate abstract class directly
+        // Shape shape = new Shape("test"); // This would cause compilation error
+        
+        // Create concrete shapes
+        Shape[] shapes = {
+            new Circle(5),
+            new Rectangle(4, 6),
+            new Triangle(3, 4, 5, 5)
+        };
+        
+        Console.WriteLine("=== Shape Information ===");
+        foreach (Shape shape in shapes)
+        {
+            shape.Paint("Blue");
+            shape.DisplayInfo();
+            Console.WriteLine($"Area: {shape.CalculateArea():F2} square units");
+            Console.WriteLine($"Perimeter: {shape.CalculatePerimeter():F2} units");
+            Console.WriteLine();
+        }
+        
+        // Calculate total area
+        double totalArea = 0;
+        foreach (Shape shape in shapes)
+        {
+            totalArea += shape.CalculateArea();
+        }
+        Console.WriteLine($"Total area of all shapes: {totalArea:F2} square units");
+    }
+}</div>
+<parameter name="old_str">    <h2>8. Practical Example - Simple Calculator</h2>    <h2>14. Interfaces and Abstract Classes</h2>
+
+    <h3>Interfaces</h3>
+    <p>Interfaces define contracts that classes must implement, enabling multiple inheritance of behavior:</p>
+
+    <div class="code-block">using System;
+using System.Collections.Generic;
+
+// Define interfaces
+interface IVehicle
+{
+    string Brand { get; set; }
+    int MaxSpeed { get; }
+    void Start();
+    void Stop();
+    void Accelerate(int speed);
+}
+
+interface IFlyable
+{
+    int MaxAltitude { get; }
+    void TakeOff();
+    void Land();
+}
+
+interface ISwimmable
+{
+    int MaxDepth { get; }
+    void Dive();
+    void Surface();
+}
+
+// Implement interfaces
+class Car : IVehicle
+{
+    public string Brand { get; set; }
+    public int MaxSpeed { get; private set; }
+    public int CurrentSpeed { get; private set; }
+    public bool IsRunning { get; private set; }
+    
+    public Car(string brand, int maxSpeed)
+    {
+        Brand = brand;
+        MaxSpeed = maxSpeed;
+        CurrentSpeed = 0;
+        IsRunning = false;
+    }
+    
+    public void Start()
+    {
+        IsRunning = true;
+        Console.WriteLine($"{Brand} car engine started");
+    }
+    
+    public void Stop()
+    {
+        IsRunning = false;
+        CurrentSpeed = 0;
+        Console.WriteLine($"{Brand} car stopped");
+    }
+    
+    public void Accelerate(int speed)
+    {
+        if (!IsRunning)
+        {
+            Console.WriteLine("Start the car first!");
+            return;
+        }
+        
+        CurrentSpeed = Math.Min(CurrentSpeed + speed, MaxSpeed);
+        Console.WriteLine($"{Brand} accelerated to {CurrentSpeed} km/h");
+    }
+}
+
+class Airplane : IVehicle, IFlyable
+{
+    public string Brand { get; set; }
+    public int MaxSpeed { get; private set; }
+    public int MaxAltitude { get; private set; }
+    public int CurrentAltitude { get; private set; }
+    public bool IsFlying { get; private set; }
+    
+    public Airplane(string brand, int maxSpeed, int maxAltitude)
+    {
+        Brand = brand;
+        MaxSpeed = maxSpeed;
+        MaxAltitude = maxAltitude;
+        CurrentAltitude = 0;
+        IsFlying = false;
+    }
+    
+    public void Start()
+    {
+        Console.WriteLine($"{Brand} airplane engines started");
+    }
+    
+    public void Stop()
+    {
+        if (IsFlying)
+        {
+            Console.WriteLine("Cannot stop while flying! Land first.");
+            return;
+        }
+        Console.WriteLine($"{Brand} airplane engines stopped");
+    }
+    
+    public void Accelerate(int speed)
+    {
+        Console.WriteLine($"{Brand} accelerated by {speed} km/h for takeoff");
+    }
+    
+    public void TakeOff()
+    {
+        IsFlying = true;
+        CurrentAltitude = 1000;
+        Console.WriteLine($"{Brand} took off, altitude: {CurrentAltitude}m");
+    }
+    
+    public void Land()
+    {
+        IsFlying = false;
+        CurrentAltitude = 0;
+        Console.WriteLine($"{Brand} landed successfully");
+    }
+}
+
+// Multiple interface implementation
+class AmphibiousVehicle : IVehicle, ISwimmable
+{
+    public string Brand { get; set; }
+    public int MaxSpeed { get; private set; }
+    public int MaxDepth { get; private set; }
+    public bool IsUnderwater { get; private set; }
+    
+    public AmphibiousVehicle(string brand, int maxSpeed, int maxDepth)
+    {
+        Brand = brand;
+        MaxSpeed = maxSpeed;
+        MaxDepth = maxDepth;
+        IsUnderwater = false;
+    }
+    
+    public void Start()
+    {
+        Console.WriteLine($"{Brand} amphibious vehicle started");
+    }
+    
+    public void Stop()
+    {
+        Console.WriteLine($"{Brand} amphibious vehicle stopped");
+    }
+    
+    public void Accelerate(int speed)
+    {
+        string mode = IsUnderwater ? "underwater" : "on surface";
+        Console.WriteLine($"{Brand} accelerated {mode} by {speed} km/h");
+    }
+    
+    public void Dive()
+    {
+        IsUnderwater = true;
+        Console.WriteLine($"{Brand} diving underwater");
+    }
+    
+    public void Surface()
+    {
+        IsUnderwater = false;
+        Console.WriteLine($"{Brand} surfaced");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        // Create vehicles
+        List<IVehicle> vehicles = new List<IVehicle>
+        {
+            new Car("Toyota", 180),
+            new Airplane("Boeing", 900, 12000),
+            new AmphibiousVehicle("SeaCar", 80, 50)
+        };
+        
+        // Use polymorphism with interfaces
+        Console.WriteLine("=== Vehicle Operations ===");
+        foreach (IVehicle vehicle in vehicles)
+        {
+            Console.WriteLine($"\nTesting {vehicle.Brand} (Max Speed: {vehicle.MaxSpeed} km/h)");
+            vehicle.Start();
+            vehicle.Accelerate(50);
+            vehicle.Stop();
+        }
+        
+        // Test specific capabilities
+        Console.WriteLine("\n=== Special Capabilities ===");
+        foreach (IVehicle vehicle in vehicles)
+        {
+            if (vehicle is IFlyable flyable)
+            {
+                Console.WriteLine($"{vehicle.Brand} can fly! Max altitude: {flyable.MaxAltitude}m");
+                flyable.TakeOff();
+                flyable.Land();
+            }
+            
+            if (vehicle is ISwimmable swimmable)
+            {
+                Console.WriteLine($"{vehicle.Brand} can swim! Max depth: {swimmable.MaxDepth}m");
+                swimmable.Dive();
+                swimmable.Surface();
+            }
+        }
+    }
+}</div>
+<parameter name="old_str">    <h2>8. Practical Example - Simple Calculator</h2>    <h2>13. DateTime and String Manipulation</h2>
+
+    <h3>Working with DateTime</h3>
+    <p>DateTime is essential for handling dates and times in applications:</p>
+
+    <div class="code-block">using System;
+using System.Globalization;
+
+class Program
+{
+    static void Main()
+    {
+        DateTimeExamples();
+        StringManipulationExamples();
+    }
+    
+    static void DateTimeExamples()
+    {
+        Console.WriteLine("=== DateTime Examples ===");
+        
+        // Current date and time
+        DateTime now = DateTime.Now;
+        DateTime utcNow = DateTime.UtcNow;
+        DateTime today = DateTime.Today;
+        
+        Console.WriteLine($"Current local time: {now}");
+        Console.WriteLine($"Current UTC time: {utcNow}");
+        Console.WriteLine($"Today's date: {today}");
+        
+        // Create specific dates
+        DateTime birthday = new DateTime(1990, 5, 15);
+        DateTime appointmentTime = new DateTime(2024, 12, 25, 14, 30, 0);
+        
+        Console.WriteLine($"Birthday: {birthday:yyyy-MM-dd}");
+        Console.WriteLine($"Appointment: {appointmentTime:yyyy-MM-dd HH:mm}");
+        
+        // Parse dates from strings
+        string dateString = "2024-03-15";
+        DateTime parsedDate = DateTime.Parse(dateString);
+        Console.WriteLine($"Parsed date: {parsedDate:dd/MM/yyyy}");
+        
+        // Safe parsing
+        string invalidDate = "invalid-date";
+        if (DateTime.TryParse(invalidDate, out DateTime result))
+        {
+            Console.WriteLine($"Parsed: {result}");
+        }
+        else
+        {
+            Console.WriteLine("Failed to parse invalid date");
+        }
+        
+        // Date calculations
+        DateTime nextWeek = now.AddDays(7);
+        DateTime nextMonth = now.AddMonths(1);
+        DateTime nextYear = now.AddYears(1);
+        
+        Console.WriteLine($"Next week: {nextWeek:yyyy-MM-dd}");
+        Console.WriteLine($"Next month: {nextMonth:yyyy-MM-dd}");
+        Console.WriteLine($"Next year: {nextYear:yyyy-MM-dd}");
+        
+        // Age calculation
+        int age = CalculateAge(birthday);
+        Console.WriteLine($"Age: {age} years");
+        
+        // Time differences
+        TimeSpan timeDifference = appointmentTime - now;
+        Console.WriteLine($"Days until appointment: {timeDifference.Days}");
+        
+        // Formatting dates
+        Console.WriteLine("\nDate Formatting:");
+        Console.WriteLine($"Short date: {now:d}");
+        Console.WriteLine($"Long date: {now:D}");
+        Console.WriteLine($"Short time: {now:t}");
+        Console.WriteLine($"Long time: {now:T}");
+        Console.WriteLine($"Custom: {now:yyyy-MM-dd HH:mm:ss}");
+        Console.WriteLine($"Month/Year: {now:MMMM yyyy}");
+    }
+    
+    static int CalculateAge(DateTime birthDate)
+    {
+        DateTime today = DateTime.Today;
+        int age = today.Year - birthDate.Year;
+        
+        // Check if birthday hasn't occurred this year yet
+        if (birthDate.Date > today.AddYears(-age))
+        {
+            age--;
+        }
+        
+        return age;
+    }
+    
+    static void StringManipulationExamples()
+    {
+        Console.WriteLine("\n=== String Manipulation Examples ===");
+        
+        string originalText = "  Hello, World! Welcome to C# Programming.  ";
+        Console.WriteLine($"Original: '{originalText}'");
+        
+        // Basic string operations
+        string trimmed = originalText.Trim();
+        string upperCase = originalText.ToUpper();
+        string lowerCase = originalText.ToLower();
+        int length = originalText.Length;
+        
+        Console.WriteLine($"Trimmed: '{trimmed}'");
+        Console.WriteLine($"Upper case: {upperCase}");
+        Console.WriteLine($"Lower case: {lowerCase}");
+        Console.WriteLine($"Length: {length}");
+        
+        // String searching
+        bool containsWorld = originalText.Contains("World");
+        bool startsWithHello = trimmed.StartsWith("Hello");
+        bool endsWithDot = trimmed.EndsWith(".");
+        int indexOfWelcome = originalText.IndexOf("Welcome");
+        
+        Console.WriteLine($"Contains 'World': {containsWorld}");
+        Console.WriteLine($"Starts with 'Hello': {startsWithHello}");
+        Console.WriteLine($"Ends with '.': {endsWithDot}");
+        Console.WriteLine($"Index of 'Welcome': {indexOfWelcome}");
+        
+        // String replacement and manipulation
+        string replaced = trimmed.Replace("World", "Universe");
+        string substring = trimmed.Substring(7, 5);  // Start at index 7, take 5 characters
+        
+        Console.WriteLine($"Replaced: {replaced}");
+        Console.WriteLine($"Substring (7, 5): '{substring}'");
+        
+        // String splitting and joining
+        string[] words = trimmed.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        Console.WriteLine($"Words count: {words.Length}");
+        Console.WriteLine("Words:");
+        for (int i = 0; i < words.Length; i++)
+        {
+            Console.WriteLine($"  {i + 1}. '{words[i]}'");
+        }
+        
+        string rejoined = string.Join(" | ", words);
+        Console.WriteLine($"Rejoined with ' | ': {rejoined}");
+        
+        // String building for performance
+        System.Text.StringBuilder sb = new System.Text.StringBuilder();
+        sb.AppendLine("Building a string efficiently:");
+        for (int i = 1; i <= 5; i++)
+        {
+            sb.AppendLine($"Line {i}");
+        }
+        string builtString = sb.ToString();
+        Console.WriteLine(builtString);
+        
+        // String formatting
+        string name = "Alice";
+        int score = 95;
+        double percentage = 0.95;
+        DateTime testDate = DateTime.Now;
+        
+        Console.WriteLine("String Formatting:");
+        Console.WriteLine($"Interpolation: {name} scored {score} points");
+        Console.WriteLine($"Currency: {score:C}");
+        Console.WriteLine($"Percentage: {percentage:P}");
+        Console.WriteLine($"Fixed decimal: {percentage:F3}");
+        Console.WriteLine($"Date: {testDate:yyyy-MM-dd}");
+        
+        // String comparison
+        string str1 = "Hello";
+        string str2 = "hello";
+        string str3 = "Hello";
+        
+        Console.WriteLine($"'{str1}' == '{str2}': {str1 == str2}");
+        Console.WriteLine($"'{str1}' == '{str3}': {str1 == str3}");
+        Console.WriteLine($"Case-insensitive comparison: {string.Equals(str1, str2, StringComparison.OrdinalIgnoreCase)}");
+    }
+}</div>
+<parameter name="old_str">    <h2>8. Practical Example - Simple Calculator</h2>        // 7. First, FirstOrDefault, Any, All
+        var topStudent = students.OrderByDescending(s => s.GPA).First();
+        Console.WriteLine($"\nTop Student: {topStudent}");
+        
+        var csStudent = students.FirstOrDefault(s => s.Major == "Chemistry");
+        if (csStudent != null)
+        {
+            Console.WriteLine($"Chemistry Student: {csStudent}");
+        }
+        else
+        {
+            Console.WriteLine("No Chemistry students found");
+        }
+        
+        bool hasHighPerformers = students.Any(s => s.GPA >= 3.8);
+        Console.WriteLine($"Has students with GPA >= 3.8: {hasHighPerformers}");
+        
+        bool allAdults = students.All(s => s.Age >= 18);
+        Console.WriteLine($"All students are adults (18+): {allAdults}");
+    }
+    
+    static void NumberLinqExamples()
+    {
+        Console.WriteLine("\n=== Number LINQ Examples ===");
+        
+        int[] numbers = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 25, 30};
+        
+        // Filter even numbers
+        var evenNumbers = numbers.Where(n => n % 2 == 0);
+        Console.WriteLine($"Even numbers: {string.Join(", ", evenNumbers)}");
+        
+        // Get squares of numbers
+        var squares = numbers.Select(n => n * n);
+        Console.WriteLine($"Squares: {string.Join(", ", squares)}");
+        
+        // Chain operations
+        var evenSquares = numbers
+            .Where(n => n % 2 == 0)
+            .Select(n => n * n)
+            .Where(square => square > 20);
+        Console.WriteLine($"Squares of even numbers > 20: {string.Join(", ", evenSquares)}");
+        
+        // Aggregate operations
+        int sum = numbers.Sum();
+        double average = numbers.Average();
+        int max = numbers.Max();
+        int min = numbers.Min();
+        
+        Console.WriteLine($"Sum: {sum}, Average: {average:F1}, Max: {max}, Min: {min}");
+    }
+}</div>
+<parameter name="old_str">        // 7. First, FirstOrDefault, Any, All    <h2>7. Arrays and Collections</h2>
+
+    <p>Arrays and collections allow you to store multiple values in a single variable. This is essential for working with lists of data.</p>
+
+    <h3>Arrays</h3>
+    <p>Arrays store multiple values of the same type in a fixed-size sequential collection:</p>
+
+    <div class="code-block">using System;
+
+class Program
+{
+    static void Main()
+    {
+        // Declare and initialize arrays
+        int[] numbers = {1, 2, 3, 4, 5};
+        string[] names = {"Alice", "Bob", "Charlie", "Diana"};
+        
+        // Access array elements using index (starts at 0)
+        Console.WriteLine($"First number: {numbers[0]}");
+        Console.WriteLine($"Last name: {names[names.Length - 1]}");
+        
+        // Loop through arrays
+        Console.WriteLine("\nAll numbers:");
+        for (int i = 0; i < numbers.Length; i++)
+        {
+            Console.WriteLine($"Index {i}: {numbers[i]}");
+        }
+        
+        Console.WriteLine("\nAll names:");
+        foreach (string name in names)
+        {
+            Console.WriteLine($"Hello, {name}!");
+        }
+        
+        // Modify array elements
+        numbers[0] = 10;
+        Console.WriteLine($"Modified first number: {numbers[0]}");
+    }
+}</div>
+
+    <h3>Lists (Dynamic Arrays)</h3>
+    <p>Lists are dynamic collections that can grow and shrink at runtime:</p>
+
+    <div class="code-block">using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main()
+    {
+        // Create a List
+        List<string> fruits = new List<string>();
+        
+        // Add items
+        fruits.Add("Apple");
+        fruits.Add("Banana");
+        fruits.Add("Orange");
+        
+        Console.WriteLine($"We have {fruits.Count} fruits");
+        
+        // Insert at specific position
+        fruits.Insert(1, "Mango");
+        
+        // Remove items
+        fruits.Remove("Banana");
+        
+        // Check if item exists
+        if (fruits.Contains("Apple"))
+        {
+            Console.WriteLine("We have apples!");
+        }
+        
+        // Loop through List
+        Console.WriteLine("\nOur fruits:");
+        foreach (string fruit in fruits)
+        {
+            Console.WriteLine($"- {fruit}");
+        }
+        
+        // Convert to array if needed
+        string[] fruitArray = fruits.ToArray();
+    }
+}</div>
+
+    <div class="note">
+      <div class="note-title">Array vs List</div>
+      <ul>
+        <li><strong>Arrays</strong> - Fixed size, faster access, less memory overhead</li>
+        <li><strong>Lists</strong> - Dynamic size, can add/remove items, more flexible</li>
+        <li>Use arrays when size is known and won't change</li>
+        <li>Use Lists when you need to add/remove items dynamically</li>
+      </ul>
+    </div>
+
+    <h2>8. Exception Handling</h2>
+
+    <p>Exception handling helps your program deal with errors gracefully instead of crashing. Use try-catch blocks to handle potential errors:</p>
+
+    <div class="code-block">using System;
+
+class Program
+{
+    static void Main()
+    {
+        // Basic exception handling
+        try
+        {
+            Console.Write("Enter a number: ");
+            string input = Console.ReadLine();
+            int number = int.Parse(input);
+            
+            Console.Write("Enter another number to divide by: ");
+            string input2 = Console.ReadLine();
+            int divisor = int.Parse(input2);
+            
+            int result = number / divisor;
+            Console.WriteLine($"Result: {number} / {divisor} = {result}");
+        }
+        catch (FormatException)
+        {
+            Console.WriteLine("Error: Please enter a valid number!");
+        }
+        catch (DivideByZeroException)
+        {
+            Console.WriteLine("Error: Cannot divide by zero!");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"An unexpected error occurred: {ex.Message}");
+        }
+        finally
+        {
+            Console.WriteLine("Program execution completed.");
+        }
+        
+        // Better approach with validation
+        ValidatedDivision();
+    }
+    
+    static void ValidatedDivision()
+    {
+        Console.WriteLine("\n--- Safe Division ---");
+        
+        try
+        {
+            int num1 = GetValidNumber("Enter first number: ");
+            int num2 = GetValidNumber("Enter second number: ");
+            
+            if (num2 == 0)
+            {
+                throw new ArgumentException("Division by zero is not allowed!");
+            }
+            
+            double result = (double)num1 / num2;
+            Console.WriteLine($"Result: {num1} / {num2} = {result:F2}");
+        }
+        catch (ArgumentException ex)
+        {
+            Console.WriteLine($"Input Error: {ex.Message}");
+        }
+    }
+    
+    static int GetValidNumber(string prompt)
+    {
+        while (true)
+        {
+            try
+            {
+                Console.Write(prompt);
+                return int.Parse(Console.ReadLine());
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Invalid input! Please enter a number.");
+            }
+        }
+    }
+}</div>
+
+    <div class="practice-section">
+      <div class="practice-title">Common Exception Types</div>
+      <ul>
+        <li><span class="inline-code">FormatException</span> - Invalid string format (e.g., parsing "abc" as number)</li>
+        <li><span class="inline-code">ArgumentException</span> - Invalid argument passed to method</li>
+        <li><span class="inline-code">IndexOutOfRangeException</span> - Array/list index out of bounds</li>
+        <li><span class="inline-code">NullReferenceException</span> - Trying to use null object</li>
+        <li><span class="inline-code">FileNotFoundException</span> - File doesn't exist</li>
+        <li><span class="inline-code">DivideByZeroException</span> - Division by zero</li>
+      </ul>
+    </div>
+
+    <h2>9. Advanced Object-Oriented Programming</h2>
+
+    <h3>Inheritance</h3>
+    <p>Inheritance allows a class to inherit properties and methods from another class, promoting code reuse:</p>
+
+    <div class="code-block">using System;
+
+// Base class (parent)
+class Animal
+{
+    public string Name { get; set; }
+    public int Age { get; set; }
+    
+    public Animal(string name, int age)
+    {
+        Name = name;
+        Age = age;
+    }
+    
+    public virtual void MakeSound()
+    {
+        Console.WriteLine($"{Name} makes a sound");
+    }
+    
+    public void Sleep()
+    {
+        Console.WriteLine($"{Name} is sleeping");
+    }
+}
+
+// Derived class (child)
+class Dog : Animal
+{
+    public string Breed { get; set; }
+    
+    public Dog(string name, int age, string breed) : base(name, age)
+    {
+        Breed = breed;
+    }
+    
+    // Override parent method
+    public override void MakeSound()
+    {
+        Console.WriteLine($"{Name} barks: Woof! Woof!");
+    }
+    
+    // Dog-specific method
+    public void Fetch()
+    {
+        Console.WriteLine($"{Name} is fetching the ball!");
+    }
+}
+
+class Cat : Animal
+{
+    public Cat(string name, int age) : base(name, age)
+    {
+    }
+    
+    public override void MakeSound()
+    {
+        Console.WriteLine($"{Name} meows: Meow! Meow!");
+    }
+    
+    public void Scratch()
+    {
+        Console.WriteLine($"{Name} is scratching the furniture!");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        // Create instances
+        Dog myDog = new Dog("Buddy", 3, "Golden Retriever");
+        Cat myCat = new Cat("Whiskers", 2);
+        
+        // Use inherited properties and methods
+        Console.WriteLine($"Dog: {myDog.Name}, Age: {myDog.Age}, Breed: {myDog.Breed}");
+        myDog.MakeSound();  // Calls overridden method
+        myDog.Fetch();      // Dog-specific method
+        myDog.Sleep();      // Inherited method
+        
+        Console.WriteLine();
+        
+        Console.WriteLine($"Cat: {myCat.Name}, Age: {myCat.Age}");
+        myCat.MakeSound();  // Calls overridden method
+        myCat.Scratch();    // Cat-specific method
+        myCat.Sleep();      // Inherited method
+        
+        // Polymorphism in action
+        Console.WriteLine("\n--- Polymorphism ---");
+        Animal[] animals = {myDog, myCat};
+        
+        foreach (Animal animal in animals)
+        {
+            animal.MakeSound();  // Calls appropriate overridden method
+        }
+    }
+}</div>
+
+    <h3>Encapsulation and Access Modifiers</h3>
+    <p>Encapsulation protects data by controlling access through properties and methods:</p>
+
+    <div class="code-block">using System;
+
+class BankAccount
+{
+    // Private fields (encapsulated data)
+    private string accountNumber;
+    private decimal balance;
+    private string ownerName;
+    
+    // Public properties with validation
+    public string AccountNumber 
+    { 
+        get { return accountNumber; }
+        private set { accountNumber = value; }  // Only class can set this
+    }
+    
+    public decimal Balance 
+    { 
+        get { return balance; }
+        private set 
+        { 
+            if (value < 0)
+                throw new ArgumentException("Balance cannot be negative!");
+            balance = value; 
+        }
+    }
+    
+    public string OwnerName
+    {
+        get { return ownerName; }
+        set 
+        { 
+            if (string.IsNullOrWhiteSpace(value))
+                throw new ArgumentException("Owner name cannot be empty!");
+            ownerName = value; 
+        }
+    }
+    
+    // Constructor
+    public BankAccount(string accountNumber, string ownerName, decimal initialBalance = 0)
+    {
+        AccountNumber = accountNumber;
+        OwnerName = ownerName;
+        Balance = initialBalance;
+    }
+    
+    // Public methods for controlled access
+    public void Deposit(decimal amount)
+    {
+        if (amount <= 0)
+        {
+            throw new ArgumentException("Deposit amount must be positive!");
+        }
+        
+        Balance += amount;
+        Console.WriteLine($"Deposited ${amount:F2}. New balance: ${Balance:F2}");
+    }
+    
+    public bool Withdraw(decimal amount)
+    {
+        if (amount <= 0)
+        {
+            Console.WriteLine("Withdrawal amount must be positive!");
+            return false;
+        }
+        
+        if (amount > Balance)
+        {
+            Console.WriteLine("Insufficient funds!");
+            return false;
+        }
+        
+        Balance -= amount;
+        Console.WriteLine($"Withdrew ${amount:F2}. New balance: ${Balance:F2}");
+        return true;
+    }
+    
+    public void DisplayAccountInfo()
+    {
+        Console.WriteLine($"Account: {AccountNumber}");
+        Console.WriteLine($"Owner: {OwnerName}");
+        Console.WriteLine($"Balance: ${Balance:F2}");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        try
+        {
+            BankAccount account = new BankAccount("ACC001", "John Doe", 1000.00m);
+            
+            account.DisplayAccountInfo();
+            Console.WriteLine();
+            
+            account.Deposit(500.00m);
+            account.Withdraw(200.00m);
+            account.Withdraw(2000.00m);  // Should fail
+            
+            Console.WriteLine();
+            account.DisplayAccountInfo();
+            
+            // This would cause compilation error (private setter):
+            // account.Balance = -100;  // Cannot access private setter
+        }
+        catch (ArgumentException ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
+        }
+    }
+}</div>
+
+    <div class="note">
+      <div class="note-title">Access Modifiers</div>
+      <ul>
+        <li><span class="inline-code">public</span> - Accessible from anywhere</li>
+        <li><span class="inline-code">private</span> - Only accessible within the same class</li>
+        <li><span class="inline-code">protected</span> - Accessible within class and derived classes</li>
+        <li><span class="inline-code">internal</span> - Accessible within the same assembly</li>
+      </ul>
+    </div>
+
+    <h2>10. Enums and Structs</h2>
+
+    <h3>Enums (Enumerations)</h3>
+    <p>Enums define a set of named constants, making code more readable and maintainable:</p>
+
+    <div class="code-block">using System;
+
+// Define enums
+enum DayOfWeek
+{
+    Monday,
+    Tuesday,
+    Wednesday,
+    Thursday,
+    Friday,
+    Saturday,
+    Sunday
+}
+
+enum OrderStatus
+{
+    Pending = 1,
+    Processing = 2,
+    Shipped = 3,
+    Delivered = 4,
+    Cancelled = 5
+}
+
+class Order
+{
+    public int OrderId { get; set; }
+    public string CustomerName { get; set; }
+    public OrderStatus Status { get; set; }
+    public DateTime OrderDate { get; set; }
+    
+    public Order(int orderId, string customerName)
+    {
+        OrderId = orderId;
+        CustomerName = customerName;
+        Status = OrderStatus.Pending;
+        OrderDate = DateTime.Now;
+    }
+    
+    public void UpdateStatus(OrderStatus newStatus)
+    {
+        Status = newStatus;
+        Console.WriteLine($"Order {OrderId} status updated to: {Status}");
+    }
+    
+    public void DisplayOrder()
+    {
+        Console.WriteLine($"Order ID: {OrderId}");
+        Console.WriteLine($"Customer: {CustomerName}");
+        Console.WriteLine($"Status: {Status} ({(int)Status})");
+        Console.WriteLine($"Order Date: {OrderDate:yyyy-MM-dd HH:mm}");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        // Using enums
+        DayOfWeek today = DayOfWeek.Friday;
+        Console.WriteLine($"Today is {today}");
+        
+        if (today == DayOfWeek.Friday || today == DayOfWeek.Saturday || today == DayOfWeek.Sunday)
+        {
+            Console.WriteLine("It's weekend time!");
+        }
+        
+        Console.WriteLine();
+        
+        // Order example
+        Order order = new Order(1001, "Alice Johnson");
+        order.DisplayOrder();
+        
+        Console.WriteLine();
+        order.UpdateStatus(OrderStatus.Processing);
+        order.UpdateStatus(OrderStatus.Shipped);
+        order.UpdateStatus(OrderStatus.Delivered);
+        
+        Console.WriteLine();
+        order.DisplayOrder();
+        
+        // Convert enum to string and back
+        string statusString = OrderStatus.Shipped.ToString();
+        OrderStatus parsedStatus = (OrderStatus)Enum.Parse(typeof(OrderStatus), statusString);
+        Console.WriteLine($"Parsed status: {parsedStatus}");
+    }
+}</div>
+
+    <h3>Structs</h3>
+    <p>Structs are value types that can contain data and methods, useful for small, simple data structures:</p>
+
+    <div class="code-block">using System;
+
+// Define a struct
+struct Point
+{
+    public int X { get; set; }
+    public int Y { get; set; }
+    
+    public Point(int x, int y)
+    {
+        X = x;
+        Y = y;
+    }
+    
+    public double DistanceFromOrigin()
+    {
+        return Math.Sqrt(X * X + Y * Y);
+    }
+    
+    public double DistanceTo(Point other)
+    {
+        int deltaX = X - other.X;
+        int deltaY = Y - other.Y;
+        return Math.Sqrt(deltaX * deltaX + deltaY * deltaY);
+    }
+    
+    public override string ToString()
+    {
+        return $"({X}, {Y})";
+    }
+}
+
+struct Rectangle
+{
+    public Point TopLeft { get; set; }
+    public Point BottomRight { get; set; }
+    
+    public Rectangle(Point topLeft, Point bottomRight)
+    {
+        TopLeft = topLeft;
+        BottomRight = bottomRight;
+    }
+    
+    public int Width => BottomRight.X - TopLeft.X;
+    public int Height => BottomRight.Y - TopLeft.Y;
+    public int Area => Width * Height;
+    
+    public bool Contains(Point point)
+    {
+        return point.X >= TopLeft.X && point.X <= BottomRight.X &&
+               point.Y >= TopLeft.Y && point.Y <= BottomRight.Y;
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        // Create points
+        Point p1 = new Point(3, 4);
+        Point p2 = new Point(6, 8);
+        Point origin = new Point(0, 0);
+        
+        Console.WriteLine($"Point 1: {p1}");
+        Console.WriteLine($"Point 2: {p2}");
+        Console.WriteLine($"Origin: {origin}");
+        
+        Console.WriteLine($"Distance from p1 to origin: {p1.DistanceFromOrigin():F2}");
+        Console.WriteLine($"Distance from p1 to p2: {p1.DistanceTo(p2):F2}");
+        
+        // Create rectangle
+        Rectangle rect = new Rectangle(new Point(0, 0), new Point(10, 5));
+        Console.WriteLine($"\nRectangle: {rect.TopLeft} to {rect.BottomRight}");
+        Console.WriteLine($"Width: {rect.Width}, Height: {rect.Height}");
+        Console.WriteLine($"Area: {rect.Area}");
+        
+        Point testPoint = new Point(5, 3);
+        Console.WriteLine($"Does rectangle contain {testPoint}? {rect.Contains(testPoint)}");
+    }
+}</div>
+
+    <div class="warning">
+      <div class="warning-title">Struct vs Class</div>
+      <ul>
+        <li><strong>Structs</strong> - Value types, stored on stack, copied by value</li>
+        <li><strong>Classes</strong> - Reference types, stored on heap, copied by reference</li>
+        <li>Use structs for small, simple data without inheritance needs</li>
+        <li>Use classes for complex objects that may need inheritance</li>
+      </ul>
+    </div>
+
+    <h2>11. File Input/Output</h2>
+
+    <p>Working with files is essential for saving and loading data. C# provides several ways to read from and write to files:</p>
+
+    <div class="code-block">using System;
+using System.IO;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main()
+    {
+        string fileName = "sample.txt";
+        string dataFile = "students.txt";
+        
+        // Basic file writing
+        WriteToFile(fileName);
+        
+        // Basic file reading
+        ReadFromFile(fileName);
+        
+        // Working with structured data
+        WriteStudentData(dataFile);
+        ReadStudentData(dataFile);
+        
+        // File operations
+        FileOperations();
+    }
+    
+    static void WriteToFile(string fileName)
+    {
+        try
+        {
+            // Write text to file (overwrites existing content)
+            string content = "Hello, File I/O!\nThis is line 2.\nThis is line 3.";
+            File.WriteAllText(fileName, content);
+            
+            // Append to file
+            string additionalContent = "\nThis line was appended.";
+            File.AppendAllText(fileName, additionalContent);
+            
+            Console.WriteLine($"Successfully wrote to {fileName}");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error writing to file: {ex.Message}");
+        }
+    }
+    
+    static void ReadFromFile(string fileName)
+    {
+        try
+        {
+            if (File.Exists(fileName))
+            {
+                // Read entire file as string
+                string content = File.ReadAllText(fileName);
+                Console.WriteLine($"\nFile contents:\n{content}");
+                
+                // Read file line by line
+                string[] lines = File.ReadAllLines(fileName);
+                Console.WriteLine($"\nFile has {lines.Length} lines:");
+                for (int i = 0; i < lines.Length; i++)
+                {
+                    Console.WriteLine($"Line {i + 1}: {lines[i]}");
+                }
+            }
+            else
+            {
+                Console.WriteLine($"File {fileName} does not exist.");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error reading file: {ex.Message}");
+        }
+    }
+    
+    static void WriteStudentData(string fileName)
+    {
+        try
+        {
+            List<string> students = new List<string>
+            {
+                "John,20,Computer Science,3.8",
+                "Sarah,19,Mathematics,3.9",
+                "Mike,21,Physics,3.6",
+                "Emma,20,Chemistry,3.7"
+            };
+            
+            // Write using StreamWriter for more control
+            using (StreamWriter writer = new StreamWriter(fileName))
+            {
+                writer.WriteLine("Name,Age,Major,GPA");  // Header
+                foreach (string student in students)
+                {
+                    writer.WriteLine(student);
+                }
+            }
+            
+            Console.WriteLine($"\nStudent data written to {fileName}");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error writing student data: {ex.Message}");
+        }
+    }
+    
+    static void ReadStudentData(string fileName)
+    {
+        try
+        {
+            if (!File.Exists(fileName))
+            {
+                Console.WriteLine($"File {fileName} does not exist.");
+                return;
+            }
+            
+            Console.WriteLine("\nReading student data:");
+            
+            using (StreamReader reader = new StreamReader(fileName))
+            {
+                string headerLine = reader.ReadLine();  // Skip header
+                Console.WriteLine($"Header: {headerLine}");
+                Console.WriteLine("Students:");
+                
+                string line;
+                int studentNumber = 1;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    string[] parts = line.Split(',');
+                    if (parts.Length >= 4)
+                    {
+                        string name = parts[0];
+                        int age = int.Parse(parts[1]);
+                        string major = parts[2];
+                        double gpa = double.Parse(parts[3]);
+                        
+                        Console.WriteLine($"{studentNumber}. {name} - Age: {age}, Major: {major}, GPA: {gpa:F1}");
+                        studentNumber++;
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error reading student data: {ex.Message}");
+        }
+    }
+    
+    static void FileOperations()
+    {
+        try
+        {
+            string fileName = "test.txt";
+            string backupName = "test_backup.txt";
+            
+            // Create a test file
+            File.WriteAllText(fileName, "This is a test file.");
+            
+            Console.WriteLine("\nFile Operations:");
+            
+            // Check if file exists
+            Console.WriteLine($"File exists: {File.Exists(fileName)}");
+            
+            // Get file info
+            FileInfo fileInfo = new FileInfo(fileName);
+            Console.WriteLine($"File size: {fileInfo.Length} bytes");
+            Console.WriteLine($"Created: {fileInfo.CreationTime}");
+            Console.WriteLine($"Last modified: {fileInfo.LastWriteTime}");
+            
+            // Copy file
+            File.Copy(fileName, backupName, true);  // true = overwrite if exists
+            Console.WriteLine($"File copied to {backupName}");
+            
+            // Move/rename file
+            string newName = "renamed_test.txt";
+            if (File.Exists(newName))
+                File.Delete(newName);
+            File.Move(fileName, newName);
+            Console.WriteLine($"File moved to {newName}");
+            
+            // Delete files
+            File.Delete(newName);
+            File.Delete(backupName);
+            Console.WriteLine("Test files deleted");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error in file operations: {ex.Message}");
+        }
+    }
+}</div>
+
+    <h2>12. LINQ Basics</h2>
+
+    <p>LINQ (Language Integrated Query) provides a powerful way to query and manipulate collections of data:</p>
+
+    <div class="code-block">using System;
+using System.Collections.Generic;
+using System.Linq;
+
+class Student
+{
+    public string Name { get; set; }
+    public int Age { get; set; }
+    public string Major { get; set; }
+    public double GPA { get; set; }
+    
+    public Student(string name, int age, string major, double gpa)
+    {
+        Name = name;
+        Age = age;
+        Major = major;
+        GPA = gpa;
+    }
+    
+    public override string ToString()
+    {
+        return $"{Name} (Age: {Age}, Major: {Major}, GPA: {GPA:F1})";
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        // Create sample data
+        List<Student> students = new List<Student>
+        {
+            new Student("Alice Johnson", 20, "Computer Science", 3.8),
+            new Student("Bob Smith", 19, "Mathematics", 3.9),
+            new Student("Charlie Brown", 21, "Computer Science", 3.6),
+            new Student("Diana Wilson", 20, "Physics", 3.7),
+            new Student("Eve Davis", 22, "Mathematics", 3.5),
+            new Student("Frank Miller", 19, "Computer Science", 3.9),
+            new Student("Grace Lee", 21, "Physics", 3.4)
+        };
+        
+        Console.WriteLine("All Students:");
+        foreach (var student in students)
+        {
+            Console.WriteLine(student);
+        }
+        
+        // LINQ Queries
+        LinqExamples(students);
+        
+        // Number examples
+        NumberLinqExamples();
+    }
+    
+    static void LinqExamples(List<Student> students)
+    {
+        Console.WriteLine("\n=== LINQ Examples ===");
+        
+        // 1. Where - Filter students
+        var computerScienceStudents = students.Where(s => s.Major == "Computer Science");
+        Console.WriteLine("\nComputer Science Students:");
+        foreach (var student in computerScienceStudents)
+        {
+            Console.WriteLine($"  {student}");
+        }
+        
+        // 2. OrderBy - Sort students
+        var studentsByGPA = students.OrderByDescending(s => s.GPA);
+        Console.WriteLine("\nStudents by GPA (highest first):");
+        foreach (var student in studentsByGPA)
+        {
+            Console.WriteLine($"  {student}");
+        }
+        
+        // 3. Select - Transform data
+        var studentNames = students.Select(s => s.Name);
+        Console.WriteLine($"\nStudent Names: {string.Join(", ", studentNames)}");
+        
+        // 4. Where + Select - Filter and transform
+        var highPerformers = students
+            .Where(s => s.GPA >= 3.7)
+            .Select(s => $"{s.Name} ({s.GPA:F1})")
+            .ToList();
+        Console.WriteLine($"\nHigh Performers (GPA >= 3.7): {string.Join(", ", highPerformers)}");
+        
+        // 5. GroupBy - Group students by major
+        var studentsByMajor = students.GroupBy(s => s.Major);
+        Console.WriteLine("\nStudents by Major:");
+        foreach (var group in studentsByMajor)
+        {
+            Console.WriteLine($"  {group.Key}:");
+            foreach (var student in group)
+            {
+                Console.WriteLine($"    - {student.Name} (GPA: {student.GPA:F1})");
+            }
+        }
+        
+        // 6. Aggregate functions
+        double averageGPA = students.Average(s => s.GPA);
+        double maxGPA = students.Max(s => s.GPA);
+        double minGPA = students.Min(s => s.GPA);
+        int totalStudents = students.Count();
+        
+        Console.WriteLine($"\nStatistics:");
+        Console.WriteLine($"  Total Students: {totalStudents}");
+        Console.WriteLine($"  Average GPA: {averageGPA:F2}");
+        Console.WriteLine($"  Highest GPA: {maxGPA:F1}");
+        Console.WriteLine($"  Lowest GPA: {minGPA:F1}");
+        
+        // 7. First, FirstOrDefault, Any, All
+        <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -254,12 +2374,20 @@ v<!DOCTYPE html>
           <p>Conditions, loops, and decision making</p>
         </div>
         <div class="concept-item">
-          <h4>Methods</h4>
-          <p>Writing reusable code with functions</p>
+          <h4>Methods & Arrays</h4>
+          <p>Functions and data collections</p>
         </div>
         <div class="concept-item">
           <h4>Object-Oriented Programming</h4>
-          <p>Classes, objects, and encapsulation</p>
+          <p>Classes, inheritance, polymorphism, encapsulation</p>
+        </div>
+        <div class="concept-item">
+          <h4>Exception Handling</h4>
+          <p>Error handling and debugging</p>
+        </div>
+        <div class="concept-item">
+          <h4>File I/O & LINQ</h4>
+          <p>Working with files and data queries</p>
         </div>
       </div>
     </div>
@@ -692,32 +2820,37 @@ class Program
 
     <div class="next-steps">
       <h3>Continue Your Learning Journey</h3>
-      <p>You've covered the fundamentals! Here's what to explore next:</p>
+      <p>You've mastered the fundamentals! Here's what to explore next:</p>
       <ul>
-        <li><strong>Arrays and Collections</strong> - Learn to work with lists and arrays of data</li>
-        <li><strong>Exception Handling</strong> - Make your programs robust with try-catch blocks</li>
-        <li><strong>File I/O</strong> - Read from and write to files</li>
-        <li><strong>LINQ</strong> - Query and manipulate data efficiently</li>
-        <li><strong>Advanced OOP</strong> - Inheritance, polymorphism, and interfaces</li>
+        <li><strong>Advanced OOP</strong> - Delegates, events, and design patterns</li>
+        <li><strong>Generics</strong> - Type-safe collections and methods</li>
+        <li><strong>Async/Await</strong> - Asynchronous programming for better performance</li>
+        <li><strong>Entity Framework</strong> - Database access and ORM</li>
+        <li><strong>ASP.NET Core</strong> - Web application development</li>
+        <li><strong>Unit Testing</strong> - Test-driven development with xUnit</li>
+        <li><strong>SOLID Principles</strong> - Clean code and architecture</li>
       </ul>
       
-      <p><strong>Recommended Resources:</strong></p>
+      <p><strong>Advanced Resources:</strong></p>
       <ul>
         <li><a href="https://learn.microsoft.com/en-us/dotnet/csharp/" target="_blank">Microsoft C# Documentation</a></li>
-        <li><a href="https://dotnetfiddle.net" target="_blank">DotNetFiddle</a> - Practice coding online</li>
-        <li><a href="https://docs.microsoft.com/en-us/dotnet/csharp/tour-of-csharp/" target="_blank">A Tour of C#</a></li>
+        <li><a href="https://learn.microsoft.com/en-us/dotnet/core/" target="_blank">.NET Documentation</a></li>
+        <li><a href="https://github.com/dotnet/core" target="_blank">.NET Core on GitHub</a></li>
+        <li><a href="https://docs.microsoft.com/en-us/aspnet/core/" target="_blank">ASP.NET Core Documentation</a></li>
       </ul>
     </div>
 
     <div class="practice-section">
-      <div class="practice-title">Practice Exercises</div>
-      <p>Try building these programs to reinforce your learning:</p>
+      <div class="practice-title">Advanced Practice Exercises</div>
+      <p>Challenge yourself with these comprehensive projects:</p>
       <ol>
-        <li><strong>Number Guessing Game</strong> - Computer picks a random number, user tries to guess it</li>
-        <li><strong>Grade Calculator</strong> - Input test scores and calculate letter grades</li>
-        <li><strong>Simple Banking System</strong> - Create accounts, deposit, withdraw money</li>
-        <li><strong>To-Do List</strong> - Add, remove, and display tasks</li>
-        <li><strong>Temperature Converter</strong> - Convert between Celsius, Fahrenheit, and Kelvin</li>
+        <li><strong>Task Management System</strong> - With user authentication, priorities, and deadlines</li>
+        <li><strong>Inventory Management</strong> - Track products, suppliers, and stock levels</li>
+        <li><strong>Student Grade Management</strong> - Calculate GPAs, generate transcripts</li>
+        <li><strong>Personal Finance Tracker</strong> - Income, expenses, budgets, and reports</li>
+        <li><strong>Hotel Reservation System</strong> - Room booking, customer management</li>
+        <li><strong>Employee Management System</strong> - HR functions, payroll calculations</li>
+        <li><strong>E-commerce Cart System</strong> - Products, shopping cart, order processing</li>
       </ol>
     </div>
 
