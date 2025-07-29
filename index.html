@@ -651,7 +651,7 @@
       outline: none;
     }
 
-    /* Contact Section (full from last answer) */
+    /* Contact Section */
     #contact {
       background-color: var(--gray-50);
       user-select: none;
@@ -986,22 +986,25 @@
   </style>
 </head>
 <body>
+
+  <!-- Scroll progress bar -->
   <div class="progress-bar" id="progress-bar" aria-hidden="true"></div>
 
+  <!-- Header / Navigation -->
   <header class="header" id="header">
     <nav class="nav container" role="navigation" aria-label="Primary Navigation">
       <a href="#home" class="logo" tabindex="0">Sunitha Kottayil</a>
 
-      <ul class="nav-links" id="nav-links">
-        <li><a href="#home" class="nav-link active" tabindex="0">Home</a></li>
-        <li><a href="#about" class="nav-link" tabindex="0">About</a></li>
-        <li><a href="#skills" class="nav-link" tabindex="0">Skills</a></li>
-        <li><a href="#projects" class="nav-link" tabindex="0">Projects</a></li>
-        <li><a href="#contact" class="nav-link" tabindex="0">Contact</a></li>
+      <ul class="nav-links" id="nav-links" role="menu">
+        <li><a href="#home" class="nav-link active" tabindex="0" role="menuitem">Home</a></li>
+        <li><a href="#about" class="nav-link" tabindex="0" role="menuitem">About</a></li>
+        <li><a href="#skills" class="nav-link" tabindex="0" role="menuitem">Skills</a></li>
+        <li><a href="#projects" class="nav-link" tabindex="0" role="menuitem">Projects</a></li>
+        <li><a href="#contact" class="nav-link" tabindex="0" role="menuitem">Contact</a></li>
       </ul>
 
       <div class="nav-actions">
-        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark theme" type="button" tabindex="0">
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark theme" type="button" tabindex="0" aria-pressed="false">
           <i class="fas fa-moon" id="theme-icon" aria-hidden="true"></i>
         </button>
         <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle mobile menu" aria-expanded="false" type="button" tabindex="0">
@@ -1011,7 +1014,9 @@
     </nav>
   </header>
 
+  <!-- Main Content -->
   <main id="main-content" tabindex="-1">
+
     <!-- Hero Section -->
     <section id="home" class="hero" aria-label="Introduction Section">
       <span class="hero-badge" aria-hidden="true"><i class="fas fa-rocket"></i> Code with Purpose: Delivering Practical Digital Solutions</span>
@@ -1024,8 +1029,8 @@
       </p>
 
       <nav class="hero-actions" aria-label="Primary call to actions">
-        <a href="#projects" class="btn" role="button"><i class="fas fa-rocket"></i> Explore My Projects</a>
-        <a href="#contact" class="btn btn-outline" role="button"><i class="fas fa-paper-plane"></i> Let's Connect</a>
+        <a href="#projects" class="btn" role="button" tabindex="0"><i class="fas fa-rocket"></i> Explore My Projects</a>
+        <a href="#contact" class="btn btn-outline" role="button" tabindex="0"><i class="fas fa-paper-plane"></i> Let's Connect</a>
       </nav>
 
       <div class="blog-cta" style="margin-top: var(--space-3xl);">
@@ -1204,8 +1209,395 @@
           </p>
         </header>
         <div class="contact-flex" style="display:flex; flex-wrap:wrap; gap:3rem; justify-content:center;">
-          <!-- Info Cards -->
+
+          <!-- Contact Info Cards -->
           <div class="info-cards" style="flex:1 1 320px; max-width: 380px;">
             <div class="info-card">
               <div class="item" tabindex="0">
-                <div class
+                <div class="icon-circle email-icon" aria-hidden="true">
+                  <i class="fas fa-envelope"></i>
+                </div>
+                <div>
+                  <div class="label">Email</div>
+                  <a href="mailto:vgsuniashok@gmail.com" class="info-text">vgsuniashok@gmail.com</a>
+                </div>
+              </div>
+              <div class="item" tabindex="0">
+                <div class="icon-circle location-icon" aria-hidden="true">
+                  <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div>
+                  <div class="label">Location</div>
+                  <div class="info-text">Aarhus, Denmark</div>
+                </div>
+              </div>
+
+              <div class="social-links" aria-label="Social networks">
+                <a href="https://github.com/SunithaKottayil" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                  <i class="fab fa-github" aria-hidden="true"></i> GitHub
+                </a>
+                <a href="https://www.linkedin.com/in/sunitha-kottayil" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                  <i class="fab fa-linkedin" aria-hidden="true"></i> LinkedIn
+                </a>
+                <a href="https://sunithakottayil.github.io/Sunitha-Kottayil.github.io/blog.html" target="_blank" rel="noopener noreferrer" aria-label="Blog">
+                  <i class="fas fa-blog" aria-hidden="true"></i> Blog
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact Form -->
+          <div class="contact-form-wrapper" style="flex:1 1 380px; max-width: 580px;">
+            <form id="contact-form" novalidate>
+              <h3>Send a Message</h3>
+
+              <label for="name">Full Name *</label>
+              <input type="text" id="name" name="name" required aria-describedby="name-error" aria-invalid="false" placeholder="John Doe" />
+              <span id="name-error" class="error-message" role="alert">Please enter your full name.</span>
+
+              <label for="email">Email Address *</label>
+              <input type="email" id="email" name="email" required aria-describedby="email-error" aria-invalid="false" placeholder="example@email.com" />
+              <span id="email-error" class="error-message" role="alert">Please enter a valid email address.</span>
+
+              <label for="subject">Subject</label>
+              <input type="text" id="subject" name="subject" placeholder="Subject (optional)" />
+
+              <label for="message">Message *</label>
+              <textarea id="message" name="message" required aria-describedby="message-error" aria-invalid="false" placeholder="Write your message here..."></textarea>
+              <span id="message-error" class="error-message" role="alert">Please enter your message.</span>
+
+              <button type="submit" aria-live="polite">
+                <i class="fas fa-paper-plane" aria-hidden="true" style="margin-right: 0.5rem;"></i> Send Message
+              </button>
+
+              <div id="form-feedback" role="alert" aria-live="polite"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div>
+        <div class="footer-logo">Sunitha Kottayil</div>
+        <p class="footer-tagline">Transforming data into insights, code into solutions</p>
+      </div>
+      <div class="footer-social" aria-label="Footer social links">
+        <a href="https://github.com/SunithaKottayil" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/sunitha-kottayil" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+          <i class="fab fa-linkedin" aria-hidden="true"></i>
+        </a>
+        <a href="https://sunithakottayil.github.io/Sunitha-Kottayil.github.io/blog.html" target="_blank" rel="noopener noreferrer" aria-label="Blog">
+          <i class="fas fa-blog" aria-hidden="true"></i>
+        </a>
+        <a href="mailto:vgsuniashok@gmail.com" aria-label="Email">
+          <i class="fas fa-envelope" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+    <div class="footer-bottom">&copy; 2025 Sunitha Kottayil. All rights reserved.</div>
+  </footer>
+
+  <!-- Scroll to Top Button -->
+  <button class="scroll-to-top" id="scroll-to-top" aria-label="Scroll to top" type="button">
+    <i class="fas fa-arrow-up" aria-hidden="true"></i>
+  </button>
+
+  <script>
+    (function () {
+      const body = document.body;
+      const themeToggleBtn = document.getElementById('theme-toggle');
+      const themeIcon = document.getElementById('theme-icon');
+      const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+      const navLinks = document.getElementById('nav-links');
+      const scrollToTopBtn = document.getElementById('scroll-to-top');
+      const navLinkElements = document.querySelectorAll('.nav-link');
+      const sections = document.querySelectorAll('section[id]');
+      const form = document.getElementById('contact-form');
+      const formFeedback = document.getElementById('form-feedback');
+
+      // Initialize theme
+      function setTheme(theme) {
+        if (theme === 'dark') {
+          body.setAttribute('data-theme', 'dark');
+          themeIcon.className = 'fas fa-sun';
+          themeToggleBtn.setAttribute('aria-pressed', 'true');
+          localStorage.setItem('theme', 'dark');
+        } else {
+          body.removeAttribute('data-theme');
+          themeIcon.className = 'fas fa-moon';
+          themeToggleBtn.setAttribute('aria-pressed', 'false');
+          localStorage.setItem('theme', 'light');
+        }
+      }
+      function toggleTheme() {
+        setTheme(body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+      }
+
+      // Mobile menu toggle
+      function toggleMobileMenu() {
+        const expanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
+        if (expanded) {
+          mobileMenuBtn.setAttribute('aria-expanded', 'false');
+          navLinks.classList.remove('mobile-active');
+        } else {
+          mobileMenuBtn.setAttribute('aria-expanded', 'true');
+          navLinks.classList.add('mobile-active');
+        }
+      }
+      function closeMobileMenu() {
+        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+        navLinks.classList.remove('mobile-active');
+      }
+
+      // Scroll progress
+      function updateProgressBar() {
+        const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrollProgress = (scrollTop / scrollHeight) * 100;
+        document.getElementById('progress-bar').style.width = scrollProgress + '%';
+      }
+
+      // Header scroll effect
+      function handleHeaderScroll() {
+        const header = document.getElementById('header');
+        if (window.scrollY > 100) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+      }
+
+      // Update active nav link on scroll
+      function updateActiveNavLink() {
+        let current = '';
+        const offsetMargin = 150;
+        sections.forEach((section) => {
+          if (window.scrollY >= section.offsetTop - offsetMargin) {
+            current = section.id;
+          }
+        });
+        navLinkElements.forEach((link) => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === '#' + current) {
+            link.classList.add('active');
+          }
+        });
+      }
+
+      // Scroll to top button toggle
+      function toggleScrollToTop() {
+        if (window.scrollY > 300) {
+          scrollToTopBtn.classList.add('visible');
+        } else {
+          scrollToTopBtn.classList.remove('visible');
+        }
+      }
+
+      // Smooth Scroll for anchor links
+      function initSmoothScrolling() {
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+          anchor.addEventListener('click', e => {
+            const href = anchor.getAttribute('href');
+            if (href.length > 1) {
+              e.preventDefault();
+              const target = document.querySelector(href);
+              if (target) {
+                target.setAttribute('tabindex', '-1');
+                target.focus({ preventScroll: true });
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }
+              closeMobileMenu();
+            }
+          });
+        });
+      }
+
+      // Scroll to top function
+      function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      // Debounce helper for scroll events with requestAnimationFrame
+      let frameId = null;
+      function debounceScroll(fn) {
+        if (frameId) {
+          cancelAnimationFrame(frameId);
+        }
+        frameId = requestAnimationFrame(fn);
+      }
+
+      // Form validation
+      function isValidEmail(email) {
+        return /^\S+@\S+\.\S+$/.test(email);
+      }
+      function clearErrors() {
+        ['name', 'email', 'message'].forEach(id => {
+          const input = document.getElementById(id);
+          const error = document.getElementById(id + '-error');
+          if (input) input.setAttribute('aria-invalid', 'false');
+          if (error) error.style.display = 'none';
+        });
+        formFeedback.style.display = 'none';
+        formFeedback.textContent = '';
+      }
+      function showError(id) {
+        const input = document.getElementById(id);
+        const error = document.getElementById(id + '-error');
+        if (input) input.setAttribute('aria-invalid', 'true');
+        if (error) error.style.display = 'block';
+      }
+      function validateForm() {
+        clearErrors();
+        let valid = true;
+        if (!form.name.value.trim()) {
+          showError('name');
+          valid = false;
+        }
+        if (!form.email.value.trim() || !isValidEmail(form.email.value.trim())) {
+          showError('email');
+          valid = false;
+        }
+        if (!form.message.value.trim()) {
+          showError('message');
+          valid = false;
+        }
+        return valid;
+      }
+      function handleFormSubmit(e) {
+        e.preventDefault();
+        if (!validateForm()) return;
+
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const originalHTML = submitBtn.innerHTML;
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+
+        // Simulate sending (replace with real backend here)
+        setTimeout(() => {
+          formFeedback.textContent = `Thank you, ${form.name.value.trim()}! Your message has been received. I will get back to you soon.`;
+          formFeedback.style.color = 'var(--success)';
+          formFeedback.style.display = 'block';
+          form.reset();
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalHTML;
+        }, 2000);
+      }
+
+      // Toggle mobile menu close on outside click
+      function outsideClickListener(e) {
+        if (
+          navLinks.classList.contains('mobile-active') &&
+          !navLinks.contains(e.target) &&
+          !mobileMenuBtn.contains(e.target)
+        ) {
+          closeMobileMenu();
+        }
+      }
+
+      // Close mobile menu on ESC key
+      function escKeyListener(e) {
+        if (e.key === 'Escape' && navLinks.classList.contains('mobile-active')) {
+          closeMobileMenu();
+          mobileMenuBtn.focus();
+        }
+      }
+
+      // Typing animation for hero name
+      function typeWriter(text, element, delay = 100, startDelay = 1000) {
+        element.textContent = '';
+        let i = 0;
+        function type() {
+          if (i < text.length) {
+            element.textContent += text.charAt(i);
+            i++;
+            setTimeout(type, delay);
+          } else {
+            element.setAttribute('aria-label', text);
+          }
+        }
+        setTimeout(type, startDelay);
+      }
+
+      // Intersection Observer to reveal sections/cards
+      function observeElementsForAnimation() {
+        const elements = document.querySelectorAll('.section-header, .project-card, .hero-badge, .hero-title, .hero-subtitle, .hero-description, .contact-flex');
+        const observer = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.style.opacity = 1;
+              entry.target.style.transform = 'none';
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.1 });
+
+        elements.forEach(el => {
+          el.style.opacity = 0;
+          el.style.transform = 'translateY(20px)';
+          observer.observe(el);
+        });
+      }
+
+      // Initialize everything on DOM ready
+      document.addEventListener('DOMContentLoaded', () => {
+        // Theme Toggle initial setup
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+          setTheme(savedTheme);
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          setTheme('dark');
+        } else {
+          setTheme('light');
+        }
+        themeToggleBtn.addEventListener('click', toggleTheme);
+
+        // Mobile menu button event
+        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+        document.addEventListener('click', outsideClickListener);
+        document.addEventListener('keydown', escKeyListener);
+
+        // Scroll events
+        window.addEventListener('scroll', () => debounceScroll(() => {
+          updateProgressBar();
+          handleHeaderScroll();
+          updateActiveNavLink();
+          toggleScrollToTop();
+        }));
+
+        // Scroll to top button click
+        scrollToTopBtn.addEventListener('click', scrollToTop);
+
+        // Smooth scroll
+        initSmoothScrolling();
+
+        // Form submission
+        if (form) {
+          form.addEventListener('submit', handleFormSubmit);
+        }
+
+        // Typing animation for hero name
+        const heroNameEl = document.getElementById('hero-name');
+        if (heroNameEl) {
+          typeWriter(heroNameEl.textContent, heroNameEl, 100, 1000);
+        }
+
+        // Initial UI update
+        updateProgressBar();
+        handleHeaderScroll();
+        updateActiveNavLink();
+        toggleScrollToTop();
+
+        // Section reveal animation
+        observeElementsForAnimation();
+      });
+    })();
+  </script>
+</body>
+</html>
