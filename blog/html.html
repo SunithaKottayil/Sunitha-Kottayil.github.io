@@ -1,431 +1,554 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>HTML Masterclass: From Beginner to Advanced</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f9faff;
-      color: #222;
-      margin: 0;
-      padding: 2em 1.5em 3em 1.5em;
-      line-height: 1.6;
-    }
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-      background: white;
-      padding: 2.8em 3em;
-      border-radius: 12px;
-      box-shadow: 0 0 15px #a0aec0;
-    }
-    h1, h2 {
-      color: #005a9c;
-      font-weight: 700;
-    }
-    h1 {
-      text-align: center;
-      font-size: 2.7em;
-      margin-bottom: 0.6em;
-    }
-    h2 {
-      margin-top: 2.4em;
-      border-bottom: 3px solid #66a3ff;
-      padding-bottom: 0.3em;
-      font-size: 1.9em;
-    }
-    h3 {
-      margin-top: 1.6em;
-      color: #004080;
-    }
-    p, ul, ol {
-      font-size: 1.05em;
-      margin: 1.2em 0;
-    }
-    ul, ol {
-      margin-left: 2.2em;
-    }
-    code {
-      background: #e6f0ff;
-      color: #004080;
-      font-family: Consolas, monospace;
-      padding: 3px 7px;
-      border-radius: 5px;
-      font-size: 1em;
-      white-space: nowrap;
-    }
-    pre.cmd {
-      background: #f0f4ff;
-      border: 1.5px solid #66a3ff;
-      border-radius: 12px;
-      padding: 1.3em 1.6em;
-      font-family: Consolas, monospace;
-      font-size: 1em;
-      color: #004080;
-      margin: 1.8em 0;
-      overflow-x: auto;
-      white-space: pre-wrap;
-    }
-    .tip {
-      background: #e3f2fd;
-      border-left: 6px solid #4a90e2;
-      padding: 1.3em 1.5em;
-      border-radius: 12px;
-      margin: 1.8em 0;
-      color: #004080;
-      font-size: 1em;
-    }
-    .diagram {
-      text-align: center;
-      margin: 2.6em 0;
-    }
-    .diagram img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 14px;
-      box-shadow: 0 5px 16px rgba(0,90,156,0.15);
-      background: #fff;
-      padding: 15px;
-    }
-    hr {
-      border: none;
-      border-top: 1.8px solid #99c2ff;
-      margin: 3.2em 0;
-    }
-    a {
-      color: #005a9c;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-    .quiz-block {
-      background: #e6f0ff;
-      border-left: 8px solid #4a90e2;
-      padding: 1.5em 1.8em;
-      border-radius: 14px;
-      margin: 2.6em 0;
-      font-size: 1.15em;
-      color: #003366;
-      max-width: 860px;
-    }
-    .quiz-block input[type="radio"] {
-      margin-right: 15px;
-      vertical-align: middle;
-      transform: scale(1.1);
-    }
-    .quiz-result {
-      font-weight: 700;
-      margin-top: 1.2em;
-      font-size: 1.15em;
-      color: #004080;
-    }
-    button.check-btn {
-      background: #005a9c;
-      color: #fff;
-      border: none;
-      padding: 8px 24px;
-      font-size: 1em;
-      border-radius: 8px;
-      cursor: pointer;
-      margin-top: 12px;
-      transition: background 0.3s ease;
-      display: inline-block;
-    }
-    button.check-btn:hover {
-      background: #003d66;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn HTML - Complete Beginner's Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.7;
+            color: #333;
+            background-color: #fafafa;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-top: 20px;
+            margin-bottom: 40px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .subtitle {
+            font-size: 1.1em;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            font-size: 1.8em;
+            color: #34495e;
+            margin: 40px 0 20px 0;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #3498db;
+        }
+
+        h3 {
+            font-size: 1.3em;
+            color: #2c3e50;
+            margin: 25px 0 15px 0;
+        }
+
+        p {
+            margin-bottom: 16px;
+            font-size: 16px;
+        }
+
+        code {
+            background: #f8f9fa;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 14px;
+            color: #e74c3c;
+        }
+
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 6px;
+            margin: 20px 0;
+            overflow-x: auto;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .tip {
+            background: #e8f4fd;
+            border-left: 4px solid #3498db;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .tip strong {
+            color: #2980b9;
+        }
+
+        ul, ol {
+            margin: 15px 0;
+            padding-left: 25px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .section {
+            margin-bottom: 50px;
+        }
+
+        .example {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .example h4 {
+            margin-bottom: 15px;
+            color: #495057;
+            font-size: 1.1em;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+        }
+
+        .quiz {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 6px;
+            padding: 20px;
+            margin: 30px 0;
+        }
+
+        .quiz h4 {
+            color: #856404;
+            margin-bottom: 15px;
+        }
+
+        .quiz-option {
+            margin: 10px 0;
+        }
+
+        .quiz-option input {
+            margin-right: 10px;
+        }
+
+        .check-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .check-btn:hover {
+            background: #2980b9;
+        }
+
+        .quiz-result {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .navigation {
+            background: #34495e;
+            color: white;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: #ecf0f1;
+            text-decoration: none;
+            font-size: 14px;
+            padding: 5px 0;
+        }
+
+        .nav-links a:hover {
+            color: #3498db;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            .nav-links {
+                font-size: 12px;
+                gap: 15px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <h1>🌐 HTML Masterclass: From Beginner to Advanced</h1>
-    <p>Welcome! This thorough guide will walk you through HTML step-by-step, from writing your first web page to mastering advanced topics. You'll gain practical knowledge, helpful tips, real code examples, visual aids, and quizzes to check your progress—all in a friendly, easy-to-understand way.</p>
+    <nav class="navigation">
+        <div class="nav-content">
+            <div class="nav-links">
+                <a href="#basics">Basics</a>
+                <a href="#structure">Structure</a>
+                <a href="#elements">Elements</a>
+                <a href="#semantic">Semantic HTML</a>
+                <a href="#forms">Forms</a>
+                <a href="#multimedia">Media</a>
+                <a href="#best-practices">Best Practices</a>
+            </div>
+        </div>
+    </nav>
 
-    <hr />
+    <div class="container">
+        <header>
+            <h1>Learn HTML from Scratch</h1>
+            <p class="subtitle">A practical guide to building web pages with HTML. No prior experience needed - we'll start with the basics and work our way up to creating complete web pages.</p>
+        </header>
 
-    <h2>1. What is HTML?</h2>
-    <p><strong>HTML (HyperText Markup Language)</strong> is the foundational markup language that structures web pages. It tells browsers how to display text, images, links, and other content.</p>
-    <p>Think of HTML as the <em>skeleton</em> of a webpage, giving structure and meaning that CSS and JavaScript build upon.</p>
-    <div class="diagram">
-      <img src="https://i.imgur.com/TXcMqPj.png" alt="HTML skeleton and structure illustration" />
-      <br />
-      <small>HTML provides the structure, CSS the styling, and JavaScript the behavior of web pages.</small>
-    </div>
+        <section id="basics" class="section">
+            <h2>What is HTML?</h2>
+            <p>HTML stands for <strong>HyperText Markup Language</strong>. It's the standard language used to create web pages. Think of HTML as the foundation of a house - it provides the structure that everything else is built on.</p>
+            
+            <p>HTML uses "tags" to mark up content and tell the browser how to display it. For example, you can mark text as a heading, a paragraph, or a link to another page.</p>
 
-    <hr />
+            <div class="tip">
+                <strong>Why learn HTML?</strong> HTML is essential for web development. Even if you use website builders, understanding HTML helps you customize and troubleshoot your sites.
+            </div>
+        </section>
 
-    <h2>2. Setting Up Your First HTML Document</h2>
-    <p>Start simple: open any text editor (Notepad, VS Code) and type this basic HTML template:</p>
-    <pre class="cmd">&lt;!DOCTYPE html&gt;
+        <section id="structure" class="section">
+            <h2>Your First HTML Page</h2>
+            <p>Every HTML page follows the same basic structure. Let's create a simple page:</p>
+
+            <div class="code-block"><!DOCTYPE html>
 &lt;html lang="en"&gt;
-  &lt;head&gt;
+&lt;head&gt;
     &lt;meta charset="UTF-8"&gt;
     &lt;title&gt;My First Page&lt;/title&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;h1&gt;Hello, World!&lt;/h1&gt;
-    &lt;p&gt;This is my very first webpage.&lt;/p&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
-</pre>
-    <p>Save as <code>index.html</code>, then open this file in your browser to see your first page live.</p>
-    <div class="tip">Tip: The <code>&lt;!DOCTYPE html&gt;</code> declaration ensures the browser uses the latest HTML standards.</div>
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Welcome to My Website&lt;/h1&gt;
+    &lt;p&gt;This is my first HTML page!&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</div>
 
-    <hr />
+            <h3>Breaking it Down</h3>
+            <ul>
+                <li><code>&lt;!DOCTYPE html&gt;</code> - Tells the browser this is an HTML5 document</li>
+                <li><code>&lt;html&gt;</code> - The root element that contains everything</li>
+                <li><code>&lt;head&gt;</code> - Contains information about the page (not visible to users)</li>
+                <li><code>&lt;body&gt;</code> - Contains the visible content of your page</li>
+            </ul>
 
-    <h2>3. Understanding HTML Document Structure</h2>
-    <p>Your HTML page has two main parts:</p>
-      <ul>
-        <li><code>&lt;head&gt;</code>: Meta-information about your page (title, character set, CSS links), not visible in the main page.</li>
-        <li><code>&lt;body&gt;</code>: Visible content like text, images, links, videos, forms, and more.</li>
-      </ul>
-    <p>Use semantic tags inside <code>&lt;body&gt;</code> to add meaning — we'll cover those soon!</p>
-    <div class="diagram">
-      <img src="https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/HTML_basics/Document_Structure.png" alt="Basic HTML document structure" />
-      <br /><small>The basic structure of an HTML document.<br> &lt;head&gt; is metadata, &lt;body&gt; is visible content.</small>
+            <div class="tip">
+                <strong>Try it yourself:</strong> Copy this code into a text editor, save it as "index.html", and open it in your web browser.
+            </div>
+        </section>
+
+        <section id="elements" class="section">
+            <h2>Essential HTML Elements</h2>
+            
+            <h3>Headings and Text</h3>
+            <p>HTML provides six levels of headings and various text elements:</p>
+
+            <div class="code-block">&lt;h1&gt;Main Heading&lt;/h1&gt;
+&lt;h2&gt;Section Heading&lt;/h2&gt;
+&lt;h3&gt;Subsection Heading&lt;/h3&gt;
+
+&lt;p&gt;This is a paragraph of text.&lt;/p&gt;
+&lt;p&gt;You can make text &lt;strong&gt;bold&lt;/strong&gt; or &lt;em&gt;italic&lt;/em&gt;.&lt;/p&gt;</div>
+
+            <h3>Links and Images</h3>
+            <p>Connect pages and add visual content:</p>
+
+            <div class="code-block">&lt;a href="https://www.example.com"&gt;Visit Example.com&lt;/a&gt;
+&lt;a href="about.html"&gt;About Page&lt;/a&gt;
+
+&lt;img src="photo.jpg" alt="A beautiful sunset"&gt;</div>
+
+            <div class="tip">
+                <strong>Important:</strong> Always include the <code>alt</code> attribute for images. It helps screen readers and shows if the image fails to load.
+            </div>
+
+            <h3>Lists</h3>
+            <p>Organize information with lists:</p>
+
+            <div class="example">
+                <h4>Unordered List (bullets)</h4>
+                <div class="code-block">&lt;ul&gt;
+    &lt;li&gt;Apples&lt;/li&gt;
+    &lt;li&gt;Bananas&lt;/li&gt;
+    &lt;li&gt;Oranges&lt;/li&gt;
+&lt;/ul&gt;</div>
+
+                <h4>Ordered List (numbers)</h4>
+                <div class="code-block">&lt;ol&gt;
+    &lt;li&gt;First step&lt;/li&gt;
+    &lt;li&gt;Second step&lt;/li&gt;
+    &lt;li&gt;Third step&lt;/li&gt;
+&lt;/ol&gt;</div>
+            </div>
+        </section>
+
+        <section id="semantic" class="section">
+            <h2>Semantic HTML</h2>
+            <p>Semantic elements clearly describe their meaning to both browsers and developers. They improve accessibility and SEO.</p>
+
+            <table>
+                <tr>
+                    <th>Element</th>
+                    <th>Purpose</th>
+                    <th>Example Use</th>
+                </tr>
+                <tr>
+                    <td><code>&lt;header&gt;</code></td>
+                    <td>Page or section header</td>
+                    <td>Site logo and navigation</td>
+                </tr>
+                <tr>
+                    <td><code>&lt;nav&gt;</code></td>
+                    <td>Navigation links</td>
+                    <td>Main menu, breadcrumbs</td>
+                </tr>
+                <tr>
+                    <td><code>&lt;main&gt;</code></td>
+                    <td>Main content</td>
+                    <td>Primary page content</td>
+                </tr>
+                <tr>
+                    <td><code>&lt;article&gt;</code></td>
+                    <td>Standalone content</td>
+                    <td>Blog post, news article</td>
+                </tr>
+                <tr>
+                    <td><code>&lt;section&gt;</code></td>
+                    <td>Content section</td>
+                    <td>Chapter, tab content</td>
+                </tr>
+                <tr>
+                    <td><code>&lt;footer&gt;</code></td>
+                    <td>Page or section footer</td>
+                    <td>Copyright, contact info</td>
+                </tr>
+            </table>
+
+            <div class="example">
+                <h4>Semantic Page Structure</h4>
+                <div class="code-block">&lt;header&gt;
+    &lt;h1&gt;My Blog&lt;/h1&gt;
+    &lt;nav&gt;
+        &lt;a href="/"&gt;Home&lt;/a&gt;
+        &lt;a href="/about"&gt;About&lt;/a&gt;
+    &lt;/nav&gt;
+&lt;/header&gt;
+
+&lt;main&gt;
+    &lt;article&gt;
+        &lt;h2&gt;My First Post&lt;/h2&gt;
+        &lt;p&gt;Welcome to my blog...&lt;/p&gt;
+    &lt;/article&gt;
+&lt;/main&gt;
+
+&lt;footer&gt;
+    &lt;p&gt;&copy; 2024 My Blog&lt;/p&gt;
+&lt;/footer&gt;</div>
+            </div>
+        </section>
+
+        <section id="forms" class="section">
+            <h2>HTML Forms</h2>
+            <p>Forms let users interact with your website by submitting information:</p>
+
+            <div class="code-block">&lt;form&gt;
+    &lt;label for="name"&gt;Your Name:&lt;/label&gt;
+    &lt;input type="text" id="name" name="name" required&gt;
+    
+    &lt;label for="email"&gt;Email:&lt;/label&gt;
+    &lt;input type="email" id="email" name="email" required&gt;
+    
+    &lt;label for="message"&gt;Message:&lt;/label&gt;
+    &lt;textarea id="message" name="message" rows="4"&gt;&lt;/textarea&gt;
+    
+    &lt;button type="submit"&gt;Send Message&lt;/button&gt;
+&lt;/form&gt;</div>
+
+            <h3>Common Input Types</h3>
+            <ul>
+                <li><code>text</code> - Single line text</li>
+                <li><code>email</code> - Email addresses (with validation)</li>
+                <li><code>password</code> - Hidden text</li>
+                <li><code>number</code> - Numeric input</li>
+                <li><code>date</code> - Date picker</li>
+                <li><code>checkbox</code> - Multiple choice</li>
+                <li><code>radio</code> - Single choice from options</li>
+            </ul>
+        </section>
+
+        <section id="multimedia" class="section">
+            <h2>Adding Media</h2>
+            
+            <h3>Images</h3>
+            <div class="code-block">&lt;img src="landscape.jpg" alt="Mountain landscape at sunset" width="600"&gt;</div>
+
+            <h3>Videos</h3>
+            <div class="code-block">&lt;video controls width="600"&gt;
+    &lt;source src="movie.mp4" type="video/mp4"&gt;
+    &lt;source src="movie.webm" type="video/webm"&gt;
+    Your browser doesn't support video.
+&lt;/video&gt;</div>
+
+            <h3>Audio</h3>
+            <div class="code-block">&lt;audio controls&gt;
+    &lt;source src="podcast.mp3" type="audio/mpeg"&gt;
+    Your browser doesn't support audio.
+&lt;/audio&gt;</div>
+        </section>
+
+        <section id="best-practices" class="section">
+            <h2>Best Practices</h2>
+            
+            <h3>Write Clean, Accessible HTML</h3>
+            <ul>
+                <li>Use semantic elements that describe your content</li>
+                <li>Always include <code>alt</code> text for images</li>
+                <li>Associate labels with form inputs using <code>for</code> and <code>id</code></li>
+                <li>Use headings in order (h1, then h2, then h3, etc.)</li>
+                <li>Validate your HTML to catch errors</li>
+            </ul>
+
+            <h3>Performance Tips</h3>
+            <ul>
+                <li>Optimize image sizes and formats</li>
+                <li>Use appropriate image formats (JPEG for photos, PNG for graphics)</li>
+                <li>Keep your HTML structure simple and clean</li>
+                <li>Use external CSS and JavaScript files</li>
+            </ul>
+
+            <div class="tip">
+                <strong>Next Steps:</strong> Once you're comfortable with HTML, learn CSS to style your pages and JavaScript to add interactivity!
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Test Your Knowledge</h2>
+            
+            <div class="quiz" id="quiz1">
+                <h4>Which element contains the visible content of a webpage?</h4>
+                <div class="quiz-option">
+                    <input type="radio" name="q1" value="incorrect" id="q1a"> 
+                    <label for="q1a">&lt;head&gt;</label>
+                </div>
+                <div class="quiz-option">
+                    <input type="radio" name="q1" value="correct" id="q1b"> 
+                    <label for="q1b">&lt;body&gt;</label>
+                </div>
+                <div class="quiz-option">
+                    <input type="radio" name="q1" value="incorrect" id="q1c"> 
+                    <label for="q1c">&lt;html&gt;</label>
+                </div>
+                <button class="check-btn" onclick="checkAnswer('quiz1')">Check Answer</button>
+                <div class="quiz-result" id="quiz1-result"></div>
+            </div>
+
+            <div class="quiz" id="quiz2">
+                <h4>What's the correct way to create a link?</h4>
+                <div class="quiz-option">
+                    <input type="radio" name="q2" value="correct" id="q2a"> 
+                    <label for="q2a">&lt;a href="page.html"&gt;Link&lt;/a&gt;</label>
+                </div>
+                <div class="quiz-option">
+                    <input type="radio" name="q2" value="incorrect" id="q2b"> 
+                    <label for="q2b">&lt;link href="page.html"&gt;Link&lt;/link&gt;</label>
+                </div>
+                <div class="quiz-option">
+                    <input type="radio" name="q2" value="incorrect" id="q2c"> 
+                    <label for="q2c">&lt;url&gt;page.html&lt;/url&gt;</label>
+                </div>
+                <button class="check-btn" onclick="checkAnswer('quiz2')">Check Answer</button>
+                <div class="quiz-result" id="quiz2-result"></div>
+            </div>
+        </section>
     </div>
 
-    <hr />
-
-    <h2>4. Basic HTML Elements and Tags</h2>
-    <p>HTML elements are defined by <em>tags</em> with angle brackets, usually opening and closing tags:</p>
-    <pre class="cmd">&lt;tagname&gt;content&lt;/tagname&gt;</pre>
-    <p>Common basic tags include:</p>
-    <ul>
-      <li><code>&lt;h1&gt;...&lt;/h1&gt;</code> to <code>&lt;h6&gt;...&lt;/h6&gt;</code> — Headings with descending importance.</li>
-      <li><code>&lt;p&gt;...&lt;/p&gt;</code> — Paragraphs.</li>
-      <li><code>&lt;a href="url"&gt;...&lt;/a&gt;</code> — Hyperlinks.</li>
-      <li><code>&lt;img src="..." alt="..." /&gt;</code> — Display images.</li>
-      <li><code>&lt;ul&gt;</code> and <code>&lt;ol&gt;</code> — Unordered and ordered lists with <code>&lt;li&gt;</code> items.</li>
-      <li><code>&lt;div&gt;</code> and <code>&lt;span&gt;</code> — Generic containers for layout and styling.</li>
-    </ul>
-
-    <hr />
-
-    <h2>5. Attributes: Adding Details to Elements</h2>
-    <p>Attributes provide extra info inside the opening tag. For example:</p>
-    <pre class="cmd">&lt;a href="https://example.com" target="_blank"&gt;Visit Example&lt;/a&gt;</pre>
-    <p>Common attributes:</p>
-    <ul>
-      <li><code>href</code>, <code>src</code>, <code>alt</code> for links and images.</li>
-      <li><code>id</code>, <code>class</code>, for CSS styling and scripting.</li>
-      <li><code>title</code> to show tooltips.</li>
-      <li><code>target</code> to specify link opening behavior.</li>
-    </ul>
-
-    <hr />
-
-    <h2>6. Semantic HTML: Giving Meaning to Web Content</h2>
-    <p>Semantic tags improve accessibility, SEO, and maintainability. Use them meaningfully:</p>
-    <ul>
-      <li><code>&lt;header&gt;</code>, <code>&lt;footer&gt;</code>: Page header and footer.</li>
-      <li><code>&lt;nav&gt;</code>: Navigation menus.</li>
-      <li><code>&lt;article&gt;</code>, <code>&lt;section&gt;</code>: Blocks of related content.</li>
-      <li><code>&lt;aside&gt;</code>: Side content like ads or tips.</li>
-      <li><code>&lt;main&gt;</code>: Main content.</li>
-      <li><code>&lt;figure&gt;</code>, <code>&lt;figcaption&gt;</code>: Images with captions.</li>
-    </ul>
-
-    <div class="diagram">
-      <img src="https://i.imgur.com/oL8vEa6.png" alt="Semantic HTML Elements" />
-      <br /><small>Using semantic tags structures your page clearly, helping browsers and assistive tech.</small>
-    </div>
-
-    <hr />
-
-    <h2>7. Working With Images and Multimedia</h2>
-    <p>Add images:</p>
-    <pre class="cmd">&lt;img src="path/to/image.jpg" alt="Description of image" width="400" /&gt;</pre>
-    <p>Embed videos and audio:</p>
-    <pre class="cmd">
-&lt;video controls width="600"&gt;
-  &lt;source src="video.mp4" type="video/mp4"&gt;
-  Your browser does not support the video tag.
-&lt;/video&gt;
-
-&lt;audio controls&gt;
-  &lt;source src="audio.mp3" type="audio/mpeg"&gt;
-  Your browser does not support the audio tag.
-&lt;/audio&gt;
-    </pre>
-
-    <hr />
-
-    <h2>8. Creating Links and Navigation</h2>
-    <p>Make links with <code>&lt;a&gt;</code> tags:</p>
-    <pre class="cmd">&lt;a href="https://www.example.com" target="_blank" rel="noopener noreferrer"&gt;External Link&lt;/a&gt;</pre>
-    <p>Internal page anchors:</p>
-    <pre class="cmd">&lt;a href="#section1"&gt;Go to Section 1&lt;/a&gt;
-...
-&lt;h2 id="section1"&gt;Section 1&lt;/h2&gt;
-    </pre>
-
-    <hr />
-
-    <h2>9. Lists: Ordered, Unordered, and Description</h2>
-    <p>Examples:</p>
-    <pre class="cmd">
-&lt;ul&gt;
-  &lt;li&gt;Apples&lt;/li&gt;
-  &lt;li&gt;Bananas&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Step one&lt;/li&gt;
-  &lt;li&gt;Step two&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;dl&gt;
-  &lt;dt&gt;HTML&lt;/dt&gt;&lt;dd&gt;HyperText Markup Language&lt;/dd&gt;
-  &lt;dt&gt;CSS&lt;/dt&gt;&lt;dd&gt;Cascading Style Sheets&lt;/dd&gt;
-&lt;/dl&gt;
-    </pre>
-
-    <hr />
-
-    <h2>10. Forms and Input Elements</h2>
-    <p>Forms collect user input:</p>
-    <pre class="cmd">
-&lt;form action="/submit" method="post"&gt;
-  &lt;label for="name"&gt;Name:&lt;/label&gt;
-  &lt;input type="text" id="name" name="name" required /&gt;
-
-  &lt;label for="email"&gt;Email:&lt;/label&gt;
-  &lt;input type="email" id="email" name="email" required /&gt;
-
-  &lt;label&gt;Choose a color:&lt;/label&gt;
-  &lt;select name="color"&gt;
-    &lt;option value="red"&gt;Red&lt;/option&gt;
-    &lt;option value="green"&gt;Green&lt;/option&gt;
-  &lt;/select&gt;
-
-  &lt;input type="submit" value="Send" /&gt;
-&lt;/form&gt;
-    </pre>
-    <p>There are many input types: text, password, checkbox, radio, date, number, file, and more, each suited for different data.</p>
-
-    <hr />
-
-    <h2>11. Tables: Displaying Tabular Data</h2>
-    <pre class="cmd">
-&lt;table border="1"&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;&lt;th&gt;Name&lt;/th&gt;&lt;th&gt;Age&lt;/th&gt;&lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;&lt;td&gt;Alice&lt;/td&gt;&lt;td&gt;30&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;Bob&lt;/td&gt;&lt;td&gt;25&lt;/td&gt;&lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-    </pre>
-
-    <hr />
-
-    <h2>12. HTML5 Semantic & Advanced Elements</h2>
-    <ul>
-      <li><code>&lt;section&gt;</code>: Logical sections of content.</li>
-      <li><code>&lt;article&gt;</code>: Self-contained content.</li>
-      <li><code>&lt;header&gt;</code>, <code>&lt;footer&gt;</code>: Intro and footer of sections.</li>
-      <li><code>&lt;figure&gt;</code>, <code>&lt;figcaption&gt;</code>: Images with captions.</li>
-      <li><code>&lt;mark&gt;</code>: Highlighted text.</li>
-      <li><code>&lt;details&gt;</code>, <code>&lt;summary&gt;</code>: Collapsible content sections.</li>
-      <li><code>&lt;dialog&gt;</code>: Modal dialog boxes.</li>
-    </ul>
-
-    <hr />
-
-    <h2>13. Accessibility & Best Practices</h2>
-    <ul>
-      <li>Provide meaningful <code>alt</code> text for images for screen readers.</li>
-      <li>Use semantic tags for better navigation (headers, navigation, main, etc.).</li>
-      <li>Label form inputs clearly; associate <code>&lt;label&gt;</code> with controls using <code>for</code> and <code>id</code>.</li>
-      <li>Ensure keyboard navigation is smooth.</li>
-      <li>Use ARIA roles and attributes when necessary.</li>
-      <li>Validate your HTML code with tools like the <a href="https://validator.w3.org/" target="_blank" rel="noopener">W3C Validator</a>.</li>
-    </ul>
-
-    <hr />
-
-    <h2>14. HTML APIs and Integrations</h2>
-    <p>Modern web pages integrate with APIs like:</p>
-    <ul>
-      <li><strong>Canvas API</strong> — drawing graphics.</li>
-      <li><strong>Web Storage API</strong> — storing data locally in the browser.</li>
-      <li><strong>Geolocation API</strong> — location information.</li>
-      <li><strong>Drag and Drop API</strong> — interactive dragging UI.</li>
-      <li><strong>Web Workers</strong> — background threads.</li>
-    </ul>
-    <p>Learn JavaScript to harness these APIs fully!</p>
-
-    <hr />
-
-    <h2>Practice Quizzes</h2>
-
-    <div class="quiz-block" id="quiz1">
-      <b>Quiz 1: What is the main visible content container in an HTML document?</b><br />
-      <form>
-        <input type="radio" name="q1" value="0" id="q1a1" /><label for="q1a1"> &lt;head&gt;</label><br />
-        <input type="radio" name="q1" value="1" id="q1a2" /><label for="q1a2"> &lt;body&gt;</label><br />
-        <input type="radio" name="q1" value="0" id="q1a3" /><label for="q1a3"> &lt;html&gt;</label><br />
-        <button type="button" class="check-btn" onclick="checkQuiz('quiz1', 1)">Check Answer</button>
-      </form>
-      <div class="quiz-result" id="quiz1-result"></div>
-    </div>
-
-    <div class="quiz-block" id="quiz2">
-      <b>Quiz 2: Which tag is used to embed an image?</b><br />
-      <form>
-        <input type="radio" name="q2" value="1" id="q2a1" /><label for="q2a1"> &lt;img&gt;</label><br />
-        <input type="radio" name="q2" value="0" id="q2a2" /><label for="q2a2"> &lt;image&gt;</label><br />
-        <input type="radio" name="q2" value="0" id="q2a3" /><label for="q2a3"> &lt;picture&gt;</label><br />
-        <button type="button" class="check-btn" onclick="checkQuiz('quiz2', 1)">Check Answer</button>
-      </form>
-      <div class="quiz-result" id="quiz2-result"></div>
-    </div>
-
-    <div class="quiz-block" id="quiz3">
-      <b>Quiz 3: What attribute provides descriptive text for an image?</b><br />
-      <form>
-        <input type="radio" name="q3" value="0" id="q3a1" /><label for="q3a1"> src</label><br />
-        <input type="radio" name="q3" value="1" id="q3a2" /><label for="q3a2"> alt</label><br />
-        <input type="radio" name="q3" value="0" id="q3a3" /><label for="q3a3"> title</label><br />
-        <button type="button" class="check-btn" onclick="checkQuiz('quiz3', 1)">Check Answer</button>
-      </form>
-      <div class="quiz-result" id="quiz3-result"></div>
-    </div>
-
-    <div class="quiz-block" id="quiz4">
-      <b>Quiz 4: Which HTML tag creates a hyperlink?</b><br />
-      <form>
-        <input type="radio" name="q4" value="1" id="q4a1" /><label for="q4a1"> &lt;a&gt;</label><br />
-        <input type="radio" name="q4" value="0" id="q4a2" /><label for="q4a2"> &lt;link&gt;</label><br />
-        <input type="radio" name="q4" value="0" id="q4a3" /><label for="q4a3"> &lt;href&gt;</label><br />
-        <button type="button" class="check-btn" onclick="checkQuiz('quiz4', 1)">Check Answer</button>
-      </form>
-      <div class="quiz-result" id="quiz4-result"></div>
-    </div>
-
-  </div>
-
-  <script>
-    function checkQuiz(quizId, correctIndex) {
-      const quiz = document.getElementById(quizId);
-      const options = quiz.querySelectorAll('input[type="radio"]');
-      const resultArea = quiz.querySelector('.quiz-result');
-      for (let i = 0; i < options.length; i++) {
-        if (options[i].checked) {
-          if (parseInt(options[i].value) === correctIndex) {
-            resultArea.textContent = '✅ Correct!';
-          } else {
-            resultArea.textContent = '❌ Try again!';
-          }
-          return;
+    <script>
+        function checkAnswer(quizId) {
+            const quiz = document.getElementById(quizId);
+            const options = quiz.querySelectorAll('input[name^="q"]');
+            const result = quiz.querySelector('.quiz-result');
+            
+            let answered = false;
+            let correct = false;
+            
+            options.forEach(option => {
+                if (option.checked) {
+                    answered = true;
+                    if (option.value === 'correct') {
+                        correct = true;
+                    }
+                }
+            });
+            
+            if (!answered) {
+                result.textContent = 'Please select an answer first.';
+                result.style.color = '#856404';
+            } else if (correct) {
+                result.textContent = '✓ Correct! Great job!';
+                result.style.color = '#155724';
+            } else {
+                result.textContent = '✗ Not quite right. Try again!';
+                result.style.color = '#721c24';
+            }
         }
-      }
-      resultArea.textContent = '❗ Please select an answer!';
-    }
-  </script>
+    </script>
 </body>
 </html>
