@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Python Masterclass: From Beginner to Advanced</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5fafe;
+      color: #28313b;
+      margin: 0;
+      padding: 0 1.2em 3em 1.2em;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 900px;
+      margin: 2em auto;
+      background: #fff;
+      border-radius: 13px;
+      box-shadow: 0 0 16px #bdd4e7;
+      padding: 2.6em 2.2em;
+    }
+    h1, h2 {
+      color: #357ae8;
+      font-weight: 700;
+    }
+    h1 {
+      text-align: center;
+      font-size: 2.4em;
+      margin-bottom: 0.6em;
+    }
+    h2 {
+      margin-top: 2em;
+      border-bottom: 3px solid #93bafd;
+      padding-bottom: 0.3em;
+      font-size: 1.7em;
+    }
+    h3 {
+      margin-top: 1.5em;
+      color: #2253a7;
+    }
+    p, ul, ol {
+      font-size: 1.09em;
+      margin: 1.2em 0;
+    }
+    ul, ol {
+      margin-left: 2.2em;
+    }
+    code {
+      background: #eaf1fb;
+      color: #154093;
+      font-family: Consolas, monospace;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 1em;
+      white-space: pre-wrap;
+    }
+    pre.cmd {
+      background: #f0f7ff;
+      border: 1.5px solid #93bafd;
+      border-radius: 12px;
+      padding: 1.2em 1.5em;
+      font-family: Consolas, monospace;
+      color: #154093;
+      margin: 1.65em 0;
+      white-space: pre-wrap;
+      font-size: 1em;
+      overflow-x: auto;
+    }
+    .tip {
+      background: #e2f1fd;
+      border-left: 6px solid #357ae8;
+      padding: 1.2em 1.5em;
+      border-radius: 12px;
+      margin: 1.6em 0;
+      color: #2065b7;
+      font-size: 1em;
+    }
+    .diagram {
+      text-align: center;
+      margin: 2.3em 0;
+    }
+    .diagram img {
+      max-width: 98%;
+      height: auto;
+      border-radius: 13px;
+      box-shadow: 0 5px 15px rgba(53,122,232,0.15);
+      background: #fff;
+      padding: 15px;
+    }
+    hr {
+      border: none;
+      border-top: 1.8px solid #b2d1fc;
+      margin: 3em 0;
+    }
+    a {
+      color: #357ae8;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .quiz-block {
+      background: #f0f8fc;
+      border-left: 8px solid #488be1;
+      padding: 1.35em 1.7em;
+      border-radius: 13px;
+      margin: 2.5em 0;
+      font-size: 1.11em;
+      color: #1a4672;
+      max-width: 860px;
+    }
+    .quiz-block input[type="radio"] {
+      margin-right: 14px;
+      vertical-align: middle;
+      transform: scale(1.1);
+    }
+    .quiz-result {
+      font-weight: 700;
+      margin-top: 1.1em;
+      font-size: 1.1em;
+      color: #2253a7;
+    }
+    button.check-btn {
+      background: #357ae8;
+      color: #fff;
+      border: none;
+      padding: 7px 22px;
+      font-size: 1em;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background 0.3s;
+      display: inline-block;
+    }
+    button.check-btn:hover {
+      background: #2051a7;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🐍 Python Masterclass: From Beginner to Advanced</h1>
+    <p>Welcome! This is your friendly, all-in-one guide to Python, taking you from first steps through advanced features, with clear code, practical examples, diagrams, and quizzes to help you really understand and use Python.</p>
+
+    <hr />
+
+    <h2>1. What is Python? Why Learn It?</h2>
+    <ul>
+      <li><strong>Python</strong> is a popular, readable, all-purpose programming language, loved for its friendliness and versatility.</li>
+      <li>Use it for web development, data science, scripting, automation, AI, games, and more.</li>
+      <li>It's free, open source, and runs on all major platforms.</li>
+    </ul>
+    <div class="diagram">
+      <img src="https://www.python.org/static/community_logos/python-logo-master-v3-TM.png" alt="Python logo" width="180"/>
+      <br />
+      <small>Python powers websites, apps, data, AI, scripts, and more!</small>
+    </div>
+
+    <hr />
+
+    <h2>2. Getting Started</h2>
+    <ol>
+      <li><b>Install Python</b> from <a href="https://www.python.org/downloads/" target="_blank" rel="noopener">python.org/downloads</a>. (Most computers make this easy!)</li>
+      <li><b>Write code</b> in IDLE (comes with Python), or try <a href="https://replit.com/~" target="_blank">replit.com</a> or <a href="https://jupyter.org/try" target="_blank">Jupyter notebooks</a> online.</li>
+      <li>To run code, open your editor, type a command, then click “Run” or type <code>python filename.py</code> in your terminal.</li>
+    </ol>
+    <div class="tip">Pro tip: The interactive shell (just type <code>python</code> in your terminal) lets you try commands instantly.</div>
+
+    <hr />
+
+    <h2>3. Your First Python Program</h2>
+    <pre class="cmd">print("Hello, World!")</pre>
+    <p>This prints <b>Hello, World!</b> on your screen. Try changing the message and see what happens!</p>
+
+    <div class="quiz-block" id="quiz1">
+      <b>Quiz 1: What does <code>print("Hello, World!")</code> do?</b><br />
+      <form>
+        <input type="radio" name="q1" value="0" id="q1a1"/><label for="q1a1"> Starts a loop</label><br />
+        <input type="radio" name="q1" value="1" id="q1a2"/><label for="q1a2"> Displays text in the output</label><br />
+        <input type="radio" name="q1" value="0" id="q1a3"/><label for="q1a3"> Reads user input</label><br />
+        <button type="button" class="check-btn" onclick="checkQuiz('quiz1', 1)">Check Answer</button>
+      </form>
+      <div class="quiz-result" id="quiz1-result"></div>
+    </div>
+
+    <hr />
+
+    <h2>4. Variables and Data Types</h2>
+    <ul>
+      <li><code>int</code>: whole numbers (<code>5</code>)</li>
+      <li><code>float</code>: decimals (<code>3.14</code>)</li>
+      <li><code>str</code>: text (<code>"Hello"</code>)</li>
+      <li><code>bool</code>: True/False values</li>
+      <li><code>list</code>, <code>tuple</code>, <code>dict</code>: advanced data (see below)</li>
+    </ul>
+    <pre class="cmd">
+age = 21
+height = 1.70
+name = "Alex"
+is_cool = True
+
+print(name, age, height, is_cool)
+    </pre>
+
+    <div class="quiz-block" id="quiz2">
+      <b>Quiz 2: Which of these is NOT a valid variable name in Python?</b><br />
+      <form>
+        <input type="radio" name="q2" value="0" id="q2a1"/><label for="q2a1"> first_name</label><br />
+        <input type="radio" name="q2" value="0" id="q2a2"/><label for="q2a2"> user2</label><br />
+        <input type="radio" name="q2" value="1" id="q2a3"/><label for="q2a3"> 2user</label><br />
+        <button type="button" class="check-btn" onclick="checkQuiz('quiz2', 1)">Check Answer</button>
+      </form>
+      <div class="quiz-result" id="quiz2-result"></div>
+    </div>
+
+    <hr />
+
+    <h2>5. Input & Output</h2>
+    <pre class="cmd">
+name = input("What is your name? ")
+print("Hello,", name)
+    </pre>
+    <p>Use <code>input()</code> to get a string from the user. You can convert types with <code>int()</code>, <code>float()</code>, etc.</p>
+
+    <hr />
+
+    <h2>6. Flow Control: if, elif, else</h2>
+    <pre class="cmd">
+score = int(input("Your score: "))
+if score >= 90:
+    print("Great job!")
+elif score >= 70:
+    print("Good effort.")
+else:
+    print("Keep practicing.")
+    </pre>
+
+    <hr />
+
+    <h2>7. Loops (for, while)</h2>
+    <pre class="cmd">
+# Print numbers 1-5
+for i in range(1, 6):
+    print(i)
+
+# While loop
+count = 5
+while count > 0:
+    print(count)
+    count -= 1
+    </pre>
+
+    <div class="quiz-block" id="quiz3">
+      <b>Quiz 3: What does <code>range(1, 6)</code> produce?</b><br />
+      <form>
+        <input type="radio" name="q3" value="1" id="q3a1"/><label for="q3a1"> 1, 2, 3, 4, 5</label><br />
+        <input type="radio" name="q3" value="0" id="q3a2"/><label for="q3a2"> 1, 2, 3, 4, 5, 6</label><br />
+        <input type="radio" name="q3" value="0" id="q3a3"/><label for="q3a3"> 0, 1, 2, 3, 4</label><br />
+        <button type="button" class="check-btn" onclick="checkQuiz('quiz3', 1)">Check Answer</button>
+      </form>
+      <div class="quiz-result" id="quiz3-result"></div>
+    </div>
+
+    <hr />
+
+    <h2>8. Functions</h2>
+    <pre class="cmd">
+def greet(name):
+    print("Hello,", name)
+
+greet("Sam")
+    </pre>
+    <p>Functions help you reuse code. You can have parameters, return values, and docstrings for documentation.</p>
+
+    <hr />
+
+    <h2>9. Lists, Tuples, Dictionaries</h2>
+    <h3>Lists (ordered, changeable):</h3>
+    <pre class="cmd">
+numbers = [10, 20, 30]
+print(numbers[0])  # 10
+numbers.append(40)
+print(numbers)  # [10, 20, 30, 40]
+    </pre>
+    <h3>Tuples (ordered, unchangeable):</h3>
+    <pre class="cmd">
+coords = (4, 5)
+print(coords[1])  # 5
+    </pre>
+    <h3>Dictionaries (key-value pairs):</h3>
+    <pre class="cmd">
+person = {"name": "Alex", "age": 30}
+print(person["name"])
+person["country"] = "France"
+    </pre>
+
+    <hr />
+
+    <h2>10. Slicing & List Comprehensions</h2>
+    <pre class="cmd">
+mylist = [1, 2, 3, 4, 5]
+print(mylist[1:4])  # [2, 3, 4]
+
+evens = [x for x in range(10) if x % 2 == 0]
+print(evens)
+    </pre>
+
+    <hr />
+
+    <h2>11. Error Handling</h2>
+    <pre class="cmd">
+try:
+    result = 10 / 0
+except ZeroDivisionError:
+    print("You can't divide by zero!")
+finally:
+    print("This always runs")
+    </pre>
+    <p>Use <code>try</code>/<code>except</code> to handle errors without crashing your program.</p>
+
+    <hr />
+
+    <h2>12. OOP: Classes and Objects</h2>
+    <pre class="cmd">
+class Dog:
+    def __init__(self, name):
+        self.name = name
+
+    def bark(self):
+        print(self.name, "says woof!")
+
+fido = Dog("Fido")
+fido.bark()  # Fido says woof!
+    </pre>
+    <ul>
+      <li>Classes define <b>blueprints</b> for objects.</li>
+      <li>Objects are created ("instantiated") from classes.</li>
+      <li>Methods are functions tied to object behavior.</li>
+      <li>You can use inheritance, properties, and built-in special methods (<code>__str__</code>, <code>__len__</code>, etc.).</li>
+    </ul>
+
+    <hr />
+
+    <h2>13. Modules & Packages</h2>
+    <p>
+      Organize your code into modules (Python files) and packages (folders of modules). Import code with:
+    </p>
+    <pre class="cmd">
+import math
+print(math.sqrt(16))  # 4.0
+    </pre>
+    <p>Install external packages using <code>pip</code>:</p>
+    <pre class="cmd">pip install requests</pre>
+    <p>Then <code>import requests</code> in your Python code.</p>
+
+    <hr />
+
+    <h2>14. File I/O</h2>
+    <pre class="cmd">
+with open("mydata.txt", "w") as f:
+    f.write("Hello, file!")
+
+with open("mydata.txt") as f:
+    contents = f.read()
+    print(contents)
+    </pre>
+
+    <hr />
+
+    <h2>15. Advanced Python: Decorators, Generators, Iterators</h2>
+    <h3>Decorators</h3>
+    <pre class="cmd">
+def shout(fn):
+    def wrapper():
+        return fn().upper()
+    return wrapper
+
+@shout
+def greet():
+    return "hello"
+
+print(greet())  # HELLO
+    </pre>
+    <h3>Generators & Iterators</h3>
+    <pre class="cmd">
+def countdown(n):
+    while n > 0:
+        yield n
+        n -= 1
+
+for i in countdown(3):
+    print(i)
+    </pre>
+
+    <hr />
+
+    <h2>16. Lambda Functions & Map/Filter/Reduce</h2>
+    <pre class="cmd">
+nums = [1, 2, 3]
+squared = list(map(lambda x: x ** 2, nums))
+evens = list(filter(lambda x: x % 2 == 0, nums))
+print(squared)  # [1, 4, 9]
+print(evens)    # [2]
+    </pre>
+
+    <hr />
+
+    <h2>17. Comprehensions and Advanced Data Structures</h2>
+    <pre class="cmd">
+matrix = [[1, 2], [3, 4]]
+flat = [num for row in matrix for num in row]
+print(flat)  # [1, 2, 3, 4]
+
+myset = {1, 2, 3}
+    </pre>
+
+    <hr />
+
+    <h2>18. Working with APIs and JSON</h2>
+    <pre class="cmd">
+import requests
+data = requests.get("https://catfact.ninja/fact").json()
+print(data["fact"])
+    </pre>
+    <pre class="cmd">
+import json
+person = {"name": "Zara", "age": 21}
+j = json.dumps(person)
+print(j)
+back = json.loads(j)
+print(back["name"])
+    </pre>
+
+    <hr />
+
+    <h2>19. Virtual Environments and Dependency Management</h2>
+    <pre class="cmd">
+python -m venv venv
+# Activate the environment:
+# Windows:
+venv\Scripts\activate
+# macOS/Linux:
+source venv/bin/activate
+    </pre>
+    <p>Use <code>pip freeze > requirements.txt</code> to save dependencies; <code>pip install -r requirements.txt</code> to reload them.</p>
+
+    <hr />
+
+    <h2>20. Popular Libraries and Frameworks</h2>
+    <ul>
+      <li><b>Flask / Django</b>: Build web apps/APIs</li>
+      <li><b>Pandas / Numpy</b>: Data science and data manipulation</li>
+      <li><b>Matplotlib / Seaborn</b>: Visualization</li>
+      <li><b>Pytest</b>: Testing</li>
+      <li><b>TensorFlow / PyTorch</b>: Machine learning</li>
+    </ul>
+    <div class="tip">Explore projects on <a href="https://pypi.org" target="_blank">PyPI</a> — Python's package index for all kinds of add-ons!</div>
+
+    <hr />
+
+    <h2>Practice Quizzes</h2>
+
+    <div class="quiz-block" id="quiz4">
+      <b>Quiz 4: Which data structure is immutable in Python?</b><br />
+      <form>
+        <input type="radio" name="q4" value="1" id="q4a1"/><label for="q4a1"> tuple</label><br />
+        <input type="radio" name="q4" value="0" id="q4a2"/><label for="q4a2"> list</label><br />
+        <input type="radio" name="q4" value="0" id="q4a3"/><label for="q4a3"> dict</label><br />
+        <button type="button" class="check-btn" onclick="checkQuiz('quiz4', 1)">Check Answer</button>
+      </form>
+      <div class="quiz-result" id="quiz4-result"></div>
+    </div>
+
+    <div class="quiz-block" id="quiz5">
+      <b>Quiz 5: Which function is used to get the length of a list?</b><br />
+      <form>
+        <input type="radio" name="q5" value="0" id="q5a1"/><label for="q5a1"> count()</label><br />
+        <input type="radio" name="q5" value="1" id="q5a2"/><label for="q5a2"> len()</label><br />
+        <input type="radio" name="q5" value="0" id="q5a3"/><label for="q5a3"> size()</label><br />
+        <button type="button" class="check-btn" onclick="checkQuiz('quiz5', 1)">Check Answer</button>
+      </form>
+      <div class="quiz-result" id="quiz5-result"></div>
+    </div>
+
+    <div class="quiz-block" id="quiz6">
+      <b>Quiz 6: What does <code>@</code> before a function mean?</b><br />
+      <form>
+        <input type="radio" name="q6" value="1" id="q6a1"/><label for="q6a1"> Decorator</label><br />
+        <input type="radio" name="q6" value="0" id="q6a2"/><label for="q6a2"> Start of a list</label><br />
+        <input type="radio" name="q6" value="0" id="q6a3"/><label for="q6a3"> Comment</label><br />
+        <button type="button" class="check-btn" onclick="checkQuiz('quiz6', 1)">Check Answer</button>
+      </form>
+      <div class="quiz-result" id="quiz6-result"></div>
+    </div>
+
+    <div class="tip">The best way to learn Python is by <b>writing lots of code</b>, breaking things, and fixing them. Try mini projects, explore libraries, and always ask "How can I automate this with Python?"</div>
+    
+    <hr />
+
+    <h2>Project Ideas for Practice</h2>
+    <ul>
+      <li>Build a simple calculator with functions.</li>
+      <li>Write a guessing game where the computer picks a number.</li>
+      <li>Analyze a CSV file of data with Pandas.</li>
+      <li>Make a to-do list app (terminal or web using Flask).</li>
+      <li>Scrape a website and extract information with BeautifulSoup.</li>
+      <li>Visualize your favorite dataset using Matplotlib.</li>
+    </ul>
+
+    <div class="tip">Congratulations! You now have a solid roadmap from the very basics to the advanced capabilities of Python. Enjoy experimenting and building!</div>
+  </div>
+
+  <script>
+    function checkQuiz(quizId, correctIndex) {
+      const quiz = document.getElementById(quizId);
+      const options = quiz.querySelectorAll('input[type="radio"]');
+      const resultArea = quiz.querySelector('.quiz-result');
+      for (let i = 0; i < options.length; i++) {
+        if (options[i].checked) {
+          if (parseInt(options[i].value) === correctIndex) {
+            resultArea.textContent = '✅ Correct!';
+          } else {
+            resultArea.textContent = '❌ Try again!';
+          }
+          return;
+        }
+      }
+      resultArea.textContent = '❗ Please select an answer!';
+    }
+  </script>
+</body>
+</html>
