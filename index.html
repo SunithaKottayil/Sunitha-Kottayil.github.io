@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="index, follow" />
   <title>Sunitha Kottayil - Aspiring Full-Stack Developer & Data Analyst | Portfolio</title>
   <meta
     name="description"
@@ -10,7 +11,8 @@
   />
   <meta name="keywords" content="Data Analyst, Software Developer, Python, Power BI, TypeScript, C#, Data Science, Portfolio" />
   <meta name="author" content="Sunitha Kottayil" />
-  <meta name="robots" content="index, follow" />
+
+  <!-- Open Graph -->
   <meta property="og:title" content="Sunitha Kottayil - Aspiring Full-Stack Developer & Data Analyst" />
   <meta
     property="og:description"
@@ -27,10 +29,14 @@
   />
 
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    crossorigin="anonymous"
+  />
 
   <style>
-    /* Root variables */
+    /* --- Root Variables --- */
     :root {
       /* Colors */
       --primary-50: #f0f9ff;
@@ -77,6 +83,7 @@
       --gray-800: #1e293b;
       --gray-900: #0f172a;
 
+      /* Semantic */
       --success: var(--accent-500);
       --error: #ef4444;
 
@@ -94,7 +101,7 @@
       --space-2xl: 3rem;
       --space-3xl: 4rem;
 
-      /* Border Radius */
+      /* Border radius */
       --radius-sm: 0.375rem;
       --radius-md: 0.5rem;
       --radius-lg: 0.75rem;
@@ -112,7 +119,7 @@
       --gradient-rainbow: linear-gradient(135deg, var(--primary-500) 0%, var(--secondary-500) 50%, var(--accent-500) 100%);
     }
 
-    /* Dark mode overrides */
+    /* Dark mode override */
     [data-theme='dark'] {
       --gray-50: #0f172a;
       --gray-100: #1e293b;
@@ -167,7 +174,7 @@
       font-family: inherit;
     }
 
-    /* Container utility */
+    /* Container */
     .container {
       max-width: 1100px;
       margin-left: auto;
@@ -176,7 +183,7 @@
       padding-right: var(--space-lg);
     }
 
-    /* Progress Bar */
+    /* Scroll progress bar */
     .progress-bar {
       position: fixed;
       top: 0;
@@ -326,7 +333,7 @@
       }
     }
 
-    /* Smooth appearance for mobile menu links */
+    /* Mobile nav link style */
     ul.nav-links.mobile-active a.nav-link {
       padding: var(--space-sm);
       border-bottom: none;
@@ -466,7 +473,7 @@
     /* Section Headings */
     .section {
       padding: var(--space-4xl) 0;
-      scroll-margin-top: 90px; /* for easier anchor focus */
+      scroll-margin-top: 90px;
     }
     .section-alt {
       background-color: white;
@@ -983,14 +990,14 @@
         max-width: 100%;
       }
     }
+
   </style>
 </head>
 <body>
-
-  <!-- Scroll progress bar -->
+  <!-- Progress Bar -->
   <div class="progress-bar" id="progress-bar" aria-hidden="true"></div>
 
-  <!-- Header / Navigation -->
+  <!-- Header -->
   <header class="header" id="header">
     <nav class="nav container" role="navigation" aria-label="Primary Navigation">
       <a href="#home" class="logo" tabindex="0">Sunitha Kottayil</a>
@@ -1016,8 +1023,7 @@
 
   <!-- Main Content -->
   <main id="main-content" tabindex="-1">
-
-    <!-- Hero Section -->
+    <!-- Hero -->
     <section id="home" class="hero" aria-label="Introduction Section">
       <span class="hero-badge" aria-hidden="true"><i class="fas fa-rocket"></i> Code with Purpose: Delivering Practical Digital Solutions</span>
       <h1 class="hero-title" tabindex="0">
@@ -1047,7 +1053,7 @@
       </div>
     </section>
 
-    <!-- About Section -->
+    <!-- About -->
     <section id="about" class="section section-alt" aria-labelledby="about-title" tabindex="-1">
       <header class="section-header">
         <span class="section-badge" aria-hidden="true">About Me</span>
@@ -1080,7 +1086,7 @@
       </div>
     </section>
 
-    <!-- Skills Section -->
+    <!-- Skills -->
     <section id="skills" class="section" aria-labelledby="skills-title" tabindex="-1">
       <header class="section-header">
         <span class="section-badge" aria-hidden="true">Skills</span>
@@ -1136,7 +1142,7 @@
       </div>
     </section>
 
-    <!-- Projects Section -->
+    <!-- Projects -->
     <section id="projects" class="section section-alt" aria-labelledby="projects-title" tabindex="-1">
       <header class="section-header">
         <span class="section-badge">Projects</span>
@@ -1144,7 +1150,6 @@
       </header>
 
       <div class="container projects-grid" role="list">
-
         <article class="project-card" role="listitem" tabindex="0" aria-label="Smart Budget Planning Terminal App project">
           <h3 class="project-title">Smart Budget Planning Terminal App</h3>
           <p class="project-desc">
@@ -1198,19 +1203,18 @@
       </div>
     </section>
 
-    <!-- Contact Section -->
+    <!-- Contact -->
     <section id="contact" class="section section-alt" aria-labelledby="contact-title" tabindex="-1">
       <div class="container">
         <header class="section-header">
           <span class="section-badge">Let's Connect</span>
-          <h2 id="contact-title" class="section-title">Ready to Create Something Great?</h2>
-          <p class="section-subtitle">
+          <h2 id="contact-title" class="section-title" tabindex="0">Ready to Create Something Great?</h2>
+          <p class="section-subtitle" tabindex="0">
             Feel free to reach out via email, social media or send me a message directly below. Let's make something awesome together!
           </p>
         </header>
-        <div class="contact-flex" style="display:flex; flex-wrap:wrap; gap:3rem; justify-content:center;">
 
-          <!-- Contact Info Cards -->
+        <div class="contact-flex" style="display:flex; flex-wrap:wrap; gap:3rem; justify-content:center;">
           <div class="info-cards" style="flex:1 1 320px; max-width: 380px;">
             <div class="info-card">
               <div class="item" tabindex="0">
@@ -1246,7 +1250,6 @@
             </div>
           </div>
 
-          <!-- Contact Form -->
           <div class="contact-form-wrapper" style="flex:1 1 380px; max-width: 580px;">
             <form id="contact-form" novalidate>
               <h3>Send a Message</h3>
@@ -1276,7 +1279,6 @@
         </div>
       </div>
     </section>
-
   </main>
 
   <!-- Footer -->
@@ -1304,11 +1306,12 @@
     <div class="footer-bottom">&copy; 2025 Sunitha Kottayil. All rights reserved.</div>
   </footer>
 
-  <!-- Scroll to Top Button -->
+  <!-- Scroll to Top -->
   <button class="scroll-to-top" id="scroll-to-top" aria-label="Scroll to top" type="button">
     <i class="fas fa-arrow-up" aria-hidden="true"></i>
   </button>
 
+  <!-- JavaScript -->
   <script>
     (function () {
       const body = document.body;
@@ -1322,7 +1325,7 @@
       const form = document.getElementById('contact-form');
       const formFeedback = document.getElementById('form-feedback');
 
-      // Initialize theme
+      // Set theme
       function setTheme(theme) {
         if (theme === 'dark') {
           body.setAttribute('data-theme', 'dark');
@@ -1336,6 +1339,7 @@
           localStorage.setItem('theme', 'light');
         }
       }
+      // Toggle theme
       function toggleTheme() {
         setTheme(body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
       }
@@ -1356,7 +1360,7 @@
         navLinks.classList.remove('mobile-active');
       }
 
-      // Scroll progress
+      // Scroll progress bar update
       function updateProgressBar() {
         const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
         const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
@@ -1364,7 +1368,7 @@
         document.getElementById('progress-bar').style.width = scrollProgress + '%';
       }
 
-      // Header scroll effect
+      // Header style on scroll
       function handleHeaderScroll() {
         const header = document.getElementById('header');
         if (window.scrollY > 100) {
@@ -1374,7 +1378,7 @@
         }
       }
 
-      // Update active nav link on scroll
+      // Active nav link indication
       function updateActiveNavLink() {
         let current = '';
         const offsetMargin = 150;
@@ -1391,7 +1395,7 @@
         });
       }
 
-      // Scroll to top button toggle
+      // Scroll-to-top button visibility toggle
       function toggleScrollToTop() {
         if (window.scrollY > 300) {
           scrollToTopBtn.classList.add('visible');
@@ -1400,7 +1404,7 @@
         }
       }
 
-      // Smooth Scroll for anchor links
+      // Smooth scrolling for anchors
       function initSmoothScrolling() {
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
           anchor.addEventListener('click', e => {
@@ -1424,7 +1428,7 @@
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
 
-      // Debounce helper for scroll events with requestAnimationFrame
+      // Debounce for scroll events
       let frameId = null;
       function debounceScroll(fn) {
         if (frameId) {
@@ -1433,10 +1437,11 @@
         frameId = requestAnimationFrame(fn);
       }
 
-      // Form validation
+      // Validate email format
       function isValidEmail(email) {
         return /^\S+@\S+\.\S+$/.test(email);
       }
+      // Clear error messages
       function clearErrors() {
         ['name', 'email', 'message'].forEach(id => {
           const input = document.getElementById(id);
@@ -1447,12 +1452,14 @@
         formFeedback.style.display = 'none';
         formFeedback.textContent = '';
       }
+      // Show error on field
       function showError(id) {
         const input = document.getElementById(id);
         const error = document.getElementById(id + '-error');
         if (input) input.setAttribute('aria-invalid', 'true');
         if (error) error.style.display = 'block';
       }
+      // Validate form fields
       function validateForm() {
         clearErrors();
         let valid = true;
@@ -1470,6 +1477,7 @@
         }
         return valid;
       }
+      // Handle form submission
       function handleFormSubmit(e) {
         e.preventDefault();
         if (!validateForm()) return;
@@ -1479,7 +1487,6 @@
         submitBtn.disabled = true;
         submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
 
-        // Simulate sending (replace with real backend here)
         setTimeout(() => {
           formFeedback.textContent = `Thank you, ${form.name.value.trim()}! Your message has been received. I will get back to you soon.`;
           formFeedback.style.color = 'var(--success)';
@@ -1490,7 +1497,7 @@
         }, 2000);
       }
 
-      // Toggle mobile menu close on outside click
+      // Close mobile menu if clicking outside
       function outsideClickListener(e) {
         if (
           navLinks.classList.contains('mobile-active') &&
@@ -1500,8 +1507,7 @@
           closeMobileMenu();
         }
       }
-
-      // Close mobile menu on ESC key
+      // Close mobile menu with ESC key
       function escKeyListener(e) {
         if (e.key === 'Escape' && navLinks.classList.contains('mobile-active')) {
           closeMobileMenu();
@@ -1509,7 +1515,7 @@
         }
       }
 
-      // Typing animation for hero name
+      // Typing effect on hero name
       function typeWriter(text, element, delay = 100, startDelay = 1000) {
         element.textContent = '';
         let i = 0;
@@ -1525,7 +1531,7 @@
         setTimeout(type, startDelay);
       }
 
-      // Intersection Observer to reveal sections/cards
+      // Intersection observer reveal (optional)
       function observeElementsForAnimation() {
         const elements = document.querySelectorAll('.section-header, .project-card, .hero-badge, .hero-title, .hero-subtitle, .hero-description, .contact-flex');
         const observer = new IntersectionObserver((entries, observer) => {
@@ -1545,9 +1551,8 @@
         });
       }
 
-      // Initialize everything on DOM ready
+      // Initialize on DOM ready
       document.addEventListener('DOMContentLoaded', () => {
-        // Theme Toggle initial setup
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme) {
           setTheme(savedTheme);
@@ -1557,44 +1562,29 @@
           setTheme('light');
         }
         themeToggleBtn.addEventListener('click', toggleTheme);
-
-        // Mobile menu button event
         mobileMenuBtn.addEventListener('click', toggleMobileMenu);
         document.addEventListener('click', outsideClickListener);
         document.addEventListener('keydown', escKeyListener);
-
-        // Scroll events
         window.addEventListener('scroll', () => debounceScroll(() => {
           updateProgressBar();
           handleHeaderScroll();
           updateActiveNavLink();
           toggleScrollToTop();
         }));
-
-        // Scroll to top button click
         scrollToTopBtn.addEventListener('click', scrollToTop);
-
-        // Smooth scroll
         initSmoothScrolling();
+        if (form) form.addEventListener('submit', handleFormSubmit);
 
-        // Form submission
-        if (form) {
-          form.addEventListener('submit', handleFormSubmit);
-        }
-
-        // Typing animation for hero name
         const heroNameEl = document.getElementById('hero-name');
         if (heroNameEl) {
           typeWriter(heroNameEl.textContent, heroNameEl, 100, 1000);
         }
 
-        // Initial UI update
         updateProgressBar();
         handleHeaderScroll();
         updateActiveNavLink();
         toggleScrollToTop();
 
-        // Section reveal animation
         observeElementsForAnimation();
       });
     })();
