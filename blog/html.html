@@ -128,6 +128,29 @@
             font-size: 1.1em;
         }
 
+        .visual-demo {
+            background: #fff;
+            border: 2px dashed #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+            color: #666;
+        }
+
+        .structure-diagram {
+            font-family: monospace;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 6px;
+            border-left: 4px solid #28a745;
+            margin: 20px 0;
+        }
+
+        .structure-diagram .indent-1 { margin-left: 20px; }
+        .structure-diagram .indent-2 { margin-left: 40px; }
+        .structure-diagram .indent-3 { margin-left: 60px; }
+
         table {
             width: 100%;
             border-collapse: collapse;
@@ -290,6 +313,16 @@
                 <li><code>&lt;body&gt;</code> - Contains the visible content of your page</li>
             </ul>
 
+            <div class="structure-diagram">
+                <div><strong>HTML Document Structure:</strong></div>
+                <div class="indent-1">📄 &lt;!DOCTYPE html&gt; ← Tells browser it's HTML5</div>
+                <div class="indent-1">🌐 &lt;html&gt; ← Root container</div>
+                <div class="indent-2">🧠 &lt;head&gt; ← Page info (invisible)</div>
+                <div class="indent-3">📋 &lt;title&gt;, &lt;meta&gt;, etc.</div>
+                <div class="indent-2">👁️ &lt;body&gt; ← Visible content</div>
+                <div class="indent-3">📝 &lt;h1&gt;, &lt;p&gt;, &lt;img&gt;, etc.</div>
+            </div>
+
             <div class="tip">
                 <strong>Try it yourself:</strong> Copy this code into a text editor, save it as "index.html", and open it in your web browser.
             </div>
@@ -315,6 +348,12 @@
 &lt;a href="about.html"&gt;About Page&lt;/a&gt;
 
 &lt;img src="photo.jpg" alt="A beautiful sunset"&gt;</div>
+
+            <div class="visual-demo">
+                <p><strong>Image Placeholder</strong></p>
+                <p>🖼️ This is where your image would appear</p>
+                <p><em>Always include descriptive alt text!</em></p>
+            </div>
 
             <div class="tip">
                 <strong>Important:</strong> Always include the <code>alt</code> attribute for images. It helps screen readers and shows if the image fails to load.
@@ -439,6 +478,12 @@
             
             <h3>Images</h3>
             <div class="code-block">&lt;img src="landscape.jpg" alt="Mountain landscape at sunset" width="600"&gt;</div>
+            
+            <div class="visual-demo">
+                <p><strong>🏔️ Image Preview</strong></p>
+                <p>Mountain landscape at sunset</p>
+                <p><em>600px wide</em></p>
+            </div>
 
             <h3>Videos</h3>
             <div class="code-block">&lt;video controls width="600"&gt;
@@ -447,11 +492,23 @@
     Your browser doesn't support video.
 &lt;/video&gt;</div>
 
+            <div class="visual-demo">
+                <p><strong>🎬 Video Player</strong></p>
+                <p>▶️ Controls: Play, Pause, Volume</p>
+                <p><em>Multiple formats for compatibility</em></p>
+            </div>
+
             <h3>Audio</h3>
             <div class="code-block">&lt;audio controls&gt;
     &lt;source src="podcast.mp3" type="audio/mpeg"&gt;
     Your browser doesn't support audio.
 &lt;/audio&gt;</div>
+
+            <div class="visual-demo">
+                <p><strong>🎵 Audio Player</strong></p>
+                <p>▶️ ⏸️ 🔊 ━━━━━━━━━━</p>
+                <p><em>Simple audio controls</em></p>
+            </div>
         </section>
 
         <section id="best-practices" class="section">
