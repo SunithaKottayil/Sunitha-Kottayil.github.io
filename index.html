@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -453,26 +454,6 @@
             transform: translateY(-2px);
         }
 
-        /* Blog CTA Button */
-        .blog-cta {
-            margin-top: var(--space-xl);
-            display: flex;
-            justify-content: center;
-        }
-
-        .btn-blog {
-            background: linear-gradient(135deg, var(--accent-500) 0%, var(--accent-700) 100%);
-            color: white;
-            box-shadow: var(--shadow-lg);
-            border: none;
-        }
-
-        .btn-blog:hover {
-            background: linear-gradient(135deg, var(--accent-600) 0%, var(--accent-800) 100%);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-xl);
-        }
-
         /* Sections */
         .section {
             padding: var(--space-4xl) 0;
@@ -567,10 +548,6 @@
 
         .grid-3 {
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        }
-
-        .grid-4 {
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         }
 
         /* Footer */
@@ -1006,30 +983,58 @@
                         Data Analyst • Aspiring Software Developer • Python Instructor
                     </p>
                     <p class="hero-description">
-                        I transform complex data into compelling stories and build innovative solutions that drive real-world impact. 
-                        Currently bridging the gap between analytics and development while empowering the next generation of tech professionals.
+                        I bring together data insights and coding skills to create impactful solutions.
+                        As I move from analytics into full-stack development, I’m also sharing what I learn by teaching Python to aspiring softwareprofessionals.
                     </p>
                     
                     <div class="hero-actions">
                         <a href="#projects" class="btn btn-primary">
                             <i class="fas fa-rocket"></i>
-                            Explore My Work
+                            Explore My Projects
                         </a>
                         <a href="#contact" class="btn btn-outline">
                             <i class="fas fa-paper-plane"></i>
                             Let's Connect
                         </a>
                     </div>
-                    
-                    <div class="blog-cta">
-                        <a href="#" class="btn btn-blog">
-                            <i class="fas fa-blog"></i>
-                            Read My Blog
-                        </a>
-                    </div>
                 </div>
             </div>
         </section>
+
+        
+
+
+<!-- Add this HTML after your existing CTA buttons.Just replace the # with your actual blog URL -->
+<div class="blog-cta">
+    <a href="https://yourblog.com" class="btn btn-blog">
+        📚 Read My Programming Tutorials
+    </a>
+</div>
+
+/* Add this CSS to your stylesheet */
+.blog-cta {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+}
+
+.btn-blog {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+    box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
+}
+
+.btn-blog:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 35px rgba(16, 185, 129, 0.4);
+}
+
+/* Add this to your mobile media query */
+@media (max-width: 768px) {
+    .blog-cta {
+        margin-top: 20px;
+    }
+}
 
         <!-- About Section -->
         <section id="about" class="section section-alt">
@@ -1038,60 +1043,60 @@
                     <div class="section-badge">About Me</div>
                     <h2 class="section-title">Where Data Meets Innovation</h2>
                     <p class="section-subtitle">
-                        From data insights to digital solutions—I'm an aspiring developer crafting web and mobile applications that make a difference.
+                        Empowering change through data and development—I'm a passionate analyst creating software that truly matters.
                     </p>
                 </div>
                 
                 <div class="grid grid-2">
                     <div class="slide-in-left visible">
                         <p style="margin-bottom: var(--space-lg); color: var(--gray-600); font-size: 1.125rem; line-height: 1.8;">
-                            👋 Hello! I'm Sunitha, an <span style="background: linear-gradient(120deg, var(--primary-100) 0%, var(--primary-100) 100%); padding: 0.2rem 0.4rem; border-radius: var(--radius-sm); font-weight: 600; color: var(--primary-700);">aspiring web and app developer</span> with a strong foundation in data analysis. My journey began in education, but my passion for technology led me to explore the fascinating world of software development and data analytics.
+                            👋 Hello ! I'm Sunitha, a <span style="background: linear-gradient(120deg, var(--primary-100) 0%, var(--primary-100) 100%); padding: 0.2rem 0.4rem; border-radius: var(--radius-sm); font-weight: 600; color: var(--primary-700);">data storyteller</span> who believes every dataset has a narrative waiting to be discovered. My journey began in education, but curiosity led me down the fascinating path of data analytics and software development.
                         </p>
                         
                         <p style="margin-bottom: var(--space-lg); color: var(--gray-600); font-size: 1.125rem; line-height: 1.8;">
-                            As a <span style="background: linear-gradient(120deg, var(--primary-100) 0%, var(--primary-100) 100%); padding: 0.2rem 0.4rem; border-radius: var(--radius-sm); font-weight: 600; color: var(--primary-700);">former data analyst</span>, I specialized in Python programming, data analysis, and visualization. I'm an expert in Power BI dashboard creation using DAX and Power Query, proficient in SQL fundamentals and Tableau, and an advanced Excel user. This analytical background gives me a unique perspective when building user-friendly applications.
+                            What drives me? The magical moment when <span style="background: linear-gradient(120deg, var(--primary-100) 0%, var(--primary-100) 100%); padding: 0.2rem 0.4rem; border-radius: var(--radius-sm); font-weight: 600; color: var(--primary-700);">complex data transforms into clear, actionable insights</span> that drive real-world decisions. Currently expanding my technical arsenal as a Data Technician student, diving deep into Python, C#, and TypeScript.
                         </p>
                         
                         <p style="margin-bottom: var(--space-lg); color: var(--gray-600); font-size: 1.125rem; line-height: 1.8;">
-                            Currently, I'm <span style="background: linear-gradient(120deg, var(--primary-100) 0%, var(--primary-100) 100%); padding: 0.2rem 0.4rem; border-radius: var(--radius-sm); font-weight: 600; color: var(--primary-700);">preparing for my career as a junior developer</span> while teaching Python to tech beginners at ReDI School. There's nothing more rewarding than seeing someone's excitement when they write their first successful program or create their first data visualization!
+                            As a <span style="background: linear-gradient(120deg, var(--primary-100) 0%, var(--primary-100) 100%); padding: 0.2rem 0.4rem; border-radius: var(--radius-sm); font-weight: 600; color: var(--primary-700);">Python instructor at ReDI School</span>, I've discovered my passion for making technology accessible. There's nothing quite like seeing someone's face light up when they write their first successful program or create their first data visualization!
                         </p>
 
                         <p style="color: var(--gray-600); font-size: 1.125rem; line-height: 1.8;">
-                            My approach combines <span style="background: linear-gradient(120deg, var(--primary-100) 0%, var(--primary-100) 100%); padding: 0.2rem 0.4rem; border-radius: var(--radius-sm); font-weight: 600; color: var(--primary-700);">analytical thinking with creative problem-solving</span>, always asking: "How can we make this technology work better for people?" Whether it's building responsive web applications, developing mobile apps, or teaching the next generation of developers, I'm committed to creating solutions that bridge the gap between complex technology and human needs.
+                            My approach combines <span style="background: linear-gradient(120deg, var(--primary-100) 0%, var(--primary-100) 100%); padding: 0.2rem 0.4rem; border-radius: var(--radius-sm); font-weight: 600; color: var(--primary-700);">analytical rigor with creative problem-solving</span>, always asking: "How can we make this data work better for people?" Whether it's building predictive models, designing intuitive dashboards, or teaching the next generation of developers, I'm committed to bridging the gap between complex technology and human understanding.
                         </p>
                     </div>
                     
                     <div class="slide-in-right visible">
                         <div class="about-timeline">
                             <div class="timeline-item">
-                                <div class="timeline-date">2025 - Present</div>
-                                <div class="timeline-title">Data Technician Trainee & Python Instructor</div>
+                                <div class="timeline-date">2024 - Present</div>
+                                <div class="timeline-title">Python Instructor & Data Technician Student</div>
                                 <div class="timeline-description">
-                                    Starting my training journey with Arolink as a Data Technician trainee with Aarhus Tech, while continuing to inspire tech beginners as a Python instructor at ReDI School.
+                                    Teaching Python fundamentals at ReDI School while mastering advanced programming concepts.
                                 </div>
                             </div>
                             
                             <div class="timeline-item">
                                 <div class="timeline-date">2024</div>
-                                <div class="timeline-title">Capstone Project: Arla Foods Collaboration</div>
+                                <div class="timeline-title">Project Collaboration as Data Analyst at Arla Foods</div>
                                 <div class="timeline-description">
-                                    Applied my Python and Power BI expertise in a real-world setting, collaborating with Denmark's largest dairy organization to analyze their best-selling brands using advanced data analytics and visualization techniques.
+                                    Got an opportunity to collaborate with Denmark's largest dairy organisation and analyse two of their best selling brands using advanced data analytics and data visualisation using python and power BI.
+                                </div>
+                            </div>
+                            
+                            <div class="timeline-item">
+                                <div class="timeline-date">2023</div>
+                                <div class="timeline-title">Career Transformation</div>
+                                <div class="timeline-description">
+                                    Transition from economist to software development, driven by an insatiable curiosity for data and a passion for solving complex problems.
                                 </div>
                             </div>
                             
                             <div class="timeline-item">
                                 <div class="timeline-date">2022</div>
-                                <div class="timeline-title">The Learning Journey Begins</div>
+                                <div class="timeline-title">The Spark</div>
                                 <div class="timeline-description">
-                                    Started Python programming as a gateway into the IT field, joining comprehensive data analysis courses at ReDI School, DataCamp, and Udemy to build a solid foundation in data science and programming.
-                                </div>
-                            </div>
-                            
-                            <div class="timeline-item">
-                                <div class="timeline-date">2020</div>
-                                <div class="timeline-title">The Spark: Discovering Data Visualization</div>
-                                <div class="timeline-description">
-                                    Explored the vast potential of advanced Excel and discovered Power BI, unlocking the power of data visualization for decision-making. This revelation ignited my passion for transforming raw data into meaningful insights.
+                                    Discovered the power of data analysis during a personal project, igniting a passion that would reshape my entire career trajectory.
                                 </div>
                             </div>
                         </div>
@@ -1111,7 +1116,7 @@
                     </p>
                 </div>
                 
-                <div class="grid grid-4">
+                <div class="grid grid-2">
                     <div class="card fade-in visible skills-category">
                         <h3>
                             <i class="fas fa-chart-line"></i>
@@ -1154,8 +1159,11 @@
                             <span class="skill-tag">Visual Studio Code</span>
                             <span class="skill-tag">Jupyter Notebooks</span>
                             <span class="skill-tag">Azure Cloud Services</span>
+                            <span class="skill-tag">Docker & Containerization</span>
+                            <span class="skill-tag">Power Platform</span>
                             <span class="skill-tag">Microsoft Office Suite</span>
                             <span class="skill-tag">Figma & Design Tools</span>
+                            <span class="skill-tag">Agile & Scrum</span>
                         </div>
                     </div>
                     
@@ -1342,9 +1350,6 @@
                                 <a href="https://www.linkedin.com/in/sunitha-kottayil" class="btn btn-outline" target="_blank" rel="noopener noreferrer">
                                     <i class="fab fa-linkedin"></i> LinkedIn
                                 </a>
-                                <a href="https://sunithakottayil.github.io/Sunitha-Kottayil.github.io/blog.html" class="btn btn-outline" target="_blank" rel="noopener noreferrer">
-                                    <i class="fas fa-blog"></i> Blog
-                                </a>
                             </div>
                         </div>
                     </div>
@@ -1400,9 +1405,6 @@
                     </a>
                     <a href="https://www.linkedin.com/in/sunitha-kottayil" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                         <i class="fab fa-linkedin"></i>
-                    </a>
-                    <a href="https://sunithakottayil.github.io/Sunitha-Kottayil.github.io/blog.html" target="_blank" rel="noopener noreferrer" aria-label="Blog">
-                        <i class="fas fa-blog"></i>
                     </a>
                     <a href="mailto:vgsuniashok.email@example.com" aria-label="Email">
                         <i class="fas fa-envelope"></i>
