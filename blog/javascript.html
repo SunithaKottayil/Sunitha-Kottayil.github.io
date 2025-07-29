@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>JavaScript Masterclass: From Basics to Advanced</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9fbfc;
+      color: #222;
+      margin: 0;
+      padding: 0 1em 3em 1em;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 900px;
+      margin: 2em auto;
+      padding: 2.5em;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 0 15px #a0aec0;
+    }
+    h1, h2 {
+      color: #0066cc;
+      font-weight: 700;
+    }
+    h1 {
+      text-align: center;
+      font-size: 2.5em;
+      margin-bottom: 0.4em;
+    }
+    h2 {
+      margin-top: 2em;
+      border-bottom: 3px solid #66a3ff;
+      padding-bottom: 0.4em;
+      font-size: 1.8em;
+    }
+    h3 {
+      margin-top: 1.4em;
+      color: #004d99;
+    }
+    p, ul, ol {
+      margin-top: 1em;
+      margin-bottom: 1em;
+      font-size: 1.05em;
+      max-width: 850px;
+    }
+    ul, ol {
+      margin-left: 2em;
+    }
+    code {
+      background: #e6f0ff;
+      color: #004080;
+      font-family: Consolas, monospace;
+      font-size: 1em;
+      padding: 2px 6px;
+      border-radius: 5px;
+    }
+    pre.cmd {
+      background: #f0f4ff;
+      border: 1.5px solid #66a3ff;
+      border-radius: 10px;
+      padding: 1.2em 1.5em;
+      font-family: Consolas, monospace;
+      overflow-x: auto;
+      font-size: 1em;
+      color: #004080;
+      margin: 1.5em 0;
+      white-space: pre-wrap;
+    }
+    .tip, .fnote {
+      background: #e8f0fe;
+      border-left: 6px solid #3399ff;
+      padding: 1.3em;
+      margin: 1.8em 0;
+      border-radius: 10px;
+      font-size: 1em;
+      color: #145cab;
+    }
+    .diagram {
+      text-align: center;
+      margin: 2.5em 0;
+    }
+    .diagram img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 14px;
+      box-shadow: 0 5px 15px rgba(0,102,204,0.2);
+      background: #fff;
+      padding: 18px;
+    }
+    hr {
+      border: none;
+      border-top: 1.5px solid #99c2ff;
+      margin: 3em 0;
+    }
+    a {
+      color: #0066cc;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .quiz-block {
+      background: #fff7e6;
+      border-left: 6px solid #ffa31a;
+      padding: 1.5em;
+      border-radius: 10px;
+      margin: 2em 0;
+      font-size: 1.1em;
+      color: #8a5600;
+      max-width: 850px;
+    }
+    .quiz-block input[type="radio"] {
+      margin-right: 12px;
+      vertical-align: middle;
+      transform: scale(1.1);
+    }
+    .quiz-result {
+      font-weight: 700;
+      margin-top: 1em;
+      font-size: 1.1em;
+    }
+    iframe {
+      border: 1.5px solid #66a3ff;
+      border-radius: 10px;
+      width: 100%;
+      min-height: 460px;
+      margin: 1.8em 0;
+    }
+    button.check-btn {
+      background: #0066cc;
+      color: #fff;
+      border: none;
+      padding: 7px 22px;
+      font-size: 1em;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background 0.3s;
+    }
+    button.check-btn:hover {
+      background: #004d99;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🌟 JavaScript Masterclass: From Basics to Advanced</h1>
+    <p>Welcome to your journey with JavaScript! This guide takes you step-by-step through the essential concepts, from the very first lines of code to advanced programming techniques you'll use in real-world projects. You’ll find clear explanations, live code examples, diagrams, and quizzes to make learning fun and effective.</p>
+
+    <hr />
+
+    <h2>1. Your First JavaScript Program</h2>
+    <p>Let’s write the classic “Hello, World!” program to get started. Open your browser console (<code>F12</code> or right-click → <em>Inspect → Console</em>) and copy-paste this:</p>
+    <pre class="cmd">console.log("Hello, World!");</pre>
+    <p>This prints <em>Hello, World!</em> in the console.</p>
+
+    <div class="tip">Tip: Use <code>console.log()</code> to display information at any point while coding.</div>
+
+    <div class="quiz-block" id="quiz1">
+      <b>Quiz 1: What does <code>console.log("Hello, World!");</code> do?</b><br />
+      <form>
+        <input type="radio" name="q1" value="0" id="q1a1"/><label for="q1a1"> Declares a variable</label><br />
+        <input type="radio" name="q1" value="1" id="q1a2"/><label for="q1a2"> Prints text to the console</label><br />
+        <input type="radio" name="q1" value="0" id="q1a3"/><label for="q1a3"> Starts a loop</label><br />
+        <button type="button" class="check-btn" onclick="checkQuiz('quiz1', 1)">Check Answer</button>
+      </form>
+      <div class="quiz-result" id="quiz1-result"></div>
+    </div>
+
+    <hr />
+
+    <h2>2. JavaScript Basics You Need to Know</h2>
+
+    <h3>2.1 Variables and Data Types</h3>
+    <p>Variables store information so you can use and change it later. JavaScript has three ways to declare variables:</p>
+    <ul>
+      <li><code>var</code> (older, avoid if possible)</li>
+      <li><code>let</code> (modern, block-scoped)</li>
+      <li><code>const</code> (constant, can’t change after assignment)</li>
+    </ul>
+    <p>Common data types:</p>
+    <ul>
+      <li><code>number</code> — for all numeric values</li>
+      <li><code>string</code> — text surrounded by quotes</li>
+      <li><code>boolean</code> — <code>true</code> or <code>false</code></li>
+      <li><code>null</code> and <code>undefined</code> — special “empty” values</li>
+      <li><code>object</code> — collections and more complex data</li>
+    </ul>
+    <pre class="cmd">
+// Declare variables
+const name = "Alice";
+let age = 25;
+let isJavaScriptFun = true;
+
+console.log(name, age, isJavaScriptFun);
+    </pre>
+
+    <div class="quiz-block" id="quiz2">
+      <b>Quiz 2: Which keyword should you use for variables you plan to change?</b><br />
+      <form>
+        <input type="radio" name="q2" value="1" id="q2a1"/><label for="q2a1"> let</label><br />
+        <input type="radio" name="q2" value="0" id="q2a2"/><label for="q2a2"> const</label><br />
+        <input type="radio" name="q2" value="0" id="q2a3"/><label for="q2a3"> var</label><br />
+        <button type="button" class="check-btn" onclick="checkQuiz('quiz2', 1)">Check Answer</button>
+      </form>
+      <div class="quiz-result" id="quiz2-result"></div>
+    </div>
+
+    <hr />
+
+    <h3>2.2 Operators</h3>
+    <p>JavaScript uses operators to perform math, compare values, and more:</p>
+    <ul>
+      <li>Arithmetic: <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>%</code></li>
+      <li>Assignment: <code>=</code>, <code>+=</code>, <code>-=</code>, etc.</li>
+      <li>Comparison: <code>==</code>, <code>===</code>, <code>!=</code>, <code>!==</code>, <code>&gt;</code>, <code>&lt;</code></li>
+      <li>Logical: <code>&amp;&amp;</code> (and), <code>||</code> (or), <code>!</code> (not)</li>
+    </ul>
+    <pre class="cmd">
+let x = 5;
+let y = 10;
+console.log(x + y); // 15
+console.log(x === 5 && y === 10); // true
+    </pre>
+
+    <hr />
+
+    <h3>2.3 Conditionals (if, else, else if)</h3>
+    <pre class="cmd">
+let age = 18;
+
+if (age >= 18) {
+  console.log("You can vote!");
+} else if (age > 13) {
+  console.log("You are a teenager.");
+} else {
+  console.log("You are a child.");
+}
+    </pre>
+
+    <div class="quiz-block" id="quiz3">
+      <b>Quiz 3: What keyword checks a condition in JavaScript?</b><br />
+      <form>
+        <input type="radio" name="q3" value="1" id="q3a1"/><label for="q3a1"> if</label><br />
+        <input type="radio" name="q3" value="0" id="q3a2"/><label for="q3a2"> then</label><br />
+        <input type="radio" name="q3" value="0" id="q3a3"/><label for="q3a3"> loop</label><br />
+        <button type="button" class="check-btn" onclick="checkQuiz('quiz3', 1)">Check Answer</button>
+      </form>
+      <div class="quiz-result" id="quiz3-result"></div>
+    </div>
+
+    <hr />
+
+    <h3>2.4 Loops (for, while, do-while)</h3>
+    <pre class="cmd">
+// For loop:
+for (let i = 1; i <= 5; i++) {
+  console.log(i);
+}
+
+// While loop:
+let count = 1;
+while (count <= 5) {
+  console.log(count);
+  count++;
+}
+
+// Do-while loop:
+let j = 1;
+do {
+  console.log(j);
+  j++;
+} while (j <= 5);
+    </pre>
+
+    <div class="quiz-block" id="quiz4">
+      <b>Quiz 4: Which loop runs the code at least once, even if the condition is false?</b><br />
+      <form>
+        <input type="radio" name="q4" value="0" id="q4a1"/><label for="q4a1"> for</label><br />
+        <input type="radio" name="q4" value="0" id="q4a2"/><label for="q4a2"> while</label><br />
+        <input type="radio" name="q4" value="1" id="q4a3"/><label for="q4a3"> do-while</label><br />
+        <button type="button" class="check-btn" onclick="checkQuiz('quiz4', 1)">Check Answer</button>
+      </form>
+      <div class="quiz-result" id="quiz4-result"></div>
+    </div>
+
+    <hr />
+
+    <h3>2.5 Functions</h3>
+    <p>Functions are reusable blocks of code you can call anytime.</p>
+    <pre class="cmd">
+function greet(name) {
+  console.log("Hello, " + name + "!");
+}
+
+greet("Samantha"); // Outputs: Hello, Samantha!
+
+// Arrow function (shorter syntax)
+const add = (a, b) => a + b;
+console.log(add(2, 3)); // 5
+    </pre>
+
+    <hr />
+
+    <h2>3. Working with Data Structures</h2>
+
+    <h3>3.1 Arrays</h3>
+    <pre class="cmd">
+// Array creation and basic use:
+let fruits = ["Apple", "Banana", "Cherry"];
+console.log(fruits[0]); // Apple
+
+// Looping over arrays:
+for (let fruit of fruits) {
+  console.log(fruit);
+}
+    </pre>
+
+    <h3>3.2 Objects</h3>
+    <pre class="cmd">
+// Object with properties:
+const person = {
+  name: "John",
+  age: 30,
+  greet() {
+    console.log("Hi, I'm " + this.name);
+  }
+};
+
+person.greet(); // Hi, I'm John
+    </pre>
+
+    <h2>4. The DOM & Events (Browser JS)</h2>
+    <p>JavaScript controls web pages through the Document Object Model (DOM). You can select elements, change them, and respond to events.</p>
+
+    <pre class="cmd">
+// Change text of an element with id="demo"
+document.getElementById("demo").innerText = "Hello from JS!";
+
+// Listen for clicks
+document.getElementById("myButton").addEventListener("click", function() {
+  alert("Button clicked!");
+});
+    </pre>
+
+    <div class="diagram">
+      <img src="https://i.imgur.com/7BHkJOK.png" alt="DOM Elements and Event Listeners" />
+      <br>
+      <small>The DOM lets JavaScript interact with your webpage's elements and respond to user actions.</small>
+    </div>
+
+    <hr />
+
+    <h2>5. Advanced JavaScript Concepts</h2>
+
+    <h3>5.1 ES6+ Features</h3>
+    <ul>
+      <li><b>Let and Const:</b> Block-scoped variables</li>
+      <li><b>Arrow Functions:</b> Shorter syntax</li>
+      <li><b>Template Literals:</b> Multi-line strings and interpolation</li>
+      <li><b>Destructuring:</b> Extract properties from objects/arrays</li>
+      <li><b>Spread/Rest Operators:</b> Expand or collect elements/arguments</li>
+      <li><b>Modules:</b> Import/export JS code</li>
+    </ul>
+    <pre class="cmd">
+// Template literals
+const name = "Anna";
+console.log(`Hello, ${name}!`);
+
+// Destructuring
+const user = { id: 1, username: "user1" };
+const { id, username } = user;
+console.log(id, username);
+
+// Spread operator
+const nums = [1, 2, 3];
+const moreNums = [...nums, 4, 5];
+console.log(moreNums);
+    </pre>
+
+    <h3>5.2 Promises & Async/Await</h3>
+    <p>Handle asynchronous operations cleanly:</p>
+    <pre class="cmd">
+// Promise example
+function wait(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+wait(1000).then(() => console.log("Waited 1 second"));
+
+// Async/await example
+async function asyncWait() {
+  await wait(1000);
+  console.log("Waited 1 second (async/await)");
+}
+asyncWait();
+    </pre>
+
+    <div class="quiz-block" id="quiz5">
+      <b>Quiz 5: What keyword lets you write asynchronous code that looks synchronous?</b><br />
+      <form>
+        <input type="radio" name="q5" value="0" id="q5a1"/><label for="q5a1"> promise</label><br />
+        <input type="radio" name="q5" value="1" id="q5a2"/><label for="q5a2"> async/await</label><br />
+        <input type="radio" name="q5" value="0" id="q5a3"/><label for="q5a3"> return</label><br />
+        <button type="button" class="check-btn" onclick="checkQuiz('quiz5', 1)">Check Answer</button>
+      </form>
+      <div class="quiz-result" id="quiz5-result"></div>
+    </div>
+
+    <hr />
+
+    <h3>5.3 Classes & Prototypes</h3>
+    <pre class="cmd">
+// Class syntax (ES6+)
+class Person {
+  constructor(name) {
+    this.name = name;
+  }
+  greet() {
+    console.log(`Hi, I'm ${this.name}`);
+  }
+}
+
+const alice = new Person("Alice");
+alice.greet(); // Hi, I'm Alice
+    </pre>
+
+    <h2>6. Error Handling</h2>
+    <pre class="cmd">
+try {
+  throw new Error("Oops!");
+} catch (e) {
+  console.error("Caught an error:", e.message);
+} finally {
+  console.log("This runs no matter what.");
+}
+    </pre>
+
+    <hr />
+
+    <h2>7. Modules and Tooling</h2>
+    <p>Modern JavaScript uses modules to split code files. Tools like <code>webpack</code>, <code>babel</code>, and <code>npm</code> help manage, transform, and install packages.</p>
+
+    <hr />
+
+    <h2>8. Testing and Debugging</h2>
+    <p>Use browser dev tools, <code>console.log</code>, and frameworks like Jest or Mocha for testing your code.</p>
+
+    <hr />
+
+    <h2>Practice Projects to Level Up</h2>
+    <ul>
+      <li>Build a to-do list app with add/remove features and local storage.</li>
+      <li>Create a quiz app with interactive questions and scoring.</li>
+      <li>Make a weather app fetching live data using fetch API and async/await.</li>
+      <li>Build a simple game like rock-paper-scissors in the browser.</li>
+    </ul>
+
+    <div class="fnote">
+      <b>Remember:</b> JavaScript mastery comes from writing lots of code, experimenting boldly, and debugging patiently. Have fun and don't hesitate to search, ask, and learn every day!
+    </div>
+  </div>
+
+  <script>
+    function checkQuiz(quizId, correctValue) {
+      const quiz = document.getElementById(quizId);
+      const radios = quiz.getElementsByTagName('input');
+      const result = quiz.querySelector('.quiz-result');
+      for (let i = 0; i < radios.length; i++) {
+        if (radios[i].checked) {
+          if (parseInt(radios[i].value) === correctValue) {
+            result.innerHTML = '✅ Correct!';
+          } else {
+            result.innerHTML = '❌ Try again!';
+          }
+          return;
+        }
+      }
+      result.innerHTML = '❗ Please select an answer!';
+    }
+  </script>
+</body>
+</html>
