@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Beginner’s Guide: C# Fundamentals – Interactive Learning</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4faff;
+      color: #263238;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 900px;
+      margin: 2em auto;
+      padding: 2em;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 0 12px #b0bec5;
+    }
+    h1, h2 {
+      color: #1976d2;
+      text-align: center;
+    }
+    h2 {
+      border-bottom: 2px solid #64b5f6;
+      padding-bottom: 0.3em;
+      margin-top: 2em;
+      text-align: left;
+    }
+    ul, ol {
+      margin-left: 2em;
+    }
+    .tip, .fnote {
+      background: #e1f5fe;
+      border-left: 6px solid #00bcd4;
+      padding: 1em;
+      margin: 1em 0;
+      border-radius: 5px;
+    }
+    .diagram {
+      text-align: center;
+      margin: 2em 0;
+    }
+    .diagram img {
+      max-width: 90%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(33,150,243,0.08);
+      background: #fff;
+      padding: 10px;
+    }
+    iframe {
+      border: 1px solid #b0bec5;
+      border-radius: 8px;
+      margin-top: 1em;
+      margin-bottom: 1em;
+      width: 100%;
+      min-height: 430px;
+    }
+    a {
+      color: #1565c0;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #b3e5fc;
+      margin: 2em 0;
+    }
+    code {
+      color: #009688;
+      font-size: 1em;
+    }
+    .quiz-block {
+      background: #fffde7;
+      border-left: 6px solid #ffd600;
+      padding: 1em;
+      border-radius: 7px;
+      margin: 2em 0;
+    }
+    .quiz-block input[type="radio"] {
+      margin-right: 10px;
+    }
+    .quiz-result {
+      font-weight: bold;
+      margin-top: 1em;
+    }
+    .run-in-fiddle {
+      background: #1976d2;
+      color: #fff;
+      border: none;
+      padding: 6px 18px;
+      font-size: 1em;
+      border-radius: 5px;
+      margin-left: 10px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <h1>🚀 C# Fundamentals: Interactive Guide for Complete Beginners</h1>
+  <p>Welcome! This illustrated guide introduces you to C# programming—with interactive code you can run <b>right in your browser</b> and quizzes to test your knowledge. Get ready to learn by doing!</p>
+
+  <hr />
+
+  <h2>1. Your First C# Program – Hello World</h2>
+  <p>This is every coder’s first step. Try editing <b>"World"</b> to your name and click <b>Run</b>:</p>
+  <iframe src="https://dotnetfiddle.net/Widget/t8d8oe" allowfullscreen></iframe>
+  <div class="tip">
+    <b>Tip:</b> You can change the code and click "Run" to see the result instantly!
+  </div>
+
+  <div class="quiz-block" id="quiz1">
+    <b>Quiz 1: What does <code>Console.WriteLine("Hello, World!");</code> do?</b>
+    <form>
+      <input type="radio" name="q1" value="0"/>Declares a variable<br>
+      <input type="radio" name="q1" value="1"/>Outputs text to the screen<br>
+      <input type="radio" name="q1" value="0"/>Starts a loop<br>
+      <button type="button" onclick="checkQuiz('quiz1', 1)">Check Answer</button>
+    </form>
+    <div class="quiz-result" id="quiz1-result"></div>
+  </div>
+
+  <hr/>
+
+  <h2>2. Variables and Data Types</h2>
+  <ul>
+    <li><code>int</code> stores whole numbers</li>
+    <li><code>double</code> stores decimals</li>
+    <li><code>string</code> stores text</li>
+    <li><code>bool</code> stores true/false</li>
+  </ul>
+  <p>Change the values below and run:</p>
+  <iframe src="https://dotnetfiddle.net/Widget/f5unKG" allowfullscreen></iframe>
+
+  <div class="quiz-block" id="quiz2">
+    <b>Quiz 2: Which of these is a valid string variable in C#?</b>
+    <form>
+      <input type="radio" name="q2" value="1"/>string name = "Sam";<br>
+      <input type="radio" name="q2" value="0"/>int name = "Sam";<br>
+      <input type="radio" name="q2" value="0"/>bool name = "Sam";<br>
+      <button type="button" onclick="checkQuiz('quiz2', 1)">Check Answer</button>
+    </form>
+    <div class="quiz-result" id="quiz2-result"></div>
+  </div>
+
+  <hr/>
+
+  <h2>3. Input and Output</h2>
+  <p>Use <code>Console.Write</code> to prompt the user, and <code>Console.ReadLine</code> to get input. On dotnetfiddle.net, you can <b>simulate input</b> using their Input box.</p>
+  <iframe src="https://dotnetfiddle.net/Widget/L5fCIS" allowfullscreen></iframe>
+
+  <div class="quiz-block" id="quiz3">
+    <b>Quiz 3: What method would you use to read a user's response?</b>
+    <form>
+      <input type="radio" name="q3" value="0"/>Console.Write();<br>
+      <input type="radio" name="q3" value="1"/>Console.ReadLine();<br>
+      <input type="radio" name="q3" value="0"/>Console.Input();<br>
+      <button type="button" onclick="checkQuiz('quiz3', 1)">Check Answer</button>
+    </form>
+    <div class="quiz-result" id="quiz3-result"></div>
+  </div>
+
+  <hr/>
+
+  <h2>4. Decision Making (if/else)</h2>
+  <p>Adjust the age value and <b>see which message appears</b>:</p>
+  <iframe src="https://dotnetfiddle.net/Widget/55RA0G" allowfullscreen></iframe>
+
+  <div class="quiz-block" id="quiz4">
+    <b>Quiz 4: What keyword do you use to run code only if a condition is true?</b>
+    <form>
+      <input type="radio" name="q4" value="0"/>while<br>
+      <input type="radio" name="q4" value="1"/>if<br>
+      <input type="radio" name="q4" value="0"/>for<br>
+      <button type="button" onclick="checkQuiz('quiz4', 1)">Check Answer</button>
+    </form>
+    <div class="quiz-result" id="quiz4-result"></div>
+  </div>
+
+  <hr/>
+
+  <h2>5. Loops (for & while)</h2>
+  <p>Try changing the for loop's end value to print more numbers:</p>
+  <iframe src="https://dotnetfiddle.net/Widget/5cim7s" allowfullscreen></iframe>
+
+  <div class="quiz-block" id="quiz5">
+    <b>Quiz 5: Which loop is best for repeating something a set number of times?</b>
+    <form>
+      <input type="radio" name="q5" value="1"/>for<br>
+      <input type="radio" name="q5" value="0"/>if<br>
+      <input type="radio" name="q5" value="0"/>catch<br>
+      <button type="button" onclick="checkQuiz('quiz5', 1)">Check Answer</button>
+    </form>
+    <div class="quiz-result" id="quiz5-result"></div>
+  </div>
+
+  <hr/>
+
+  <h2>6. Methods (Functions)</h2>
+  <p>Modify the <code>Greet</code> method to try different names:</p>
+  <iframe src="https://dotnetfiddle.net/Widget/XxyJQC" allowfullscreen></iframe>
+
+  <div class="quiz-block" id="quiz6">
+    <b>Quiz 6: What does <code>static void Greet(string name)</code> define?</b>
+    <form>
+      <input type="radio" name="q6" value="1"/>A method (function) called Greet<br>
+      <input type="radio" name="q6" value="0"/>A variable<br>
+      <input type="radio" name="q6" value="0"/>A loop<br>
+      <button type="button" onclick="checkQuiz('quiz6', 1)">Check Answer</button>
+    </form>
+    <div class="quiz-result" id="quiz6-result"></div>
+  </div>
+
+  <hr/>
+
+  <h2>7. Object-Oriented Programming (OOP) Basics</h2>
+  <p>Change the <code>Model</code> and run. This demonstrates classes/objects:</p>
+  <iframe src="https://dotnetfiddle.net/Widget/dN0DKh" allowfullscreen></iframe>
+  <div class="tip">
+    <b>OOP</b>: Use <b>classes</b> to organize related data and actions together—like a blueprint for building objects!
+  </div>
+
+  <hr/>
+
+  <h2>Extra: Practice & Keep Learning</h2>
+  <ul>
+    <li>Try making your own mini-programs by combining variables, loops, and user input.</li>
+    <li>Search for "<b>C# beginner exercises</b>" to get daily ideas.</li>
+    <li>Check <a href="https://learn.microsoft.com/en-us/shows/csharp-fundamentals-for-absolute-beginners/" target="_blank">Microsoft’s C# Fundamentals for Beginners</a>.</li>
+    <li>Explore more interactive fiddles at <a href="https://dotnetfiddle.net" target="_blank">dotnetfiddle.net</a>.</li>
+  </ul>
+  <div class="fnote">
+    <b>Have fun exploring and coding—try, break, edit, and fix! That’s the programmer’s way.</b>
+  </div>
+
+</div>
+<script>
+function checkQuiz(quizId, answerIndex) {
+  var quiz = document.getElementById(quizId);
+  var radios = quiz.getElementsByTagName('input');
+  var result = quiz.querySelector('.quiz-result');
+  for (var i = 0; i < radios.length; i++) {
+    if (radios[i].checked) {
+      if (parseInt(radios[i].value) === answerIndex) {
+        result.innerHTML = "✅ Correct!";
+      } else {
+        result.innerHTML = "❌ Try again!";
+      }
+      return;
+    }
+  }
+  result.innerHTML = "❗ Please select an answer!";
+}
+</script>
+</body>
+</html>
