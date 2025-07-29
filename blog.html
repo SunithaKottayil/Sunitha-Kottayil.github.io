@@ -1,41 +1,210 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>My Blog</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sunitha Kottayil - Blog</title>
+  <meta name="description" content="Read blog posts on software development, data analytics, and more by Sunitha Kottayil." />
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" />
+
   <style>
-    body { font-family: Arial, sans-serif; background: #f9f9f9; margin: 0; padding: 2rem; }
-    h1 { color: #333; }
-    ul { list-style-type: none; padding: 0; }
-    li { background: #fff; margin: 1rem 0; padding: 1rem; border-radius: 6px; box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
-    a { text-decoration: none; color: #1565c0; font-weight: bold; }
-    a:hover { text-decoration: underline; }
-    p { margin: 0.5rem 0 0 0; color: #444; }
-    .nav { margin-bottom: 2rem; }
-    .nav a { margin-right: 1.5rem; color: #1565c0; }
+    :root {
+      /* Same colors and vars as main portfolio for consistency */
+      --primary-600: #0284c7;
+      --primary-700: #0369a1;
+      --gray-50: #f8fafc;
+      --gray-100: #f1f5f9;
+      --gray-600: #475569;
+      --gray-700: #334155;
+      --gray-900: #0f172a;
+      --font-primary: 'Inter', sans-serif;
+      --font-display: 'Playfair Display', serif;
+      --radius-lg: 0.75rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    }
+    body {
+      font-family: var(--font-primary);
+      color: var(--gray-900);
+      background-color: var(--gray-50);
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    header {
+      background-color: white;
+      box-shadow: var(--shadow-md);
+      padding: var(--space-md) var(--space-lg);
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header .logo {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: var(--primary-700);
+      text-decoration: none;
+      user-select: none;
+    }
+    nav a {
+      color: var(--gray-700);
+      text-decoration: none;
+      font-weight: 600;
+      margin-left: var(--space-lg);
+      transition: color 0.25s ease;
+    }
+    nav a:hover,
+    nav a:focus {
+      color: var(--primary-600);
+      outline: none;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 2rem auto 4rem;
+      padding: 0 var(--space-lg);
+    }
+    h1 {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 2.5rem;
+      margin-bottom: var(--space-lg);
+      user-select: text;
+    }
+
+    .posts {
+      display: grid;
+      gap: var(--space-lg);
+    }
+    .post-card {
+      background: white;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      padding: var(--space-md);
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow 0.3s ease;
+    }
+    .post-card:hover,
+    .post-card:focus-within {
+      box-shadow: var(--shadow-lg);
+      outline: none;
+    }
+    .post-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.5rem;
+      margin: 0 0 0.5rem 0;
+      user-select: text;
+    }
+    .post-excerpt {
+      flex-grow: 1;
+      color: var(--gray-600);
+      user-select: text;
+    }
+    .read-more {
+      align-self: flex-start;
+      margin-top: var(--space-md);
+      color: var(--primary-700);
+      font-weight: 600;
+      text-decoration: none;
+      user-select: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      transition: color 0.3s;
+    }
+    .read-more:hover,
+    .read-more:focus {
+      color: var(--primary-600);
+      outline: none;
+      text-decoration: underline;
+    }
+
+    footer {
+      background-color: white;
+      box-shadow: var(--shadow-md);
+      padding: var(--space-lg);
+      text-align: center;
+      user-select: none;
+      font-size: 0.9rem;
+      color: var(--gray-600);
+      position: sticky;
+      bottom: 0;
+      width: 100%;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      main {
+        margin: 1rem auto 3rem;
+        padding: 0 var(--space-md);
+      }
+      header {
+        flex-direction: column;
+        gap: var(--space-sm);
+      }
+      nav a {
+        margin: 0 var(--space-sm);
+      }
+      .post-card {
+        padding: var(--space-sm);
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="nav">
-    <a href="index.html">🏠 Home</a>
-    <a href="blog.html">📝 Blog</a>
-  </div>
-  <h1>Blog Posts</h1>
-  <ul>
-    <li>
-      <a href="blog/first-steps-with-git.md" target="_blank">
-        Getting Started with Git: A Beginner’s Guide
-      </a>
-      <p>A simple walkthrough for Git beginners, including installation and basic commands.</p>
-    </li>
-    <!-- Add more blog posts below as you write them -->
-    <!--
-    <li>
-      <a href="blog/your-next-post.md" target="_blank">Your Next Blog Post Title</a>
-      <p>Short description of your next post.</p>
-    </li>
-    -->
-  </ul>
-  <a href="index.html">← Back to Portfolio</a>
+  <header>
+    <a href="../index.html" class="logo" aria-label="Go to Sunitha Kottayil Portfolio Home">Sunitha Kottayil</a>
+    <nav>
+      <a href="../index.html" aria-current="false">Home</a>
+      <a href="../index.html#about">About</a>
+      <a href="../index.html#skills">Skills</a>
+      <a href="../index.html#projects">Projects</a>
+      <a href="../index.html#contact">Contact</a>
+      <!-- Theme toggle button could be added here if you want to share the script -->
+    </nav>
+  </header>
+  <main>
+    <h1>Blog</h1>
+    <div class="posts" role="list">
+      <!-- Example blog posts; in your repo, add separate files in /blog/ folder and link here -->
+      <article class="post-card" role="listitem" tabindex="0">
+        <h2 class="post-title">Getting Started with Python Data Analysis</h2>
+        <p class="post-excerpt">An introductory tutorial on using Python libraries like pandas and matplotlib to analyze and visualize data effectively.</p>
+        <a href="getting-started-python-data-analysis.html" class="read-more" aria-label="Read more about Getting Started with Python Data Analysis">Read more <i class="fas fa-arrow-right"></i></a>
+      </article>
+      <article class="post-card" role="listitem" tabindex="0">
+        <h2 class="post-title">Tips for Building Responsive Web Applications</h2>
+        <p class="post-excerpt">Best practices and common pitfalls when designing web apps that look great on all screen sizes.</p>
+        <a href="building-responsive-web-applications.html" class="read-more" aria-label="Read more about Tips for Building Responsive Web Applications">Read more <i class="fas fa-arrow-right"></i></a>
+      </article>
+      <article class="post-card" role="listitem" tabindex="0">
+        <h2 class="post-title">Exploring Power BI for Advanced Visualizations</h2>
+        <p class="post-excerpt">Deep dive into Power BI features and how to create dashboards to reveal important business insights.</p>
+        <a href="exploring-power-bi-visualizations.html" class="read-more" aria-label="Read more about Exploring Power BI for Advanced Visualizations">Read more <i class="fas fa-arrow-right"></i></a>
+      </article>
+      <!-- Add more posts here as you create them -->
+    </div>
+  </main>
+  <footer>
+    &copy; 2025 Sunitha Kottayil &bull; <a href="../index.html" style="color: var(--primary-600); text-decoration:none;">Back to Portfolio</a>
+  </footer>
+
+  <!-- Optional: you can reuse the theme toggle JS from your main site here if you want -->
+
 </body>
 </html>
