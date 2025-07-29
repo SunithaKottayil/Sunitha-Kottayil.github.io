@@ -80,6 +80,9 @@
       font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
       overflow-x: auto;
       position: relative;
+      white-space: pre;
+      line-height: 1.4;
+      font-size: 14px;
     }
     
     .code-block::before {
@@ -152,31 +155,6 @@
     
     li {
       margin-bottom: 8px;
-    }
-    
-    .interactive-demo {
-      border: 2px solid #e9ecef;
-      border-radius: 6px;
-      margin: 25px 0;
-      overflow: hidden;
-    }
-    
-    .demo-header {
-      background: #f8f9fa;
-      padding: 12px 20px;
-      border-bottom: 1px solid #e9ecef;
-      font-weight: 500;
-      color: #495057;
-    }
-    
-    .demo-content {
-      padding: 0;
-    }
-    
-    iframe {
-      width: 100%;
-      height: 400px;
-      border: none;
     }
     
     .key-concepts {
@@ -261,7 +239,7 @@
     </header>
 
     <section>
-      <p>This guide covers the essential concepts you need to start programming in C#. Each section includes practical examples you can run and modify to deepen your understanding. C# is a versatile language used for web development, desktop applications, games, and mobile apps.</p>
+      <p>This guide covers the essential concepts you need to start programming in C#. Each section includes practical examples with properly formatted code that you can copy and run in your development environment. C# is a versatile language used for web development, desktop applications, games, and mobile apps.</p>
     </section>
 
     <div class="key-concepts">
@@ -311,13 +289,6 @@ class Program
       </ul>
     </div>
 
-    <div class="interactive-demo">
-      <div class="demo-header">Try it yourself - Edit and run the code</div>
-      <div class="demo-content">
-        <iframe src="https://dotnetfiddle.net/Widget/t8d8oe"></iframe>
-      </div>
-    </div>
-
     <h2>2. Variables and Data Types</h2>
 
     <p>Variables are containers that store data. C# has several built-in data types, each designed for specific kinds of information:</p>
@@ -352,13 +323,6 @@ class Program
         Console.WriteLine($"Grade: {grade}");
     }
 }</div>
-
-    <div class="interactive-demo">
-      <div class="demo-header">Practice with Variables - Try changing the values</div>
-      <div class="demo-content">
-        <iframe src="https://dotnetfiddle.net/Widget/f5unKG"></iframe>
-      </div>
-    </div>
 
     <div class="note">
       <div class="note-title">String Interpolation</div>
@@ -395,13 +359,6 @@ class Program
     <div class="warning">
       <div class="warning-title">Input Conversion</div>
       <p><span class="inline-code">Console.ReadLine()</span> always returns a string. Use <span class="inline-code">int.Parse()</span> or <span class="inline-code">Convert.ToInt32()</span> to convert strings to numbers.</p>
-    </div>
-
-    <div class="interactive-demo">
-      <div class="demo-header">Interactive Input Example</div>
-      <div class="demo-content">
-        <iframe src="https://dotnetfiddle.net/Widget/L5fCIS"></iframe>
-      </div>
     </div>
 
     <h2>4. Making Decisions with if/else</h2>
@@ -455,13 +412,6 @@ class Program
         <li><span class="inline-code">&amp;&amp;</span> Logical AND</li>
         <li><span class="inline-code">||</span> Logical OR</li>
       </ul>
-    </div>
-
-    <div class="interactive-demo">
-      <div class="demo-header">Decision Making Example</div>
-      <div class="demo-content">
-        <iframe src="https://dotnetfiddle.net/Widget/55RA0G"></iframe>
-      </div>
     </div>
 
     <h2>5. Loops - Repeating Actions</h2>
@@ -525,13 +475,6 @@ class Program
     }
 }</div>
 
-    <div class="interactive-demo">
-      <div class="demo-header">Loop Examples</div>
-      <div class="demo-content">
-        <iframe src="https://dotnetfiddle.net/Widget/5cim7s"></iframe>
-      </div>
-    </div>
-
     <h2>6. Methods - Organizing Your Code</h2>
 
     <p>Methods (also called functions) help you organize code into reusable pieces. Instead of writing the same code multiple times, you can create a method and call it whenever needed.</p>
@@ -587,13 +530,6 @@ class Program
         <li><span class="inline-code">Parameters</span> - Input values the method needs</li>
         <li><span class="inline-code">return</span> - Sends a value back to the caller</li>
       </ul>
-    </div>
-
-    <div class="interactive-demo">
-      <div class="demo-header">Method Examples</div>
-      <div class="demo-content">
-        <iframe src="https://dotnetfiddle.net/Widget/XxyJQC"></iframe>
-      </div>
     </div>
 
     <h2>7. Introduction to Classes and Objects</h2>
@@ -666,13 +602,6 @@ class Program
       </ul>
     </div>
 
-    <div class="interactive-demo">
-      <div class="demo-header">Class and Object Example</div>
-      <div class="demo-content">
-        <iframe src="https://dotnetfiddle.net/Widget/dN0DKh"></iframe>
-      </div>
-    </div>
-
     <h2>8. Practical Example - Simple Calculator</h2>
 
     <p>Let's combine everything we've learned to build a simple calculator program:</p>
@@ -684,6 +613,7 @@ class Calculator
     public static double Add(double a, double b) => a + b;
     public static double Subtract(double a, double b) => a - b;
     public static double Multiply(double a, double b) => a * b;
+    
     public static double Divide(double a, double b)
     {
         if (b != 0)
