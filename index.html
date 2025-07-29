@@ -525,43 +525,7 @@
             background-clip: text;
         }
 
-        /* Professional Stats */
-        .stats-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: var(--space-lg);
-            margin: var(--space-2xl) 0;
-        }
 
-        .stat-item {
-            text-align: center;
-            padding: var(--space-lg);
-            background: white;
-            border-radius: var(--radius-xl);
-            box-shadow: var(--shadow-md);
-            border: 1px solid var(--gray-200);
-            transition: all var(--transition-normal);
-        }
-
-        .stat-item:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-xl);
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: var(--primary-600);
-            margin-bottom: var(--space-sm);
-        }
-
-        .stat-label {
-            color: var(--gray-600);
-            font-weight: 600;
-            font-size: 0.875rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
 
         /* Sections */
         .section {
@@ -1208,29 +1172,7 @@
             </div>
         </section>
 
-        <!-- Stats Section -->
-        <section class="section" style="background: linear-gradient(135deg, var(--primary-50) 0%, var(--secondary-50) 100%);">
-            <div class="container">
-                <div class="stats-container">
-                    <div class="stat-item fade-in visible">
-                        <div class="stat-number">4+</div>
-                        <div class="stat-label">Years Experience</div>
-                    </div>
-                    <div class="stat-item fade-in visible">
-                        <div class="stat-number">15+</div>
-                        <div class="stat-label">Projects Completed</div>
-                    </div>
-                    <div class="stat-item fade-in visible">
-                        <div class="stat-number">50+</div>
-                        <div class="stat-label">Students Taught</div>
-                    </div>
-                    <div class="stat-item fade-in visible">
-                        <div class="stat-number">8+</div>
-                        <div class="stat-label">Technologies</div>
-                    </div>
-                </div>
-            </div>
-        </section>
+
 
         <!-- Skills Section -->
         <section id="skills" class="section">
@@ -1707,39 +1649,7 @@
                 setTimeout(typeWriter, 1000);
             }
 
-            // Add counter animation for stats
-            function animateCounter(element, target, duration = 2000) {
-                let start = 0;
-                const increment = target / (duration / 16);
-                
-                function updateCounter() {
-                    start += increment;
-                    if (start < target) {
-                        element.textContent = Math.floor(start) + '+';
-                        requestAnimationFrame(updateCounter);
-                    } else {
-                        element.textContent = target + '+';
-                    }
-                }
-                
-                updateCounter();
-            }
 
-            // Trigger counter animation when stats come into view
-            const statNumbers = document.querySelectorAll('.stat-number');
-            const statsObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const target = parseInt(entry.target.textContent);
-                        animateCounter(entry.target, target);
-                        statsObserver.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.5 });
-
-            statNumbers.forEach(stat => {
-                statsObserver.observe(stat);
-            });
 
             // Add focus styles for form inputs
             document.querySelectorAll('input, textarea').forEach(input => {
