@@ -1,629 +1,424 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HTML Tutorial</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: #f8f9fa;
-            padding: 20px 0;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            background: white;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            color: #2c3e50;
-            text-align: center;
-        }
-
-        .subtitle {
-            text-align: center;
-            color: #7f8c8d;
-            margin-bottom: 40px;
-            font-size: 1.1rem;
-        }
-
-        h2 {
-            color: #2c3e50;
-            margin: 40px 0 20px 0;
-            font-size: 1.8rem;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 10px;
-        }
-
-        h3 {
-            color: #34495e;
-            margin: 25px 0 15px 0;
-            font-size: 1.3rem;
-        }
-
-        p {
-            margin-bottom: 16px;
-            line-height: 1.7;
-            color: #2c3e50;
-        }
-
-        /* Exact code editor matching the screenshot */
-        .code-editor {
-            background: #2b2b2b;
-            border-radius: 8px;
-            margin: 20px 0;
-            overflow: hidden;
-            font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Source Code Pro', monospace;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .code-content {
-            padding: 20px;
-            color: #a9b7c6;
-            font-size: 14px;
-            line-height: 1.4;
-            overflow-x: auto;
-        }
-
-        /* Line structure exactly like real editors */
-        .code-line {
-            display: flex;
-            margin: 0;
-            padding: 0;
-            min-height: 20px;
-        }
-
-        .line-number {
-            color: #606366;
-            width: 30px;
-            text-align: right;
-            margin-right: 15px;
-            user-select: none;
-            font-size: 13px;
-        }
-
-        .line-content {
-            flex: 1;
-        }
-
-        /* Syntax highlighting to match the screenshot exactly */
-        .doctype { color: #cc7832; }
-        .tag { color: #e8bf6a; }
-        .attr { color: #bababa; }
-        .string { color: #6a8759; }
-        .text { color: #a9b7c6; }
-        .comment { color: #808080; font-style: italic; }
-
-        /* Simple preview box */
-        .preview {
-            background: #fff;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            padding: 20px;
-            margin: 20px 0;
-        }
-
-        .preview h1 {
-            font-size: 2rem;
-            margin-bottom: 10px;
-            text-align: left;
-        }
-
-        .preview p {
-            margin: 0;
-        }
-
-        /* Info boxes */
-        .info {
-            background: #e8f4f8;
-            border-left: 4px solid #3498db;
-            padding: 15px 20px;
-            margin: 20px 0;
-            border-radius: 0 4px 4px 0;
-        }
-
-        .info strong {
-            color: #2980b9;
-        }
-
-        /* Lists */
-        ul, ol {
-            margin: 15px 0;
-            padding-left: 25px;
-        }
-
-        li {
-            margin-bottom: 8px;
-        }
-
-        /* Table */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            background: white;
-        }
-
-        th, td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-
-        th {
-            background: #f8f9fa;
-            font-weight: 600;
-        }
-
-        /* Inline code */
-        code {
-            background: #f1f2f6;
-            color: #c0392b;
-            padding: 2px 6px;
-            border-radius: 3px;
-            font-family: 'SF Mono', 'Monaco', monospace;
-            font-size: 0.9em;
-        }
-
-        /* Quiz */
-        .quiz {
-            background: #fff9e6;
-            border: 1px solid #f39c12;
-            border-radius: 6px;
-            padding: 20px;
-            margin: 25px 0;
-        }
-
-        .quiz h4 {
-            color: #d68910;
-            margin-bottom: 15px;
-        }
-
-        .quiz-option {
-            margin: 10px 0;
-        }
-
-        .quiz-option input {
-            margin-right: 8px;
-        }
-
-        .quiz-button {
-            background: #3498db;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-
-        .quiz-result {
-            margin-top: 10px;
-            padding: 10px;
-            border-radius: 4px;
-            font-weight: bold;
-        }
-
-        /* Navigation */
-        .nav {
-            background: #f8f9fa;
-            border: 1px solid #dee2e6;
-            border-radius: 6px;
-            padding: 20px;
-            margin: 30px 0;
-        }
-
-        .nav h3 {
-            margin-top: 0;
-        }
-
-        .nav ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .nav a {
-            color: #3498db;
-            text-decoration: none;
-        }
-
-        .nav a:hover {
-            text-decoration: underline;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <title>CSS Masterclass: From Beginner to Advanced</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f8fafc;
+      color: #213043;
+      margin: 0;
+      padding: 0 1.5em 3em 1.5em;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 900px;
+      margin: 2em auto;
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 0 16px #b3c9e3;
+      padding: 2.4em 2.2em 2.7em 2.2em;
+    }
+    h1, h2 {
+      color: #0057b3;
+      font-weight: 700;
+    }
+    h1 {
+      text-align: center;
+      font-size: 2.5em;
+      margin-bottom: 0.5em;
+    }
+    h2 {
+      margin-top: 2em;
+      border-bottom: 3px solid #6bb3ff;
+      padding-bottom: 0.3em;
+      font-size: 1.7em;
+    }
+    h3 {
+      margin-top: 1.5em;
+      color: #004080;
+    }
+    p, ul, ol {
+      font-size: 1.06em;
+      margin: 1.15em 0;
+    }
+    ul, ol {
+      margin-left: 2.2em;
+    }
+    code, pre.cmd {
+      background: #eaf2fd;
+      color: #003e80;
+      font-family: Consolas, monospace;
+      padding: 3px 9px;
+      border-radius: 4px;
+      font-size: 1em;
+    }
+    pre.cmd {
+      display: block;
+      padding: 1.05em 1.3em;
+      margin: 1.5em 0;
+      white-space: pre-wrap;
+    }
+    .tip, .fnote {
+      background: #e3f1fb;
+      border-left: 6px solid #2691da;
+      padding: 1.2em 1.3em;
+      border-radius: 11px;
+      margin: 1.65em 0;
+      color: #195c8a;
+      font-size: 1em;
+    }
+    .diagram {
+      text-align: center;
+      margin: 2em 0;
+    }
+    .diagram img {
+      max-width: 95%;
+      height: auto;
+      border-radius: 14px;
+      box-shadow: 0 4px 16px rgba(38,145,218,0.13);
+      background: #fff;
+      padding: 14px;
+    }
+    hr {
+      border: none;
+      border-top: 1.6px solid #6bb3ff;
+      margin: 3em 0;
+    }
+    a {
+      color: #0073e6;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .quiz-block {
+      background: #eaf2fd;
+      border-left: 8px solid #2691da;
+      padding: 1.35em 1.6em;
+      border-radius: 12px;
+      margin: 2.4em 0;
+      font-size: 1.14em;
+      color: #173b61;
+      max-width: 800px;
+    }
+    .quiz-block input[type="radio"] {
+      margin-right: 15px;
+      vertical-align: middle;
+      transform: scale(1.1);
+    }
+    .quiz-result {
+      font-weight: 700;
+      margin-top: 1.07em;
+      font-size: 1.07em;
+      color: #22547e;
+    }
+    button.check-btn {
+      background: #0057b3;
+      color: #fff;
+      border: none;
+      padding: 7px 22px;
+      font-size: 1em;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background 0.3s;
+      display: inline-block;
+    }
+    button.check-btn:hover {
+      background: #003d82;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Learning HTML</h1>
-        <p class="subtitle">A practical guide to building websites - no fancy stuff, just real learning</p>
+  <div class="container">
+    <h1>🎨 CSS Masterclass: From Beginner to Advanced</h1>
+    <p>
+      Welcome! This hands-on CSS guide takes you gently from “What is CSS?” to powerful advanced layouts, with explanations, code examples, diagrams, and quizzes to anchor each new skill. Whether you’re styling your first web page or mastering responsive design, you’ll find all the essentials here.
+    </p>
 
-        <div class="nav">
-            <h3>What we'll cover</h3>
-            <ul>
-                <li><a href="#basics">1. HTML Basics</a></li>
-                <li><a href="#structure">2. Document Structure</a></li>
-                <li><a href="#elements">3. HTML Elements</a></li>
-                <li><a href="#forms">4. Forms</a></li>
-                <li><a href="#semantic">5. Semantic HTML</a></li>
-            </ul>
-        </div>
+    <hr />
 
-        <section id="basics">
-            <h2>1. What is HTML?</h2>
-            <p>Hey there! HTML is like the skeleton of every website you visit. It's the language that tells your web browser "put this text here, make this a heading, add a link there." Think of it as the blueprint for building web pages.</p>
-
-            <h3>Your First HTML Page</h3>
-            <p>Every HTML page follows the same basic structure. Here's what it looks like:</p>
-
-            <div class="code-editor">
-                <div class="code-content">
-                    <div class="code-line">
-                        <span class="line-number">1</span>
-                        <span class="line-content"><span class="doctype">&lt;!DOCTYPE html&gt;</span></span>
-                    </div>
-                    <div class="code-line">
-                        <span class="line-number">2</span>
-                        <span class="line-content"><span class="tag">&lt;html</span> <span class="attr">lang</span>=<span class="string">"en"</span><span class="tag">&gt;</span></span>
-                    </div>
-                    <div class="code-line">
-                        <span class="line-number">3</span>
-                        <span class="line-content"><span class="tag">&lt;head&gt;</span></span>
-                    </div>
-                    <div class="code-line">
-                        <span class="line-number">4</span>
-                        <span class="line-content">    <span class="tag">&lt;meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span> <span class="tag">/&gt;</span></span>
-                    </div>
-                    <div class="code-line">
-                        <span class="line-number">5</span>
-                        <span class="line-content">    <span class="tag">&lt;meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span> <span class="tag">/&gt;</span></span>
-                    </div>
-                    <div class="code-line">
-                        <span class="line-number">6</span>
-                        <span class="line-content">    <span class="tag">&lt;title&gt;</span><span class="text">Page Title</span><span class="tag">&lt;/title&gt;</span></span>
-                    </div>
-                    <div class="code-line">
-                        <span class="line-number">7</span>
-                        <span class="line-content"><span class="tag">&lt;/head&gt;</span></span>
-                    </div>
-                    <div class="code-line">
-                        <span class="line-number">8</span>
-                        <span class="line-content"><span class="tag">&lt;body&gt;</span></span>
-                    </div>
-                    <div class="code-line">
-                        <span class="line-number">9</span>
-                        <span class="line-content">    <span class="tag">&lt;h1&gt;</span><span class="text">This is a heading</span><span class="tag">&lt;/h1&gt;</span></span>
-                    </div>
-                    <div class="code-line">
-                        <span class="line-number">10</span>
-                        <span class="line-content">    <span class="tag">&lt;p&gt;</span><span class="text">This is a paragraph.</span><span class="tag">&lt;/p&gt;</span></span>
-                    </div>
-                    <div class="code-line">
-                        <span class="line-number">11</span>
-                        <span class="line-content"><span class="tag">&lt;/body&gt;</span></span>
-                    </div>
-                    <div class="code-line">
-                        <span class="line-number">12</span>
-                        <span class="line-content"><span class="tag">&lt;/html&gt;</span></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="preview">
-                <h1>This is a heading</h1>
-                <p>This is a paragraph.</p>
-            </div>
-
-            <div class="info">
-                <strong>Quick tip:</strong> Save your HTML files with a .html extension (like "my-page.html") and double-click them to open in your web browser. That's how you'll see your work!
-            </div>
-        </section>
-
-        <section id="structure">
-            <h2>2. How HTML Pages Are Built</h2>
-            <p>Let's break down the parts of an HTML page - think of it like building a house:</p>
-
-            <ul>
-                <li><code>&lt;!DOCTYPE html&gt;</code> - Tells the browser "this is an HTML page"</li>
-                <li><code>&lt;html&gt;</code> - The main container (like the foundation of a house)</li>
-                <li><code>&lt;head&gt;</code> - Contains information about your page (like the title that shows in the browser tab)</li>
-                <li><code>&lt;body&gt;</code> - Contains everything people actually see on your page</li>
-            </ul>
-
-            <h3>The Head Section</h3>
-            <p>The head is like the "behind the scenes" part of your page - it contains important information that doesn't show up on the page itself:</p>
-
-            <div class="code-editor">
-                <div class="code-content">
-                    <div class="code-line">
-                        <span class="line-number">1</span>
-                        <span class="line-content"><span class="tag">&lt;head&gt;</span></span>
-                    </div>
-                    <div class="code-line">
-                        <span class="line-number">2</span>
-                        <span class="line-content">    <span class="tag">&lt;meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span><span class="tag">&gt;</span></span>
-                    </div>
-                    <div class="code-line">
-                        <span class="line-number">3</span>
-                        <span class="line-content">    <span class="tag">&lt;meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span><span class="tag">&gt;</span></span>
-                    </div>
-                    <div class="code-line">
-                        <span class="line-number">4</span>
-                        <span class="line-content">    <span class="tag">&lt;title&gt;</span><span class="text">My Website</span><span class="tag">&lt;/title&gt;</span></span>
-                    </div>
-                    <div class="code-line">
-                        <span class="line-number">5</span>
-                        <span class="line-content">    <span class="tag">&lt;meta</span> <span class="attr">name</span>=<span class="string">"description"</span> <span class="attr">content</span>=<span class="string">"A brief description of my website"</span><span class="tag">&gt;</span></span>
-                    </div>
-                    <div class="code-line">
-                        <span class="line-number">6</span>
-                        <span class="line-content"><span class="tag">&lt;/head&gt;</span></span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="elements">
-            <h2>3. The Building Blocks - HTML Elements</h2>
-
-            <h3>Headings - Making Text Stand Out</h3>
-            <p>HTML gives you six different heading sizes, just like different text sizes in a document:</p>
-
-            <div class="code-editor">
-                <div class="code-content">
-                    <div class="code-line">
-                        <span class="line-number">1</span>
-                        <span class="line-content"><span class="tag">&lt;h1&gt;</span><span class="text">Main Heading</span><span class="tag">&lt;/h1&gt;</span></span>
-                    </div>
-                    <div class="code-line">
-                        <span class="line-number">2</span>
-                        <span class="line-content"><span class="tag">&lt;h2&gt;</span><span class="text">Section Heading</span><span class="tag">&lt;/h2&gt;</span></span>
-                    </div>
-                    <div class="code-line">
-                        <span class="line-number">3</span>
-                        <span class="line-content"><span class="tag">&lt;h3&gt;</span><span class="text">Subsection Heading</span><span class="tag">&lt;/h3&gt;</span></span>
-                    </div>
-                    <div class="code-line">
-                        <span class="line-number">4</span>
-                        <span class="line-content"><span class="tag">&lt;h4&gt;</span><span class="text">Minor Heading</span><span class="tag">&lt;/h4&gt;</span></span>
-                    </div>
-                    <div class="code-line">
-                        <span class="line-number">5</span>
-                        <span class="line-content"><span class="tag">&lt;h5&gt;</span><span class="text">Small Heading</span><span class="tag">&lt;/h5&gt;</span></span>
-                    </div>
-                    <div class="code-line">
-                        <span class="line-number">6</span>
-                        <span class="line-content"><span class="tag">&lt;h6&gt;</span><span class="text">Smallest Heading</span><span class="tag">&lt;/h6&gt;</span></span>
-                    </div>
-                </div>
-            </div>
-
-            <h3>Paragraphs and Text Formatting</h3>
-            <div class="code-editor">
-                <div class="code-content">
-                    <div class="code-line">
-                        <span class="line-number">1</span>
-                        <span class="line-content"><span class="tag">&lt;p&gt;</span><span class="text">This is a regular paragraph.</span><span class="tag">&lt;/p&gt;</span></span>
-                    </div>
-                    <div class="code-line">
-                        <span class="line-number">2</span>
-                        <span class="line-content"><span class="tag">&lt;p&gt;</span><span class="text">Text can be </span><span class="tag">&lt;strong&gt;</span><span class="text">bold</span><span class="tag">&lt;/strong&gt;</span><span class="text"> or </span><span class="tag">&lt;em&gt;</span><span class="text">italic</span><span class="tag">&lt;/em&gt;</span><span class="text">.</span><span class="tag">&lt;/p&gt;</span></span>
-                    </div>
-                    <div class="code-line">
-                        <span class="line-number">3</span>
-                        <span class="line-content"><span class="tag">&lt;p&gt;</span><span class="text">You can also </span><span class="tag">&lt;mark&gt;</span><span class="text">highlight</span><span class="tag">&lt;/mark&gt;</span><span class="text"> text.</span><span class="tag">&lt;/p&gt;</span></span>
-                    </div>
-                </div>
-            </div>
-
-            <h3>Links - Connecting Pages Together</h3>
-            <div class="code-editor">
-                <div class="code-content">
-                    <div class="code-line">
-                        <span class="line-number">1</span>
-                        <span class="line-content"><span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="string">"https://example.com"</span><span class="tag">&gt;</span><span class="text">External Link</span><span class="tag">&lt;/a&gt;</span></span>
-                    </div>
-                    <div class="code-line">
-                        <span class="line-number">2</span>
-                        <span class="line-content"><span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="string">"about.html"</span><span class="tag">&gt;</span><span class="text">Internal Link</span><span class="tag">&lt;/a&gt;</span></span>
-                    </div>
-                    <div class="code-line">
-                        <span class="line-number">3</span>
-                        <span class="line-content"><span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="string">"mailto:email@example.com"</span><span class="tag">&gt;</span><span class="text">Email Link</span><span class="tag">&lt;/a&gt;</span></span>
-                    </div>
-                </div>
-            </div>
-
-            <h3>Lists - Organizing Information</h3>
-            <div class="code-editor">
-                <div class="code-content">
-<span class="comment">&lt;!-- Bullet points (unordered list) --&gt;</span>
-<span class="tag">&lt;ul&gt;</span>
-<span class="indent-1"><span class="tag">&lt;li&gt;</span><span class="text">First item</span><span class="tag">&lt;/li&gt;</span></span>
-<span class="indent-1"><span class="tag">&lt;li&gt;</span><span class="text">Second item</span><span class="tag">&lt;/li&gt;</span></span>
-<span class="indent-1"><span class="tag">&lt;li&gt;</span><span class="text">Third item</span><span class="tag">&lt;/li&gt;</span></span>
-<span class="tag">&lt;/ul&gt;</span>
-
-<span class="comment">&lt;!-- Numbered list (ordered list) --&gt;</span>
-<span class="tag">&lt;ol&gt;</span>
-<span class="indent-1"><span class="tag">&lt;li&gt;</span><span class="text">Step one</span><span class="tag">&lt;/li&gt;</span></span>
-<span class="indent-1"><span class="tag">&lt;li&gt;</span><span class="text">Step two</span><span class="tag">&lt;/li&gt;</span></span>
-<span class="indent-1"><span class="tag">&lt;li&gt;</span><span class="text">Step three</span><span class="tag">&lt;/li&gt;</span></span>
-<span class="tag">&lt;/ol&gt;</span>
-                </div>
-            </div>
-        </section>
-
-        <section id="forms">
-            <h2>4. Forms - Getting Information from Users</h2>
-            <p>Forms let people interact with your website - like signing up for a newsletter or leaving a comment:</p>
-
-            <div class="code-editor">
-                <div class="code-content">
-<span class="tag">&lt;form <span class="attr">action</span>=<span class="string">"/submit"</span> <span class="attr">method</span>=<span class="string">"post"</span>&gt;</span>
-<span class="indent-1"><span class="tag">&lt;label <span class="attr">for</span>=<span class="string">"name"</span>&gt;</span><span class="text">Name:</span><span class="tag">&lt;/label&gt;</span></span>
-<span class="indent-1"><span class="tag">&lt;input <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"name"</span> <span class="attr">name</span>=<span class="string">"name"</span> <span class="attr">required</span>&gt;</span></span>
-
-<span class="indent-1"><span class="tag">&lt;label <span class="attr">for</span>=<span class="string">"email"</span>&gt;</span><span class="text">Email:</span><span class="tag">&lt;/label&gt;</span></span>
-<span class="indent-1"><span class="tag">&lt;input <span class="attr">type</span>=<span class="string">"email"</span> <span class="attr">id</span>=<span class="string">"email"</span> <span class="attr">name</span>=<span class="string">"email"</span> <span class="attr">required</span>&gt;</span></span>
-
-<span class="indent-1"><span class="tag">&lt;button <span class="attr">type</span>=<span class="string">"submit"</span>&gt;</span><span class="text">Submit</span><span class="tag">&lt;/button&gt;</span></span>
-<span class="tag">&lt;/form&gt;</span>
-                </div>
-            </div>
-
-            <h3>Different Types of Input Fields</h3>
-            <ul>
-                <li><code>text</code> - A simple text box for names, titles, etc.</li>
-                <li><code>email</code> - For email addresses (browsers check the format)</li>
-                <li><code>password</code> - Hides what you type (for passwords)</li>
-                <li><code>number</code> - Only allows numbers</li>
-                <li><code>checkbox</code> - Little boxes you can check/uncheck</li>
-                <li><code>radio</code> - Round buttons where you pick one option</li>
-                <li><code>file</code> - Lets people upload files from their computer</li>
-            </ul>
-        </section>
-
-        <section id="semantic">
-            <h2>5. Semantic HTML - Making Your Code Meaningful</h2>
-            <p>Semantic elements give meaning to your content - they tell browsers and screen readers "this is a header" or "this is the main content":</p>
-
-            <table>
-                <tr>
-                    <th>Element</th>
-                    <th>Purpose</th>
-                </tr>
-                <tr>
-                    <td><code>&lt;header&gt;</code></td>
-                    <td>The top part of your page (like a page header)</td>
-                </tr>
-                <tr>
-                    <td><code>&lt;nav&gt;</code></td>
-                    <td>Navigation menu (like the menu bar on a website)</td>
-                </tr>
-                <tr>
-                    <td><code>&lt;main&gt;</code></td>
-                    <td>The most important content on your page</td>
-                </tr>
-                <tr>
-                    <td><code>&lt;article&gt;</code></td>
-                    <td>A complete piece of content (like a blog post)</td>
-                </tr>
-                <tr>
-                    <td><code>&lt;section&gt;</code></td>
-                    <td>A section of your page (like a chapter in a book)</td>
-                </tr>
-                <tr>
-                    <td><code>&lt;footer&gt;</code></td>
-                    <td>The bottom part of your page (like a page footer)</td>
-                </tr>
-            </table>
-
-            <div class="code-editor">
-                <div class="code-content">
-<span class="tag">&lt;header&gt;</span>
-<span class="indent-1"><span class="tag">&lt;h1&gt;</span><span class="text">My Website</span><span class="tag">&lt;/h1&gt;</span></span>
-<span class="indent-1"><span class="tag">&lt;nav&gt;</span></span>
-<span class="indent-2"><span class="tag">&lt;a <span class="attr">href</span>=<span class="string">"/"</span>&gt;</span><span class="text">Home</span><span class="tag">&lt;/a&gt;</span></span>
-<span class="indent-2"><span class="tag">&lt;a <span class="attr">href</span>=<span class="string">"/about"</span>&gt;</span><span class="text">About</span><span class="tag">&lt;/a&gt;</span></span>
-<span class="indent-1"><span class="tag">&lt;/nav&gt;</span></span>
-<span class="tag">&lt;/header&gt;</span>
-
-<span class="tag">&lt;main&gt;</span>
-<span class="indent-1"><span class="tag">&lt;article&gt;</span></span>
-<span class="indent-2"><span class="tag">&lt;h2&gt;</span><span class="text">Article Title</span><span class="tag">&lt;/h2&gt;</span></span>
-<span class="indent-2"><span class="tag">&lt;p&gt;</span><span class="text">Article content goes here...</span><span class="tag">&lt;/p&gt;</span></span>
-<span class="indent-1"><span class="tag">&lt;/article&gt;</span></span>
-<span class="tag">&lt;/main&gt;</span>
-
-<span class="tag">&lt;footer&gt;</span>
-<span class="indent-1"><span class="tag">&lt;p&gt;</span><span class="text">&copy; 2024 My Website</span><span class="tag">&lt;/p&gt;</span></span>
-<span class="tag">&lt;/footer&gt;</span>
-                </div>
-            </div>
-
-            <div class="info">
-                <strong>Why this matters:</strong> Using semantic elements helps people with screen readers understand your page better, and it helps search engines like Google understand what your content is about.
-            </div>
-        </section>
-
-        <section>
-            <h2>Try These Questions!</h2>
-
-            <div class="quiz">
-                <h4>Which element contains everything people see on your page?</h4>
-                <div class="quiz-option">
-                    <input type="radio" name="q1" value="a" id="q1a">
-                    <label for="q1a">&lt;head&gt;</label>
-                </div>
-                <div class="quiz-option">
-                    <input type="radio" name="q1" value="b" id="q1b">
-                    <label for="q1b">&lt;body&gt;</label>
-                </div>
-                <div class="quiz-option">
-                    <input type="radio" name="q1" value="c" id="q1c">
-                    <label for="q1c">&lt;html&gt;</label>
-                </div>
-                <button class="quiz-button" onclick="checkAnswer('q1', 'b', 'result1')">Check Answer</button>
-                <div class="quiz-result" id="result1"></div>
-            </div>
-
-            <div class="quiz">
-                <h4>Which attribute do you need to make an image show up?</h4>
-                <div class="quiz-option">
-                    <input type="radio" name="q2" value="a" id="q2a">
-                    <label for="q2a">src</label>
-                </div>
-                <div class="quiz-option">
-                    <input type="radio" name="q2" value="b" id="q2b">
-                    <label for="q2b">alt</label>
-                </div>
-                <div class="quiz-option">
-                    <input type="radio" name="q2" value="c" id="q2c">
-                    <label for="q2c">width</label>
-                </div>
-                <button class="quiz-button" onclick="checkAnswer('q2', 'b', 'result2')">Check Answer</button>
-                <div class="quiz-result" id="result2"></div>
-            </div>
-        </section>
+    <h2>1. What is CSS?</h2>
+    <p><b>CSS</b> (Cascading Style Sheets) styles HTML documents, controlling how everything looks: colors, fonts, layout, and more. Think of CSS as the “clothes and paint” for the HTML “structure” of your site.</p>
+    <div class="diagram">
+      <img src="https://i.imgur.com/C8ZbDkt.png" alt="HTML vs CSS illustration" width="400"/>
+      <br>
+      <small>HTML provides the structure, CSS makes it appealing and styled.</small>
     </div>
 
-    <script>
-        function checkAnswer(questionName, correctAnswer, resultId) {
-            const selectedOption = document.querySelector(`input[name="${questionName}"]:checked`);
-            const resultDiv = document.getElementById(resultId);
-            
-            if (!selectedOption) {
-                resultDiv.textContent = "Please select an answer.";
-                resultDiv.style.background = "#fff3cd";
-                resultDiv.style.color = "#856404";
-                return;
-            }
-            
-            if (selectedOption.value === correctAnswer) {
-                resultDiv.textContent = "✓ Correct!";
-                resultDiv.style.background = "#d4edda";
-                resultDiv.style.color = "#155724";
-            } else {
-                resultDiv.textContent = "✗ Try again!";
-                resultDiv.style.background = "#f8d7da";
-                resultDiv.style.color = "#721c24";
-            }
+    <hr />
+
+    <h2>2. Including CSS in Your Page</h2>
+    <ul>
+      <li><b>Inline:</b> <code>&lt;p style="color:red"&gt;Hello&lt;/p&gt;</code> (not best practice)</li>
+      <li><b>Internal:</b> Inside <code>&lt;style&gt;</code> tags in <code>&lt;head&gt;</code></li>
+      <li><b>External:</b> <code>&lt;link rel="stylesheet" href="styles.css"&gt;</code> (recommended for most projects)</li>
+    </ul>
+    <pre class="cmd">
+/* styles.css file example */
+body {
+  background: #f8fafc;
+  color: #213043;
+}
+    </pre>
+    <div class="tip"><b>Best practice:</b> Use external CSS for consistent styling and simpler code maintenance.</div>
+
+    <hr />
+
+    <h2>3. CSS Syntax Basics</h2>
+    <pre class="cmd">
+selector {
+  property: value;
+  property2: value2;
+}
+/* Example: */
+h1 {
+  color: steelblue;
+  font-size: 2em;
+}
+    </pre>
+    <ul>
+      <li><b>Selector:</b> What HTML elements to style.</li>
+      <li><b>Property:</b> The aspect you want to change.</li>
+      <li><b>Value:</b> The new style you want to use.</li>
+    </ul>
+
+    <hr />
+
+    <h2>4. Selectors & Combinators</h2>
+    <ul>
+      <li><b>Element selector:</b> <code>p</code></li>
+      <li><b>Class selector:</b> <code>.classname</code></li>
+      <li><b>ID selector:</b> <code>#myid</code></li>
+      <li><b>Group selector:</b> <code>h1, h2, h3 { color: navy; }</code></li>
+      <li><b>Descendant:</b> <code>.nav a { ... }</code> (all <code>a</code> inside <code>.nav</code>)</li>
+      <li><b>Child:</b> <code>.nav > a</code> (direct children) </li>
+      <li><b>Pseudo-class:</b> <code>a:hover</code>, <code>li:first-child</code></li>
+      <li><b>Pseudo-element:</b> <code>p::first-line</code>, <code>div::after</code></li>
+    </ul>
+    <div class="tip">Use class selectors (<code>.example</code>) for most styles—avoid over-using IDs for styling to keep things maintainable.</div>
+
+    <hr />
+
+    <h2>5. Colors, Units & Typography</h2>
+    <p>
+      Choose colors via names (<code>blue</code>), hex (<code>#0074d9</code>), RGB, or HSL. Use relative units (<code>em</code>, <code>rem</code>, <code>%</code>) for better scaling and accessibility[15].
+    </p>
+    <pre class="cmd">
+body { color: #2253a7; background: #eaf6fd; }
+h1 { font-family: 'Arial Rounded MT', sans-serif; }
+p { font-size: 1.1em; line-height: 1.6; }
+    </pre>
+
+    <hr />
+
+    <h2>6. The Box Model</h2>
+    <p>
+      Every HTML element is a box: <b>content</b>, <b>padding</b>, <b>border</b>, <b>margin</b>. Learn to visualize and control spacing.
+    </p>
+    <div class="diagram">
+      <img src="https://i.imgur.com/qk7V8nR.png" alt="CSS Box Model diagram" width="370"/>
+      <br>
+      <small>Content inside padding inside border inside margin.</small>
+    </div>
+    <pre class="cmd">
+.box {
+  margin: 20px;
+  padding: 10px 15px;
+  border: 2px solid #0057b3;
+  background: #e3f1fb;
+}
+    </pre>
+    <p>
+      <b>Shorthand:</b> One-liner for margin/padding like <code>margin: 5px 10px 15px 20px;</code> (top right bottom left).
+    </p>
+
+    <hr />
+
+    <h2>7. Layout & Positioning</h2>
+    <ul>
+      <li><b>Display modes:</b> <code>block</code>, <code>inline</code>, <code>inline-block</code>, <code>none</code></li>
+      <li><b>Floats and Clearing</b></li>
+      <li><b>Positioning:</b> <code>static</code>, <code>relative</code>, <code>absolute</code>, <code>fixed</code>, <code>sticky</code></li>
+      <li><b>Flexbox (1D layout):</b> <code>display: flex;</code><br>Super for nav bars, cards, overall flexibility.</li>
+      <li><b>Grid (2D layout):</b> <code>display: grid;</code><br>Rows, columns, and dashboard layouts made easy.</li>
+    </ul>
+    <pre class="cmd">
+.container {
+  display: flex;
+  gap: 20px;
+}
+.item { flex: 1; min-width: 200px; }
+    </pre>
+    <div class="tip">Practice layouts in games like <a href="https://flexboxfroggy.com" target="_blank">Flexbox Froggy</a>!</div>
+
+    <hr />
+
+    <h2>8. Responsive Design</h2>
+    <ul>
+      <li>Use <b>media queries</b> to adapt for different screens:
+        <pre class="cmd">
+@media (max-width: 600px) {
+  body { font-size: 1.2em; }
+  .container { flex-direction: column; }
+}
+        </pre>
+      </li>
+      <li>Use relative units and fluid layouts (<code>max-width: 100%</code> for images).</li>
+      <li>Design mobile-first, then enhance for larger screens.</li>
+    </ul>
+
+    <hr />
+
+    <h2>9. Advanced CSS: Variables, Animations, Effects</h2>
+    <h3>CSS Variables:</h3>
+    <pre class="cmd">
+:root {
+  --main-bg: #f0f8ff;
+  --accent: #2253a7;
+}
+body {
+  background: var(--main-bg);
+  color: var(--accent);
+}
+    </pre>
+    <h3>Transitions & Animations:</h3>
+    <pre class="cmd">
+.button {
+  background: #4fc3f7;
+  transition: background 0.3s;
+}
+.button:hover {
+  background: #0277bd;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-100px);}
+  to { opacity: 1; transform: translateX(0);}
+}
+.banner {
+  animation: slideIn 0.7s ease;
+}
+    </pre>
+
+    <h3>Filters & Effects:</h3>
+    <pre class="cmd">
+img.blur {
+  filter: blur(4px) grayscale(60%);
+}
+    </pre>
+
+    <hr />
+
+    <h2>10. CSS Best Practices</h2>
+    <ul>
+      <li>Use <b>class selectors</b> (not IDs) for most component styling.</li>
+      <li>Organize code: <b>reset.css</b> first, then base, layout, utilities, components[6][9][12][15].</li>
+      <li>Adopt BEM or similar naming (<code>.card__title</code>, <code>.nav--main</code>).</li>
+      <li>Write modular, reusable styles. Comment as needed.</li>
+      <li>Keep specificity low, avoid excessive <code>!important</code>s.</li>
+      <li>Modularize: consider splitting styles into small files for bigger projects.</li>
+      <li>Minimize unused CSS for better performance.</li>
+      <li><b>Validate and lint</b> your CSS for errors with tools like Stylelint.</li>
+    </ul>
+
+    <hr />
+
+    <h2>11. Practice Projects & Helpful Tools</h2>
+    <ul>
+      <li>Style blog posts, cards, navbars, profile boxes (practice Flexbox & Grid).</li>
+      <li>Make responsive layouts—test shrinking your browser window!</li>
+      <li>Try CSS playgrounds like <a href="https://css-tricks.com/snippets/css/" target="_blank">CSS Tricks</a> for handy snippets.</li>
+      <li>Experiment with interactive courses: <a href="https://scrimba.com/learn-html-and-css-c0p" target="_blank">Scrimba</a>, <a href="https://flexboxfroggy.com" target="_blank">Flexbox Froggy</a>.</li>
+    </ul>
+
+    <div class="fnote">
+      <b>Pro tip:</b> CSS is best learned by <b>experimenting live</b>—try changing, breaking, and fixing styles in your code editor or browser!
+    </div>
+
+    <hr />
+
+    <h2>Practice Quizzes</h2>
+
+    <div class="quiz-block" id="quiz1">
+      <b>Quiz 1: Which selector targets all elements with the class "button"?</b><br />
+      <form>
+        <input type="radio" name="q1" value="1" id="q1a1" /><label for="q1a1"> .button</label><br />
+        <input type="radio" name="q1" value="0" id="q1a2" /><label for="q1a2"> #button</label><br />
+        <input type="radio" name="q1" value="0" id="q1a3" /><label for="q1a3"> button</label><br />
+        <button type="button" class="check-btn" onclick="checkQuiz('quiz1', 1)">Check Answer</button>
+      </form>
+      <div class="quiz-result" id="quiz1-result"></div>
+    </div>
+
+    <div class="quiz-block" id="quiz2">
+      <b>Quiz 2: What property controls the space around an element’s content?</b><br />
+      <form>
+        <input type="radio" name="q2" value="0" id="q2a1" /><label for="q2a1"> margin</label><br />
+        <input type="radio" name="q2" value="1" id="q2a2" /><label for="q2a2"> padding</label><br />
+        <input type="radio" name="q2" value="0" id="q2a3" /><label for="q2a3"> border</label><br />
+        <button type="button" class="check-btn" onclick="checkQuiz('quiz2', 1)">Check Answer</button>
+      </form>
+      <div class="quiz-result" id="quiz2-result"></div>
+    </div>
+
+    <div class="quiz-block" id="quiz3">
+      <b>Quiz 3: Which display mode enables a container to use Flexbox?</b><br />
+      <form>
+        <input type="radio" name="q3" value="0" id="q3a1" /><label for="q3a1"> block</label><br />
+        <input type="radio" name="q3" value="1" id="q3a2" /><label for="q3a2"> flex</label><br />
+        <input type="radio" name="q3" value="0" id="q3a3" /><label for="q3a3"> grid</label><br />
+        <button type="button" class="check-btn" onclick="checkQuiz('quiz3', 1)">Check Answer</button>
+      </form>
+      <div class="quiz-result" id="quiz3-result"></div>
+    </div>
+
+    <div class="quiz-block" id="quiz4">
+      <b>Quiz 4: Which technique makes a website look good on all devices?</b><br />
+      <form>
+        <input type="radio" name="q4" value="1" id="q4a1" /><label for="q4a1"> Responsive design</label><br />
+        <input type="radio" name="q4" value="0" id="q4a2" /><label for="q4a2"> Pseudo-elements</label><br />
+        <input type="radio" name="q4" value="0" id="q4a3" /><label for="q4a3"> Floats</label><br />
+        <button type="button" class="check-btn" onclick="checkQuiz('quiz4', 1)">Check Answer</button>
+      </form>
+      <div class="quiz-result" id="quiz4-result"></div>
+    </div>
+
+    <div class="quiz-block" id="quiz5">
+      <b>Quiz 5: Which is best for organizing reusable and scalable CSS?</b><br />
+      <form>
+        <input type="radio" name="q5" value="0" id="q5a1" /><label for="q5a1"> Inline styles</label><br />
+        <input type="radio" name="q5" value="1" id="q5a2" /><label for="q5a2"> BEM naming & external stylesheets</label><br />
+        <input type="radio" name="q5" value="0" id="q5a3" /><label for="q5a3"> !important everywhere</label><br />
+        <button type="button" class="check-btn" onclick="checkQuiz('quiz5', 1)">Check Answer</button>
+      </form>
+      <div class="quiz-result" id="quiz5-result"></div>
+    </div>
+
+    <div class="tip">
+      <b>Keep going!</b> Practice by building real layouts and playing with styles—CSS is as much about creative experimentation as rules!
+    </div>
+  </div>
+
+  <script>
+    function checkQuiz(quizId, correctIndex) {
+      const quiz = document.getElementById(quizId);
+      const options = quiz.querySelectorAll('input[type="radio"]');
+      const resultArea = quiz.querySelector('.quiz-result');
+      for (let i = 0; i < options.length; i++) {
+        if (options[i].checked) {
+          if (parseInt(options[i].value) === correctIndex) {
+            resultArea.textContent = '✅ Correct!';
+          } else {
+            resultArea.textContent = '❌ Try again!';
+          }
+          return;
         }
-    </script>
+      }
+      resultArea.textContent = '❗ Please select an answer!';
+    }
+  </script>
 </body>
 </html>
