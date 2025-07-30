@@ -585,4 +585,1281 @@
 
         <div class="warning-box">
           <div class="warning-box-title">⚠️ Important: Data Type Conversion</div>
-          <p><span class="inline-code">Console.ReadLine()</span> always returns a string, even if the user types numbers. When you need to perform calculations, you must convert the string to the appropriate number type using <span class="inline-code">int.Parse()</span>
+          <p><span class="inline-code">Console.ReadLine()</span> always returns a string, even if the user types numbers. When you need to perform calculations, you must convert the string to the appropriate number type using <span class="inline-code">int.Parse()</span> or <span class="inline-code">double.Parse()</span>.</p>
+        </div>
+
+        <div class="practice-section">
+          <div class="practice-title">🎯 Practice Challenge</div>
+          <p>Create a simple calculator that asks the user for two numbers and performs addition, subtraction, multiplication, and division. Display all results in a formatted table!</p>
+        </div>
+      </div>
+
+      <!-- Chapter 4: Control Flow - Decision Making -->
+      <div class="section">
+        <h2>Chapter 4: Control Flow - Making Decisions</h2>
+        
+        <div class="section-intro">
+          Programs become truly powerful when they can make decisions and respond differently based on conditions. Control flow statements allow your programs to think and adapt to different situations.
+        </div>
+
+        <h3>If Statements - The Foundation of Decision Making</h3>
+        <p>If statements let your program execute different code based on whether a condition is true or false. Think of it like a traffic light - if it's green, you go; if it's red, you stop.</p>
+
+        <div class="code-block"><span class="keyword">using</span> <span class="namespace">System</span>;
+
+<span class="keyword">class</span> <span class="type">Program</span>
+<span class="brace">{</span>
+    <span class="keyword">static</span> <span class="keyword">void</span> <span class="method">Main</span>()
+    <span class="brace">{</span>
+        <span class="comment">// Simple if statement</span>
+        <span class="keyword">int</span> temperature <span class="operator">=</span> <span class="number">75</span>;
+        
+        <span class="keyword">if</span> (temperature <span class="operator">></span> <span class="number">70</span>)
+        <span class="brace">{</span>
+            <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"It's warm outside! ☀️"</span>);
+        <span class="brace">}</span>
+        
+        <span class="comment">// If-else statement</span>
+        <span class="keyword">int</span> age <span class="operator">=</span> <span class="number">17</span>;
+        
+        <span class="keyword">if</span> (age <span class="operator">>=</span> <span class="number">18</span>)
+        <span class="brace">{</span>
+            <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"You are an adult! 🎉"</span>);
+        <span class="brace">}</span>
+        <span class="keyword">else</span>
+        <span class="brace">{</span>
+            <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"You are a minor! 📚"</span>);
+            <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"You'll be an adult in </span><span class="brace">{</span><span class="number">18</span> <span class="operator">-</span> age<span class="brace">}</span><span class="string"> years!"</span>);
+        <span class="brace">}</span>
+        
+        <span class="comment">// If-else if-else chain</span>
+        <span class="keyword">int</span> score <span class="operator">=</span> <span class="number">85</span>;
+        
+        <span class="keyword">if</span> (score <span class="operator">>=</span> <span class="number">90</span>)
+        <span class="brace">{</span>
+            <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"Grade: A - Excellent! 🌟"</span>);
+        <span class="brace">}</span>
+        <span class="keyword">else</span> <span class="keyword">if</span> (score <span class="operator">>=</span> <span class="number">80</span>)
+        <span class="brace">{</span>
+            <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"Grade: B - Good job! 👍"</span>);
+        <span class="brace">}</span>
+        <span class="keyword">else</span> <span class="keyword">if</span> (score <span class="operator">>=</span> <span class="number">70</span>)
+        <span class="brace">{</span>
+            <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"Grade: C - Satisfactory! ✅"</span>);
+        <span class="brace">}</span>
+        <span class="keyword">else</span> <span class="keyword">if</span> (score <span class="operator">>=</span> <span class="number">60</span>)
+        <span class="brace">{</span>
+            <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"Grade: D - Needs improvement! 📝"</span>);
+        <span class="brace">}</span>
+        <span class="keyword">else</span>
+        <span class="brace">{</span>
+            <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"Grade: F - Failed! 😞"</span>);
+        <span class="brace">}</span>
+    <span class="brace">}</span>
+<span class="brace">}</span></div>
+
+        <div class="info-box">
+          <div class="info-box-title">🔍 Comparison Operators</div>
+          <ul>
+            <li><span class="inline-code">==</span> - Equal to</li>
+            <li><span class="inline-code">!=</span> - Not equal to</li>
+            <li><span class="inline-code">></span> - Greater than</li>
+            <li><span class="inline-code"><</span> - Less than</li>
+            <li><span class="inline-code">>=</span> - Greater than or equal to</li>
+            <li><span class="inline-code"><=</span> - Less than or equal to</li>
+          </ul>
+        </div>
+
+        <h3>Logical Operators - Combining Conditions</h3>
+        <p>Sometimes you need to check multiple conditions at once. Logical operators help you combine conditions logically.</p>
+
+        <div class="code-block"><span class="keyword">using</span> <span class="namespace">System</span>;
+
+<span class="keyword">class</span> <span class="type">Program</span>
+<span class="brace">{</span>
+    <span class="keyword">static</span> <span class="keyword">void</span> <span class="method">Main</span>()
+    <span class="brace">{</span>
+        <span class="keyword">int</span> age <span class="operator">=</span> <span class="number">25</span>;
+        <span class="keyword">bool</span> hasLicense <span class="operator">=</span> <span class="keyword">true</span>;
+        <span class="keyword">bool</span> hasInsurance <span class="operator">=</span> <span class="keyword">false</span>;
+        
+        <span class="comment">// AND operator (&&) - both conditions must be true</span>
+        <span class="keyword">if</span> (age <span class="operator">>=</span> <span class="number">18</span> <span class="operator">&&</span> hasLicense)
+        <span class="brace">{</span>
+            <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"You can drive! 🚗"</span>);
+        <span class="brace">}</span>
+        <span class="keyword">else</span>
+        <span class="brace">{</span>
+            <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"You cannot drive! 🚫"</span>);
+        <span class="brace">}</span>
+        
+        <span class="comment">// OR operator (||) - at least one condition must be true</span>
+        <span class="keyword">if</span> (hasLicense <span class="operator">||</span> hasInsurance)
+        <span class="brace">{</span>
+            <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"You have some form of driving documentation! 📄"</span>);
+        <span class="brace">}</span>
+        
+        <span class="comment">// NOT operator (!) - reverses the condition</span>
+        <span class="keyword">if</span> (<span class="operator">!</span>hasInsurance)
+        <span class="brace">{</span>
+            <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"Warning: You don't have insurance! ⚠️"</span>);
+        <span class="brace">}</span>
+        
+        <span class="comment">// Complex condition with parentheses for clarity</span>
+        <span class="keyword">bool</span> isWeekend <span class="operator">=</span> <span class="keyword">true</span>;
+        <span class="keyword">bool</span> isHoliday <span class="operator">=</span> <span class="keyword">false</span>;
+        <span class="keyword">bool</span> isRaining <span class="operator">=</span> <span class="keyword">true</span>;
+        
+        <span class="keyword">if</span> ((isWeekend <span class="operator">||</span> isHoliday) <span class="operator">&&</span> <span class="operator">!</span>isRaining)
+        <span class="brace">{</span>
+            <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"Perfect day for outdoor activities! 🏃‍♂️"</span>);
+        <span class="brace">}</span>
+        <span class="keyword">else</span>
+        <span class="brace">{</span>
+            <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"Maybe stay inside today! 🏠"</span>);
+        <span class="brace">}</span>
+    <span class="brace">}</span>
+<span class="brace">}</span></div>
+
+        <div class="tip-box">
+          <div class="tip-box-title">💡 Best Practices</div>
+          <ul>
+            <li>Use parentheses to group complex conditions for clarity</li>
+            <li>Keep conditions simple and readable</li>
+            <li>Use meaningful variable names that make conditions self-explanatory</li>
+            <li>Consider using early returns to reduce nesting</li>
+          </ul>
+        </div>
+
+        <div class="practice-section">
+          <div class="practice-title">🎯 Practice Challenge</div>
+          <p>Create a program that determines if someone can vote in an election. Ask for their age and citizenship status. Display appropriate messages for different scenarios!</p>
+        </div>
+      </div>
+
+      <!-- Chapter 5: Loops - Repeating Actions -->
+      <div class="section">
+        <h2>Chapter 5: Loops - Repeating Actions</h2>
+        
+        <div class="section-intro">
+          Loops are one of the most powerful concepts in programming. They allow you to repeat actions without writing the same code multiple times. Think of loops like a washing machine cycle - it repeats the same process until the job is done.
+        </div>
+
+        <h3>For Loop - When You Know How Many Times to Repeat</h3>
+        <p>The for loop is perfect when you know exactly how many times you want to repeat an action.</p>
+
+        <div class="code-block"><span class="keyword">using</span> <span class="namespace">System</span>;
+
+<span class="keyword">class</span> <span class="type">Program</span>
+<span class="brace">{</span>
+    <span class="keyword">static</span> <span class="keyword">void</span> <span class="method">Main</span>()
+    <span class="brace">{</span>
+        <span class="comment">// Basic for loop - count from 1 to 5</span>
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"Counting from 1 to 5:"</span>);
+        <span class="keyword">for</span> (<span class="keyword">int</span> i <span class="operator">=</span> <span class="number">1</span>; i <span class="operator"><=</span> <span class="number">5</span>; i<span class="operator">++</span>)
+        <span class="brace">{</span>
+            <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"Number: </span><span class="brace">{</span>i<span class="brace">}</span><span class="string">"</span>);
+        <span class="brace">}</span>
+        
+        <span class="comment">// Count backwards from 10 to 1</span>
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"</span><span class="operator">\n</span><span class="string">Countdown from 10:"</span>);
+        <span class="keyword">for</span> (<span class="keyword">int</span> countdown <span class="operator">=</span> <span class="number">10</span>; countdown <span class="operator">>=</span> <span class="number">1</span>; countdown<span class="operator">--</span>)
+        <span class="brace">{</span>
+            <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"</span><span class="brace">{</span>countdown<span class="brace">}</span><span class="string">..."</span>);
+        <span class="brace">}</span>
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"Blast off! 🚀"</span>);
+        
+        <span class="comment">// Skip by 2s (even numbers)</span>
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"</span><span class="operator">\n</span><span class="string">Even numbers from 2 to 10:"</span>);
+        <span class="keyword">for</span> (<span class="keyword">int</span> even <span class="operator">=</span> <span class="number">2</span>; even <span class="operator"><=</span> <span class="number">10</span>; even <span class="operator">+=</span> <span class="number">2</span>)
+        <span class="brace">{</span>
+            <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"</span><span class="brace">{</span>even<span class="brace">}</span><span class="string">"</span>);
+        <span class="brace">}</span>
+        
+        <span class="comment">// Calculate sum of numbers from 1 to 10</span>
+        <span class="keyword">int</span> sum <span class="operator">=</span> <span class="number">0</span>;
+        <span class="keyword">for</span> (<span class="keyword">int</span> num <span class="operator">=</span> <span class="number">1</span>; num <span class="operator"><=</span> <span class="number">10</span>; num<span class="operator">++</span>)
+        <span class="brace">{</span>
+            sum <span class="operator">+=</span> num;  <span class="comment">// Add current number to sum</span>
+        <span class="brace">}</span>
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"</span><span class="operator">\n</span><span class="string">Sum of numbers 1 to 10: </span><span class="brace">{</span>sum<span class="brace">}</span><span class="string">"</span>);
+    <span class="brace">}</span>
+<span class="brace">}</span></div>
+
+        <div class="info-box">
+          <div class="info-box-title">🔍 For Loop Structure</div>
+          <p><span class="inline-code">for (initialization; condition; increment)</span></p>
+          <ul>
+            <li><strong>Initialization:</strong> Set up the loop variable (runs once at the start)</li>
+            <li><strong>Condition:</strong> Check if the loop should continue (checked before each iteration)</li>
+            <li><strong>Increment:</strong> Update the loop variable (runs after each iteration)</li>
+          </ul>
+        </div>
+
+        <h3>While Loop - When You Don't Know How Many Times</h3>
+        <p>While loops continue as long as a condition is true. They're great when you don't know in advance how many times you'll need to repeat.</p>
+
+        <div class="code-block"><span class="keyword">using</span> <span class="namespace">System</span>;
+
+<span class="keyword">class</span> <span class="type">Program</span>
+<span class="brace">{</span>
+    <span class="keyword">static</span> <span class="keyword">void</span> <span class="method">Main</span>()
+    <span class="brace">{</span>
+        <span class="comment">// Simple while loop</span>
+        <span class="keyword">int</span> counter <span class="operator">=</span> <span class="number">1</span>;
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"Counting with while loop:"</span>);
+        
+        <span class="keyword">while</span> (counter <span class="operator"><=</span> <span class="number">5</span>)
+        <span class="brace">{</span>
+            <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"Counter: </span><span class="brace">{</span>counter<span class="brace">}</span><span class="string">"</span>);
+            counter<span class="operator">++</span>;  <span class="comment">// Don't forget to update the counter!</span>
+        <span class="brace">}</span>
+        
+        <span class="comment">// Guessing game with while loop</span>
+        <span class="keyword">int</span> secretNumber <span class="operator">=</span> <span class="number">7</span>;
+        <span class="keyword">int</span> guess <span class="operator">=</span> <span class="number">0</span>;
+        <span class="keyword">int</span> attempts <span class="operator">=</span> <span class="number">0</span>;
+        
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"</span><span class="operator">\n</span><span class="string">Guess the number (1-10):"</span>);
+        
+        <span class="keyword">while</span> (guess <span class="operator">!=</span> secretNumber)
+        <span class="brace">{</span>
+            <span class="type">Console</span>.<span class="method">Write</span>(<span class="string">"Enter your guess: "</span>);
+            guess <span class="operator">=</span> <span class="keyword">int</span>.<span class="method">Parse</span>(<span class="type">Console</span>.<span class="method">ReadLine</span>());
+            attempts<span class="operator">++</span>;
+            
+            <span class="keyword">if</span> (guess <span class="operator"><</span> secretNumber)
+            <span class="brace">{</span>
+                <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"Too low! Try again."</span>);
+            <span class="brace">}</span>
+            <span class="keyword">else</span> <span class="keyword">if</span> (guess <span class="operator">></span> secretNumber)
+            <span class="brace">{</span>
+                <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"Too high! Try again."</span>);
+            <span class="brace">}</span>
+        <span class="brace">}</span>
+        
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"Congratulations! You guessed it in </span><span class="brace">{</span>attempts<span class="brace">}</span><span class="string"> attempts! 🎉"</span>);
+    <span class="brace">}</span>
+<span class="brace">}</span></div>
+
+        <div class="warning-box">
+          <div class="warning-box-title">⚠️ Infinite Loop Warning</div>
+          <p>Always ensure your while loop condition will eventually become false, or you'll create an infinite loop that runs forever! Make sure to update variables that affect the condition inside the loop.</p>
+        </div>
+
+        <h3>Do-While Loop - Execute at Least Once</h3>
+        <p>Do-while loops are similar to while loops, but they always execute the code block at least once before checking the condition.</p>
+
+        <div class="code-block"><span class="keyword">using</span> <span class="namespace">System</span>;
+
+<span class="keyword">class</span> <span class="type">Program</span>
+<span class="brace">{</span>
+    <span class="keyword">static</span> <span class="keyword">void</span> <span class="method">Main</span>()
+    <span class="brace">{</span>
+        <span class="keyword">string</span> playAgain;
+        
+        <span class="keyword">do</span>
+        <span class="brace">{</span>
+            <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"🎮 Playing a game..."</span>);
+            <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"Game finished!"</span>);
+            
+            <span class="type">Console</span>.<span class="method">Write</span>(<span class="string">"Play again? (yes/no): "</span>);
+            playAgain <span class="operator">=</span> <span class="type">Console</span>.<span class="method">ReadLine</span>().<span class="method">ToLower</span>();
+        <span class="brace">}</span> <span class="keyword">while</span> (playAgain <span class="operator">==</span> <span class="string">"yes"</span> <span class="operator">||</span> playAgain <span class="operator">==</span> <span class="string">"y"</span>);
+        
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"Thanks for playing! 👋"</span>);
+    <span class="brace">}</span>
+<span class="brace">}</span></div>
+
+        <div class="tip-box">
+          <div class="tip-box-title">💡 Loop Control</div>
+          <ul>
+            <li><span class="inline-code">break;</span> - Exit the loop immediately</li>
+            <li><span class="inline-code">continue;</span> - Skip to the next iteration</li>
+            <li>Use <span class="inline-code">for</span> when you know the number of iterations</li>
+            <li>Use <span class="inline-code">while</span> when you don't know the number of iterations</li>
+            <li>Use <span class="inline-code">do-while</span> when you need at least one execution</li>
+          </ul>
+        </div>
+
+        <div class="practice-section">
+          <div class="practice-title">🎯 Practice Challenge</div>
+          <p>Create a multiplication table generator! Ask the user for a number and display its multiplication table from 1 to 10. Use a for loop to generate the table.</p>
+        </div>
+      </div>
+
+      <!-- Chapter 6: Arrays and Collections -->
+      <div class="section">
+        <h2>Chapter 6: Arrays and Collections - Organizing Data</h2>
+        
+        <div class="section-intro">
+          Arrays and collections are like organized storage boxes for your data. Instead of having separate variables for each piece of data, you can store multiple related items together and work with them efficiently.
+        </div>
+
+        <h3>Arrays - Fixed-Size Collections</h3>
+        <p>Arrays are containers that hold multiple values of the same type. Think of them like a row of numbered boxes where each box can hold one item.</p>
+
+        <div class="code-block"><span class="keyword">using</span> <span class="namespace">System</span>;
+
+<span class="keyword">class</span> <span class="type">Program</span>
+<span class="brace">{</span>
+    <span class="keyword">static</span> <span class="keyword">void</span> <span class="method">Main</span>()
+    <span class="brace">{</span>
+        <span class="comment">// Creating and initializing arrays</span>
+        <span class="keyword">int</span>[] numbers <span class="operator">=</span> <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">5</span>];  <span class="comment">// Empty array of 5 integers</span>
+        <span class="keyword">string</span>[] fruits <span class="operator">=</span> <span class="keyword">new</span> <span class="keyword">string</span>[] <span class="brace">{</span><span class="string">"Apple"</span>, <span class="string">"Banana"</span>, <span class="string">"Orange"</span><span class="brace">}</span>;  <span class="comment">// Array with initial values</span>
+        <span class="keyword">double</span>[] prices <span class="operator">=</span> <span class="brace">{</span><span class="number">1.99</span>, <span class="number">2.49</span>, <span class="number">3.99</span>, <span class="number">0.99</span><span class="brace">}</span>;  <span class="comment">// Shorthand initialization</span>
+        
+        <span class="comment">// Accessing array elements (indexing starts at 0)</span>
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"First fruit: "</span> <span class="operator">+</span> fruits[<span class="number">0</span>]);  <span class="comment">// Apple</span>
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"Second fruit: "</span> <span class="operator">+</span> fruits[<span class="number">1</span>]);  <span class="comment">// Banana</span>
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"Last fruit: "</span> <span class="operator">+</span> fruits[fruits.<span class="method">Length</span> <span class="operator">-</span> <span class="number">1</span>]);  <span class="comment">// Orange</span>
+        
+        <span class="comment">// Modifying array elements</span>
+        numbers[<span class="number">0</span>] <span class="operator">=</span> <span class="number">10</span>;
+        numbers[<span class="number">1</span>] <span class="operator">=</span> <span class="number">20</span>;
+        numbers[<span class="number">2</span>] <span class="operator">=</span> <span class="number">30</span>;
+        numbers[<span class="number">3</span>] <span class="operator">=</span> <span class="number">40</span>;
+        numbers[<span class="number">4</span>] <span class="operator">=</span> <span class="number">50</span>;
+        
+        <span class="comment">// Looping through arrays</span>
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"</span><span class="operator">\n</span><span class="string">Numbers array:"</span>);
+        <span class="keyword">for</span> (<span class="keyword">int</span> i <span class="operator">=</span> <span class="number">0</span>; i <span class="operator"><</span> numbers.<span class="method">Length</span>; i<span class="operator">++</span>)
+        <span class="brace">{</span>
+            <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"Index </span><span class="brace">{</span>i<span class="brace">}</span><span class="string">: </span><span class="brace">{</span>numbers[i]<span class="brace">}</span><span class="string">"</span>);
+        <span class="brace">}</span>
+        
+        <span class="comment">// Using foreach loop (simpler for reading all elements)</span>
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"</span><span class="operator">\n</span><span class="string">Fruits using foreach:"</span>);
+        <span class="keyword">foreach</span> (<span class="keyword">string</span> fruit <span class="keyword">in</span> fruits)
+        <span class="brace">{</span>
+            <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"🍎 </span><span class="brace">{</span>fruit<span class="brace">}</span><span class="string">"</span>);
+        <span class="brace">}</span>
+        
+        <span class="comment">// Calculating sum and average</span>
+        <span class="keyword">double</span> total <span class="operator">=</span> <span class="number">0</span>;
+        <span class="keyword">foreach</span> (<span class="keyword">double</span> price <span class="keyword">in</span> prices)
+        <span class="brace">{</span>
+            total <span class="operator">+=</span> price;
+        <span class="brace">}</span>
+        <span class="keyword">double</span> average <span class="operator">=</span> total <span class="operator">/</span> prices.<span class="method">Length</span>;
+        
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"</span><span class="operator">\n</span><span class="string">Total price: $</span><span class="brace">{</span>total<span class="brace">}</span><span class="string">"</span>);
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"Average price: $</span><span class="brace">{</span>average<span class="brace">}</span><span class="string">"</span>);
+    <span class="brace">}</span>
+<span class="brace">}</span></div>
+
+        <div class="info-box">
+          <div class="info-box-title">🔍 Array Properties</div>
+          <ul>
+            <li><span class="inline-code">array.Length</span> - Number of elements in the array</li>
+            <li><span class="inline-code">array[0]</span> - First element (index 0)</li>
+            <li><span class="inline-code">array[array.Length - 1]</span> - Last element</li>
+            <li>Arrays have fixed size - you cannot add or remove elements</li>
+            <li>All elements must be of the same type</li>
+          </ul>
+        </div>
+
+        <h3>Lists - Dynamic Collections</h3>
+        <p>Lists are like flexible arrays that can grow and shrink as needed. They're more convenient when you don't know how many items you'll need to store.</p>
+
+        <div class="code-block"><span class="keyword">using</span> <span class="namespace">System</span>;
+<span class="keyword">using</span> <span class="namespace">System.Collections.Generic</span>;
+
+<span class="keyword">class</span> <span class="type">Program</span>
+<span class="brace">{</span>
+    <span class="keyword">static</span> <span class="keyword">void</span> <span class="method">Main</span>()
+    <span class="brace">{</span>
+        <span class="comment">// Creating lists</span>
+        <span class="keyword">List</span><<span class="keyword">string</span>> names <span class="operator">=</span> <span class="keyword">new</span> <span class="keyword">List</span><<span class="keyword">string</span>>();
+        <span class="keyword">List</span><<span class="keyword">int</span>> scores <span class="operator">=</span> <span class="keyword">new</span> <span class="keyword">List</span><<span class="keyword">int</span>> <span class="brace">{</span><span class="number">85</span>, <span class="number">92</span>, <span class="number">78</span><span class="brace">}</span>;
+        
+        <span class="comment">// Adding elements to a list</span>
+        names.<span class="method">Add</span>(<span class="string">"Alice"</span>);
+        names.<span class="method">Add</span>(<span class="string">"Bob"</span>);
+        names.<span class="method">Add</span>(<span class="string">"Charlie"</span>);
+        names.<span class="method">Add</span>(<span class="string">"Diana"</span>);
+        
+        <span class="comment">// Inserting at specific position</span>
+        names.<span class="method">Insert</span>(<span class="number">1</span>, <span class="string">"Eve"</span>);  <span class="comment">// Insert at index 1</span>
+        
+        <span class="comment">// Removing elements</span>
+        names.<span class="method">Remove</span>(<span class="string">"Bob"</span>);  <span class="comment">// Remove by value</span>
+        names.<span class="method">RemoveAt</span>(<span class="number">0</span>);  <span class="comment">// Remove by index</span>
+        
+        <span class="comment">// Checking if element exists</span>
+        <span class="keyword">if</span> (names.<span class="method">Contains</span>(<span class="string">"Charlie"</span>))
+        <span class="brace">{</span>
+            <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"Charlie is in the list! 👋"</span>);
+        <span class="brace">}</span>
+        
+        <span class="comment">// Displaying list contents</span>
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"Current names in the list:"</span>);
+        <span class="keyword">for</span> (<span class="keyword">int</span> i <span class="operator">=</span> <span class="number">0</span>; i <span class="operator"><</span> names.<span class="method">Count</span>; i<span class="operator">++</span>)
+        <span class="brace">{</span>
+            <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"</span><span class="brace">{</span>i <span class="operator">+</span> <span class="number">1</span><span class="brace">}</span><span class="string">. </span><span class="brace">{</span>names[i]<span class="brace">}</span><span class="string">"</span>);
+        <span class="brace">}</span>
+        
+        <span class="comment">// Using foreach with lists</span>
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"</span><span class="operator">\n</span><span class="string">Scores:"</span>);
+        <span class="keyword">foreach</span> (<span class="keyword">int</span> score <span class="keyword">in</span> scores)
+        <span class="brace">{</span>
+            <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"Score: </span><span class="brace">{</span>score<span class="brace">}</span><span class="string">"</span>);
+        <span class="brace">}</span>
+        
+        <span class="comment">// List properties</span>
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"</span><span class="operator">\n</span><span class="string">Number of names: </span><span class="brace">{</span>names.<span class="method">Count</span><span class="brace">}</span><span class="string">"</span>);
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"Number of scores: </span><span class="brace">{</span>scores.<span class="method">Count</span><span class="brace">}</span><span class="string">"</span>);
+    <span class="brace">}</span>
+<span class="brace">}</span></div>
+
+        <div class="tip-box">
+          <div class="tip-box-title">💡 When to Use Arrays vs Lists</div>
+          <ul>
+            <li><strong>Use Arrays:</strong> When you know the exact size and it won't change</li>
+            <li><strong>Use Lists:</strong> When the size might change or you don't know the size in advance</li>
+            <li>Lists are more flexible but slightly slower than arrays</li>
+            <li>Arrays use less memory but are less convenient</li>
+          </ul>
+        </div>
+
+        <h3>Multi-dimensional Arrays</h3>
+        <p>Sometimes you need to store data in a grid or table format. Multi-dimensional arrays let you organize data in rows and columns.</p>
+
+        <div class="code-block"><span class="keyword">using</span> <span class="namespace">System</span>;
+
+<span class="keyword">class</span> <span class="type">Program</span>
+<span class="brace">{</span>
+    <span class="keyword">static</span> <span class="keyword">void</span> <span class="method">Main</span>()
+    <span class="brace">{</span>
+        <span class="comment">// 2D array (like a table with rows and columns)</span>
+        <span class="keyword">int</span>[,] grid <span class="operator">=</span> <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>, <span class="number">4</span>];  <span class="comment">// 3 rows, 4 columns</span>
+        
+        <span class="comment">// Filling the grid with values</span>
+        <span class="keyword">for</span> (<span class="keyword">int</span> row <span class="operator">=</span> <span class="number">0</span>; row <span class="operator"><</span> <span class="number">3</span>; row<span class="operator">++</span>)
+        <span class="brace">{</span>
+            <span class="keyword">for</span> (<span class="keyword">int</span> col <span class="operator">=</span> <span class="number">0</span>; col <span class="operator"><</span> <span class="number">4</span>; col<span class="operator">++</span>)
+            <span class="brace">{</span>
+                grid[row, col] <span class="operator">=</span> row <span class="operator">*</span> <span class="number">10</span> <span class="operator">+</span> col;  <span class="comment">// Create pattern: 00, 01, 02, 03, 10, 11, etc.</span>
+            <span class="brace">}</span>
+        <span class="brace">}</span>
+        
+        <span class="comment">// Displaying the grid</span>
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"2D Grid:"</span>);
+        <span class="keyword">for</span> (<span class="keyword">int</span> row <span class="operator">=</span> <span class="number">0</span>; row <span class="operator"><</span> <span class="number">3</span>; row<span class="operator">++</span>)
+        <span class="brace">{</span>
+            <span class="keyword">for</span> (<span class="keyword">int</span> col <span class="operator">=</span> <span class="number">0</span>; col <span class="operator"><</span> <span class="number">4</span>; col<span class="operator">++</span>)
+            <span class="brace">{</span>
+                <span class="type">Console</span>.<span class="method">Write</span>(<span class="string">$"</span><span class="brace">{</span>grid[row, col]<span class="brace">}</span><span class="string"> "</span>);
+            <span class="brace">}</span>
+            <span class="type">Console</span>.<span class="method">WriteLine</span>();  <span class="comment">// New line after each row</span>
+        <span class="brace">}</span>
+        
+        <span class="comment">// Jagged array (array of arrays)</span>
+        <span class="keyword">int</span>[][] jaggedArray <span class="operator">=</span> <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>][];
+        jaggedArray[<span class="number">0</span>] <span class="operator">=</span> <span class="keyword">new</span> <span class="keyword">int</span>[] <span class="brace">{</span><span class="number">1</span>, <span class="number">2</span><span class="brace">}</span>;
+        jaggedArray[<span class="number">1</span>] <span class="operator">=</span> <span class="keyword">new</span> <span class="keyword">int</span>[] <span class="brace">{</span><span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span><span class="brace">}</span>;
+        jaggedArray[<span class="number">2</span>] <span class="operator">=</span> <span class="keyword">new</span> <span class="keyword">int</span>[] <span class="brace">{</span><span class="number">6</span><span class="brace">}</span>;
+        
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"</span><span class="operator">\n</span><span class="string">Jagged Array:"</span>);
+        <span class="keyword">for</span> (<span class="keyword">int</span> i <span class="operator">=</span> <span class="number">0</span>; i <span class="operator"><</span> jaggedArray.<span class="method">Length</span>; i<span class="operator">++</span>)
+        <span class="brace">{</span>
+            <span class="keyword">for</span> (<span class="keyword">int</span> j <span class="operator">=</span> <span class="number">0</span>; j <span class="operator"><</span> jaggedArray[i].<span class="method">Length</span>; j<span class="operator">++</span>)
+            <span class="brace">{</span>
+                <span class="type">Console</span>.<span class="method">Write</span>(<span class="string">$"</span><span class="brace">{</span>jaggedArray[i][j]<span class="brace">}</span><span class="string"> "</span>);
+            <span class="brace">}</span>
+            <span class="type">Console</span>.<span class="method">WriteLine</span>();
+        <span class="brace">}</span>
+    <span class="brace">}</span>
+<span class="brace">}</span></div>
+
+        <div class="practice-section">
+          <div class="practice-title">🎯 Practice Challenge</div>
+          <p>Create a student grade tracker! Store student names and their grades in separate lists. Calculate and display the average grade, highest grade, and lowest grade. Add functionality to add new students and their grades.</p>
+        </div>
+      </div>
+
+      <!-- Chapter 7: Methods and Functions -->
+      <div class="section">
+        <h2>Chapter 7: Methods and Functions - Reusable Code</h2>
+        
+        <div class="section-intro">
+          Methods are like mini-programs within your program. They allow you to break down complex tasks into smaller, manageable pieces and reuse code without writing it multiple times. Think of methods as recipes - you write the recipe once and can use it many times.
+        </div>
+
+        <h3>Creating Simple Methods</h3>
+        <p>Methods have a name, can take parameters (inputs), and can return a value (output). Let's start with simple methods that don't return anything.</p>
+
+        <div class="code-block"><span class="keyword">using</span> <span class="namespace">System</span>;
+
+<span class="keyword">class</span> <span class="type">Program</span>
+<span class="brace">{</span>
+    <span class="keyword">static</span> <span class="keyword">void</span> <span class="method">Main</span>()
+    <span class="brace">{</span>
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"=== Method Examples ==="</span>);
+        
+        <span class="comment">// Calling methods</span>
+        <span class="method">SayHello</span>();
+        <span class="method">DisplayStars</span>();
+        <span class="method">SayHello</span>();  <span class="comment">// Can call the same method multiple times</span>
+        
+        <span class="comment">// Methods with parameters</span>
+        <span class="method">GreetPerson</span>(<span class="string">"Alice"</span>);
+        <span class="method">GreetPerson</span>(<span class="string">"Bob"</span>);
+        <span class="method">DisplayNumber</span>(<span class="number">42</span>);
+        <span class="method">DisplayNumber</span>(<span class="number">100</span>);
+        
+        <span class="comment">// Methods with multiple parameters</span>
+        <span class="method">DisplayInfo</span>(<span class="string">"John"</span>, <span class="number">25</span>);
+        <span class="method">DisplayInfo</span>(<span class="string">"Sarah"</span>, <span class="number">30</span>);
+    <span class="brace">}</span>
+    
+    <span class="comment">// Simple method with no parameters</span>
+    <span class="keyword">static</span> <span class="keyword">void</span> <span class="method">SayHello</span>()
+    <span class="brace">{</span>
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"Hello, World! 👋"</span>);
+    <span class="brace">}</span>
+    
+    <span class="comment">// Method that displays stars</span>
+    <span class="keyword">static</span> <span class="keyword">void</span> <span class="method">DisplayStars</span>()
+    <span class="brace">{</span>
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"⭐⭐⭐⭐⭐"</span>);
+    <span class="brace">}</span>
+    
+    <span class="comment">// Method with one parameter</span>
+    <span class="keyword">static</span> <span class="keyword">void</span> <span class="method">GreetPerson</span>(<span class="keyword">string</span> name)
+    <span class="brace">{</span>
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"Hello, </span><span class="brace">{</span>name<span class="brace">}</span><span class="string">! Nice to meet you! 🤝"</span>);
+    <span class="brace">}</span>
+    
+    <span class="comment">// Method with one parameter of different type</span>
+    <span class="keyword">static</span> <span class="keyword">void</span> <span class="method">DisplayNumber</span>(<span class="keyword">int</span> number)
+    <span class="brace">{</span>
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"The number is: </span><span class="brace">{</span>number<span class="brace">}</span><span class="string">"</span>);
+    <span class="brace">}</span>
+    
+    <span class="comment">// Method with multiple parameters</span>
+    <span class="keyword">static</span> <span class="keyword">void</span> <span class="method">DisplayInfo</span>(<span class="keyword">string</span> name, <span class="keyword">int</span> age)
+    <span class="brace">{</span>
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"Name: </span><span class="brace">{</span>name<span class="brace">}</span><span class="string">, Age: </span><span class="brace">{</span>age<span class="brace">}</span><span class="string">"</span>);
+    <span class="brace">}</span>
+<span class="brace">}</span></div>
+
+        <div class="info-box">
+          <div class="info-box-title">🔍 Method Structure</div>
+          <p><span class="inline-code">static void MethodName(parameters) { }</span></p>
+          <ul>
+            <li><strong>static:</strong> Makes the method accessible without creating an object</li>
+            <li><strong>void:</strong> Means the method doesn't return a value</li>
+            <li><strong>MethodName:</strong> The name you choose for your method</li>
+            <li><strong>parameters:</strong> Input values the method needs (optional)</li>
+          </ul>
+        </div>
+
+        <h3>Methods That Return Values</h3>
+        <p>Methods can also return values back to the code that called them. This is useful for calculations and data processing.</p>
+
+        <div class="code-block"><span class="keyword">using</span> <span class="namespace">System</span>;
+
+<span class="keyword">class</span> <span class="type">Program</span>
+<span class="brace">{</span>
+    <span class="keyword">static</span> <span class="keyword">void</span> <span class="method">Main</span>()
+    <span class="brace">{</span>
+        <span class="comment">// Using methods that return values</span>
+        <span class="keyword">int</span> result1 <span class="operator">=</span> <span class="method">AddNumbers</span>(<span class="number">5</span>, <span class="number">3</span>);
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"5 + 3 = </span><span class="brace">{</span>result1<span class="brace">}</span><span class="string">"</span>);
+        
+        <span class="keyword">int</span> result2 <span class="operator">=</span> <span class="method">MultiplyNumbers</span>(<span class="number">4</span>, <span class="number">7</span>);
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"4 × 7 = </span><span class="brace">{</span>result2<span class="brace">}</span><span class="string">"</span>);
+        
+        <span class="keyword">double</span> area <span class="operator">=</span> <span class="method">CalculateCircleArea</span>(<span class="number">5.0</span>);
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"Area of circle with radius 5: </span><span class="brace">{</span>area<span class="brace">}</span><span class="string">"</span>);
+        
+        <span class="keyword">string</span> message <span class="operator">=</span> <span class="method">CreateGreeting</span>(<span class="string">"David"</span>, <span class="number">28</span>);
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(message);
+        
+        <span class="comment">// Using returned values in calculations</span>
+        <span class="keyword">int</span> sum <span class="operator">=</span> <span class="method">AddNumbers</span>(<span class="number">10</span>, <span class="number">20</span>) <span class="operator">+</span> <span class="method">AddNumbers</span>(<span class="number">5</span>, <span class="number">15</span>);
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"Complex calculation: </span><span class="brace">{</span>sum<span class="brace">}</span><span class="string">"</span>);
+        
+        <span class="comment">// Using boolean methods</span>
+        <span class="keyword">bool</span> isEven <span class="operator">=</span> <span class="method">IsEven</span>(<span class="number">8</span>);
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"Is 8 even? </span><span class="brace">{</span>isEven<span class="brace">}</span><span class="string">"</span>);
+        
+        <span class="keyword">bool</span> isAdult <span class="operator">=</span> <span class="method">IsAdult</span>(<span class="number">17</span>);
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"Is 17-year-old an adult? </span><span class="brace">{</span>isAdult<span class="brace">}</span><span class="string">"</span>);
+    <span class="brace">}</span>
+    
+    <span class="comment">// Method that returns an integer</span>
+    <span class="keyword">static</span> <span class="keyword">int</span> <span class="method">AddNumbers</span>(<span class="keyword">int</span> a, <span class="keyword">int</span> b)
+    <span class="brace">{</span>
+        <span class="keyword">return</span> a <span class="operator">+</span> b;  <span class="comment">// Return the sum</span>
+    <span class="brace">}</span>
+    
+    <span class="comment">// Method that returns an integer</span>
+    <span class="keyword">static</span> <span class="keyword">int</span> <span class="method">MultiplyNumbers</span>(<span class="keyword">int</span> a, <span class="keyword">int</span> b)
+    <span class="brace">{</span>
+        <span class="keyword">return</span> a <span class="operator">*</span> b;  <span class="comment">// Return the product</span>
+    <span class="brace">}</span>
+    
+    <span class="comment">// Method that returns a double</span>
+    <span class="keyword">static</span> <span class="keyword">double</span> <span class="method">CalculateCircleArea</span>(<span class="keyword">double</span> radius)
+    <span class="brace">{</span>
+        <span class="keyword">double</span> pi <span class="operator">=</span> <span class="number">3.14159</span>;
+        <span class="keyword">return</span> pi <span class="operator">*</span> radius <span class="operator">*</span> radius;  <span class="comment">// π × r²</span>
+    <span class="brace">}</span>
+    
+    <span class="comment">// Method that returns a string</span>
+    <span class="keyword">static</span> <span class="keyword">string</span> <span class="method">CreateGreeting</span>(<span class="keyword">string</span> name, <span class="keyword">int</span> age)
+    <span class="brace">{</span>
+        <span class="keyword">return</span> <span class="string">$"Hello </span><span class="brace">{</span>name<span class="brace">}</span><span class="string">! You are </span><span class="brace">{</span>age<span class="brace">}</span><span class="string"> years old. 🎂"</span>;
+    <span class="brace">}</span>
+    
+    <span class="comment">// Method that returns a boolean</span>
+    <span class="keyword">static</span> <span class="keyword">bool</span> <span class="method">IsEven</span>(<span class="keyword">int</span> number)
+    <span class="brace">{</span>
+        <span class="keyword">return</span> number <span class="operator">%</span> <span class="number">2</span> <span class="operator">==</span> <span class="number">0</span>;  <span class="comment">// Returns true if number is even</span>
+    <span class="brace">}</span>
+    
+    <span class="comment">// Method that returns a boolean</span>
+    <span class="keyword">static</span> <span class="keyword">bool</span> <span class="method">IsAdult</span>(<span class="keyword">int</span> age)
+    <span class="brace">{</span>
+        <span class="keyword">return</span> age <span class="operator">>=</span> <span class="number">18</span>;  <span class="comment">// Returns true if age is 18 or older</span>
+    <span class="brace">}</span>
+<span class="brace">}</span></div>
+
+        <div class="tip-box">
+          <div class="tip-box-title">💡 Return Statement Rules</div>
+          <ul>
+            <li>Use <span class="inline-code">return</span> to send a value back from a method</li>
+            <li>The return type must match what you're returning</li>
+            <li><span class="inline-code">void</span> methods don't return anything</li>
+            <li>You can return early from a method using <span class="inline-code">return</span></li>
+            <li>Methods can have multiple return statements (but only one will execute)</li>
+          </ul>
+        </div>
+
+        <h3>Method Overloading - Same Name, Different Parameters</h3>
+        <p>C# allows you to create multiple methods with the same name but different parameters. This is called method overloading.</p>
+
+        <div class="code-block"><span class="keyword">using</span> <span class="namespace">System</span>;
+
+<span class="keyword">class</span> <span class="type">Program</span>
+<span class="brace">{</span>
+    <span class="keyword">static</span> <span class="keyword">void</span> <span class="method">Main</span>()
+    <span class="brace">{</span>
+        <span class="comment">// Using overloaded methods</span>
+        <span class="method">DisplayMessage</span>();  <span class="comment">// No parameters</span>
+        <span class="method">DisplayMessage</span>(<span class="string">"Hello!"</span>);  <span class="comment">// One string parameter</span>
+        <span class="method">DisplayMessage</span>(<span class="string">"Welcome"</span>, <span class="number">3</span>);  <span class="comment">// String and int parameters</span>
+        
+        <span class="comment">// Using overloaded calculation methods</span>
+        <span class="keyword">int</span> sum1 <span class="operator">=</span> <span class="method">Add</span>(<span class="number">5</span>, <span class="number">3</span>);  <span class="comment">// Two integers</span>
+        <span class="keyword">double</span> sum2 <span class="operator">=</span> <span class="method">Add</span>(<span class="number">5.5</span>, <span class="number">3.2</span>);  <span class="comment">// Two doubles</span>
+        <span class="keyword">int</span> sum3 <span class="operator">=</span> <span class="method">Add</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>);  <span class="comment">// Three integers</span>
+        
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"Sum of 5 + 3 = </span><span class="brace">{</span>sum1<span class="brace">}</span><span class="string">"</span>);
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"Sum of 5.5 + 3.2 = </span><span class="brace">{</span>sum2<span class="brace">}</span><span class="string">"</span>);
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"Sum of 1 + 2 + 3 = </span><span class="brace">{</span>sum3<span class="brace">}</span><span class="string">"</span>);
+    <span class="brace">}</span>
+    
+    <span class="comment">// Overloaded methods with same name but different parameters</span>
+    <span class="keyword">static</span> <span class="keyword">void</span> <span class="method">DisplayMessage</span>()
+    <span class="brace">{</span>
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"Default message! 📢"</span>);
+    <span class="brace">}</span>
+    
+    <span class="keyword">static</span> <span class="keyword">void</span> <span class="method">DisplayMessage</span>(<span class="keyword">string</span> message)
+    <span class="brace">{</span>
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"Message: </span><span class="brace">{</span>message<span class="brace">}</span><span class="string">"</span>);
+    <span class="brace">}</span>
+    
+    <span class="keyword">static</span> <span class="keyword">void</span> <span class="method">DisplayMessage</span>(<span class="keyword">string</span> message, <span class="keyword">int</span> times)
+    <span class="brace">{</span>
+        <span class="keyword">for</span> (<span class="keyword">int</span> i <span class="operator">=</span> <span class="number">0</span>; i <span class="operator"><</span> times; i<span class="operator">++</span>)
+        <span class="brace">{</span>
+            <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"</span><span class="brace">{</span>i <span class="operator">+</span> <span class="number">1</span><span class="brace">}</span><span class="string">. </span><span class="brace">{</span>message<span class="brace">}</span><span class="string">"</span>);
+        <span class="brace">}</span>
+    <span class="brace">}</span>
+    
+    <span class="comment">// Overloaded Add methods</span>
+    <span class="keyword">static</span> <span class="keyword">int</span> <span class="method">Add</span>(<span class="keyword">int</span> a, <span class="keyword">int</span> b)
+    <span class="brace">{</span>
+        <span class="keyword">return</span> a <span class="operator">+</span> b;
+    <span class="brace">}</span>
+    
+    <span class="keyword">static</span> <span class="keyword">double</span> <span class="method">Add</span>(<span class="keyword">double</span> a, <span class="keyword">double</span> b)
+    <span class="brace">{</span>
+        <span class="keyword">return</span> a <span class="operator">+</span> b;
+    <span class="brace">}</span>
+    
+    <span class="keyword">static</span> <span class="keyword">int</span> <span class="method">Add</span>(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> c)
+    <span class="brace">{</span>
+        <span class="keyword">return</span> a <span class="operator">+</span> b <span class="operator">+</span> c;
+    <span class="brace">}</span>
+<span class="brace">}</span></div>
+
+        <div class="warning-box">
+          <div class="warning-box-title">⚠️ Method Naming Best Practices</div>
+          <ul>
+            <li>Use descriptive names that explain what the method does</li>
+            <li>Use PascalCase for method names (first letter of each word capitalized)</li>
+            <li>Methods that return boolean values often start with "Is", "Has", "Can", etc.</li>
+            <li>Keep methods focused on a single task</li>
+            <li>Don't make methods too long - break complex tasks into smaller methods</li>
+          </ul>
+        </div>
+
+        <div class="practice-section">
+          <div class="practice-title">🎯 Practice Challenge</div>
+          <p>Create a calculator program with methods for basic operations (add, subtract, multiply, divide). Include methods to calculate the area of different shapes (circle, rectangle, triangle). Use method overloading where appropriate!</p>
+        </div>
+      </div>
+
+      <!-- Chapter 8: Object-Oriented Programming -->
+      <div class="section">
+        <h2>Chapter 8: Object-Oriented Programming - Classes and Objects</h2>
+        
+        <div class="section-intro">
+          Object-Oriented Programming (OOP) is a powerful way to organize and structure your code. It allows you to model real-world objects and their behaviors in your programs. Think of classes as blueprints and objects as things built from those blueprints.
+        </div>
+
+        <h3>Classes - The Blueprint</h3>
+        <p>A class is like a template that defines what properties (data) and methods (behaviors) an object will have. It's the blueprint for creating objects.</p>
+
+        <div class="code-block"><span class="keyword">using</span> <span class="namespace">System</span>;
+
+<span class="comment">// Define a class called Person</span>
+<span class="keyword">class</span> <span class="type">Person</span>
+<span class="brace">{</span>
+    <span class="comment">// Properties (data/attributes)</span>
+    <span class="keyword">public</span> <span class="keyword">string</span> Name;
+    <span class="keyword">public</span> <span class="keyword">int</span> Age;
+    <span class="keyword">public</span> <span class="keyword">string</span> City;
+    
+    <span class="comment">// Constructor - special method that runs when creating a new object</span>
+    <span class="keyword">public</span> <span class="type">Person</span>(<span class="keyword">string</span> name, <span class="keyword">int</span> age, <span class="keyword">string</span> city)
+    <span class="brace">{</span>
+        Name <span class="operator">=</span> name;
+        Age <span class="operator">=</span> age;
+        City <span class="operator">=</span> city;
+    <span class="brace">}</span>
+    
+    <span class="comment">// Methods (behaviors)</span>
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="method">Introduce</span>()
+    <span class="brace">{</span>
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"Hi! I'm </span><span class="brace">{</span>Name<span class="brace">}</span><span class="string">, I'm </span><span class="brace">{</span>Age<span class="brace">}</span><span class="string"> years old, and I live in </span><span class="brace">{</span>City<span class="brace">}</span><span class="string">."</span>);
+    <span class="brace">}</span>
+    
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="method">HaveBirthday</span>()
+    <span class="brace">{</span>
+        Age<span class="operator">++</span>;
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"Happy Birthday, </span><span class="brace">{</span>Name<span class="brace">}</span><span class="string">! You are now </span><span class="brace">{</span>Age<span class="brace">}</span><span class="string"> years old! 🎉"</span>);
+    <span class="brace">}</span>
+    
+    <span class="keyword">public</span> <span class="keyword">bool</span> <span class="method">IsAdult</span>()
+    <span class="brace">{</span>
+        <span class="keyword">return</span> Age <span class="operator">>=</span> <span class="number">18</span>;
+    <span class="brace">}</span>
+<span class="brace">}</span>
+
+<span class="keyword">class</span> <span class="type">Program</span>
+<span class="brace">{</span>
+    <span class="keyword">static</span> <span class="keyword">void</span> <span class="method">Main</span>()
+    <span class="brace">{</span>
+        <span class="comment">// Creating objects (instances) of the Person class</span>
+        <span class="type">Person</span> person1 <span class="operator">=</span> <span class="keyword">new</span> <span class="type">Person</span>(<span class="string">"Alice"</span>, <span class="number">25</span>, <span class="string">"New York"</span>);
+        <span class="type">Person</span> person2 <span class="operator">=</span> <span class="keyword">new</span> <span class="type">Person</span>(<span class="string">"Bob"</span>, <span class="number">17</span>, <span class="string">"Los Angeles"</span>);
+        
+        <span class="comment">// Using object methods</span>
+        person1.<span class="method">Introduce</span>();
+        person2.<span class="method">Introduce</span>();
+        
+        <span class="comment">// Checking if they are adults</span>
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"</span><span class="operator">\n</span><span class="string">Is </span><span class="brace">{</span>person1.Name<span class="brace">}</span><span class="string"> an adult? </span><span class="brace">{</span>person1.<span class="method">IsAdult</span>()<span class="brace">}</span><span class="string">"</span>);
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"Is </span><span class="brace">{</span>person2.Name<span class="brace">}</span><span class="string"> an adult? </span><span class="brace">{</span>person2.<span class="method">IsAdult</span>()<span class="brace">}</span><span class="string">"</span>);
+        
+        <span class="comment">// Having a birthday</span>
+        person2.<span class="method">HaveBirthday</span>();
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"Now is </span><span class="brace">{</span>person2.Name<span class="brace">}</span><span class="string"> an adult? </span><span class="brace">{</span>person2.<span class="method">IsAdult</span>()<span class="brace">}</span><span class="string">"</span>);
+    <span class="brace">}</span>
+<span class="brace">}</span></div>
+
+        <div class="info-box">
+          <div class="info-box-title">🔍 Class Components</div>
+          <ul>
+            <li><strong>Properties:</strong> Data/attributes that describe the object</li>
+            <li><strong>Constructor:</strong> Special method that initializes the object</li>
+            <li><strong>Methods:</strong> Actions/behaviors the object can perform</li>
+            <li><strong>Objects:</strong> Instances created from the class blueprint</li>
+          </ul>
+        </div>
+
+        <h3>Encapsulation - Protecting Data</h3>
+        <p>Encapsulation is about controlling access to data and methods. It helps protect data and provides a clean interface for working with objects.</p>
+
+        <div class="code-block"><span class="keyword">using</span> <span class="namespace">System</span>;
+
+<span class="keyword">class</span> <span class="type">BankAccount</span>
+<span class="brace">{</span>
+    <span class="comment">// Private fields - only accessible within the class</span>
+    <span class="keyword">private</span> <span class="keyword">string</span> accountNumber;
+    <span class="keyword">private</span> <span class="keyword">double</span> balance;
+    <span class="keyword">private</span> <span class="keyword">string</span> ownerName;
+    
+    <span class="comment">// Public properties - controlled access to private fields</span>
+    <span class="keyword">public</span> <span class="keyword">string</span> AccountNumber
+    <span class="brace">{</span>
+        <span class="keyword">get</span> <span class="brace">{</span> <span class="keyword">return</span> accountNumber; <span class="brace">}</span>
+        <span class="keyword">private</span> <span class="keyword">set</span> <span class="brace">{</span> accountNumber <span class="operator">=</span> value; <span class="brace">}</span>
+    <span class="brace">}</span>
+    
+    <span class="keyword">public</span> <span class="keyword">double</span> Balance
+    <span class="brace">{</span>
+        <span class="keyword">get</span> <span class="brace">{</span> <span class="keyword">return</span> balance; <span class="brace">}</span>
+        <span class="keyword">private</span> <span class="keyword">set</span> <span class="brace">{</span> balance <span class="operator">=</span> value; <span class="brace">}</span>
+    <span class="brace">}</span>
+    
+    <span class="keyword">public</span> <span class="keyword">string</span> OwnerName
+    <span class="brace">{</span>
+        <span class="keyword">get</span> <span class="brace">{</span> <span class="keyword">return</span> ownerName; <span class="brace">}</span>
+        <span class="keyword">set</span> <span class="brace">{</span> ownerName <span class="operator">=</span> value; <span class="brace">}</span>
+    <span class="brace">}</span>
+    
+    <span class="comment">// Constructor</span>
+    <span class="keyword">public</span> <span class="type">BankAccount</span>(<span class="keyword">string</span> owner, <span class="keyword">string</span> accountNum, <span class="keyword">double</span> initialBalance)
+    <span class="brace">{</span>
+        ownerName <span class="operator">=</span> owner;
+        accountNumber <span class="operator">=</span> accountNum;
+        balance <span class="operator">=</span> initialBalance;
+    <span class="brace">}</span>
+    
+    <span class="comment">// Public methods to interact with the account</span>
+    <span class="keyword">public</span> <span class="keyword">bool</span> <span class="method">Deposit</span>(<span class="keyword">double</span> amount)
+    <span class="brace">{</span>
+        <span class="keyword">if</span> (amount <span class="operator">></span> <span class="number">0</span>)
+        <span class="brace">{</span>
+            balance <span class="operator">+=</span> amount;
+            <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"Deposited $</span><span class="brace">{</span>amount<span class="brace">}</span><span class="string">. New balance: $</span><span class="brace">{</span>balance<span class="brace">}</span><span class="string">"</span>);
+            <span class="keyword">return</span> <span class="keyword">true</span>;
+        <span class="brace">}</span>
+        <span class="keyword">else</span>
+        <span class="brace">{</span>
+            <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"Invalid deposit amount!"</span>);
+            <span class="keyword">return</span> <span class="keyword">false</span>;
+        <span class="brace">}</span>
+    <span class="brace">}</span>
+    
+    <span class="keyword">public</span> <span class="keyword">bool</span> <span class="method">Withdraw</span>(<span class="keyword">double</span> amount)
+    <span class="brace">{</span>
+        <span class="keyword">if</span> (amount <span class="operator">></span> <span class="number">0</span> <span class="operator">&&</span> amount <span class="operator"><=</span> balance)
+        <span class="brace">{</span>
+            balance <span class="operator">-=</span> amount;
+            <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"Withdrew $</span><span class="brace">{</span>amount<span class="brace">}</span><span class="string">. New balance: $</span><span class="brace">{</span>balance<span class="brace">}</span><span class="string">"</span>);
+            <span class="keyword">return</span> <span class="keyword">true</span>;
+        <span class="brace">}</span>
+        <span class="keyword">else</span>
+        <span class="brace">{</span>
+            <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"Invalid withdrawal amount or insufficient funds!"</span>);
+            <span class="keyword">return</span> <span class="keyword">false</span>;
+        <span class="brace">}</span>
+    <span class="brace">}</span>
+    
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="method">DisplayInfo</span>()
+    <span class="brace">{</span>
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"Account: </span><span class="brace">{</span>accountNumber<span class="brace">}</span><span class="string">"</span>);
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"Owner: </span><span class="brace">{</span>ownerName<span class="brace">}</span><span class="string">"</span>);
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"Balance: $</span><span class="brace">{</span>balance<span class="brace">}</span><span class="string">"</span>);
+    <span class="brace">}</span>
+<span class="brace">}</span>
+
+<span class="keyword">class</span> <span class="type">Program</span>
+<span class="brace">{</span>
+    <span class="keyword">static</span> <span class="keyword">void</span> <span class="method">Main</span>()
+    <span class="brace">{</span>
+        <span class="comment">// Creating a bank account</span>
+        <span class="type">BankAccount</span> account <span class="operator">=</span> <span class="keyword">new</span> <span class="type">BankAccount</span>(<span class="string">"John Doe"</span>, <span class="string">"123456789"</span>, <span class="number">1000.0</span>);
+        
+        <span class="comment">// Display initial info</span>
+        account.<span class="method">DisplayInfo</span>();
+        
+        <span class="comment">// Perform transactions</span>
+        account.<span class="method">Deposit</span>(<span class="number">500.0</span>);
+        account.<span class="method">Withdraw</span>(<span class="number">200.0</span>);
+        account.<span class="method">Withdraw</span>(<span class="number">2000.0</span>);  <span class="comment">// Should fail</span>
+        
+        <span class="comment">// Display final info</span>
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"</span><span class="operator">\n</span><span class="string">Final account status:"</span>);
+        account.<span class="method">DisplayInfo</span>();
+    <span class="brace">}</span>
+<span class="brace">}</span></div>
+
+        <div class="tip-box">
+          <div class="tip-box-title">💡 Access Modifiers</div>
+          <ul>
+            <li><span class="inline-code">public</span> - Accessible from anywhere</li>
+            <li><span class="inline-code">private</span> - Only accessible within the class</li>
+            <li><span class="inline-code">protected</span> - Accessible within the class and derived classes</li>
+            <li>Use properties to control access to private fields</li>
+            <li>Encapsulation helps maintain data integrity</li>
+          </ul>
+        </div>
+
+        <h3>Inheritance - Reusing Code</h3>
+        <p>Inheritance allows you to create a new class based on an existing class, inheriting its properties and methods while adding new ones.</p>
+
+        <div class="code-block"><span class="keyword">using</span> <span class="namespace">System</span>;
+
+<span class="comment">// Base class (parent)</span>
+<span class="keyword">class</span> <span class="type">Animal</span>
+<span class="brace">{</span>
+    <span class="keyword">public</span> <span class="keyword">string</span> Name;
+    <span class="keyword">public</span> <span class="keyword">int</span> Age;
+    
+    <span class="keyword">public</span> <span class="type">Animal</span>(<span class="keyword">string</span> name, <span class="keyword">int</span> age)
+    <span class="brace">{</span>
+        Name <span class="operator">=</span> name;
+        Age <span class="operator">=</span> age;
+    <span class="brace">}</span>
+    
+    <span class="keyword">public</span> <span class="keyword">virtual</span> <span class="keyword">void</span> <span class="method">MakeSound</span>()
+    <span class="brace">{</span>
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"Some animal sound"</span>);
+    <span class="brace">}</span>
+    
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="method">Sleep</span>()
+    <span class="brace">{</span>
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"</span><span class="brace">{</span>Name<span class="brace">}</span><span class="string"> is sleeping... 😴"</span>);
+    <span class="brace">}</span>
+<span class="brace">}</span>
+
+<span class="comment">// Derived class (child) - inherits from Animal</span>
+<span class="keyword">class</span> <span class="type">Dog</span> : <span class="type">Animal</span>
+<span class="brace">{</span>
+    <span class="keyword">public</span> <span class="keyword">string</span> Breed;
+    
+    <span class="keyword">public</span> <span class="type">Dog</span>(<span class="keyword">string</span> name, <span class="keyword">int</span> age, <span class="keyword">string</span> breed) : <span class="keyword">base</span>(name, age)
+    <span class="brace">{</span>
+        Breed <span class="operator">=</span> breed;
+    <span class="brace">}</span>
+    
+    <span class="comment">// Override the MakeSound method</span>
+    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="method">MakeSound</span>()
+    <span class="brace">{</span>
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"</span><span class="brace">{</span>Name<span class="brace">}</span><span class="string"> says: Woof! Woof! 🐕"</span>);
+    <span class="brace">}</span>
+    
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="method">Fetch</span>()
+    <span class="brace">{</span>
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"</span><span class="brace">{</span>Name<span class="brace">}</span><span class="string"> is fetching the ball! 🎾"</span>);
+    <span class="brace">}</span>
+<span class="brace">}</span>
+
+<span class="comment">// Another derived class</span>
+<span class="keyword">class</span> <span class="type">Cat</span> : <span class="type">Animal</span>
+<span class="brace">{</span>
+    <span class="keyword">public</span> <span class="keyword">bool</span> IsIndoor;
+    
+    <span class="keyword">public</span> <span class="type">Cat</span>(<span class="keyword">string</span> name, <span class="keyword">int</span> age, <span class="keyword">bool</span> isIndoor) : <span class="keyword">base</span>(name, age)
+    <span class="brace">{</span>
+        IsIndoor <span class="operator">=</span> isIndoor;
+    <span class="brace">}</span>
+    
+    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="method">MakeSound</span>()
+    <span class="brace">{</span>
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"</span><span class="brace">{</span>Name<span class="brace">}</span><span class="string"> says: Meow! 🐱"</span>);
+    <span class="brace">}</span>
+    
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="method">Purr</span>()
+    <span class="brace">{</span>
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"</span><span class="brace">{</span>Name<span class="brace">}</span><span class="string"> is purring... 😺"</span>);
+    <span class="brace">}</span>
+<span class="brace">}</span>
+
+<span class="keyword">class</span> <span class="type">Program</span>
+<span class="brace">{</span>
+    <span class="keyword">static</span> <span class="keyword">void</span> <span class="method">Main</span>()
+    <span class="brace">{</span>
+        <span class="comment">// Creating different types of animals</span>
+        <span class="type">Dog</span> dog <span class="operator">=</span> <span class="keyword">new</span> <span class="type">Dog</span>(<span class="string">"Buddy"</span>, <span class="number">3</span>, <span class="string">"Golden Retriever"</span>);
+        <span class="type">Cat</span> cat <span class="operator">=</span> <span class="keyword">new</span> <span class="type">Cat</span>(<span class="string">"Whiskers"</span>, <span class="number">2</span>, <span class="keyword">true</span>);
+        
+        <span class="comment">// Using inherited methods</span>
+        dog.<span class="method">Sleep</span>();
+        cat.<span class="method">Sleep</span>();
+        
+        <span class="comment">// Using overridden methods</span>
+        dog.<span class="method">MakeSound</span>();
+        cat.<span class="method">MakeSound</span>();
+        
+        <span class="comment">// Using specific methods</span>
+        dog.<span class="method">Fetch</span>();
+        cat.<span class="method">Purr</span>();
+        
+        <span class="comment">// Polymorphism - treating different objects as the same type</span>
+        <span class="type">Animal</span>[] animals <span class="operator">=</span> <span class="keyword">new</span> <span class="type">Animal</span>[] <span class="brace">{</span>dog, cat<span class="brace">}</span>;
+        
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"</span><span class="operator">\n</span><span class="string">All animals making sounds:"</span>);
+        <span class="keyword">foreach</span> (<span class="type">Animal</span> animal <span class="keyword">in</span> animals)
+        <span class="brace">{</span>
+            animal.<span class="method">MakeSound</span>();  <span class="comment">// Each animal makes its own sound</span>
+        <span class="brace">}</span>
+    <span class="brace">}</span>
+<span class="brace">}</span></div>
+
+        <div class="practice-section">
+          <div class="practice-title">🎯 Practice Challenge</div>
+          <p>Create a simple library management system! Create classes for Book, Library, and Member. Books should have title, author, and availability status. Library should manage books and members. Members should be able to borrow and return books. Use inheritance and encapsulation!</p>
+        </div>
+      </div>
+
+      <!-- Chapter 9: Exception Handling -->
+      <div class="section">
+        <h2>Chapter 9: Exception Handling - Making Programs Robust</h2>
+        
+        <div class="section-intro">
+          Exception handling is like having a safety net for your programs. It allows you to gracefully handle errors and unexpected situations instead of your program crashing. Think of it as having a backup plan when things go wrong.
+        </div>
+
+        <h3>Understanding Exceptions</h3>
+        <p>Exceptions are events that occur during program execution that disrupt the normal flow of instructions. They can be caused by various factors like invalid input, file not found, division by zero, etc.</p>
+
+        <div class="code-block"><span class="keyword">using</span> <span class="namespace">System</span>;
+
+<span class="keyword">class</span> <span class="type">Program</span>
+<span class="brace">{</span>
+    <span class="keyword">static</span> <span class="keyword">void</span> <span class="method">Main</span>()
+    <span class="brace">{</span>
+        <span class="comment">// Example without exception handling (will crash)</span>
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"=== Exception Examples ==="</span>);
+        
+        <span class="comment">// Division by zero exception</span>
+        <span class="keyword">try</span>
+        <span class="brace">{</span>
+            <span class="keyword">int</span> result <span class="operator">=</span> <span class="number">10</span> <span class="operator">/</span> <span class="number">0</span>;
+            <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"Result: </span><span class="brace">{</span>result<span class="brace">}</span><span class="string">"</span>);
+        <span class="brace">}</span>
+        <span class="keyword">catch</span> (<span class="type">DivideByZeroException</span> ex)
+        <span class="brace">{</span>
+            <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"Error: Cannot divide by zero! </span><span class="brace">{</span>ex.Message<span class="brace">}</span><span class="string">"</span>);
+        <span class="brace">}</span>
+        
+        <span class="comment">// Array index out of bounds exception</span>
+        <span class="keyword">int</span>[] numbers <span class="operator">=</span> <span class="keyword">new</span> <span class="keyword">int</span>[] <span class="brace">{</span><span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span><span class="brace">}</span>;
+        <span class="keyword">try</span>
+        <span class="brace">{</span>
+            <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"Number at index 5: </span><span class="brace">{</span>numbers[<span class="number">5</span>]<span class="brace">}</span><span class="string">"</span>);
+        <span class="brace">}</span>
+        <span class="keyword">catch</span> (<span class="type">IndexOutOfRangeException</span> ex)
+        <span class="brace">{</span>
+            <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"Error: Array index out of bounds! </span><span class="brace">{</span>ex.Message<span class="brace">}</span><span class="string">"</span>);
+        <span class="brace">}</span>
+        
+        <span class="comment">// Format exception (parsing errors)</span>
+        <span class="keyword">try</span>
+        <span class="brace">{</span>
+            <span class="keyword">int</span> number <span class="operator">=</span> <span class="keyword">int</span>.<span class="method">Parse</span>(<span class="string">"abc"</span>);
+            <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"Parsed number: </span><span class="brace">{</span>number<span class="brace">}</span><span class="string">"</span>);
+        <span class="brace">}</span>
+        <span class="keyword">catch</span> (<span class="type">FormatException</span> ex)
+        <span class="brace">{</span>
+            <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"Error: Invalid number format! </span><span class="brace">{</span>ex.Message<span class="brace">}</span><span class="string">"</span>);
+        <span class="brace">}</span>
+    <span class="brace">}</span>
+<span class="brace">}</span></div>
+
+        <div class="info-box">
+          <div class="info-box-title">🔍 Try-Catch Structure</div>
+          <ul>
+            <li><span class="inline-code">try</span> - Contains code that might cause an exception</li>
+            <li><span class="inline-code">catch</span> - Handles the exception if it occurs</li>
+            <li><span class="inline-code">finally</span> - Always executes, regardless of whether an exception occurred</li>
+            <li>You can have multiple catch blocks for different exception types</li>
+          </ul>
+        </div>
+
+        <h3>Practical Exception Handling</h3>
+        <p>Let's see how to handle exceptions in real-world scenarios, like user input validation and file operations.</p>
+
+        <div class="code-block"><span class="keyword">using</span> <span class="namespace">System</span>;
+
+<span class="keyword">class</span> <span class="type">Program</span>
+<span class="brace">{</span>
+    <span class="keyword">static</span> <span class="keyword">void</span> <span class="method">Main</span>()
+    <span class="brace">{</span>
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"=== Safe Input Handling ==="</span>);
+        
+        <span class="comment">// Safe number input with exception handling</span>
+        <span class="keyword">int</span> age <span class="operator">=</span> <span class="method">GetValidAge</span>();
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"You entered: </span><span class="brace">{</span>age<span class="brace">}</span><span class="string">"</span>);
+        
+        <span class="comment">// Safe division with exception handling</span>
+        <span class="keyword">double</span> result <span class="operator">=</span> <span class="method">SafeDivide</span>(<span class="number">10</span>, <span class="number">0</span>);
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"Safe division result: </span><span class="brace">{</span>result<span class="brace">}</span><span class="string">"</span>);
+        
+        <span class="comment">// Array access with bounds checking</span>
+        <span class="keyword">int</span>[] scores <span class="operator">=</span> <span class="keyword">new</span> <span class="keyword">int</span>[] <span class="brace">{</span><span class="number">85</span>, <span class="number">92</span>, <span class="number">78</span><span class="brace">}</span>;
+        <span class="keyword">int</span> score <span class="operator">=</span> <span class="method">GetArrayElement</span>(scores, <span class="number">5</span>);
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"Retrieved score: </span><span class="brace">{</span>score<span class="brace">}</span><span class="string">"</span>);
+    <span class="brace">}</span>
+    
+    <span class="comment">// Method to safely get age input</span>
+    <span class="keyword">static</span> <span class="keyword">int</span> <span class="method">GetValidAge</span>()
+    <span class="brace">{</span>
+        <span class="keyword">while</span> (<span class="keyword">true</span>)
+        <span class="brace">{</span>
+            <span class="keyword">try</span>
+            <span class="brace">{</span>
+                <span class="type">Console</span>.<span class="method">Write</span>(<span class="string">"Enter your age: "</span>);
+                <span class="keyword">string</span> input <span class="operator">=</span> <span class="type">Console</span>.<span class="method">ReadLine</span>();
+                <span class="keyword">int</span> age <span class="operator">=</span> <span class="keyword">int</span>.<span class="method">Parse</span>(input);
+                
+                <span class="keyword">if</span> (age <span class="operator"><</span> <span class="number">0</span> <span class="operator">||</span> age <span class="operator">></span> <span class="number">150</span>)
+                <span class="brace">{</span>
+                    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="type">ArgumentException</span>(<span class="string">"Age must be between 0 and 150"</span>);
+                <span class="brace">}</span>
+                
+                <span class="keyword">return</span> age;
+            <span class="brace">}</span>
+            <span class="keyword">catch</span> (<span class="type">FormatException</span>)
+            <span class="brace">{</span>
+                <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"Error: Please enter a valid number!"</span>);
+            <span class="brace">}</span>
+            <span class="keyword">catch</span> (<span class="type">ArgumentException</span> ex)
+            <span class="brace">{</span>
+                <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"Error: </span><span class="brace">{</span>ex.Message<span class="brace">}</span><span class="string">"</span>);
+            <span class="brace">}</span>
+        <span class="brace">}</span>
+    <span class="brace">}</span>
+    
+    <span class="comment">// Method to safely perform division</span>
+    <span class="keyword">static</span> <span class="keyword">double</span> <span class="method">SafeDivide</span>(<span class="keyword">double</span> numerator, <span class="keyword">double</span> denominator)
+    <span class="brace">{</span>
+        <span class="keyword">try</span>
+        <span class="brace">{</span>
+            <span class="keyword">return</span> numerator <span class="operator">/</span> denominator;
+        <span class="brace">}</span>
+        <span class="keyword">catch</span> (<span class="type">DivideByZeroException</span>)
+        <span class="brace">{</span>
+            <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"Warning: Division by zero attempted. Returning 0."</span>);
+            <span class="keyword">return</span> <span class="number">0</span>;
+        <span class="brace">}</span>
+    <span class="brace">}</span>
+    
+    <span class="comment">// Method to safely access array elements</span>
+    <span class="keyword">static</span> <span class="keyword">int</span> <span class="method">GetArrayElement</span>(<span class="keyword">int</span>[] array, <span class="keyword">int</span> index)
+    <span class="brace">{</span>
+        <span class="keyword">try</span>
+        <span class="brace">{</span>
+            <span class="keyword">return</span> array[index];
+        <span class="brace">}</span>
+        <span class="keyword">catch</span> (<span class="type">IndexOutOfRangeException</span>)
+        <span class="brace">{</span>
+            <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"Warning: Index </span><span class="brace">{</span>index<span class="brace">}</span><span class="string"> is out of bounds. Returning -1."</span>);
+            <span class="keyword">return</span> <span class="operator">-</span><span class="number">1</span>;
+        <span class="brace">}</span>
+    <span class="brace">}</span>
+<span class="brace">}</span></div>
+
+        <h3>Finally Block - Cleanup Code</h3>
+        <p>The finally block is used to ensure that certain code always executes, regardless of whether an exception occurs or not. It's commonly used for cleanup operations.</p>
+
+        <div class="code-block"><span class="keyword">using</span> <span class="namespace">System</span>;
+
+<span class="keyword">class</span> <span class="type">Program</span>
+<span class="brace">{</span>
+    <span class="keyword">static</span> <span class="keyword">void</span> <span class="method">Main</span>()
+    <span class="brace">{</span>
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"=== Finally Block Example ==="</span>);
+        
+        <span class="comment">// Example with finally block</span>
+        <span class="method">ProcessData</span>(<span class="number">10</span>);
+        <span class="method">ProcessData</span>(<span class="operator">-</span><span class="number">5</span>);  <span class="comment">// This will cause an exception</span>
+    <span class="brace">}</span>
+    
+    <span class="keyword">static</span> <span class="keyword">void</span> <span class="method">ProcessData</span>(<span class="keyword">int</span> value)
+    <span class="brace">{</span>
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"</span><span class="operator">\n</span><span class="string">Processing value: </span><span class="brace">{</span>value<span class="brace">}</span><span class="string">"</span>);
+        
+        <span class="keyword">try</span>
+        <span class="brace">{</span>
+            <span class="keyword">if</span> (value <span class="operator"><</span> <span class="number">0</span>)
+            <span class="brace">{</span>
+                <span class="keyword">throw</span> <span class="keyword">new</span> <span class="type">ArgumentException</span>(<span class="string">"Value cannot be negative"</span>);
+            <span class="brace">}</span>
+            
+            <span class="keyword">int</span> result <span class="operator">=</span> value <span class="operator">*</span> <span class="number">2</span>;
+            <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"Processing successful! Result: </span><span class="brace">{</span>result<span class="brace">}</span><span class="string">"</span>);
+        <span class="brace">}</span>
+        <span class="keyword">catch</span> (<span class="type">ArgumentException</span> ex)
+        <span class="brace">{</span>
+            <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"Error during processing: </span><span class="brace">{</span>ex.Message<span class="brace">}</span><span class="string">"</span>);
+        <span class="brace">}</span>
+        <span class="keyword">finally</span>
+        <span class="brace">{</span>
+            <span class="comment">// This code always executes</span>
+            <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"Cleanup: Processing completed (success or failure)"</span>);
+            <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"---"</span>);
+        <span class="brace">}</span>
+    <span class="brace">}</span>
+<span class="brace">}</span></div>
+
+        <div class="tip-box">
+          <div class="tip-box-title">💡 Exception Handling Best Practices</div>
+          <ul>
+            <li>Only catch exceptions you can handle meaningfully</li>
+            <li>Use specific exception types rather than catching all exceptions</li>
+            <li>Always clean up resources in finally blocks</li>
+            <li>Provide meaningful error messages to users</li>
+            <li>Log exceptions for debugging purposes</li>
+            <li>Don't use exceptions for normal flow control</li>
+          </ul>
+        </div>
+
+        <div class="practice-section">
+          <div class="practice-title">🎯 Practice Challenge</div>
+          <p>Create a calculator program with robust exception handling! Handle division by zero, invalid number formats, and out-of-range inputs. Use try-catch blocks to make your program user-friendly and prevent crashes.</p>
+        </div>
+      </div>
+
+      <!-- Conclusion and Next Steps -->
+      <div class="section">
+        <div class="next-steps">
+          <h3>🎉 Congratulations! You've Completed the C# Fundamentals</h3>
+          <p>You've now learned the essential building blocks of C# programming! Here's what you've mastered:</p>
+          <ul>
+            <li>✅ Basic program structure and syntax</li>
+            <li>✅ Variables, data types, and operators</li>
+            <li>✅ User input and output</li>
+            <li>✅ Control flow with if statements and loops</li>
+            <li>✅ Arrays, lists, and collections</li>
+            <li>✅ Methods and functions</li>
+            <li>✅ Object-oriented programming concepts</li>
+            <li>✅ Exception handling</li>
+          </ul>
+          
+          <h3>🚀 What's Next?</h3>
+          <p>Continue your C# journey with these advanced topics:</p>
+          <ul>
+            <li><strong>Advanced OOP:</strong> Interfaces, abstract classes, and polymorphism</li>
+            <li><strong>File I/O:</strong> Reading and writing files</li>
+            <li><strong>LINQ:</strong> Language Integrated Query for data manipulation</li>
+            <li><strong>Collections:</strong> Dictionaries, queues, and stacks</li>
+            <li><strong>Events and Delegates:</strong> Advanced programming patterns</li>
+            <li><strong>Async Programming:</strong> Working with asynchronous operations</li>
+            <li><strong>Web Development:</strong> ASP.NET Core for web applications</li>
+            <li><strong>Desktop Apps:</strong> Windows Forms or WPF</li>
+          </ul>
+          
+          <h3>💡 Practice Projects</h3>
+          <p>Build these projects to reinforce your learning:</p>
+          <ul>
+            <li>📊 Grade calculator with statistics</li>
+            <li>🎮 Simple text-based game</li>
+            <li>📚 Library management system</li>
+            <li>💰 Personal finance tracker</li>
+            <li>📝 To-do list application</li>
+            <li>🎲 Dice rolling simulator</li>
+          </ul>
+        </div>
+      </div>
