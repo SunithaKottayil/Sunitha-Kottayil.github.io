@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <title>Power BI & DAX Masterclass: Your Friendly Guide from Excel to Advanced Analytics</title>
   <style>
-    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); color: #2c3e50; margin: 0; padding: 0 1.5em 3em 1.5em; line-height: 1.7; }
-    .container { max-width: 1000px; margin: 2em auto; background: #fff; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); padding: 3em 3em 3em 3em;}
-    h1, h2 { color: #3498db; font-weight: 600;}
-    h1 { text-align: center; font-size: 2.8em; margin-bottom: 0.5em; background: linear-gradient(45deg, #3498db, #2980b9); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f8f9fa; color: #2c3e50; margin: 0; padding: 0 1.5em 3em 1.5em; line-height: 1.7; }
+    .container { max-width: 1000px; margin: 2em auto; background: #fff; border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.08); padding: 3em 3em 3em 3em; border: 1px solid #e9ecef;}
+    h1, h2 { color: #2c3e50; font-weight: 600;}
+    h1 { text-align: center; font-size: 2.6em; margin-bottom: 0.5em; color: #2c3e50; }
     h2 { margin-top: 2.5em; border-bottom: 4px solid #3498db; padding-bottom: 0.5em; font-size: 1.8em; }
     h3 { margin-top: 2em; color: #2980b9; font-size: 1.4em;}
     p, ul, ol { font-size: 1.1em; margin: 1.3em 0; color: #34495e;}
@@ -24,24 +24,24 @@
     }
     pre.cmd { display: block; padding: 1.5em 1.8em; margin: 2em 0; background: #f8f9fa; border: 1px solid #e9ecef;}
     .tip, .fnote {
-      background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-      border-left: 6px solid #2196f3;
+      background: #e3f2fd;
+      border-left: 4px solid #2196f3;
       padding: 1.5em 1.8em;
-      border-radius: 12px;
+      border-radius: 8px;
       margin: 2em 0;
       color: #1565c0;
       font-size: 1.05em;
-      box-shadow: 0 4px 12px rgba(33, 150, 243, 0.15);
+      box-shadow: 0 2px 8px rgba(33, 150, 243, 0.1);
     }
     .excel-note {
-      background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%);
-      border-left: 6px solid #4caf50;
+      background: #e8f5e8;
+      border-left: 4px solid #4caf50;
       padding: 1.5em 1.8em;
-      border-radius: 12px;
+      border-radius: 8px;
       margin: 2em 0;
       color: #2e7d32;
       font-size: 1.05em;
-      box-shadow: 0 4px 12px rgba(76, 175, 80, 0.15);
+      box-shadow: 0 2px 8px rgba(76, 175, 80, 0.1);
     }
     .diagram { text-align: center; margin: 2.5em 0;}
     .diagram img { max-width: 100%; height: auto; border-radius: 16px; box-shadow: 0 8px 25px rgba(52, 152, 219, 0.2); background: #fff; padding: 20px;}
@@ -49,32 +49,32 @@
     a { color: #3498db; text-decoration: none; font-weight: 500;}
     a:hover { text-decoration: underline; color: #2980b9; }
     .quiz-block {
-      background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
-      border-left: 7px solid #ff9800;
+      background: #fff3e0;
+      border-left: 4px solid #ff9800;
       padding: 1.5em 2em;
-      border-radius: 12px;
+      border-radius: 8px;
       margin: 2.5em 0;
       font-size: 1.15em;
       color: #e65100;
       max-width: 850px;
-      box-shadow: 0 4px 12px rgba(255, 152, 0, 0.15);
+      box-shadow: 0 2px 8px rgba(255, 152, 0, 0.1);
     }
     .quiz-block input[type="radio"] { margin-right: 15px; vertical-align: middle; transform: scale(1.1);}
     .quiz-result { font-weight: 700; margin-top: 1.2em; font-size: 1.1em; color: #d84315;}
     button.check-btn {
-      background: linear-gradient(45deg, #ff9800, #f57c00); color: #fff; border: none; padding: 12px 25px; font-size: 1.05em;
-      border-radius: 25px; cursor: pointer; margin-top: 15px; transition: all 0.3s; display: inline-block; font-weight: 600;
-      box-shadow: 0 4px 15px rgba(255, 152, 0, 0.3);
+      background: #ff9800; color: #fff; border: none; padding: 12px 25px; font-size: 1.05em;
+      border-radius: 6px; cursor: pointer; margin-top: 15px; transition: all 0.3s; display: inline-block; font-weight: 600;
+      box-shadow: 0 2px 8px rgba(255, 152, 0, 0.2);
     }
-    button.check-btn:hover { background: linear-gradient(45deg, #f57c00, #ef6c00); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255, 152, 0, 0.4); }
+    button.check-btn:hover { background: #f57c00; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(255, 152, 0, 0.3); }
     .real-world-example {
-      background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
-      border: 2px solid #9c27b0;
+      background: #f3e5f5;
+      border: 1px solid #9c27b0;
       padding: 1.5em 2em;
-      border-radius: 12px;
+      border-radius: 8px;
       margin: 2em 0;
       color: #4a148c;
-      box-shadow: 0 4px 12px rgba(156, 39, 176, 0.15);
+      box-shadow: 0 2px 8px rgba(156, 39, 176, 0.1);
     }
     .step-by-step {
       background: #f8f9fa;
@@ -86,6 +86,145 @@
     }
     .step-by-step ol { margin-left: 1.5em; }
     .step-by-step li { margin-bottom: 0.8em; }
+    
+    /* Human-designed workflow diagram */
+    .workflow-diagram {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 3em 0;
+      padding: 2em;
+      background: #f8f9fa;
+      border-radius: 8px;
+      border: 1px solid #dee2e6;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    
+    .workflow-step {
+      text-align: center;
+      flex: 1;
+      max-width: 180px;
+    }
+    
+    .step-number {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #3498db;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1em;
+      font-weight: bold;
+      margin: 0 auto 1em auto;
+      box-shadow: 0 2px 6px rgba(52, 152, 219, 0.2);
+    }
+    
+    .step-content h4 {
+      margin: 0 0 0.5em 0;
+      color: #2c3e50;
+      font-size: 1.1em;
+      font-weight: 600;
+    }
+    
+    .step-content p {
+      margin: 0;
+      color: #7f8c8d;
+      font-size: 0.9em;
+      line-height: 1.4;
+    }
+    
+    .workflow-arrow {
+      font-size: 1.5em;
+      color: #3498db;
+      font-weight: bold;
+      margin: 0 1em;
+      opacity: 0.7;
+    }
+    
+    /* DAX Architecture diagram */
+    .dax-architecture {
+      margin: 3em 0;
+      padding: 2em;
+      background: #f8f9fa;
+      border-radius: 8px;
+      border: 1px solid #dee2e6;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    
+    .architecture-layer {
+      background: white;
+      border: 2px solid #e9ecef;
+      border-radius: 12px;
+      padding: 1.5em;
+      margin: 1em 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+    }
+    
+    .architecture-layer:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    }
+    
+    .highlight-layer {
+      border-color: #3498db;
+      background: #e3f2fd;
+      box-shadow: 0 2px 8px rgba(52, 152, 219, 0.1);
+    }
+    
+    .layer-title {
+      font-size: 1.2em;
+      font-weight: 600;
+      color: #2c3e50;
+      margin-bottom: 1em;
+      text-align: center;
+    }
+    
+    .layer-items {
+      display: flex;
+      justify-content: center;
+      gap: 1em;
+      flex-wrap: wrap;
+    }
+    
+    .layer-item {
+      background: #f8f9fa;
+      border: 1px solid #dee2e6;
+      border-radius: 20px;
+      padding: 0.5em 1em;
+      font-size: 0.9em;
+      color: #495057;
+      font-weight: 500;
+    }
+    
+    .architecture-arrow {
+      text-align: center;
+      font-size: 1.5em;
+      color: #3498db;
+      font-weight: bold;
+      margin: 0.5em 0;
+      opacity: 0.7;
+    }
+    
+    /* Responsive design for diagrams */
+    @media (max-width: 768px) {
+      .workflow-diagram {
+        flex-direction: column;
+        gap: 1em;
+      }
+      
+      .workflow-arrow {
+        transform: rotate(90deg);
+        margin: 0.5em 0;
+      }
+      
+      .layer-items {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
   </style>
 </head>
 <body>
@@ -125,9 +264,46 @@
       <li><strong>Real-time Updates:</strong> Connect to live data sources and see updates automatically</li>
     </ul>
 
-    <div class="diagram">
-      <img src="https://i.imgur.com/AmiHlSF.png" alt="Power BI Data Flow">
-      <br><small style="color: #7f8c8d;">Your data journey: Sources → Clean → Model → Visualize → Share</small>
+    <div class="workflow-diagram">
+      <div class="workflow-step">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <h4>Data Sources</h4>
+          <p>Excel, CSV, Databases, APIs</p>
+        </div>
+      </div>
+      <div class="workflow-arrow">→</div>
+      <div class="workflow-step">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <h4>Power Query</h4>
+          <p>Clean & Transform</p>
+        </div>
+      </div>
+      <div class="workflow-arrow">→</div>
+      <div class="workflow-step">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <h4>Data Model</h4>
+          <p>Relationships & DAX</p>
+        </div>
+      </div>
+      <div class="workflow-arrow">→</div>
+      <div class="workflow-step">
+        <div class="step-number">4</div>
+        <div class="step-content">
+          <h4>Visualizations</h4>
+          <p>Charts & Dashboards</p>
+        </div>
+      </div>
+      <div class="workflow-arrow">→</div>
+      <div class="workflow-step">
+        <div class="step-number">5</div>
+        <div class="step-content">
+          <h4>Share & Publish</h4>
+          <p>Reports & Collaboration</p>
+        </div>
+      </div>
     </div>
 
     <div class="tip">
@@ -190,9 +366,42 @@
       <li><strong>Time Intelligence:</strong> Calculate year-over-year growth, running totals, etc.</li>
     </ul>
 
-    <div class="diagram">
-      <img src="https://i.imgur.com/M1yLOhs.png" alt="How DAX fits in Power BI">
-      <br><small style="color: #7f8c8d;">DAX bridges your raw data and beautiful visualizations</small>
+    <div class="dax-architecture">
+      <div class="architecture-layer">
+        <div class="layer-title">Data Sources</div>
+        <div class="layer-items">
+          <span class="layer-item">Excel Files</span>
+          <span class="layer-item">Databases</span>
+          <span class="layer-item">Web APIs</span>
+        </div>
+      </div>
+      <div class="architecture-arrow">↓</div>
+      <div class="architecture-layer">
+        <div class="layer-title">Power Query</div>
+        <div class="layer-items">
+          <span class="layer-item">Data Cleaning</span>
+          <span class="layer-item">Transformation</span>
+          <span class="layer-item">Loading</span>
+        </div>
+      </div>
+      <div class="architecture-arrow">↓</div>
+      <div class="architecture-layer highlight-layer">
+        <div class="layer-title">DAX Engine</div>
+        <div class="layer-items">
+          <span class="layer-item">Calculated Columns</span>
+          <span class="layer-item">Measures</span>
+          <span class="layer-item">Time Intelligence</span>
+        </div>
+      </div>
+      <div class="architecture-arrow">↓</div>
+      <div class="architecture-layer">
+        <div class="layer-title">Visualizations</div>
+        <div class="layer-items">
+          <span class="layer-item">Charts</span>
+          <span class="layer-item">Dashboards</span>
+          <span class="layer-item">Reports</span>
+        </div>
+      </div>
     </div>
 
     <hr>
