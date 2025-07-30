@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -838,10 +839,10 @@
 <body>
     <div class="container">
         <header class="header">
-            <h1>Git Version Control</h1>
-            <div class="subtitle">Complete Developer Guide to Version Control and Collaboration</div>
+            <h1>Learning Git</h1>
+            <div class="subtitle">A practical guide to version control - no fancy stuff, just real learning</div>
             <div class="intro">
-                Git is the industry-standard version control system used by millions of developers worldwide. This comprehensive guide covers essential Git concepts, commands, workflows, and best practices for effective version control and team collaboration.
+                Hey there! Git might seem scary at first, but it's actually just a way to keep track of your code changes. Think of it like a super-powered "save" button that remembers everything you've ever done. This guide will walk you through the basics in plain English.
             </div>
         </header>
 
@@ -860,61 +861,61 @@
         </nav>
 
         <main>
-            <h2 id="fundamentals">Git Fundamentals</h2>
+            <h2 id="fundamentals">What is Git?</h2>
             
-            <p>Git is a distributed version control system that tracks changes in source code during software development. It enables multiple developers to work on the same project efficiently while maintaining a complete history of all changes.</p>
+            <p>Okay, let's start simple. Git is basically a time machine for your code. Remember when you used to save files as "project_v1", "project_v2", "project_final", "project_final_really"? Git does that automatically, but way better.</p>
 
             <div class="diagram">
-                <div class="diagram-title">Version Control Comparison</div>
+                <div class="diagram-title">Why Git is Awesome</div>
                 <div class="concept-grid">
                     <div class="concept-card">
-                        <h4>❌ Without Version Control</h4>
-                        <p>• Files scattered across folders<br>
-                        • Manual backup naming<br>
-                        • Difficult collaboration<br>
-                        • Risk of losing work<br>
-                        • No change tracking</p>
+                        <h4>❌ The Old Way</h4>
+                        <p>• Files everywhere with weird names<br>
+                        • "final_final_really_final.html"<br>
+                        • Can't work with others easily<br>
+                        • Accidentally delete something important<br>
+                        • No idea what changed when</p>
                     </div>
                     <div class="concept-card">
-                        <h4>✅ With Git Version Control</h4>
-                        <p>• Complete change history<br>
-                        • Systematic organization<br>
-                        • Seamless collaboration<br>
-                        • Backup and recovery<br>
-                        • Parallel development</p>
+                        <h4>✅ With Git</h4>
+                        <p>• Everything organized automatically<br>
+                        • Can go back to any point in time<br>
+                        • Work with friends without chaos<br>
+                        • Never lose your work again<br>
+                        • See exactly what you changed</p>
                     </div>
                 </div>
             </div>
 
-            <h3>Core Git Concepts</h3>
+            <h3>The Main Ideas</h3>
             <div class="concept-grid">
                 <div class="concept-card">
                     <h4>📁 Repository</h4>
-                    <p>A directory containing your project files and the complete version history managed by Git.</p>
+                    <p>Just a fancy word for your project folder. Git watches everything in here and remembers all your changes.</p>
                 </div>
                 <div class="concept-card">
                     <h4>📸 Commit</h4>
-                    <p>A snapshot of your project at a specific point in time, including all tracked changes.</p>
+                    <p>Like taking a photo of your code at a specific moment. "Hey Git, remember how my code looks right now!"</p>
                 </div>
                 <div class="concept-card">
                     <h4>🌳 Branch</h4>
-                    <p>An independent line of development that allows you to work on features without affecting the main code.</p>
+                    <p>Think of it like a parallel universe. You can try new things without messing up your main code.</p>
                 </div>
                 <div class="concept-card">
                     <h4>🔄 Merge</h4>
-                    <p>The process of combining changes from different branches into a single branch.</p>
+                    <p>When you bring your experimental changes back into the main code. Like combining two recipes into one.</p>
                 </div>
                 <div class="concept-card">
                     <h4>🌐 Remote</h4>
-                    <p>A version of your repository hosted on a server (like GitHub) for backup and collaboration.</p>
+                    <p>Your code stored online (like on GitHub) so you can work from anywhere and share with others.</p>
                 </div>
                 <div class="concept-card">
                     <h4>👤 Clone</h4>
-                    <p>Creating a local copy of a remote repository on your computer for development.</p>
+                    <p>Downloading a copy of someone else's project to your computer so you can work on it too.</p>
                 </div>
             </div>
 
-            <h2 id="installation">Installation & Setup</h2>
+            <h2 id="installation">Getting Started</h2>
             
             <h3>Installing Git</h3>
             <table class="comparison-table">
@@ -954,8 +955,8 @@
                 </tbody>
             </table>
 
-            <h3>Initial Configuration</h3>
-            <p>Configure Git with your identity information for commit attribution:</p>
+            <h3>Setting Up Git</h3>
+            <p>Once you have Git installed, you need to tell it who you are. This is like signing up for a service - Git needs to know who's making the changes:</p>
 
             <div class="terminal">
                 <div class="terminal-header">
@@ -972,7 +973,7 @@
             </div>
 
             <div class="info callout">
-                <strong>Configuration Scope:</strong> The <code>--global</code> flag applies settings to all repositories. Use <code>--local</code> for repository-specific settings or omit the flag for the current repository only.
+                <strong>Quick tip:</strong> The <code>--global</code> flag means these settings will apply to all your projects. If you want different settings for just one project, you can leave out the <code>--global</code> part.
             </div>
 
             <h3>Verification</h3>
@@ -993,9 +994,9 @@
                 <button class="copy-btn" onclick="copyCode(this)">Copy</button>
             </div>
 
-            <h2 id="repository">Repository Management</h2>
+            <h2 id="repository">Working with Projects</h2>
             
-            <h3>Creating a New Repository</h3>
+            <h3>Starting a New Project</h3>
             <div class="terminal">
                 <div class="terminal-header">
                     <div class="terminal-dot dot-red"></div>
@@ -1016,7 +1017,7 @@
                 <button class="copy-btn" onclick="copyCode(this)">Copy</button>
             </div>
 
-            <h3>Cloning an Existing Repository</h3>
+            <h3>Getting Someone Else's Project</h3>
             <div class="terminal">
                 <div class="terminal-header">
                     <div class="terminal-dot dot-red"></div>
@@ -1032,10 +1033,10 @@
                 <button class="copy-btn" onclick="copyCode(this)">Copy</button>
             </div>
 
-            <h2 id="workflow">Core Git Workflow</h2>
+            <h2 id="workflow">The Basic Workflow</h2>
             
             <div class="diagram">
-                <div class="diagram-title">Git File Lifecycle</div>
+                <div class="diagram-title">How Git Tracks Your Files</div>
                 <div class="state-diagram">
                     <div class="state-row">
                         <div class="state-box">Untracked</div>
@@ -1054,58 +1055,58 @@
                 </div>
             </div>
 
-            <h3>The Three-Stage Process</h3>
+            <h3>The Three-Step Process</h3>
             <div class="git-workflow">
                 <div class="workflow-stage">
                     <span class="stage-icon">✏️</span>
                     <div class="stage-title">Working Directory</div>
-                    <div class="stage-desc">Make changes to files in your project directory</div>
+                    <div class="stage-desc">You edit your files normally, just like always</div>
                 </div>
                 <div class="workflow-arrow">→</div>
                 <div class="workflow-stage">
                     <span class="stage-icon">📋</span>
                     <div class="stage-title">Staging Area</div>
-                    <div class="stage-desc">Prepare changes for commit using git add</div>
+                    <div class="stage-desc">Tell Git "hey, I want to save these changes"</div>
                 </div>
                 <div class="workflow-arrow">→</div>
                 <div class="workflow-stage">
                     <span class="stage-icon">💾</span>
                     <div class="stage-title">Repository</div>
-                    <div class="stage-desc">Save changes permanently with git commit</div>
+                    <div class="stage-desc">Git saves your changes permanently</div>
                 </div>
             </div>
 
-            <h3>Essential Commands</h3>
+            <h3>The Commands You'll Use Most</h3>
             <div class="command-ref">
                 <div class="command-grid">
                     <div class="command-item">
                         <div class="command-name">git status</div>
-                        <div class="command-desc">Display the working tree status, showing modified, staged, and untracked files.</div>
+                        <div class="command-desc">See what files you've changed and what Git is tracking. Your go-to command to check what's happening.</div>
                     </div>
                     <div class="command-item">
                         <div class="command-name">git add &lt;file&gt;</div>
-                        <div class="command-desc">Add specific files to the staging area. Use <code>git add .</code> for all files.</div>
+                        <div class="command-desc">Tell Git "I want to save these changes." Use <code>git add .</code> to add everything.</div>
                     </div>
                     <div class="command-item">
                         <div class="command-name">git commit -m "message"</div>
-                        <div class="command-desc">Create a commit with staged changes and a descriptive message.</div>
+                        <div class="command-desc">Actually save your changes with a note about what you did. Like a save point in a game.</div>
                     </div>
                     <div class="command-item">
                         <div class="command-name">git log</div>
-                        <div class="command-desc">View commit history. Use <code>--oneline</code> for compact format.</div>
+                        <div class="command-desc">See all your previous saves. Use <code>--oneline</code> to see a shorter version.</div>
                     </div>
                     <div class="command-item">
                         <div class="command-name">git diff</div>
-                        <div class="command-desc">Show changes between working directory and staging area.</div>
+                        <div class="command-desc">See exactly what you changed in your files. Great for double-checking before committing.</div>
                     </div>
                     <div class="command-item">
                         <div class="command-name">git restore &lt;file&gt;</div>
-                        <div class="command-desc">Discard changes in working directory. Use <code>--staged</code> to unstage.</div>
+                        <div class="command-desc">Oops! Undo changes to a file. Use <code>--staged</code> to unstage something you just added.</div>
                     </div>
                 </div>
             </div>
 
-            <h3>Practical Example</h3>
+            <h3>Let's See It in Action</h3>
             <div class="terminal">
                 <div class="terminal-header">
                     <div class="terminal-dot dot-red"></div>
@@ -1136,12 +1137,12 @@
                 <button class="copy-btn" onclick="copyCode(this)">Copy</button>
             </div>
 
-            <h2 id="branching">Branching & Merging</h2>
+            <h2 id="branching">Branches - Working on Different Things</h2>
             
-            <p>Branches allow you to diverge from the main line of development and work on features independently without affecting the stable codebase.</p>
+            <p>Branches are like having multiple versions of your project. You can work on a new feature without messing up your main code. Think of it like having a rough draft and a final copy.</p>
 
             <div class="diagram">
-                <div class="diagram-title">Git Branching Model</div>
+                <div class="diagram-title">How Branches Work</div>
                 <div class="branch-diagram">
                     <div class="branch-visual">
 <span class="commit">●</span>─────<span class="commit">●</span>─────<span class="commit">●</span>─────<span class="commit">●</span>─────<span class="commit">●</span>  main
@@ -1153,7 +1154,7 @@
                 </div>
             </div>
 
-            <h3>Branch Management Commands</h3>
+            <h3>Working with Branches</h3>
             <div class="terminal">
                 <div class="terminal-header">
                     <div class="terminal-dot dot-red"></div>
@@ -1179,23 +1180,23 @@
                 <button class="copy-btn" onclick="copyCode(this)">Copy</button>
             </div>
 
-            <h3>Merging Strategies</h3>
+            <h3>Combining Your Work</h3>
             <div class="concept-grid">
                 <div class="concept-card">
                     <h4>🔄 Fast-Forward Merge</h4>
-                    <p>When the target branch hasn't diverged, Git simply moves the pointer forward. Clean and linear history.</p>
+                    <p>When your main branch hasn't changed since you started your feature. Git just moves forward - clean and simple.</p>
                 </div>
                 <div class="concept-card">
                     <h4>🔀 Three-Way Merge</h4>
-                    <p>Creates a new merge commit when branches have diverged. Preserves branch history.</p>
+                    <p>When both branches have changed. Git creates a new "merge commit" that combines everything together.</p>
                 </div>
                 <div class="concept-card">
                     <h4>📝 Squash Merge</h4>
-                    <p>Combines all commits from a feature branch into a single commit on the target branch.</p>
+                    <p>Takes all your feature commits and squishes them into one big commit. Makes history cleaner.</p>
                 </div>
                 <div class="concept-card">
                     <h4>🔄 Rebase</h4>
-                    <p>Replays commits from one branch onto another, creating a linear history without merge commits.</p>
+                    <p>Replays your changes on top of the latest main branch. Like rewriting history to make it look linear.</p>
                 </div>
             </div>
 
@@ -1221,7 +1222,7 @@ Fast-forward
                 <button class="copy-btn" onclick="copyCode(this)">Copy</button>
             </div>
 
-            <h3>Resolving Merge Conflicts</h3>
+            <h3>When Things Go Wrong - Conflicts</h3>
             <div class="terminal">
                 <div class="terminal-header">
                     <div class="terminal-dot dot-red"></div>
@@ -1250,14 +1251,14 @@ Unmerged paths:
             </div>
 
             <div class="warning callout">
-                <strong>Conflict Markers:</strong> Git marks conflicts in files with <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>, <code>=======</code>, and <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code>. Remove these markers and choose the correct content before committing.
+                <strong>Don't panic!</strong> When Git finds conflicts, it puts special markers in your files (<code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>, <code>=======</code>, <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code>). Just edit the file, remove these markers, and pick which version you want to keep.
             </div>
 
-            <h2 id="remote">Remote Repositories</h2>
+            <h2 id="remote">Working with Others</h2>
             
-            <p>Remote repositories enable collaboration and backup by storing your project on external servers like GitHub, GitLab, or Bitbucket.</p>
+            <p>Remote repositories are like having your project stored online (like on GitHub). This lets you work from anywhere and share your code with other people.</p>
 
-            <h3>Remote Management</h3>
+            <h3>Connecting to Online Repositories</h3>
             <div class="terminal">
                 <div class="terminal-header">
                     <div class="terminal-dot dot-red"></div>
@@ -1278,74 +1279,74 @@ origin  https://github.com/username/repo.git (push)
                 <button class="copy-btn" onclick="copyCode(this)">Copy</button>
             </div>
 
-            <h3>Synchronization Commands</h3>
+            <h3>Sharing Your Work</h3>
             <div class="command-ref">
                 <div class="command-grid">
                     <div class="command-item">
                         <div class="command-name">git push origin main</div>
-                        <div class="command-desc">Upload local commits to the remote repository's main branch.</div>
+                        <div class="command-desc">Upload your saved changes to GitHub so others can see them.</div>
                     </div>
                     <div class="command-item">
                         <div class="command-name">git pull origin main</div>
-                        <div class="command-desc">Download and merge changes from remote repository.</div>
+                        <div class="command-desc">Download the latest changes from GitHub and add them to your local copy.</div>
                     </div>
                     <div class="command-item">
                         <div class="command-name">git fetch origin</div>
-                        <div class="command-desc">Download changes without merging them into current branch.</div>
+                        <div class="command-desc">Check what's new on GitHub without actually downloading it yet.</div>
                     </div>
                     <div class="command-item">
                         <div class="command-name">git push -u origin feature</div>
-                        <div class="command-desc">Push and set upstream tracking for the branch.</div>
+                        <div class="command-desc">Upload your feature branch and tell Git to remember this connection.</div>
                     </div>
                 </div>
             </div>
 
             <div class="diagram">
-                <div class="diagram-title">Remote Workflow</div>
+                <div class="diagram-title">How Remote Repositories Work</div>
                 <div class="git-workflow">
                     <div class="workflow-stage">
                         <span class="stage-icon">💻</span>
-                        <div class="stage-title">Local Repository</div>
-                        <div class="stage-desc">Your working copy with commits and branches</div>
+                        <div class="stage-title">Your Computer</div>
+                        <div class="stage-desc">Where you do all your work and make changes</div>
                     </div>
                     <div class="workflow-arrow">⇄</div>
                     <div class="workflow-stage">
                         <span class="stage-icon">☁️</span>
-                        <div class="stage-title">Remote Repository</div>
-                        <div class="stage-desc">Shared repository on GitHub/GitLab</div>
+                        <div class="stage-title">GitHub/Online</div>
+                        <div class="stage-desc">Where your code lives online for backup and sharing</div>
                     </div>
                     <div class="workflow-arrow">⇄</div>
                     <div class="workflow-stage">
                         <span class="stage-icon">👥</span>
-                        <div class="stage-title">Team Members</div>
-                        <div class="stage-desc">Other developers' local repositories</div>
+                        <div class="stage-title">Your Team</div>
+                        <div class="stage-desc">Other people who can see and work on your code</div>
                     </div>
                 </div>
             </div>
 
-            <h2 id="collaboration">Team Collaboration</h2>
+            <h2 id="collaboration">Working with a Team</h2>
             
-            <h3>Common Workflows</h3>
+            <h3>Different Ways to Work Together</h3>
             <div class="concept-grid">
                 <div class="concept-card">
                     <h4>🔄 Centralized Workflow</h4>
-                    <p>Everyone works on the main branch. Simple but can cause conflicts with larger teams.</p>
+                    <p>Everyone works on the same branch. Simple but can get messy when lots of people work on the same project.</p>
                 </div>
                 <div class="concept-card">
                     <h4>🌊 Feature Branch Workflow</h4>
-                    <p>Each feature is developed in a separate branch and merged via pull requests.</p>
+                    <p>Each person works on their own branch for new features, then asks to merge it back when done.</p>
                 </div>
                 <div class="concept-card">
                     <h4>🔀 Git Flow</h4>
-                    <p>Structured workflow with specific branches for features, releases, and hotfixes.</p>
+                    <p>A more organized way with special branches for features, releases, and quick fixes. Good for bigger projects.</p>
                 </div>
                 <div class="concept-card">
                     <h4>🚀 GitHub Flow</h4>
-                    <p>Simplified workflow with feature branches and continuous deployment from main.</p>
+                    <p>A simpler version that's popular on GitHub. Make a branch, work on it, then merge it back quickly.</p>
                 </div>
             </div>
 
-            <h3>Pull Request Process</h3>
+            <h3>How Pull Requests Work</h3>
             <div class="terminal">
                 <div class="terminal-header">
                     <div class="terminal-dot dot-red"></div>
@@ -1369,7 +1370,7 @@ origin  https://github.com/username/repo.git (push)
                 <button class="copy-btn" onclick="copyCode(this)">Copy</button>
             </div>
 
-            <h3>Keeping Branches Updated</h3>
+            <h3>Keeping Your Work Up to Date</h3>
             <div class="terminal">
                 <div class="terminal-header">
                     <div class="terminal-dot dot-red"></div>
@@ -1391,45 +1392,45 @@ origin  https://github.com/username/repo.git (push)
                 <button class="copy-btn" onclick="copyCode(this)">Copy</button>
             </div>
 
-            <h2 id="best-practices">Best Practices</h2>
+            <h2 id="best-practices">Some Tips to Make Life Easier</h2>
             
             <div class="best-practices">
-                <h3>Git Best Practices</h3>
+                <h3>Good Habits to Develop</h3>
                 <div class="practice-grid">
                     <div class="practice-item">
                         <div class="practice-title">📝 Write Clear Commit Messages</div>
-                        <p>Use imperative mood, keep first line under 50 characters, explain what and why, not how.</p>
+                        <p>Tell people what you did and why. "Fix login bug" is better than "stuff".</p>
                     </div>
                     <div class="practice-item">
                         <div class="practice-title">🔄 Commit Often</div>
-                        <p>Make small, logical commits that represent single changes or features.</p>
+                        <p>Save your work frequently with small, logical changes. Don't wait until everything is perfect.</p>
                     </div>
                     <div class="practice-item">
                         <div class="practice-title">🌳 Use Branches</div>
-                        <p>Create branches for features, bug fixes, and experiments to keep main stable.</p>
+                        <p>Create separate branches for new features so you don't mess up your main code.</p>
                     </div>
                     <div class="practice-item">
                         <div class="practice-title">📋 Review Before Committing</div>
-                        <p>Use git diff and git status to review changes before staging and committing.</p>
+                        <p>Always check what you're about to save with git status and git diff.</p>
                     </div>
                     <div class="practice-item">
                         <div class="practice-title">🚫 Use .gitignore</div>
-                        <p>Exclude temporary files, build artifacts, and sensitive information from version control.</p>
+                        <p>Tell Git to ignore temporary files and things that shouldn't be shared with others.</p>
                     </div>
                     <div class="practice-item">
                         <div class="practice-title">📤 Pull Before Push</div>
-                        <p>Always pull latest changes before pushing to avoid conflicts.</p>
+                        <p>Get the latest changes from others before you share your work to avoid conflicts.</p>
                     </div>
                 </div>
             </div>
 
-            <h3>Commit Message Format</h3>
+            <h3>Writing Good Commit Messages</h3>
             <div class="terminal">
                 <div class="terminal-header">
                     <div class="terminal-dot dot-red"></div>
                     <div class="terminal-dot dot-yellow"></div>
                     <div class="terminal-dot dot-green"></div>
-                    <div class="terminal-title">Good Commit Messages</div>
+                    <div class="terminal-title">Good vs Bad Commit Messages</div>
                 </div>
                 <div class="terminal-content">
 # Good examples:
@@ -1445,7 +1446,7 @@ git commit -m "stuff"
                 <button class="copy-btn" onclick="copyCode(this)">Copy</button>
             </div>
 
-            <h3>Common .gitignore Patterns</h3>
+            <h3>What to Ignore</h3>
             <div class="terminal">
                 <div class="terminal-header">
                     <div class="terminal-dot dot-red"></div>
@@ -1489,37 +1490,37 @@ logs/
                 <button class="copy-btn" onclick="copyCode(this)">Copy</button>
             </div>
 
-            <h3>Advanced Git Techniques</h3>
+            <h3>Some Cool Advanced Stuff</h3>
             <div class="command-ref">
                 <div class="command-grid">
                     <div class="command-item">
                         <div class="command-name">git stash</div>
-                        <div class="command-desc">Temporarily store uncommitted changes to switch branches quickly.</div>
+                        <div class="command-desc">Temporarily hide your changes so you can switch branches without committing.</div>
                     </div>
                     <div class="command-item">
                         <div class="command-name">git cherry-pick &lt;commit&gt;</div>
-                        <div class="command-desc">Apply a specific commit from another branch to current branch.</div>
+                        <div class="command-desc">Take one specific change from another branch and add it to your current branch.</div>
                     </div>
                     <div class="command-item">
                         <div class="command-name">git rebase -i HEAD~3</div>
-                        <div class="command-desc">Interactive rebase to edit, squash, or reorder the last 3 commits.</div>
+                        <div class="command-desc">Edit, combine, or reorder your last few commits. Like rewriting history!</div>
                     </div>
                     <div class="command-item">
                         <div class="command-name">git bisect</div>
-                        <div class="command-desc">Binary search through commit history to find when a bug was introduced.</div>
+                        <div class="command-desc">Find exactly when a bug was introduced by testing different versions.</div>
                     </div>
                     <div class="command-item">
                         <div class="command-name">git blame &lt;file&gt;</div>
-                        <div class="command-desc">Show who last modified each line of a file and when.</div>
+                        <div class="command-desc">See who wrote each line of code and when. Great for figuring out who to ask about something.</div>
                     </div>
                     <div class="command-item">
                         <div class="command-name">git reflog</div>
-                        <div class="command-desc">Show reference log of all commits, including "lost" ones.</div>
+                        <div class="command-desc">See everything you've done, even if you accidentally deleted something. Your safety net!</div>
                     </div>
                 </div>
             </div>
 
-            <h3>Troubleshooting Common Issues</h3>
+            <h3>When Things Go Wrong</h3>
             <table class="comparison-table">
                 <thead>
                     <tr>
@@ -1558,16 +1559,16 @@ logs/
             </table>
 
             <div class="important callout">
-                <strong>Safety First:</strong> Always create backups before using destructive commands like <code>git reset --hard</code> or <code>git push --force</code>. Use <code>--force-with-lease</code> instead of <code>--force</code> when possible.
+                <strong>Be careful!</strong> Some commands can delete your work permanently. Always make sure you have a backup before using <code>git reset --hard</code> or <code>git push --force</code>. When in doubt, use <code>--force-with-lease</code> instead of <code>--force</code>.
             </div>
 
-            <h3>Git Aliases for Productivity</h3>
+            <h3>Shortcuts to Save Time</h3>
             <div class="terminal">
                 <div class="terminal-header">
                     <div class="terminal-dot dot-red"></div>
                     <div class="terminal-dot dot-yellow"></div>
                     <div class="terminal-dot dot-green"></div>
-                    <div class="terminal-title">Useful Git Aliases</div>
+                    <div class="terminal-title">Setting Up Shortcuts</div>
                 </div>
                 <div class="terminal-content">
 <span class="command-prompt">$</span> git config --global alias.st status
@@ -1588,8 +1589,8 @@ logs/
         </main>
 
         <footer class="footer">
-            <p>This guide covers essential Git concepts and workflows for effective version control and team collaboration. Git mastery comes with practice - start with the basics and gradually incorporate advanced techniques into your workflow.</p>
-            <p style="margin-top: 10px;"><em>Remember: Git is a powerful tool that becomes intuitive with regular use. Focus on understanding the core concepts rather than memorizing every command.</em></p>
+            <p>You made it! 🎉 This guide covers the basics of Git that you'll use every day. Don't worry about memorizing everything - just start using Git regularly and it'll become second nature.</p>
+            <p style="margin-top: 10px;"><em>Remember: Git is just a tool to help you work better. Focus on understanding the main ideas rather than trying to learn every single command.</em></p>
         </footer>
     </div>
 
@@ -1615,7 +1616,31 @@ logs/
                     const commandMatch = plainText.match(/\$\s*(.+)/);
                     if (commandMatch) {
                         text += commandMatch[1] + '\n';
-                    } else if (!plainText.includes('user@macbook:') && !plainText.includes('
+                    } else if (!plainText.includes('user@macbook:') && !plainText.includes('john@MacBook-Pro')) {
+                        // This is output, keep it as is
+                        text += plainText + '\n';
+                    }
+                }
+            });
+            
+            // Clean up the text
+            text = text.trim();
+            
+            navigator.clipboard.writeText(text).then(() => {
+                button.textContent = 'Copied!';
+                setTimeout(() => button.textContent = 'Copy', 2000);
+            }).catch(() => {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                button.textContent = 'Copied!';
+                setTimeout(() => button.textContent = 'Copy', 2000);
+            });
+        }
 
         // Smooth scrolling for navigation links
         document.querySelectorAll('.nav a').forEach(link => {
