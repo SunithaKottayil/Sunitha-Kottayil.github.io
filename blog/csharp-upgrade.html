@@ -130,13 +130,16 @@
 
 <body>
   <div class="container">
-    <h1>🚀 C# Masterclass: From Beginner to Advanced</h1>
-    <p>Welcome! This comprehensive guide covers C# programming from the very basics to advanced concepts, complete with code examples, diagrams, tips, and interactive quizzes to help you learn effectively and confidently.</p>
+    <h1>🚀 C# Advanced Concepts</h1>
+    <p>Hey there! Ready to level up your C# skills? This guide builds on what you learned in the beginner tutorial and takes you deeper into C#'s powerful features. We'll explore advanced concepts like LINQ, async programming, design patterns, and more - all explained in a friendly, practical way that makes complex topics feel approachable.</p>
 
     <hr />
 
-    <h2>1. Getting Started: Your First C# Program</h2>
-    <p>Let’s jump right in with the classic "Hello, World!" program. Run this code in your IDE or explore the interactive example below:</p>
+    <h2>1. Quick Review - Building on the Basics</h2>
+    <p>Before we dive into the advanced stuff, let's quickly review the fundamentals. If you've completed the beginner tutorial, this should feel familiar. If not, you might want to check that out first!</p>
+    
+    <h3>Your First C# Program (A Refresher)</h3>
+    <p>Here's the classic "Hello, World!" program that started it all:</p>
     <div class="cmd">
 using System;
 
@@ -149,7 +152,7 @@ class Program
 }
     </div>
     <iframe src="https://dotnetfiddle.net/Widget/t8d8oe" allowfullscreen></iframe>
-    <div class="tip">Change "World" to your name and hit Run!</div>
+    <div class="tip">Quick tip: Try changing "World" to your name and hit Run to see it in action!</div>
 
     <div class="quiz-block" id="quiz1">
       <b>Quiz 1: What does <code>Console.WriteLine("Hello, World!");</code> do?</b><br />
@@ -164,15 +167,15 @@ class Program
 
     <hr />
 
-    <h2>2. Fundamentals You Need to Know</h2>
+    <h2>2. Core Concepts Review - The Building Blocks</h2>
 
-    <h3>2.1 Variables and Data Types</h3>
-    <p>Variables hold data, and C# has many types:</p>
+    <h3>2.1 Variables and Data Types (Refresher)</h3>
+    <p>Variables are like labeled boxes where you store information. Here are the main types you'll work with:</p>
     <ul>
-      <li><code>int</code>: integers (e.g., <code>5</code>)</li>
-      <li><code>double</code>: decimal numbers (e.g., <code>3.14</code>)</li>
-      <li><code>string</code>: text (e.g., <code>"Hello"</code>)</li>
-      <li><code>bool</code>: true/false values</li>
+      <li><code>int</code>: whole numbers (like <code>5</code> or <code>-10</code>)</li>
+      <li><code>double</code>: decimal numbers (like <code>3.14</code> or <code>2.5</code>)</li>
+      <li><code>string</code>: text (like <code>"Hello"</code> or <code>"Your name"</code>)</li>
+      <li><code>bool</code>: true/false values (like <code>true</code> or <code>false</code>)</li>
     </ul>
     <div class="cmd">
 int age = 30;
@@ -196,10 +199,10 @@ Console.WriteLine($"{name} | {age} years old | Price: {price}");
       <div class="quiz-result" id="quiz2-result"></div>
     </div>
 
-    <h3>2.2 Input and Output</h3>
-    <p>Interact with users using <code>Console.ReadLine()</code> and <code>Console.Write*</code>:</p>
+    <h3>2.2 Getting Input from Users</h3>
+    <p>Interact with users using <code>Console.ReadLine()</code> to get input and <code>Console.Write*</code> to show output:</p>
     <div class="cmd">
-// Prompt for name:
+// Ask for the user's name:
 Console.Write("Enter your name: ");
 string userName = Console.ReadLine();
 Console.WriteLine("Hello, " + userName + "!");
@@ -217,7 +220,8 @@ Console.WriteLine("Hello, " + userName + "!");
       <div class="quiz-result" id="quiz3-result"></div>
     </div>
 
-    <h3>2.3 Conditional Statements (if, else)</h3>
+    <h3>2.3 Making Decisions with if/else</h3>
+    <p>Conditionals let your program make decisions based on conditions:</p>
     <div class="cmd">
 int age = 20;
 
@@ -243,8 +247,8 @@ else
       <div class="quiz-result" id="quiz4-result"></div>
     </div>
 
-    <h3>2.4 Loops (for & while)</h3>
-    <p>Repeat code blocks easily:</p>
+    <h3>2.4 Loops - Doing Things Repeatedly</h3>
+    <p>Loops let you repeat code blocks easily without writing the same thing over and over:</p>
     <div class="cmd">
 // For loop example:
 for(int i = 1; i <= 3; i++)
@@ -273,8 +277,8 @@ while(count <= 3)
       <div class="quiz-result" id="quiz5-result"></div>
     </div>
 
-    <h3>2.5 Methods (Functions)</h3>
-    <p>Reusable blocks of code that make programs modular:</p>
+    <h3>2.5 Methods - Reusable Code Blocks</h3>
+    <p>Methods are like recipes - you write the instructions once and can use them over and over again:</p>
     <div class="cmd">
 static void Greet(string name)
 {
@@ -298,13 +302,13 @@ Greet("Sam"); // Output: Hello, Sam!
 
     <hr />
 
-    <h2>3. Object-Oriented Programming (OOP) Basics</h2>
-    <p>C# is an object-oriented language. Key ideas:</p>
+    <h2>3. Object-Oriented Programming - The Heart of C#</h2>
+    <p>C# is built around object-oriented programming. Think of it as organizing your code like real-world objects:</p>
     <ul>
-      <li><b>Classes:</b> blueprints for creating objects.</li>
-      <li><b>Objects:</b> instances of classes.</li>
-      <li><b>Properties:</b> data stored in objects.</li>
-      <li><b>Methods:</b> actions objects can do.</li>
+      <li><b>Classes:</b> blueprints for creating objects (like a car design)</li>
+      <li><b>Objects:</b> actual instances of classes (like your specific car)</li>
+      <li><b>Properties:</b> data stored in objects (like the car's color)</li>
+      <li><b>Methods:</b> actions objects can do (like starting the car)</li>
     </ul>
     <div class="cmd">
 class Car
@@ -324,10 +328,11 @@ myCar.Start();
     <iframe src="https://dotnetfiddle.net/Widget/dN0DKh" allowfullscreen></iframe>
 
     <div class="tip">
-      OOP helps organize complex programs into manageable blueprints and objects.
+      OOP helps organize complex programs into manageable pieces - like building with LEGO blocks!
     </div>
 
-    <h3>Encapsulation & Properties</h3>
+    <h3>Encapsulation & Properties - Keeping Data Safe</h3>
+    <p>Encapsulation is like putting your data in a protective box - you control how it's accessed and modified:</p>
     <div class="cmd">
 public class User
 {
@@ -345,8 +350,8 @@ public class User
 }
     </div>
 
-    <h3>Inheritance and Polymorphism</h3>
-    <p>Build class hierarchies and enable flexibility:</p>
+    <h3>Inheritance and Polymorphism - Building on What Exists</h3>
+    <p>Inheritance lets you create new classes based on existing ones, and polymorphism lets you use them flexibly:</p>
     <div class="cmd">
 public class Animal
 {
@@ -374,7 +379,8 @@ pet.Speak(); // Output: Woof!
       <div class="quiz-result" id="quiz7-result"></div>
     </div>
 
-    <h3>Abstract Classes & Interfaces</h3>
+    <h3>Abstract Classes & Interfaces - Defining Contracts</h3>
+    <p>Abstract classes and interfaces define what classes must do, like a contract or blueprint:</p>
     <div class="cmd">
 // Abstract class example
 public abstract class Shape
@@ -405,12 +411,12 @@ public class Car : IDrive
 
     <hr />
 
-    <h2>4. Collections and LINQ</h2>
-    <p>Powerful collection types and query syntax for working with data:</p>
+    <h2>4. Collections and LINQ - Working with Data Like a Pro</h2>
+    <p>Collections are like smart containers for your data, and LINQ is like having a super-powered search and filter system:</p>
     <ul>
-      <li><code>List&lt;T&gt;</code> — dynamic arrays</li>
-      <li><code>Dictionary&lt;K, V&gt;</code> — key-value pairs</li>
-      <li><code>HashSet&lt;T&gt;</code> — unique items</li>
+      <li><code>List&lt;T&gt;</code> — dynamic arrays that grow and shrink</li>
+      <li><code>Dictionary&lt;K, V&gt;</code> — key-value pairs (like a phone book)</li>
+      <li><code>HashSet&lt;T&gt;</code> — collections of unique items</li>
     </ul>
     <div class="cmd">
 using System.Collections.Generic;
@@ -436,8 +442,8 @@ Console.WriteLine(string.Join(", ", evenNums));
 
     <hr />
 
-    <h2>5. Delegates and Events</h2>
-    <p>Function pointers and event notification systems:</p>
+    <h2>5. Delegates and Events - Making Your Code Responsive</h2>
+    <p>Delegates are like function pointers, and events let your code respond to things that happen. Think of events like doorbells - when someone rings, you respond:</p>
     <div class="cmd">
 // Delegate example
 public delegate void Notify();
@@ -453,15 +459,14 @@ public class Process
     }
 }
     </div>
-    <div class="diagram">
-      <img src="https://i.imgur.com/viWmccO.png" alt="Delegates and Events in C#" />
-      <br/>
-      <small>Delegates allow methods to be passed as parameters; events notify when actions occur.</small>
+    <div class="tip">
+      Delegates allow methods to be passed as parameters, and events notify when actions occur - like having a notification system in your code!
     </div>
 
     <hr />
 
-    <h2>6. Generics: Code Reuse with Type Safety</h2>
+    <h2>6. Generics - Writing Flexible, Reusable Code</h2>
+    <p>Generics let you write code that works with any type you give it. Think of it like a template that adapts to whatever you need:</p>
     <div class="cmd">
 public class Box&lt;T&gt;
 {
@@ -475,7 +480,8 @@ Console.WriteLine(box.Value);
 
     <hr />
 
-    <h2>7. Exception Handling (Advanced)</h2>
+    <h2>7. Exception Handling - Dealing with Problems Gracefully</h2>
+    <p>Exception handling is like having a safety net - when something goes wrong, your program can catch the problem and handle it properly instead of crashing:</p>
     <div class="cmd">
 try
 {
@@ -493,8 +499,8 @@ finally
 
     <hr />
 
-    <h2>8. Asynchronous Programming (<code>async</code>/<code>await</code>)</h2>
-    <p>Useful for I/O-bound tasks to keep your apps responsive:</p>
+    <h2>8. Asynchronous Programming - Keeping Your App Responsive</h2>
+    <p>Async programming lets your app do multiple things at once without freezing. It's like being able to cook dinner while doing laundry:</p>
     <div class="cmd">
 using System.Threading.Tasks;
 
@@ -506,13 +512,13 @@ public async Task DownloadAsync()
 }
     </div>
     <div class="tip">
-      <b>Tip:</b> <code>await</code> lets your program continue doing other work while waiting.
+      <b>Quick tip:</b> <code>await</code> lets your program continue doing other work while waiting for something to finish.
     </div>
 
     <hr />
 
-    <h2>9. File Handling, Streams, and Serialization</h2>
-    <p>Read/write files and convert objects to/from JSON:</p>
+    <h2>9. File Handling and Data - Working with Files and JSON</h2>
+    <p>Learn how to read and write files, and work with JSON data. This is essential for most real-world applications:</p>
     <div class="cmd">
 using System.IO;
 
@@ -532,8 +538,8 @@ Console.WriteLine(deserialized.Name);
 
     <hr />
 
-    <h2>10. Dependency Injection & Design Patterns (Introduction)</h2>
-    <p>Write maintainable and testable code with dependency injection and design patterns:</p>
+    <h2>10. Dependency Injection - Writing Better, Testable Code</h2>
+    <p>Dependency injection is like having a smart assistant that provides your classes with the tools they need. It makes your code more flexible and easier to test:</p>
     <div class="cmd">
 // Simple constructor injection:
 
@@ -558,21 +564,249 @@ var service = new Service(logger);
 service.Execute();
     </div>
     <div class="tip">
-      <b>Learn more:</b> <a href="https://docs.microsoft.com/en-us/dotnet/core/extensions/dependency-injection" target="_blank">Microsoft DI Docs</a> | <a href="https://refactoring.guru/design-patterns/csharp" target="_blank">Design Patterns in C#</a>
+      <b>Why this matters:</b> Dependency injection makes your code more flexible and easier to test. <a href="https://docs.microsoft.com/en-us/dotnet/core/extensions/dependency-injection" target="_blank">Learn more about DI</a> | <a href="https://refactoring.guru/design-patterns/csharp" target="_blank">Design Patterns in C#</a>
     </div>
 
     <hr />
 
-    <h2>Practice Projects to Master Concepts</h2>
+    <h2>11. Advanced C# Features - Taking It to the Next Level</h2>
+    
+    <h3>11.1 Extension Methods - Adding Features to Existing Classes</h3>
+    <p>Extension methods let you add new functionality to existing classes without modifying them. It's like adding new tools to your toolbox:</p>
+    <div class="cmd">
+public static class StringExtensions
+{
+    public static int WordCount(this string str)
+    {
+        return str.Split(new char[] { ' ', '.', '?' }, 
+                        StringSplitOptions.RemoveEmptyEntries).Length;
+    }
+}
+
+// Usage:
+string text = "Hello world! How are you?";
+Console.WriteLine(text.WordCount()); // Output: 5
+    </div>
+
+    <h3>11.2 Lambda Expressions and Expression Trees</h3>
+    <p>Lambda expressions are like shortcuts for writing methods. They make your code more concise and readable:</p>
+    <div class="cmd">
+// Lambda expressions
+var numbers = new List&lt;int&gt; { 1, 2, 3, 4, 5 };
+var doubled = numbers.Select(n =&gt; n * 2);
+var evens = numbers.Where(n =&gt; n % 2 == 0);
+
+// Expression trees
+Expression&lt;Func&lt;int, bool&gt;&gt; expr = num =&gt; num &lt; 5;
+Console.WriteLine(expr.Compile()(3)); // Output: True
+    </div>
+
+    <h3>11.3 Attributes and Reflection - Metadata and Runtime Information</h3>
+    <p>Attributes add metadata to your code, and reflection lets you examine and work with that metadata at runtime:</p>
+    <div class="cmd">
+[Obsolete("Use NewMethod instead")]
+public void OldMethod() { }
+
+[Serializable]
+public class Person
+{
+    public string Name { get; set; }
+}
+
+// Reflection example
+Type type = typeof(Person);
+var properties = type.GetProperties();
+foreach(var prop in properties)
+{
+    Console.WriteLine(prop.Name);
+}
+    </div>
+
+    <h3>11.4 Memory Management and Garbage Collection</h3>
+    <p>Understanding how C# manages memory helps you write more efficient code:</p>
+    <div class="cmd">
+// Using statement for automatic disposal
+using (var stream = new FileStream("test.txt", FileMode.Create))
+{
+    // File will be automatically closed when we exit this block
+}
+
+// IDisposable pattern
+public class ResourceManager : IDisposable
+{
+    public void Dispose()
+    {
+        // Clean up resources
+        Console.WriteLine("Cleaning up resources...");
+    }
+}
+    </div>
+
+    <h3>11.5 Threading and Parallel Programming</h3>
+    <p>Learn how to run code in parallel for better performance:</p>
+    <div class="cmd">
+using System.Threading.Tasks;
+
+// Parallel processing
+var numbers = Enumerable.Range(1, 1000).ToList();
+var results = new List&lt;int&gt;();
+
+Parallel.ForEach(numbers, num =&gt;
+{
+    lock(results)
+    {
+        results.Add(num * 2);
+    }
+});
+
+// Task-based programming
+var task1 = Task.Run(() =&gt; Console.WriteLine("Task 1"));
+var task2 = Task.Run(() =&gt; Console.WriteLine("Task 2"));
+Task.WaitAll(task1, task2);
+    </div>
+
+    <h3>11.6 Pattern Matching - Modern C# Features</h3>
+    <p>Pattern matching makes your code more readable and expressive:</p>
+    <div class="cmd">
+// Switch expressions (C# 8.0+)
+string GetDisplayName(object obj) =&gt; obj switch
+{
+    string s =&gt; $"String: {s}",
+    int i =&gt; $"Number: {i}",
+    Person p =&gt; $"Person: {p.Name}",
+    _ =&gt; "Unknown"
+};
+
+// Property patterns
+bool IsValidPerson(Person p) =&gt; p switch
+{
+    { Name: not null, Age: &gt;= 18 } =&gt; true,
+    _ =&gt; false
+};
+    </div>
+
+    <h3>11.7 Records - Immutable Data Classes (C# 9.0+)</h3>
+    <p>Records are perfect for data that doesn't change after creation:</p>
+    <div class="cmd">
+// Record declaration
+public record Person(string Name, int Age);
+
+// Usage
+var person1 = new Person("Alice", 30);
+var person2 = person1 with { Age = 31 }; // Creates a copy with new age
+
+Console.WriteLine(person1); // Person { Name = Alice, Age = 30 }
+Console.WriteLine(person2); // Person { Name = Alice, Age = 31 }
+    </div>
+
+    <h3>11.8 Nullable Reference Types - Preventing Null Reference Exceptions</h3>
+    <p>Help prevent null reference exceptions at compile time:</p>
+    <div class="cmd">
+#nullable enable
+
+public class User
+{
+    public string Name { get; set; } = string.Empty; // Must be initialized
+    public string? Email { get; set; } // Can be null
+}
+
+public void ProcessUser(User user)
+{
+    Console.WriteLine(user.Name); // Safe - Name is never null
+    if (user.Email != null)
+    {
+        Console.WriteLine(user.Email); // Safe after null check
+    }
+}
+    </div>
+
+    <hr />
+
+    <h2>12. Practice Projects - Building Real Applications</h2>
+    <p>Now it's time to put everything together! Here are some project ideas that will help you master these advanced concepts:</p>
     <ul>
-      <li>Build a console TODO list app with classes, lists, and file saving/loading.</li>
-      <li>Create a simple calculator using delegates and input parsing.</li>
-      <li>Develop an inventory system using LINQ to query stock data.</li>
-      <li>Write a small game or simulation leveraging OOP and async features.</li>
+      <li><strong>Advanced TODO List:</strong> Build a console app with classes, LINQ queries, file saving/loading, and async operations</li>
+      <li><strong>Simple Calculator:</strong> Use delegates, events, and exception handling to create a robust calculator</li>
+      <li><strong>Inventory Management System:</strong> Practice OOP, collections, LINQ, and data persistence</li>
+      <li><strong>Weather App:</strong> Use async programming to fetch data from APIs and display it</li>
+      <li><strong>Simple Game:</strong> Create a text-based game using classes, inheritance, and event-driven programming</li>
+      <li><strong>Data Analysis Tool:</strong> Use LINQ, generics, and file handling to analyze CSV data</li>
     </ul>
 
+    <div class="tip">
+      <b>Pro tip:</b> Start with simple projects and gradually add more advanced features. Don't try to build everything at once!
+    </div>
+
+    <h3>Project Example: Advanced TODO List</h3>
+    <p>Here's a more advanced version of a TODO list that uses many of the concepts we've covered:</p>
+    <div class="cmd">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+public class TodoItem
+{
+    public int Id { get; set; }
+    public string Title { get; set; } = string.Empty;
+    public string Description { get; set; } = string.Empty;
+    public bool IsCompleted { get; set; }
+    public DateTime CreatedAt { get; set; } = DateTime.Now;
+    public Priority Priority { get; set; } = Priority.Medium;
+}
+
+public enum Priority { Low, Medium, High }
+
+public class TodoManager
+{
+    private List&lt;TodoItem&gt; _items = new();
+    private int _nextId = 1;
+
+    public event Action&lt;TodoItem&gt;? ItemAdded;
+    public event Action&lt;TodoItem&gt;? ItemCompleted;
+
+    public async Task AddItemAsync(string title, string description, Priority priority)
+    {
+        var item = new TodoItem
+        {
+            Id = _nextId++,
+            Title = title,
+            Description = description,
+            Priority = priority
+        };
+
+        _items.Add(item);
+        ItemAdded?.Invoke(item);
+        
+        // Simulate some async work
+        await Task.Delay(100);
+    }
+
+    public IEnumerable&lt;TodoItem&gt; GetItemsByPriority(Priority priority)
+    {
+        return _items.Where(item =&gt; item.Priority == priority);
+    }
+
+    public async Task CompleteItemAsync(int id)
+    {
+        var item = _items.FirstOrDefault(i =&gt; i.Id == id);
+        if (item != null)
+        {
+            item.IsCompleted = true;
+            ItemCompleted?.Invoke(item);
+            await Task.Delay(100);
+        }
+    }
+
+    public IEnumerable&lt;TodoItem&gt; GetCompletedItems()
+    {
+        return _items.Where(item =&gt; item.IsCompleted);
+    }
+}
+    </div>
+
     <div class="fnote">
-      <b>Remember:</b> The best way to learn C# deeply is by building, experimenting, breaking, and fixing code regularly. Use <a href="https://dotnetfiddle.net" target="_blank">dotnetfiddle.net</a> or Visual Studio to practice interactively.
+      <b>Remember:</b> The best way to learn C# deeply is by building, experimenting, breaking, and fixing code regularly. Use <a href="https://dotnetfiddle.net" target="_blank">dotnetfiddle.net</a> or Visual Studio to practice interactively. Don't be afraid to make mistakes - that's how you learn!
     </div>
 
   </div>
