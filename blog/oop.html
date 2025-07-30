@@ -18,6 +18,18 @@
     padding: 2em 2.5em;
     border-radius: 12px;
     box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+    position: relative;
+  }
+
+  .container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #004080, #007acc, #00aaff);
+    border-radius: 12px 12px 0 0;
   }
   h1, h2 {
     color: #004080;
@@ -26,11 +38,36 @@
     text-align: center;
     font-size: 2.7em;
     margin-bottom: 0.2em;
+    position: relative;
+  }
+
+  h1::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, #004080, #007acc);
+    border-radius: 2px;
   }
   h2 {
     margin-top: 2em;
     border-bottom: 3px solid #007acc;
     padding-bottom: 0.3em;
+    position: relative;
+  }
+
+  h2::before {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #004080, #007acc);
+    border-radius: 2px;
   }
   p {
     font-size: 1.1em;
@@ -43,6 +80,19 @@
     padding: 3px 6px;
     border-radius: 5px;
     font-size: 1em;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+
+  code::before {
+    content: '>';
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    color: #004080;
+    font-weight: bold;
+    font-size: 10px;
+    opacity: 0.6;
   }
   pre {
     background: #d0e7ff;
@@ -52,9 +102,54 @@
     font-family: Consolas, monospace;
     overflow-x: auto;
     margin-top: 1em;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+
+  pre::before {
+    content: 'Code';
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    font-size: 11px;
+    color: #003366;
+    background: rgba(255,255,255,0.8);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+  }
+
+  pre::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 20px 20px 0;
+    border-color: transparent #004080 transparent transparent;
+    border-radius: 0 10px 0 0;
   }
   ul {
     margin-left: 1.8em;
+  }
+
+  ol li {
+    position: relative;
+    margin-bottom: 1.5em;
+    padding-left: 0.5em;
+  }
+
+  ol li::before {
+    content: '';
+    position: absolute;
+    left: -1.5em;
+    top: 0.3em;
+    width: 8px;
+    height: 8px;
+    background: #007acc;
+    border-radius: 50%;
   }
   .diagram {
     text-align: center;
@@ -65,6 +160,22 @@
     height: auto;
     border-radius: 8px;
     box-shadow: 0 3px 8px rgba(0,112,192,0.3);
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .diagram::before {
+    content: 'Visual Guide';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #004080;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
   }
   .tip {
     background: #dff4ff;
@@ -74,6 +185,19 @@
     margin: 1.5em 0;
     font-style: italic;
     color: #006699;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+
+  .tip::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 100%;
+    background: linear-gradient(to bottom, #00aaff, #007acc);
+    border-radius: 0 3px 3px 0;
   }
   .quiz-block {
     background: #f0faff;
@@ -81,6 +205,32 @@
     padding: 1.3em 1.6em;
     border-radius: 8px;
     margin: 2em 0 3em;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+
+  .quiz-block::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 100%;
+    background: linear-gradient(to bottom, #007acc, #004080);
+    border-radius: 0 3px 3px 0;
+  }
+
+  .quiz-block::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 25px 25px 0;
+    border-color: transparent #007acc transparent transparent;
+    border-radius: 0 8px 0 0;
   }
   .quiz-block b {
     font-size: 1.1em;
@@ -98,6 +248,15 @@
     margin-top: 1em;
     font-size: 1.05em;
     color: #004080;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+  }
+
+  .quiz-result:not(:empty) {
+    background: #e8f5e8;
+    border-left: 4px solid #4caf50;
+    color: #2e7d32;
   }
   button.check-btn {
     background: #007acc;
@@ -113,12 +272,38 @@
   button.check-btn:hover {
     background: #004f8b;
   }
+
+  /* Hover effects for professional interaction */
+  pre:hover {
+    box-shadow: 0 4px 16px rgba(0,112,192,0.2);
+    transform: translateY(-1px);
+  }
+
+  .tip:hover {
+    transform: translateX(2px);
+    box-shadow: 0 4px 12px rgba(0,170,255,0.2);
+  }
+
+  .quiz-block:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,122,204,0.2);
+  }
+
+  code:hover {
+    background: #bbdefb;
+    border-color: #004080;
+  }
+
+  .diagram img:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 20px rgba(0,112,192,0.3);
+  }
 </style>
 </head>
 <body>
 <div class="container">
   <h1>
-    🎉 Meet OOP: Object-Oriented Programming, the "School Class" Way
+    Meet OOP: Object-Oriented Programming, the "School Class" Way
   </h1>
 
   <p>
@@ -196,7 +381,7 @@ class MathStudent(Student):
     </li>
   </ol>
 
-  <h2>Schoolyard OOP Quiz! 🤓</h2>
+  <h2>Schoolyard OOP Quiz!</h2>
   <div class="quiz-block" id="quiz1">
     <b>1. What is a Class in OOP?</b>
     <form>
@@ -254,10 +439,10 @@ class MathStudent(Student):
       if (answers[i].checked) {
         selected = true;
         if(parseInt(answers[i].value) === correctVal) {
-          result.textContent = "✅ Correct!";
+          result.textContent = "Correct!";
           result.style.color = "#007acc";
         } else {
-          result.textContent = "❌ Try again!";
+          result.textContent = "Try again!";
           result.style.color = "#cc0000";
         }
         break;
