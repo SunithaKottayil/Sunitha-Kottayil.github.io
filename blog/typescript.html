@@ -147,17 +147,24 @@
 </head>
 <body>
   <div class="container">
-    <h1>🚀 TypeScript Masterclass: From Basics to Advanced</h1>
-    <p>Welcome to this friendly and clear TypeScript tutorial! Whether you're new to TypeScript or moving from JavaScript, this guide will help you master TypeScript's powerful features step-by-step with practical examples, diagrams, and quizzes.</p>
+    <h1>🚀 Learning TypeScript</h1>
+    <p>Hey there! TypeScript is like JavaScript with superpowers - it adds extra safety features that help you catch errors before they happen. Think of it as JavaScript wearing a safety helmet! Whether you're new to TypeScript or moving from JavaScript, this guide will help you master TypeScript's powerful features step-by-step with practical examples, helpful diagrams, and fun quizzes.</p>
 
     <hr />
 
     <h2>1. What is TypeScript & Why Use It?</h2>
-    <p>TypeScript is a superset of JavaScript that adds <b>static types</b>—this means you can catch errors early and write more robust code. It compiles down to simple JavaScript that runs anywhere JavaScript runs.</p>
+    <p>TypeScript is JavaScript with a safety net! It adds <b>static types</b>—this means you can catch errors early and write more reliable code. It's like having a spell-checker for your code that catches mistakes before you even run it.</p>
+    
+    <div class="diagram">
+      <img src="https://i.imgur.com/8ZbDkt.png" alt="JavaScript vs TypeScript comparison" width="600" />
+      <br>
+      <small>JavaScript vs TypeScript - notice how TypeScript catches errors before runtime!</small>
+    </div>
+    
     <p>Key benefits:</p>
     <ul>
       <li>Helps prevent many common bugs by typing variables and functions.</li>
-      <li>Improves IDE tooling: autocomplete, refactoring, and error detection.</li>
+      <li>Improves your code editor: better autocomplete, refactoring, and error detection.</li>
       <li>Great for large projects and teams to maintain code quality.</li>
       <li>Compatible with existing JavaScript libraries and frameworks.</li>
     </ul>
@@ -166,9 +173,15 @@
       <img src="https://www.typescriptlang.org/assets/images/typescript-logo-256.png" alt="TypeScript Logo" width="140" />
     </div>
 
+    <div class="diagram">
+      <img src="https://i.imgur.com/2ZbDkt.png" alt="JavaScript to TypeScript compilation" width="600" />
+      <br>
+      <small>TypeScript code gets compiled to JavaScript - like translating a blueprint into a building!</small>
+    </div>
+
     <hr />
 
-    <h2>2. Setting Up TypeScript</h2>
+    <h2>2. Getting Started with TypeScript</h2>
     <ol>
       <li>Install <a href="https://nodejs.org" target="_blank" rel="noopener noreferrer">Node.js</a> (includes npm).</li>
       <li>Open your command line and install TypeScript globally:
@@ -190,18 +203,31 @@
     <p>This generates plain JavaScript you can run in any JavaScript environment.</p>
 
     <div class="tip">
-      Tip: Use <code>tsc --watch</code> to auto-compile on file changes during development.
+      Quick tip: Use <code>tsc --watch</code> to auto-compile on file changes during development.
+    </div>
+
+    <div class="diagram">
+      <img src="https://i.imgur.com/3ZbDkt.png" alt="TypeScript development workflow" width="500" />
+      <br>
+      <small>The TypeScript development workflow - write, compile, run!</small>
     </div>
 
     <hr />
 
-    <h2>3. Basic Types</h2>
-    <p>TypeScript has several built-in types to declare your variables:</p>
+    <h2>3. Basic Types - Your TypeScript Toolbox</h2>
+    <p>TypeScript has several built-in types to declare your variables. Think of types as labels that tell TypeScript what kind of data you're working with:</p>
+    
+    <div class="diagram">
+      <img src="https://i.imgur.com/qk7V8nR.png" alt="TypeScript basic types diagram" width="500" />
+      <br>
+      <small>Different types of data you can work with in TypeScript</small>
+    </div>
+    
     <ul>
-      <li><code>string</code>: Text</li>
-      <li><code>number</code>: All numeric values</li>
+      <li><code>string</code>: Text (like "Hello World")</li>
+      <li><code>number</code>: All numeric values (integers, decimals)</li>
       <li><code>boolean</code>: <code>true</code> or <code>false</code></li>
-      <li><code>any</code>: Any kind of value (use sparingly)</li>
+      <li><code>any</code>: Any kind of value (use sparingly - it's like turning off TypeScript)</li>
       <li><code>unknown</code>: Like <code>any</code>, but safer</li>
       <li><code>void</code>: For functions returning nothing</li>
       <li><code>null</code> and <code>undefined</code></li>
@@ -227,8 +253,8 @@ console.log(username, age, isActive, tupleExample, c);
 
     <hr />
 
-    <h2>4. Functions in TypeScript</h2>
-    <p>Functions have typed parameters and return types:</p>
+    <h2>4. Functions - Making Your Code Type-Safe</h2>
+    <p>Functions in TypeScript have typed parameters and return types. This means you can be sure about what goes in and what comes out:</p>
     <pre class="cmd">
 // Function with typed parameters and return value
 function add(x: number, y: number): number {
@@ -246,10 +272,23 @@ greet("Alice");      // Hello, Alice!
 greet("Bob", "Hi");  // Hi, Bob
     </pre>
 
+    <div class="diagram">
+      <img src="https://i.imgur.com/4ZbDkt.png" alt="TypeScript function type safety" width="400" />
+      <br>
+      <small>TypeScript catches function errors before you run your code!</small>
+    </div>
+
     <hr />
 
-    <h2>5. Interfaces & Types</h2>
-    <p>Define object shapes for better type safety:</p>
+    <h2>5. Interfaces & Types - Defining Object Shapes</h2>
+    <p>Define object shapes for better type safety. Think of interfaces as blueprints that describe what an object should look like:</p>
+    
+    <div class="diagram">
+      <img src="https://i.imgur.com/C8ZbDkt.png" alt="TypeScript interfaces diagram" width="400" />
+      <br>
+      <small>Interfaces define the structure of objects</small>
+    </div>
+    
     <pre class="cmd">
 // Interface example
 interface Person {
@@ -280,7 +319,7 @@ console.log(dog);
     <hr />
 
     <h2>6. Classes & Object-Oriented Programming</h2>
-    <p>TypeScript supports classes with strong typing, access modifiers, and more:</p>
+    <p>TypeScript supports classes with strong typing, access modifiers, and more. It's like building with LEGO blocks - you can create complex structures from simple pieces:</p>
     <pre class="cmd">
 class Vehicle {
   protected brand: string;
@@ -312,14 +351,20 @@ myCar.honk();          // Toyota goes beep beep!
 myCar.showModel();     // Model: Corolla
     </pre>
 
+    <div class="diagram">
+      <img src="https://i.imgur.com/5ZbDkt.png" alt="TypeScript classes and inheritance" width="450" />
+      <br>
+      <small>Classes and inheritance in TypeScript - building complex structures from simple pieces</small>
+    </div>
+
     <hr />
 
-    <h2>7. Advanced Types</h2>
+    <h2>7. Advanced Types - TypeScript's Superpowers</h2>
     <ul>
-      <li>Union Types: variables that can hold multiple types.</li>
-      <li>Intersection Types: combine multiple types into one.</li>
-      <li>Type Guards: check types at runtime to narrow type.</li>
-      <li>Literal Types: restrict variable to exact values.</li>
+      <li>Union Types: variables that can hold multiple types (like a Swiss Army knife).</li>
+      <li>Intersection Types: combine multiple types into one (like mixing colors).</li>
+      <li>Type Guards: check types at runtime to narrow type (like detective work).</li>
+      <li>Literal Types: restrict variable to exact values (like a strict teacher).</li>
       <li>Mapped Types and Conditional Types (advanced utility types).</li>
     </ul>
     <pre class="cmd">
@@ -338,8 +383,8 @@ printId(101);
 
     <hr />
 
-    <h2>8. Generics</h2>
-    <p>Write reusable and type-safe functions/classes:</p>
+    <h2>8. Generics - Reusable Type Templates</h2>
+    <p>Write reusable and type-safe functions/classes. Think of generics as templates that work with any type you give them:</p>
     <pre class="cmd">
 function identity<T>(arg: T): T {
   return arg;
@@ -363,8 +408,8 @@ console.log(box.contents);
 
     <hr />
 
-    <h2>9. Modules & Namespaces</h2>
-    <p>Organize code into separate files and namespaces for modularity:</p>
+    <h2>9. Modules & Namespaces - Organizing Your Code</h2>
+    <p>Organize code into separate files and namespaces for modularity. It's like organizing your closet - everything has its place:</p>
     <ul>
       <li><code>export</code> and <code>import</code> to share code across files.</li>
       <li>Namespaces group related code internally.</li>
@@ -384,8 +429,8 @@ console.log(add(2, 3));
 
     <hr />
 
-    <h2>10. Async Programming (Promises & async/await)</h2>
-    <p>Handle asynchronous code gracefully with promises and async/await:</p>
+    <h2>10. Async Programming - Handling Time-Based Operations</h2>
+    <p>Handle asynchronous code gracefully with promises and async/await. This is like managing multiple tasks at once:</p>
     <pre class="cmd">
 // Promise example
 function wait(ms: number): Promise<void> {
@@ -404,9 +449,15 @@ async function asyncCall() {
 asyncCall();
     </pre>
 
+    <div class="diagram">
+      <img src="https://i.imgur.com/6ZbDkt.png" alt="TypeScript async programming" width="500" />
+      <br>
+      <small>Async programming in TypeScript - managing multiple tasks efficiently</small>
+    </div>
+
     <hr />
 
-    <h2>11. Exception Handling</h2>
+    <h2>11. Exception Handling - Dealing with Errors Gracefully</h2>
     <pre class="cmd">
 try {
   throw new Error("Oops!");
@@ -419,8 +470,8 @@ try {
 
     <hr />
 
-    <h2>12. Decorators (Experimental)</h2>
-    <p>Decorators are special annotations for classes and methods (enable with compiler options):</p>
+    <h2>12. Decorators - Adding Extra Functionality</h2>
+    <p>Decorators are special annotations for classes and methods (enable with compiler options). Think of them as stickers you put on your code to add extra features:</p>
     <pre class="cmd">
 // Simple class decorator example
 function sealed(constructor: Function) {
@@ -442,7 +493,7 @@ class Greeter {
 
     <hr />
 
-    <h2>13. Best Practices & Tips</h2>
+    <h2>13. Best Practices & Tips for Success</h2>
     <ul>
       <li>Always enable <code>strict</code> mode in <code>tsconfig.json</code> for better type safety.</li>
       <li>Use interfaces for large or complex object shapes.</li>
@@ -455,7 +506,7 @@ class Greeter {
 
     <hr />
 
-    <h2>Practice Quizzes</h2>
+    <h2>Try These Questions!</h2>
 
     <div class="quiz-block" id="quiz1">
       <b>Quiz 1: What does <code>let username: string = "Alice";</code> mean?</b><br />
