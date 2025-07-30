@@ -9,7 +9,7 @@ Welcome to my GitHub profile! I'm a Data Technician with a deep passion for stat
 ## 🔧 Technologies & Tools
 
 - **Languages**: Python, C#, HTML, TypeScript  
-- **Frameworks & Tools**: Power BI, Bootstrap, Git, VS Code, GitHub  
+- **Frameworks & Tools**: Power BI, Tableau, Git, VS Code, GitHub  
 - **Environments**: Jupyter Notebook, Thonny, Google Colab
 
 ---
