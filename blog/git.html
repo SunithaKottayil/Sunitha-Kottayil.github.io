@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -973,7 +972,7 @@
                 <div class="diagram-title">Why Git is Awesome</div>
                 <div class="concept-grid">
                     <div class="concept-card">
-                        <h4>❌ The Old Way</h4>
+                        <h4>The Old Way</h4>
                         <p>• Files everywhere with weird names<br>
                         • "final_final_really_final.html"<br>
                         • Can't work with others easily<br>
@@ -1471,7 +1470,6 @@ origin  https://github.com/username/repo.git (push)
 <span class="command-prompt">$</span> # Create pull request on GitHub/GitLab
 <span class="command-prompt">$</span> # After review and approval, merge via web interface
                 </div>
-                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
             </div>
 
             <h3>Keeping Your Work Up to Date</h3>
@@ -1493,7 +1491,6 @@ origin  https://github.com/username/repo.git (push)
 <span class="command-prompt">$</span> # Force push after rebase (use carefully)
 <span class="command-prompt">$</span> git push --force-with-lease origin feature/my-feature
                 </div>
-                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
             </div>
 
             <h2 id="best-practices">Some Tips to Make Life Easier</h2>
@@ -1547,7 +1544,6 @@ git commit -m "fix bug"
 git commit -m "changes"
 git commit -m "stuff"
                 </div>
-                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
             </div>
 
             <h3>What to Ignore</h3>
@@ -1591,7 +1587,6 @@ Thumbs.db
 *.log
 logs/
                 </div>
-                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
             </div>
 
             <h3>Some Cool Advanced Stuff</h3>
@@ -1688,7 +1683,6 @@ logs/
 <span class="command-prompt">$</span> git co main     # instead of git checkout main
 <span class="command-prompt">$</span> git lg          # beautiful log output
                 </div>
-                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
             </div>
         </main>
 
@@ -1730,206 +1724,6 @@ logs/
         </footer>
     </div>
 
-    <script>
-        // Copy functionality for code blocks
-        function copyCode(button) {
-            const terminal = button.parentElement;
-            const content = terminal.querySelector('.terminal-content');
-            
-            // Extract plain text from the formatted terminal content
-            let text = '';
-            const lines = content.innerHTML.split('\n');
-            
-            lines.forEach(line => {
-                // Remove HTML tags and extract just the command parts
-                const tempDiv = document.createElement('div');
-                tempDiv.innerHTML = line;
-                const plainText = tempDiv.textContent || tempDiv.innerText || '';
-                
-                // Skip empty lines and format properly
-                if (plainText.trim()) {
-                    // Extract just the command part (after the $ prompt)
-                    const commandMatch = plainText.match(/\$\s*(.+)/);
-                    if (commandMatch) {
-                        text += commandMatch[1] + '\n';
-                    } else if (!plainText.includes('user@macbook:') && !plainText.includes('john@MacBook-Pro')) {
-                        // This is output, keep it as is
-                        text += plainText + '\n';
-                    }
-                }
-            });
-            
-            // Clean up the text
-            text = text.trim();
-            
-            navigator.clipboard.writeText(text).then(() => {
-                button.textContent = 'Copied!';
-                setTimeout(() => button.textContent = 'Copy', 2000);
-            }).catch(() => {
-                // Fallback for older browsers
-                const textArea = document.createElement('textarea');
-                textArea.value = text;
-                document.body.appendChild(textArea);
-                textArea.select();
-                document.execCommand('copy');
-                document.body.removeChild(textArea);
-                button.textContent = 'Copied!';
-                setTimeout(() => button.textContent = 'Copy', 2000);
-            });
-        }
 
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('.nav a').forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const target = document.querySelector(link.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-        });
-
-        // Highlight current section in navigation
-        function highlightCurrentSection() {
-            const sections = document.querySelectorAll('h2[id]');
-            const navLinks = document.querySelectorAll('.nav a');
-            
-            let currentSection = '';
-            sections.forEach(section => {
-                const rect = section.getBoundingClientRect();
-                if (rect.top <= 100 && rect.bottom >= 100) {
-                    currentSection = section.id;
-                }
-            });
-            
-            navLinks.forEach(link => {
-                if (link.getAttribute('href') === '#' + currentSection) {
-                    link.style.fontWeight = 'bold';
-                    link.style.color = '#1a202c';
-                } else {
-                    link.style.fontWeight = 'normal';
-                    link.style.color = '#4299e1';
-                }
-            });
-        }
-
-        window.addEventListener('scroll', highlightCurrentSection);
-
-        // Add subtle animations to cards when they come into view
-        const observeElements = () => {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '0';
-                        entry.target.style.transform = 'translateY(20px)';
-                        entry.target.style.transition = 'all 0.6s ease';
-                        
-                        setTimeout(() => {
-                            entry.target.style.opacity = '1';
-                            entry.target.style.transform = 'translateY(0)';
-                        }, 100);
-                        
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.1 });
-
-            document.querySelectorAll('.concept-card, .workflow-stage, .command-item').forEach(el => {
-                observer.observe(el);
-            });
-        };
-
-        document.addEventListener('DOMContentLoaded', observeElements);
-    </script>
-</body>
-</html>)) {
-                        // This is output, keep it as is
-                        text += plainText + '\n';
-                    }
-                }
-            });
-            
-            // Clean up the text
-            text = text.trim();
-            
-            navigator.clipboard.writeText(text).then(() => {
-                button.textContent = 'Copied!';
-                setTimeout(() => button.textContent = 'Copy', 2000);
-            }).catch(() => {
-                // Fallback for older browsers
-                const textArea = document.createElement('textarea');
-                textArea.value = text;
-                document.body.appendChild(textArea);
-                textArea.select();
-                document.execCommand('copy');
-                document.body.removeChild(textArea);
-                button.textContent = 'Copied!';
-                setTimeout(() => button.textContent = 'Copy', 2000);
-            });
-        }
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('.nav a').forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const target = document.querySelector(link.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-        });
-
-        // Highlight current section in navigation
-        function highlightCurrentSection() {
-            const sections = document.querySelectorAll('h2[id]');
-            const navLinks = document.querySelectorAll('.nav a');
-            
-            let currentSection = '';
-            sections.forEach(section => {
-                const rect = section.getBoundingClientRect();
-                if (rect.top <= 100 && rect.bottom >= 100) {
-                    currentSection = section.id;
-                }
-            });
-            
-            navLinks.forEach(link => {
-                if (link.getAttribute('href') === '#' + currentSection) {
-                    link.style.fontWeight = 'bold';
-                    link.style.color = '#1a202c';
-                } else {
-                    link.style.fontWeight = 'normal';
-                    link.style.color = '#4299e1';
-                }
-            });
-        }
-
-        window.addEventListener('scroll', highlightCurrentSection);
-
-        // Add subtle animations to cards when they come into view
-        const observeElements = () => {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '0';
-                        entry.target.style.transform = 'translateY(20px)';
-                        entry.target.style.transition = 'all 0.6s ease';
-                        
-                        setTimeout(() => {
-                            entry.target.style.opacity = '1';
-                            entry.target.style.transform = 'translateY(0)';
-                        }, 100);
-                        
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.1 });
-
-            document.querySelectorAll('.concept-card, .workflow-stage, .command-item').forEach(el => {
-                observer.observe(el);
-            });
-        };
-
-        document.addEventListener('DOMContentLoaded', observeElements);
-    </script>
 </body>
 </html>
