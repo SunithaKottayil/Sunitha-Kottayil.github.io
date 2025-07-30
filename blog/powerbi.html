@@ -2,265 +2,445 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Power BI & DAX Masterclass: From Basics to Essential Functions</title>
+  <title>Power BI & DAX Masterclass: Your Friendly Guide from Excel to Advanced Analytics</title>
   <style>
-    body { font-family: Arial, sans-serif; background: #f7fafd; color: #213043; margin: 0; padding: 0 1.5em 3em 1.5em; line-height: 1.6; }
-    .container { max-width: 900px; margin: 2em auto; background: #fff; border-radius: 14px; box-shadow: 0 0 16px #b3c9e3; padding: 2.7em 2.5em 2.7em 2.5em;}
-    h1, h2 { color: #0c5192; font-weight: 700;}
-    h1 { text-align: center; font-size: 2.5em; margin-bottom: 0.5em; }
-    h2 { margin-top: 2em; border-bottom: 3px solid #2596be; padding-bottom: 0.3em; font-size: 1.6em; }
-    h3 { margin-top: 1.5em; color: #2362a6;}
-    p, ul, ol { font-size: 1.07em; margin: 1.1em 0;}
-    ul, ol { margin-left: 2.2em;}
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); color: #2c3e50; margin: 0; padding: 0 1.5em 3em 1.5em; line-height: 1.7; }
+    .container { max-width: 1000px; margin: 2em auto; background: #fff; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); padding: 3em 3em 3em 3em;}
+    h1, h2 { color: #3498db; font-weight: 600;}
+    h1 { text-align: center; font-size: 2.8em; margin-bottom: 0.5em; background: linear-gradient(45deg, #3498db, #2980b9); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    h2 { margin-top: 2.5em; border-bottom: 4px solid #3498db; padding-bottom: 0.5em; font-size: 1.8em; }
+    h3 { margin-top: 2em; color: #2980b9; font-size: 1.4em;}
+    p, ul, ol { font-size: 1.1em; margin: 1.3em 0; color: #34495e;}
+    ul, ol { margin-left: 2.5em;}
     code, pre.cmd {
-      background: #e8f0fd;
-      color: #12406b;
-      font-family: Consolas, monospace;
-      padding: 3px 8px;
-      border-radius: 4px;
-      font-size: 1em;
+      background: #ecf0f1;
+      color: #2c3e50;
+      font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.95em;
       white-space: pre-wrap;
+      border-left: 4px solid #3498db;
     }
-    pre.cmd { display: block; padding: 1.08em 1.3em; margin: 1.5em 0;}
+    pre.cmd { display: block; padding: 1.5em 1.8em; margin: 2em 0; background: #f8f9fa; border: 1px solid #e9ecef;}
     .tip, .fnote {
-      background: #eaf5fb;
-      border-left: 6px solid #2596be;
-      padding: 1.1em 1.2em;
-      border-radius: 11px;
-      margin: 1.5em 0;
-      color: #195a7a;
-      font-size: 1em;
-    }
-    .diagram { text-align: center; margin: 2.2em 0;}
-    .diagram img { max-width: 96%; height: auto; border-radius: 14px; box-shadow: 0 4px 16px rgba(38,145,218,0.13); background: #fff; padding: 14px;}
-    hr { border: none; border-top: 1.5px solid #6bb3ff; margin: 3em 0;}
-    a { color: #1962b8; text-decoration: none;}
-    a:hover { text-decoration: underline; }
-    .quiz-block {
-      background: #eaf5fb;
-      border-left: 7px solid #2596be;
-      padding: 1.1em 1.6em;
-      border-radius: 11px;
+      background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+      border-left: 6px solid #2196f3;
+      padding: 1.5em 1.8em;
+      border-radius: 12px;
       margin: 2em 0;
-      font-size: 1.13em;
-      color: #195a7a;
-      max-width: 780px;
+      color: #1565c0;
+      font-size: 1.05em;
+      box-shadow: 0 4px 12px rgba(33, 150, 243, 0.15);
     }
-    .quiz-block input[type="radio"] { margin-right: 13px; vertical-align: middle; transform: scale(1.07);}
-    .quiz-result { font-weight: 700; margin-top: 1.08em; font-size: 1.07em; color: #22547e;}
+    .excel-note {
+      background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%);
+      border-left: 6px solid #4caf50;
+      padding: 1.5em 1.8em;
+      border-radius: 12px;
+      margin: 2em 0;
+      color: #2e7d32;
+      font-size: 1.05em;
+      box-shadow: 0 4px 12px rgba(76, 175, 80, 0.15);
+    }
+    .diagram { text-align: center; margin: 2.5em 0;}
+    .diagram img { max-width: 100%; height: auto; border-radius: 16px; box-shadow: 0 8px 25px rgba(52, 152, 219, 0.2); background: #fff; padding: 20px;}
+    hr { border: none; border-top: 3px solid #bdc3c7; margin: 4em 0; opacity: 0.3;}
+    a { color: #3498db; text-decoration: none; font-weight: 500;}
+    a:hover { text-decoration: underline; color: #2980b9; }
+    .quiz-block {
+      background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+      border-left: 7px solid #ff9800;
+      padding: 1.5em 2em;
+      border-radius: 12px;
+      margin: 2.5em 0;
+      font-size: 1.15em;
+      color: #e65100;
+      max-width: 850px;
+      box-shadow: 0 4px 12px rgba(255, 152, 0, 0.15);
+    }
+    .quiz-block input[type="radio"] { margin-right: 15px; vertical-align: middle; transform: scale(1.1);}
+    .quiz-result { font-weight: 700; margin-top: 1.2em; font-size: 1.1em; color: #d84315;}
     button.check-btn {
-      background: #0c5192; color: #fff; border: none; padding: 7px 20px; font-size: 1em;
-      border-radius: 8px; cursor: pointer; margin-top: 9px; transition: background .3s; display: inline-block;
+      background: linear-gradient(45deg, #ff9800, #f57c00); color: #fff; border: none; padding: 12px 25px; font-size: 1.05em;
+      border-radius: 25px; cursor: pointer; margin-top: 15px; transition: all 0.3s; display: inline-block; font-weight: 600;
+      box-shadow: 0 4px 15px rgba(255, 152, 0, 0.3);
     }
-    button.check-btn:hover { background: #083459; }
+    button.check-btn:hover { background: linear-gradient(45deg, #f57c00, #ef6c00); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255, 152, 0, 0.4); }
+    .real-world-example {
+      background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+      border: 2px solid #9c27b0;
+      padding: 1.5em 2em;
+      border-radius: 12px;
+      margin: 2em 0;
+      color: #4a148c;
+      box-shadow: 0 4px 12px rgba(156, 39, 176, 0.15);
+    }
+    .step-by-step {
+      background: #f8f9fa;
+      border: 1px solid #dee2e6;
+      padding: 1.5em 2em;
+      border-radius: 12px;
+      margin: 2em 0;
+      border-left: 5px solid #6c757d;
+    }
+    .step-by-step ol { margin-left: 1.5em; }
+    .step-by-step li { margin-bottom: 0.8em; }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>📊 Power BI Masterclass:<br>Basics & Essential DAX Functions</h1>
-    <p>
-      Welcome to your beginner-friendly Power BI and DAX journey! You'll learn everything from importing data and building powerful dashboards to mastering the most important DAX functions for analysis—all explained simply, with clear examples, diagrams, and practice quizzes.
+    <h1>📊 Power BI & DAX Masterclass<br><span style="font-size: 0.6em; color: #7f8c8d;">Your Journey from Excel to Advanced Analytics</span></h1>
+    
+    <p style="font-size: 1.2em; text-align: center; color: #7f8c8d; font-style: italic;">
+      "If you can work with Excel, you can master Power BI! Let's make data analysis fun and powerful."
     </p>
+
+    <p>
+      Hey there! 👋 If you're reading this, chances are you're either an Excel wizard looking to level up your data game, or you've heard about Power BI and want to see what all the fuss is about. Well, you're in the right place! 
+    </p>
+
+    <p>
+      Think of Power BI as Excel's super-powered cousin. You know how you spend hours creating charts and pivot tables in Excel? Power BI does all that and more, but with interactive dashboards that update automatically and look absolutely stunning. Plus, it can handle millions of rows of data without breaking a sweat!
+    </p>
+
+    <div class="excel-note">
+      <strong>🎯 Excel User? You're Already Ahead!</strong><br>
+      If you're comfortable with Excel formulas, pivot tables, and VLOOKUP, you'll pick up Power BI and DAX much faster than you think. DAX is like Excel formulas on steroids!
+    </div>
 
     <hr>
 
-    <h2>1. What is Power BI?</h2>
+    <h2>🚀 What is Power BI? (The Simple Version)</h2>
+    
+    <p>
+      Power BI is Microsoft's answer to the question: "What if we could make data analysis as easy as dragging and dropping, but as powerful as a full business intelligence suite?"
+    </p>
+
     <ul>
-      <li><b>Power BI</b> is a Microsoft tool for visualizing, analyzing, and sharing data from many sources.</li>
-      <li>You can <b>import data</b> (Excel, CSV, web, databases), <b>transform & clean it</b>, build <b>interactive reports and dashboards</b>, and share them online.</li>
-      <li>It's available as Power BI Desktop (Windows app) and Power BI Service (web version).</li>
+      <li><strong>Data Import:</strong> Connect to Excel files, CSV files, databases, web services, and even live data sources</li>
+      <li><strong>Data Cleaning:</strong> Transform messy data into clean, analysis-ready datasets (like Power Query in Excel, but better)</li>
+      <li><strong>Interactive Dashboards:</strong> Create beautiful, clickable reports that tell your data story</li>
+      <li><strong>Sharing & Collaboration:</strong> Publish your reports online and share them with your team</li>
+      <li><strong>Real-time Updates:</strong> Connect to live data sources and see updates automatically</li>
     </ul>
+
     <div class="diagram">
       <img src="https://i.imgur.com/AmiHlSF.png" alt="Power BI Data Flow">
-      <br><small>Data sources → Power Query → Model & DAX → Visualizations → Dashboards & Publishing</small>
+      <br><small style="color: #7f8c8d;">Your data journey: Sources → Clean → Model → Visualize → Share</small>
     </div>
-    <div class="tip">Power BI is the “control center” for all your business data. You can create drag-and-drop dashboards and discover insights visually!</div>
+
+    <div class="tip">
+      <strong>💡 Pro Tip:</strong> Power BI Desktop is completely free! You can download it right now and start building amazing dashboards without spending a penny. The paid version (Power BI Service) is only needed when you want to share your reports online.
+    </div>
 
     <hr>
 
-    <h2>2. Power BI Desktop: The Workflow</h2>
-    <ol>
-      <li><b>Get Data</b>: Connect to a file or database (Excel, SQL, etc.).</li>
-      <li><b>Transform Data (Power Query)</b>: Clean, shape, and filter your data.</li>
-      <li><b>Model</b>: Build relationships between tables; create calculated columns/measures using DAX.</li>
-      <li><b>Visualize</b>: Create charts, graphs, maps, and other interactive visuals.</li>
-      <li><b>Publish</b>: Share your report/dashboards in the Power BI Service.</li>
-    </ol>
+    <h2>🛠️ Power BI Desktop: Your New Best Friend</h2>
+    
+    <p>
+      Power BI Desktop is where the magic happens. It's like having Excel, Access, and a design studio all rolled into one powerful application. Here's how the workflow looks:
+    </p>
+
+    <div class="step-by-step">
+      <h3>📋 The 5-Step Power BI Workflow</h3>
+      <ol>
+        <li><strong>Get Data:</strong> Connect to your data sources (Excel files, databases, web APIs, etc.)</li>
+        <li><strong>Transform Data:</strong> Clean, reshape, and prepare your data using Power Query</li>
+        <li><strong>Model:</strong> Create relationships between tables and build calculated fields with DAX</li>
+        <li><strong>Visualize:</strong> Design interactive charts, graphs, and dashboards</li>
+        <li><strong>Publish:</strong> Share your masterpiece with the world (or just your team)</li>
+      </ol>
+    </div>
+
     <pre class="cmd">
-# Typical steps:
-1. Home > Get Data > Excel (choose your dataset)
-2. Home > Transform Data (launch Power Query)
-3. Home > Close & Apply (load cleaned data)
-4. Insert visuals (bar, pie, line chart, etc.)
-5. Modeling > New Measure (write DAX)
-6. File > Publish to Power BI Service
+# Real-world example workflow:
+1. File → Get Data → Excel → Select "Sales_Data_2023.xlsx"
+2. Transform Data → Clean up messy data, remove duplicates
+3. Modeling → Create relationships between Sales and Products tables
+4. Insert → Bar Chart → Drag "Product Category" to Axis, "Sales Amount" to Values
+5. File → Publish → Power BI Service → Share with marketing team
     </pre>
 
+    <div class="real-world-example">
+      <strong>🎯 Real-World Scenario:</strong><br>
+      Imagine you're a sales manager with monthly Excel reports from 12 different regions. Instead of manually combining them and creating charts, Power BI can automatically refresh all data sources and update your dashboard every morning. You walk into your office, open your dashboard, and instantly see yesterday's performance across all regions!
+    </div>
+
     <hr>
 
-    <h2>3. DAX: What, Why, Where?</h2>
+    <h2>🔧 DAX: The Secret Sauce of Power BI</h2>
+    
     <p>
-      <b>DAX</b> (Data Analysis Expressions) is the formula language of Power BI—like Excel formulas, but tuned for interactive analytics. Use it for:<br>
-      <ul>
-        <li>New columns and calculated fields</li>
-        <li>Measures (dynamic calculations like SUM of sales YTD, averages, etc.)</li>
-        <li>Custom tables for slicing/dicing your data</li>
-      </ul>
+      DAX (Data Analysis Expressions) is the formula language that makes Power BI so powerful. If you know Excel formulas, you're already halfway there! DAX is like Excel formulas, but designed specifically for data modeling and business intelligence.
     </p>
+
+    <div class="excel-note">
+      <strong>📊 Excel vs DAX Comparison:</strong><br>
+      • Excel: <code>=SUM(A2:A100)</code> → DAX: <code>=SUM(Sales[Amount])</code><br>
+      • Excel: <code>=VLOOKUP(A2, Products, 2, FALSE)</code> → DAX: <code>=RELATED(Products[Category])</code><br>
+      • Excel: <code>=IF(A2>1000, "High", "Low")</code> → DAX: <code>=IF(Sales[Amount]>1000, "High", "Low")</code>
+    </div>
+
+    <h3>🎯 When to Use DAX:</h3>
+    <ul>
+      <li><strong>Calculated Columns:</strong> Add new data to each row (like adding a new column in Excel)</li>
+      <li><strong>Measures:</strong> Create dynamic calculations that respond to filters and selections</li>
+      <li><strong>Calculated Tables:</strong> Build new tables from existing data</li>
+      <li><strong>Time Intelligence:</strong> Calculate year-over-year growth, running totals, etc.</li>
+    </ul>
+
     <div class="diagram">
       <img src="https://i.imgur.com/M1yLOhs.png" alt="How DAX fits in Power BI">
-      <br><small>DAX bridges data and visual analytics, letting you ask business questions with code.</small>
-    </div>
-    <div class="tip">
-      DAX formulas can be created using <b>“New Measure”</b> (for calculations in visuals) or <b>“New Column”</b> (for extra data on each row).
+      <br><small style="color: #7f8c8d;">DAX bridges your raw data and beautiful visualizations</small>
     </div>
 
     <hr>
 
-    <h2>4. Essential and Important DAX Functions</h2>
-    <ul>
-      <li><b>CALCULATE</b>: Change/filter context to compute dynamic values.<br>
-        <code>CALCULATE(SUM(Sales[Amount]), Sales[Region]="West", YEAR(Sales[Date])=2022)</code>
-      </li>
-      <li><b>SUM</b>: Adds up all values in a column.<br>
-        <code>SUM(Sales[Amount])</code>
-      </li>
-      <li><b>AVERAGE</b>: Calculates the mean value.
-        <br><code>AVERAGE(Sales[Amount])</code>
-      </li>
-      <li><b>COUNT / COUNTA / DISTINCTCOUNT</b>: Counts total rows, non-blank rows, or unique values.
-        <br><code>COUNT(Sales[OrderID])</code> <code>DISTINCTCOUNT(Sales[CustomerID])</code>
-      </li>
-      <li><b>MIN / MAX</b>: Finds smallest/largest value in a column.
-      </li>
-      <li><b>SUMX</b>: Iterates across a table, doing row-by-row calculation and summing results.
-        <br><code>SUMX(Sales, Sales[Quantity] * Sales[Price])</code>
-      </li>
-      <li><b>FILTER</b>: Returns a subset of table rows based on a condition.
-        <br><code>FILTER(Sales, Sales[Region]="West")</code>
-      </li>
-      <li><b>RELATED</b>: Pulls in fields from related tables (like VLOOKUP).
-        <br><code>RELATED(Products[Category])</code>
-      </li>
-      <li><b>ALL</b>: Ignores existing filters (handy for percent-of-total, e.g. <code>SUM(Sales[Amount]) / CALCULATE(SUM(Sales[Amount]), ALL(Sales))</code>).
-      </li>
-      <li><b>IF</b>: Logical branching—like Excel’s IF.
-        <br><code>IF(Sales[Amount] > 1000, "Big", "Small")</code>
-      </li>
-      <li><b>AND / OR / SWITCH</b>: More logic chaining and multibranch.
-      </li>
-      <li><b>DATEADD / DATESYTD / SAMEPERIODLASTYEAR</b>: Built-in “time intelligence”—essential for trends, YoY, growth, etc.
-      </li>
-      <li><b>RANKX</b>: Assigns ranks to table rows.
-        <br><code>RANKX(ALL(Sales), SUM(Sales[Amount]))</code>
-      </li>
-      <li><b>SUMMARIZE / GROUPBY</b>: Returns a summary table grouped by chosen columns.
-        <br><code>SUMMARIZE(Sales, Customers[Country], "Total", SUM(Sales[Amount]))</code>
-      </li>
-      <li><b>ADDCOLUMNS</b>: Adds calculated columns to a table.
-      </li>
-      <li><b>CROSSFILTER</b>: Controls filter direction in relationships (advanced modeling).
-      </li>
-    </ul>
-    <div class="tip">
-      <b>Pro tip:</b> Most DAX functions work on <i>columns and tables</i>—not single cells. Think in <b>table logic</b>, not spreadsheet cells[6][12][7][9][15].
+    <h2>⚡ Essential DAX Functions (The Ones You'll Use Every Day)</h2>
+    
+    <p>
+      Here are the DAX functions that will become your best friends. I've organized them by how often you'll use them, with real examples that actually make sense!
+    </p>
+
+    <h3>🔥 The "Must-Know" Functions (Use These Daily)</h3>
+    
+    <div class="step-by-step">
+      <h4>1. SUM - Your Old Friend from Excel</h4>
+      <code>Total Sales = SUM(Sales[Amount])</code><br>
+      <small>Just like <code>=SUM(A:A)</code> in Excel, but smarter!</small>
+    </div>
+
+    <div class="step-by-step">
+      <h4>2. CALCULATE - The Swiss Army Knife</h4>
+      <code>West Region Sales = CALCULATE(SUM(Sales[Amount]), Sales[Region]="West")</code><br>
+      <small>This is like combining SUM with a filter. "Show me total sales, but only for the West region."</small>
+    </div>
+
+    <div class="step-by-step">
+      <h4>3. RELATED - Your VLOOKUP Replacement</h4>
+      <code>Product Category = RELATED(Products[Category])</code><br>
+      <small>Instead of VLOOKUP, DAX automatically finds related data when tables are connected.</small>
+    </div>
+
+    <div class="step-by-step">
+      <h4>4. IF - Same Logic, More Power</h4>
+      <code>Sales Status = IF(Sales[Amount] > 1000, "High Value", "Standard")</code><br>
+      <small>Just like Excel's IF, but works across entire columns at once.</small>
+    </div>
+
+    <h3>🚀 The "Game Changer" Functions (Learn These Next)</h3>
+    
+    <div class="step-by-step">
+      <h4>5. SUMX - When You Need Row-by-Row Calculations</h4>
+      <code>Total Revenue = SUMX(Sales, Sales[Quantity] * Sales[UnitPrice])</code><br>
+      <small>Multiply quantity by price for each row, then sum everything up. Perfect for complex calculations!</small>
+    </div>
+
+    <div class="step-by-step">
+      <h4>6. FILTER - Your Data Filtering Tool</h4>
+      <code>High Value Sales = FILTER(Sales, Sales[Amount] > 1000)</code><br>
+      <small>Returns only the rows that meet your criteria. Great for building custom tables.</small>
+    </div>
+
+    <div class="step-by-step">
+      <h4>7. ALL - Ignore All Filters</h4>
+      <code>Percent of Total = SUM(Sales[Amount]) / CALCULATE(SUM(Sales[Amount]), ALL(Sales))</code><br>
+      <small>Calculate what percentage each value represents of the grand total.</small>
+    </div>
+
+    <h3>📈 Time Intelligence Functions (For Trend Analysis)</h3>
+    
+    <div class="step-by-step">
+      <h4>8. SAMEPERIODLASTYEAR - Year-over-Year Comparisons</h4>
+      <code>Sales Last Year = CALCULATE(SUM(Sales[Amount]), SAMEPERIODLASTYEAR(Sales[Date]))</code><br>
+      <small>Compare this year's sales to the same period last year. Essential for growth analysis!</small>
+    </div>
+
+    <div class="step-by-step">
+      <h4>9. DATESYTD - Year-to-Date Calculations</h4>
+      <code>Sales YTD = CALCULATE(SUM(Sales[Amount]), DATESYTD(Sales[Date]))</code><br>
+      <small>Calculate total sales from January 1st to today. Perfect for tracking annual progress.</small>
+    </div>
+
+    <div class="real-world-example">
+      <strong>🎯 Real-World DAX Example:</strong><br>
+      You're analyzing e-commerce data and want to see:<br>
+      • Total revenue by product category<br>
+      • Growth compared to last year<br>
+      • Percentage of total sales each category represents<br><br>
+      
+      <code>
+      -- Total Revenue by Category<br>
+      Category Revenue = SUMX(Sales, Sales[Quantity] * Sales[UnitPrice])<br><br>
+      
+      -- Year-over-Year Growth<br>
+      YoY Growth = ([Category Revenue] - CALCULATE([Category Revenue], SAMEPERIODLASTYEAR(Sales[Date]))) / CALCULATE([Category Revenue], SAMEPERIODLASTYEAR(Sales[Date]))<br><br>
+      
+      -- Percent of Total<br>
+      Percent of Total = [Category Revenue] / CALCULATE([Category Revenue], ALL(Products[Category]))
+      </code>
     </div>
 
     <hr>
 
-    <h2>5. Example DAX Calculations</h2>
+    <h2>🧪 Let's Practice: Build These Common DAX Measures</h2>
+    
+    <p>
+      Here are some practical DAX measures you'll actually use in real business scenarios. Copy these into your Power BI model and see the magic happen!
+    </p>
+
     <pre class="cmd">
--- Total Sales
+-- 1. Basic Sales Metrics
 Total Sales = SUM(Sales[Amount])
+Total Orders = COUNTROWS(Sales)
+Average Order Value = DIVIDE([Total Sales], [Total Orders])
 
--- Total Revenue
-Total Revenue = SUMX(Sales, Sales[Quantity] * Sales[UnitPrice])
+-- 2. Time Intelligence
+Sales This Year = CALCULATE([Total Sales], DATESYTD(Sales[Date]))
+Sales Last Year = CALCULATE([Total Sales], SAMEPERIODLASTYEAR(Sales[Date]))
+Year over Year Growth = DIVIDE([Sales This Year] - [Sales Last Year], [Sales Last Year])
 
--- Sales Last Year
-Sales Last Year = CALCULATE(SUM(Sales[Amount]), SAMEPERIODLASTYEAR(Sales[Date]))
-
--- Running Total
+-- 3. Running Totals
 Cumulative Sales = CALCULATE([Total Sales], FILTER(ALL(Sales[Date]), Sales[Date] <= MAX(Sales[Date])))
 
--- Category Rank
-Category Rank = RANKX(ALL(Products[Category]), [Total Sales],, DESC)
+-- 4. Ranking
+Product Rank = RANKX(ALL(Products[ProductName]), [Total Sales],, DESC)
+
+-- 5. Conditional Logic
+Sales Status = IF([Total Sales] > 10000, "High Performer", IF([Total Sales] > 5000, "Medium", "Low"))
+
+-- 6. Percentage Calculations
+Sales % of Total = DIVIDE([Total Sales], CALCULATE([Total Sales], ALL(Sales)))
     </pre>
-    <div class="tip">Measures let you easily build KPIs, percent-of-total, trends, and more for every dashboard visual!</div>
+
+    <div class="tip">
+      <strong>💡 Pro Tip:</strong> Start with simple measures like SUM and COUNT, then gradually add complexity. DAX is powerful, but you don't need to master everything at once. Focus on the functions that solve your specific business problems!
+    </div>
 
     <hr>
 
-    <h2>6. Practice Quiz: DAX Basics</h2>
+    <h2>🎯 Practice Quiz: Test Your DAX Knowledge</h2>
+    
+    <p>
+      Ready to test what you've learned? These questions are designed to help you think like a DAX expert. Don't worry if you don't get them all right - DAX takes practice!
+    </p>
+
     <div class="quiz-block" id="quiz1">
-      <b>Quiz 1: What does the <code>CALCULATE()</code> function do?</b><br>
+      <strong>Quiz 1: You want to calculate total sales for only the "Electronics" category. Which DAX function would you use?</strong><br>
       <form>
-        <input type="radio" name="q1" value="0" id="q1a1"><label for="q1a1"> Sums all values in a column</label><br>
-        <input type="radio" name="q1" value="1" id="q1a2"><label for="q1a2"> Changes filter context and computes a value</label><br>
-        <input type="radio" name="q1" value="0" id="q1a3"><label for="q1a3"> Sorts values in a table</label><br>
-        <button type="button" class="check-btn" onclick="checkQuiz('quiz1', 1)">Check Answer</button>
+        <input type="radio" name="q1" value="0" id="q1a1"><label for="q1a1"> SUM(Sales[Amount])</label><br>
+        <input type="radio" name="q1" value="1" id="q1a2"><label for="q1a2"> CALCULATE(SUM(Sales[Amount]), Products[Category]="Electronics")</label><br>
+        <input type="radio" name="q1" value="0" id="q1a3"><label for="q1a3"> FILTER(Sales, Products[Category]="Electronics")</label><br>
+        <button type="button" class="check-btn" onclick="checkQuiz('quiz1', 1)">Check My Answer</button>
       </form>
       <div class="quiz-result" id="quiz1-result"></div>
     </div>
+
     <div class="quiz-block" id="quiz2">
-      <b>Quiz 2: Which DAX function allows you to get a value from a related table?</b><br>
+      <strong>Quiz 2: You have a Sales table and a Products table with a relationship. How do you get the product name in your Sales table?</strong><br>
       <form>
-        <input type="radio" name="q2" value="1" id="q2a1"><label for="q2a1"> RELATED</label><br>
-        <input type="radio" name="q2" value="0" id="q2a2"><label for="q2a2"> COUNTROWS</label><br>
-        <input type="radio" name="q2" value="0" id="q2a3"><label for="q2a3"> SUMX</label><br>
-        <button type="button" class="check-btn" onclick="checkQuiz('quiz2', 1)">Check Answer</button>
+        <input type="radio" name="q2" value="1" id="q2a1"><label for="q2a1"> RELATED(Products[ProductName])</label><br>
+        <input type="radio" name="q2" value="0" id="q2a2"><label for="q2a2"> VLOOKUP(Sales[ProductID], Products, 2, FALSE)</label><br>
+        <input type="radio" name="q2" value="0" id="q2a3"><label for="q2a3"> LOOKUP(Products[ProductName], Sales[ProductID])</label><br>
+        <button type="button" class="check-btn" onclick="checkQuiz('quiz2', 1)">Check My Answer</button>
       </form>
       <div class="quiz-result" id="quiz2-result"></div>
     </div>
+
     <div class="quiz-block" id="quiz3">
-      <b>Quiz 3: What DAX function returns a running or cumulative total?</b><br>
+      <strong>Quiz 3: You want to show what percentage each region contributes to total sales. Which approach would work?</strong><br>
       <form>
-        <input type="radio" name="q3" value="0" id="q3a1"><label for="q3a1"> DISTINCTCOUNT</label><br>
-        <input type="radio" name="q3" value="1" id="q3a2"><label for="q3a2"> CALCULATE with FILTER and ALL</label><br>
-        <input type="radio" name="q3" value="0" id="q3a3"><label for="q3a3"> SUMX only</label><br>
-        <button type="button" class="check-btn" onclick="checkQuiz('quiz3', 1)">Check Answer</button>
+        <input type="radio" name="q3" value="0" id="q3a1"><label for="q3a1"> SUM(Sales[Amount]) / COUNT(Sales[Region])</label><br>
+        <input type="radio" name="q3" value="1" id="q3a2"><label for="q3a2"> SUM(Sales[Amount]) / CALCULATE(SUM(Sales[Amount]), ALL(Sales[Region]))</label><br>
+        <input type="radio" name="q3" value="0" id="q3a3"><label for="q3a3"> AVERAGE(Sales[Amount])</label><br>
+        <button type="button" class="check-btn" onclick="checkQuiz('quiz3', 1)">Check My Answer</button>
       </form>
       <div class="quiz-result" id="quiz3-result"></div>
     </div>
 
+    <div class="quiz-block" id="quiz4">
+      <strong>Quiz 4: You want to calculate year-over-year growth. Which time intelligence function would you use?</strong><br>
+      <form>
+        <input type="radio" name="q4" value="0" id="q4a1"><label for="q4a1"> DATESYTD</label><br>
+        <input type="radio" name="q4" value="1" id="q4a2"><label for="q4a2"> SAMEPERIODLASTYEAR</label><br>
+        <input type="radio" name="q4" value="0" id="q4a3"><label for="q4a3"> DATEADD</label><br>
+        <button type="button" class="check-btn" onclick="checkQuiz('quiz4', 1)">Check My Answer</button>
+      </form>
+      <div class="quiz-result" id="quiz4-result"></div>
+    </div>
+
     <hr>
 
-    <h2>7. Further Resources & Practice</h2>
-    <ul>
-      <li>
-        Power BI Desktop: <a href="https://learn.microsoft.com/en-us/power-bi/fundamentals/desktop-getting-started" target="_blank">Official Getting Started Guide</a>
-      </li>
-      <li>
-        Learn DAX step-by-step: <a href="https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-quickstart-learn-dax-basics" target="_blank">Microsoft DAX Basics Tutorial</a>
-      </li>
-      <li>
-        Full DAX function reference: <a href="https://learn.microsoft.com/en-us/dax/dax-function-reference" target="_blank">DAX Function Reference</a>
-      </li>
-      <li>
-        Hands-on Power BI videos: <a href="https://www.youtube.com/playlist?list=PLUaB-1hjhk8HqnmK0gQhfmIdCbxwoAoys" target="_blank">Power BI Tutorials for Beginners (YouTube)</a>
-      </li>
-      <li>
-        DAX cheat sheet: <a href="https://www.datacamp.com/cheat-sheet/dax-cheat-sheet" target="_blank">DataCamp</a>
-      </li>
-    </ul>
-    <div class="fnote">
-      <b>Tip:</b> The best way to learn Power BI & DAX is to load your own dataset, try these formulas, and visualize the results. Don’t be afraid to explore!
+    <h2>🎓 Next Steps: Continue Your Power BI Journey</h2>
+    
+    <p>
+      Congratulations! You've taken the first step into the exciting world of Power BI and DAX. Here's how to keep growing your skills:
+    </p>
+
+    <div class="step-by-step">
+      <h3>📚 Learning Resources (Free & Paid)</h3>
+      <ul>
+        <li><strong>Microsoft's Official Tutorials:</strong> <a href="https://learn.microsoft.com/en-us/power-bi/fundamentals/desktop-getting-started" target="_blank">Power BI Getting Started</a> - Start here for the basics</li>
+        <li><strong>DAX Deep Dive:</strong> <a href="https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-quickstart-learn-dax-basics" target="_blank">Microsoft DAX Basics</a> - Master the formula language</li>
+        <li><strong>YouTube Channels:</strong> 
+          <a href="https://www.youtube.com/playlist?list=PLUaB-1hjhk8HqnmK0gQhfmIdCbxwoAoys" target="_blank">Power BI Tutorials for Beginners</a> - Visual learning</li>
+        <li><strong>Community Forums:</strong> <a href="https://community.powerbi.com/" target="_blank">Power BI Community</a> - Ask questions, share solutions</li>
+        <li><strong>Practice Datasets:</strong> <a href="https://www.kaggle.com/datasets" target="_blank">Kaggle Datasets</a> - Real data to practice with</li>
+      </ul>
     </div>
+
+    <div class="excel-note">
+      <strong>🎯 For Excel Users:</strong><br>
+      • Start by importing your existing Excel files into Power BI<br>
+      • Recreate your favorite Excel charts as Power BI visuals<br>
+      • Convert your Excel formulas to DAX measures<br>
+      • Explore Power Query (it's like Excel's Power Query, but more powerful!)
+    </div>
+
+    <div class="real-world-example">
+      <strong>🚀 Your First Power BI Project:</strong><br>
+      1. Download Power BI Desktop (it's free!)<br>
+      2. Import a simple Excel file you work with regularly<br>
+      3. Create a few basic charts (bar chart, pie chart, line chart)<br>
+      4. Add one DAX measure (like total sales or average)<br>
+      5. Share your dashboard with a colleague<br><br>
+      
+      <em>That's it! You've just created your first Power BI dashboard. The rest is just building on this foundation.</em>
+    </div>
+
+    <div class="tip">
+      <strong>💡 Remember:</strong> Power BI and DAX are skills that improve with practice. Don't try to memorize every function - focus on understanding the concepts and solving real problems. Start simple, build gradually, and don't be afraid to experiment!
+    </div>
+
+    <hr>
+
+    <p style="text-align: center; font-size: 1.1em; color: #7f8c8d; margin-top: 3em;">
+      <strong>Happy analyzing! 📊✨</strong><br>
+      <small>Questions? Join the Power BI community or reach out to fellow data enthusiasts. We're all learning together!</small>
+    </p>
   </div>
+
   <script>
     function checkQuiz(quizId, correctIndex) {
       const quiz = document.getElementById(quizId);
       const options = quiz.querySelectorAll('input[type="radio"]');
       const resultArea = quiz.querySelector('.quiz-result');
+      
       for (let i = 0; i < options.length; i++) {
         if (options[i].checked) {
           if (parseInt(options[i].value) === correctIndex) {
-            resultArea.textContent = '✅ Correct!';
+            resultArea.textContent = '🎉 Excellent! You\'re getting the hang of DAX!';
+            resultArea.style.color = '#27ae60';
           } else {
-            resultArea.textContent = '❌ Try again!';
+            resultArea.textContent = '🤔 Not quite right, but that\'s okay! Review the examples above and try again.';
+            resultArea.style.color = '#e74c3c';
           }
           return;
         }
       }
-      resultArea.textContent = '❗ Please select an answer!';
+      resultArea.textContent = '⚠️ Please select an answer before checking!';
+      resultArea.style.color = '#f39c12';
     }
   </script>
 </body>
