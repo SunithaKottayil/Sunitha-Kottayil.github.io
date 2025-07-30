@@ -499,26 +499,41 @@
 <body>
     <div class="container">
         <header class="header">
-            <h1>JavaScript: From "What's This?" to "I Got This!"</h1>
+            <h1>Learning JavaScript</h1>
             <div class="meta">
-                My complete coding journey • Updated March 2025 • Mistakes, breakthroughs, and everything in between
+                A practical guide to web programming • Updated March 2025 • From beginner to confident developer
             </div>
             <div class="intro">
-                Two years ago, I couldn't even spell "JavaScript" correctly (I kept writing "Java Script" as two words). Today, I'm building web apps and actually enjoying it! This isn't just another tutorial - it's my entire learning journey, complete with all the confusion, breakthroughs, and "aha!" moments that got me from absolute beginner to confident developer.
+                Hey there! JavaScript is the language that makes websites come alive. It's what makes buttons work, forms submit, and pages interactive. And here's something important: <strong>JavaScript and Java are completely different languages!</strong> They just happen to share a similar name. Also, TypeScript is like JavaScript with superpowers - it adds extra features to help catch errors before they happen.
             </div>
         </header>
 
+        <div class="info callout">
+            <strong>Important: JavaScript vs Java vs TypeScript</strong>
+            <p style="margin-top: 10px;">
+                <strong>JavaScript and Java are completely different languages!</strong> They just happen to share a similar name. Here's the breakdown:
+            </p>
+            <ul style="margin-top: 10px;">
+                <li><strong>JavaScript:</strong> Runs in web browsers, makes websites interactive, easier to learn, no compilation needed</li>
+                <li><strong>Java:</strong> Runs on computers/servers, used for Android apps and enterprise software, requires compilation, more complex syntax</li>
+                <li><strong>TypeScript:</strong> A "superset" of JavaScript - it's JavaScript with extra features that help catch errors before they happen. TypeScript code gets converted to JavaScript when it runs.</li>
+            </ul>
+            <p style="margin-top: 10px;">
+                Think of it this way: JavaScript is like English, TypeScript is like English with grammar rules, and Java is like a completely different language (maybe French). They're not related at all!
+            </p>
+        </div>
+
         <div class="toc">
-            <h4>Your complete JavaScript roadmap</h4>
+            <h4>What we'll cover in this guide</h4>
             <ul>
-                <li><a href="#getting-started">Getting started (and my first confusion)</a></li>
-                <li><a href="#fundamentals">The fundamentals that actually matter</a></li>
+                <li><a href="#getting-started">Getting started (and common beginner confusion)</a></li>
+                <li><a href="#fundamentals">The basics that actually matter</a></li>
                 <li><a href="#thinking-like-dev">Learning to think like a developer</a></li>
                 <li><a href="#data-structures">Working with data (arrays, objects, and more)</a></li>
                 <li><a href="#dom-events">Making websites interactive</a></li>
                 <li><a href="#advanced-concepts">Advanced stuff (when you're ready)</a></li>
                 <li><a href="#real-projects">Building real projects</a></li>
-                <li><a href="#mistakes-lessons">Common mistakes and hard-learned lessons</a></li>
+                <li><a href="#mistakes-lessons">Common mistakes and lessons learned</a></li>
             </ul>
         </div>
 
@@ -533,7 +548,7 @@
                 <div class="progress-step">
                     <div class="step-number">2</div>
                     <div class="step-title">Variables & Logic</div>
-                    <div class="step-desc">Storing and manipulating data</div>
+                    <div class="step-desc">Storing and working with data</div>
                 </div>
                 <div class="progress-step">
                     <div class="step-number">3</div>
@@ -543,7 +558,7 @@
                 <div class="progress-step">
                     <div class="step-number">4</div>
                     <div class="step-title">DOM Manipulation</div>
-                    <div class="step-desc">Interactive web pages</div>
+                    <div class="step-desc">Making web pages interactive</div>
                 </div>
                 <div class="progress-step">
                     <div class="step-number">5</div>
@@ -559,14 +574,14 @@
         </div>
 
         <main>
-            <h2 id="getting-started">Getting started (and my first confusion)</h2>
+            <h2 id="getting-started">Getting started (and common beginner confusion)</h2>
             
             <div class="story callout">
-                <div class="story-title">My embarrassing first attempt</div>
-                I thought I needed to download and install JavaScript like other software. I spent an hour searching for "JavaScript installer" before realizing it's already built into every web browser. Then I spent another hour trying to figure out where to type my code. The browser console was a revelation!
+                <div class="story-title">A common beginner mistake</div>
+                When I first started, I thought I needed to download and install JavaScript like other software. I spent an hour searching for "JavaScript installer" before realizing it's already built into every web browser. Then I spent another hour trying to figure out where to type my code. The browser console was a revelation!
             </div>
 
-            <p>Here's the truth: JavaScript is already on your computer. Every web browser can run JavaScript code, and that's all you need to get started.</p>
+            <p>Here's the good news: JavaScript is already on your computer! Every web browser can run JavaScript code, and that's all you need to get started.</p>
 
             <h3>Your very first JavaScript program</h3>
             
@@ -590,7 +605,7 @@
                 </div>
                 <div class="quiz-option">
                     <input type="radio" name="q1" value="correct" id="q1b">
-                    <label for="q1b">Displays text in the browser console</label>
+                    <label for="q1b">Shows text in the browser console</label>
                 </div>
                 <div class="quiz-option">
                     <input type="radio" name="q1" value="wrong" id="q1c">
@@ -626,10 +641,10 @@
             </div>
 
             <div class="info callout">
-                <strong>Pro tip:</strong> Save this as an HTML file (with a .html extension) and open it in your browser. This became my go-to setup for practicing - simple, works everywhere, and no complicated setup required.
+                <strong>Quick tip:</strong> Save this as an HTML file (with a .html extension) and open it in your browser. This became my go-to setup for practicing - simple, works everywhere, and no complicated setup required.
             </div>
 
-            <h2 id="fundamentals">The fundamentals that actually matter</h2>
+            <h2 id="fundamentals">The basics that actually matter</h2>
             
             <div class="story callout">
                 <div class="story-title">When variables finally clicked</div>
@@ -761,7 +776,7 @@ if (score >= 90) {
                     <input type="radio" name="q2" value="wrong" id="q2c">
                     <label for="q2c">"Try harder"</label>
                 </div>
-                <button class="quiz-btn" onclick="checkAnswer('q2', 'Correct! Since 85 is not >= 90, but it is >= 80, the output is \"B grade\"')">Check Answer</button>
+                <button class="quiz-btn" onclick="checkAnswer('q2', 'Correct! Since 85 is not >= 90, but it is >= 80, the output is B grade')">Check Answer</button>
                 <div class="quiz-result" id="q2-result"></div>
             </div>
 
@@ -1020,7 +1035,7 @@ console.log("Average salary: $" + averageSalary);
                     <input type="radio" name="q3" value="wrong" id="q3c">
                     <label for="q3c">object[property]</label>
                 </div>
-                <button class="quiz-btn" onclick="checkAnswer('q3', 'Correct! You can use dot notation (object.property) or bracket notation (object[\"property\"])')">Check Answer</button>
+                <button class="quiz-btn" onclick="checkAnswer('q3', 'Correct! You can use dot notation (object.property) or bracket notation (object[property])')">Check Answer</button>
                 <div class="quiz-result" id="q3-result"></div>
             </div>
 
@@ -1497,7 +1512,7 @@ console.log(developer.code());   // "Alex is coding in JavaScript, Python, Java"
                 <strong>What this project teaches:</strong> DOM manipulation, event handling, local storage, classes, array methods, and user interface design. It's a complete mini-application that you can actually use!
             </div>
 
-            <h2 id="mistakes-lessons">Common mistakes and hard-learned lessons</h2>
+            <h2 id="mistakes-lessons">Common mistakes and lessons learned</h2>
             
             <div class="story callout">
                 <div class="story-title">My greatest hits of JavaScript errors</div>
@@ -1678,7 +1693,7 @@ console.log({} + []);
                     <input type="radio" name="q4" value="wrong" id="q4c">
                     <label for="q4c">"undefined", "undefined", "undefined", "undefined"</label>
                 </div>
-                <button class="quiz-btn" onclick="checkAnswer('q4', 'JavaScript has some weird behaviors! typeof null is \"object\" (a famous bug), and when you add arrays/objects, they get converted to strings.')">Check Answer</button>
+                <button class="quiz-btn" onclick="checkAnswer('q4', 'JavaScript has some weird behaviors! typeof null is object (a famous bug), and when you add arrays/objects, they get converted to strings.')">Check Answer</button>
                 <div class="quiz-result" id="q4-result"></div>
             </div>
 
