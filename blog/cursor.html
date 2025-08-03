@@ -16,20 +16,23 @@
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
             line-height: 1.7;
             color: #1a1a1a;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background-attachment: fixed;
             font-size: 16px;
             font-weight: 400;
+            min-height: 100vh;
         }
 
         .container {
             max-width: 1200px;
             margin: 40px auto;
-            padding: 60px;
-            background: #ffffff;
+            padding: 80px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
             box-shadow: 
-                0 20px 40px rgba(0,0,0,0.1),
-                0 0 0 1px rgba(255,255,255,0.8);
-            border-radius: 16px;
+                0 25px 50px rgba(0,0,0,0.15),
+                0 0 0 1px rgba(255,255,255,0.9);
+            border-radius: 24px;
             position: relative;
             overflow: hidden;
         }
@@ -40,14 +43,27 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            height: 6px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+        }
+
+        .container::after {
+            content: '';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 50%;
+            opacity: 0.1;
+            z-index: 0;
         }
 
         .header {
-            margin-bottom: 60px;
-            padding-bottom: 40px;
-            border-bottom: 1px solid #e1e5e9;
+            margin-bottom: 80px;
+            padding-bottom: 50px;
+            border-bottom: 2px solid rgba(102, 126, 234, 0.2);
             text-align: center;
             position: relative;
         }
@@ -55,65 +71,90 @@
         .header::after {
             content: '';
             position: absolute;
-            bottom: -1px;
+            bottom: -2px;
             left: 50%;
             transform: translateX(-50%);
-            width: 80px;
-            height: 2px;
-            background: linear-gradient(90deg, #667eea, #764ba2);
+            width: 120px;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+            border-radius: 2px;
         }
 
         h1 {
-            font-size: 42px;
-            font-weight: 800;
-            color: #1a1a1a;
-            margin-bottom: 20px;
+            font-size: 48px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 25px;
             line-height: 1.1;
-            letter-spacing: -0.02em;
+            letter-spacing: -0.03em;
             position: relative;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
 
         .subtitle {
             color: #6b7280;
-            font-size: 22px;
-            margin-bottom: 30px;
+            font-size: 24px;
+            margin-bottom: 35px;
             font-weight: 500;
             letter-spacing: -0.01em;
+            position: relative;
+        }
+
+        .subtitle::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 1px;
         }
 
         .intro {
-            font-size: 19px;
+            font-size: 20px;
             color: #374151;
-            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-            padding: 35px;
-            border-radius: 12px;
-            border: 1px solid #e2e8f0;
+            background: linear-gradient(135deg, rgba(248, 250, 252, 0.9) 0%, rgba(241, 245, 249, 0.9) 100%);
+            backdrop-filter: blur(10px);
+            padding: 45px;
+            border-radius: 20px;
+            border: 1px solid rgba(226, 232, 240, 0.5);
             line-height: 1.8;
             max-width: 900px;
             margin: 0 auto;
             position: relative;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            box-shadow: 
+                0 10px 30px rgba(0,0,0,0.1),
+                0 0 0 1px rgba(255,255,255,0.8);
         }
 
         .intro::before {
             content: '"';
             position: absolute;
-            top: -10px;
-            left: 30px;
-            font-size: 60px;
-            color: #667eea;
+            top: -15px;
+            left: 35px;
+            font-size: 80px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             font-family: Georgia, serif;
-            opacity: 0.3;
+            opacity: 0.4;
         }
 
         h2 {
-            font-size: 32px;
-            font-weight: 700;
+            font-size: 36px;
+            font-weight: 800;
             color: #1a1a1a;
-            margin: 50px 0 25px 0;
-            padding-bottom: 12px;
-            border-bottom: 2px solid #e1e5e9;
+            margin: 60px 0 30px 0;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(102, 126, 234, 0.2);
             position: relative;
+            letter-spacing: -0.02em;
         }
 
         h2::after {
@@ -121,24 +162,40 @@
             position: absolute;
             bottom: -2px;
             left: 0;
-            width: 60px;
-            height: 2px;
-            background: linear-gradient(90deg, #667eea, #764ba2);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+            border-radius: 2px;
         }
 
         h3 {
-            font-size: 24px;
-            font-weight: 600;
+            font-size: 26px;
+            font-weight: 700;
             color: #2d3748;
-            margin: 35px 0 20px 0;
+            margin: 40px 0 25px 0;
             letter-spacing: -0.01em;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        h3::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 20px;
+            background: linear-gradient(180deg, #667eea, #764ba2);
+            border-radius: 2px;
         }
 
         h4 {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 600;
             color: #374151;
-            margin: 25px 0 12px 0;
+            margin: 30px 0 15px 0;
+            position: relative;
         }
 
         p {
@@ -157,14 +214,15 @@
         }
 
         .nav {
-            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-            border: 1px solid #e2e8f0;
-            border-radius: 16px;
-            padding: 40px;
-            margin: 45px 0;
+            background: linear-gradient(135deg, rgba(248, 250, 252, 0.9) 0%, rgba(241, 245, 249, 0.9) 100%);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(226, 232, 240, 0.5);
+            border-radius: 20px;
+            padding: 50px;
+            margin: 55px 0;
             box-shadow: 
-                0 10px 25px rgba(0,0,0,0.08),
-                0 0 0 1px rgba(255,255,255,0.8);
+                0 15px 35px rgba(0,0,0,0.1),
+                0 0 0 1px rgba(255,255,255,0.9);
             position: relative;
             overflow: hidden;
         }
@@ -175,8 +233,20 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #667eea, #764ba2);
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+        }
+
+        .nav::after {
+            content: '';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 50%;
+            opacity: 0.1;
         }
 
         .nav h4 {
@@ -236,20 +306,21 @@
 
         .concept-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin: 30px 0;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
         }
 
         .concept-card {
-            background: #ffffff;
-            border: 1px solid #e5e7eb;
-            border-radius: 12px;
-            padding: 30px;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(229, 231, 235, 0.5);
+            border-radius: 16px;
+            padding: 35px;
             box-shadow: 
-                0 4px 6px rgba(0,0,0,0.05),
-                0 1px 3px rgba(0,0,0,0.1);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                0 8px 15px rgba(0,0,0,0.08),
+                0 2px 4px rgba(0,0,0,0.05);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
         }
@@ -259,10 +330,10 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 4px;
+            width: 5px;
             height: 100%;
-            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
-            transition: width 0.3s ease;
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            transition: all 0.3s ease;
         }
 
         .concept-card::after {
@@ -273,21 +344,23 @@
             width: 0;
             height: 0;
             border-style: solid;
-            border-width: 0 20px 20px 0;
-            border-color: transparent #f3f4f6 transparent transparent;
+            border-width: 0 25px 25px 0;
+            border-color: transparent rgba(243, 244, 246, 0.8) transparent transparent;
             transition: all 0.3s ease;
         }
 
         .concept-card:hover {
-            transform: translateY(-4px);
+            transform: translateY(-6px) scale(1.02);
             box-shadow: 
-                0 20px 25px rgba(0,0,0,0.1),
-                0 10px 10px rgba(0,0,0,0.04);
-            border-color: #d1d5db;
+                0 25px 35px rgba(0,0,0,0.15),
+                0 15px 20px rgba(0,0,0,0.08);
+            border-color: rgba(102, 126, 234, 0.3);
+            background: rgba(255, 255, 255, 0.95);
         }
 
         .concept-card:hover::before {
-            width: 6px;
+            width: 8px;
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
         }
 
         .concept-card:hover::after {
@@ -295,18 +368,19 @@
         }
 
         .concept-card h4 {
-            font-size: 20px;
-            margin-bottom: 15px;
+            font-size: 22px;
+            margin-bottom: 18px;
             color: #1a1a1a;
-            font-weight: 600;
+            font-weight: 700;
             letter-spacing: -0.01em;
+            position: relative;
         }
 
         .concept-card p {
-            font-size: 15px;
+            font-size: 16px;
             color: #6b7280;
             margin: 0;
-            line-height: 1.6;
+            line-height: 1.7;
         }
 
         .callout {
@@ -416,17 +490,18 @@
 
         .workflow-stage {
             flex: 1;
-            min-width: 220px;
+            min-width: 240px;
             text-align: center;
-            background: #ffffff;
-            border: 2px solid #e5e7eb;
-            border-radius: 12px;
-            padding: 30px 25px;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(229, 231, 235, 0.5);
+            border-radius: 16px;
+            padding: 35px 30px;
             position: relative;
             box-shadow: 
-                0 4px 6px rgba(0,0,0,0.05),
-                0 1px 3px rgba(0,0,0,0.1);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                0 8px 15px rgba(0,0,0,0.08),
+                0 2px 4px rgba(0,0,0,0.05);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             overflow: hidden;
         }
 
@@ -436,36 +511,56 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #667eea, #764ba2);
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
             transform: scaleX(0);
-            transition: transform 0.3s ease;
+            transition: transform 0.4s ease;
+        }
+
+        .workflow-stage::after {
+            content: '';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 50%;
+            opacity: 0.1;
+            transition: all 0.3s ease;
         }
 
         .workflow-stage:hover {
-            transform: translateY(-4px);
+            transform: translateY(-6px) scale(1.02);
             box-shadow: 
-                0 20px 25px rgba(0,0,0,0.1),
-                0 10px 10px rgba(0,0,0,0.04);
-            border-color: #667eea;
+                0 25px 35px rgba(0,0,0,0.15),
+                0 15px 20px rgba(0,0,0,0.08);
+            border-color: rgba(102, 126, 234, 0.3);
+            background: rgba(255, 255, 255, 0.95);
         }
 
         .workflow-stage:hover::before {
             transform: scaleX(1);
         }
 
+        .workflow-stage:hover::after {
+            opacity: 0.2;
+            transform: scale(1.2);
+        }
+
         .stage-title {
-            font-weight: 600;
-            margin-bottom: 12px;
+            font-weight: 700;
+            margin-bottom: 15px;
             color: #1a1a1a;
-            font-size: 18px;
+            font-size: 20px;
             letter-spacing: -0.01em;
+            position: relative;
         }
 
         .stage-desc {
-            font-size: 15px;
+            font-size: 16px;
             color: #6b7280;
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
         .git-workflow {
@@ -473,34 +568,38 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 30px;
-            margin: 35px 0;
-            padding: 40px;
-            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-            border-radius: 16px;
-            border: 1px solid #e2e8f0;
+            gap: 35px;
+            margin: 45px 0;
+            padding: 50px;
+            background: linear-gradient(135deg, rgba(248, 250, 252, 0.9) 0%, rgba(241, 245, 249, 0.9) 100%);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            border: 1px solid rgba(226, 232, 240, 0.5);
             box-shadow: 
-                0 10px 25px rgba(0,0,0,0.08),
-                0 0 0 1px rgba(255,255,255,0.8);
+                0 15px 35px rgba(0,0,0,0.1),
+                0 0 0 1px rgba(255,255,255,0.9);
         }
 
         .workflow-arrow {
-            font-size: 28px;
+            font-size: 32px;
             color: #667eea;
             font-weight: bold;
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
         .workflow-arrow:hover {
-            transform: scale(1.2);
+            transform: scale(1.3);
+            color: #764ba2;
         }
 
         .footer {
-            margin-top: 80px;
-            padding: 60px 0;
-            border-top: 1px solid #e1e5e9;
-            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-            border-radius: 16px 16px 0 0;
+            margin-top: 100px;
+            padding: 80px 0;
+            border-top: 2px solid rgba(102, 126, 234, 0.2);
+            background: linear-gradient(135deg, rgba(248, 250, 252, 0.9) 0%, rgba(241, 245, 249, 0.9) 100%);
+            backdrop-filter: blur(15px);
+            border-radius: 24px 24px 0 0;
             position: relative;
         }
 
@@ -510,29 +609,47 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #667eea, #764ba2);
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+        }
+
+        .footer::after {
+            content: '';
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 50%;
+            opacity: 0.1;
         }
         
         .footer-content {
             max-width: 900px;
             margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
         
         .footer-content h3 {
             color: #1a1a1a;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
             text-align: center;
-            font-size: 28px;
-            font-weight: 700;
+            font-size: 32px;
+            font-weight: 800;
             letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
         .footer-content p {
             color: #6b7280;
-            line-height: 1.7;
-            margin-bottom: 30px;
-            font-size: 17px;
+            line-height: 1.8;
+            margin-bottom: 35px;
+            font-size: 18px;
         }
 
         @media (max-width: 768px) {
