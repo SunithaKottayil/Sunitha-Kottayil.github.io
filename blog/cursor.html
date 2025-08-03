@@ -3,35 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cursor AI Developer Guide</title>
-    <meta name="description" content="Professional guide to Cursor AI - the intelligent code editor">
+    <title>Cursor AI Complete Guide</title>
+    <meta name="description" content="Complete guide to Cursor AI - Installation, features, shortcuts, and tutorials">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #2563eb;
-            --primary-dark: #1d4ed8;
-            --secondary: #64748b;
-            --accent: #f59e0b;
-            --success: #10b981;
-            --warning: #f59e0b;
-            --error: #ef4444;
-            --text-primary: #0f172a;
-            --text-secondary: #475569;
-            --text-muted: #64748b;
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --primary-light: #a5b4fc;
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary: #f59e0b;
+            --accent: #10b981;
+            --text-primary: #1f2937;
+            --text-secondary: #4b5563;
             --bg-primary: #ffffff;
-            --bg-secondary: #f8fafc;
-            --bg-tertiary: #f1f5f9;
-            --border: #e2e8f0;
-            --border-light: #f1f5f9;
-            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-            --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --bg-secondary: #f9fafb;
+            --border: #e5e7eb;
+            --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
             --radius: 0.375rem;
             --radius-lg: 0.5rem;
-            --radius-xl: 0.75rem;
+            --space-md: 1rem;
+            --space-lg: 1.5rem;
+            --space-xl: 2rem;
+            --space-2xl: 3rem;
         }
 
         * {
@@ -41,320 +39,417 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            font-family: 'Inter', sans-serif;
             line-height: 1.6;
             color: var(--text-primary);
             background: var(--bg-primary);
-            font-size: 16px;
-            font-weight: 400;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
 
         .container {
             max-width: 1280px;
             margin: 0 auto;
-            padding: 0 1rem;
-        }
-
-        /* Header */
-        .header {
-            background: var(--bg-primary);
-            border-bottom: 1px solid var(--border);
-            padding: 1.5rem 0;
-            margin-bottom: 2rem;
-        }
-
-        .header-content {
-            text-align: center;
-        }
-
-        .header h1 {
-            font-size: 2.25rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 0.5rem;
-            letter-spacing: -0.025em;
-        }
-
-        .header .subtitle {
-            font-size: 1.125rem;
-            color: var(--text-secondary);
-            font-weight: 500;
-            margin-bottom: 1rem;
-        }
-
-        .header .intro {
-            max-width: 600px;
-            margin: 0 auto;
-            color: var(--text-secondary);
-            font-size: 1rem;
-            line-height: 1.6;
+            padding: 0 var(--space-md);
         }
 
         /* Navigation */
         .nav {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .nav h2 {
-            font-size: 1.125rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 1rem;
-            text-align: center;
-        }
-
-        .nav-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 0.75rem;
-        }
-
-        .nav-item {
-            display: block;
-            padding: 0.75rem 1rem;
             background: var(--bg-primary);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            color: var(--text-primary);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.875rem;
-            transition: all 0.15s ease;
-        }
-
-        .nav-item:hover {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
-            transform: translateY(-1px);
-            box-shadow: var(--shadow-md);
-        }
-
-        /* Main Layout */
-        .main {
-            display: grid;
-            grid-template-columns: 280px 1fr 280px;
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .sidebar-left {
-            background: var(--bg-primary);
-            border-radius: var(--radius-lg);
-            padding: 1.5rem;
-            box-shadow: var(--shadow);
-            height: fit-content;
-            position: sticky;
-            top: 1rem;
-        }
-
-        .content {
-            background: var(--bg-primary);
-            border-radius: var(--radius-lg);
-            padding: 2rem;
-            box-shadow: var(--shadow);
-        }
-
-        .sidebar-right {
-            background: var(--bg-primary);
-            border-radius: var(--radius-lg);
-            padding: 1.5rem;
-            box-shadow: var(--shadow);
-            height: fit-content;
-            position: sticky;
-            top: 1rem;
-        }
-
-        /* Typography */
-        h2 {
-            font-size: 1.875rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin: 2rem 0 1rem 0;
-            padding-bottom: 0.5rem;
             border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
         }
 
-        h2:first-child {
-            margin-top: 0;
-        }
-
-        h3 {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin: 1.5rem 0 0.75rem 0;
-        }
-
-        h4 {
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin: 1rem 0 0.5rem 0;
-        }
-
-        p {
-            margin-bottom: 1rem;
-            color: var(--text-secondary);
-            line-height: 1.6;
-            font-size: 1rem;
-        }
-
-        /* Cards */
-        .card {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 1.25rem;
-            margin-bottom: 1.25rem;
-        }
-
-        .card h3 {
-            margin-top: 0;
-            margin-bottom: 0.75rem;
-            color: var(--text-primary);
-        }
-
-        /* Grid Layouts */
-        .grid-2 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.25rem;
-            margin: 1.25rem 0;
-        }
-
-        .grid-3 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 1.25rem;
-            margin: 1.25rem 0;
-        }
-
-        .grid-4 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin: 1.25rem 0;
-        }
-
-        /* Feature Cards */
-        .feature-card {
-            background: var(--bg-primary);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 1.25rem;
-            transition: all 0.15s ease;
-        }
-
-        .feature-card:hover {
-            border-color: var(--primary);
-            box-shadow: var(--shadow-md);
-            transform: translateY(-1px);
-        }
-
-        .feature-card h4 {
-            margin-top: 0;
-            margin-bottom: 0.5rem;
-            color: var(--text-primary);
-            font-size: 0.875rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .feature-card p {
-            margin: 0;
-            font-size: 0.875rem;
-            color: var(--text-secondary);
-            line-height: 1.5;
-        }
-
-        /* Shortcuts */
-        .shortcut-group {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 1.25rem;
-            margin: 1.25rem 0;
-        }
-
-        .shortcut {
+        .nav-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0.5rem 0;
-            border-bottom: 1px solid var(--border-light);
+            padding: var(--space-md) 0;
         }
 
-        .shortcut:last-child {
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary-gradient);
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.25rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: var(--space-xl);
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            padding: 0.5rem var(--space-md);
+            border-radius: var(--radius);
+            transition: all 0.2s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+            background: var(--bg-secondary);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--primary-gradient);
+            color: white;
+            padding: var(--space-2xl) 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: var(--space-lg);
+            background: linear-gradient(135deg, #ffffff 0%, #e0e7ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero .subtitle {
+            font-size: 1.25rem;
+            margin-bottom: var(--space-xl);
+            opacity: 0.9;
+        }
+
+        .hero .description {
+            max-width: 600px;
+            margin: 0 auto var(--space-2xl);
+            font-size: 1.125rem;
+            opacity: 0.8;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: var(--space-md);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: var(--space-md) var(--space-xl);
+            border-radius: var(--radius-lg);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--primary);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Section Styles */
+        .section {
+            padding: var(--space-2xl) 0;
+        }
+
+        .section:nth-child(even) {
+            background: var(--bg-secondary);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--space-2xl);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: var(--space-md);
+        }
+
+        .section-subtitle {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-xl);
+            margin-bottom: var(--space-2xl);
+        }
+
+        .feature-card {
+            background: var(--bg-primary);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--primary-gradient);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-gradient);
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: var(--space-lg);
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: var(--space-md);
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Installation Steps */
+        .installation-steps {
+            display: grid;
+            gap: var(--space-xl);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .step-card {
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .step-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+
+        .step-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .step-description {
+            color: var(--text-secondary);
+            margin-bottom: var(--space-lg);
+        }
+
+        /* Shortcuts Grid */
+        .shortcuts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: var(--space-xl);
+            margin-bottom: var(--space-2xl);
+        }
+
+        .shortcut-category {
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            box-shadow: var(--shadow);
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+
+        .category-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-gradient);
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.25rem;
+        }
+
+        .category-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .shortcut-list {
+            list-style: none;
+        }
+
+        .shortcut-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-md) 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .shortcut-item:last-child {
             border-bottom: none;
         }
 
-        .shortcut-desc {
+        .shortcut-description {
             color: var(--text-secondary);
             font-weight: 500;
-            font-size: 0.875rem;
         }
 
-        .shortcut-key {
+        .shortcut-keys {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .key {
             background: var(--text-primary);
             color: white;
             padding: 0.25rem 0.5rem;
             border-radius: 0.25rem;
-            font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Consolas', monospace;
+            font-family: 'SF Mono', 'Monaco', monospace;
             font-size: 0.75rem;
             font-weight: 600;
-            margin-left: 0.5rem;
         }
 
-        .mac-key {
+        .key.mac {
             background: #007AFF;
         }
 
-        /* Lists */
-        .feature-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .feature-list li {
-            padding: 0.375rem 0;
-            padding-left: 1.25rem;
-            position: relative;
-            color: var(--text-secondary);
+        /* Code Blocks */
+        .code-block {
+            background: var(--text-primary);
+            color: #e2e8f0;
+            padding: var(--space-lg);
+            border-radius: var(--radius);
+            font-family: 'SF Mono', 'Monaco', monospace;
             font-size: 0.875rem;
-        }
-
-        .feature-list li::before {
-            content: '→';
-            position: absolute;
-            left: 0;
-            color: var(--primary);
-            font-weight: bold;
+            overflow-x: auto;
+            margin: var(--space-lg) 0;
+            line-height: 1.5;
         }
 
         /* Callouts */
         .callout {
-            padding: 1.25rem;
-            margin: 1.25rem 0;
-            border-radius: var(--radius);
+            padding: var(--space-lg);
+            margin: var(--space-lg) 0;
+            border-radius: var(--radius-lg);
             border-left: 4px solid;
             background: var(--bg-secondary);
         }
 
         .tip {
-            border-left-color: var(--success);
+            border-left-color: var(--accent);
             background: #f0fdf4;
         }
 
         .warning {
-            border-left-color: var(--warning);
+            border-left-color: var(--secondary);
             background: #fffbeb;
         }
 
@@ -363,145 +458,57 @@
             background: #eff6ff;
         }
 
-        .important {
-            border-left-color: var(--error);
-            background: #fef2f2;
-        }
-
-        /* Code Blocks */
-        .code-block {
-            background: var(--text-primary);
-            color: #e2e8f0;
-            padding: 1.25rem;
-            border-radius: var(--radius);
-            font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Consolas', monospace;
-            font-size: 0.875rem;
-            overflow-x: auto;
-            margin: 1.25rem 0;
-            line-height: 1.5;
-        }
-
-        /* Tables */
-        .table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1.25rem 0;
-            background: var(--bg-primary);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            overflow: hidden;
-        }
-
-        .table th,
-        .table td {
-            padding: 0.75rem;
-            text-align: left;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .table th {
-            background: var(--bg-secondary);
+        .callout h4 {
+            font-size: 1rem;
             font-weight: 600;
+            margin-bottom: var(--space-sm);
             color: var(--text-primary);
-            font-size: 0.875rem;
         }
 
-        .table tr:last-child td {
-            border-bottom: none;
-        }
-
-        .table code {
-            background: var(--bg-secondary);
-            padding: 0.125rem 0.25rem;
-            border-radius: 0.25rem;
-            font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Consolas', monospace;
-            font-size: 0.75rem;
-            color: var(--error);
-        }
-
-        /* Workflow */
-        .workflow {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin: 1.5rem 0;
-            padding: 1.5rem;
-            background: var(--bg-secondary);
-            border-radius: var(--radius-lg);
-            border: 1px solid var(--border);
-        }
-
-        .workflow-step {
-            flex: 1;
-            text-align: center;
-            padding: 1.25rem;
-            background: var(--bg-primary);
-            border-radius: var(--radius);
-            border: 1px solid var(--border);
-        }
-
-        .workflow-step h4 {
-            margin-top: 0;
-            margin-bottom: 0.5rem;
-            color: var(--text-primary);
-            font-size: 0.875rem;
-            font-weight: 600;
-        }
-
-        .workflow-step p {
-            margin: 0;
-            font-size: 0.75rem;
-            color: var(--text-muted);
-        }
-
-        .workflow-arrow {
-            color: var(--primary);
-            font-weight: bold;
-            font-size: 1.125rem;
-        }
-
-        /* Sidebar */
-        .sidebar-left h3,
-        .sidebar-right h3 {
-            margin-top: 0;
-            margin-bottom: 0.75rem;
-            font-size: 0.875rem;
-            color: var(--text-primary);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            font-weight: 600;
-        }
-
-        .sidebar-section {
-            margin-bottom: 1.5rem;
-        }
-
-        .sidebar-section:last-child {
-            margin-bottom: 0;
-        }
-
-        .sidebar-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .sidebar-list li {
-            padding: 0.375rem 0;
-            border-bottom: 1px solid var(--border-light);
-            font-size: 0.875rem;
+        .callout p {
             color: var(--text-secondary);
+            font-size: 0.875rem;
         }
 
-        .sidebar-list li:last-child {
-            border-bottom: none;
+        /* Stats Section */
+        .stats {
+            background: var(--primary-gradient);
+            color: white;
+            padding: var(--space-2xl) 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-xl);
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: var(--space-xl);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: var(--space-sm);
+            background: linear-gradient(135deg, #ffffff 0%, #e0e7ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            font-size: 1.125rem;
+            opacity: 0.9;
+            font-weight: 500;
         }
 
         /* Footer */
         .footer {
-            background: var(--bg-secondary);
-            border-top: 1px solid var(--border);
-            padding: 2rem 0;
-            margin-top: 3rem;
+            background: var(--text-primary);
+            color: white;
+            padding: var(--space-2xl) 0;
         }
 
         .footer-content {
@@ -509,691 +516,870 @@
         }
 
         .footer h3 {
-            margin-bottom: 0.75rem;
-            color: var(--text-primary);
+            margin-bottom: var(--space-lg);
             font-size: 1.125rem;
         }
 
         .footer p {
-            color: var(--text-secondary);
+            color: #9ca3af;
             margin-bottom: 0.5rem;
             font-size: 0.875rem;
         }
 
         .footer a {
-            color: var(--primary);
+            color: var(--primary-light);
             text-decoration: none;
-            font-weight: 500;
-        }
-
-        .footer a:hover {
-            text-decoration: underline;
         }
 
         /* Responsive */
-        @media (max-width: 1024px) {
-            .main {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-
-            .sidebar-left,
-            .sidebar-right {
-                position: static;
-                order: 2;
-            }
-
-            .content {
-                order: 1;
-            }
-        }
-
         @media (max-width: 768px) {
-            .container {
-                padding: 0 0.75rem;
+            .nav-menu {
+                display: none;
             }
 
-            .header h1 {
-                font-size: 1.875rem;
+            .hero h1 {
+                font-size: 2.5rem;
             }
 
-            .content {
-                padding: 1.5rem;
+            .section-title {
+                font-size: 2rem;
             }
 
-            .nav {
-                padding: 1.25rem;
-            }
-
-            .nav-grid {
+            .features-grid {
                 grid-template-columns: 1fr;
             }
 
-            .grid-2,
-            .grid-3,
-            .grid-4 {
+            .shortcuts-grid {
                 grid-template-columns: 1fr;
             }
 
-            .workflow {
+            .cta-buttons {
                 flex-direction: column;
-                gap: 0.75rem;
+                align-items: center;
             }
 
-            .workflow-arrow {
-                transform: rotate(90deg);
+            .btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
             }
         }
 
-        /* Utility Classes */
-        .text-center { text-align: center; }
-        .text-muted { color: var(--text-muted); }
-        .font-mono { font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Consolas', monospace; }
-        .font-sm { font-size: 0.875rem; }
-        .font-xs { font-size: 0.75rem; }
-        .mb-0 { margin-bottom: 0; }
-        .mt-0 { margin-top: 0; }
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
+        }
     </style>
 </head>
 <body>
-    <header class="header">
+    <!-- Navigation -->
+    <nav class="nav">
         <div class="container">
-            <div class="header-content">
-                <h1>Cursor AI Developer Guide</h1>
-                <div class="subtitle">Master the intelligent code editor</div>
-                <div class="intro">
-                    A comprehensive guide to Cursor AI, the code editor that combines VS Code's power with advanced AI capabilities. Learn shortcuts, workflows, and professional techniques.
+            <div class="nav-container">
+                <a href="#" class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <span>Cursor AI Guide</span>
+                </a>
+                
+                <ul class="nav-menu">
+                    <li><a href="#home" class="nav-link">Home</a></li>
+                    <li><a href="#getting-started" class="nav-link">Getting Started</a></li>
+                    <li><a href="#features" class="nav-link">Features</a></li>
+                    <li><a href="#shortcuts" class="nav-link">Shortcuts</a></li>
+                    <li><a href="#tutorials" class="nav-link">Tutorials</a></li>
+                    <li><a href="#models" class="nav-link">AI Models</a></li>
+                    <li><a href="#best-practices" class="nav-link">Best Practices</a></li>
+                    <li><a href="#advanced" class="nav-link">Advanced</a></li>
+                    <li><a href="#resources" class="nav-link">Resources</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="animate-fade-in-up">Master Cursor AI</h1>
+                <p class="subtitle animate-fade-in-up">The Intelligent Code Editor That Understands Your Project</p>
+                <p class="description animate-fade-in-up">
+                    Transform your development workflow with Cursor AI - the code editor that combines VS Code's power with advanced AI capabilities. 
+                    Generate code, debug issues, and learn faster with context-aware assistance.
+                </p>
+                <div class="cta-buttons animate-fade-in-up">
+                    <a href="#getting-started" class="btn btn-primary">
+                        <i class="fas fa-rocket"></i>
+                        Get Started
+                    </a>
+                    <a href="#features" class="btn btn-secondary">
+                        <i class="fas fa-play"></i>
+                        Explore Features
+                    </a>
                 </div>
             </div>
         </div>
-    </header>
+    </section>
 
-    <div class="container">
-        <nav class="nav">
-            <h2>Quick Navigation</h2>
-            <div class="nav-grid">
-                <a href="#basics" class="nav-item">Getting Started</a>
-                <a href="#shortcuts" class="nav-item">Keyboard Shortcuts</a>
-                <a href="#chat" class="nav-item">Chat Interface</a>
-                <a href="#generation" class="nav-item">Code Generation</a>
-                <a href="#editing" class="nav-item">AI Editing</a>
-                <a href="#debugging" class="nav-item">Debugging</a>
-                <a href="#models" class="nav-item">AI Models</a>
-                <a href="#frontend" class="nav-item">Frontend</a>
-                <a href="#backend" class="nav-item">Backend</a>
-                <a href="#documentation" class="nav-item">Documentation</a>
-                <a href="#best-practices" class="nav-item">Best Practices</a>
-                <a href="#advanced" class="nav-item">Advanced Features</a>
+    <!-- Features Section -->
+    <section id="features" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Why Choose Cursor AI?</h2>
+                <p class="section-subtitle">
+                    Experience the future of coding with AI-powered features that understand your project context
+                </p>
             </div>
-        </nav>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Intelligent Code Generation</h3>
+                    <p>Generate code, refactor existing code, and get intelligent suggestions based on your project context and coding patterns.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3>Natural Language Interface</h3>
+                    <p>Ask questions in plain English and get code explanations, debugging help, and implementation guidance instantly.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <h3>Project-Aware Intelligence</h3>
+                    <p>The AI understands your entire codebase, including file structure, dependencies, and your team's coding conventions.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-puzzle-piece"></i>
+                    </div>
+                    <h3>Seamless Integration</h3>
+                    <p>Works perfectly with your existing VS Code extensions, Git workflow, and development environment without disruption.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bug"></i>
+                    </div>
+                    <h3>Advanced Debugging</h3>
+                    <p>Get intelligent debugging assistance, error explanations, and optimization suggestions for better code quality.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Learning & Documentation</h3>
+                    <p>Generate comprehensive documentation, learn new technologies, and understand complex codebases with AI assistance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        <div class="main">
-            <aside class="sidebar-left">
-                <div class="sidebar-section">
-                    <h3>Quick Reference</h3>
-                    <ul class="sidebar-list">
-                        <li><strong>Chat:</strong> Ctrl+K / Cmd+K</li>
-                        <li><strong>Generate:</strong> Ctrl+L / Cmd+L</li>
-                        <li><strong>Edit:</strong> Ctrl+J / Cmd+J</li>
-                        <li><strong>Explain:</strong> Ctrl+I / Cmd+I</li>
-                        <li><strong>Quick Open:</strong> Ctrl+P / Cmd+P</li>
-                        <li><strong>Command Palette:</strong> Ctrl+Shift+P</li>
-                    </ul>
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">500K+</div>
+                    <div class="stat-label">Active Developers</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Programming Languages</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">90%</div>
+                    <div class="stat-label">Faster Development</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">AI Assistance</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Getting Started Section -->
+    <section id="getting-started" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Getting Started</h2>
+                <p class="section-subtitle">
+                    Install Cursor AI and set up your development environment in minutes
+                </p>
+            </div>
+
+            <div class="installation-steps">
+                <div class="step-card">
+                    <div class="step-header">
+                        <div class="step-number">1</div>
+                        <div>
+                            <h3 class="step-title">Download Cursor AI</h3>
+                        </div>
+                    </div>
+                    <p class="step-description">
+                        Visit the official Cursor AI website and download the latest version for your operating system.
+                    </p>
+                    <div class="cta-buttons">
+                        <a href="https://cursor.sh/" target="_blank" class="btn btn-primary">
+                            <i class="fas fa-download"></i>
+                            Download Now
+                        </a>
+                    </div>
                 </div>
 
-                <div class="sidebar-section">
-                    <h3>Common Prompts</h3>
-                    <ul class="sidebar-list">
-                        <li>"Explain this code"</li>
-                        <li>"Optimize this function"</li>
-                        <li>"Add error handling"</li>
-                        <li>"Write tests for this"</li>
-                        <li>"Refactor this code"</li>
-                        <li>"Fix this bug"</li>
-                    </ul>
-                </div>
-
-                <div class="sidebar-section">
-                    <h3>Best Practices</h3>
-                    <ul class="sidebar-list">
-                        <li>Be specific in your prompts</li>
-                        <li>Provide context and requirements</li>
-                        <li>Ask for explanations, not just code</li>
-                        <li>Review generated code thoroughly</li>
-                        <li>Test everything before production</li>
-                        <li>Use AI as a learning tool</li>
-                    </ul>
-                </div>
-            </aside>
-
-            <main class="content">
-                <section id="basics">
-                    <h2>Getting Started</h2>
-                    
-                    <p>Cursor AI is an intelligent code editor built on VS Code with advanced AI capabilities. It understands your entire codebase and provides context-aware assistance.</p>
-
-                    <div class="grid-2">
-                        <div class="feature-card">
-                            <h4>Intelligent Code Generation</h4>
-                            <p>Generate code, refactor existing code, and get intelligent suggestions based on your project context.</p>
-                        </div>
-                        <div class="feature-card">
-                            <h4>Natural Language Interface</h4>
-                            <p>Ask questions in plain English and get code explanations, debugging help, and implementation guidance.</p>
-                        </div>
-                        <div class="feature-card">
-                            <h4>Project-Aware Intelligence</h4>
-                            <p>The AI understands your entire codebase, including file structure, dependencies, and coding conventions.</p>
-                        </div>
-                        <div class="feature-card">
-                            <h4>Seamless Integration</h4>
-                            <p>Works with your existing VS Code extensions, Git workflow, and development environment.</p>
+                <div class="step-card">
+                    <div class="step-header">
+                        <div class="step-number">2</div>
+                        <div>
+                            <h3 class="step-title">Install the Application</h3>
                         </div>
                     </div>
-
-                    <div class="card">
-                        <h3>Installation</h3>
-                        <ol class="feature-list">
-                            <li>Visit <a href="https://cursor.sh/" target="_blank">cursor.sh</a></li>
-                            <li>Download for your operating system</li>
-                            <li>Install and launch Cursor</li>
-                            <li>Sign in with GitHub or Google</li>
-                        </ol>
-                    </div>
-                </section>
-
-                <section id="shortcuts">
-                    <h2>Essential Keyboard Shortcuts</h2>
-                    
-                    <div class="shortcut-group">
-                        <h3>AI Commands</h3>
-                        <div class="shortcut">
-                            <span class="shortcut-desc">Chat with AI</span>
-                            <div>
-                                <span class="shortcut-key">Ctrl+K</span>
-                                <span class="shortcut-key mac-key">Cmd+K</span>
-                            </div>
-                        </div>
-                        <div class="shortcut">
-                            <span class="shortcut-desc">Generate code</span>
-                            <div>
-                                <span class="shortcut-key">Ctrl+L</span>
-                                <span class="shortcut-key mac-key">Cmd+L</span>
-                            </div>
-                        </div>
-                        <div class="shortcut">
-                            <span class="shortcut-desc">Edit with AI</span>
-                            <div>
-                                <span class="shortcut-key">Ctrl+J</span>
-                                <span class="shortcut-key mac-key">Cmd+J</span>
-                            </div>
-                        </div>
-                        <div class="shortcut">
-                            <span class="shortcut-desc">Explain code</span>
-                            <div>
-                                <span class="shortcut-key">Ctrl+I</span>
-                                <span class="shortcut-key mac-key">Cmd+I</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="shortcut-group">
-                        <h3>Editor Shortcuts</h3>
-                        <div class="shortcut">
-                            <span class="shortcut-desc">Quick open file</span>
-                            <div>
-                                <span class="shortcut-key">Ctrl+P</span>
-                                <span class="shortcut-key mac-key">Cmd+P</span>
-                            </div>
-                        </div>
-                        <div class="shortcut">
-                            <span class="shortcut-desc">Go to symbol</span>
-                            <div>
-                                <span class="shortcut-key">Ctrl+Shift+O</span>
-                                <span class="shortcut-key mac-key">Cmd+Shift+O</span>
-                            </div>
-                        </div>
-                        <div class="shortcut">
-                            <span class="shortcut-desc">Toggle comment</span>
-                            <div>
-                                <span class="shortcut-key">Ctrl+/</span>
-                                <span class="shortcut-key mac-key">Cmd+/</span>
-                            </div>
-                        </div>
-                        <div class="shortcut">
-                            <span class="shortcut-desc">Command palette</span>
-                            <div>
-                                <span class="shortcut-key">Ctrl+Shift+P</span>
-                                <span class="shortcut-key mac-key">Cmd+Shift+P</span>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <section id="chat">
-                    <h2>Chat Interface</h2>
-                    
-                    <p>The chat interface is your primary way to interact with Cursor AI. It understands your project context and provides intelligent assistance.</p>
-
-                    <div class="grid-2">
-                        <div class="feature-card">
-                            <h4>Be Specific</h4>
-                            <p>Instead of "help with this code," try "explain why this function returns undefined when called with an empty array."</p>
-                        </div>
-                        <div class="feature-card">
-                            <h4>Provide Context</h4>
-                            <p>Mention the programming language, framework, and what you're trying to achieve.</p>
-                        </div>
-                        <div class="feature-card">
-                            <h4>Ask for Explanations</h4>
-                            <p>Request explanations of concepts, not just code solutions. Understanding is key.</p>
-                        </div>
-                        <div class="feature-card">
-                            <h4>Iterate</h4>
-                            <p>Build on previous responses. The AI remembers your conversation context.</p>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <h3>Effective Prompts</h3>
-                        <ul class="feature-list">
-                            <li>"How can I optimize this code?"</li>
-                            <li>"Explain what this function does"</li>
-                            <li>"How do I fix this error?"</li>
-                            <li>"What's the best way to implement X?"</li>
-                            <li>"Can you suggest a better approach for this?"</li>
-                        </ul>
-                    </div>
-                </section>
-
-                <section id="generation">
-                    <h2>Code Generation</h2>
-                    
-                    <p>Cursor AI can generate code from scratch based on your requirements. Follow this workflow for best results:</p>
-
-                    <div class="workflow">
-                        <div class="workflow-step">
-                            <h4>Describe Requirements</h4>
-                            <p>Tell the AI what functionality you want to implement</p>
-                        </div>
-                        <div class="workflow-arrow">→</div>
-                        <div class="workflow-step">
-                            <h4>Review & Refine</h4>
-                            <p>Check the generated code and ask for modifications if needed</p>
-                        </div>
-                        <div class="workflow-arrow">→</div>
-                        <div class="workflow-step">
-                            <h4>Test & Integrate</h4>
-                            <p>Add the code to your project and test it thoroughly</p>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <h3>Generation Examples</h3>
-                        <ul class="feature-list">
-                            <li>"Generate a React component for a login form"</li>
-                            <li>"Write a function to parse CSV data"</li>
-                            <li>"Create an API endpoint for user authentication using Express"</li>
-                            <li>"Write a unit test for this function"</li>
-                            <li>"Implement a binary search tree in Python"</li>
-                        </ul>
-                    </div>
-
-                    <div class="warning callout">
-                        <strong>Always Review Generated Code:</strong> While Cursor AI is incredibly capable, always review, test, and understand the code it generates before using it in production.
-                    </div>
-                </section>
-
-                <section id="editing">
-                    <h2>AI Code Editing</h2>
-                    
-                    <p>Cursor AI excels at modifying and improving existing code. Here's how to leverage this powerful feature:</p>
-
-                    <div class="card">
-                        <h3>Edit with AI Steps</h3>
-                        <ol class="feature-list">
-                            <li>Select the code you want to modify</li>
-                            <li>Press <span class="shortcut-key">Ctrl+J</span> (macOS: <span class="shortcut-key mac-key">Cmd+J</span>)</li>
-                            <li>Describe your changes in natural language</li>
-                            <li>Review the AI's suggested changes</li>
-                            <li>Accept or reject the changes</li>
-                        </ol>
-                    </div>
-
-                    <div class="card">
-                        <h3>Edit Examples</h3>
-                        <ul class="feature-list">
-                            <li>"Add TypeScript type definitions to this function"</li>
-                            <li>"Replace the for loop with map() and filter()"</li>
-                            <li>"Add input validation with helpful error messages"</li>
-                            <li>"Update this to handle asynchronous operations"</li>
-                            <li>"Fix the potential memory leak in this component"</li>
-                        </ul>
-                    </div>
-                </section>
-
-                <section id="debugging">
-                    <h2>Debugging & Optimization</h2>
-                    
-                    <p>Cursor AI can help you debug issues more effectively and optimize your code for better performance:</p>
-
-                    <div class="grid-2">
-                        <div class="card">
-                            <h3>Debugging Prompts</h3>
-                            <ul class="feature-list">
-                                <li>"Fix this TypeError in my React component"</li>
-                                <li>"Why is this infinite loop occurring?"</li>
-                                <li>"Debug this async function that isn't resolving"</li>
-                                <li>"Why is my state not updating in this component?"</li>
-                            </ul>
-                        </div>
-                        <div class="card">
-                            <h3>Optimization Requests</h3>
-                            <ul class="feature-list">
-                                <li>"Optimize this function for better performance"</li>
-                                <li>"Reduce the memory usage of this algorithm"</li>
-                                <li>"Improve the time complexity of this sorting function"</li>
-                                <li>"Refactor this code to be more maintainable"</li>
-                            </ul>
-                        </div>
-                    </div>
-                </section>
-
-                <section id="models">
-                    <h2>AI Model Selection (Pro)</h2>
-                    
-                    <p>Choose the right AI model for different tasks to optimize performance and results:</p>
-
-                    <div class="table">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Model</th>
-                                    <th>Best For</th>
-                                    <th>Speed</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><strong>Claude 3 Opus</strong></td>
-                                    <td>Complex tasks, architecture design, security auditing</td>
-                                    <td>Slow</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Claude 3 Sonnet</strong></td>
-                                    <td>General coding, bug fixing, documentation</td>
-                                    <td>Medium</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Claude 3 Haiku</strong></td>
-                                    <td>Simple tasks, quick explanations, formatting</td>
-                                    <td>Fast</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>GPT-4o</strong></td>
-                                    <td>Creative code generation, complex instructions</td>
-                                    <td>Medium</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>GPT-3.5 Turbo</strong></td>
-                                    <td>Formatting tasks, simple code generation</td>
-                                    <td>Fast</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <div class="tip callout">
-                        <strong>Switching Models:</strong> Settings → AI → Model Selection or use command palette: "AI: Select Model"
-                    </div>
-                </section>
-
-                <section id="frontend">
-                    <h2>Frontend Development</h2>
-                    
-                    <p>Cursor AI excels at frontend development tasks. Here are the most effective prompts and techniques:</p>
-
-                    <div class="grid-2">
-                        <div class="card">
-                            <h3>React Component Generation</h3>
-                            <ul class="feature-list">
-                                <li>"Create a reusable button component with variants"</li>
-                                <li>"Generate a form component with validation"</li>
-                                <li>"Create a responsive navigation bar component"</li>
-                                <li>"Build a data table component with sorting and filtering"</li>
-                            </ul>
-                        </div>
-                        <div class="card">
-                            <h3>CSS/Styling Assistance</h3>
-                            <ul class="feature-list">
-                                <li>"Convert this CSS to Tailwind classes"</li>
-                                <li>"Create animations for this component"</li>
-                                <li>"Optimize these styles for mobile devices"</li>
-                                <li>"Generate a dark mode version of these styles"</li>
-                            </ul>
-                        </div>
-                    </div>
-                </section>
-
-                <section id="backend">
-                    <h2>Backend Development</h2>
-                    
-                    <p>Leverage Cursor AI for powerful backend development with these specialized prompts:</p>
-
-                    <div class="grid-2">
-                        <div class="card">
-                            <h3>API Development</h3>
-                            <ul class="feature-list">
-                                <li>"Create a RESTful CRUD API for users using Express"</li>
-                                <li>"Generate GraphQL resolvers for this schema"</li>
-                                <li>"Implement JWT authentication middleware"</li>
-                                <li>"Create database models and migrations"</li>
-                            </ul>
-                        </div>
-                        <div class="card">
-                            <h3>Database Queries</h3>
-                            <ul class="feature-list">
-                                <li>"Optimize this SQL query for performance"</li>
-                                <li>"Convert this ORM query to raw SQL"</li>
-                                <li>"Write a MongoDB aggregation pipeline for this data"</li>
-                                <li>"Create indexes for these database operations"</li>
-                            </ul>
-                        </div>
-                    </div>
-                </section>
-
-                <section id="documentation">
-                    <h2>Documentation</h2>
-                    
-                    <p>Generate comprehensive documentation effortlessly with AI assistance:</p>
-
-                    <div class="card">
-                        <h3>Documentation Types</h3>
-                        <ul class="feature-list">
-                            <li>Code comments and inline documentation</li>
-                            <li>JSDoc/DocStrings for functions and classes</li>
-                            <li>README files and project documentation</li>
-                            <li>API documentation and usage guides</li>
-                            <li>User guides and tutorials</li>
-                            <li>Architecture documentation</li>
-                        </ul>
-                    </div>
-
-                    <div class="card">
-                        <h3>Documentation Prompts</h3>
-                        <ul class="feature-list">
-                            <li>"Add JSDoc comments to this function"</li>
-                            <li>"Generate a README for this project"</li>
-                            <li>"Document the API endpoints in this file"</li>
-                            <li>"Create usage examples for this library"</li>
-                            <li>"Add type documentation to these interfaces"</li>
-                        </ul>
-                    </div>
-
+                    <p class="step-description">
+                        Run the installer and follow the setup wizard. The installation process is straightforward and takes just a few minutes.
+                    </p>
                     <div class="code-block">
-// Before: Undocumented function
-function calculateTotal(items, discount, tax) {
-  const subtotal = items.reduce((sum, item) => 
-    sum + item.price * item.quantity, 0);
-  const discountAmount = subtotal * discount;
-  const taxAmount = (subtotal - discountAmount) * tax;
-  return subtotal - discountAmount + taxAmount;
-}
+# Windows (using winget)
+winget install Cursor.Cursor
 
-// After AI documentation:
-/**
- * Calculates the total price including discount and tax.
- * @param {Array<{price: number, quantity: number}>} items
- * @param {number} discount - Discount rate (0.1 for 10%)
- * @param {number} tax - Tax rate (0.07 for 7%)
- * @returns {number} The final total after discount and tax
- */</div>
-                </section>
+# macOS (using Homebrew)
+brew install --cask cursor
 
-                <section id="best-practices">
-                    <h2>Best Practices</h2>
-                    
-                    <h3>Writing Effective Prompts</h3>
-                    <p>The quality of your prompts directly affects the quality of the AI's responses:</p>
-
-                    <div class="grid-2">
-                        <div class="feature-card">
-                            <h4>Be Specific and Detailed</h4>
-                            <p>Instead of "fix this bug," say "this function returns undefined when the input array is empty, please add proper validation."</p>
-                        </div>
-                        <div class="feature-card">
-                            <h4>Provide Context</h4>
-                            <p>Mention the programming language, framework, and any relevant constraints or requirements.</p>
-                        </div>
-                        <div class="feature-card">
-                            <h4>Ask for Explanations</h4>
-                            <p>Request explanations of concepts, not just code solutions. Understanding is key to learning.</p>
-                        </div>
-                        <div class="feature-card">
-                            <h4>Iterate and Refine</h4>
-                            <p>Build on previous responses. The AI remembers your conversation context.</p>
-                        </div>
-                    </div>
-
-                    <div class="info callout">
-                        <strong>Learning and Growth:</strong> Use Cursor AI as a learning tool, not just a code generator. Ask "why" questions, request explanations, and compare different approaches.
-                    </div>
-                </section>
-
-                <section id="advanced">
-                    <h2>Advanced Features</h2>
-                    
-                    <h3>Project-Wide Understanding</h3>
-                    <p>One of Cursor AI's most powerful features is its ability to understand your entire project:</p>
-
-                    <div class="grid-2">
-                        <div class="feature-card">
-                            <h4>Cross-File References</h4>
-                            <p>The AI can reference and understand relationships between different files in your project.</p>
-                        </div>
-                        <div class="feature-card">
-                            <h4>Dependency Awareness</h4>
-                            <p>It knows about your project's dependencies and can suggest appropriate libraries and patterns.</p>
-                        </div>
-                        <div class="feature-card">
-                            <h4>Code Style Consistency</h4>
-                            <p>The AI learns your coding style and maintains consistency across your codebase.</p>
-                        </div>
-                        <div class="feature-card">
-                            <h4>Architecture Understanding</h4>
-                            <p>It can suggest architectural improvements based on your project structure.</p>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <h3>Advanced Use Cases</h3>
-                        <div class="table">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Use Case</th>
-                                        <th>Command/Approach</th>
-                                        <th>Best Practices</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><strong>Legacy Code Modernization</strong></td>
-                                        <td><code>"Convert this jQuery code to modern vanilla JS"</code></td>
-                                        <td>Test thoroughly, understand the original functionality first</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Security Audits</strong></td>
-                                        <td><code>"Review this authentication system for vulnerabilities"</code></td>
-                                        <td>Cross-reference with security best practices, use multiple models</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Performance Profiling</strong></td>
-                                        <td><code>"Analyze this function for performance bottlenecks"</code></td>
-                                        <td>Benchmark before and after, consider real-world usage patterns</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Code Architecture Review</strong></td>
-                                        <td><code>"Suggest architectural improvements for this module"</code></td>
-                                        <td>Consider team size, project scope, and maintenance requirements</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <div class="important callout">
-                        <strong>Remember:</strong> Cursor AI is a tool to enhance your capabilities, not replace your expertise. The best results come from combining AI assistance with your own knowledge and judgment. Always review, test, and understand the code before using it in production.
-                    </div>
-                </section>
-            </main>
-
-            <aside class="sidebar-right">
-                <div class="sidebar-section">
-                    <h3>Resources</h3>
-                    <ul class="sidebar-list">
-                        <li><a href="https://cursor.sh/" target="_blank">Official Website</a></li>
-                        <li><a href="https://docs.cursor.sh/" target="_blank">Documentation</a></li>
-                        <li><a href="https://github.com/getcursor/cursor" target="_blank">GitHub</a></li>
-                        <li><a href="https://discord.gg/cursor" target="_blank">Discord Community</a></li>
-                    </ul>
+# Linux (using snap)
+sudo snap install cursor --classic</div>
                 </div>
 
-                <div class="sidebar-section">
-                    <h3>Pro Features</h3>
-                    <ul class="sidebar-list">
-                        <li>Advanced AI models</li>
-                        <li>Team collaboration</li>
-                        <li>Custom model selection</li>
-                        <li>Priority support</li>
-                        <li>Advanced analytics</li>
-                    </ul>
+                <div class="step-card">
+                    <div class="step-header">
+                        <div class="step-number">3</div>
+                        <div>
+                            <h3 class="step-title">Sign In to Your Account</h3>
+                        </div>
+                    </div>
+                    <p class="step-description">
+                        Launch Cursor AI and sign in with your GitHub or Google account to access all features and sync your preferences.
+                    </p>
+                    <div class="callout info">
+                        <h4><i class="fas fa-info-circle"></i> Account Benefits</h4>
+                        <p>Signing in enables features like model selection, team collaboration, and cross-device synchronization.</p>
+                    </div>
                 </div>
 
-                <div class="sidebar-section">
-                    <h3>Tips & Tricks</h3>
-                    <ul class="sidebar-list">
-                        <li>Use specific file references</li>
-                        <li>Provide project context</li>
-                        <li>Ask for multiple solutions</li>
-                        <li>Use role-based prompts</li>
-                        <li>Iterate on responses</li>
-                    </ul>
+                <div class="step-card">
+                    <div class="step-header">
+                        <div class="step-number">4</div>
+                        <div>
+                            <h3 class="step-title">Start Coding with AI</h3>
+                        </div>
+                    </div>
+                    <p class="step-description">
+                        You're ready to start! Press Ctrl+K to chat with AI, Ctrl+L to generate code, and explore the powerful features.
+                    </p>
+                    <div class="callout tip">
+                        <h4><i class="fas fa-lightbulb"></i> Pro Tip</h4>
+                        <p>Start with simple prompts like "explain this code" or "add comments to this function" to get familiar with the AI interface.</p>
+                    </div>
                 </div>
-            </aside>
+            </div>
         </div>
-    </div>
+    </section>
 
+    <!-- Shortcuts Section -->
+    <section id="shortcuts" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Essential Keyboard Shortcuts</h2>
+                <p class="section-subtitle">
+                    Master the essential keyboard shortcuts to supercharge your Cursor AI workflow
+                </p>
+            </div>
+
+            <div class="shortcuts-grid">
+                <div class="shortcut-category">
+                    <div class="category-header">
+                        <div class="category-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <h3 class="category-title">AI Commands</h3>
+                    </div>
+                    <ul class="shortcut-list">
+                        <li class="shortcut-item">
+                            <span class="shortcut-description">Chat with AI</span>
+                            <div class="shortcut-keys">
+                                <span class="key">Ctrl+K</span>
+                                <span class="key mac">Cmd+K</span>
+                            </div>
+                        </li>
+                        <li class="shortcut-item">
+                            <span class="shortcut-description">Generate code</span>
+                            <div class="shortcut-keys">
+                                <span class="key">Ctrl+L</span>
+                                <span class="key mac">Cmd+L</span>
+                            </div>
+                        </li>
+                        <li class="shortcut-item">
+                            <span class="shortcut-description">Edit with AI</span>
+                            <div class="shortcut-keys">
+                                <span class="key">Ctrl+J</span>
+                                <span class="key mac">Cmd+J</span>
+                            </div>
+                        </li>
+                        <li class="shortcut-item">
+                            <span class="shortcut-description">Explain code</span>
+                            <div class="shortcut-keys">
+                                <span class="key">Ctrl+I</span>
+                                <span class="key mac">Cmd+I</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="shortcut-category">
+                    <div class="category-header">
+                        <div class="category-icon">
+                            <i class="fas fa-edit"></i>
+                        </div>
+                        <h3 class="category-title">Editor Shortcuts</h3>
+                    </div>
+                    <ul class="shortcut-list">
+                        <li class="shortcut-item">
+                            <span class="shortcut-description">Quick open file</span>
+                            <div class="shortcut-keys">
+                                <span class="key">Ctrl+P</span>
+                                <span class="key mac">Cmd+P</span>
+                            </div>
+                        </li>
+                        <li class="shortcut-item">
+                            <span class="shortcut-description">Go to symbol</span>
+                            <div class="shortcut-keys">
+                                <span class="key">Ctrl+Shift+O</span>
+                                <span class="key mac">Cmd+Shift+O</span>
+                            </div>
+                        </li>
+                        <li class="shortcut-item">
+                            <span class="shortcut-description">Toggle comment</span>
+                            <div class="shortcut-keys">
+                                <span class="key">Ctrl+/</span>
+                                <span class="key mac">Cmd+/</span>
+                            </div>
+                        </li>
+                        <li class="shortcut-item">
+                            <span class="shortcut-description">Command palette</span>
+                            <div class="shortcut-keys">
+                                <span class="key">Ctrl+Shift+P</span>
+                                <span class="key mac">Cmd+Shift+P</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="shortcut-category">
+                    <div class="category-header">
+                        <div class="category-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <h3 class="category-title">Navigation</h3>
+                    </div>
+                    <ul class="shortcut-list">
+                        <li class="shortcut-item">
+                            <span class="shortcut-description">Find in files</span>
+                            <div class="shortcut-keys">
+                                <span class="key">Ctrl+Shift+F</span>
+                                <span class="key mac">Cmd+Shift+F</span>
+                            </div>
+                        </li>
+                        <li class="shortcut-item">
+                            <span class="shortcut-description">Go to line</span>
+                            <div class="shortcut-keys">
+                                <span class="key">Ctrl+G</span>
+                                <span class="key mac">Cmd+G</span>
+                            </div>
+                        </li>
+                        <li class="shortcut-item">
+                            <span class="shortcut-description">Toggle sidebar</span>
+                            <div class="shortcut-keys">
+                                <span class="key">Ctrl+B</span>
+                                <span class="key mac">Cmd+B</span>
+                            </div>
+                        </li>
+                        <li class="shortcut-item">
+                            <span class="shortcut-description">Switch tabs</span>
+                            <div class="shortcut-keys">
+                                <span class="key">Ctrl+Tab</span>
+                                <span class="key mac">Cmd+Tab</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tutorials Section -->
+    <section id="tutorials" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Quick Tutorials</h2>
+                <p class="section-subtitle">
+                    Learn how to use Cursor AI effectively with these practical examples
+                </p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-comment-dots"></i>
+                    </div>
+                    <h3>Chat with AI</h3>
+                    <p>Press Ctrl+K and ask questions like "How do I create a React component?" or "Explain this function" to get instant help.</p>
+                    <div class="callout tip">
+                        <h4>Pro Tip</h4>
+                        <p>Be specific in your questions for better results.</p>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-magic"></i>
+                    </div>
+                    <h3>Generate Code</h3>
+                    <p>Use Ctrl+L to generate code from descriptions like "Create a function to validate email addresses" or "Build a todo list component".</p>
+                    <div class="callout warning">
+                        <h4>Remember</h4>
+                        <p>Always review generated code before using it in production.</p>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-edit"></i>
+                    </div>
+                    <h3>Edit with AI</h3>
+                    <p>Select code and press Ctrl+J to ask AI to "Add error handling", "Optimize this function", or "Convert to TypeScript".</p>
+                    <div class="callout info">
+                        <h4>Note</h4>
+                        <p>The AI understands your project context for better suggestions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Models Section -->
+    <section id="models" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">AI Model Selection (Pro)</h2>
+                <p class="section-subtitle">
+                    Choose the right AI model for different tasks to optimize performance and results
+                </p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Claude 3 Opus</h3>
+                    <p><strong>Best For:</strong> Complex tasks, architecture design, security auditing</p>
+                    <p><strong>Speed:</strong> Slow but most capable</p>
+                    <div class="callout info">
+                        <h4>Use When</h4>
+                        <p>Designing system architecture, complex refactoring, security reviews</p>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3>Claude 3 Sonnet</h3>
+                    <p><strong>Best For:</strong> General coding, bug fixing, documentation</p>
+                    <p><strong>Speed:</strong> Medium - balanced performance</p>
+                    <div class="callout tip">
+                        <h4>Recommended</h4>
+                        <p>Great for daily development tasks and code generation</p>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Claude 3 Haiku</h3>
+                    <p><strong>Best For:</strong> Simple tasks, quick explanations, formatting</p>
+                    <p><strong>Speed:</strong> Fast - instant responses</p>
+                    <div class="callout tip">
+                        <h4>Use When</h4>
+                        <p>Quick code formatting, simple explanations, rapid prototyping</p>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>GPT-4o</h3>
+                    <p><strong>Best For:</strong> Creative code generation, complex instructions</p>
+                    <p><strong>Speed:</strong> Medium - good balance</p>
+                    <div class="callout info">
+                        <h4>Use When</h4>
+                        <p>Creative solutions, innovative approaches, complex prompts</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Best Practices Section -->
+    <section id="best-practices" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Best Practices</h2>
+                <p class="section-subtitle">
+                    Follow these guidelines to get the most out of Cursor AI
+                </p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h3>Be Specific</h3>
+                    <p>Instead of "fix this bug," say "this function returns undefined when the input array is empty, please add proper validation."</p>
+                    <div class="callout tip">
+                        <h4>Example</h4>
+                        <p>"Add TypeScript types to this function and handle the case where user might be null"</p>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-info-circle"></i>
+                    </div>
+                    <h3>Provide Context</h3>
+                    <p>Mention the programming language, framework, and any relevant constraints or requirements.</p>
+                    <div class="callout info">
+                        <h4>Context Matters</h4>
+                        <p>"In this React TypeScript project, create a reusable button component with variants"</p>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <h3>Ask for Explanations</h3>
+                    <p>Request explanations of concepts, not just code solutions. Understanding is key to learning.</p>
+                    <div class="callout tip">
+                        <h4>Learning Approach</h4>
+                        <p>"Explain why this pattern is used and what alternatives exist"</p>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-refresh"></i>
+                    </div>
+                    <h3>Iterate and Refine</h3>
+                    <p>Build on previous responses. The AI remembers your conversation context.</p>
+                    <div class="callout info">
+                        <h4>Conversation Flow</h4>
+                        <p>Ask follow-up questions like "Can you optimize this further?" or "Add error handling"</p>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Review Generated Code</h3>
+                    <p>Always review, test, and understand the code before using it in production.</p>
+                    <div class="callout warning">
+                        <h4>Security First</h4>
+                        <p>Check for security vulnerabilities, especially in authentication and data handling code</p>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Use AI as a Learning Tool</h3>
+                    <p>Ask "why" questions, request explanations, and compare different approaches.</p>
+                    <div class="callout tip">
+                        <h4>Learning Questions</h4>
+                        <p>"What are the trade-offs between these two approaches?" or "Explain this design pattern"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Advanced Features Section -->
+    <section id="advanced" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Advanced Features</h2>
+                <p class="section-subtitle">
+                    Explore powerful features for experienced developers
+                </p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <h3>Project-Wide Understanding</h3>
+                    <p>The AI understands your entire codebase, including file relationships, dependencies, and architecture patterns.</p>
+                    <div class="callout info">
+                        <h4>Cross-File References</h4>
+                        <p>Ask about relationships between files: "How does this component interact with the user service?"</p>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-code-branch"></i>
+                    </div>
+                    <h3>Legacy Code Modernization</h3>
+                    <p>Convert old code to modern patterns and frameworks with AI assistance.</p>
+                    <div class="code-block">
+// Example: Convert jQuery to modern JS
+// Before: $("#button").click(function() { ... })
+// After: document.querySelector("#button").addEventListener("click", () => { ... })</div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Security Audits</h3>
+                    <p>Review authentication systems, API endpoints, and data handling for vulnerabilities.</p>
+                    <div class="callout warning">
+                        <h4>Security Review</h4>
+                        <p>"Review this authentication system for common vulnerabilities"</p>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <h3>Performance Profiling</h3>
+                    <p>Analyze functions for performance bottlenecks and optimization opportunities.</p>
+                    <div class="callout tip">
+                        <h4>Performance Analysis</h4>
+                        <p>"Analyze this function for performance bottlenecks and suggest optimizations"</p>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-sitemap"></i>
+                    </div>
+                    <h3>Architecture Review</h3>
+                    <p>Get suggestions for architectural improvements based on your project structure.</p>
+                    <div class="callout info">
+                        <h4>Architecture Help</h4>
+                        <p>"Suggest architectural improvements for this module"</p>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3>Database Optimization</h3>
+                    <p>Optimize SQL queries, create indexes, and improve database performance.</p>
+                    <div class="callout tip">
+                        <h4>Query Optimization</h4>
+                        <p>"Optimize this SQL query for better performance"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources Section -->
+    <section id="resources" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Resources & Community</h2>
+                <p class="section-subtitle">
+                    Connect with the community and access additional resources
+                </p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3>Official Documentation</h3>
+                    <p>Comprehensive guides, API references, and tutorials from the Cursor AI team.</p>
+                    <div class="cta-buttons">
+                        <a href="https://docs.cursor.sh/" target="_blank" class="btn btn-primary">
+                            <i class="fas fa-external-link-alt"></i>
+                            View Documentation
+                        </a>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fab fa-discord"></i>
+                    </div>
+                    <h3>Discord Community</h3>
+                    <p>Join thousands of developers in the official Cursor AI Discord server.</p>
+                    <div class="cta-buttons">
+                        <a href="https://discord.gg/cursor" target="_blank" class="btn btn-primary">
+                            <i class="fas fa-users"></i>
+                            Join Discord
+                        </a>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fab fa-github"></i>
+                    </div>
+                    <h3>GitHub Repository</h3>
+                    <p>Access the source code, report issues, and contribute to the project.</p>
+                    <div class="cta-buttons">
+                        <a href="https://github.com/getcursor/cursor" target="_blank" class="btn btn-primary">
+                            <i class="fab fa-github"></i>
+                            View on GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h3>Video Tutorials</h3>
+                    <p>Watch step-by-step tutorials and advanced usage examples.</p>
+                    <div class="callout info">
+                        <h4>YouTube Channel</h4>
+                        <p>Subscribe to the official Cursor AI YouTube channel for video content</p>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-blog"></i>
+                    </div>
+                    <h3>Blog & Updates</h3>
+                    <p>Stay updated with the latest features, tips, and community highlights.</p>
+                    <div class="cta-buttons">
+                        <a href="https://cursor.sh/blog" target="_blank" class="btn btn-primary">
+                            <i class="fas fa-rss"></i>
+                            Read Blog
+                        </a>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-life-ring"></i>
+                    </div>
+                    <h3>Support & Help</h3>
+                    <p>Get help from the community or contact the Cursor AI support team.</p>
+                    <div class="cta-buttons">
+                        <a href="mailto:support@cursor.sh" class="btn btn-primary">
+                            <i class="fas fa-envelope"></i>
+                            Contact Support
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
-                <h3>Master Cursor AI</h3>
-                <p>You've now learned the essential techniques for using Cursor AI effectively. Remember that expertise comes with practice and continuous exploration.</p>
-                <p class="text-muted">Start integrating these techniques into your daily workflow and discover new capabilities that enhance your development process.</p>
-                <p class="text-muted">Created by Professional Developers | Updated 2024</p>
+                <h3>Cursor AI Guide</h3>
+                <p>Your comprehensive resource for mastering Cursor AI - the intelligent code editor that transforms your development workflow.</p>
                 <p>Visit <a href="https://cursor.sh/" target="_blank">cursor.sh</a> for the latest updates and downloads</p>
+                <p>&copy; 2024 Cursor AI Guide. Created by Professional Developers. All rights reserved.</p>
             </div>
         </div>
     </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in-up');
+                }
+            });
+        });
+
+        document.querySelectorAll('.feature-card, .step-card, .shortcut-category').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Highlight active navigation link on scroll
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
 </body>
-</html>
+</html> 
