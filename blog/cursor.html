@@ -1,44 +1,38 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cursor AI Complete Guide - Enhanced</title>
-    <meta name="description" content="Complete guide to Cursor AI - Installation, features, shortcuts, and tutorials">
+    <title>Cursor AI Developer Guide</title>
+    <meta name="description" content="Professional guide to Cursor AI - the intelligent code editor">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #667eea;
-            --primary-dark: #5a67d8;
-            --primary-light: #a5b4fc;
-            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --secondary: #f093fb;
-            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            --accent: #4facfe;
-            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            --success: #43e97b;
-            --success-gradient: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-            --warning: #fa709a;
-            --warning-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-            --text-primary: #2d3748;
-            --text-secondary: #4a5568;
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #64748b;
+            --accent: #f59e0b;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #64748b;
             --bg-primary: #ffffff;
-            --bg-secondary: #f7fafc;
-            --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --bg-secondary: #f8fafc;
+            --bg-tertiary: #f1f5f9;
             --border: #e2e8f0;
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-            --shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            --radius: 0.5rem;
-            --radius-lg: 1rem;
-            --radius-xl: 1.5rem;
-            --space-md: 1rem;
-            --space-lg: 1.5rem;
-            --space-xl: 2rem;
-            --space-2xl: 3rem;
+            --border-light: #f1f5f9;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --radius: 0.375rem;
+            --radius-lg: 0.5rem;
+            --radius-xl: 0.75rem;
         }
 
         * {
@@ -48,520 +42,467 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
             line-height: 1.6;
             color: var(--text-primary);
             background: var(--bg-primary);
-            overflow-x: hidden;
+            font-size: 16px;
+            font-weight: 400;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         .container {
             max-width: 1280px;
             margin: 0 auto;
-            padding: 0 var(--space-md);
+            padding: 0 1rem;
         }
 
-        /* Enhanced Navigation */
-        .nav {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: var(--shadow);
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: var(--space-md) 0;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            text-decoration: none;
-            color: var(--text-primary);
-            font-weight: 800;
-            font-size: 1.75rem;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .logo-icon {
-            width: 50px;
-            height: 50px;
-            background: var(--primary-gradient);
-            border-radius: var(--radius-lg);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.5rem;
-            box-shadow: var(--shadow-lg);
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: var(--space-xl);
-        }
-
-        .nav-link {
-            text-decoration: none;
-            color: var(--text-secondary);
-            font-weight: 600;
-            padding: 0.75rem var(--space-md);
-            border-radius: var(--radius);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .nav-link::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: var(--primary-gradient);
-            transition: left 0.3s ease;
-            z-index: -1;
-        }
-
-        .nav-link:hover::before {
-            left: 0;
-        }
-
-        .nav-link:hover {
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        /* Enhanced Hero Section */
-        .hero {
-            background: var(--primary-gradient);
-            color: white;
-            padding: var(--space-2xl) 0;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
-            opacity: 0.3;
-        }
-
-        .hero::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 100%;
-            height: 100%;
-            background: var(--secondary-gradient);
-            border-radius: 50%;
-            opacity: 0.1;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(180deg); }
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero h1 {
-            font-size: 4rem;
-            font-weight: 900;
-            margin-bottom: var(--space-lg);
-            background: linear-gradient(135deg, #ffffff 0%, #e0e7ff 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-family: 'Poppins', sans-serif;
-            animation: slideInUp 1s ease-out;
-        }
-
-        @keyframes slideInUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .hero .subtitle {
-            font-size: 1.5rem;
-            margin-bottom: var(--space-xl);
-            opacity: 0.9;
-            font-weight: 500;
-            animation: slideInUp 1s ease-out 0.2s both;
-        }
-
-        .hero .description {
-            max-width: 700px;
-            margin: 0 auto var(--space-2xl);
-            font-size: 1.25rem;
-            opacity: 0.8;
-            line-height: 1.8;
-            animation: slideInUp 1s ease-out 0.4s both;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: var(--space-md);
-            justify-content: center;
-            flex-wrap: wrap;
-            animation: slideInUp 1s ease-out 0.6s both;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: var(--space-md) var(--space-xl);
-            border-radius: var(--radius-lg);
-            text-decoration: none;
-            font-weight: 700;
-            transition: all 0.3s ease;
-            font-size: 1.1rem;
-            position: relative;
-            overflow: hidden;
-            box-shadow: var(--shadow-lg);
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .btn:hover::before {
-            left: 100%;
-        }
-
-        .btn-primary {
-            background: white;
-            color: var(--primary);
-            transform: translateY(0);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-xl);
-        }
-
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(10px);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.2);
-            border-color: rgba(255, 255, 255, 0.5);
-            transform: translateY(-5px);
-        }
-
-        /* Enhanced Section Styles */
-        .section {
-            padding: var(--space-2xl) 0;
-            position: relative;
-        }
-
-        .section:nth-child(even) {
-            background: var(--bg-secondary);
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: var(--space-2xl);
-        }
-
-        .section-title {
-            font-size: 3rem;
-            font-weight: 800;
-            color: var(--text-primary);
-            margin-bottom: var(--space-md);
-            font-family: 'Poppins', sans-serif;
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .section-subtitle {
-            font-size: 1.25rem;
-            color: var(--text-secondary);
-            max-width: 700px;
-            margin: 0 auto;
-            line-height: 1.8;
-        }
-
-        /* Enhanced Features Grid */
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: var(--space-xl);
-            margin-bottom: var(--space-2xl);
-        }
-
-        .feature-card {
+        /* Header */
+        .header {
             background: var(--bg-primary);
-            border-radius: var(--radius-xl);
-            padding: var(--space-xl);
-            box-shadow: var(--shadow);
-            transition: all 0.4s ease;
-            border: 1px solid var(--border);
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
+            border-bottom: 1px solid var(--border);
+            padding: 1.5rem 0;
+            margin-bottom: 2rem;
         }
 
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 5px;
-            background: var(--primary-gradient);
-        }
-
-        .feature-card::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: var(--primary-gradient);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: -1;
-        }
-
-        .feature-card:hover::after {
-            opacity: 0.05;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: var(--shadow-xl);
-        }
-
-        .feature-icon {
-            width: 80px;
-            height: 80px;
-            background: var(--primary-gradient);
-            border-radius: var(--radius-lg);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 2rem;
-            margin-bottom: var(--space-lg);
-            box-shadow: var(--shadow-lg);
-            transition: all 0.3s ease;
-        }
-
-        .feature-card:hover .feature-icon {
-            transform: rotate(360deg) scale(1.1);
-        }
-
-        .feature-card h3 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: var(--space-md);
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .feature-card p {
-            color: var(--text-secondary);
-            line-height: 1.7;
-            font-size: 1.1rem;
-        }
-
-        /* Enhanced Stats Section */
-        .stats {
-            background: var(--primary-gradient);
-            color: white;
-            padding: var(--space-2xl) 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .stats::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="20" cy="20" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="80" r="1" fill="rgba(255,255,255,0.1)"/></svg>');
-            animation: float 10s ease-in-out infinite;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: var(--space-xl);
+        .header-content {
             text-align: center;
-            position: relative;
-            z-index: 2;
         }
 
-        .stat-item {
-            padding: var(--space-xl);
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: var(--radius-lg);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .stat-item:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .stat-number {
-            font-size: 3.5rem;
-            font-weight: 900;
-            margin-bottom: var(--space-sm);
-            background: linear-gradient(135deg, #ffffff 0%, #e0e7ff 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .stat-label {
-            font-size: 1.25rem;
-            opacity: 0.9;
-            font-weight: 600;
-        }
-
-        /* Enhanced Code Blocks */
-        .code-block {
-            background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
-            color: #e2e8f0;
-            padding: var(--space-xl);
-            border-radius: var(--radius-lg);
-            font-family: 'SF Mono', 'Monaco', monospace;
-            font-size: 0.95rem;
-            overflow-x: auto;
-            margin: var(--space-lg) 0;
-            line-height: 1.6;
-            box-shadow: var(--shadow-xl);
-            border: 1px solid #4a5568;
-            position: relative;
-        }
-
-        .code-block::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--accent-gradient);
-            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-        }
-
-        /* Enhanced Callouts */
-        .callout {
-            padding: var(--space-lg);
-            margin: var(--space-lg) 0;
-            border-radius: var(--radius-lg);
-            border-left: 5px solid;
-            background: var(--bg-secondary);
-            box-shadow: var(--shadow);
-            transition: all 0.3s ease;
-        }
-
-        .callout:hover {
-            transform: translateX(5px);
-        }
-
-        .tip {
-            border-left-color: var(--success);
-            background: linear-gradient(135deg, #f0fff4 0%, #e6fffa 100%);
-        }
-
-        .warning {
-            border-left-color: var(--warning);
-            background: linear-gradient(135deg, #fffaf0 0%, #fef5e7 100%);
-        }
-
-        .info {
-            border-left-color: var(--accent);
-            background: linear-gradient(135deg, #ebf8ff 0%, #e6fffa 100%);
-        }
-
-        .callout h4 {
-            font-size: 1.1rem;
+        .header h1 {
+            font-size: 2.25rem;
             font-weight: 700;
-            margin-bottom: var(--space-sm);
             color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.025em;
         }
 
-        .callout p {
+        .header .subtitle {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .header .intro {
+            max-width: 600px;
+            margin: 0 auto;
             color: var(--text-secondary);
             font-size: 1rem;
             line-height: 1.6;
         }
 
-        /* Enhanced Footer */
-        .footer {
-            background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
-            color: white;
-            padding: var(--space-2xl) 0;
-            position: relative;
+        /* Navigation */
+        .nav {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
         }
 
-        .footer::before {
-            content: '';
+        .nav h2 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 0.75rem;
+        }
+
+        .nav-item {
+            display: block;
+            padding: 0.75rem 1rem;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.875rem;
+            transition: all 0.15s ease;
+        }
+
+        .nav-item:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Main Layout */
+        .main {
+            display: grid;
+            grid-template-columns: 280px 1fr 280px;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .sidebar-left {
+            background: var(--bg-primary);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            height: fit-content;
+            position: sticky;
+            top: 1rem;
+        }
+
+        .content {
+            background: var(--bg-primary);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .sidebar-right {
+            background: var(--bg-primary);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            height: fit-content;
+            position: sticky;
+            top: 1rem;
+        }
+
+        /* Typography */
+        h2 {
+            font-size: 1.875rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: 2rem 0 1rem 0;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        h2:first-child {
+            margin-top: 0;
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 1.5rem 0 0.75rem 0;
+        }
+
+        h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 1rem 0 0.5rem 0;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.25rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .card h3 {
+            margin-top: 0;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+        }
+
+        /* Grid Layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.25rem;
+            margin: 1.25rem 0;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.25rem;
+            margin: 1.25rem 0;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.25rem 0;
+        }
+
+        /* Feature Cards */
+        .feature-card {
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.25rem;
+            transition: all 0.15s ease;
+        }
+
+        .feature-card:hover {
+            border-color: var(--primary);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-1px);
+        }
+
+        .feature-card h4 {
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .feature-card p {
+            margin: 0;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Shortcuts */
+        .shortcut-group {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.25rem;
+            margin: 1.25rem 0;
+        }
+
+        .shortcut {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .shortcut:last-child {
+            border-bottom: none;
+        }
+
+        .shortcut-desc {
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: 0.875rem;
+        }
+
+        .shortcut-key {
+            background: var(--text-primary);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Consolas', monospace;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+
+        .mac-key {
+            background: #007AFF;
+        }
+
+        /* Lists */
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            padding: 0.375rem 0;
+            padding-left: 1.25rem;
+            position: relative;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .feature-list li::before {
+            content: '→';
             position: absolute;
-            top: 0;
             left: 0;
-            right: 0;
-            height: 1px;
-            background: var(--primary-gradient);
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        /* Callouts */
+        .callout {
+            padding: 1.25rem;
+            margin: 1.25rem 0;
+            border-radius: var(--radius);
+            border-left: 4px solid;
+            background: var(--bg-secondary);
+        }
+
+        .tip {
+            border-left-color: var(--success);
+            background: #f0fdf4;
+        }
+
+        .warning {
+            border-left-color: var(--warning);
+            background: #fffbeb;
+        }
+
+        .info {
+            border-left-color: var(--primary);
+            background: #eff6ff;
+        }
+
+        .important {
+            border-left-color: var(--error);
+            background: #fef2f2;
+        }
+
+        /* Code Blocks */
+        .code-block {
+            background: var(--text-primary);
+            color: #e2e8f0;
+            padding: 1.25rem;
+            border-radius: var(--radius);
+            font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Consolas', monospace;
+            font-size: 0.875rem;
+            overflow-x: auto;
+            margin: 1.25rem 0;
+            line-height: 1.5;
+        }
+
+        /* Tables */
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.25rem 0;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+        }
+
+        .table th,
+        .table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .table th {
+            background: var(--bg-secondary);
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.875rem;
+        }
+
+        .table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .table code {
+            background: var(--bg-secondary);
+            padding: 0.125rem 0.25rem;
+            border-radius: 0.25rem;
+            font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Consolas', monospace;
+            font-size: 0.75rem;
+            color: var(--error);
+        }
+
+        /* Workflow */
+        .workflow {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1.5rem 0;
+            padding: 1.5rem;
+            background: var(--bg-secondary);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+        }
+
+        .workflow-step {
+            flex: 1;
+            text-align: center;
+            padding: 1.25rem;
+            background: var(--bg-primary);
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+        }
+
+        .workflow-step h4 {
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .workflow-step p {
+            margin: 0;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .workflow-arrow {
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 1.125rem;
+        }
+
+        /* Sidebar */
+        .sidebar-left h3,
+        .sidebar-right h3 {
+            margin-top: 0;
+            margin-bottom: 0.75rem;
+            font-size: 0.875rem;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+        }
+
+        .sidebar-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .sidebar-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .sidebar-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar-list li {
+            padding: 0.375rem 0;
+            border-bottom: 1px solid var(--border-light);
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .sidebar-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            padding: 2rem 0;
+            margin-top: 3rem;
         }
 
         .footer-content {
@@ -569,292 +510,691 @@
         }
 
         .footer h3 {
-            margin-bottom: var(--space-lg);
-            font-size: 1.5rem;
-            font-weight: 700;
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+            font-size: 1.125rem;
         }
 
         .footer p {
-            color: #a0aec0;
+            color: var(--text-secondary);
             margin-bottom: 0.5rem;
-            font-size: 1rem;
-            line-height: 1.7;
+            font-size: 0.875rem;
         }
 
         .footer a {
-            color: var(--primary-light);
+            color: var(--primary);
             text-decoration: none;
-            transition: color 0.3s ease;
+            font-weight: 500;
         }
 
         .footer a:hover {
-            color: white;
+            text-decoration: underline;
         }
 
-        /* Responsive Design */
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .main {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .sidebar-left,
+            .sidebar-right {
+                position: static;
+                order: 2;
+            }
+
+            .content {
+                order: 1;
+            }
+        }
+
         @media (max-width: 768px) {
-            .nav-menu {
-                display: none;
+            .container {
+                padding: 0 0.75rem;
             }
 
-            .hero h1 {
-                font-size: 2.5rem;
+            .header h1 {
+                font-size: 1.875rem;
             }
 
-            .section-title {
-                font-size: 2rem;
+            .content {
+                padding: 1.5rem;
             }
 
-            .features-grid {
+            .nav {
+                padding: 1.25rem;
+            }
+
+            .nav-grid {
                 grid-template-columns: 1fr;
             }
 
-            .cta-buttons {
+            .grid-2,
+            .grid-3,
+            .grid-4 {
+                grid-template-columns: 1fr;
+            }
+
+            .workflow {
                 flex-direction: column;
-                align-items: center;
+                gap: 0.75rem;
             }
 
-            .btn {
-                width: 100%;
-                max-width: 300px;
-                justify-content: center;
+            .workflow-arrow {
+                transform: rotate(90deg);
             }
         }
 
-        /* Scroll Animations */
-        .animate-on-scroll {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease;
-        }
-
-        .animate-on-scroll.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Floating Elements */
-        .floating {
-            animation: floating 3s ease-in-out infinite;
-        }
-
-        @keyframes floating {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
+        /* Utility Classes */
+        .text-center { text-align: center; }
+        .text-muted { color: var(--text-muted); }
+        .font-mono { font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Consolas', monospace; }
+        .font-sm { font-size: 0.875rem; }
+        .font-xs { font-size: 0.75rem; }
+        .mb-0 { margin-bottom: 0; }
+        .mt-0 { margin-top: 0; }
     </style>
 </head>
 <body>
-    <!-- Enhanced Navigation -->
-    <nav class="nav">
+    <header class="header">
         <div class="container">
-            <div class="nav-container">
-                <a href="#" class="logo">
-                    <div class="logo-icon">
-                        <i class="fas fa-code"></i>
-                    </div>
-                    <span>Cursor AI Guide</span>
-                </a>
-                
-                <ul class="nav-menu">
-                    <li><a href="#home" class="nav-link">Home</a></li>
-                    <li><a href="#getting-started" class="nav-link">Getting Started</a></li>
-                    <li><a href="#features" class="nav-link">Features</a></li>
-                    <li><a href="#shortcuts" class="nav-link">Shortcuts</a></li>
-                    <li><a href="#tutorials" class="nav-link">Tutorials</a></li>
-                    <li><a href="#models" class="nav-link">AI Models</a></li>
-                    <li><a href="#best-practices" class="nav-link">Best Practices</a></li>
-                    <li><a href="#advanced" class="nav-link">Advanced</a></li>
-                    <li><a href="#resources" class="nav-link">Resources</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Enhanced Hero Section -->
-    <section id="home" class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1 class="animate-on-scroll">Master Cursor AI</h1>
-                <p class="subtitle animate-on-scroll">The Intelligent Code Editor That Understands Your Project</p>
-                <p class="description animate-on-scroll">
-                    Transform your development workflow with Cursor AI - the code editor that combines VS Code's power with advanced AI capabilities. 
-                    Generate code, debug issues, and learn faster with context-aware assistance.
-                </p>
-                <div class="cta-buttons animate-on-scroll">
-                    <a href="#getting-started" class="btn btn-primary">
-                        <i class="fas fa-rocket"></i>
-                        Get Started
-                    </a>
-                    <a href="#features" class="btn btn-secondary">
-                        <i class="fas fa-play"></i>
-                        Explore Features
-                    </a>
+            <div class="header-content">
+                <h1>Cursor AI Developer Guide</h1>
+                <div class="subtitle">Master the intelligent code editor</div>
+                <div class="intro">
+                    A comprehensive guide to Cursor AI, the code editor that combines VS Code's power with advanced AI capabilities. Learn shortcuts, workflows, and professional techniques.
                 </div>
             </div>
         </div>
-    </section>
+    </header>
 
-    <!-- Enhanced Features Section -->
-    <section id="features" class="section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Why Choose Cursor AI?</h2>
-                <p class="section-subtitle">
-                    Experience the future of coding with AI-powered features that understand your project context
-                </p>
+    <div class="container">
+        <nav class="nav">
+            <h2>Quick Navigation</h2>
+            <div class="nav-grid">
+                <a href="#basics" class="nav-item">Getting Started</a>
+                <a href="#shortcuts" class="nav-item">Keyboard Shortcuts</a>
+                <a href="#chat" class="nav-item">Chat Interface</a>
+                <a href="#generation" class="nav-item">Code Generation</a>
+                <a href="#editing" class="nav-item">AI Editing</a>
+                <a href="#debugging" class="nav-item">Debugging</a>
+                <a href="#models" class="nav-item">AI Models</a>
+                <a href="#frontend" class="nav-item">Frontend</a>
+                <a href="#backend" class="nav-item">Backend</a>
+                <a href="#documentation" class="nav-item">Documentation</a>
+                <a href="#best-practices" class="nav-item">Best Practices</a>
+                <a href="#advanced" class="nav-item">Advanced Features</a>
             </div>
-            
-            <div class="features-grid">
-                <div class="feature-card animate-on-scroll">
-                    <div class="feature-icon">
-                        <i class="fas fa-brain"></i>
-                    </div>
-                    <h3>Intelligent Code Generation</h3>
-                    <p>Generate code, refactor existing code, and get intelligent suggestions based on your project context and coding patterns.</p>
+        </nav>
+
+        <div class="main">
+            <aside class="sidebar-left">
+                <div class="sidebar-section">
+                    <h3>Quick Reference</h3>
+                    <ul class="sidebar-list">
+                        <li><strong>Chat:</strong> Ctrl+K / Cmd+K</li>
+                        <li><strong>Generate:</strong> Ctrl+L / Cmd+L</li>
+                        <li><strong>Edit:</strong> Ctrl+J / Cmd+J</li>
+                        <li><strong>Explain:</strong> Ctrl+I / Cmd+I</li>
+                        <li><strong>Quick Open:</strong> Ctrl+P / Cmd+P</li>
+                        <li><strong>Command Palette:</strong> Ctrl+Shift+P</li>
+                    </ul>
                 </div>
-                
-                <div class="feature-card animate-on-scroll">
-                    <div class="feature-icon">
-                        <i class="fas fa-comments"></i>
-                    </div>
-                    <h3>Natural Language Interface</h3>
-                    <p>Ask questions in plain English and get code explanations, debugging help, and implementation guidance instantly.</p>
+
+                <div class="sidebar-section">
+                    <h3>Common Prompts</h3>
+                    <ul class="sidebar-list">
+                        <li>"Explain this code"</li>
+                        <li>"Optimize this function"</li>
+                        <li>"Add error handling"</li>
+                        <li>"Write tests for this"</li>
+                        <li>"Refactor this code"</li>
+                        <li>"Fix this bug"</li>
+                    </ul>
                 </div>
-                
-                <div class="feature-card animate-on-scroll">
-                    <div class="feature-icon">
-                        <i class="fas fa-project-diagram"></i>
-                    </div>
-                    <h3>Project-Aware Intelligence</h3>
-                    <p>The AI understands your entire codebase, including file structure, dependencies, and your team's coding conventions.</p>
+
+                <div class="sidebar-section">
+                    <h3>Best Practices</h3>
+                    <ul class="sidebar-list">
+                        <li>Be specific in your prompts</li>
+                        <li>Provide context and requirements</li>
+                        <li>Ask for explanations, not just code</li>
+                        <li>Review generated code thoroughly</li>
+                        <li>Test everything before production</li>
+                        <li>Use AI as a learning tool</li>
+                    </ul>
                 </div>
-                
-                <div class="feature-card animate-on-scroll">
-                    <div class="feature-icon">
-                        <i class="fas fa-puzzle-piece"></i>
+            </aside>
+
+            <main class="content">
+                <section id="basics">
+                    <h2>Getting Started</h2>
+                    
+                    <p>Cursor AI is an intelligent code editor built on VS Code with advanced AI capabilities. It understands your entire codebase and provides context-aware assistance.</p>
+
+                    <div class="grid-2">
+                        <div class="feature-card">
+                            <h4>Intelligent Code Generation</h4>
+                            <p>Generate code, refactor existing code, and get intelligent suggestions based on your project context.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4>Natural Language Interface</h4>
+                            <p>Ask questions in plain English and get code explanations, debugging help, and implementation guidance.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4>Project-Aware Intelligence</h4>
+                            <p>The AI understands your entire codebase, including file structure, dependencies, and coding conventions.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4>Seamless Integration</h4>
+                            <p>Works with your existing VS Code extensions, Git workflow, and development environment.</p>
+                        </div>
                     </div>
-                    <h3>Seamless Integration</h3>
-                    <p>Works perfectly with your existing VS Code extensions, Git workflow, and development environment without disruption.</p>
-                </div>
-                
-                <div class="feature-card animate-on-scroll">
-                    <div class="feature-icon">
-                        <i class="fas fa-bug"></i>
+
+                    <div class="card">
+                        <h3>Installation</h3>
+                        <ol class="feature-list">
+                            <li>Visit <a href="https://cursor.sh/" target="_blank">cursor.sh</a></li>
+                            <li>Download for your operating system</li>
+                            <li>Install and launch Cursor</li>
+                            <li>Sign in with GitHub or Google</li>
+                        </ol>
                     </div>
-                    <h3>Advanced Debugging</h3>
-                    <p>Get intelligent debugging assistance, error explanations, and optimization suggestions for better code quality.</p>
-                </div>
-                
-                <div class="feature-card animate-on-scroll">
-                    <div class="feature-icon">
-                        <i class="fas fa-graduation-cap"></i>
+                </section>
+
+                <section id="shortcuts">
+                    <h2>Essential Keyboard Shortcuts</h2>
+                    
+                    <div class="shortcut-group">
+                        <h3>AI Commands</h3>
+                        <div class="shortcut">
+                            <span class="shortcut-desc">Chat with AI</span>
+                            <div>
+                                <span class="shortcut-key">Ctrl+K</span>
+                                <span class="shortcut-key mac-key">Cmd+K</span>
+                            </div>
+                        </div>
+                        <div class="shortcut">
+                            <span class="shortcut-desc">Generate code</span>
+                            <div>
+                                <span class="shortcut-key">Ctrl+L</span>
+                                <span class="shortcut-key mac-key">Cmd+L</span>
+                            </div>
+                        </div>
+                        <div class="shortcut">
+                            <span class="shortcut-desc">Edit with AI</span>
+                            <div>
+                                <span class="shortcut-key">Ctrl+J</span>
+                                <span class="shortcut-key mac-key">Cmd+J</span>
+                            </div>
+                        </div>
+                        <div class="shortcut">
+                            <span class="shortcut-desc">Explain code</span>
+                            <div>
+                                <span class="shortcut-key">Ctrl+I</span>
+                                <span class="shortcut-key mac-key">Cmd+I</span>
+                            </div>
+                        </div>
                     </div>
-                    <h3>Learning & Documentation</h3>
-                    <p>Generate comprehensive documentation, learn new technologies, and understand complex codebases with AI assistance.</p>
+
+                    <div class="shortcut-group">
+                        <h3>Editor Shortcuts</h3>
+                        <div class="shortcut">
+                            <span class="shortcut-desc">Quick open file</span>
+                            <div>
+                                <span class="shortcut-key">Ctrl+P</span>
+                                <span class="shortcut-key mac-key">Cmd+P</span>
+                            </div>
+                        </div>
+                        <div class="shortcut">
+                            <span class="shortcut-desc">Go to symbol</span>
+                            <div>
+                                <span class="shortcut-key">Ctrl+Shift+O</span>
+                                <span class="shortcut-key mac-key">Cmd+Shift+O</span>
+                            </div>
+                        </div>
+                        <div class="shortcut">
+                            <span class="shortcut-desc">Toggle comment</span>
+                            <div>
+                                <span class="shortcut-key">Ctrl+/</span>
+                                <span class="shortcut-key mac-key">Cmd+/</span>
+                            </div>
+                        </div>
+                        <div class="shortcut">
+                            <span class="shortcut-desc">Command palette</span>
+                            <div>
+                                <span class="shortcut-key">Ctrl+Shift+P</span>
+                                <span class="shortcut-key mac-key">Cmd+Shift+P</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="chat">
+                    <h2>Chat Interface</h2>
+                    
+                    <p>The chat interface is your primary way to interact with Cursor AI. It understands your project context and provides intelligent assistance.</p>
+
+                    <div class="grid-2">
+                        <div class="feature-card">
+                            <h4>Be Specific</h4>
+                            <p>Instead of "help with this code," try "explain why this function returns undefined when called with an empty array."</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4>Provide Context</h4>
+                            <p>Mention the programming language, framework, and what you're trying to achieve.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4>Ask for Explanations</h4>
+                            <p>Request explanations of concepts, not just code solutions. Understanding is key.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4>Iterate</h4>
+                            <p>Build on previous responses. The AI remembers your conversation context.</p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>Effective Prompts</h3>
+                        <ul class="feature-list">
+                            <li>"How can I optimize this code?"</li>
+                            <li>"Explain what this function does"</li>
+                            <li>"How do I fix this error?"</li>
+                            <li>"What's the best way to implement X?"</li>
+                            <li>"Can you suggest a better approach for this?"</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section id="generation">
+                    <h2>Code Generation</h2>
+                    
+                    <p>Cursor AI can generate code from scratch based on your requirements. Follow this workflow for best results:</p>
+
+                    <div class="workflow">
+                        <div class="workflow-step">
+                            <h4>Describe Requirements</h4>
+                            <p>Tell the AI what functionality you want to implement</p>
+                        </div>
+                        <div class="workflow-arrow">→</div>
+                        <div class="workflow-step">
+                            <h4>Review & Refine</h4>
+                            <p>Check the generated code and ask for modifications if needed</p>
+                        </div>
+                        <div class="workflow-arrow">→</div>
+                        <div class="workflow-step">
+                            <h4>Test & Integrate</h4>
+                            <p>Add the code to your project and test it thoroughly</p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>Generation Examples</h3>
+                        <ul class="feature-list">
+                            <li>"Generate a React component for a login form"</li>
+                            <li>"Write a function to parse CSV data"</li>
+                            <li>"Create an API endpoint for user authentication using Express"</li>
+                            <li>"Write a unit test for this function"</li>
+                            <li>"Implement a binary search tree in Python"</li>
+                        </ul>
+                    </div>
+
+                    <div class="warning callout">
+                        <strong>Always Review Generated Code:</strong> While Cursor AI is incredibly capable, always review, test, and understand the code it generates before using it in production.
+                    </div>
+                </section>
+
+                <section id="editing">
+                    <h2>AI Code Editing</h2>
+                    
+                    <p>Cursor AI excels at modifying and improving existing code. Here's how to leverage this powerful feature:</p>
+
+                    <div class="card">
+                        <h3>Edit with AI Steps</h3>
+                        <ol class="feature-list">
+                            <li>Select the code you want to modify</li>
+                            <li>Press <span class="shortcut-key">Ctrl+J</span> (macOS: <span class="shortcut-key mac-key">Cmd+J</span>)</li>
+                            <li>Describe your changes in natural language</li>
+                            <li>Review the AI's suggested changes</li>
+                            <li>Accept or reject the changes</li>
+                        </ol>
+                    </div>
+
+                    <div class="card">
+                        <h3>Edit Examples</h3>
+                        <ul class="feature-list">
+                            <li>"Add TypeScript type definitions to this function"</li>
+                            <li>"Replace the for loop with map() and filter()"</li>
+                            <li>"Add input validation with helpful error messages"</li>
+                            <li>"Update this to handle asynchronous operations"</li>
+                            <li>"Fix the potential memory leak in this component"</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section id="debugging">
+                    <h2>Debugging & Optimization</h2>
+                    
+                    <p>Cursor AI can help you debug issues more effectively and optimize your code for better performance:</p>
+
+                    <div class="grid-2">
+                        <div class="card">
+                            <h3>Debugging Prompts</h3>
+                            <ul class="feature-list">
+                                <li>"Fix this TypeError in my React component"</li>
+                                <li>"Why is this infinite loop occurring?"</li>
+                                <li>"Debug this async function that isn't resolving"</li>
+                                <li>"Why is my state not updating in this component?"</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <h3>Optimization Requests</h3>
+                            <ul class="feature-list">
+                                <li>"Optimize this function for better performance"</li>
+                                <li>"Reduce the memory usage of this algorithm"</li>
+                                <li>"Improve the time complexity of this sorting function"</li>
+                                <li>"Refactor this code to be more maintainable"</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="models">
+                    <h2>AI Model Selection (Pro)</h2>
+                    
+                    <p>Choose the right AI model for different tasks to optimize performance and results:</p>
+
+                    <div class="table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Model</th>
+                                    <th>Best For</th>
+                                    <th>Speed</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Claude 3 Opus</strong></td>
+                                    <td>Complex tasks, architecture design, security auditing</td>
+                                    <td>Slow</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Claude 3 Sonnet</strong></td>
+                                    <td>General coding, bug fixing, documentation</td>
+                                    <td>Medium</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Claude 3 Haiku</strong></td>
+                                    <td>Simple tasks, quick explanations, formatting</td>
+                                    <td>Fast</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>GPT-4o</strong></td>
+                                    <td>Creative code generation, complex instructions</td>
+                                    <td>Medium</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>GPT-3.5 Turbo</strong></td>
+                                    <td>Formatting tasks, simple code generation</td>
+                                    <td>Fast</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="tip callout">
+                        <strong>Switching Models:</strong> Settings → AI → Model Selection or use command palette: "AI: Select Model"
+                    </div>
+                </section>
+
+                <section id="frontend">
+                    <h2>Frontend Development</h2>
+                    
+                    <p>Cursor AI excels at frontend development tasks. Here are the most effective prompts and techniques:</p>
+
+                    <div class="grid-2">
+                        <div class="card">
+                            <h3>React Component Generation</h3>
+                            <ul class="feature-list">
+                                <li>"Create a reusable button component with variants"</li>
+                                <li>"Generate a form component with validation"</li>
+                                <li>"Create a responsive navigation bar component"</li>
+                                <li>"Build a data table component with sorting and filtering"</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <h3>CSS/Styling Assistance</h3>
+                            <ul class="feature-list">
+                                <li>"Convert this CSS to Tailwind classes"</li>
+                                <li>"Create animations for this component"</li>
+                                <li>"Optimize these styles for mobile devices"</li>
+                                <li>"Generate a dark mode version of these styles"</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="backend">
+                    <h2>Backend Development</h2>
+                    
+                    <p>Leverage Cursor AI for powerful backend development with these specialized prompts:</p>
+
+                    <div class="grid-2">
+                        <div class="card">
+                            <h3>API Development</h3>
+                            <ul class="feature-list">
+                                <li>"Create a RESTful CRUD API for users using Express"</li>
+                                <li>"Generate GraphQL resolvers for this schema"</li>
+                                <li>"Implement JWT authentication middleware"</li>
+                                <li>"Create database models and migrations"</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <h3>Database Queries</h3>
+                            <ul class="feature-list">
+                                <li>"Optimize this SQL query for performance"</li>
+                                <li>"Convert this ORM query to raw SQL"</li>
+                                <li>"Write a MongoDB aggregation pipeline for this data"</li>
+                                <li>"Create indexes for these database operations"</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="documentation">
+                    <h2>Documentation</h2>
+                    
+                    <p>Generate comprehensive documentation effortlessly with AI assistance:</p>
+
+                    <div class="card">
+                        <h3>Documentation Types</h3>
+                        <ul class="feature-list">
+                            <li>Code comments and inline documentation</li>
+                            <li>JSDoc/DocStrings for functions and classes</li>
+                            <li>README files and project documentation</li>
+                            <li>API documentation and usage guides</li>
+                            <li>User guides and tutorials</li>
+                            <li>Architecture documentation</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <h3>Documentation Prompts</h3>
+                        <ul class="feature-list">
+                            <li>"Add JSDoc comments to this function"</li>
+                            <li>"Generate a README for this project"</li>
+                            <li>"Document the API endpoints in this file"</li>
+                            <li>"Create usage examples for this library"</li>
+                            <li>"Add type documentation to these interfaces"</li>
+                        </ul>
+                    </div>
+
+                    <div class="code-block">
+// Before: Undocumented function
+function calculateTotal(items, discount, tax) {
+  const subtotal = items.reduce((sum, item) => 
+    sum + item.price * item.quantity, 0);
+  const discountAmount = subtotal * discount;
+  const taxAmount = (subtotal - discountAmount) * tax;
+  return subtotal - discountAmount + taxAmount;
+}
+
+// After AI documentation:
+/**
+ * Calculates the total price including discount and tax.
+ * @param {Array<{price: number, quantity: number}>} items
+ * @param {number} discount - Discount rate (0.1 for 10%)
+ * @param {number} tax - Tax rate (0.07 for 7%)
+ * @returns {number} The final total after discount and tax
+ */</div>
+                </section>
+
+                <section id="best-practices">
+                    <h2>Best Practices</h2>
+                    
+                    <h3>Writing Effective Prompts</h3>
+                    <p>The quality of your prompts directly affects the quality of the AI's responses:</p>
+
+                    <div class="grid-2">
+                        <div class="feature-card">
+                            <h4>Be Specific and Detailed</h4>
+                            <p>Instead of "fix this bug," say "this function returns undefined when the input array is empty, please add proper validation."</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4>Provide Context</h4>
+                            <p>Mention the programming language, framework, and any relevant constraints or requirements.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4>Ask for Explanations</h4>
+                            <p>Request explanations of concepts, not just code solutions. Understanding is key to learning.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4>Iterate and Refine</h4>
+                            <p>Build on previous responses. The AI remembers your conversation context.</p>
+                        </div>
+                    </div>
+
+                    <div class="info callout">
+                        <strong>Learning and Growth:</strong> Use Cursor AI as a learning tool, not just a code generator. Ask "why" questions, request explanations, and compare different approaches.
+                    </div>
+                </section>
+
+                <section id="advanced">
+                    <h2>Advanced Features</h2>
+                    
+                    <h3>Project-Wide Understanding</h3>
+                    <p>One of Cursor AI's most powerful features is its ability to understand your entire project:</p>
+
+                    <div class="grid-2">
+                        <div class="feature-card">
+                            <h4>Cross-File References</h4>
+                            <p>The AI can reference and understand relationships between different files in your project.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4>Dependency Awareness</h4>
+                            <p>It knows about your project's dependencies and can suggest appropriate libraries and patterns.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4>Code Style Consistency</h4>
+                            <p>The AI learns your coding style and maintains consistency across your codebase.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4>Architecture Understanding</h4>
+                            <p>It can suggest architectural improvements based on your project structure.</p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>Advanced Use Cases</h3>
+                        <div class="table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Use Case</th>
+                                        <th>Command/Approach</th>
+                                        <th>Best Practices</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Legacy Code Modernization</strong></td>
+                                        <td><code>"Convert this jQuery code to modern vanilla JS"</code></td>
+                                        <td>Test thoroughly, understand the original functionality first</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Security Audits</strong></td>
+                                        <td><code>"Review this authentication system for vulnerabilities"</code></td>
+                                        <td>Cross-reference with security best practices, use multiple models</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Performance Profiling</strong></td>
+                                        <td><code>"Analyze this function for performance bottlenecks"</code></td>
+                                        <td>Benchmark before and after, consider real-world usage patterns</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Code Architecture Review</strong></td>
+                                        <td><code>"Suggest architectural improvements for this module"</code></td>
+                                        <td>Consider team size, project scope, and maintenance requirements</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="important callout">
+                        <strong>Remember:</strong> Cursor AI is a tool to enhance your capabilities, not replace your expertise. The best results come from combining AI assistance with your own knowledge and judgment. Always review, test, and understand the code before using it in production.
+                    </div>
+                </section>
+            </main>
+
+            <aside class="sidebar-right">
+                <div class="sidebar-section">
+                    <h3>Resources</h3>
+                    <ul class="sidebar-list">
+                        <li><a href="https://cursor.sh/" target="_blank">Official Website</a></li>
+                        <li><a href="https://docs.cursor.sh/" target="_blank">Documentation</a></li>
+                        <li><a href="https://github.com/getcursor/cursor" target="_blank">GitHub</a></li>
+                        <li><a href="https://discord.gg/cursor" target="_blank">Discord Community</a></li>
+                    </ul>
                 </div>
-            </div>
+
+                <div class="sidebar-section">
+                    <h3>Pro Features</h3>
+                    <ul class="sidebar-list">
+                        <li>Advanced AI models</li>
+                        <li>Team collaboration</li>
+                        <li>Custom model selection</li>
+                        <li>Priority support</li>
+                        <li>Advanced analytics</li>
+                    </ul>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3>Tips & Tricks</h3>
+                    <ul class="sidebar-list">
+                        <li>Use specific file references</li>
+                        <li>Provide project context</li>
+                        <li>Ask for multiple solutions</li>
+                        <li>Use role-based prompts</li>
+                        <li>Iterate on responses</li>
+                    </ul>
+                </div>
+            </aside>
         </div>
-    </section>
+    </div>
 
-    <!-- Enhanced Stats Section -->
-    <section class="stats">
-        <div class="container">
-            <div class="stats-grid">
-                <div class="stat-item floating">
-                    <div class="stat-number">500K+</div>
-                    <div class="stat-label">Active Developers</div>
-                </div>
-                <div class="stat-item floating">
-                    <div class="stat-number">50+</div>
-                    <div class="stat-label">Programming Languages</div>
-                </div>
-                <div class="stat-item floating">
-                    <div class="stat-number">90%</div>
-                    <div class="stat-label">Faster Development</div>
-                </div>
-                <div class="stat-item floating">
-                    <div class="stat-number">24/7</div>
-                    <div class="stat-label">AI Assistance</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Enhanced Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
-                <h3>Cursor AI Guide</h3>
-                <p>Your comprehensive resource for mastering Cursor AI - the intelligent code editor that transforms your development workflow.</p>
+                <h3>Master Cursor AI</h3>
+                <p>You've now learned the essential techniques for using Cursor AI effectively. Remember that expertise comes with practice and continuous exploration.</p>
+                <p class="text-muted">Start integrating these techniques into your daily workflow and discover new capabilities that enhance your development process.</p>
+                <p class="text-muted">Created by Professional Developers | Updated 2024</p>
                 <p>Visit <a href="https://cursor.sh/" target="_blank">cursor.sh</a> for the latest updates and downloads</p>
-                <p>&copy; 2024 Cursor AI Guide. Created by Professional Developers. All rights reserved.</p>
             </div>
         </div>
     </footer>
-
-    <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Scroll animations
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        });
-
-        document.querySelectorAll('.animate-on-scroll').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Parallax effect for hero section
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const hero = document.querySelector('.hero');
-            if (hero) {
-                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
-            }
-        });
-
-        // Active navigation highlighting
-        window.addEventListener('scroll', () => {
-            const sections = document.querySelectorAll('section[id]');
-            const navLinks = document.querySelectorAll('.nav-link');
-            
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (scrollY >= (sectionTop - 200)) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${current}`) {
-                    link.classList.add('active');
-                }
-            });
-        });
-    </script>
 </body>
 </html>
