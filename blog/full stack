@@ -1,1 +1,2010 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full-Stack Development: Complete IDE Tutorial</title>
+    <meta name="description" content="Complete full-stack development guide with IDE-like interface and real code examples">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            background: #1e1e1e;
+            color: #d4d4d4;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .ide-container {
+            display: flex;
+            height: 100vh;
+            background: #1e1e1e;
+        }
+
+        .sidebar {
+            width: 250px;
+            background: #252526;
+            border-right: 1px solid #3c3c3c;
+            overflow-y: auto;
+        }
+
+        .file-explorer {
+            padding: 10px 0;
+        }
+
+        .folder-item {
+            padding: 5px 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            color: #cccccc;
+        }
+
+        .folder-item:hover {
+            background: #2a2d2e;
+        }
+
+        .folder-item::before {
+            content: '📁';
+            margin-right: 8px;
+            font-size: 16px;
+        }
+
+        .file-item {
+            padding: 5px 15px 5px 35px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            color: #cccccc;
+        }
+
+        .file-item:hover {
+            background: #2a2d2e;
+        }
+
+        .file-item::before {
+            content: '📄';
+            margin-right: 8px;
+            font-size: 14px;
+        }
+
+        .file-item.html::before { content: '🌐'; }
+        .file-item.css::before { content: '🎨'; }
+        .file-item.js::before { content: '⚡'; }
+        .file-item.json::before { content: '📋'; }
+        .file-item.sql::before { content: '🗄️'; }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .tab-bar {
+            background: #2d2d30;
+            border-bottom: 1px solid #3c3c3c;
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+            height: 35px;
+        }
+
+        .tab {
+            padding: 8px 15px;
+            background: #1e1e1e;
+            border-right: 1px solid #3c3c3c;
+            cursor: pointer;
+            color: #cccccc;
+            font-size: 13px;
+        }
+
+        .tab.active {
+            background: #007acc;
+            color: white;
+        }
+
+        .tab::before {
+            content: '📄';
+            margin-right: 5px;
+        }
+
+        .editor-container {
+            flex: 1;
+            display: flex;
+        }
+
+        .line-numbers {
+            background: #1e1e1e;
+            color: #858585;
+            padding: 10px 8px;
+            border-right: 1px solid #3c3c3c;
+            text-align: right;
+            font-size: 12px;
+            user-select: none;
+            min-width: 50px;
+        }
+
+        .code-editor {
+            flex: 1;
+            background: #1e1e1e;
+            padding: 10px;
+            overflow-y: auto;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .code-block {
+            background: #1e1e1e;
+            border: 1px solid #3c3c3c;
+            border-radius: 4px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .code-header {
+            background: #2d2d30;
+            padding: 8px 15px;
+            border-bottom: 1px solid #3c3c3c;
+            font-size: 12px;
+            color: #cccccc;
+            display: flex;
+            align-items: center;
+        }
+
+        .code-header::before {
+            content: '💻';
+            margin-right: 8px;
+        }
+
+        .code-content {
+            padding: 15px;
+            background: #1e1e1e;
+            color: #d4d4d4;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            overflow-x: auto;
+        }
+
+        .comment { color: #6a9955; }
+        .keyword { color: #569cd6; }
+        .string { color: #ce9178; }
+        .number { color: #b5cea8; }
+        .function { color: #dcdcaa; }
+        .variable { color: #9cdcfe; }
+        .operator { color: #d4d4d4; }
+        .tag { color: #569cd6; }
+        .attribute { color: #9cdcfe; }
+
+        .section {
+            margin: 30px 0;
+            padding: 20px;
+            background: #252526;
+            border-radius: 4px;
+            border-left: 4px solid #007acc;
+        }
+
+        .section h2 {
+            color: #007acc;
+            margin-bottom: 15px;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+        }
+
+        .section h2::before {
+            content: '📚';
+            margin-right: 10px;
+        }
+
+        .section h3 {
+            color: #4ec9b0;
+            margin: 15px 0 10px 0;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+        }
+
+        .section h3::before {
+            content: '📖';
+            margin-right: 8px;
+        }
+
+        .info-box {
+            background: #1e1e1e;
+            border: 1px solid #3c3c3c;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 15px 0;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .info-box::before {
+            content: '💡';
+            margin-right: 10px;
+            font-size: 18px;
+        }
+
+        .warning-box {
+            background: #1e1e1e;
+            border: 1px solid #d7ba7d;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 15px 0;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .warning-box::before {
+            content: '⚠️';
+            margin-right: 10px;
+            font-size: 18px;
+        }
+
+        .success-box {
+            background: #1e1e1e;
+            border: 1px solid #4ec9b0;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 15px 0;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .success-box::before {
+            content: '✅';
+            margin-right: 10px;
+            font-size: 18px;
+        }
+
+        .step-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .step-list li {
+            padding: 8px 0;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .step-list li::before {
+            content: '🔹';
+            margin-right: 10px;
+            margin-top: 2px;
+        }
+
+        .project-structure {
+            background: #1e1e1e;
+            border: 1px solid #3c3c3c;
+            border-radius: 4px;
+            padding: 15px;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .folder-line::before { content: '📁'; margin-right: 5px; }
+        .file-line::before { content: '📄'; margin-right: 5px; }
+
+        .terminal {
+            background: #0c0c0c;
+            color: #cccccc;
+            padding: 15px;
+            border-radius: 4px;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .terminal::before {
+            content: '💻 Terminal';
+            display: block;
+            color: #007acc;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .command {
+            color: #4ec9b0;
+        }
+
+        .output {
+            color: #cccccc;
+        }
+
+        .error {
+            color: #f44747;
+        }
+
+        .navigation {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #252526;
+            border: 1px solid #3c3c3c;
+            border-radius: 4px;
+            padding: 10px;
+            z-index: 1000;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 5px 10px;
+            color: #cccccc;
+            text-decoration: none;
+            font-size: 12px;
+            border-radius: 2px;
+        }
+
+        .nav-link:hover {
+            background: #2a2d2e;
+        }
+
+        .nav-link::before {
+            content: '🔗';
+            margin-right: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .ide-container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                height: 200px;
+            }
+            
+            .navigation {
+                position: static;
+                margin: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="ide-container">
+        <div class="sidebar">
+            <div class="file-explorer">
+                <div class="folder-item">📁 Full-Stack Course</div>
+                <div class="file-item html">🌐 index.html</div>
+                <div class="file-item css">🎨 styles.css</div>
+                <div class="file-item js">⚡ script.js</div>
+                <div class="file-item json">📋 package.json</div>
+                <div class="folder-item">📁 Backend</div>
+                <div class="file-item js">⚡ server.js</div>
+                <div class="file-item sql">🗄️ database.sql</div>
+                <div class="folder-item">📁 Frontend</div>
+                <div class="file-item js">⚡ app.js</div>
+                <div class="file-item css">🎨 components.css</div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="tab-bar">
+                <div class="tab active">📄 Full-Stack Tutorial.md</div>
+                <div class="tab">📄 index.html</div>
+                <div class="tab">📄 server.js</div>
+            </div>
+
+            <div class="editor-container">
+                <div class="line-numbers">
+                    1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>
+                    11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20<br>
+                    21<br>22<br>23<br>24<br>25<br>26<br>27<br>28<br>29<br>30<br>
+                    31<br>32<br>33<br>34<br>35<br>36<br>37<br>38<br>39<br>40<br>
+                    41<br>42<br>43<br>44<br>45<br>46<br>47<br>48<br>49<br>50<br>
+                </div>
+
+                <div class="code-editor">
+                    <div class="section">
+                        <h2>📚 Complete Full-Stack Development Tutorial</h2>
+                        <p>Master web development from frontend to backend with this comprehensive guide designed by professional developers.</p>
+                        
+                        <div class="info-box">
+                            This tutorial covers everything you need to become a full-stack developer, 
+                            from HTML basics to advanced backend development and deployment. Each module includes 
+                            practical examples, cheat sheets, and real-world projects.
+                        </div>
+
+                        <div class="warning-box">
+                            <strong>Prerequisites:</strong> Basic computer knowledge. No prior programming experience required. 
+                            We'll start from the very beginning and build up to advanced concepts.
+                        </div>
+
+                        <div class="success-box">
+                            <strong>Learning Path:</strong> Complete all modules in order for the best learning experience. 
+                            Each module builds upon the previous one.
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <h3>📖 Module 1: Frontend Fundamentals</h3>
+                        
+                        <div class="info-box">
+                            <strong>Module Overview:</strong> Learn the core technologies that power the web - HTML for structure, 
+                            CSS for styling, and JavaScript for interactivity. This foundation is essential for any web developer.
+                        </div>
+
+                        <h4>🌐 HTML Structure & Semantics</h4>
+                        <p>HTML (HyperText Markup Language) is the backbone of every website. It provides structure and meaning to web content.</p>
+
+                        <div class="code-block">
+                            <div class="code-header">💻 index.html - Complete HTML Structure</div>
+                            <div class="code-content"><span class="tag">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html</span> <span class="attribute">lang</span>=<span class="string">"en"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;head&gt;</span>
+    <span class="tag">&lt;meta</span> <span class="attribute">charset</span>=<span class="string">"UTF-8"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;meta</span> <span class="attribute">name</span>=<span class="string">"viewport"</span> <span class="attribute">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;meta</span> <span class="attribute">name</span>=<span class="string">"description"</span> <span class="attribute">content</span>=<span class="string">"Professional full-stack application"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;title&gt;</span>My Full-Stack App<span class="tag">&lt;/title&gt;</span>
+    <span class="tag">&lt;link</span> <span class="attribute">rel</span>=<span class="string">"stylesheet"</span> <span class="attribute">href</span>=<span class="string">"styles.css"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;link</span> <span class="attribute">rel</span>=<span class="string">"icon"</span> <span class="attribute">href</span>=<span class="string">"favicon.ico"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+<span class="tag">&lt;body&gt;</span>
+    <span class="tag">&lt;header&gt;</span>
+        <span class="tag">&lt;nav</span> <span class="attribute">class</span>=<span class="string">"main-nav"</span><span class="tag">&gt;</span>
+            <span class="tag">&lt;div</span> <span class="attribute">class</span>=<span class="string">"nav-container"</span><span class="tag">&gt;</span>
+                <span class="tag">&lt;div</span> <span class="attribute">class</span>=<span class="string">"logo"</span><span class="tag">&gt;</span>
+                    <span class="tag">&lt;a</span> <span class="attribute">href</span>=<span class="string">"#home"</span><span class="tag">&gt;</span>MyApp<span class="tag">&lt;/a&gt;</span>
+                <span class="tag">&lt;/div&gt;</span>
+                <span class="tag">&lt;ul</span> <span class="attribute">class</span>=<span class="string">"nav-menu"</span><span class="tag">&gt;</span>
+                    <span class="tag">&lt;li&gt;</span><span class="tag">&lt;a</span> <span class="attribute">href</span>=<span class="string">"#home"</span><span class="tag">&gt;</span>Home<span class="tag">&lt;/a&gt;</span><span class="tag">&lt;/li&gt;</span>
+                    <span class="tag">&lt;li&gt;</span><span class="tag">&lt;a</span> <span class="attribute">href</span>=<span class="string">"#about"</span><span class="tag">&gt;</span>About<span class="tag">&lt;/a&gt;</span><span class="tag">&lt;/li&gt;</span>
+                    <span class="tag">&lt;li&gt;</span><span class="tag">&lt;a</span> <span class="attribute">href</span>=<span class="string">"#services"</span><span class="tag">&gt;</span>Services<span class="tag">&lt;/a&gt;</span><span class="tag">&lt;/li&gt;</span>
+                    <span class="tag">&lt;li&gt;</span><span class="tag">&lt;a</span> <span class="attribute">href</span>=<span class="string">"#contact"</span><span class="tag">&gt;</span>Contact<span class="tag">&lt;/a&gt;</span><span class="tag">&lt;/li&gt;</span>
+                <span class="tag">&lt;/ul&gt;</span>
+            <span class="tag">&lt;/div&gt;</span>
+        <span class="tag">&lt;/nav&gt;</span>
+    <span class="tag">&lt;/header&gt;</span>
+    
+    <span class="tag">&lt;main&gt;</span>
+        <span class="tag">&lt;section</span> <span class="attribute">id</span>=<span class="string">"home"</span> <span class="attribute">class</span>=<span class="string">"hero-section"</span><span class="tag">&gt;</span>
+            <span class="tag">&lt;div</span> <span class="attribute">class</span>=<span class="string">"container"</span><span class="tag">&gt;</span>
+                <span class="tag">&lt;h1</span> <span class="attribute">class</span>=<span class="string">"hero-title"</span><span class="tag">&gt;</span>Welcome to My Full-Stack App<span class="tag">&lt;/h1&gt;</span>
+                <span class="tag">&lt;p</span> <span class="attribute">class</span>=<span class="string">"hero-subtitle"</span><span class="tag">&gt;</span>Professional web development at its finest<span class="tag">&lt;/p&gt;</span>
+                <span class="tag">&lt;button</span> <span class="attribute">class</span>=<span class="string">"cta-button"</span><span class="tag">&gt;</span>Get Started<span class="tag">&lt;/button&gt;</span>
+            <span class="tag">&lt;/div&gt;</span>
+        <span class="tag">&lt;/section&gt;</span>
+        
+        <span class="tag">&lt;section</span> <span class="attribute">id</span>=<span class="string">"about"</span> <span class="attribute">class</span>=<span class="string">"about-section"</span><span class="tag">&gt;</span>
+            <span class="tag">&lt;div</span> <span class="attribute">class</span>=<span class="string">"container"</span><span class="tag">&gt;</span>
+                <span class="tag">&lt;h2&gt;</span>About Our Platform<span class="tag">&lt;/h2&gt;</span>
+                <span class="tag">&lt;p&gt;</span>Built with modern web technologies for optimal performance.<span class="tag">&lt;/p&gt;</span>
+            <span class="tag">&lt;/div&gt;</span>
+        <span class="tag">&lt;/section&gt;</span>
+    <span class="tag">&lt;/main&gt;</span>
+    
+    <span class="tag">&lt;footer</span> <span class="attribute">class</span>=<span class="string">"main-footer"</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;div</span> <span class="attribute">class</span>=<span class="string">"container"</span><span class="tag">&gt;</span>
+            <span class="tag">&lt;p&gt;</span>&copy; 2024 My Full-Stack App. All rights reserved.<span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;/footer&gt;</span>
+    
+    <span class="tag">&lt;script</span> <span class="attribute">src</span>=<span class="string">"script.js"</span><span class="tag">&gt;</span><span class="tag">&lt;/script&gt;</span>
+<span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></div>
+                        </div>
+
+                        <div class="project-structure">
+                            <div class="folder-line">📁 HTML Cheat Sheet</div>
+                            <div class="file-line">🔹 &lt;!DOCTYPE html&gt; - Document type declaration</div>
+                            <div class="file-line">🔹 &lt;html&gt; - Root element</div>
+                            <div class="file-line">🔹 &lt;head&gt; - Metadata container</div>
+                            <div class="file-line">🔹 &lt;meta&gt; - Character encoding, viewport, SEO</div>
+                            <div class="file-line">🔹 &lt;title&gt; - Page title (browser tab)</div>
+                            <div class="file-line">🔹 &lt;body&gt; - Visible content</div>
+                            <div class="file-line">🔹 &lt;header&gt; - Page header section</div>
+                            <div class="file-line">🔹 &lt;nav&gt; - Navigation menu</div>
+                            <div class="file-line">🔹 &lt;main&gt; - Main content area</div>
+                            <div class="file-line">🔹 &lt;section&gt; - Content section</div>
+                            <div class="file-line">🔹 &lt;footer&gt; - Page footer</div>
+                            <div class="file-line">🔹 &lt;h1&gt;-&lt;h6&gt; - Headings (h1 most important)</div>
+                            <div class="file-line">🔹 &lt;p&gt; - Paragraph text</div>
+                            <div class="file-line">🔹 &lt;a&gt; - Hyperlinks</div>
+                            <div class="file-line">🔹 &lt;ul&gt;, &lt;ol&gt;, &lt;li&gt; - Lists</div>
+                            <div class="file-line">🔹 &lt;div&gt; - Generic container</div>
+                            <div class="file-line">🔹 &lt;span&gt; - Inline container</div>
+                            <div class="file-line">🔹 &lt;img&gt; - Images</div>
+                            <div class="file-line">🔹 &lt;form&gt; - Form container</div>
+                            <div class="file-line">🔹 &lt;input&gt; - Form inputs</div>
+                            <div class="file-line">🔹 &lt;button&gt; - Clickable buttons</div>
+                            <div class="file-line">🔹 &lt;table&gt;, &lt;tr&gt;, &lt;td&gt;, &lt;th&gt; - Tables</div>
+                            <div class="file-line">🔹 &lt;article&gt; - Self-contained content</div>
+                            <div class="file-line">🔹 &lt;aside&gt; - Sidebar content</div>
+                            <div class="file-line">🔹 &lt;figure&gt;, &lt;figcaption&gt; - Images with captions</div>
+                            <div class="file-line">🔹 &lt;video&gt;, &lt;audio&gt; - Media elements</div>
+                            <div class="file-line">🔹 &lt;canvas&gt; - Drawing area</div>
+                            <div class="file-line">🔹 &lt;svg&gt; - Vector graphics</div>
+                            <div class="file-line">🔹 &lt;details&gt;, &lt;summary&gt; - Expandable content</div>
+                            <div class="file-line">🔹 &lt;time&gt; - Date/time information</div>
+                            <div class="file-line">🔹 &lt;mark&gt; - Highlighted text</div>
+                            <div class="file-line">🔹 &lt;code&gt;, &lt;pre&gt; - Code blocks</div>
+                            <div class="file-line">🔹 &lt;blockquote&gt; - Quoted content</div>
+                            <div class="file-line">🔹 &lt;cite&gt; - Citation</div>
+                            <div class="file-line">🔹 &lt;abbr&gt; - Abbreviations</div>
+                            <div class="file-line">🔹 &lt;address&gt; - Contact information</div>
+                            <div class="file-line">🔹 &lt;strong&gt;, &lt;em&gt; - Text emphasis</div>
+                            <div class="file-line">🔹 &lt;small&gt; - Fine print</div>
+                            <div class="file-line">🔹 &lt;del&gt;, &lt;ins&gt; - Deleted/inserted text</div>
+                            <div class="file-line">🔹 &lt;sub&gt;, &lt;sup&gt; - Subscript/superscript</div>
+                            <div class="file-line">🔹 &lt;label&gt; - Form labels</div>
+                            <div class="file-line">🔹 &lt;select&gt;, &lt;option&gt; - Dropdown menus</div>
+                            <div class="file-line">🔹 &lt;textarea&gt; - Multi-line text input</div>
+                            <div class="file-line">🔹 &lt;fieldset&gt;, &lt;legend&gt; - Form grouping</div>
+                            <div class="file-line">🔹 &lt;datalist&gt; - Input suggestions</div>
+                            <div class="file-line">🔹 &lt;output&gt; - Form calculation results</div>
+                            <div class="file-line">🔹 &lt;progress&gt;, &lt;meter&gt; - Progress indicators</div>
+                            <div class="file-line">🔹 &lt;dialog&gt; - Modal dialogs</div>
+                            <div class="file-line">🔹 &lt;template&gt; - Hidden content template</div>
+                            <div class="file-line">🔹 &lt;slot&gt; - Web component slots</div>
+                            <div class="file-line">🔹 &lt;picture&gt; - Responsive images</div>
+                            <div class="file-line">🔹 &lt;source&gt; - Media sources</div>
+                            <div class="file-line">🔹 &lt;track&gt; - Video/audio tracks</div>
+                            <div class="file-line">🔹 &lt;map&gt;, &lt;area&gt; - Image maps</div>
+                            <div class="file-line">🔹 &lt;object&gt;, &lt;embed&gt; - External content</div>
+                            <div class="file-line">🔹 &lt;iframe&gt; - Inline frames</div>
+                            <div class="file-line">🔹 &lt;noscript&gt; - Fallback for disabled JS</div>
+                            <div class="file-line">🔹 &lt;script&gt; - JavaScript code</div>
+                            <div class="file-line">🔹 &lt;style&gt; - CSS styles</div>
+                            <div class="file-line">🔹 &lt;link&gt; - External resources</div>
+                            <div class="file-line">🔹 &lt;base&gt; - Base URL for relative links</div>
+                            <div class="file-line">🔹 &lt;meta&gt; - Various metadata</div>
+                            <div class="file-line">🔹 &lt;viewport&gt; - Mobile viewport control</div>
+                            <div class="file-line">🔹 &lt;charset&gt; - Character encoding</div>
+                            <div class="file-line">🔹 &lt;description&gt; - Page description</div>
+                            <div class="file-line">🔹 &lt;keywords&gt; - SEO keywords</div>
+                            <div class="file-line">🔹 &lt;robots&gt; - Search engine directives</div>
+                            <div class="file-line">🔹 &lt;author&gt; - Page author</div>
+                            <div class="file-line">🔹 &lt;refresh&gt; - Page refresh/redirect</div>
+                            <div class="file-line">🔹 &lt;theme-color&gt; - Browser theme color</div>
+                            <div class="file-line">🔹 &lt;apple-mobile-web-app&gt; - iOS web app</div>
+                            <div class="file-line">🔹 &lt;msapplication&gt; - Windows tile</div>
+                            <div class="file-line">🔹 &lt;og:title&gt; - Open Graph title</div>
+                            <div class="file-line">🔹 &lt;og:description&gt; - Open Graph description</div>
+                            <div class="file-line">🔹 &lt;og:image&gt; - Open Graph image</div>
+                            <div class="file-line">🔹 &lt;twitter:card&gt; - Twitter card type</div>
+                            <div class="file-line">🔹 &lt;canonical&gt; - Canonical URL</div>
+                            <div class="file-line">🔹 &lt;alternate&gt; - Alternative versions</div>
+                            <div class="file-line">🔹 &lt;icon&gt; - Favicon</div>
+                            <div class="file-line">🔹 &lt;manifest&gt; - Web app manifest</div>
+                            <div class="file-line">🔹 &lt;preconnect&gt; - DNS prefetch</div>
+                            <div class="file-line">🔹 &lt;dns-prefetch&gt; - DNS prefetch</div>
+                            <div class="file-line">🔹 &lt;preload&gt; - Resource preloading</div>
+                            <div class="file-line">🔹 &lt;prefetch&gt; - Resource prefetching</div>
+                        </div>
+
+                        <h4>🎨 CSS Styling & Layout</h4>
+                        <p>CSS (Cascading Style Sheets) transforms plain HTML into beautiful, responsive designs. Learn modern CSS with Flexbox, Grid, and responsive design.</p>
+
+                        <div class="code-block">
+                            <div class="code-header">🎨 styles.css - Professional CSS with Modern Layout</div>
+                            <div class="code-content"><span class="comment">/* CSS Variables for consistent theming */</span>
+<span class="keyword">:root</span> {
+    <span class="variable">--primary-color</span>: <span class="string">#007acc</span>;
+    <span class="variable">--secondary-color</span>: <span class="string">#4ec9b0</span>;
+    <span class="variable">--text-color</span>: <span class="string">#333</span>;
+    <span class="variable">--bg-color</span>: <span class="string">#fff</span>;
+    <span class="variable">--border-radius</span>: <span class="number">8px</span>;
+    <span class="variable">--box-shadow</span>: <span class="string">0 2px 10px rgba(0,0,0,0.1)</span>;
+    <span class="variable">--transition</span>: <span class="string">all 0.3s ease</span>;
+}
+
+<span class="comment">/* Reset and base styles */</span>
+<span class="keyword">*</span> {
+    <span class="variable">margin</span>: <span class="number">0</span>;
+    <span class="variable">padding</span>: <span class="number">0</span>;
+    <span class="variable">box-sizing</span>: <span class="string">border-box</span>;
+}
+
+<span class="keyword">body</span> {
+    <span class="variable">font-family</span>: <span class="string">'Inter'</span>, <span class="string">'Segoe UI'</span>, <span class="string">sans-serif</span>;
+    <span class="variable">line-height</span>: <span class="number">1.6</span>;
+    <span class="variable">color</span>: <span class="function">var</span>(<span class="variable">--text-color</span>);
+    <span class="variable">background-color</span>: <span class="function">var</span>(<span class="variable">--bg-color</span>);
+}
+
+<span class="comment">/* Container utility */</span>
+<span class="keyword">.container</span> {
+    <span class="variable">max-width</span>: <span class="number">1200px</span>;
+    <span class="variable">margin</span>: <span class="number">0</span> <span class="string">auto</span>;
+    <span class="variable">padding</span>: <span class="number">0</span> <span class="number">20px</span>;
+}
+
+<span class="comment">/* Navigation styles with Flexbox */</span>
+<span class="keyword">.main-nav</span> {
+    <span class="variable">background</span>: <span class="function">var</span>(<span class="variable">--primary-color</span>);
+    <span class="variable">box-shadow</span>: <span class="function">var</span>(<span class="variable">--box-shadow</span>);
+    <span class="variable">position</span>: <span class="string">sticky</span>;
+    <span class="variable">top</span>: <span class="number">0</span>;
+    <span class="variable">z-index</span>: <span class="number">1000</span>;
+}
+
+<span class="keyword">.nav-container</span> {
+    <span class="variable">display</span>: <span class="string">flex</span>;
+    <span class="variable">justify-content</span>: <span class="string">space-between</span>;
+    <span class="variable">align-items</span>: <span class="string">center</span>;
+    <span class="variable">padding</span>: <span class="number">1rem</span> <span class="number">0</span>;
+}
+
+<span class="keyword">.logo a</span> {
+    <span class="variable">color</span>: <span class="string">white</span>;
+    <span class="variable">text-decoration</span>: <span class="string">none</span>;
+    <span class="variable">font-size</span>: <span class="number">1.5rem</span>;
+    <span class="variable">font-weight</span>: <span class="string">bold</span>;
+}
+
+<span class="keyword">.nav-menu</span> {
+    <span class="variable">display</span>: <span class="string">flex</span>;
+    <span class="variable">list-style</span>: <span class="string">none</span>;
+    <span class="variable">gap</span>: <span class="number">2rem</span>;
+}
+
+<span class="keyword">.nav-menu a</span> {
+    <span class="variable">color</span>: <span class="string">white</span>;
+    <span class="variable">text-decoration</span>: <span class="string">none</span>;
+    <span class="variable">font-weight</span>: <span class="number">500</span>;
+    <span class="variable">transition</span>: <span class="function">var</span>(<span class="variable">--transition</span>);
+    <span class="variable">padding</span>: <span class="number">0.5rem</span> <span class="number">1rem</span>;
+    <span class="variable">border-radius</span>: <span class="function">var</span>(<span class="variable">--border-radius</span>);
+}
+
+<span class="keyword">.nav-menu a:hover</span> {
+    <span class="variable">background</span>: <span class="string">rgba(255,255,255,0.1)</span>;
+    <span class="variable">transform</span>: <span class="string">translateY(-2px)</span>;
+}
+
+<span class="comment">/* Hero section with CSS Grid */</span>
+<span class="keyword">.hero-section</span> {
+    <span class="variable">min-height</span>: <span class="number">80vh</span>;
+    <span class="variable">display</span>: <span class="string">grid</span>;
+    <span class="variable">place-items</span>: <span class="string">center</span>;
+    <span class="variable">background</span>: <span class="string">linear-gradient(135deg, var(--primary-color), var(--secondary-color))</span>;
+    <span class="variable">color</span>: <span class="string">white</span>;
+    <span class="variable">text-align</span>: <span class="string">center</span>;
+}
+
+<span class="keyword">.hero-title</span> {
+    <span class="variable">font-size</span>: <span class="number">3rem</span>;
+    <span class="variable">margin-bottom</span>: <span class="number">1rem</span>;
+    <span class="variable">font-weight</span>: <span class="number">700</span>;
+}
+
+<span class="keyword">.hero-subtitle</span> {
+    <span class="variable">font-size</span>: <span class="number">1.2rem</span>;
+    <span class="variable">margin-bottom</span>: <span class="number">2rem</span>;
+    <span class="variable">opacity</span>: <span class="number">0.9</span>;
+}
+
+<span class="keyword">.cta-button</span> {
+    <span class="variable">background</span>: <span class="string">white</span>;
+    <span class="variable">color</span>: <span class="function">var</span>(<span class="variable">--primary-color</span>);
+    <span class="variable">border</span>: <span class="string">none</span>;
+    <span class="variable">padding</span>: <span class="number">1rem</span> <span class="number">2rem</span>;
+    <span class="variable">border-radius</span>: <span class="function">var</span>(<span class="variable">--border-radius</span>);
+    <span class="variable">font-size</span>: <span class="number">1.1rem</span>;
+    <span class="variable">font-weight</span>: <span class="string">bold</span>;
+    <span class="variable">cursor</span>: <span class="string">pointer</span>;
+    <span class="variable">transition</span>: <span class="function">var</span>(<span class="variable">--transition</span>);
+    <span class="variable">box-shadow</span>: <span class="function">var</span>(<span class="variable">--box-shadow</span>);
+}
+
+<span class="keyword">.cta-button:hover</span> {
+    <span class="variable">transform</span>: <span class="string">translateY(-3px)</span>;
+    <span class="variable">box-shadow</span>: <span class="string">0 5px 20px rgba(0,0,0,0.2)</span>;
+}
+
+<span class="comment">/* Responsive design */</span>
+<span class="keyword">@media</span> (<span class="variable">max-width</span>: <span class="number">768px</span>) {
+    <span class="keyword">.nav-container</span> {
+        <span class="variable">flex-direction</span>: <span class="string">column</span>;
+        <span class="variable">gap</span>: <span class="number">1rem</span>;
+    }
+    
+    <span class="keyword">.nav-menu</span> {
+        <span class="variable">flex-direction</span>: <span class="string">column</span>;
+        <span class="variable">text-align</span>: <span class="string">center</span>;
+    }
+    
+    <span class="keyword">.hero-title</span> {
+        <span class="variable">font-size</span>: <span class="number">2rem</span>;
+    }
+}</div>
+                        </div>
+
+                        <div class="project-structure">
+                            <div class="folder-line">📁 CSS Cheat Sheet</div>
+                            <div class="file-line">🔹 display: flex - Flexible box layout</div>
+                            <div class="file-line">🔹 display: grid - Grid layout system</div>
+                            <div class="file-line">🔹 justify-content - Horizontal alignment</div>
+                            <div class="file-line">🔹 align-items - Vertical alignment</div>
+                            <div class="file-line">🔹 gap - Space between grid/flex items</div>
+                            <div class="file-line">🔹 position: relative/absolute/fixed - Positioning</div>
+                            <div class="file-line">🔹 z-index - Stacking order</div>
+                            <div class="file-line">🔹 transition - Smooth animations</div>
+                            <div class="file-line">🔹 transform - Rotate, scale, translate</div>
+                            <div class="file-line">🔹 box-shadow - Drop shadows</div>
+                            <div class="file-line">🔹 border-radius - Rounded corners</div>
+                            <div class="file-line">🔹 @media queries - Responsive design</div>
+                            <div class="file-line">🔹 CSS Variables (--var) - Custom properties</div>
+                            <div class="file-line">🔹 calc() - Dynamic calculations</div>
+                            <div class="file-line">🔹 linear-gradient() - Gradient backgrounds</div>
+                            <div class="file-line">🔹 flex-direction - Row/column layout</div>
+                            <div class="file-line">🔹 grid-template-columns - Grid columns</div>
+                            <div class="file-line">🔹 place-items - Center grid items</div>
+                            <div class="file-line">🔹 margin/padding - Spacing properties</div>
+                            <div class="file-line">🔹 width/height - Size properties</div>
+                            <div class="file-line">🔹 min-width/max-width - Size constraints</div>
+                            <div class="file-line">🔹 overflow - Content overflow handling</div>
+                            <div class="file-line">🔹 background - Background styling</div>
+                            <div class="file-line">🔹 border - Border styling</div>
+                            <div class="file-line">🔹 color - Text color</div>
+                            <div class="file-line">🔹 font-family - Font selection</div>
+                            <div class="file-line">🔹 font-size - Text size</div>
+                            <div class="file-line">🔹 font-weight - Text weight</div>
+                            <div class="file-line">🔹 line-height - Line spacing</div>
+                            <div class="file-line">🔹 text-align - Text alignment</div>
+                            <div class="file-line">🔹 text-decoration - Text decoration</div>
+                            <div class="file-line">🔹 text-transform - Text transformation</div>
+                            <div class="file-line">🔹 letter-spacing - Character spacing</div>
+                            <div class="file-line">🔹 word-spacing - Word spacing</div>
+                            <div class="file-line">🔹 white-space - Whitespace handling</div>
+                            <div class="file-line">🔹 cursor - Mouse cursor style</div>
+                            <div class="file-line">🔹 opacity - Element transparency</div>
+                            <div class="file-line">🔹 visibility - Element visibility</div>
+                            <div class="file-line">🔹 display: none - Hide element</div>
+                            <div class="file-line">🔹 display: block - Block element</div>
+                            <div class="file-line">🔹 display: inline - Inline element</div>
+                            <div class="file-line">🔹 display: inline-block - Inline block</div>
+                            <div class="file-line">🔹 float - Element floating</div>
+                            <div class="file-line">🔹 clear - Clear floating</div>
+                            <div class="file-line">🔹 flex-wrap - Flex wrapping</div>
+                            <div class="file-line">🔹 flex-grow - Flex growth</div>
+                            <div class="file-line">🔹 flex-shrink - Flex shrinking</div>
+                            <div class="file-line">🔹 flex-basis - Flex basis</div>
+                            <div class="file-line">🔹 align-self - Individual flex alignment</div>
+                            <div class="file-line">🔹 order - Flex order</div>
+                            <div class="file-line">🔹 grid-template-rows - Grid rows</div>
+                            <div class="file-line">🔹 grid-template-areas - Grid areas</div>
+                            <div class="file-line">🔹 grid-column/row - Grid positioning</div>
+                            <div class="file-line">🔹 grid-area - Grid area assignment</div>
+                            <div class="file-line">🔹 grid-gap - Grid spacing</div>
+                            <div class="file-line">🔹 justify-self - Grid self alignment</div>
+                            <div class="file-line">🔹 align-self - Grid self alignment</div>
+                            <div class="file-line">🔹 object-fit - Image fitting</div>
+                            <div class="file-line">🔹 object-position - Image positioning</div>
+                            <div class="file-line">🔹 clip-path - Element clipping</div>
+                            <div class="file-line">🔹 mask - Element masking</div>
+                            <div class="file-line">🔹 filter - Visual filters</div>
+                            <div class="file-line">🔹 backdrop-filter - Background filters</div>
+                            <div class="file-line">🔹 mix-blend-mode - Blend modes</div>
+                            <div class="file-line">🔹 isolation - Stacking context</div>
+                            <div class="file-line">🔹 will-change - Performance hint</div>
+                            <div class="file-line">🔹 contain - Containment</div>
+                            <div class="file-line">🔹 aspect-ratio - Aspect ratio</div>
+                            <div class="file-line">🔹 gap - Modern spacing</div>
+                            <div class="file-line">🔹 logical properties - Logical properties</div>
+                            <div class="file-line">🔹 custom properties - CSS variables</div>
+                            <div class="file-line">🔹 @supports - Feature queries</div>
+                            <div class="file-line">🔹 @keyframes - Animation keyframes</div>
+                            <div class="file-line">🔹 animation - Animation shorthand</div>
+                            <div class="file-line">🔹 animation-name - Animation name</div>
+                            <div class="file-line">🔹 animation-duration - Animation duration</div>
+                            <div class="file-line">🔹 animation-timing-function - Animation timing</div>
+                            <div class="file-line">🔹 animation-delay - Animation delay</div>
+                            <div class="file-line">🔹 animation-iteration-count - Animation iterations</div>
+                            <div class="file-line">🔹 animation-direction - Animation direction</div>
+                            <div class="file-line">🔹 animation-fill-mode - Animation fill mode</div>
+                            <div class="file-line">🔹 animation-play-state - Animation play state</div>
+                            <div class="file-line">🔹 transform-origin - Transform origin</div>
+                            <div class="file-line">🔹 perspective - 3D perspective</div>
+                            <div class="file-line">🔹 perspective-origin - Perspective origin</div>
+                            <div class="file-line">🔹 backface-visibility - Backface visibility</div>
+                            <div class="file-line">🔹 transform-style - Transform style</div>
+                            <div class="file-line">🔹 scroll-behavior - Smooth scrolling</div>
+                            <div class="file-line">🔹 scroll-snap-type - Scroll snapping</div>
+                            <div class="file-line">🔹 scroll-snap-align - Scroll snap alignment</div>
+                            <div class="file-line">🔹 scroll-margin - Scroll margin</div>
+                            <div class="file-line">🔹 scroll-padding - Scroll padding</div>
+                            <div class="file-line">🔹 overscroll-behavior - Overscroll behavior</div>
+                            <div class="file-line">🔹 touch-action - Touch actions</div>
+                            <div class="file-line">🔹 user-select - Text selection</div>
+                            <div class="file-line">🔹 pointer-events - Pointer events</div>
+                            <div class="file-line">🔹 resize - Element resizing</div>
+                            <div class="file-line">🔹 outline - Element outline</div>
+                            <div class="file-line">🔹 outline-offset - Outline offset</div>
+                            <div class="file-line">🔹 box-sizing - Box sizing model</div>
+                            <div class="file-line">🔹 vertical-align - Vertical alignment</div>
+                            <div class="file-line">🔹 text-indent - Text indentation</div>
+                            <div class="file-line">🔹 text-shadow - Text shadow</div>
+                            <div class="file-line">🔹 word-break - Word breaking</div>
+                            <div class="file-line">🔹 word-wrap - Word wrapping</div>
+                            <div class="file-line">🔹 hyphens - Text hyphenation</div>
+                            <div class="file-line">🔹 direction - Text direction</div>
+                            <div class="file-line">🔹 unicode-bidi - Unicode bidirectional</div>
+                            <div class="file-line">🔹 writing-mode - Writing mode</div>
+                            <div class="file-line">🔹 text-orientation - Text orientation</div>
+                            <div class="file-line">🔹 tab-size - Tab size</div>
+                            <div class="file-line">🔹 counter-reset - Counter reset</div>
+                            <div class="file-line">🔹 counter-increment - Counter increment</div>
+                            <div class="file-line">🔹 content - Generated content</div>
+                            <div class="file-line">🔹 quotes - Quote marks</div>
+                            <div class="file-line">🔹 list-style - List styling</div>
+                            <div class="file-line">🔹 list-style-type - List marker type</div>
+                            <div class="file-line">🔹 list-style-position - List marker position</div>
+                            <div class="file-line">🔹 list-style-image - List marker image</div>
+                            <div class="file-line">🔹 table-layout - Table layout</div>
+                            <div class="file-line">🔹 border-collapse - Table border collapse</div>
+                            <div class="file-line">🔹 border-spacing - Table border spacing</div>
+                            <div class="file-line">🔹 empty-cells - Empty table cells</div>
+                            <div class="file-line">🔹 caption-side - Table caption side</div>
+                        </div>
+
+                        <h4>⚡ JavaScript Functionality & Interactivity</h4>
+                        <p>JavaScript brings websites to life with dynamic functionality, user interactions, and data manipulation. Learn modern ES6+ features and best practices.</p>
+
+                        <div class="code-block">
+                            <div class="code-header">⚡ script.js - Professional JavaScript with Modern Features</div>
+                            <div class="code-content"><span class="comment">// Configuration and constants</span>
+<span class="keyword">const</span> <span class="variable">CONFIG</span> = {
+    <span class="variable">API_BASE_URL</span>: <span class="string">'https://api.example.com'</span>,
+    <span class="variable">ANIMATION_DURATION</span>: <span class="number">300</span>,
+    <span class="variable">DEBOUNCE_DELAY</span>: <span class="number">250</span>
+};
+
+<span class="comment">// Utility functions</span>
+<span class="keyword">const</span> <span class="variable">utils</span> = {
+    <span class="function">debounce</span>(<span class="variable">func</span>, <span class="variable">wait</span>) {
+        <span class="keyword">let</span> <span class="variable">timeout</span>;
+        <span class="keyword">return</span> <span class="function">function executedFunction</span>(<span class="variable">...args</span>) {
+            <span class="keyword">const</span> <span class="variable">later</span> = () => {
+                <span class="function">clearTimeout</span>(<span class="variable">timeout</span>);
+                <span class="variable">func</span>(<span class="variable">...args</span>);
+            };
+            <span class="function">clearTimeout</span>(<span class="variable">timeout</span>);
+            <span class="variable">timeout</span> = <span class="function">setTimeout</span>(<span class="variable">later</span>, <span class="variable">wait</span>);
+        };
+    },
+
+    <span class="function">showNotification</span>(<span class="variable">message</span>, <span class="variable">type</span> = <span class="string">'info'</span>) {
+        <span class="keyword">const</span> <span class="variable">notification</span> = <span class="function">document</span>.<span class="function">createElement</span>(<span class="string">'div'</span>);
+        <span class="variable">notification</span>.<span class="variable">className</span> = <span class="string">`notification notification-${type}`</span>;
+        <span class="variable">notification</span>.<span class="variable">textContent</span> = <span class="variable">message</span>;
+        <span class="function">document</span>.<span class="variable">body</span>.<span class="function">appendChild</span>(<span class="variable">notification</span>);
+        
+        <span class="function">setTimeout</span>(() => {
+            <span class="variable">notification</span>.<span class="function">remove</span>();
+        }, <span class="number">3000</span>);
+    }
+};
+
+<span class="comment">// Main application class</span>
+<span class="keyword">class</span> <span class="function">App</span> {
+    <span class="function">constructor</span>() {
+        <span class="keyword">this</span>.<span class="variable">currentSection</span> = <span class="string">'home'</span>;
+        <span class="keyword">this</span>.<span class="variable">isLoading</span> = <span class="keyword">false</span>;
+        <span class="keyword">this</span>.<span class="variable">init</span>();
+    }
+
+    <span class="function">init</span>() {
+        <span class="keyword">this</span>.<span class="variable">setupEventListeners</span>();
+        <span class="keyword">this</span>.<span class="variable">setupIntersectionObserver</span>();
+        <span class="keyword">this</span>.<span class="variable">loadInitialData</span>();
+        <span class="keyword">this</span>.<span class="variable">setupSmoothScrolling</span>();
+    }
+
+    <span class="function">setupEventListeners</span>() {
+        <span class="comment">// Navigation event listeners</span>
+        <span class="keyword">const</span> <span class="variable">navLinks</span> = <span class="function">document</span>.<span class="function">querySelectorAll</span>(<span class="string">'.nav-menu a'</span>);
+        
+        <span class="variable">navLinks</span>.<span class="function">forEach</span>(<span class="variable">link</span> => {
+            <span class="variable">link</span>.<span class="function">addEventListener</span>(<span class="string">'click'</span>, <span class="variable">e</span> => {
+                <span class="variable">e</span>.<span class="function">preventDefault</span>();
+                <span class="keyword">this</span>.<span class="variable">navigateToSection</span>(<span class="variable">link</span>.<span class="variable">getAttribute</span>(<span class="string">'href'</span>).<span class="function">substring</span>(<span class="number">1</span>));
+            });
+        });
+
+        <span class="comment">// CTA button event listener</span>
+        <span class="keyword">const</span> <span class="variable">ctaButton</span> = <span class="function">document</span>.<span class="function">querySelector</span>(<span class="string">'.cta-button'</span>);
+        <span class="keyword">if</span> (<span class="variable">ctaButton</span>) {
+            <span class="variable">ctaButton</span>.<span class="function">addEventListener</span>(<span class="string">'click'</span>, () => {
+                <span class="keyword">this</span>.<span class="variable">handleCTAClick</span>();
+            });
+        }
+
+        <span class="comment">// Scroll event listener with debouncing</span>
+        <span class="function">window</span>.<span class="function">addEventListener</span>(<span class="string">'scroll'</span>, 
+            <span class="variable">utils</span>.<span class="function">debounce</span>(() => <span class="keyword">this</span>.<span class="variable">handleScroll</span>(), <span class="variable">CONFIG</span>.<span class="variable">DEBOUNCE_DELAY</span>)
+        );
+    }
+
+    <span class="function">setupIntersectionObserver</span>() {
+        <span class="keyword">const</span> <span class="variable">observer</span> = <span class="keyword">new</span> <span class="function">IntersectionObserver</span>((<span class="variable">entries</span>) => {
+            <span class="variable">entries</span>.<span class="function">forEach</span>(<span class="variable">entry</span> => {
+                <span class="keyword">if</span> (<span class="variable">entry</span>.<span class="variable">isIntersecting</span>) {
+                    <span class="variable">entry</span>.<span class="variable">target</span>.<span class="variable">classList</span>.<span class="function">add</span>(<span class="string">'animate-in'</span>);
+                }
+            });
+        }, { <span class="variable">threshold</span>: <span class="number">0.1</span> });
+
+        <span class="comment">// Observe all sections</span>
+        <span class="function">document</span>.<span class="function">querySelectorAll</span>(<span class="string">'section'</span>).<span class="function">forEach</span>(<span class="variable">section</span> => {
+            <span class="variable">observer</span>.<span class="function">observe</span>(<span class="variable">section</span>);
+        });
+    }
+
+    <span class="keyword">async</span> <span class="function">loadInitialData</span>() {
+        <span class="keyword">if</span> (<span class="keyword">this</span>.<span class="variable">isLoading</span>) <span class="keyword">return</span>;
+        
+        <span class="keyword">this</span>.<span class="variable">isLoading</span> = <span class="keyword">true</span>;
+        <span class="keyword">this</span>.<span class="variable">showLoadingState</span>();
+
+        <span class="keyword">try</span> {
+            <span class="keyword">const</span> <span class="variable">response</span> = <span class="keyword">await</span> <span class="function">fetch</span>(<span class="string">`${CONFIG.API_BASE_URL}/api/data`</span>);
+            
+            <span class="keyword">if</span> (!<span class="variable">response</span>.<span class="variable">ok</span>) {
+                <span class="keyword">throw</span> <span class="keyword">new</span> <span class="function">Error</span>(<span class="string">`HTTP error! status: ${response.status}`</span>);
+            }
+            
+            <span class="keyword">const</span> <span class="variable">data</span> = <span class="keyword">await</span> <span class="variable">response</span>.<span class="function">json</span>();
+            <span class="keyword">this</span>.<span class="variable">displayData</span>(<span class="variable">data</span>);
+            <span class="variable">utils</span>.<span class="function">showNotification</span>(<span class="string">'Data loaded successfully!'</span>, <span class="string">'success'</span>);
+        } <span class="keyword">catch</span> (<span class="variable">error</span>) {
+            <span class="function">console</span>.<span class="function">error</span>(<span class="string">'Error loading data:'</span>, <span class="variable">error</span>);
+            <span class="variable">utils</span>.<span class="function">showNotification</span>(<span class="string">'Failed to load data. Please try again.'</span>, <span class="string">'error'</span>);
+        } <span class="keyword">finally</span> {
+            <span class="keyword">this</span>.<span class="variable">isLoading</span> = <span class="keyword">false</span>;
+            <span class="keyword">this</span>.<span class="variable">hideLoadingState</span>();
+        }
+    }
+
+    <span class="function">displayData</span>(<span class="variable">data</span>) {
+        <span class="keyword">const</span> <span class="variable">main</span> = <span class="function">document</span>.<span class="function">querySelector</span>(<span class="string">'main'</span>);
+        
+        <span class="keyword">if</span> (!<span class="variable">main</span>) <span class="keyword">return</span>;
+
+        <span class="keyword">const</span> <span class="variable">contentHTML</span> = <span class="string">`
+            &lt;div class="data-display"&gt;
+                &lt;h2 class="data-title"&gt;${data.title || 'Welcome'}&lt;/h2&gt;
+                &lt;p class="data-content"&gt;${data.content || 'No content available'}&lt;/p&gt;
+                ${data.timestamp ? `&lt;p class="data-timestamp"&gt;Last updated: ${new Date(data.timestamp).toLocaleString()}&lt;/p&gt;` : ''}
+            &lt;/div&gt;
+        `</span>;
+
+        <span class="variable">main</span>.<span class="variable">insertAdjacentHTML</span>(<span class="string">'beforeend'</span>, <span class="variable">contentHTML</span>);
+    }
+
+    <span class="function">navigateToSection</span>(<span class="variable">sectionId</span>) {
+        <span class="keyword">const</span> <span class="variable">targetSection</span> = <span class="function">document</span>.<span class="function">getElementById</span>(<span class="variable">sectionId</span>);
+        
+        <span class="keyword">if</span> (<span class="variable">targetSection</span>) {
+            <span class="variable">targetSection</span>.<span class="function">scrollIntoView</span>({ 
+                <span class="variable">behavior</span>: <span class="string">'smooth'</span>,
+                <span class="variable">block</span>: <span class="string">'start'</span>
+            });
+            <span class="keyword">this</span>.<span class="variable">currentSection</span> = <span class="variable">sectionId</span>;
+            <span class="keyword">this</span>.<span class="variable">updateActiveNavLink</span>(<span class="variable">sectionId</span>);
+        }
+    }
+
+    <span class="function">updateActiveNavLink</span>(<span class="variable">sectionId</span>) {
+        <span class="function">document</span>.<span class="function">querySelectorAll</span>(<span class="string">'.nav-menu a'</span>).<span class="function">forEach</span>(<span class="variable">link</span> => {
+            <span class="variable">link</span>.<span class="variable">classList</span>.<span class="function">remove</span>(<span class="string">'active'</span>);
+            <span class="keyword">if</span> (<span class="variable">link</span>.<span class="variable">getAttribute</span>(<span class="string">'href'</span>) === <span class="string">`#${sectionId}`</span>) {
+                <span class="variable">link</span>.<span class="variable">classList</span>.<span class="function">add</span>(<span class="string">'active'</span>);
+            }
+        });
+    }
+
+    <span class="function">handleCTAClick</span>() {
+        <span class="variable">utils</span>.<span class="function">showNotification</span>(<span class="string">'Thank you for your interest! We\'ll be in touch soon.'</span>, <span class="string">'success'</span>);
+    }
+
+    <span class="function">handleScroll</span>() {
+        <span class="comment">// Add scroll-based animations or effects here</span>
+        <span class="keyword">const</span> <span class="variable">scrollTop</span> = <span class="function">window</span>.<span class="variable">pageYOffset</span>;
+        
+        <span class="keyword">if</span> (<span class="variable">scrollTop</span> > <span class="number">100</span>) {
+            <span class="function">document</span>.<span class="variable">body</span>.<span class="variable">classList</span>.<span class="function">add</span>(<span class="string">'scrolled'</span>);
+        } <span class="keyword">else</span> {
+            <span class="function">document</span>.<span class="variable">body</span>.<span class="variable">classList</span>.<span class="function">remove</span>(<span class="string">'scrolled'</span>);
+        }
+    }
+
+    <span class="function">showLoadingState</span>() {
+        <span class="keyword">const</span> <span class="variable">loader</span> = <span class="function">document</span>.<span class="function">createElement</span>(<span class="string">'div'</span>);
+        <span class="variable">loader</span>.<span class="variable">className</span> = <span class="string">'loading-spinner'</span>;
+        <span class="variable">loader</span>.<span class="variable">innerHTML</span> = <span class="string">'&lt;div class="spinner"&gt;&lt;/div&gt;'</span>;
+        <span class="function">document</span>.<span class="variable">body</span>.<span class="function">appendChild</span>(<span class="variable">loader</span>);
+    }
+
+    <span class="function">hideLoadingState</span>() {
+        <span class="keyword">const</span> <span class="variable">loader</span> = <span class="function">document</span>.<span class="function">querySelector</span>(<span class="string">'.loading-spinner'</span>);
+        <span class="keyword">if</span> (<span class="variable">loader</span>) {
+            <span class="variable">loader</span>.<span class="function">remove</span>();
+        }
+    }
+}
+
+<span class="comment">// Initialize the application when DOM is loaded</span>
+<span class="function">document</span>.<span class="function">addEventListener</span>(<span class="string">'DOMContentLoaded'</span>, () => {
+    <span class="keyword">const</span> <span class="variable">app</span> = <span class="keyword">new</span> <span class="function">App</span>();
+    
+    <span class="comment">// Make app globally accessible for debugging</span>
+    <span class="function">window</span>.<span class="variable">app</span> = <span class="variable">app</span>;
+});</div>
+                        </div>
+
+                        <div class="project-structure">
+                            <div class="folder-line">📁 JavaScript Cheat Sheet</div>
+                            <div class="file-line">🔹 const/let - Block-scoped variables (ES6+)</div>
+                            <div class="file-line">🔹 var - Function-scoped variables (legacy)</div>
+                            <div class="file-line">🔹 arrow functions - () => {} (ES6+)</div>
+                            <div class="file-line">🔹 template literals - `string ${variable}` (ES6+)</div>
+                            <div class="file-line">🔹 destructuring - const {prop} = object (ES6+)</div>
+                            <div class="file-line">🔹 spread operator - ...array (ES6+)</div>
+                            <div class="file-line">🔹 rest parameters - ...args (ES6+)</div>
+                            <div class="file-line">🔹 async/await - Promise handling (ES7+)</div>
+                            <div class="file-line">🔹 class - Object-oriented programming</div>
+                            <div class="file-line">🔹 constructor() - Class constructor</div>
+                            <div class="file-line">🔹 static - Static class methods</div>
+                            <div class="file-line">🔹 extends - Class inheritance</div>
+                            <div class="file-line">🔹 super() - Parent constructor call</div>
+                            <div class="file-line">🔹 get/set - Property accessors</div>
+                            <div class="file-line">🔹 fetch() - HTTP requests</div>
+                            <div class="file-line">🔹 XMLHttpRequest - Legacy HTTP requests</div>
+                            <div class="file-line">🔹 addEventListener() - Event handling</div>
+                            <div class="file-line">🔹 removeEventListener() - Remove event listeners</div>
+                            <div class="file-line">🔹 querySelector() - DOM selection</div>
+                            <div class="file-line">🔹 querySelectorAll() - Multiple DOM elements</div>
+                            <div class="file-line">🔹 getElementById() - Element by ID</div>
+                            <div class="file-line">🔹 getElementsByClassName() - Elements by class</div>
+                            <div class="file-line">🔹 getElementsByTagName() - Elements by tag</div>
+                            <div class="file-line">🔹 createElement() - Create DOM element</div>
+                            <div class="file-line">🔹 appendChild() - Add child element</div>
+                            <div class="file-line">🔹 removeChild() - Remove child element</div>
+                            <div class="file-line">🔹 cloneNode() - Clone DOM element</div>
+                            <div class="file-line">🔹 setAttribute() - Set element attribute</div>
+                            <div class="file-line">🔹 getAttribute() - Get element attribute</div>
+                            <div class="file-line">🔹 classList - Element class manipulation</div>
+                            <div class="file-line">🔹 dataset - Data attributes</div>
+                            <div class="file-line">🔹 innerHTML - Element HTML content</div>
+                            <div class="file-line">🔹 textContent - Element text content</div>
+                            <div class="file-line">🔹 forEach() - Array iteration</div>
+                            <div class="file-line">🔹 map() - Array transformation</div>
+                            <div class="file-line">🔹 filter() - Array filtering</div>
+                            <div class="file-line">🔹 reduce() - Array reduction</div>
+                            <div class="file-line">🔹 find() - Find array element</div>
+                            <div class="file-line">🔹 findIndex() - Find array element index</div>
+                            <div class="file-line">🔹 some() - Check if any element matches</div>
+                            <div class="file-line">🔹 every() - Check if all elements match</div>
+                            <div class="file-line">🔹 includes() - Check if array includes value</div>
+                            <div class="file-line">🔹 indexOf() - Find element index</div>
+                            <div class="file-line">🔹 lastIndexOf() - Find last element index</div>
+                            <div class="file-line">🔹 slice() - Extract array portion</div>
+                            <div class="file-line">🔹 splice() - Modify array</div>
+                            <div class="file-line">🔹 push() - Add to array end</div>
+                            <div class="file-line">🔹 pop() - Remove from array end</div>
+                            <div class="file-line">🔹 unshift() - Add to array start</div>
+                            <div class="file-line">🔹 shift() - Remove from array start</div>
+                            <div class="file-line">🔹 reverse() - Reverse array</div>
+                            <div class="file-line">🔹 sort() - Sort array</div>
+                            <div class="file-line">🔹 join() - Join array to string</div>
+                            <div class="file-line">🔹 split() - Split string to array</div>
+                            <div class="file-line">🔹 concat() - Concatenate arrays</div>
+                            <div class="file-line">🔹 flat() - Flatten nested arrays</div>
+                            <div class="file-line">🔹 flatMap() - Map and flatten</div>
+                            <div class="file-line">🔹 Array.from() - Create array from iterable</div>
+                            <div class="file-line">🔹 Array.isArray() - Check if is array</div>
+                            <div class="file-line">🔹 localStorage - Browser storage</div>
+                            <div class="file-line">🔹 sessionStorage - Session storage</div>
+                            <div class="file-line">🔹 JSON.parse()/stringify() - Data conversion</div>
+                            <div class="file-line">🔹 setTimeout()/setInterval() - Timing</div>
+                            <div class="file-line">🔹 clearTimeout()/clearInterval() - Clear timers</div>
+                            <div class="file-line">🔹 requestAnimationFrame() - Smooth animations</div>
+                            <div class="file-line">🔹 cancelAnimationFrame() - Cancel animation</div>
+                            <div class="file-line">🔹 IntersectionObserver - Scroll detection</div>
+                            <div class="file-line">🔹 MutationObserver - DOM changes</div>
+                            <div class="file-line">🔹 ResizeObserver - Element resize</div>
+                            <div class="file-line">🔹 PerformanceObserver - Performance monitoring</div>
+                            <div class="file-line">🔹 Error handling - try/catch blocks</div>
+                            <div class="file-line">🔹 throw - Throw custom errors</div>
+                            <div class="file-line">🔹 Error() - Create error object</div>
+                            <div class="file-line">🔹 finally - Always execute code</div>
+                            <div class="file-line">🔹 Promise - Asynchronous operations</div>
+                            <div class="file-line">🔹 Promise.resolve() - Resolve promise</div>
+                            <div class="file-line">🔹 Promise.reject() - Reject promise</div>
+                            <div class="file-line">🔹 Promise.all() - Wait for all promises</div>
+                            <div class="file-line">🔹 Promise.race() - Wait for first promise</div>
+                            <div class="file-line">🔹 Promise.allSettled() - Wait for all to settle</div>
+                            <div class="file-line">🔹 Promise.any() - Wait for first to resolve</div>
+                            <div class="file-line">🔹 then() - Promise success handler</div>
+                            <div class="file-line">🔹 catch() - Promise error handler</div>
+                            <div class="file-line">🔹 Object.keys() - Get object keys</div>
+                            <div class="file-line">🔹 Object.values() - Get object values</div>
+                            <div class="file-line">🔹 Object.entries() - Get object entries</div>
+                            <div class="file-line">🔹 Object.assign() - Copy object properties</div>
+                            <div class="file-line">🔹 Object.create() - Create object with prototype</div>
+                            <div class="file-line">🔹 Object.freeze() - Freeze object</div>
+                            <div class="file-line">🔹 Object.seal() - Seal object</div>
+                            <div class="file-line">🔹 Object.is() - Compare values</div>
+                            <div class="file-line">🔹 Object.hasOwn() - Check property existence</div>
+                            <div class="file-line">🔹 Math.random() - Random number</div>
+                            <div class="file-line">🔹 Math.floor() - Round down</div>
+                            <div class="file-line">🔹 Math.ceil() - Round up</div>
+                            <div class="file-line">🔹 Math.round() - Round to nearest</div>
+                            <div class="file-line">🔹 Math.max()/min() - Maximum/minimum</div>
+                            <div class="file-line">🔹 Math.abs() - Absolute value</div>
+                            <div class="file-line">🔹 Math.pow() - Power function</div>
+                            <div class="file-line">🔹 Math.sqrt() - Square root</div>
+                            <div class="file-line">🔹 Date() - Current date/time</div>
+                            <div class="file-line">🔹 Date.now() - Current timestamp</div>
+                            <div class="file-line">🔹 getTime() - Get timestamp</div>
+                            <div class="file-line">🔹 getFullYear() - Get year</div>
+                            <div class="file-line">🔹 getMonth() - Get month (0-11)</div>
+                            <div class="file-line">🔹 getDate() - Get day of month</div>
+                            <div class="file-line">🔹 getDay() - Get day of week</div>
+                            <div class="file-line">🔹 getHours() - Get hours</div>
+                            <div class="file-line">🔹 getMinutes() - Get minutes</div>
+                            <div class="file-line">🔹 getSeconds() - Get seconds</div>
+                            <div class="file-line">🔹 toISOString() - ISO date string</div>
+                            <div class="file-line">🔹 toLocaleString() - Localized date string</div>
+                            <div class="file-line">🔹 RegExp - Regular expressions</div>
+                            <div class="file-line">🔹 test() - Test regex match</div>
+                            <div class="file-line">🔹 exec() - Execute regex match</div>
+                            <div class="file-line">🔹 match() - String regex match</div>
+                            <div class="file-line">🔹 replace() - String replacement</div>
+                            <div class="file-line">🔹 search() - String search</div>
+                            <div class="file-line">🔹 split() - String splitting</div>
+                            <div class="file-line">🔹 trim() - Remove whitespace</div>
+                            <div class="file-line">🔹 toUpperCase()/toLowerCase() - Case conversion</div>
+                            <div class="file-line">🔹 substring() - Extract substring</div>
+                            <div class="file-line">🔹 substr() - Extract substring (deprecated)</div>
+                            <div class="file-line">🔹 charAt() - Get character at position</div>
+                            <div class="file-line">🔹 charCodeAt() - Get character code</div>
+                            <div class="file-line">🔹 startsWith()/endsWith() - String checking</div>
+                            <div class="file-line">🔹 includes() - String inclusion check</div>
+                            <div class="file-line">🔹 repeat() - Repeat string</div>
+                            <div class="file-line">🔹 padStart()/padEnd() - String padding</div>
+                            <div class="file-line">🔹 parseInt()/parseFloat() - Number parsing</div>
+                            <div class="file-line">🔹 isNaN() - Check if not a number</div>
+                            <div class="file-line">🔹 isFinite() - Check if finite number</div>
+                            <div class="file-line">🔹 Number.isInteger() - Check if integer</div>
+                            <div class="file-line">🔹 Number.isSafeInteger() - Check if safe integer</div>
+                            <div class="file-line">🔹 toFixed() - Format number</div>
+                            <div class="file-line">🔹 toPrecision() - Format number precision</div>
+                            <div class="file-line">🔹 toString() - Convert to string</div>
+                            <div class="file-line">🔹 valueOf() - Get primitive value</div>
+                            <div class="file-line">🔹 Symbol - Unique identifier</div>
+                            <div class="file-line">🔹 Symbol.for() - Global symbol</div>
+                            <div class="file-line">🔹 Symbol.keyFor() - Get symbol key</div>
+                            <div class="file-line">🔹 WeakMap - Weak key map</div>
+                            <div class="file-line">🔹 WeakSet - Weak value set</div>
+                            <div class="file-line">🔹 Proxy - Object proxy</div>
+                            <div class="file-line">🔹 Reflect - Reflection API</div>
+                            <div class="file-line">🔹 Generator - Generator functions</div>
+                            <div class="file-line">🔹 yield - Generator yield</div>
+                            <div class="file-line">🔹 next() - Generator next</div>
+                            <div class="file-line">🔹 throw() - Generator throw</div>
+                            <div class="file-line">🔹 return() - Generator return</div>
+                            <div class="file-line">🔹 Map - Key-value collection</div>
+                            <div class="file-line">🔹 Set - Unique value collection</div>
+                            <div class="file-line">🔹 WeakRef - Weak reference</div>
+                            <div class="file-line">🔹 FinalizationRegistry - Finalization registry</div>
+                            <div class="file-line">🔹 BigInt - Large integers</div>
+                            <div class="file-line">🔹 globalThis - Global object</div>
+                            <div class="file-line">🔹 import() - Dynamic imports</div>
+                            <div class="file-line">🔹 export - Module exports</div>
+                            <div class="file-line">🔹 import - Module imports</div>
+                            <div class="file-line">🔹 default export - Default module export</div>
+                            <div class="file-line">🔹 named export - Named module export</div>
+                            <div class="file-line">🔹 namespace import - Namespace import</div>
+                            <div class="file-line">🔹 re-export - Re-export modules</div>
+                            <div class="file-line">🔹 top-level await - Top-level await</div>
+                            <div class="file-line">🔹 import.meta - Import metadata</div>
+                            <div class="file-line">🔹 import.meta.url - Module URL</div>
+                            <div class="file-line">🔹 import.meta.resolve() - Resolve module</div>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <h3>📖 Module 2: Backend Development</h3>
+                        
+                        <h4>Node.js Server Setup</h4>
+                        <div class="code-block">
+                            <div class="code-header">⚡ server.js</div>
+                            <div class="code-content"><span class="comment">// Import required modules</span>
+<span class="keyword">const</span> <span class="variable">express</span> = <span class="function">require</span>(<span class="string">'express'</span>);
+<span class="keyword">const</span> <span class="variable">cors</span> = <span class="function">require</span>(<span class="string">'cors'</span>);
+<span class="keyword">const</span> <span class="variable">path</span> = <span class="function">require</span>(<span class="string">'path'</span>);
+
+<span class="comment">// Initialize Express app</span>
+<span class="keyword">const</span> <span class="variable">app</span> = <span class="function">express</span>();
+<span class="keyword">const</span> <span class="variable">PORT</span> = <span class="function">process</span>.<span class="variable">env</span>.<span class="variable">PORT</span> || <span class="number">3000</span>;
+
+<span class="comment">// Middleware setup</span>
+<span class="variable">app</span>.<span class="function">use</span>(<span class="function">cors</span>());
+<span class="variable">app</span>.<span class="function">use</span>(<span class="function">express</span>.<span class="function">json</span>());
+<span class="variable">app</span>.<span class="function">use</span>(<span class="function">express</span>.<span class="function">static</span>(<span class="function">path</span>.<span class="function">join</span>(<span class="function">__dirname</span>, <span class="string">'public'</span>)));
+
+<span class="comment">// API Routes</span>
+<span class="variable">app</span>.<span class="function">get</span>(<span class="string">'/api/data'</span>, (<span class="variable">req</span>, <span class="variable">res</span>) => {
+    <span class="variable">res</span>.<span class="function">json</span>({
+        <span class="variable">title</span>: <span class="string">'Welcome to Full-Stack App'</span>,
+        <span class="variable">content</span>: <span class="string">'This data is served from the backend!'</span>,
+        <span class="variable">timestamp</span>: <span class="keyword">new</span> <span class="function">Date</span>().<span class="function">toISOString</span>()
+    });
+});
+
+<span class="variable">app</span>.<span class="function">post</span>(<span class="string">'/api/users'</span>, (<span class="variable">req</span>, <span class="variable">res</span>) => {
+    <span class="keyword">const</span> { <span class="variable">name</span>, <span class="variable">email</span> } = <span class="variable">req</span>.<span class="variable">body</span>;
+    
+    <span class="keyword">if</span> (!<span class="variable">name</span> || !<span class="variable">email</span>) {
+        <span class="keyword">return</span> <span class="variable">res</span>.<span class="function">status</span>(<span class="number">400</span>).<span class="function">json</span>({
+            <span class="variable">error</span>: <span class="string">'Name and email are required'</span>
+        });
+    }
+    
+    <span class="comment">// In a real app, save to database</span>
+    <span class="keyword">const</span> <span class="variable">newUser</span> = {
+        <span class="variable">id</span>: <span class="function">Date</span>.<span class="function">now</span>(),
+        <span class="variable">name</span>,
+        <span class="variable">email</span>,
+        <span class="variable">createdAt</span>: <span class="keyword">new</span> <span class="function">Date</span>().<span class="function">toISOString</span>()
+    };
+    
+    <span class="variable">res</span>.<span class="function">status</span>(<span class="number">201</span>).<span class="function">json</span>(<span class="variable">newUser</span>);
+});
+
+<span class="comment">// Start server</span>
+<span class="variable">app</span>.<span class="function">listen</span>(<span class="variable">PORT</span>, () => {
+    <span class="function">console</span>.<span class="function">log</span>(<span class="string">`🚀 Server running on port ${PORT}`</span>);
+});</div>
+                        </div>
+
+                        <h4>Package Configuration</h4>
+                        <div class="code-block">
+                            <div class="code-header">📋 package.json</div>
+                            <div class="code-content">{
+  <span class="string">"name"</span>: <span class="string">"fullstack-tutorial"</span>,
+  <span class="string">"version"</span>: <span class="string">"1.0.0"</span>,
+  <span class="string">"description"</span>: <span class="string">"Complete full-stack development tutorial"</span>,
+  <span class="string">"main"</span>: <span class="string">"server.js"</span>,
+  <span class="string">"scripts"</span>: {
+    <span class="string">"start"</span>: <span class="string">"node server.js"</span>,
+    <span class="string">"dev"</span>: <span class="string">"nodemon server.js"</span>,
+    <span class="string">"test"</span>: <span class="string">"jest"</span>
+  },
+  <span class="string">"dependencies"</span>: {
+    <span class="string">"express"</span>: <span class="string">"^4.18.2"</span>,
+    <span class="string">"cors"</span>: <span class="string">"^2.8.5"</span>,
+    <span class="string">"body-parser"</span>: <span class="string">"^1.20.2"</span>
+  },
+  <span class="string">"devDependencies"</span>: {
+    <span class="string">"nodemon"</span>: <span class="string">"^3.0.1"</span>,
+    <span class="string">"jest"</span>: <span class="string">"^29.7.0"</span>
+  }
+}</div>
+                        </div>
+
+                        <div class="project-structure">
+                            <div class="folder-line">📁 Node.js Cheat Sheet</div>
+                            <div class="file-line">🔹 require() - Import modules</div>
+                            <div class="file-line">🔹 module.exports - Export modules</div>
+                            <div class="file-line">🔹 exports - Shorthand export</div>
+                            <div class="file-line">🔹 __dirname - Current directory path</div>
+                            <div class="file-line">🔹 __filename - Current file path</div>
+                            <div class="file-line">🔹 process.env - Environment variables</div>
+                            <div class="file-line">🔹 process.argv - Command line arguments</div>
+                            <div class="file-line">🔹 process.cwd() - Current working directory</div>
+                            <div class="file-line">🔹 process.exit() - Exit process</div>
+                            <div class="file-line">🔹 console.log() - Output to console</div>
+                            <div class="file-line">🔹 console.error() - Error output</div>
+                            <div class="file-line">🔹 console.warn() - Warning output</div>
+                            <div class="file-line">🔹 console.table() - Tabular output</div>
+                            <div class="file-line">🔹 console.time()/timeEnd() - Performance timing</div>
+                            <div class="file-line">🔹 Buffer - Binary data handling</div>
+                            <div class="file-line">🔹 Buffer.from() - Create buffer</div>
+                            <div class="file-line">🔹 Buffer.alloc() - Allocate buffer</div>
+                            <div class="file-line">🔹 fs.readFile() - Read file asynchronously</div>
+                            <div class="file-line">🔹 fs.readFileSync() - Read file synchronously</div>
+                            <div class="file-line">🔹 fs.writeFile() - Write file asynchronously</div>
+                            <div class="file-line">🔹 fs.writeFileSync() - Write file synchronously</div>
+                            <div class="file-line">🔹 fs.appendFile() - Append to file</div>
+                            <div class="file-line">🔹 fs.unlink() - Delete file</div>
+                            <div class="file-line">🔹 fs.mkdir() - Create directory</div>
+                            <div class="file-line">🔹 fs.rmdir() - Remove directory</div>
+                            <div class="file-line">🔹 fs.stat() - Get file stats</div>
+                            <div class="file-line">🔹 fs.access() - Check file access</div>
+                            <div class="file-line">🔹 path.join() - Join path segments</div>
+                            <div class="file-line">🔹 path.resolve() - Resolve absolute path</div>
+                            <div class="file-line">🔹 path.basename() - Get filename</div>
+                            <div class="file-line">🔹 path.dirname() - Get directory name</div>
+                            <div class="file-line">🔹 path.extname() - Get file extension</div>
+                            <div class="file-line">🔹 path.parse() - Parse path object</div>
+                            <div class="file-line">🔹 url.parse() - Parse URL</div>
+                            <div class="file-line">🔹 url.format() - Format URL</div>
+                            <div class="file-line">🔹 querystring.parse() - Parse query string</div>
+                            <div class="file-line">🔹 querystring.stringify() - Stringify query</div>
+                            <div class="file-line">🔹 crypto.createHash() - Create hash</div>
+                            <div class="file-line">🔹 crypto.randomBytes() - Generate random bytes</div>
+                            <div class="file-line">🔹 crypto.createCipher() - Create cipher</div>
+                            <div class="file-line">🔹 crypto.createDecipher() - Create decipher</div>
+                            <div class="file-line">🔹 zlib.gzip() - Compress data</div>
+                            <div class="file-line">🔹 zlib.gunzip() - Decompress data</div>
+                            <div class="file-line">🔹 events.EventEmitter - Event emitter</div>
+                            <div class="file-line">🔹 emitter.on() - Listen for events</div>
+                            <div class="file-line">🔹 emitter.emit() - Emit events</div>
+                            <div class="file-line">🔹 emitter.once() - Listen once</div>
+                            <div class="file-line">🔹 emitter.removeListener() - Remove listener</div>
+                            <div class="file-line">🔹 stream.Readable - Readable stream</div>
+                            <div class="file-line">🔹 stream.Writable - Writable stream</div>
+                            <div class="file-line">🔹 stream.Duplex - Duplex stream</div>
+                            <div class="file-line">🔹 stream.Transform - Transform stream</div>
+                            <div class="file-line">🔹 stream.pipe() - Pipe streams</div>
+                            <div class="file-line">🔹 http.createServer() - Create HTTP server</div>
+                            <div class="file-line">🔹 http.request() - Make HTTP request</div>
+                            <div class="file-line">🔹 https.createServer() - Create HTTPS server</div>
+                            <div class="file-line">🔹 https.request() - Make HTTPS request</div>
+                            <div class="file-line">🔹 net.createServer() - Create TCP server</div>
+                            <div class="file-line">🔹 net.connect() - Connect to TCP server</div>
+                            <div class="file-line">🔹 dgram.createSocket() - Create UDP socket</div>
+                            <div class="file-line">🔹 child_process.spawn() - Spawn process</div>
+                            <div class="file-line">🔹 child_process.exec() - Execute command</div>
+                            <div class="file-line">🔹 child_process.fork() - Fork process</div>
+                            <div class="file-line">🔹 cluster.fork() - Fork worker</div>
+                            <div class="file-line">🔹 cluster.isMaster - Check if master</div>
+                            <div class="file-line">🔹 cluster.isWorker - Check if worker</div>
+                            <div class="file-line">🔹 os.platform() - Get platform</div>
+                            <div class="file-line">🔹 os.arch() - Get architecture</div>
+                            <div class="file-line">🔹 os.cpus() - Get CPU info</div>
+                            <div class="file-line">🔹 os.meminfo() - Get memory info</div>
+                            <div class="file-line">🔹 os.hostname() - Get hostname</div>
+                            <div class="file-line">🔹 os.userInfo() - Get user info</div>
+                            <div class="file-line">🔹 util.inherits() - Inherit from EventEmitter</div>
+                            <div class="file-line">🔹 util.promisify() - Convert callback to promise</div>
+                            <div class="file-line">🔹 util.format() - Format string</div>
+                            <div class="file-line">🔹 util.inspect() - Inspect object</div>
+                            <div class="file-line">🔹 timers.setTimeout() - Set timeout</div>
+                            <div class="file-line">🔹 timers.setInterval() - Set interval</div>
+                            <div class="file-line">🔹 timers.setImmediate() - Set immediate</div>
+                            <div class="file-line">🔹 timers.clearTimeout() - Clear timeout</div>
+                            <div class="file-line">🔹 timers.clearInterval() - Clear interval</div>
+                            <div class="file-line">🔹 timers.clearImmediate() - Clear immediate</div>
+                            <div class="file-line">🔹 vm.runInContext() - Run code in context</div>
+                            <div class="file-line">🔹 vm.createContext() - Create context</div>
+                            <div class="file-line">🔹 vm.Script - Compile script</div>
+                            <div class="file-line">🔹 repl.start() - Start REPL</div>
+                            <div class="file-line">🔹 readline.createInterface() - Create readline</div>
+                            <div class="file-line">🔹 readline.question() - Ask question</div>
+                            <div class="file-line">🔹 readline.on() - Listen for events</div>
+                            <div class="file-line">🔹 tty.isatty() - Check if TTY</div>
+                            <div class="file-line">🔹 tty.ReadStream - TTY read stream</div>
+                            <div class="file-line">🔹 tty.WriteStream - TTY write stream</div>
+                            <div class="file-line">🔹 assert() - Assertion testing</div>
+                            <div class="file-line">🔹 assert.equal() - Assert equality</div>
+                            <div class="file-line">🔹 assert.strictEqual() - Strict equality</div>
+                            <div class="file-line">🔹 assert.deepEqual() - Deep equality</div>
+                            <div class="file-line">🔹 assert.throws() - Assert exception</div>
+                            <div class="file-line">🔹 assert.doesNotThrow() - Assert no exception</div>
+                            <div class="file-line">🔹 assert.ifError() - Assert no error</div>
+                            <div class="file-line">🔹 assert.fail() - Force failure</div>
+                            <div class="file-line">🔹 assert.ok() - Assert truthy</div>
+                            <div class="file-line">🔹 assert.notEqual() - Assert inequality</div>
+                            <div class="file-line">🔹 assert.notStrictEqual() - Strict inequality</div>
+                            <div class="file-line">🔹 assert.notDeepEqual() - Deep inequality</div>
+                            <div class="file-line">🔹 assert.rejects() - Assert promise rejection</div>
+                            <div class="file-line">🔹 assert.doesNotReject() - Assert no rejection</div>
+                            <div class="file-line">🔹 assert.match() - Assert regex match</div>
+                            <div class="file-line">🔹 assert.doesNotMatch() - Assert no regex match</div>
+                            <div class="file-line">🔹 assert.approximately() - Assert approximate</div>
+                            <div class="file-line">🔹 assert.notApproximately() - Assert not approximate</div>
+                            <div class="file-line">🔹 assert.operator() - Assert operator</div>
+                            <div class="file-line">🔹 assert.notOperator() - Assert not operator</div>
+                            <div class="file-line">🔹 assert.typeOf() - Assert type</div>
+                            <div class="file-line">🔹 assert.notTypeOf() - Assert not type</div>
+                            <div class="file-line">🔹 assert.instanceOf() - Assert instanceof</div>
+                            <div class="file-line">🔹 assert.notInstanceOf() - Assert not instanceof</div>
+                            <div class="file-line">🔹 assert.includes() - Assert inclusion</div>
+                            <div class="file-line">🔹 assert.notIncludes() - Assert not inclusion</div>
+                            <div class="file-line">🔹 assert.property() - Assert property</div>
+                            <div class="file-line">🔹 assert.notProperty() - Assert not property</div>
+                            <div class="file-line">🔹 assert.propertyVal() - Assert property value</div>
+                            <div class="file-line">🔹 assert.notPropertyVal() - Assert not property value</div>
+                            <div class="file-line">🔹 assert.deepProperty() - Assert deep property</div>
+                            <div class="file-line">🔹 assert.notDeepProperty() - Assert not deep property</div>
+                            <div class="file-line">🔹 assert.deepPropertyVal() - Assert deep property value</div>
+                            <div class="file-line">🔹 assert.notDeepPropertyVal() - Assert not deep property value</div>
+                            <div class="file-line">🔹 assert.lengthOf() - Assert length</div>
+                            <div class="file-line">🔹 assert.hasAnyKeys() - Assert has any keys</div>
+                            <div class="file-line">🔹 assert.hasAllKeys() - Assert has all keys</div>
+                            <div class="file-line">🔹 assert.containsAllKeys() - Assert contains all keys</div>
+                            <div class="file-line">🔹 assert.doesNotHaveAnyKeys() - Assert no keys</div>
+                            <div class="file-line">🔹 assert.doesNotHaveAllKeys() - Assert not all keys</div>
+                            <div class="file-line">🔹 assert.hasAnyDeepKeys() - Assert has any deep keys</div>
+                            <div class="file-line">🔹 assert.hasAllDeepKeys() - Assert has all deep keys</div>
+                            <div class="file-line">🔹 assert.containsAllDeepKeys() - Assert contains all deep keys</div>
+                            <div class="file-line">🔹 assert.doesNotHaveAnyDeepKeys() - Assert no deep keys</div>
+                            <div class="file-line">🔹 assert.doesNotHaveAllDeepKeys() - Assert not all deep keys</div>
+                            <div class="file-line">🔹 assert.nestedProperty() - Assert nested property</div>
+                            <div class="file-line">🔹 assert.notNestedProperty() - Assert not nested property</div>
+                            <div class="file-line">🔹 assert.nestedPropertyVal() - Assert nested property value</div>
+                            <div class="file-line">🔹 assert.notNestedPropertyVal() - Assert not nested property value</div>
+                            <div class="file-line">🔹 assert.nestedInclude() - Assert nested include</div>
+                            <div class="file-line">🔹 assert.notNestedInclude() - Assert not nested include</div>
+                            <div class="file-line">🔹 assert.nestedPropertyVal() - Assert nested property value</div>
+                            <div class="file-line">🔹 assert.notNestedPropertyVal() - Assert not nested property value</div>
+                            <div class="file-line">🔹 assert.nestedPropertyVal() - Assert nested property value</div>
+                            <div class="file-line">🔹 assert.notNestedPropertyVal() - Assert not nested property value</div>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <h3>📖 Module 3: Database Integration</h3>
+                        
+                        <h4>SQL Database Schema</h4>
+                        <div class="code-block">
+                            <div class="code-header">🗄️ database.sql</div>
+                            <div class="code-content"><span class="comment">-- Create database</span>
+<span class="keyword">CREATE DATABASE</span> <span class="variable">fullstack_tutorial</span>;
+<span class="keyword">USE</span> <span class="variable">fullstack_tutorial</span>;
+
+<span class="comment">-- Users table</span>
+<span class="keyword">CREATE TABLE</span> <span class="variable">users</span> (
+    <span class="variable">id</span> <span class="keyword">INT</span> <span class="keyword">PRIMARY KEY</span> <span class="keyword">AUTO_INCREMENT</span>,
+    <span class="variable">username</span> <span class="keyword">VARCHAR</span>(<span class="number">50</span>) <span class="keyword">UNIQUE NOT NULL</span>,
+    <span class="variable">email</span> <span class="keyword">VARCHAR</span>(<span class="number">100</span>) <span class="keyword">UNIQUE NOT NULL</span>,
+    <span class="variable">password_hash</span> <span class="keyword">VARCHAR</span>(<span class="number">255</span>) <span class="keyword">NOT NULL</span>,
+    <span class="variable">created_at</span> <span class="keyword">TIMESTAMP</span> <span class="keyword">DEFAULT</span> <span class="function">CURRENT_TIMESTAMP</span>,
+    <span class="variable">updated_at</span> <span class="keyword">TIMESTAMP</span> <span class="keyword">DEFAULT</span> <span class="function">CURRENT_TIMESTAMP</span> <span class="keyword">ON UPDATE</span> <span class="function">CURRENT_TIMESTAMP</span>
+);
+
+<span class="comment">-- Posts table</span>
+<span class="keyword">CREATE TABLE</span> <span class="variable">posts</span> (
+    <span class="variable">id</span> <span class="keyword">INT</span> <span class="keyword">PRIMARY KEY</span> <span class="keyword">AUTO_INCREMENT</span>,
+    <span class="variable">user_id</span> <span class="keyword">INT</span> <span class="keyword">NOT NULL</span>,
+    <span class="variable">title</span> <span class="keyword">VARCHAR</span>(<span class="number">200</span>) <span class="keyword">NOT NULL</span>,
+    <span class="variable">content</span> <span class="keyword">TEXT</span>,
+    <span class="variable">created_at</span> <span class="keyword">TIMESTAMP</span> <span class="keyword">DEFAULT</span> <span class="function">CURRENT_TIMESTAMP</span>,
+    <span class="keyword">FOREIGN KEY</span> (<span class="variable">user_id</span>) <span class="keyword">REFERENCES</span> <span class="variable">users</span>(<span class="variable">id</span>) <span class="keyword">ON DELETE</span> <span class="keyword">CASCADE</span>
+);
+
+<span class="comment">-- Insert sample data</span>
+<span class="keyword">INSERT INTO</span> <span class="variable">users</span> (<span class="variable">username</span>, <span class="variable">email</span>, <span class="variable">password_hash</span>) 
+<span class="keyword">VALUES</span> 
+(<span class="string">'john_doe'</span>, <span class="string">'john@example.com'</span>, <span class="string">'hashed_password_123'</span>),
+(<span class="string">'jane_smith'</span>, <span class="string">'jane@example.com'</span>, <span class="string">'hashed_password_456'</span>);
+
+<span class="keyword">INSERT INTO</span> <span class="variable">posts</span> (<span class="variable">user_id</span>, <span class="variable">title</span>, <span class="variable">content</span>)
+<span class="keyword">VALUES</span>
+(<span class="number">1</span>, <span class="string">'My First Post'</span>, <span class="string">'This is my first blog post!'</span>),
+(<span class="number">2</span>, <span class="string">'Learning Full-Stack'</span>, <span class="string">'Full-stack development is amazing!'</span>);</div>
+                        </div>
+
+                        <div class="terminal">
+                            <span class="command">$ mysql -u root -p</span>
+                            <span class="output">Enter password: ********</span>
+                            <span class="output">Welcome to the MySQL monitor...</span>
+                            <span class="command">mysql> source database.sql;</span>
+                            <span class="output">Query OK, 2 rows affected</span>
+                            <span class="command">mysql> SELECT * FROM users;</span>
+                            <span class="output">+----+-----------+------------------+-------------------+---------------------+</span>
+                            <span class="output">| id | username  | email            | password_hash     | created_at          |</span>
+                            <span class="output">+----+-----------+------------------+-------------------+---------------------+</span>
+                            <span class="output">|  1 | john_doe  | john@example.com | hashed_password_123| 2024-01-15 10:30:00 |</span>
+                            <span class="output">|  2 | jane_smith| jane@example.com | hashed_password_456| 2024-01-15 10:30:00 |</span>
+                            <span class="output">+----+-----------+------------------+-------------------+---------------------+</span>
+                        </div>
+
+                        <div class="project-structure">
+                            <div class="folder-line">📁 SQL Cheat Sheet</div>
+                            <div class="file-line">🔹 SELECT - Query data</div>
+                            <div class="file-line">🔹 FROM - Specify table</div>
+                            <div class="file-line">🔹 WHERE - Filter conditions</div>
+                            <div class="file-line">🔹 ORDER BY - Sort results</div>
+                            <div class="file-line">🔹 GROUP BY - Group results</div>
+                            <div class="file-line">🔹 HAVING - Filter groups</div>
+                            <div class="file-line">🔹 LIMIT - Limit results</div>
+                            <div class="file-line">🔹 OFFSET - Skip results</div>
+                            <div class="file-line">🔹 INSERT INTO - Add data</div>
+                            <div class="file-line">🔹 UPDATE - Modify data</div>
+                            <div class="file-line">🔹 DELETE FROM - Remove data</div>
+                            <div class="file-line">🔹 CREATE TABLE - Create table</div>
+                            <div class="file-line">🔹 ALTER TABLE - Modify table</div>
+                            <div class="file-line">🔹 DROP TABLE - Delete table</div>
+                            <div class="file-line">🔹 CREATE DATABASE - Create database</div>
+                            <div class="file-line">🔹 USE - Select database</div>
+                            <div class="file-line">🔹 DROP DATABASE - Delete database</div>
+                            <div class="file-line">🔹 CREATE INDEX - Create index</div>
+                            <div class="file-line">🔹 DROP INDEX - Delete index</div>
+                            <div class="file-line">🔹 CREATE VIEW - Create view</div>
+                            <div class="file-line">🔹 DROP VIEW - Delete view</div>
+                            <div class="file-line">🔹 CREATE PROCEDURE - Create stored procedure</div>
+                            <div class="file-line">🔹 CALL - Execute procedure</div>
+                            <div class="file-line">🔹 CREATE FUNCTION - Create function</div>
+                            <div class="file-line">🔹 CREATE TRIGGER - Create trigger</div>
+                            <div class="file-line">🔹 CREATE USER - Create user</div>
+                            <div class="file-line">🔹 GRANT - Grant privileges</div>
+                            <div class="file-line">🔹 REVOKE - Revoke privileges</div>
+                            <div class="file-line">🔹 COMMIT - Commit transaction</div>
+                            <div class="file-line">🔹 ROLLBACK - Rollback transaction</div>
+                            <div class="file-line">🔹 START TRANSACTION - Begin transaction</div>
+                            <div class="file-line">🔹 SAVEPOINT - Create savepoint</div>
+                            <div class="file-line">🔹 RELEASE SAVEPOINT - Release savepoint</div>
+                            <div class="file-line">🔹 SET - Set variables</div>
+                            <div class="file-line">🔹 SHOW - Show information</div>
+                            <div class="file-line">🔹 DESCRIBE - Describe table</div>
+                            <div class="file-line">🔹 EXPLAIN - Explain query</div>
+                            <div class="file-line">🔹 ANALYZE - Analyze table</div>
+                            <div class="file-line">🔹 OPTIMIZE - Optimize table</div>
+                            <div class="file-line">🔹 REPAIR - Repair table</div>
+                            <div class="file-line">🔹 CHECK - Check table</div>
+                            <div class="file-line">🔹 BACKUP - Backup database</div>
+                            <div class="file-line">🔹 RESTORE - Restore database</div>
+                            <div class="file-line">🔹 IMPORT - Import data</div>
+                            <div class="file-line">🔹 EXPORT - Export data</div>
+                            <div class="file-line">🔹 LOAD DATA - Load data from file</div>
+                            <div class="file-line">🔹 SELECT INTO - Export to file</div>
+                            <div class="file-line">🔹 UNION - Combine queries</div>
+                            <div class="file-line">🔹 UNION ALL - Combine queries (duplicates)</div>
+                            <div class="file-line">🔹 INTERSECT - Common results</div>
+                            <div class="file-line">🔹 EXCEPT - Different results</div>
+                            <div class="file-line">🔹 JOIN - Join tables</div>
+                            <div class="file-line">🔹 INNER JOIN - Inner join</div>
+                            <div class="file-line">🔹 LEFT JOIN - Left outer join</div>
+                            <div class="file-line">🔹 RIGHT JOIN - Right outer join</div>
+                            <div class="file-line">🔹 FULL JOIN - Full outer join</div>
+                            <div class="file-line">🔹 CROSS JOIN - Cross join</div>
+                            <div class="file-line">🔹 SELF JOIN - Self join</div>
+                            <div class="file-line">🔹 NATURAL JOIN - Natural join</div>
+                            <div class="file-line">🔹 ON - Join condition</div>
+                            <div class="file-line">🔹 USING - Join using columns</div>
+                            <div class="file-line">🔹 DISTINCT - Unique values</div>
+                            <div class="file-line">🔹 ALL - All values (default)</div>
+                            <div class="file-line">🔹 AS - Alias</div>
+                            <div class="file-line">🔹 IN - Value in list</div>
+                            <div class="file-line">🔹 NOT IN - Value not in list</div>
+                            <div class="file-line">🔹 BETWEEN - Range values</div>
+                            <div class="file-line">🔹 NOT BETWEEN - Not in range</div>
+                            <div class="file-line">🔹 LIKE - Pattern matching</div>
+                            <div class="file-line">🔹 NOT LIKE - Not pattern match</div>
+                            <div class="file-line">🔹 IS NULL - Null value</div>
+                            <div class="file-line">🔹 IS NOT NULL - Not null value</div>
+                            <div class="file-line">🔹 EXISTS - Subquery exists</div>
+                            <div class="file-line">🔹 NOT EXISTS - Subquery not exists</div>
+                            <div class="file-line">🔹 ANY - Any value in subquery</div>
+                            <div class="file-line">🔹 ALL - All values in subquery</div>
+                            <div class="file-line">🔹 SOME - Some values in subquery</div>
+                            <div class="file-line">🔹 CASE - Conditional logic</div>
+                            <div class="file-line">🔹 WHEN - Case condition</div>
+                            <div class="file-line">🔹 THEN - Case result</div>
+                            <div class="file-line">🔹 ELSE - Case default</div>
+                            <div class="file-line">🔹 END - End case</div>
+                            <div class="file-line">🔹 IF - Conditional function</div>
+                            <div class="file-line">🔹 IFNULL - Null check</div>
+                            <div class="file-line">🔹 COALESCE - First non-null</div>
+                            <div class="file-line">🔹 NULLIF - Null if equal</div>
+                            <div class="file-line">🔹 COUNT - Count rows</div>
+                            <div class="file-line">🔹 SUM - Sum values</div>
+                            <div class="file-line">🔹 AVG - Average values</div>
+                            <div class="file-line">🔹 MIN - Minimum value</div>
+                            <div class="file-line">🔹 MAX - Maximum value</div>
+                            <div class="file-line">🔹 STDDEV - Standard deviation</div>
+                            <div class="file-line">🔹 VARIANCE - Variance</div>
+                            <div class="file-line">🔹 CONCAT - Concatenate strings</div>
+                            <div class="file-line">🔹 SUBSTRING - Extract substring</div>
+                            <div class="file-line">🔹 LENGTH - String length</div>
+                            <div class="file-line">🔹 UPPER - Uppercase</div>
+                            <div class="file-line">🔹 LOWER - Lowercase</div>
+                            <div class="file-line">🔹 TRIM - Remove whitespace</div>
+                            <div class="file-line">🔹 LTRIM - Left trim</div>
+                            <div class="file-line">🔹 RTRIM - Right trim</div>
+                            <div class="file-line">🔹 REPLACE - Replace text</div>
+                            <div class="file-line">🔹 POSITION - Find position</div>
+                            <div class="file-line">🔹 LOCATE - Find location</div>
+                            <div class="file-line">🔹 INSTR - Find position</div>
+                            <div class="file-line">🔹 LEFT - Left characters</div>
+                            <div class="file-line">🔹 RIGHT - Right characters</div>
+                            <div class="file-line">🔹 MID - Middle characters</div>
+                            <div class="file-line">🔹 LPAD - Left pad</div>
+                            <div class="file-line">🔹 RPAD - Right pad</div>
+                            <div class="file-line">🔹 REVERSE - Reverse string</div>
+                            <div class="file-line">🔹 REPEAT - Repeat string</div>
+                            <div class="file-line">🔹 SPACE - Space characters</div>
+                            <div class="file-line">🔹 ASCII - ASCII value</div>
+                            <div class="file-line">🔹 CHAR - Character from ASCII</div>
+                            <div class="file-line">🔹 HEX - Hexadecimal</div>
+                            <div class="file-line">🔹 UNHEX - From hexadecimal</div>
+                            <div class="file-line">🔹 BIN - Binary</div>
+                            <div class="file-line">🔹 OCT - Octal</div>
+                            <div class="file-line">🔹 CONV - Convert base</div>
+                            <div class="file-line">🔹 ABS - Absolute value</div>
+                            <div class="file-line">🔹 CEIL - Ceiling</div>
+                            <div class="file-line">🔹 FLOOR - Floor</div>
+                            <div class="file-line">🔹 ROUND - Round number</div>
+                            <div class="file-line">🔹 TRUNCATE - Truncate number</div>
+                            <div class="file-line">🔹 MOD - Modulo</div>
+                            <div class="file-line">🔹 POWER - Power function</div>
+                            <div class="file-line">🔹 SQRT - Square root</div>
+                            <div class="file-line">🔹 EXP - Exponential</div>
+                            <div class="file-line">🔹 LOG - Natural logarithm</div>
+                            <div class="file-line">🔹 LOG10 - Base-10 logarithm</div>
+                            <div class="file-line">🔹 SIN - Sine</div>
+                            <div class="file-line">🔹 COS - Cosine</div>
+                            <div class="file-line">🔹 TAN - Tangent</div>
+                            <div class="file-line">🔹 ASIN - Arcsine</div>
+                            <div class="file-line">🔹 ACOS - Arccosine</div>
+                            <div class="file-line">🔹 ATAN - Arctangent</div>
+                            <div class="file-line">🔹 ATAN2 - Arctangent of quotient</div>
+                            <div class="file-line">🔹 DEGREES - Radians to degrees</div>
+                            <div class="file-line">🔹 RADIANS - Degrees to radians</div>
+                            <div class="file-line">🔹 PI - Pi constant</div>
+                            <div class="file-line">🔹 RAND - Random number</div>
+                            <div class="file-line">🔹 NOW - Current timestamp</div>
+                            <div class="file-line">🔹 CURDATE - Current date</div>
+                            <div class="file-line">🔹 CURTIME - Current time</div>
+                            <div class="file-line">🔹 DATE - Extract date</div>
+                            <div class="file-line">🔹 TIME - Extract time</div>
+                            <div class="file-line">🔹 YEAR - Extract year</div>
+                            <div class="file-line">🔹 MONTH - Extract month</div>
+                            <div class="file-line">🔹 DAY - Extract day</div>
+                            <div class="file-line">🔹 HOUR - Extract hour</div>
+                            <div class="file-line">🔹 MINUTE - Extract minute</div>
+                            <div class="file-line">🔹 SECOND - Extract second</div>
+                            <div class="file-line">🔹 DAYOFWEEK - Day of week</div>
+                            <div class="file-line">🔹 DAYOFYEAR - Day of year</div>
+                            <div class="file-line">🔹 WEEK - Week number</div>
+                            <div class="file-line">🔹 QUARTER - Quarter</div>
+                            <div class="file-line">🔹 DATE_ADD - Add to date</div>
+                            <div class="file-line">🔹 DATE_SUB - Subtract from date</div>
+                            <div class="file-line">🔹 DATEDIFF - Date difference</div>
+                            <div class="file-line">🔹 TIMEDIFF - Time difference</div>
+                            <div class="file-line">🔹 TIMESTAMPADD - Add to timestamp</div>
+                            <div class="file-line">🔹 TIMESTAMPDIFF - Timestamp difference</div>
+                            <div class="file-line">🔹 DATE_FORMAT - Format date</div>
+                            <div class="file-line">🔹 STR_TO_DATE - String to date</div>
+                            <div class="file-line">🔹 UNIX_TIMESTAMP - Unix timestamp</div>
+                            <div class="file-line">🔹 FROM_UNIXTIME - Unix to datetime</div>
+                            <div class="file-line">🔹 UTC_TIMESTAMP - UTC timestamp</div>
+                            <div class="file-line">🔹 UTC_DATE - UTC date</div>
+                            <div class="file-line">🔹 UTC_TIME - UTC time</div>
+                            <div class="file-line">🔹 CONVERT_TZ - Convert timezone</div>
+                            <div class="file-line">🔹 GET_FORMAT - Get format</div>
+                            <div class="file-line">🔹 MAKEDATE - Make date</div>
+                            <div class="file-line">🔹 MAKETIME - Make time</div>
+                            <div class="file-line">🔹 PERIOD_ADD - Add periods</div>
+                            <div class="file-line">🔹 PERIOD_DIFF - Period difference</div>
+                            <div class="file-line">🔹 TO_DAYS - Days since year 0</div>
+                            <div class="file-line">🔹 FROM_DAYS - Date from days</div>
+                            <div class="file-line">🔹 LAST_DAY - Last day of month</div>
+                            <div class="file-line">🔹 DAYNAME - Day name</div>
+                            <div class="file-line">🔹 MONTHNAME - Month name</div>
+                            <div class="file-line">🔹 QUARTER - Quarter number</div>
+                            <div class="file-line">🔹 WEEKDAY - Weekday number</div>
+                            <div class="file-line">🔹 YEARWEEK - Year and week</div>
+                            <div class="file-line">🔹 ADDDATE - Add date</div>
+                            <div class="file-line">🔹 SUBDATE - Subtract date</div>
+                            <div class="file-line">🔹 ADDTIME - Add time</div>
+                            <div class="file-line">🔹 SUBTIME - Subtract time</div>
+                            <div class="file-line">🔹 SEC_TO_TIME - Seconds to time</div>
+                            <div class="file-line">🔹 TIME_TO_SEC - Time to seconds</div>
+                            <div class="file-line">🔹 TO_SECONDS - To seconds</div>
+                            <div class="file-line">🔹 FROM_SECONDS - From seconds</div>
+                            <div class="file-line">🔹 MICROSECOND - Microseconds</div>
+                            <div class="file-line">🔹 SECOND_MICROSECOND - Second microsecond</div>
+                            <div class="file-line">🔹 MINUTE_MICROSECOND - Minute microsecond</div>
+                            <div class="file-line">🔹 MINUTE_SECOND - Minute second</div>
+                            <div class="file-line">🔹 HOUR_MICROSECOND - Hour microsecond</div>
+                            <div class="file-line">🔹 HOUR_SECOND - Hour second</div>
+                            <div class="file-line">🔹 HOUR_MINUTE - Hour minute</div>
+                            <div class="file-line">🔹 DAY_MICROSECOND - Day microsecond</div>
+                            <div class="file-line">🔹 DAY_SECOND - Day second</div>
+                            <div class="file-line">🔹 DAY_MINUTE - Day minute</div>
+                            <div class="file-line">🔹 DAY_HOUR - Day hour</div>
+                            <div class="file-line">🔹 YEAR_MONTH - Year month</div>
+                            <div class="file-line">🔹 INTERVAL - Interval keyword</div>
+                            <div class="file-line">🔹 PRIMARY KEY - Primary key constraint</div>
+                            <div class="file-line">🔹 FOREIGN KEY - Foreign key constraint</div>
+                            <div class="file-line">🔹 UNIQUE - Unique constraint</div>
+                            <div class="file-line">🔹 NOT NULL - Not null constraint</div>
+                            <div class="file-line">🔹 DEFAULT - Default value</div>
+                            <div class="file-line">🔹 AUTO_INCREMENT - Auto increment</div>
+                            <div class="file-line">🔹 CHECK - Check constraint</div>
+                            <div class="file-line">🔹 INDEX - Create index</div>
+                            <div class="file-line">🔹 KEY - Key constraint</div>
+                            <div class="file-line">🔹 FULLTEXT - Fulltext index</div>
+                            <div class="file-line">🔹 SPATIAL - Spatial index</div>
+                            <div class="file-line">🔹 COMMENT - Add comment</div>
+                            <div class="file-line">🔹 CHARACTER SET - Character set</div>
+                            <div class="file-line">🔹 COLLATE - Collation</div>
+                            <div class="file-line">🔹 ENGINE - Storage engine</div>
+                            <div class="file-line">🔹 ROW_FORMAT - Row format</div>
+                            <div class="file-line">🔹 PARTITION - Partition table</div>
+                            <div class="file-line">🔹 SUBPARTITION - Subpartition</div>
+                            <div class="file-line">🔹 TABLESPACE - Tablespace</div>
+                            <div class="file-line">🔹 STORAGE - Storage options</div>
+                            <div class="file-line">🔹 COMPRESSION - Compression</div>
+                            <div class="file-line">🔹 ENCRYPTION - Encryption</div>
+                            <div class="file-line">🔹 STATS_PERSISTENT - Persistent stats</div>
+                            <div class="file-line">🔹 STATS_AUTO_RECALC - Auto recalc stats</div>
+                            <div class="file-line">🔹 STATS_SAMPLE_PAGES - Sample pages</div>
+                            <div class="file-line">🔹 DELAY_KEY_WRITE - Delay key write</div>
+                            <div class="file-line">🔹 PACK_KEYS - Pack keys</div>
+                            <div class="file-line">🔹 CHECKSUM - Checksum</div>
+                            <div class="file-line">🔹 INSERT_METHOD - Insert method</div>
+                            <div class="file-line">🔹 UNION - Union tables</div>
+                            <div class="file-line">🔹 DATA DIRECTORY - Data directory</div>
+                            <div class="file-line">🔹 INDEX DIRECTORY - Index directory</div>
+                            <div class="file-line">🔹 MAX_ROWS - Maximum rows</div>
+                            <div class="file-line">🔹 MIN_ROWS - Minimum rows</div>
+                            <div class="file-line">🔹 AVG_ROW_LENGTH - Average row length</div>
+                            <div class="file-line">🔹 PASSWORD - Password</div>
+                            <div class="file-line">🔹 CONNECTION - Connection string</div>
+                            <div class="file-line">🔹 DELAY - Delay</div>
+                            <div class="file-line">🔹 ENABLE - Enable</div>
+                            <div class="file-line">🔹 DISABLE - Disable</div>
+                            <div class="file-line">🔹 IGNORE - Ignore errors</div>
+                            <div class="file-line">🔹 FORCE - Force operation</div>
+                            <div class="file-line">🔹 CASCADE - Cascade operations</div>
+                            <div class="file-line">🔹 RESTRICT - Restrict operations</div>
+                            <div class="file-line">🔹 SET NULL - Set to null</div>
+                            <div class="file-line">🔹 NO ACTION - No action</div>
+                            <div class="file-line">🔹 ON DELETE - On delete action</div>
+                            <div class="file-line">🔹 ON UPDATE - On update action</div>
+                            <div class="file-line">🔹 REFERENCES - Reference table</div>
+                            <div class="file-line">🔹 MATCH - Match type</div>
+                            <div class="file-line">🔹 FULL - Full match</div>
+                            <div class="file-line">🔹 PARTIAL - Partial match</div>
+                            <div class="file-line">🔹 SIMPLE - Simple match</div>
+                            <div class="file-line">🔹 DEFERRABLE - Deferrable constraint</div>
+                            <div class="file-line">🔹 INITIALLY DEFERRED - Initially deferred</div>
+                            <div class="file-line">🔹 INITIALLY IMMEDIATE - Initially immediate</div>
+                            <div class="file-line">🔹 DEFERRED - Deferred</div>
+                            <div class="file-line">🔹 IMMEDIATE - Immediate</div>
+                            <div class="file-line">🔹 LOCAL - Local constraint</div>
+                            <div class="file-line">🔹 GLOBAL - Global constraint</div>
+                            <div class="file-line">🔹 TEMPORARY - Temporary table</div>
+                            <div class="file-line">🔹 IF NOT EXISTS - Create if not exists</div>
+                            <div class="file-line">🔹 IF EXISTS - Drop if exists</div>
+                            <div class="file-line">🔹 OR REPLACE - Or replace</div>
+                            <div class="file-line">🔹 OR IGNORE - Or ignore</div>
+                            <div class="file-line">🔹 OR ABORT - Or abort</div>
+                            <div class="file-line">🔹 OR FAIL - Or fail</div>
+                            <div class="file-line">🔹 OR ROLLBACK - Or rollback</div>
+                            <div class="file-line">🔹 OR REPLACE - Or replace</div>
+                            <div class="file-line">🔹 OR IGNORE - Or ignore</div>
+                            <div class="file-line">🔹 OR ABORT - Or abort</div>
+                            <div class="file-line">🔹 OR FAIL - Or fail</div>
+                            <div class="file-line">🔹 OR ROLLBACK - Or rollback</div>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <h3>📖 Module 4: Project Structure</h3>
+                        
+                        <div class="project-structure">
+                            <div class="folder-line">📁 fullstack-tutorial/</div>
+                            <div class="file-line">📋 package.json</div>
+                            <div class="file-line">📋 README.md</div>
+                            <div class="folder-line">📁 public/</div>
+                            <div class="file-line">🌐 index.html</div>
+                            <div class="file-line">🎨 styles.css</div>
+                            <div class="file-line">⚡ script.js</div>
+                            <div class="folder-line">📁 src/</div>
+                            <div class="file-line">⚡ server.js</div>
+                            <div class="file-line">⚡ routes.js</div>
+                            <div class="file-line">⚡ database.js</div>
+                            <div class="folder-line">📁 database/</div>
+                            <div class="file-line">🗄️ schema.sql</div>
+                            <div class="file-line">🗄️ seeds.sql</div>
+                            <div class="folder-line">📁 tests/</div>
+                            <div class="file-line">⚡ server.test.js</div>
+                            <div class="file-line">⚡ routes.test.js</div>
+                        </div>
+
+                        <div class="info-box">
+                            This structure follows best practices for a full-stack application with 
+                            clear separation of concerns between frontend, backend, and database layers.
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <h3>📖 Module 5: Deployment</h3>
+                        
+                        <h4>Deployment Steps</h4>
+                        <ol class="step-list">
+                            <li>Set up version control with Git</li>
+                            <li>Create a production build</li>
+                            <li>Choose a hosting platform (Heroku, Vercel, AWS)</li>
+                            <li>Configure environment variables</li>
+                            <li>Set up database in production</li>
+                            <li>Deploy and test the application</li>
+                        </ol>
+
+                        <div class="terminal">
+                            <span class="command">$ git init</span>
+                            <span class="output">Initialized empty Git repository</span>
+                            <span class="command">$ git add .</span>
+                            <span class="output">All files added to staging</span>
+                            <span class="command">$ git commit -m "Initial commit"</span>
+                            <span class="output">[main] Initial commit</span>
+                            <span class="command">$ git remote add origin https://github.com/username/fullstack-tutorial.git</span>
+                            <span class="command">$ git push -u origin main</span>
+                            <span class="output">Branch 'main' set up to track remote branch 'main'</span>
+                        </div>
+
+                        <div class="success-box">
+                            🎉 Congratulations! You've successfully created a complete full-stack application. 
+                            Continue learning and building more complex features to enhance your skills.
+                        </div>
+
+                        <div class="project-structure">
+                            <div class="folder-line">📁 Git Cheat Sheet</div>
+                            <div class="file-line">🔹 git init - Initialize repository</div>
+                            <div class="file-line">🔹 git clone - Clone repository</div>
+                            <div class="file-line">🔹 git add - Stage files</div>
+                            <div class="file-line">🔹 git commit - Commit changes</div>
+                            <div class="file-line">🔹 git push - Push to remote</div>
+                            <div class="file-line">🔹 git pull - Pull from remote</div>
+                            <div class="file-line">🔹 git fetch - Fetch from remote</div>
+                            <div class="file-line">🔹 git merge - Merge branches</div>
+                            <div class="file-line">🔹 git branch - Manage branches</div>
+                            <div class="file-line">🔹 git checkout - Switch branches</div>
+                            <div class="file-line">🔹 git status - Check status</div>
+                            <div class="file-line">🔹 git log - View history</div>
+                            <div class="file-line">🔹 git diff - View differences</div>
+                            <div class="file-line">🔹 git reset - Reset changes</div>
+                            <div class="file-line">🔹 git revert - Revert commits</div>
+                            <div class="file-line">🔹 git stash - Stash changes</div>
+                            <div class="file-line">🔹 git tag - Manage tags</div>
+                            <div class="file-line">🔹 git remote - Manage remotes</div>
+                            <div class="file-line">🔹 git config - Configure Git</div>
+                            <div class="file-line">🔹 git help - Get help</div>
+                            <div class="file-line">🔹 git blame - Blame lines</div>
+                            <div class="file-line">🔹 git bisect - Binary search</div>
+                            <div class="file-line">🔹 git rebase - Rebase commits</div>
+                            <div class="file-line">🔹 git cherry-pick - Pick commits</div>
+                            <div class="file-line">🔹 git submodule - Manage submodules</div>
+                            <div class="file-line">🔹 git worktree - Manage worktrees</div>
+                            <div class="file-line">🔹 git clean - Clean untracked</div>
+                            <div class="file-line">🔹 git rm - Remove files</div>
+                            <div class="file-line">🔹 git mv - Move/rename files</div>
+                            <div class="file-line">🔹 git show - Show objects</div>
+                            <div class="file-line">🔹 git describe - Describe commits</div>
+                            <div class="file-line">🔹 git archive - Create archive</div>
+                            <div class="file-line">🔹 git bundle - Create bundle</div>
+                            <div class="file-line">🔹 git notes - Add notes</div>
+                            <div class="file-line">🔹 git replace - Replace objects</div>
+                            <div class="file-line">🔹 git filter-branch - Filter history</div>
+                            <div class="file-line">🔹 git gc - Garbage collect</div>
+                            <div class="file-line">🔹 git fsck - Check integrity</div>
+                            <div class="file-line">🔹 git reflog - Reference log</div>
+                            <div class="file-line">🔹 git update-ref - Update references</div>
+                            <div class="file-line">🔹 git symbolic-ref - Symbolic references</div>
+                            <div class="file-line">🔹 git for-each-ref - Iterate references</div>
+                            <div class="file-line">🔹 git ls-remote - List remote refs</div>
+                            <div class="file-line">🔹 git ls-files - List tracked files</div>
+                            <div class="file-line">🔹 git ls-tree - List tree contents</div>
+                            <div class="file-line">🔹 git cat-file - Show object contents</div>
+                            <div class="file-line">🔹 git hash-object - Hash objects</div>
+                            <div class="file-line">🔹 git write-tree - Write tree</div>
+                            <div class="file-line">🔹 git commit-tree - Commit tree</div>
+                            <div class="file-line">🔹 git merge-tree - Merge trees</div>
+                            <div class="file-line">🔹 git read-tree - Read tree</div>
+                            <div class="file-line">🔹 git write-blob - Write blob</div>
+                            <div class="file-line">🔹 git mktree - Make tree</div>
+                            <div class="file-line">🔹 git mktag - Make tag</div>
+                            <div class="file-line">🔹 git verify-tag - Verify tag</div>
+                            <div class="file-line">🔹 git verify-commit - Verify commit</div>
+                            <div class="file-line">🔹 git verify-pack - Verify pack</div>
+                            <div class="file-line">🔹 git index-pack - Index pack</div>
+                            <div class="file-line">🔹 git unpack-objects - Unpack objects</div>
+                            <div class="file-line">🔹 git pack-objects - Pack objects</div>
+                            <div class="file-line">🔹 git prune - Prune objects</div>
+                            <div class="file-line">🔹 git prune-packed - Prune packed</div>
+                            <div class="file-line">🔹 git count-objects - Count objects</div>
+                            <div class="file-line">🔹 git verify-pack - Verify pack</div>
+                            <div class="file-line">🔹 git show-index - Show index</div>
+                            <div class="file-line">🔹 git show-ref - Show references</div>
+                            <div class="file-line">🔹 git name-rev - Name revisions</div>
+                            <div class="file-line">🔹 git rev-parse - Parse revisions</div>
+                            <div class="file-line">🔹 git rev-list - List revisions</div>
+                            <div class="file-line">🔹 git rev-parse - Parse revisions</div>
+                            <div class="file-line">🔹 git merge-base - Find merge base</div>
+                            <div class="file-line">🔹 git merge-file - Merge files</div>
+                            <div class="file-line">🔹 git merge-index - Merge index</div>
+                            <div class="file-line">🔹 git merge-tree - Merge trees</div>
+                            <div class="file-line">🔹 git merge-ours - Merge strategy</div>
+                            <div class="file-line">🔹 git merge-recursive - Recursive merge</div>
+                            <div class="file-line">🔹 git merge-octopus - Octopus merge</div>
+                            <div class="file-line">🔹 git merge-subtree - Subtree merge</div>
+                            <div class="file-line">🔹 git merge-resolve - Resolve merge</div>
+                            <div class="file-line">🔹 git merge-ort - ORT merge</div>
+                            <div class="file-line">🔹 git apply - Apply patches</div>
+                            <div class="file-line">🔹 git am - Apply mailbox</div>
+                            <div class="file-line">🔹 git format-patch - Format patches</div>
+                            <div class="file-line">🔹 git send-email - Send email</div>
+                            <div class="file-line">🔹 git request-pull - Request pull</div>
+                            <div class="file-line">🔹 git imap-send - Send via IMAP</div>
+                            <div class="file-line">🔹 git daemon - Run daemon</div>
+                            <div class="file-line">🔹 git http-backend - HTTP backend</div>
+                            <div class="file-line">🔹 git http-push - HTTP push</div>
+                            <div class="file-line">🔹 git http-fetch - HTTP fetch</div>
+                            <div class="file-line">🔹 git http-pull - HTTP pull</div>
+                            <div class="file-line">🔹 git http-log - HTTP log</div>
+                            <div class="file-line">🔹 git http-receive-pack - HTTP receive</div>
+                            <div class="file-line">🔹 git http-upload-pack - HTTP upload</div>
+                            <div class="file-line">🔹 git instaweb - Instaweb</div>
+                            <div class="file-line">🔹 git web--browse - Web browser</div>
+                            <div class="file-line">🔹 git cvsexportcommit - CVS export</div>
+                            <div class="file-line">🔹 git cvsimport - CVS import</div>
+                            <div class="file-line">🔹 git cvsserver - CVS server</div>
+                            <div class="file-line">🔹 git svn - SVN bridge</div>
+                            <div class="file-line">🔹 git p4 - Perforce bridge</div>
+                            <div class="file-line">🔹 git fast-import - Fast import</div>
+                            <div class="file-line">🔹 git fast-export - Fast export</div>
+                            <div class="file-line">🔹 git quiltimport - Quilt import</div>
+                            <div class="file-line">🔹 git quiltrefresh - Quilt refresh</div>
+                            <div class="file-line">🔹 git quiltpush - Quilt push</div>
+                            <div class="file-line">🔹 git quiltpop - Quilt pop</div>
+                            <div class="file-line">🔹 git quiltdiff - Quilt diff</div>
+                            <div class="file-line">🔹 git quiltfold - Quilt fold</div>
+                            <div class="file-line">🔹 git quiltnew - Quilt new</div>
+                            <div class="file-line">🔹 git quiltadd - Quilt add</div>
+                            <div class="file-line">🔹 git quiltedit - Quilt edit</div>
+                            <div class="file-line">🔹 git quiltheader - Quilt header</div>
+                            <div class="file-line">🔹 git quiltmail - Quilt mail</div>
+                            <div class="file-line">🔹 git quiltseries - Quilt series</div>
+                            <div class="file-line">🔹 git quiltunapplied - Quilt unapplied</div>
+                            <div class="file-line">🔹 git quiltapplied - Quilt applied</div>
+                            <div class="file-line">🔹 git quilttop - Quilt top</div>
+                            <div class="file-line">🔹 git quiltprevious - Quilt previous</div>
+                            <div class="file-line">🔹 git quiltnext - Quilt next</div>
+                            <div class="file-line">🔹 git quiltguard - Quilt guard</div>
+                            <div class="file-line">🔹 git quiltannotate - Quilt annotate</div>
+                            <div class="file-line">🔹 git quiltsetup - Quilt setup</div>
+                            <div class="file-line">🔹 git quiltinit - Quilt init</div>
+                            <div class="file-line">🔹 git quiltrefresh - Quilt refresh</div>
+                            <div class="file-line">🔹 git quiltpush - Quilt push</div>
+                            <div class="file-line">🔹 git quiltpop - Quilt pop</div>
+                            <div class="file-line">🔹 git quiltdiff - Quilt diff</div>
+                            <div class="file-line">🔹 git quiltfold - Quilt fold</div>
+                            <div class="file-line">🔹 git quiltnew - Quilt new</div>
+                            <div class="file-line">🔹 git quiltadd - Quilt add</div>
+                            <div class="file-line">🔹 git quiltedit - Quilt edit</div>
+                            <div class="file-line">🔹 git quiltheader - Quilt header</div>
+                            <div class="file-line">🔹 git quiltmail - Quilt mail</div>
+                            <div class="file-line">🔹 git quiltseries - Quilt series</div>
+                            <div class="file-line">🔹 git quiltunapplied - Quilt unapplied</div>
+                            <div class="file-line">🔹 git quiltapplied - Quilt applied</div>
+                            <div class="file-line">🔹 git quilttop - Quilt top</div>
+                            <div class="file-line">🔹 git quiltprevious - Quilt previous</div>
+                            <div class="file-line">🔹 git quiltnext - Quilt next</div>
+                            <div class="file-line">🔹 git quiltguard - Quilt guard</div>
+                            <div class="file-line">🔹 git quiltannotate - Quilt annotate</div>
+                            <div class="file-line">🔹 git quiltsetup - Quilt setup</div>
+                            <div class="file-line">🔹 git quiltinit - Quilt init</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="navigation">
+        <a href="#frontend" class="nav-link">Frontend</a>
+        <a href="#backend" class="nav-link">Backend</a>
+        <a href="#database" class="nav-link">Database</a>
+        <a href="#deployment" class="nav-link">Deployment</a>
+    </div>
+</body>
+</html> 
