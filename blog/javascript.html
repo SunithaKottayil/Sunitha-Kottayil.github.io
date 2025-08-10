@@ -120,12 +120,13 @@
             border-radius: 10px;
             padding: 25px;
             margin: 30px 0;
-            font-family: 'Courier New', monospace;
+            font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
             font-size: 14px;
-            line-height: 1.6;
+            line-height: 1.7;
             overflow-x: auto;
             border: 2px solid #4a5568;
             position: relative;
+            white-space: pre-wrap;
         }
 
         .code-header {
@@ -460,6 +461,63 @@
             text-decoration: underline;
         }
 
+        /* Interactive demo styles */
+        .demo-container {
+            background: #fff;
+            border: 2px solid #007bff;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .demo-title {
+            font-weight: bold;
+            color: #007bff;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .demo-content {
+            min-height: 100px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .demo-button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        .demo-button:hover {
+            background: #0056b3;
+        }
+
+        .demo-input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin: 5px;
+        }
+
+        .todo-item {
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            border-bottom: 1px solid #eee;
+            gap: 10px;
+        }
+
+        .todo-item.completed {
+            text-decoration: line-through;
+            opacity: 0.6;
+        }
+
         /* Responsive design */
         @media (max-width: 768px) {
             body {
@@ -586,7 +644,7 @@
             <h3>Your very first JavaScript program</h3>
             
             <div class="try-it">
-                <div class="try-it-title">🚀 Try this right now!</div>
+                <div class="try-it-title">Try this right now!</div>
                 <ol>
                     <li>Open your web browser (any browser works)</li>
                     <li>Press <code>F12</code> or right-click and select "Inspect"</li>
@@ -620,197 +678,63 @@
             <p>While the browser console is great for experimenting, you'll want a proper setup for real projects:</p>
 
             <div class="code-block">
-                <div class="code-header">my-first-page.html</div>
+                <div class="code-header">JavaScript functions that power the demo</div>
                 <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-    &lt;title&gt;My JavaScript Playground&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;h1&gt;Welcome to JavaScript!&lt;/h1&gt;
-    &lt;p&gt;Check the console for messages.&lt;/p&gt;
+// Variables to store state (like memory for our app)
+let clickCounter = 0;
+let todoItems = [];
+
+// Function to change text
+function demoChangeText() {
+    const display = document.getElementById('demo-display');
+    const messages = [
+        "JavaScript is awesome! 🚀",
+        "You're learning programming! 💻",
+        "This text was changed by JavaScript!",
+        "Welcome to the world of coding! 🌟"
+    ];
     
-    &lt;script&gt;
-        // Your JavaScript code goes here
-        console.log("Hello from my HTML page!");
-        console.log("I'm learning JavaScript!");
-    &lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;
+    const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+    display.textContent = randomMessage;
+}
+
+// Function to change colors
+function demoChangeColor() {
+    const display = document.getElementById('demo-display');
+    const colors = [
+        '#ff6b6b', '#4ecdc4', '#45b7d1', 
+        '#f9ca24', '#f0932b', '#eb4d4b'
+    ];
+    
+    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+    display.style.backgroundColor = randomColor;
+    display.style.color = 'white';
+    display.textContent = `Color changed to ${randomColor}!`;
+}
+
+// Function to show current time
+function demoShowTime() {
+    const display = document.getElementById('demo-display');
+    const now = new Date();
+    
+    display.textContent = `Current time: ${now.toLocaleTimeString()}`;
+    display.style.backgroundColor = '#f8f9fa';
+    display.style.color = '#333';
+}
+
+// Counter function
+function demoCounter() {
+    clickCounter++;
+    const display = document.getElementById('demo-display');
+    
+    display.textContent = `Button clicked ${clickCounter} times!`;
+    display.style.backgroundColor = '#e3f2fd';
+    display.style.color = '#1565c0';
+}
             </div>
 
             <div class="info callout">
-                <strong>Quick tip:</strong> Save this as an HTML file (with a .html extension) and open it in your browser. This became my go-to setup for practicing - simple, works everywhere, and no complicated setup required.
-            </div>
-
-            <h2 id="fundamentals">The basics that actually matter</h2>
-            
-            <div class="story callout">
-                <div class="story-title">When variables finally clicked</div>
-                I struggled with variables until my friend explained them as "labeled boxes where you store stuff." Want to remember someone's name? Put it in a box labeled "userName". Need to count something? Use a box labeled "counter". This simple analogy changed everything for me.
-            </div>
-
-            <h3>Variables: Your code's memory boxes</h3>
-            
-            <p>Variables are containers that hold information. Think of them as labeled storage boxes in your code's memory:</p>
-
-            <div class="code-block">
-                <div class="code-header">Working with variables</div>
-                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-// Different types of data you can store
-let userName = "Sarah";              // Text (string)
-let userAge = 25;                    // Number
-let isLearningJS = true;             // True/false (boolean)
-let favoriteColors = ["blue", "red", "green"];  // List (array)
-let userProfile = {                  // Object (collection of properties)
-    name: "Sarah",
-    age: 25,
-    city: "New York"
-};
-
-// Using variables
-console.log("Hi, I'm " + userName);
-console.log("I'm " + userAge + " years old");
-console.log("Am I learning JavaScript? " + isLearningJS);
-            </div>
-
-            <div class="diagram">
-                <div class="diagram-title">JavaScript Data Types: Your Digital Toolbox</div>
-                <div class="ascii-art">
-┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐
-│      STRING     │  │     NUMBER     │   │         BOOLEAN │
-│                 │  │                 │  │                 │
-│ "Hello World"   │  │      42         │  │   true/false    │
-│ 'JavaScript'    │  │    3.14159      │  │                 │
-│ "user@mail.com" │  │     -7          │  │   yes/no        │
-└─────────────────┘  └─────────────────┘  └─────────────────┘
-
-┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐
-│   ARRAY      │  │     OBJECT         │  │ UNDEFINED       │
-│                 │  │                 │  │                 │
-│ [1, 2, 3, 4]    │  │ {name: "John"}  │  │   undefined     │
-│ ["a", "b", "c"] │  │ {age: 30}       │  │     null        │
-│ [true, false]   │  │ {city: "NYC"}   │  │                 │
-└─────────────────┘  └─────────────────┘  └─────────────────┘
-                </div>
-            </div>
-
-            <h4>Variable naming: Making your code readable</h4>
-            
-            <div class="comparison">
-                <div class="compare-box bad">
-                    <div class="compare-title"> Confusing names (my old code)</div>
-                    <div class="code-block" style="margin: 10px 0; padding: 15px; font-size: 13px;">
-let x = "John";
-let thing = 25;
-let stuff = true;
-let data = ["apple", "banana"];
-// What do these even mean?!
-                    </div>
-                </div>
-                <div class="compare-box good">
-                    <div class="compare-title"> Clear names (much better!)</div>
-                    <div class="code-block" style="margin: 10px 0; padding: 15px; font-size: 13px;">
-let customerName = "John";
-let customerAge = 25;
-let isLoggedIn = true;
-let shoppingCartItems = ["apple", "banana"];
-// Now I understand what's happening!
-                    </div>
-                </div>
-            </div>
-
-            <h3>Making decisions with conditionals</h3>
-            
-            <p>Conditionals let your code make decisions. It's like teaching your program to think:</p>
-
-            <div class="code-block">
-                <div class="code-header">if/else statements</div>
-                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-let userAge = 17;
-
-if (userAge >= 18) {
-    console.log("You can vote!");
-    console.log("You're also old enough to drive.");
-} else if (userAge >= 16) {
-    console.log("You can drive, but can't vote yet.");
-} else {
-    console.log("You're not old enough to drive or vote.");
-}
-
-// More complex decisions
-let weather = "sunny";
-let temperature = 75;
-
-if (weather === "sunny" && temperature > 70) {
-    console.log("Perfect day for a picnic!");
-} else if (weather === "rainy" || temperature < 50) {
-    console.log("Better stay inside today.");
-} else {
-    console.log("It's an okay day to go out.");
-}
-            </div>
-
-            <div class="quiz">
-                <div class="quiz-title">Test your understanding: What does this code output?</div>
-                <div class="code-block" style="margin: 15px 0; padding: 15px; font-size: 13px;">
-let score = 85;
-if (score >= 90) {
-    console.log("A grade");
-} else if (score >= 80) {
-    console.log("B grade");
-} else {
-    console.log("Try harder");
-}
-                </div>
-                <div class="quiz-option">
-                    <input type="radio" name="q2" value="wrong" id="q2a">
-                    <label for="q2a">"A grade"</label>
-                </div>
-                <div class="quiz-option">
-                    <input type="radio" name="q2" value="correct" id="q2b">
-                    <label for="q2b">"B grade"</label>
-                </div>
-                <div class="quiz-option">
-                    <input type="radio" name="q2" value="wrong" id="q2c">
-                    <label for="q2c">"Try harder"</label>
-                </div>
-                <button class="quiz-btn" onclick="checkAnswer('q2', 'Correct! Since 85 is not >= 90, but it is >= 80, the output is B grade')">Check Answer</button>
-                <div class="quiz-result" id="q2-result"></div>
-            </div>
-
-            <h3>Loops: Doing things repeatedly (without going crazy)</h3>
-            
-            <div class="story callout">
-                <div class="story-title">My loop breakthrough moment</div>
-                I was manually writing console.log statements to print numbers 1 through 10. My friend saw my code and laughed - then showed me loops. One line of code replaced ten lines! That's when I understood the power of programming.
-            </div>
-
-            <div class="code-block">
-                <div class="code-header">Different types of loops</div>
-                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-// For loop: when you know how many times to repeat
-console.log("Counting with for loop:");
-for (let i = 1; i <= 5; i++) {
-    console.log("Count: " + i);
-}
-
-// While loop: repeat while condition is true
-console.log("\nCountdown with while loop:");
-let countdown = 5;
-while (countdown > 0) {
-    console.log("T-minus " + countdown);
-    countdown--;
-}
-console.log("Blast off! ");
-
-// For...of loop: go through each item in a list
-console.log("\nGoing through a list:");
-let fruits = ["apple", "banana", "orange"];
-for (let fruit of fruits) {
-    console.log("I like " + fruit);
-}
+                <strong>What's happening here:</strong> Each button calls a different JavaScript function when clicked. These functions find elements on the page using <code>document.getElementById()</code> and then modify their content, colors, or styles. This is the foundation of interactive web development!
             </div>
 
             <h2 id="thinking-like-dev">Learning to think like a developer</h2>
@@ -835,6 +759,7 @@ function greetUser(name) {
 // Using the function
 let message1 = greetUser("Sarah");
 let message2 = greetUser("Mike");
+
 console.log(message1);  // "Hello, Sarah! Welcome to our website!"
 console.log(message2);  // "Hello, Mike! Welcome to our website!"
 
@@ -842,6 +767,7 @@ console.log(message2);  // "Hello, Mike! Welcome to our website!"
 function calculateTax(price, taxRate) {
     let tax = price * (taxRate / 100);
     let total = price + tax;
+    
     return {
         originalPrice: price,
         tax: tax,
@@ -851,12 +777,14 @@ function calculateTax(price, taxRate) {
 
 // Using the tax calculator
 let purchase = calculateTax(100, 8.5);
+
 console.log("Price: $" + purchase.originalPrice);
 console.log("Tax: $" + purchase.tax);
 console.log("Total: $" + purchase.total);
 
 // Modern arrow function syntax (shorter way to write functions)
 const addNumbers = (a, b) => a + b;
+
 const multiplyNumbers = (a, b) => {
     let result = a * b;
     console.log(a + " × " + b + " = " + result);
@@ -864,38 +792,7 @@ const multiplyNumbers = (a, b) => {
 };
 
 console.log(addNumbers(5, 3));        // 8
-multiplyNumbers(4, 7);             // 4 × 7 = 28, returns 28
-            </div>
-
-            <div class="diagram">
-                <div class="diagram-title">How Functions Work: Input → Process → Output</div>
-                <div class="flow-diagram">
-                    <div class="flow-step">Input<br/>(Parameters)</div>
-                    <div class="flow-arrow">→</div>
-                    <div class="flow-step">Function<br/>(Process)</div>
-                    <div class="flow-arrow">→</div>
-                    <div class="flow-step">Output<br/>(Return Value)</div>
-                </div>
-                <div class="ascii-art" style="margin-top: 20px;">
-    greetUser("Sarah")  →  [Function Magic]  →  "Hello, Sarah!"
-         ↑                      ↑                    ↑
-      Input              Process/Transform        Output
-                </div>
-            </div>
-
-            <div class="try-it">
-                <div class="try-it-title">🧪 Practice: Write your own function</div>
-                <p>Try creating a function that calculates the area of a rectangle:</p>
-                <div class="code-block">
-function calculateArea(length, width) {
-    return length * width;
-}
-
-// Test it out
-console.log(calculateArea(5, 3));  // Should output 15
-console.log(calculateArea(10, 2)); // Should output 20
-                </div>
-                <p>Bonus: Try modifying it to also calculate the perimeter!</p>
+multiplyNumbers(4, 7);                // 4 × 7 = 28, returns 28
             </div>
 
             <h2 id="data-structures">Working with data (arrays, objects, and more)</h2>
@@ -923,12 +820,14 @@ console.log(shoppingList[3]);  // "butter" - fourth item
 // Adding items to arrays
 shoppingList.push("cheese");           // Add to end
 shoppingList.unshift("bananas");       // Add to beginning
+
 console.log(shoppingList);
 // ["bananas", "milk", "eggs", "bread", "butter", "cheese"]
 
 // Removing items
 let lastItem = shoppingList.pop();     // Remove from end
 let firstItem = shoppingList.shift();  // Remove from beginning
+
 console.log("Removed: " + lastItem + " and " + firstItem);
 
 // Looping through arrays (this is where arrays shine!)
@@ -943,7 +842,6 @@ let fruits = ["apple", "banana", "orange", "apple", "grape"];
 console.log("Array length: " + fruits.length);
 console.log("Contains apple? " + fruits.includes("apple"));
 console.log("First apple at position: " + fruits.indexOf("apple"));
-console.log("Last apple at position: " + fruits.lastIndexOf("apple"));
 
 // Finding items
 let longFruit = fruits.find(fruit => fruit.length > 5);
@@ -956,393 +854,6 @@ console.log("Uppercase fruits:", upperCaseFruits);
 // Filtering arrays
 let shortFruits = fruits.filter(fruit => fruit.length <= 5);
 console.log("Short fruit names:", shortFruits);
-            </div>
-
-            <h3>Objects: Organizing related information</h3>
-            
-            <p>Objects are like digital filing cabinets - they let you group related information together under one name:</p>
-
-            <div class="code-block">
-                <div class="code-header">Working with objects</div>
-                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-// Creating objects
-let user = {
-    name: "Sarah Johnson",
-    age: 28,
-    email: "sarah@example.com",
-    isActive: true,
-    hobbies: ["reading", "coding", "hiking"],
-    
-    // Objects can have functions too!
-    greet: function() {
-        return "Hi, I'm " + this.name;
-    },
-    
-    // Modern way to write object functions
-    getInfo() {
-        return this.name + " (" + this.age + " years old)";
-    }
-};
-
-// Accessing object properties
-console.log(user.name);           // "Sarah Johnson"
-console.log(user["email"]);       // "sarah@example.com" (alternative syntax)
-console.log(user.hobbies[0]);     // "reading"
-
-// Calling object functions
-console.log(user.greet());        // "Hi, I'm Sarah Johnson"
-console.log(user.getInfo());      // "Sarah Johnson (28 years old)"
-
-// Adding new properties
-user.location = "New York";
-user.skills = ["JavaScript", "HTML", "CSS"];
-
-// Modifying existing properties
-user.age = 29;
-user.hobbies.push("photography");
-
-console.log(user);
-
-// Working with arrays of objects (real-world scenario)
-let employees = [
-    {name: "John", department: "Engineering", salary: 75000},
-    {name: "Sarah", department: "Design", salary: 65000},
-    {name: "Mike", department: "Engineering", salary: 80000},
-    {name: "Lisa", department: "Marketing", salary: 60000}
-];
-
-// Find all engineers
-let engineers = employees.filter(emp => emp.department === "Engineering");
-console.log("Engineers:", engineers);
-
-// Calculate average salary
-let totalSalary = employees.reduce((sum, emp) => sum + emp.salary, 0);
-let averageSalary = totalSalary / employees.length;
-console.log("Average salary: $" + averageSalary);
-            </div>
-
-            <div class="quiz">
-                <div class="quiz-title">Quick Check: How do you access an object property?</div>
-                <div class="quiz-option">
-                    <input type="radio" name="q3" value="correct" id="q3a">
-                    <label for="q3a">object.property or object["property"]</label>
-                </div>
-                <div class="quiz-option">
-                    <input type="radio" name="q3" value="wrong" id="q3b">
-                    <label for="q3b">object(property)</label>
-                </div>
-                <div class="quiz-option">
-                    <input type="radio" name="q3" value="wrong" id="q3c">
-                    <label for="q3c">object[property]</label>
-                </div>
-                <button class="quiz-btn" onclick="checkAnswer('q3', 'Correct! You can use dot notation (object.property) or bracket notation (object[property])')">Check Answer</button>
-                <div class="quiz-result" id="q3-result"></div>
-            </div>
-
-            <h2 id="dom-events">Making websites interactive</h2>
-            
-            <div class="story callout">
-                <div class="story-title">The moment web pages came alive</div>
-                I'll never forget the first time I made a button actually do something. I'd been writing JavaScript in the console for weeks, but seeing my code change what appeared on a webpage felt like magic. That's when I knew I wanted to be a web developer.
-            </div>
-
-            <p>The DOM (Document Object Model) is how JavaScript talks to your HTML. Think of it as JavaScript's way of reaching into your web page and changing things in real-time.</p>
-
-            <h3>Selecting and modifying elements</h3>
-            
-            <div class="code-block">
-                <div class="code-header">DOM manipulation basics</div>
-                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-// Finding elements on your page
-let titleElement = document.getElementById("main-title");
-let buttons = document.getElementsByClassName("action-button");
-let firstParagraph = document.querySelector("p");
-let allParagraphs = document.querySelectorAll("p");
-
-// Changing content
-titleElement.textContent = "New title!";
-titleElement.innerHTML = "&lt;em&gt;Italic title!&lt;/em&gt;";
-
-// Changing styles
-titleElement.style.color = "blue";
-titleElement.style.fontSize = "24px";
-titleElement.style.backgroundColor = "#f0f0f0";
-
-// Adding and removing CSS classes
-titleElement.classList.add("highlighted");
-titleElement.classList.remove("old-style");
-titleElement.classList.toggle("visible");  // Add if not present, remove if present
-
-// Creating new elements
-let newParagraph = document.createElement("p");
-newParagraph.textContent = "This paragraph was created by JavaScript!";
-newParagraph.style.color = "green";
-
-// Adding the new element to the page
-document.body.appendChild(newParagraph);
-            </div>
-
-            <h3>Handling events (when users interact)</h3>
-            
-            <div class="code-block">
-                <div class="code-header">Complete interactive example</div>
-                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-    &lt;title&gt;Interactive Demo&lt;/title&gt;
-    &lt;style&gt;
-        .highlight { background-color: yellow; }
-        .hidden { display: none; }
-        button { margin: 5px; padding: 10px; }
-    &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;h1 id="title"&gt;Click the buttons below!&lt;/h1&gt;
-    &lt;p id="message"&gt;This text will change...&lt;/p&gt;
-    
-    &lt;button id="change-text"&gt;Change Text&lt;/button&gt;
-    &lt;button id="change-color"&gt;Change Color&lt;/button&gt;
-    &lt;button id="toggle-visibility"&gt;Toggle Visibility&lt;/button&gt;
-    &lt;button id="add-item"&gt;Add Item&lt;/button&gt;
-    
-    &lt;ul id="item-list"&gt;&lt;/ul&gt;
-    
-    &lt;input type="text" id="user-input" placeholder="Type something here..."&gt;
-    &lt;button id="echo-input"&gt;Echo Input&lt;/button&gt;
-    
-    &lt;script&gt;
-        // Get references to elements
-        const title = document.getElementById("title");
-        const message = document.getElementById("message");
-        const itemList = document.getElementById("item-list");
-        const userInput = document.getElementById("user-input");
-        
-        // Button click handlers
-        document.getElementById("change-text").addEventListener("click", function() {
-            message.textContent = "Text changed at " + new Date().toLocaleTimeString();
-        });
-        
-        document.getElementById("change-color").addEventListener("click", function() {
-            const colors = ["red", "blue", "green", "purple", "orange"];
-            const randomColor = colors[Math.floor(Math.random() * colors.length)];
-            title.style.color = randomColor;
-        });
-        
-        document.getElementById("toggle-visibility").addEventListener("click", function() {
-            message.classList.toggle("hidden");
-        });
-        
-        document.getElementById("add-item").addEventListener("click", function() {
-            const li = document.createElement("li");
-            li.textContent = "Item " + (itemList.children.length + 1);
-            itemList.appendChild(li);
-        });
-        
-        document.getElementById("echo-input").addEventListener("click", function() {
-            const inputText = userInput.value;
-            if (inputText.trim() !== "") {
-                message.textContent = "You typed: " + inputText;
-                userInput.value = "";  // Clear the input
-            } else {
-                message.textContent = "Please type something first!";
-            }
-        });
-        
-        // Keyboard event
-        userInput.addEventListener("keypress", function(event) {
-            if (event.key === "Enter") {
-                document.getElementById("echo-input").click();
-            }
-        });
-    &lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-            </div>
-
-            <div class="tip callout">
-                <strong>Event handling tip:</strong> There are tons of events you can listen for: click, mouseover, keypress, scroll, resize, load, and many more. Each event gives you information about what happened, like which key was pressed or where the mouse was clicked.
-            </div>
-
-            <h2 id="advanced-concepts">Advanced stuff (when you're ready)</h2>
-            
-            <h3>Modern JavaScript features (ES6+)</h3>
-            
-            <div class="story callout">
-                <div class="story-title">Discovering modern JavaScript</div>
-                After learning the basics, I discovered that JavaScript had evolved tremendously. Features like template literals, destructuring, and arrow functions made my code so much cleaner and easier to read. It was like upgrading from a bicycle to a sports car!
-            </div>
-
-            <div class="code-block">
-                <div class="code-header">Modern JavaScript features</div>
-                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-// Template literals (much better than string concatenation!)
-const name = "Sarah";
-const age = 28;
-const greeting = `Hello, my name is ${name} and I'm ${age} years old.`;
-console.log(greeting);
-
-// Destructuring - extract values from objects and arrays
-const user = {name: "John", age: 30, city: "NYC"};
-const {name: userName, age: userAge} = user;
-console.log(userName, userAge);  // "John" 30
-
-const colors = ["red", "green", "blue"];
-const [first, second, third] = colors;
-console.log(first);  // "red"
-
-// Spread operator - expand arrays and objects
-const fruits = ["apple", "banana"];
-const vegetables = ["carrot", "broccoli"];
-const groceries = [...fruits, ...vegetables, "milk"];
-console.log(groceries);  // ["apple", "banana", "carrot", "broccoli", "milk"]
-
-// Object spread
-const basicUser = {name: "Jane", age: 25};
-const fullUser = {...basicUser, city: "Boston", profession: "Developer"};
-console.log(fullUser);
-
-// Default parameters
-function greetUser(name = "Guest", greeting = "Hello") {
-    return `${greeting}, ${name}!`;
-}
-console.log(greetUser());                    // "Hello, Guest!"
-console.log(greetUser("Sarah"));             // "Hello, Sarah!"
-console.log(greetUser("Mike", "Hi"));        // "Hi, Mike!"
-
-// Arrow functions (shorter way to write functions)
-const multiply = (a, b) => a * b;
-const square = x => x * x;  // Single parameter doesn't need parentheses
-const sayHello = () => console.log("Hello!");  // No parameters need parentheses
-
-// Array methods with arrow functions
-const numbers = [1, 2, 3, 4, 5];
-const doubled = numbers.map(n => n * 2);
-const evens = numbers.filter(n => n % 2 === 0);
-const sum = numbers.reduce((total, n) => total + n, 0);
-
-console.log("Original:", numbers);
-console.log("Doubled:", doubled);
-console.log("Evens:", evens);
-console.log("Sum:", sum);
-            </div>
-
-            <h3>Asynchronous JavaScript (Promises and async/await)</h3>
-            
-            <p>This is where JavaScript gets really powerful - handling things that take time, like loading data from the internet:</p>
-
-            <div class="code-block">
-                <div class="code-header">Working with asynchronous code</div>
-                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-// Creating a promise (represents something that will complete in the future)
-function wait(milliseconds) {
-    return new Promise(resolve => {
-        setTimeout(() => {
-            resolve("Done waiting!");
-        }, milliseconds);
-    });
-}
-
-// Using promises with .then()
-console.log("Starting to wait...");
-wait(2000).then(result => {
-    console.log(result);  // "Done waiting!" (after 2 seconds)
-});
-
-// Async/await makes asynchronous code look synchronous
-async function example() {
-    console.log("Starting async function...");
-    
-    try {
-        const result = await wait(1000);
-        console.log(result);  // "Done waiting!" (after 1 second)
-        
-        const result2 = await wait(500);
-        console.log(result2);  // "Done waiting!" (after another 0.5 seconds)
-        
-        console.log("All done!");
-    } catch (error) {
-        console.error("Something went wrong:", error);
-    }
-}
-
-example();
-
-// Real-world example: fetching data from an API
-async function fetchUserData(userId) {
-    try {
-        console.log("Fetching user data...");
-        
-        // This would fetch data from a real API
-        const response = await fetch(`https://jsonplaceholder.typicode.com/users/${userId}`);
-        const userData = await response.json();
-        
-        console.log("User data received:", userData);
-        return userData;
-    } catch (error) {
-        console.error("Failed to fetch user data:", error);
-        return null;
-    }
-}
-
-// fetchUserData(1);  // Uncomment to try this (needs internet connection)
-            </div>
-
-            <div class="warning callout">
-                <strong>Common async mistake:</strong> I used to forget that async functions return promises, not the actual values. If you call an async function, you need to either use <code>await</code> or <code>.then()</code> to get the result!
-            </div>
-
-            <h3>Classes and object-oriented programming</h3>
-            
-            <div class="code-block">
-                <div class="code-header">Creating classes</div>
-                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-// Class definition
-class Person {
-    constructor(name, age) {
-        this.name = name;
-        this.age = age;
-    }
-    
-    greet() {
-        return `Hi, I'm ${this.name} and I'm ${this.age} years old.`;
-    }
-    
-    haveBirthday() {
-        this.age++;
-        console.log(`Happy birthday! ${this.name} is now ${this.age} years old.`);
-    }
-}
-
-// Creating instances (objects) from the class
-const person1 = new Person("Sarah", 28);
-const person2 = new Person("Mike", 32);
-
-console.log(person1.greet());  // "Hi, I'm Sarah and I'm 28 years old."
-console.log(person2.greet());  // "Hi, I'm Mike and I'm 32 years old."
-
-person1.haveBirthday();  // "Happy birthday! Sarah is now 29 years old."
-
-// Inheritance - creating specialized classes
-class Developer extends Person {
-    constructor(name, age, programmingLanguages) {
-        super(name, age);  // Call the parent constructor
-        this.programmingLanguages = programmingLanguages;
-    }
-    
-    code() {
-        return `${this.name} is coding in ${this.programmingLanguages.join(", ")}`;
-    }
-    
-    // Override the parent's greet method
-    greet() {
-        return `${super.greet()} I'm a developer!`;
-    }
-}
-
-const developer = new Developer("Alex", 26, ["JavaScript", "Python", "Java"]);
-console.log(developer.greet());  // "Hi, I'm Alex and I'm 26 years old. I'm a developer!"
-console.log(developer.code());   // "Alex is coding in JavaScript, Python, Java"
             </div>
 
             <h2 id="real-projects">Building real projects</h2>
@@ -1358,158 +869,21 @@ console.log(developer.code());   // "Alex is coding in JavaScript, Python, Java"
                 <div class="progress-title">Projects by Difficulty Level</div>
                 <div class="progress-steps">
                     <div class="progress-step">
-                        <div class="step-number"></div>
+                        <div class="step-number">🟢</div>
                         <div class="step-title">Beginner</div>
                         <div class="step-desc">Calculator, To-do list, Random quote generator</div>
                     </div>
                     <div class="progress-step">
-                        <div class="step-number"></div>
+                        <div class="step-number">🟡</div>
                         <div class="step-title">Intermediate</div>
                         <div class="step-desc">Weather app, Quiz game, Expense tracker</div>
                     </div>
                     <div class="progress-step">
-                        <div class="step-number"></div>
+                        <div class="step-number">🔴</div>
                         <div class="step-title">Advanced</div>
                         <div class="step-desc">Chat app, E-commerce site, Data visualization</div>
                     </div>
                 </div>
-            </div>
-
-            <h3>Complete project example: Interactive To-Do List</h3>
-            
-            <div class="code-block">
-                <div class="code-header">todo-app.html</div>
-                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-    &lt;title&gt;My To-Do List&lt;/title&gt;
-    &lt;style&gt;
-        body { font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; }
-        .todo-item { display: flex; align-items: center; padding: 10px; border-bottom: 1px solid #eee; }
-        .todo-item.completed { text-decoration: line-through; opacity: 0.6; }
-        input[type="text"] { flex: 1; padding: 10px; margin-right: 10px; }
-        button { padding: 10px 15px; margin: 0 5px; cursor: pointer; }
-        .delete-btn { background: #ff4444; color: white; border: none; }
-        .add-btn { background: #4CAF50; color: white; border: none; }
-        .toggle-btn { background: #2196F3; color: white; border: none; }
-    &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;h1&gt;My To-Do List&lt;/h1&gt;
-    
-    &lt;div&gt;
-        &lt;input type="text" id="new-todo" placeholder="Add a new task..."&gt;
-        &lt;button id="add-btn" class="add-btn"&gt;Add Task&lt;/button&gt;
-    &lt;/div&gt;
-    
-    &lt;div id="todo-list"&gt;&lt;/div&gt;
-    
-    &lt;div&gt;
-        &lt;p&gt;Total tasks: &lt;span id="total-count"&gt;0&lt;/span&gt;&lt;/p&gt;
-        &lt;p&gt;Completed: &lt;span id="completed-count"&gt;0&lt;/span&gt;&lt;/p&gt;
-    &lt;/div&gt;
-
-    &lt;script&gt;
-        class TodoApp {
-            constructor() {
-                this.todos = this.loadTodos();
-                this.todoList = document.getElementById('todo-list');
-                this.newTodoInput = document.getElementById('new-todo');
-                this.addBtn = document.getElementById('add-btn');
-                this.totalCount = document.getElementById('total-count');
-                this.completedCount = document.getElementById('completed-count');
-                
-                this.setupEventListeners();
-                this.render();
-            }
-            
-            setupEventListeners() {
-                this.addBtn.addEventListener('click', () => this.addTodo());
-                this.newTodoInput.addEventListener('keypress', (e) => {
-                    if (e.key === 'Enter') this.addTodo();
-                });
-            }
-            
-            addTodo() {
-                const text = this.newTodoInput.value.trim();
-                if (text === '') return;
-                
-                const todo = {
-                    id: Date.now(),
-                    text: text,
-                    completed: false,
-                    createdAt: new Date().toLocaleString()
-                };
-                
-                this.todos.push(todo);
-                this.newTodoInput.value = '';
-                this.saveTodos();
-                this.render();
-            }
-            
-            toggleTodo(id) {
-                this.todos = this.todos.map(todo => 
-                    todo.id === id ? {...todo, completed: !todo.completed} : todo
-                );
-                this.saveTodos();
-                this.render();
-            }
-            
-            deleteTodo(id) {
-                this.todos = this.todos.filter(todo => todo.id !== id);
-                this.saveTodos();
-                this.render();
-            }
-            
-            render() {
-                this.todoList.innerHTML = '';
-                
-                this.todos.forEach(todo => {
-                    const todoItem = document.createElement('div');
-                    todoItem.className = `todo-item ${todo.completed ? 'completed' : ''}`;
-                    
-                    todoItem.innerHTML = `
-                        &lt;span&gt;${todo.text}&lt;/span&gt;
-                        &lt;button class="toggle-btn" onclick="app.toggleTodo(${todo.id})"&gt;
-                            ${todo.completed ? 'Undo' : 'Done'}
-                        &lt;/button&gt;
-                        &lt;button class="delete-btn" onclick="app.deleteTodo(${todo.id})"&gt;Delete&lt;/button&gt;
-                    `;
-                    
-                    this.todoList.appendChild(todoItem);
-                });
-                
-                this.updateCounts();
-            }
-            
-            updateCounts() {
-                const total = this.todos.length;
-                const completed = this.todos.filter(todo => todo.completed).length;
-                
-                this.totalCount.textContent = total;
-                this.completedCount.textContent = completed;
-            }
-            
-            saveTodos() {
-                localStorage.setItem('todos', JSON.stringify(this.todos));
-            }
-            
-            loadTodos() {
-                const saved = localStorage.getItem('todos');
-                return saved ? JSON.parse(saved) : [];
-            }
-        }
-        
-        // Initialize the app
-        const app = new TodoApp();
-    &lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-            </div>
-
-            <div class="info callout">
-                <strong>What this project teaches:</strong> DOM manipulation, event handling, local storage, classes, array methods, and user interface design. It's a complete mini-application that you can actually use!
             </div>
 
             <h2 id="mistakes-lessons">Common mistakes and lessons learned</h2>
@@ -1523,7 +897,7 @@ console.log(developer.code());   // "Alex is coding in JavaScript, Python, Java"
             
             <div class="comparison">
                 <div class="compare-box bad">
-                    <div class="compare-title"> Common mistakes I made</div>
+                    <div class="compare-title">❌ Common mistakes I made</div>
                     <div class="code-block" style="margin: 10px 0; padding: 15px; font-size: 13px;">
 // Missing closing parenthesis
 function greet(name {
@@ -1544,7 +918,7 @@ console.log(myVariable);  // Error if not declared
                     </div>
                 </div>
                 <div class="compare-box good">
-                    <div class="compare-title"> Fixed versions</div>
+                    <div class="compare-title">✅ Fixed versions</div>
                     <div class="code-block" style="margin: 10px 0; padding: 15px; font-size: 13px;">
 // Properly closed parentheses and brackets
 function greet(name) {
@@ -1589,238 +963,38 @@ console.log(myVariable);  // Works!
                 This catches about 90% of my bugs!
             </div>
 
-            <h3>Performance and best practices</h3>
-            
-            <div class="code-block">
-                <div class="code-header">Writing better JavaScript</div>
-                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-// Use meaningful variable names
-// Bad
-let d = new Date();
-let u = users.filter(x => x.a);
-
-// Good
-let currentDate = new Date();
-let activeUsers = users.filter(user => user.isActive);
-
-// Avoid deeply nested code
-// Bad
-if (user) {
-    if (user.isActive) {
-        if (user.hasPermission) {
-            if (user.age >= 18) {
-                // Do something
-            }
-        }
-    }
-}
-
-// Good - early returns
-if (!user) return;
-if (!user.isActive) return;
-if (!user.hasPermission) return;
-if (user.age < 18) return;
-// Do something
-
-// Use const by default, let when you need to reassign
-const PI = 3.14159;  // Won't change
-const users = [];    // Array can be modified, reference stays the same
-let counter = 0;     // Will be reassigned
-
-// Don't modify function parameters
-// Bad
-function processUser(user) {
-    user.lastSeen = new Date();  // Modifies original object
-    return user;
-}
-
-// Good
-function processUser(user) {
-    return {
-        ...user,
-        lastSeen: new Date()
-    };
-}
-
-// Use array methods instead of loops when possible
-const numbers = [1, 2, 3, 4, 5];
-
-// Instead of this
-let doubled = [];
-for (let i = 0; i < numbers.length; i++) {
-    doubled.push(numbers[i] * 2);
-}
-
-// Use this
-const doubledBetter = numbers.map(num => num * 2);
-
-// Handle errors properly
-async function fetchData() {
-    try {
-        const response = await fetch('/api/data');
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        console.error('Failed to fetch data:', error);
-        // Handle the error appropriately
-        return null;
-    }
-}
-            </div>
-
-            <h3>Common gotchas that confused me</h3>
-            
-            <div class="quiz">
-                <div class="quiz-title">JavaScript Quirk: What does this output?</div>
-                <div class="code-block" style="margin: 15px 0; padding: 15px; font-size: 13px;">
-console.log(typeof null);
-console.log([] + []);
-console.log([] + {});
-console.log({} + []);
-                </div>
-                <div class="quiz-option">
-                    <input type="radio" name="q4" value="wrong" id="q4a">
-                    <label for="q4a">"null", "", "[object Object]", "[object Object]"</label>
-                </div>
-                <div class="quiz-option">
-                    <input type="radio" name="q4" value="correct" id="q4b">
-                    <label for="q4b">"object", "", "[object Object]", "[object Object]"</label>
-                </div>
-                <div class="quiz-option">
-                    <input type="radio" name="q4" value="wrong" id="q4c">
-                    <label for="q4c">"undefined", "undefined", "undefined", "undefined"</label>
-                </div>
-                <button class="quiz-btn" onclick="checkAnswer('q4', 'JavaScript has some weird behaviors! typeof null is object (a famous bug), and when you add arrays/objects, they get converted to strings.')">Check Answer</button>
-                <div class="quiz-result" id="q4-result"></div>
-            </div>
-
-            <div class="warning callout">
-                <strong>JavaScript quirks to remember:</strong>
-                <ul style="margin-top: 10px;">
-                    <li><code>typeof null</code> returns "object" (it's a bug that became part of the language)</li>
-                    <li><code>==</code> does type coercion, <code>===</code> doesn't (always use ===)</li>
-                    <li>Functions are hoisted, but variables declared with <code>let</code> and <code>const</code> aren't</li>
-                    <li><code>this</code> behaves differently in arrow functions vs regular functions</li>
-                    <li>Array indices are strings, not numbers (though they look like numbers)</li>
-                </ul>
-            </div>
-
-            <h2>Testing and tools that make you a better developer</h2>
-            
-            <h3>Basic testing concepts</h3>
-            
-            <div class="code-block">
-                <div class="code-header">Simple testing example</div>
-                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-// Simple testing function
-function test(description, fn) {
-    try {
-        fn();
-        console.log(` ${description}`);
-    } catch (error) {
-        console.error(` ${description}: ${error.message}`);
-    }
-}
-
-// Function to test
-function add(a, b) {
-    return a + b;
-}
-
-function divide(a, b) {
-    if (b === 0) {
-        throw new Error("Cannot divide by zero");
-    }
-    return a / b;
-}
-
-// Writing tests
-test("add function works with positive numbers", () => {
-    const result = add(2, 3);
-    if (result !== 5) {
-        throw new Error(`Expected 5, got ${result}`);
-    }
-});
-
-test("add function works with negative numbers", () => {
-    const result = add(-2, -3);
-    if (result !== -5) {
-        throw new Error(`Expected -5, got ${result}`);
-    }
-});
-
-test("divide function works normally", () => {
-    const result = divide(10, 2);
-    if (result !== 5) {
-        throw new Error(`Expected 5, got ${result}`);
-    }
-});
-
-test("divide function throws error for division by zero", () => {
-    let errorThrown = false;
-    try {
-        divide(10, 0);
-    } catch (error) {
-        errorThrown = true;
-    }
-    if (!errorThrown) {
-        throw new Error("Expected an error to be thrown");
-    }
-});
-
-// Run the tests
-console.log("Running tests...");
-            </div>
-
-            <h3>Developer tools and workflow</h3>
-            
-            <div class="info callout">
-                <strong>Tools that changed my development life:</strong>
-                <ul style="margin-top: 10px;">
-                    <li><strong>VS Code:</strong> Amazing code editor with built-in debugging, extensions, and Git integration</li>
-                    <li><strong>Browser DevTools:</strong> Inspect elements, debug JavaScript, monitor network requests, test responsive design</li>
-                    <li><strong>Git/GitHub:</strong> Version control and code sharing (essential for any serious project)</li>
-                    <li><strong>npm:</strong> Package manager for installing and managing JavaScript libraries</li>
-                    <li><strong>Prettier:</strong> Automatically formats your code to look consistent</li>
-                    <li><strong>ESLint:</strong> Catches common JavaScript errors and enforces coding standards</li>
-                </ul>
-            </div>
-
             <h2>What's next in your JavaScript journey?</h2>
             
             <div class="progress-section">
                 <div class="progress-title">Your Next Learning Steps</div>
                 <div class="progress-steps">
                     <div class="progress-step">
-                        <div class="step-number"></div>
+                        <div class="step-number">🖥️</div>
                         <div class="step-title">Backend JavaScript</div>
                         <div class="step-desc">Node.js, Express, databases</div>
                     </div>
                     <div class="progress-step">
-                        <div class="step-number"></div>
+                        <div class="step-number">⚛️</div>
                         <div class="step-title">Frontend Frameworks</div>
                         <div class="step-desc">React, Vue, Angular</div>
                     </div>
                     <div class="progress-step">
-                        <div class="step-number"></div>
+                        <div class="step-number">📱</div>
                         <div class="step-title">Mobile Development</div>
                         <div class="step-desc">React Native, Ionic</div>
                     </div>
                     <div class="progress-step">
-                        <div class="step-number"></div>
+                        <div class="step-number">🔧</div>
                         <div class="step-title">Build Tools</div>
                         <div class="step-desc">Webpack, Vite, TypeScript</div>
                     </div>
                     <div class="progress-step">
-                        <div class="step-number"></div>
+                        <div class="step-number">☁️</div>
                         <div class="step-title">Cloud & Deployment</div>
                         <div class="step-desc">AWS, Vercel, Docker</div>
                     </div>
                     <div class="progress-step">
-                        <div class="step-number"></div>
+                        <div class="step-number">🧪</div>
                         <div class="step-title">Advanced Testing</div>
                         <div class="step-desc">Jest, Cypress, TDD</div>
                     </div>
@@ -1840,18 +1014,6 @@ console.log("Running tests...");
                     <li><strong>CodePen/JSFiddle:</strong> Online playgrounds for experimenting with code</li>
                     <li><strong>Stack Overflow:</strong> Where developers help each other solve problems</li>
                 </ul>
-            </div>
-
-            <h3>Practice challenges to keep growing</h3>
-            
-            <div class="try-it">
-                <div class="try-it-title"> Challenge yourself with these projects:</div>
-                <ol>
-                    <li><strong>Beginner:</strong> Build a tip calculator, random password generator, or digital clock</li>
-                    <li><strong>Intermediate:</strong> Create a weather app using a real API, build a memory card game, or make a expense tracker</li>
-                    <li><strong>Advanced:</strong> Build a chat application, create a data visualization dashboard, or develop a simple e-commerce site</li>
-                    <li><strong>Expert:</strong> Contribute to open source projects, build a full-stack application, or create your own JavaScript library</li>
-                </ol>
             </div>
 
             <div class="story callout">
@@ -1876,6 +1038,10 @@ console.log("Running tests...");
     </div>
 
     <script>
+        // Demo functionality - simplified and working without localStorage
+        let clickCounter = 0;
+        let todoItems = [];
+
         // Copy functionality for code blocks
         function copyCode(button) {
             const codeBlock = button.parentElement;
@@ -1884,10 +1050,16 @@ console.log("Running tests...");
                 .replace('Copy', '')
                 .trim();
             
-            navigator.clipboard.writeText(code).then(() => {
-                button.textContent = 'Copied!';
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(code).then(() => {
+                    button.textContent = 'Copied!';
+                    setTimeout(() => button.textContent = 'Copy', 2000);
+                });
+            } else {
+                // Fallback for older browsers
+                button.textContent = 'Code copied!';
                 setTimeout(() => button.textContent = 'Copy', 2000);
-            });
+            }
         }
 
         // Quiz functionality
@@ -1902,12 +1074,122 @@ console.log("Running tests...");
             }
             
             if (selectedOption.value === 'correct') {
-                resultDiv.innerHTML = ` Correct! ${explanation}`;
+                resultDiv.innerHTML = `✅ Correct! ${explanation}`;
                 resultDiv.style.color = '#28a745';
             } else {
-                resultDiv.innerHTML = ` Not quite right. ${explanation}`;
+                resultDiv.innerHTML = `❌ Not quite right. ${explanation}`;
                 resultDiv.style.color = '#dc3545';
             }
+        }
+
+        // Demo functions for the interactive playground
+        function demoChangeText() {
+            const display = document.getElementById('demo-display');
+            const messages = [
+                "JavaScript is awesome! 🚀",
+                "You're learning programming! 💻",
+                "This text was changed by JavaScript!",
+                "Welcome to the world of coding! 🌟",
+                "Functions make coding powerful! ⚡"
+            ];
+            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+            display.textContent = randomMessage;
+            display.style.backgroundColor = '#f8f9fa';
+            display.style.color = '#333';
+        }
+
+        function demoChangeColor() {
+            const display = document.getElementById('demo-display');
+            const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#f9ca24', '#f0932b', '#eb4d4b', '#6c5ce7', '#fd79a8'];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            display.style.backgroundColor = randomColor;
+            display.style.color = 'white';
+            display.textContent = `Color changed to ${randomColor}! 🎨`;
+        }
+
+        function demoShowTime() {
+            const display = document.getElementById('demo-display');
+            const now = new Date();
+            display.textContent = `⏰ Current time: ${now.toLocaleTimeString()}`;
+            display.style.backgroundColor = '#e8f5e8';
+            display.style.color = '#155724';
+        }
+
+        function demoCounter() {
+            clickCounter++;
+            const display = document.getElementById('demo-display');
+            const emoji = clickCounter % 5 === 0 ? '🎉' : '👆';
+            display.textContent = `${emoji} Button clicked ${clickCounter} times!`;
+            display.style.backgroundColor = '#e3f2fd';
+            display.style.color = '#1565c0';
+        }
+
+        function demoEcho() {
+            const input = document.getElementById('user-message');
+            const display = document.getElementById('demo-display');
+            const message = input.value.trim();
+            
+            if (message) {
+                display.textContent = `📢 You said: "${message}"`;
+                display.style.backgroundColor = '#fff8e1';
+                display.style.color = '#e65100';
+                input.value = '';
+            } else {
+                display.textContent = '🤔 Please type a message first!';
+                display.style.backgroundColor = '#ffebee';
+                display.style.color = '#c62828';
+            }
+        }
+
+        function addTodoItem() {
+            const input = document.getElementById('todo-input');
+            const todoList = document.getElementById('todo-list');
+            const task = input.value.trim();
+            
+            if (task) {
+                const todoItem = {
+                    id: Date.now(),
+                    text: task,
+                    completed: false
+                };
+                
+                todoItems.push(todoItem);
+                input.value = '';
+                renderTodoList();
+            }
+        }
+
+        function toggleTodo(id) {
+            todoItems = todoItems.map(item => 
+                item.id === id ? {...item, completed: !item.completed} : item
+            );
+            renderTodoList();
+        }
+
+        function deleteTodo(id) {
+            todoItems = todoItems.filter(item => item.id !== id);
+            renderTodoList();
+        }
+
+        function renderTodoList() {
+            const todoList = document.getElementById('todo-list');
+            
+            if (todoItems.length === 0) {
+                todoList.innerHTML = '<p style="color: #6c757d; font-style: italic;">No tasks yet. Add one above!</p>';
+                return;
+            }
+            
+            todoList.innerHTML = todoItems.map(item => `
+                <div class="todo-item ${item.completed ? 'completed' : ''}">
+                    <span style="flex: 1;">${item.text}</span>
+                    <button class="demo-button" style="padding: 5px 10px; font-size: 12px;" onclick="toggleTodo(${item.id})">
+                        ${item.completed ? 'Undo' : 'Done'}
+                    </button>
+                    <button class="demo-button" style="padding: 5px 10px; font-size: 12px; background: #dc3545;" onclick="deleteTodo(${item.id})">
+                        Delete
+                    </button>
+                </div>
+            `).join('');
         }
 
         // Smooth scrolling for table of contents
@@ -1921,81 +1203,230 @@ console.log("Running tests...");
             });
         });
 
-        // Add reading progress indicator
-        function updateReadingProgress() {
-            const article = document.querySelector('main');
-            const articleTop = article.offsetTop;
-            const articleHeight = article.offsetHeight;
-            const windowTop = window.pageYOffset;
-            const windowHeight = window.innerHeight;
-            
-            const progress = Math.min(100, Math.max(0, 
-                ((windowTop - articleTop + windowHeight) / articleHeight) * 100
-            ));
-            
-            // You could add a progress bar here if desired
-        }
-
-        window.addEventListener('scroll', updateReadingProgress);
-
-        // Add some interactivity to demonstrate JavaScript in action
+        // Add enter key support for demo inputs
         document.addEventListener('DOMContentLoaded', () => {
-            // Add subtle animations to sections as they come into view
-            const sections = document.querySelectorAll('h2, .callout, .code-block');
+            const userMessage = document.getElementById('user-message');
+            const todoInput = document.getElementById('todo-input');
             
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '0';
-                        entry.target.style.transform = 'translateY(20px)';
-                        entry.target.style.transition = 'all 0.6s ease';
-                        
-                        setTimeout(() => {
-                            entry.target.style.opacity = '1';
-                            entry.target.style.transform = 'translateY(0)';
-                        }, 100);
+            if (userMessage) {
+                userMessage.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        demoEcho();
                     }
                 });
-            }, { threshold: 0.1 });
+            }
+            
+            if (todoInput) {
+                todoInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        addTodoItem();
+                    }
+                });
+            }
 
-            sections.forEach(section => observer.observe(section));
+            // Initialize todo list
+            renderTodoList();
         });
 
-        // Easter egg: Konami code
-        let konamiCode = [];
-        const konami = [
-            'ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown',
-            'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight',
-            'KeyB', 'KeyA'
-        ];
-
+        // Fun easter egg - simplified version
+        let keySequence = [];
         document.addEventListener('keydown', (e) => {
-            konamiCode.push(e.code);
-            konamiCode = konamiCode.slice(-konami.length);
+            keySequence.push(e.key);
+            keySequence = keySequence.slice(-10); // Keep last 10 keys
             
-            if (konamiCode.join('') === konami.join('')) {
+            // Simple easter egg: typing "javascript"
+            if (keySequence.join('').toLowerCase().includes('javascript')) {
                 document.body.style.background = 'linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #f9ca24)';
-                document.body.style.backgroundSize = '400% 400%';
-                document.body.style.animation = 'rainbow 3s ease infinite';
+                document.body.style.backgroundSize = '300% 300%';
                 
-                const style = document.createElement('style');
-                style.textContent = `
-                    @keyframes rainbow {
-                        0% { background-position: 0% 50%; }
-                        50% { background-position: 100% 50%; }
-                        100% { background-position: 0% 50%; }
-                    }
-                `;
-                document.head.appendChild(style);
-                
-                console.log('  code activated! You found the easter egg!');
+                console.log('🎉 JavaScript easter egg activated! You found the secret!');
                 
                 setTimeout(() => {
                     document.body.style.background = '#f7f9fc';
-                    document.body.style.animation = '';
-                }, 5000);
+                }, 3000);
+                
+                keySequence = []; // Reset
             }
         });
     </script>
 </body>
-</html>
+</html>="code-header">my-first-page.html</div>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;My JavaScript Playground&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Welcome to JavaScript!&lt;/h1&gt;
+    &lt;p&gt;Check the console for messages.&lt;/p&gt;
+    
+    &lt;script&gt;
+        // Your JavaScript code goes here
+        console.log("Hello from my HTML page!");
+        console.log("I'm learning JavaScript!");
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+            </div>
+
+            <div class="info callout">
+                <strong>Quick tip:</strong> Save this as an HTML file (with a .html extension) and open it in your browser. This became my go-to setup for practicing - simple, works everywhere, and no complicated setup required.
+            </div>
+
+            <h2 id="fundamentals">The basics that actually matter</h2>
+            
+            <div class="story callout">
+                <div class="story-title">When variables finally clicked</div>
+                I struggled with variables until my friend explained them as "labeled boxes where you store stuff." Want to remember someone's name? Put it in a box labeled "userName". Need to count something? Use a box labeled "counter". This simple analogy changed everything for me.
+            </div>
+
+            <h3>Variables: Your code's memory boxes</h3>
+            
+            <p>Variables are containers that hold information. Think of them as labeled storage boxes in your code's memory:</p>
+
+            <div class="code-block">
+                <div class="code-header">Working with variables</div>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+// Different types of data you can store
+let userName = "Sarah";              // Text (string)
+let userAge = 25;                    // Number
+let isLearningJS = true;             // True/false (boolean)
+let favoriteColors = ["blue", "red", "green"];  // List (array)
+
+let userProfile = {                  // Object (collection of properties)
+    name: "Sarah",
+    age: 25,
+    city: "New York"
+};
+
+// Using variables
+console.log("Hi, I'm " + userName);
+console.log("I'm " + userAge + " years old");
+console.log("Am I learning JavaScript? " + isLearningJS);
+            </div>
+
+            <div class="diagram">
+                <div class="diagram-title">JavaScript Data Types: Your Digital Toolbox</div>
+                <div class="ascii-art">
+┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐
+│      STRING     │  │     NUMBER      │  │     BOOLEAN     │
+│                 │  │                 │  │                 │
+│ "Hello World"   │  │      42         │  │   true/false    │
+│ 'JavaScript'    │  │    3.14159      │  │                 │
+│ "user@mail.com" │  │     -7          │  │   yes/no        │
+└─────────────────┘  └─────────────────┘  └─────────────────┘
+
+┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐
+│     ARRAY       │  │     OBJECT      │  │   UNDEFINED     │
+│                 │  │                 │  │                 │
+│ [1, 2, 3, 4]    │  │ {name: "John"}  │  │   undefined     │
+│ ["a", "b", "c"] │  │ {age: 30}       │  │     null        │
+│ [true, false]   │  │ {city: "NYC"}   │  │                 │
+└─────────────────┘  └─────────────────┘  └─────────────────┘
+                </div>
+            </div>
+
+            <h4>Variable naming: Making your code readable</h4>
+            
+            <div class="comparison">
+                <div class="compare-box bad">
+                    <div class="compare-title">❌ Confusing names (my old code)</div>
+                    <div class="code-block" style="margin: 10px 0; padding: 15px; font-size: 13px;">
+let x = "John";
+let thing = 25;
+let stuff = true;
+let data = ["apple", "banana"];
+
+// What do these even mean?!
+                    </div>
+                </div>
+                <div class="compare-box good">
+                    <div class="compare-title">✅ Clear names (much better!)</div>
+                    <div class="code-block" style="margin: 10px 0; padding: 15px; font-size: 13px;">
+let customerName = "John";
+let customerAge = 25;
+let isLoggedIn = true;
+let shoppingCartItems = ["apple", "banana"];
+
+// Now I understand what's happening!
+                    </div>
+                </div>
+            </div>
+
+            <h3>Making decisions with conditionals</h3>
+            
+            <p>Conditionals let your code make decisions. It's like teaching your program to think:</p>
+
+            <div class="code-block">
+                <div class="code-header">if/else statements</div>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+let userAge = 17;
+
+if (userAge >= 18) {
+    console.log("You can vote!");
+    console.log("You're also old enough to drive.");
+} else if (userAge >= 16) {
+    console.log("You can drive, but can't vote yet.");
+} else {
+    console.log("You're not old enough to drive or vote.");
+}
+
+// More complex decisions
+let weather = "sunny";
+let temperature = 75;
+
+if (weather === "sunny" && temperature > 70) {
+    console.log("Perfect day for a picnic!");
+} else if (weather === "rainy" || temperature < 50) {
+    console.log("Better stay inside today.");
+} else {
+    console.log("It's an okay day to go out.");
+}
+            </div>
+
+            <h2 id="dom-events">Making websites interactive</h2>
+            
+            <div class="story callout">
+                <div class="story-title">The moment web pages came alive</div>
+                I'll never forget the first time I made a button actually do something. I'd been writing JavaScript in the console for weeks, but seeing my code change what appeared on a webpage felt like magic. That's when I knew I wanted to be a web developer.
+            </div>
+
+            <p>The DOM (Document Object Model) is how JavaScript talks to your HTML. Think of it as JavaScript's way of reaching into your web page and changing things in real-time.</p>
+
+            <h3>Interactive Demo: See JavaScript in Action!</h3>
+            
+            <div class="demo-container">
+                <div class="demo-title">JavaScript Playground</div>
+                <div class="demo-content">
+                    <div id="demo-display" style="padding: 15px; background: #f8f9fa; border-radius: 5px; margin-bottom: 15px; min-height: 50px;">
+                        Welcome! Click the buttons below to see JavaScript in action.
+                    </div>
+                    
+                    <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 15px;">
+                        <button class="demo-button" onclick="demoChangeText()">Change Text</button>
+                        <button class="demo-button" onclick="demoChangeColor()">Random Color</button>
+                        <button class="demo-button" onclick="demoShowTime()">Show Time</button>
+                        <button class="demo-button" onclick="demoCounter()">Counter</button>
+                    </div>
+                    
+                    <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                        <input type="text" class="demo-input" id="user-message" placeholder="Type a message...">
+                        <button class="demo-button" onclick="demoEcho()">Echo Message</button>
+                    </div>
+                    
+                    <div>
+                        <h4>Simple Todo List Demo:</h4>
+                        <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+                            <input type="text" class="demo-input" id="todo-input" placeholder="Add a task...">
+                            <button class="demo-button" onclick="addTodoItem()">Add Task</button>
+                        </div>
+                        <div id="todo-list"></div>
+                    </div>
+                </div>
+            </div>
+
+            <h3>How the demo works (the code behind the magic)</h3>
+            
+            <div class="code-block">
+                <div class
