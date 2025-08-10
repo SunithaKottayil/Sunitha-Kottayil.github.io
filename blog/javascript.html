@@ -441,6 +441,40 @@
                 <p style="margin-top: 15px;">🎉 <strong>Congratulations!</strong> You just wrote and executed your first JavaScript program! That text that appeared? You created that with code. You're officially a programmer now!</p>
             </div>
 
+            <h3>Practice JavaScript Right Here - No Setup Required!</h3>
+            <p>Instead of creating separate files, you can practice JavaScript directly in this guide! Try the interactive code editor below:</p>
+
+            <!-- Built-in Practice Section -->
+            <div class="demo-section" style="background: #f0f8ff; border-color: #28a745;">
+                <div class="demo-title" style="color: #28a745;">✨ Your Personal JavaScript Practice Area ✨</div>
+                
+                <div style="background: white; border: 1px solid #dee2e6; border-radius: 5px; padding: 15px; margin-bottom: 20px;">
+                    <h4 style="margin-bottom: 10px; color: #495057;">Try Your Own JavaScript Code:</h4>
+                    <textarea id="practice-code" style="width: 100%; height: 120px; font-family: 'Courier New', monospace; font-size: 14px; padding: 10px; border: 1px solid #ccc; border-radius: 4px;" placeholder="// Type your JavaScript code here and click Run!">// Your first JavaScript code - try editing and running this!
+console.log("Hello, JavaScript!");
+console.log("I'm learning programming!");
+
+// Try some math
+console.log("What's 5 + 3?", 5 + 3);
+console.log("What's 10 * 4?", 10 * 4);
+
+// Create your first variable
+let myName = "Your Name Here";
+console.log("Hi, I'm " + myName);</textarea>
+                    
+                    <div style="margin-top: 10px; display: flex; gap: 10px;">
+                        <button class="demo-button" onclick="runPracticeCode()" style="background: #28a745;">▶ Run Code</button>
+                        <button class="demo-button" onclick="clearPracticeOutput()" style="background: #6c757d;">🗑 Clear Output</button>
+                        <button class="demo-button" onclick="loadExample()" style="background: #17a2b8;">📝 Load Example</button>
+                    </div>
+                </div>
+                
+                <div style="background: #2d3748; color: #e2e8f0; border-radius: 5px; padding: 15px; font-family: 'Courier New', monospace; font-size: 14px; min-height: 100px;">
+                    <div style="color: #4fd1c7; font-weight: bold; margin-bottom: 10px;">Console Output:</div>
+                    <div id="practice-output">Click "▶ Run Code" to see your JavaScript output here!</div>
+                </div>
+            </div>
+
             <h3>What Just Happened? (Breaking Down Your First Code)</h3>
             <p>Let me explain what you just did, piece by piece:</p>
             
@@ -457,110 +491,19 @@
 
             <p><strong>The semicolon ;</strong> - This is like a period at the end of a sentence. It tells JavaScript "this instruction is complete." While JavaScript is forgiving and often works without semicolons, it's good practice to include them.</p>
 
-            <h3>Setting Up Your Own Coding Playground</h3>
-            <p>The browser console is great for quick experiments, but for real learning and building projects, you'll want to create your own HTML files. Think of this as moving from borrowing someone's workshop to having your own dedicated space.</p>
-
-            <p>Here's how to create your very own JavaScript playground:</p>
-
-            <div class="code-container">
-                <div class="code-header">my-first-page.html - Copy this code to create your practice file</div>
-                <div class="code-content">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-    &lt;title&gt;My JavaScript Playground&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;h1&gt;Welcome to My JavaScript Journey!&lt;/h1&gt;
-    &lt;p&gt;Check the browser console to see what JavaScript is doing.&lt;/p&gt;
-    
-    &lt;script&gt;
-        // This is a comment - JavaScript ignores everything after //
-        // Comments are notes you write to yourself or other programmers
-        
-        console.log("Hello from my HTML page!");
-        console.log("I'm learning JavaScript!");
-        console.log("This is so exciting!");
-        
-        // You can do simple math too!
-        console.log("What's 5 + 3?", 5 + 3);
-        console.log("What's 10 * 4?", 10 * 4);
-    &lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;</div>
-            </div>
-
-            <div class="tip-box">
-                <strong>Can't see the HTML code above? Here's the complete practice file code:</strong>
-                <div style="background: #f8f9fa; padding: 15px; border-radius: 5px; margin-top: 10px; font-family: monospace; font-size: 14px; border: 1px solid #dee2e6;">
-                    <div style="color: #007bff; margin-bottom: 5px;">Copy everything between the lines below:</div>
-                    <div style="border-top: 2px solid #007bff; padding-top: 10px; white-space: pre-wrap;">
-&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-    &lt;title&gt;My JavaScript Playground&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;h1&gt;Welcome to My JavaScript Journey!&lt;/h1&gt;
-    &lt;p&gt;Check the browser console to see what JavaScript is doing.&lt;/p&gt;
-    
-    &lt;script&gt;
-        // This is a comment - JavaScript ignores everything after //
-        // Comments are notes you write to yourself or other programmers
-        
-        console.log("Hello from my HTML page!");
-        console.log("I'm learning JavaScript!");
-        console.log("This is so exciting!");
-        
-        // You can do simple math too!
-        console.log("What's 5 + 3?", 5 + 3);
-        console.log("What's 10 * 4?", 10 * 4);
-    &lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-                    </div>
-                </div>
-            </div>
+            <h3>Setting Up Your Own Coding Playground (Optional)</h3>
+            <p>The practice area above is perfect for learning, but if you want to create your own separate HTML files for bigger projects, here's how:</p>
 
             <div class="info-box">
-                <strong>How to use this:</strong>
+                <strong>Optional: Create Your Own HTML File</strong>
+                <p style="margin-top: 10px;">If you want to create separate practice files (not required!), you can:</p>
                 <ol style="margin-top: 10px;">
-                    <li>Copy the code above</li>
-                    <li>Open a text editor (Notepad on Windows, TextEdit on Mac, or any code editor)</li>
-                    <li>Paste the code</li>
-                    <li>Save it with the name "my-first-page.html" (the .html extension is crucial!)</li>
-                    <li>Double-click the file to open it in your browser</li>
-                    <li>Press F12 to open the console and see your JavaScript messages!</li>
+                    <li>Open a text editor (Notepad, TextEdit, or any code editor)</li>
+                    <li>Create a basic HTML structure with JavaScript</li>
+                    <li>Save it with a .html extension</li>
+                    <li>Open it in your browser</li>
                 </ol>
-                <p style="margin-top: 15px;">This HTML file is now your personal JavaScript laboratory. You can experiment, make mistakes, and learn without breaking anything!</p>
-            </div>
-
-            <h3>Practice Right Here - Live JavaScript Playground</h3>
-            <p>You can also practice JavaScript directly in this guide! Try the interactive demo below:</p>
-
-            <!-- Practice Section -->
-            <div class="demo-section" style="background: #f0f8ff; border-color: #28a745;">
-                <div class="demo-title" style="color: #28a745;">✨ Your Personal JavaScript Practice Area ✨</div>
-                
-                <div style="background: white; border: 1px solid #dee2e6; border-radius: 5px; padding: 15px; margin-bottom: 20px;">
-                    <h4 style="margin-bottom: 10px; color: #495057;">Try Your Own JavaScript Code:</h4>
-                    <textarea id="practice-code" style="width: 100%; height: 120px; font-family: 'Courier New', monospace; font-size: 14px; padding: 10px; border: 1px solid #ccc; border-radius: 4px;" placeholder="// Type your JavaScript code here and click Run!
-console.log('Hello, World!');
-let myName = 'Your Name';
-console.log('Hi, I am ' + myName);">// Type your JavaScript code here and click Run!
-console.log('Hello, World!');
-let myName = 'Your Name';
-console.log('Hi, I am ' + myName);</textarea>
-                    
-                    <div style="margin-top: 10px; display: flex; gap: 10px;">
-                        <button class="demo-button" onclick="runPracticeCode()" style="background: #28a745;">Run Code</button>
-                        <button class="demo-button" onclick="clearPracticeOutput()" style="background: #6c757d;">Clear Output</button>
-                    </div>
-                </div>
-                
-                <div style="background: #2d3748; color: #e2e8f0; border-radius: 5px; padding: 15px; font-family: 'Courier New', monospace; font-size: 14px; min-height: 100px;">
-                    <div style="color: #4fd1c7; font-weight: bold; margin-bottom: 10px;">Console Output:</div>
-                    <div id="practice-output">Click "Run Code" to see your JavaScript output here!</div>
-                </div>
+                <p style="margin-top: 15px;"><strong>But remember:</strong> You can do everything right here in this guide using the practice area above!</p>
             </div>
 
             <h3>Understanding Comments - Your Future Self Will Thank You</h3>
@@ -1124,7 +1067,55 @@ if (age === 18) {  // Compares values
         }
         
         function clearPracticeOutput() {
-            document.getElementById('practice-output').innerHTML = 'Output cleared. Click "Run Code" to execute your JavaScript!';
+            document.getElementById('practice-output').innerHTML = 'Output cleared. Click "▶ Run Code" to execute your JavaScript!';
+        }
+        
+        function loadExample() {
+            const examples = [
+                `// Variables and Data Types
+let firstName = "Sarah";
+let age = 25;
+let isStudent = true;
+
+console.log("Name:", firstName);
+console.log("Age:", age);
+console.log("Is student?", isStudent);`,
+
+                `// Math and Calculations
+let price = 19.99;
+let quantity = 3;
+let total = price * quantity;
+
+console.log("Price per item: $" + price);
+console.log("Quantity:", quantity);
+console.log("Total cost: $" + total);`,
+
+                `// Arrays and Lists
+let fruits = ["apple", "banana", "orange"];
+console.log("My fruit list:", fruits);
+
+fruits.push("grape");
+console.log("After adding grape:", fruits);
+
+console.log("First fruit:", fruits[0]);
+console.log("Total fruits:", fruits.length);`,
+
+                `// Functions
+function greetUser(name) {
+    return "Hello, " + name + "!";
+}
+
+let message = greetUser("JavaScript Learner");
+console.log(message);
+
+// Arrow function
+const addNumbers = (a, b) => a + b;
+console.log("5 + 3 =", addNumbers(5, 3));`
+            ];
+            
+            const randomExample = examples[Math.floor(Math.random() * examples.length)];
+            document.getElementById('practice-code').value = randomExample;
+            document.getElementById('practice-output').innerHTML = 'New example loaded! Click "▶ Run Code" to see it in action.';
         }
         
         function escapeHtml(text) {
@@ -1132,6 +1123,41 @@ if (age === 18) {  // Compares values
             div.textContent = text;
             return div.innerHTML;
         }
+
+        // Add Enter key support for demo input
+        document.addEventListener('DOMContentLoaded', function() {
+            const userInput = document.getElementById('user-input');
+            if (userInput) {
+                userInput.addEventListener('keypress', function(event) {
+                    if (event.key === 'Enter') {
+                        echoMessage();
+                    }
+                });
+            }
+        });
+
+        // Simple easter egg for learners
+        let keySequence = [];
+        document.addEventListener('keydown', function(event) {
+            keySequence.push(event.key.toLowerCase());
+            keySequence = keySequence.slice(-10);
+            
+            if (keySequence.join('').includes('javascript')) {
+                const display = document.getElementById('demo-display');
+                if (display) {
+                    display.textContent = ' You found the easter egg! Keep coding!';
+                    display.style.background = 'linear-gradient(45deg, #ff6b6b, #4ecdc4)';
+                    display.style.color = 'white';
+                    
+                    setTimeout(() => {
+                        display.style.background = '#f8f9fa';
+                        display.style.color = '#2c3e50';
+                        display.textContent = 'Click the buttons below to see JavaScript in action!';
+                    }, 3000);
+                }
+                keySequence = [];
+            }
+        });
     </script>
 </body>
 </html>
