@@ -1,3937 +1,551 @@
-</div>
-
-                    <h3>Utility Types - TypeScript's Built-in Generic Helpers</h3>
-                    <p>TypeScript includes many useful generic utility types that solve common problems:</p>
-
-                    <div class="code-container">
-                        <div class="code-header">Useful utility types</div>
-                        <div class="code-block">interface User {
-    id: number;
-    name: string;
-    email: string;
-    password: string;
-    isActive: boolean;
-}
-
-// Partial<T> - makes all properties optional
-function updateUser(id: number, updates: Partial<User>): void {
-    // You can update just some properties, not all
-    console.log(`Updating user ${id} with:`, updates);
-}
-
-updateUser(1, { name: "New Name" }); // Only updating name
-updateUser(2, { email: "new@email.com", isActive: false }); // Updating multiple
-
-// Pick<T, K> - select specific properties
-type PublicUser = Pick<User, 'id' | 'name' | 'email'>; // No password!
-
-function getPublicUserInfo(user: User): PublicUser {
-    return {
-        id: user.id,
-        name: user.name,
-        email: user.email
-        // password is not included - security!
-    };
-}
-
-// Omit<T, K> - exclude specific properties
-type UserRegistration = Omit<User, 'id' | 'isActive'>; // New users don't have ID yet
-
-function registerUser(userData: UserRegistration): User {
-    return {
-        id: Math.floor(Math.random() * 1000), // Generate ID
-        isActive: true, // New users are active by default
-        ...userData
-    };
-}
-
-// Required<T> - makes all properties required
-type CompleteUser = Required<User>; // All properties must be provided
-
-// Readonly<T> - makes all properties readonly
-type ImmutableUser = Readonly<User>;
-
-function createImmutableUser(userData: User): ImmutableUser {
-    return Object.freeze({ ...userData });
-}
-
-// Record<K, T> - create object with specific keys and value types
-type UserRoles = Record<string, string[]>;
-
-const userPermissions: UserRoles = {
-    "admin": ["read", "write", "delete", "manage"],
-    "editor": ["read", "write"],
-    "viewer": ["read"]
-};
-
-// Array utility types
-function processItems<T>(items: T[]): {
-    first: T | undefined;
-    last: T | undefined;
-    middle: T[];
-    count: number;
-} {
-    return {
-        first: items[0],
-        last: items[items.length - 1],
-        middle: items.slice(1, -1),
-        count: items.length
-    };
-}
-
-const numbers = [1, 2, 3, 4, 5];
-const strings = ["a", "b", "c", "d"];
-
-console.log("Numbers:", processItems(numbers));
-console.log("Strings:", processItems(strings));</div>
-                    </div>
-
-                    <div class="exercise">
-                        <h4> Build a Generic Todo List Manager</h4>
-                        <p>Create a flexible todo list that can handle different types of tasks!</p>
-                        <ol class="exercise-steps">
-                            <li>Create a base <code class="code-inline">Task</code> interface with id, title, completed</li>
-                            <li>Create specific task types that extend the base (WorkTask, PersonalTask, StudyTask)</li>
-                            <li>Build a generic <code class="code-inline">TodoList&lt;T&gt;</code> class</li>
-                            <li>Add methods: add, remove, complete, filter, getStats</li>
-                            <li>Use generic constraints where appropriate</li>
-                            <li>Create different todo lists for different task types</li>
-                        </ol>
-                    </div>
-
-                    <div class="tip">
-                        <h4>When to Use Generics</h4>
-                        <p><strong>Use generics when:</strong></p>
-                        <ul style="margin-left: 1.5rem;">
-                            <li>You need the same logic for different types</li>
-                            <li>You want to maintain type safety</li>
-                            <li>You're building reusable components/functions</li>
-                            <li>You want to avoid code duplication</li>
-                        </ul>
-                        <p><strong>Don't use generics when:</strong></p>
-                        <ul style="margin-left: 1.5rem;">
-                            <li>You only work with one specific type</li>
-                            <li>The logic is completely different for each type</li>
-                            <li>It makes the code harder to understand</li>
-                        </ul>
-                    </div>
-
-                    <div class="important">
-                        <h4> Generic Best Practices</h4>
-                        <ul style="margin-left: 1.5rem;">
-                            <li><strong>Use descriptive names:</strong> <code class="code-inline">T</code> for Type, <code class="code-inline">K</code> for Key, <code class="code-inline">V</code> for Value</li>
-                            <li><strong>Add constraints when needed:</strong> Don't make generics too flexible</li>
-                            <li><strong>Provide default types:</strong> <code class="code-inline">&lt;T = string&gt;</code> for common cases</li>
-                            <li><strong>Document your generics:</strong> Explain what types are expected</li>
-                        </ul>
-                    </div>
-
-                    <button class="try-it-button" onclick="markChapterComplete('generics')">Generics conquered! Time for projects →</button>
-                </section>
-
-                <section id="projects" class="fade-in" style="display: none;">
-                    <h2>Real Projects - Put It All Together </h2>
-                    
-                    <div class="analogy">
-                        <h4> Like Building Your Dream House</h4>
-                        <p>You've learned about foundations (types), blueprints (interfaces), construction techniques (classes), and organization systems (modules). Now it's time to build something amazing by combining everything you've learned!</p>
-                    </div>
-
-                    <p>The best way to master TypeScript is by building real projects. Let's create three progressively challenging applications that showcase different aspects of TypeScript!</p>
-
-                    <h3>Project 1: Personal Task Manager </h3>
-                    <p>A command-line task manager that helps you organize your daily activities.</p>
-
-                    <div class="code-container">
-                        <div class="code-header">Project 1: Task Manager - Complete Implementation</div>
-                        <div class="code-block">// types.ts - Type definitions
-export interface Task {
-    id: number;
-    title: string;
-    description: string;
-    completed: boolean;
-    priority: Priority;
-    category: Category;
-    dueDate?: Date;
-    createdAt: Date;
-    completedAt?: Date;
-}
-
-export enum Priority {
-    LOW = 'low',
-    MEDIUM = 'medium',
-    HIGH = 'high',
-    URGENT = 'urgent'
-}
-
-export enum Category {
-    WORK = 'work',
-    PERSONAL = 'personal',
-    STUDY = 'study',
-    HEALTH = 'health',
-    OTHER = 'other'
-}
-
-export interface TaskStats {
-    total: number;
-    completed: number;
-    pending: number;
-    overdue: number;
-    completionRate: number;
-}
-
-// taskManager.ts - Main task management class
-import { Task, Priority, Category, TaskStats } from './types';
-
-export class TaskManager {
-    private tasks: Task[] = [];
-    private nextId: number = 1;
-    
-    // Add a new task
-    addTask(
-        title: string, 
-        description: string, 
-        priority: Priority = Priority.MEDIUM,
-        category: Category = Category.OTHER,
-        dueDate?: Date
-    ): Task {
-        const task: Task = {
-            id: this.nextId++,
-            title: title.trim(),
-            description: description.trim(),
-            completed: false,
-            priority,
-            category,
-            dueDate,
-            createdAt: new Date()
-        };
-        
-        this.tasks.push(task);
-        console.log(` Added task: "${task.title}"`);
-        return task;
-    }
-    
-    // Complete a task
-    completeTask(id: number): boolean {
-        const task = this.findTaskById(id);
-        if (task && !task.completed) {
-            task.completed = true;
-            task.completedAt = new Date();
-            console.log(` Completed task: "${task.title}"`);
-            return true;
-        }
-        console.log(` Task with ID ${id} not found or already completed`);
-        return false;
-    }
-    
-    // Remove a task
-    removeTask(id: number): boolean {
-        const index = this.tasks.findIndex(task => task.id === id);
-        if (index >= 0) {
-            const removed = this.tasks.splice(index, 1)[0];
-            console.log(`🗑️ Removed task: "${removed.title}"`);
-            return true;
-        }
-        console.log(` Task with ID ${id} not found`);
-        return false;
-    }
-    
-    // Find task by ID
-    private findTaskById(id: number): Task | undefined {
-        return this.tasks.find(task => task.id === id);
-    }
-    
-    // Get tasks by category
-    getTasksByCategory(category: Category): Task[] {
-        return this.tasks.filter(task => task.category === category);
-    }
-    
-    // Get tasks by priority
-    getTasksByPriority(priority: Priority): Task[] {
-        return this.tasks.filter(task => task.priority === priority);
-    }
-    
-    // Get pending tasks
-    getPendingTasks(): Task[] {
-        return this.tasks.filter(task => !task.completed);
-    }
-    
-    // Get completed tasks
-    getCompletedTasks(): Task[] {
-        return this.tasks.filter(task => task.completed);
-    }
-    
-    // Get overdue tasks
-    getOverdueTasks(): Task[] {
-        const now = new Date();
-        return this.tasks.filter(task => 
-            !task.completed && 
-            task.dueDate && 
-            task.dueDate < now
-        );
-    }
-    
-    // Get task statistics
-    getStats(): TaskStats {
-        const total = this.tasks.length;
-        const completed = this.getCompletedTasks().length;
-        const pending = this.getPendingTasks().length;
-        const overdue = this.getOverdueTasks().length;
-        const completionRate = total > 0 ? Math.round((completed / total) * 100) : 0;
-        
-        return { total, completed, pending, overdue, completionRate };
-    }
-    
-    // List all tasks with formatting
-    listTasks(): void {
-        if (this.tasks.length === 0) {
-            console.log("📝 No tasks found. Add some tasks to get started!");
-            return;
-        }
-        
-        console.log("\n📋 Your Tasks:");
-        console.log("=" * 50);
-        
-        this.tasks.forEach(task => {
-            const status = task.completed ? "✅" : "⏳";
-            const priority = this.getPriorityIcon(task.priority);
-            const overdue = this.isOverdue(task) ? " OVERDUE" : "";
-            
-            console.log(`${status} [${task.id}] ${priority} ${task.title}`);
-            console.log(`    ${task.description}`);
-            console.log(`   ${task.category} |  ${this.formatDate(task.dueDate)} ${overdue}`);
-            console.log("");
-        });
-    }
-    
-    private getPriorityIcon(priority: Priority): string {
-        switch (priority) {
-            case Priority.URGENT: return "🔴";
-            case Priority.HIGH: return "🟡";
-            case Priority.MEDIUM: return "🟢";
-            case Priority.LOW: return "🔵";
-            default: return "⚪";
-        }
-    }
-    
-    private isOverdue(task: Task): boolean {
-        return !task.completed && task.dueDate ? task.dueDate < new Date() : false;
-    }
-    
-    private formatDate(date?: Date): string {
-        if (!date) return "No due date";
-        return date.toLocaleDateString();
-    }
-}
-
-// app.ts - Main application
-import { TaskManager } from './taskManager';
-import { Priority, Category } from './types';
-
-// Create task manager instance
-const taskManager = new TaskManager();
-
-// Demo: Add some tasks
-console.log("🚀 Personal Task Manager Started!\n");
-
-taskManager.addTask(
-    "Complete TypeScript Tutorial",
-    "Finish learning about generics and build projects",
-    Priority.HIGH,
-    Category.STUDY,
-    new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) // Due in 1 week
-);
-
-taskManager.addTask(
-    "Go for a run",
-    "30-minute jog around the neighborhood",
-    Priority.MEDIUM,
-    Category.HEALTH,
-    new Date(Date.now() + 1 * 24 * 60 * 60 * 1000) // Due tomorrow
-);
-
-taskManager.addTask(
-    "Grocery shopping",
-    "Buy ingredients for weekend cooking",
-    Priority.LOW,
-    Category.PERSONAL,
-    new Date(Date.now() + 2 * 24 * 60 * 60 * 1000) // Due in 2 days
-);
-
-taskManager.addTask(
-    "Finish project proposal",
-    "Complete the client presentation slides",
-    Priority.URGENT,
-    Category.WORK,
-    new Date(Date.now() - 1 * 24 * 60 * 60 * 1000) // Overdue by 1 day
-);
-
-// Display all tasks
-taskManager.listTasks();
-
-// Complete a task
-taskManager.completeTask(2);
-
-// Show statistics
-const stats = taskManager.getStats();
-console.log("\n Task Statistics:");
-console.log(`Total: ${stats.total} | Completed: ${stats.completed} | Pending: ${stats.pending}`);
-console.log(`Overdue: ${stats.overdue} | Completion Rate: ${stats.completionRate}%`);
-
-// Show specific categories
-console.log("\n Work Tasks:");
-taskManager.getTasksByCategory(Category.WORK).forEach(task => {
-    console.log(`  - ${task.title} (${task.completed ? 'Done' : 'Pending'})`);
-});
-
-console.log("\n🎓 Study Tasks:");
-taskManager.getTasksByCategory(Category.STUDY).forEach(task => {
-    console.log(`  - ${task.title} (${task.completed ? 'Done' : 'Pending'})`);
-});</div>
-                    </div>
-
-                    <h3>Project 2: Student Grade Tracker </h3>
-                    <p>A comprehensive grade tracking system for students to monitor their academic performance.</p>
-
-                    <div class="code-container">
-                        <div class="code-header">Project 2: Grade Tracker - Core System</div>
-                        <div class="code-block">// gradeTypes.ts - Academic type definitions
-export interface Course {
-    id: string;
-    name: string;
-    credits: number;
-    instructor: string;
-    semester: string;
-}
-
-export interface Assignment {
-    id: string;
-    courseId: string;
-    name: string;
-    type: AssignmentType;
-    maxPoints: number;
-    earnedPoints?: number;
-    dueDate: Date;
-    submittedAt?: Date;
-    grade?: LetterGrade;
-}
-
-export enum AssignmentType {
-    HOMEWORK = 'homework',
-    QUIZ = 'quiz',
-    EXAM = 'exam',
-    PROJECT = 'project',
-    PARTICIPATION = 'participation'
-}
-
-export enum LetterGrade {
-    A_PLUS = 'A+',
-    A = 'A',
-    A_MINUS = 'A-',
-    B_PLUS = 'B+',
-    B = 'B',
-    B_MINUS = 'B-',
-    C_PLUS = 'C+',
-    C = 'C',
-    C_MINUS = 'C-',
-    D_PLUS = 'D+',
-    D = 'D',
-    F = 'F'
-}
-
-export interface CourseGradeSummary {
-    course: Course;
-    assignments: Assignment[];
-    currentGrade: number;
-    letterGrade: LetterGrade;
-    totalEarnedPoints: number;
-    totalPossiblePoints: number;
-    assignmentCounts: Record<AssignmentType, number>;
-}
-
-export interface Semester {
-    name: string;
-    courses: Course[];
-    gpa: number;
-    totalCredits: number;
-}
-
-// gradeCalculator.ts - Grade calculation utilities
-import { LetterGrade, Assignment, AssignmentType } from './gradeTypes';
-
-export class GradeCalculator {
-    static calculatePercentage(earnedPoints: number, maxPoints: number): number {
-        if (maxPoints === 0) return 0;
-        return Math.round((earnedPoints / maxPoints) * 100 * 100) / 100; // Round to 2 decimals
-    }
-    
-    static getLetterGrade(percentage: number): LetterGrade {
-        if (percentage >= 97) return LetterGrade.A_PLUS;
-        if (percentage >= 93) return LetterGrade.A;
-        if (percentage >= 90) return LetterGrade.A_MINUS;
-        if (percentage >= 87) return LetterGrade.B_PLUS;
-        if (percentage >= 83) return LetterGrade.B;
-        if (percentage >= 80) return LetterGrade.B_MINUS;
-        if (percentage >= 77) return LetterGrade.C_PLUS;
-        if (percentage >= 73) return LetterGrade.C;
-        if (percentage >= 70) return LetterGrade.C_MINUS;
-        if (percentage >= 67) return LetterGrade.D_PLUS;
-        if (percentage >= 65) return LetterGrade.D;
-        return LetterGrade.F;
-    }
-    
-    static getGradePoints(letterGrade: LetterGrade): number {
-        const gradePoints: Record<LetterGrade, number> = {
-            [LetterGrade.A_PLUS]: 4.0,
-            [LetterGrade.A]: 4.0,
-            [LetterGrade.A_MINUS]: 3.7,
-            [LetterGrade.B_PLUS]: 3.3,
-            [LetterGrade.B]: 3.0,
-            [LetterGrade.B_MINUS]: 2.7,
-            [LetterGrade.C_PLUS]: 2.3,
-            [LetterGrade.C]: 2.0,
-            [LetterGrade.C_MINUS]: 1.7,
-            [LetterGrade.D_PLUS]: 1.3,
-            [LetterGrade.D]: 1.0,
-            [LetterGrade.F]: 0.0
-        };
-        return gradePoints[letterGrade];
-    }
-    
-    static calculateGPA(courseGrades: { grade: LetterGrade; credits: number }[]): number {
-        if (courseGrades.length === 0) return 0;
-        
-        const totalPoints = courseGrades.reduce((sum, course) => {
-            return sum + (this.getGradePoints(course.grade) * course.credits);
-        }, 0);
-        
-        const totalCredits = courseGrades.reduce((sum, course) => sum + course.credits, 0);
-        
-        if (totalCredits === 0) return 0;
-        return Math.round((totalPoints / totalCredits) * 100) / 100;
-    }
-    
-    static predictGrade(assignments: Assignment[], targetGrade: LetterGrade): string {
-        const completed = assignments.filter(a => a.earnedPoints !== undefined);
-        const remaining = assignments.filter(a => a.earnedPoints === undefined);
-        
-        if (remaining.length === 0) {
-            return "All assignments completed!";
-        }
-        
-        const completedPoints = completed.reduce((sum, a) => sum + (a.earnedPoints || 0), 0);
-        const totalPossible = assignments.reduce((sum, a) => sum + a.maxPoints, 0);
-        const remainingPossible = remaining.reduce((sum, a) => sum + a.maxPoints, 0);
-        
-        const targetPercentage = this.getMinPercentageForGrade(targetGrade);
-        const neededTotal = (targetPercentage / 100) * totalPossible;
-        const neededFromRemaining = neededTotal - completedPoints;
-        
-        if (neededFromRemaining <= 0) {
-            return `You've already achieved ${targetGrade}! `;
-        }
-        
-        if (neededFromRemaining > remainingPossible) {
-            return `Target ${targetGrade} is not achievable with remaining assignments. `;
-        }
-        
-        const requiredPercentage = (neededFromRemaining / remainingPossible) * 100;
-        return `You need ${requiredPercentage.toFixed(1)}% on remaining assignments to get ${targetGrade}`;
-    }
-    
-    private static getMinPercentageForGrade(grade: LetterGrade): number {
-        switch (grade) {
-            case LetterGrade.A_PLUS: return 97;
-            case LetterGrade.A: return 93;
-            case LetterGrade.A_MINUS: return 90;
-            case LetterGrade.B_PLUS: return 87;
-            case LetterGrade.B: return 83;
-            case LetterGrade.B_MINUS: return 80;
-            case LetterGrade.C_PLUS: return 77;
-            case LetterGrade.C: return 73;
-            case LetterGrade.C_MINUS: return 70;
-            case LetterGrade.D_PLUS: return 67;
-            case LetterGrade.D: return 65;
-            default: return 0;
-        }
-    }
-}
-
-// studentTracker.ts - Main tracking system
-import { Course, Assignment, CourseGradeSummary, Semester, AssignmentType, LetterGrade } from './gradeTypes';
-import { GradeCalculator } from './gradeCalculator';
-
-export class StudentTracker {
-    private courses: Map<string, Course> = new Map();
-    private assignments: Map<string, Assignment[]> = new Map();
-    
-    // Course management
-    addCourse(course: Course): void {
-        this.courses.set(course.id, course);
-        this.assignments.set(course.id, []);
-        console.log(` Added course: ${course.name} (${course.credits} credits)`);
-    }
-    
-    getCourse(courseId: string): Course | undefined {
-        return this.courses.get(courseId);
-    }
-    
-    getAllCourses(): Course[] {
-        return Array.from(this.courses.values());
-    }
-    
-    // Assignment management
-    addAssignment(assignment: Assignment): void {
-        const courseAssignments = this.assignments.get(assignment.courseId);
-        if (!courseAssignments) {
-            console.log(` Course ${assignment.courseId} not found`);
-            return;
-        }
-        
-        courseAssignments.push(assignment);
-        console.log(` Added assignment: ${assignment.name} for ${this.getCourse(assignment.courseId)?.name}`);
-    }
-    
-    submitAssignment(courseId: string, assignmentId: string, earnedPoints: number): void {
-        const assignments = this.assignments.get(courseId);
-        if (!assignments) {
-            console.log(` Course ${courseId} not found`);
-            return;
-        }
-        
-        const assignment = assignments.find(a => a.id === assignmentId);
-        if (!assignment) {
-            console.log(` Assignment ${assignmentId} not found`);
-            return;
-        }
-        
-        assignment.earnedPoints = earnedPoints;
-        assignment.submittedAt = new Date();
-        assignment.grade = GradeCalculator.getLetterGrade(
-            GradeCalculator.calculatePercentage(earnedPoints, assignment.maxPoints)
-        );
-        
-        console.log(` Submitted ${assignment.name}: ${earnedPoints}/${assignment.maxPoints} (${assignment.grade})`);
-    }
-    
-    // Grade analysis
-    getCourseGradeSummary(courseId: string): CourseGradeSummary | undefined {
-        const course = this.getCourse(courseId);
-        const assignments = this.assignments.get(courseId);
-        
-        if (!course || !assignments) return undefined;
-        
-        const submittedAssignments = assignments.filter(a => a.earnedPoints !== undefined);
-        const totalEarnedPoints = submittedAssignments.reduce((sum, a) => sum + (a.earnedPoints || 0), 0);
-        const totalPossiblePoints = submittedAssignments.reduce((sum, a) => sum + a.maxPoints, 0);
-        
-        const currentGrade = totalPossiblePoints > 0 ? 
-            GradeCalculator.calculatePercentage(totalEarnedPoints, totalPossiblePoints) : 0;
-        
-        const letterGrade = GradeCalculator.getLetterGrade(currentGrade);
-        
-        // Count assignments by type
-        const assignmentCounts: Record<AssignmentType, number> = {
-            [AssignmentType.HOMEWORK]: 0,
-            [AssignmentType.QUIZ]: 0,
-            [AssignmentType.EXAM]: 0,
-            [AssignmentType.PROJECT]: 0,
-            [AssignmentType.PARTICIPATION]: 0
-        };
-        
-        assignments.forEach(assignment => {
-            assignmentCounts[assignment.type]++;
-        });
-        
-        return {
-            course,
-            assignments,
-            currentGrade,
-            letterGrade,
-            totalEarnedPoints,
-            totalPossiblePoints,
-            assignmentCounts
-        };
-    }
-    
-    calculateSemesterGPA(semesterName: string): number {
-        const semesterCourses = this.getAllCourses().filter(course => 
-            course.semester === semesterName
-        );
-        
-        const courseGrades = semesterCourses.map(course => {
-            const summary = this.getCourseGradeSummary(course.id);
-            return {
-                grade: summary?.letterGrade || LetterGrade.F,
-                credits: course.credits
-            };
-        });
-        
-        return GradeCalculator.calculateGPA(courseGrades);
-    }
-    
-    // Reporting
-    generateReport(): void {
-        console.log("\n🎓 Academic Progress Report");
-        console.log("=" * 50);
-        
-        const courses = this.getAllCourses();
-        
-        courses.forEach(course => {
-            const summary = this.getCourseGradeSummary(course.id);
-            if (!summary) return;
-            
-            console.log(`\n ${course.name} (${course.instructor})`);
-            console.log(`   Current Grade: ${summary.currentGrade}% (${summary.letterGrade})`);
-            console.log(`   Points: ${summary.totalEarnedPoints}/${summary.totalPossiblePoints}`);
-            console.log(`   Assignments: ${summary.assignments.length} total`);
-            
-            // Show grade prediction
-            const prediction = GradeCalculator.predictGrade(summary.assignments, LetterGrade.A);
-            console.log(`   To get an A: ${prediction}`);
-        });
-        
-        // Overall GPA by semester
-        const semesters = [...new Set(courses.map(c => c.semester))];
-        console.log("\n📊 Semester GPAs:");
-        semesters.forEach(semester => {
-            const gpa = this.calculateSemesterGPA(semester);
-            console.log(`   ${semester}: ${gpa.toFixed(2)}`);
-        });
-    }
-}
-
-// Example usage
-const tracker = new StudentTracker();
-
-// Add courses
-tracker.addCourse({
-    id: "CS101",
-    name: "Introduction to Computer Science",
-    credits: 3,
-    instructor: "Dr. Smith",
-    semester: "Fall 2024"
-});
-
-tracker.addCourse({
-    id: "MATH201",
-    name: "Calculus II",
-    credits: 4,
-    instructor: "Prof. Johnson",
-    semester: "Fall 2024"
-});
-
-// Add assignments
-tracker.addAssignment({
-    id: "hw1",
-    courseId: "CS101",
-    name: "Variables and Data Types",
-    type: AssignmentType.HOMEWORK,
-    maxPoints: 100,
-    dueDate: new Date("2024-09-15")
-});
-
-tracker.addAssignment({
-    id: "quiz1",
-    courseId: "CS101",
-    name: "Programming Basics Quiz",
-    type: AssignmentType.QUIZ,
-    maxPoints: 50,
-    dueDate: new Date("2024-09-20")
-});
-
-// Submit some assignments
-tracker.submitAssignment("CS101", "hw1", 92);
-tracker.submitAssignment("CS101", "quiz1", 48);
-
-// Generate progress report
-tracker.generateReport();</div>
-                    </div>
-
-                    <h3>Project 3: Mini Social Media API </h3>
-                    <p>A TypeScript-based social media backend with users, posts, comments, and real-time interactions.</p>
-
-                    <div class="code-container">
-                        <div class="code-header">Project 3: Social Media API - Complete System</div>
-                        <div class="code-block">// socialTypes.ts - Social media type definitions
-export interface User {
-    id: string;
-    username: string;
-    email: string;
-    displayName: string;
-    bio?: string;
-    profilePicture?: string;
-    followers: string[]; // User IDs
-    following: string[]; // User IDs
-    createdAt: Date;
-    lastActive: Date;
-    isVerified: boolean;
-}
-
-export interface Post {
-    id: string;
-    authorId: string;
-    content: string;
-    imageUrl?: string;
-    likes: string[]; // User IDs who liked
-    comments: Comment[];
-    shares: number;
-    createdAt: Date;
-    editedAt?: Date;
-    hashtags: string[];
-    mentions: string[]; // Mentioned user IDs
-}
-
-export interface Comment {
-    id: string;
-    postId: string;
-    authorId: string;
-    content: string;
-    likes: string[];
-    replies: Reply[];
-    createdAt: Date;
-    editedAt?: Date;
-}
-
-export interface Reply {
-    id: string;
-    commentId: string;
-    authorId: string;
-    content: string;
-    likes: string[];
-    createdAt: Date;
-}
-
-export interface Notification {
-    id: string;
-    userId: string;
-    type: NotificationType;
-    fromUserId: string;
-    postId?: string;
-    commentId?: string;
-    message: string;
-    read: boolean;
-    createdAt: Date;
-}
-
-export enum NotificationType {
-    LIKE = 'like',
-    COMMENT = 'comment',
-    FOLLOW = 'follow',
-    MENTION = 'mention',
-    REPLY = 'reply'
-}
-
-export interface UserStats {
-    postsCount: number;
-    followersCount: number;
-    followingCount: number;
-    totalLikes: number;
-    totalComments: number;
-}
-
-// userService.ts - User management
-import { User, UserStats } from './socialTypes';
-
-export class UserService {
-    private users: Map<string, User> = new Map();
-    
-    createUser(username: string, email: string, displayName: string): User {
-        const userId = this.generateId();
-        
-        // Check if username or email already exists
-        if (this.findUserByUsername(username)) {
-            throw new Error(`Username "${username}" is already taken`);
-        }
-        
-        if (this.findUserByEmail(email)) {
-            throw new Error(`Email "${email}" is already registered`);
-        }
-        
-        const user: User = {
-            id: userId,
-            username: username.toLowerCase(),
-            email: email.toLowerCase(),
-            displayName,
-            followers: [],
-            following: [],
-            createdAt: new Date(),
-            lastActive: new Date(),
-            isVerified: false
-        };
-        
-        this.users.set(userId, user);
-        console.log(`👤 Created user: @${username}`);
-        return user;
-    }
-    
-    findUserById(id: string): User | undefined {
-        return this.users.get(id);
-    }
-    
-    findUserByUsername(username: string): User | undefined {
-        return Array.from(this.users.values()).find(
-            user => user.username === username.toLowerCase()
-        );
-    }
-    
-    findUserByEmail(email: string): User | undefined {
-        return Array.from(this.users.values()).find(
-            user => user.email === email.toLowerCase()
-        );
-    }
-    
-    updateProfile(userId: string, updates: Partial<Pick<User, 'displayName' | 'bio' | 'profilePicture'>>): boolean {
-        const user = this.findUserById(userId);
-        if (!user) return false;
-        
-        Object.assign(user, updates);
-        console.log(` Updated profile for @${user.username}`);
-        return true;
-    }
-    
-    followUser(followerId: string, targetId: string): boolean {
-        const follower = this.findUserById(followerId);
-        const target = this.findUserById(targetId);
-        
-        if (!follower || !target || followerId === targetId) return false;
-        
-        if (!follower.following.includes(targetId)) {
-            follower.following.push(targetId);
-            target.followers.push(followerId);
-            console.log(`👥 @${follower.username} followed @${target.username}`);
-            return true;
-        }
-        
-        return false;
-    }
-    
-    unfollowUser(followerId: string, targetId: string): boolean {
-        const follower = this.findUserById(followerId);
-        const target = this.findUserById(targetId);
-        
-        if (!follower || !target) return false;
-        
-        const followingIndex = follower.following.indexOf(targetId);
-        const followerIndex = target.followers.indexOf(followerId);
-        
-        if (followingIndex > -1 && followerIndex > -1) {
-            follower.following.splice(followingIndex, 1);
-            target.followers.splice(followerIndex, 1);
-            console.log(` @${follower.username} unfollowed @${target.username}`);
-            return true;
-        }
-        
-        return false;
-    }
-    
-    getUserStats(userId: string, postService?: any): UserStats | undefined {
-        const user = this.findUserById(userId);
-        if (!user) return undefined;
-        
-        const userPosts = postService ? postService.getPostsByUser(userId) : [];
-        
-        return {
-            postsCount: userPosts.length,
-            followersCount: user.followers.length,
-            followingCount: user.following.length,
-            totalLikes: userPosts.reduce((sum: number, post: any) => sum + post.likes.length, 0),
-            totalComments: userPosts.reduce((sum: number, post: any) => sum + post.comments.length, 0)
-        };
-    }
-    
-    private generateId(): string {
-        return Math.random().toString(36).substr(2, 9) + Date.now().toString(36);
-    }
-}
-
-// postService.ts - Post management
-import { Post, Comment, Reply } from './socialTypes';
-
-export class PostService {
-    private posts: Map<string, Post> = new Map();
-    
-    createPost(authorId: string, content: string, imageUrl?: string): Post {
-        const postId = this.generateId();
-        
-        // Extract hashtags and mentions
-        const hashtags = this.extractHashtags(content);
-        const mentions = this.extractMentions(content);
-        
-        const post: Post = {
-            id: postId,
-            authorId,
-            content: content.trim(),
-            imageUrl,
-            likes: [],
-            comments: [],
-            shares: 0,
-            createdAt: new Date(),
-            hashtags,
-            mentions
-        };
-        
-        this.posts.set(postId, post);
-        console.log(` Created post by user ${authorId}`);
-        return post;
-    }
-    
-    getPost(postId: string): Post | undefined {
-        return this.posts.get(postId);
-    }
-    
-    getPostsByUser(userId: string): Post[] {
-        return Array.from(this.posts.values()).filter(post => post.authorId === userId);
-    }
-    
-    getFeed(userId: string, followingIds: string[]): Post[] {
-        // Get posts from followed users + own posts
-        const relevantUserIds = [...followingIds, userId];
-        return Array.from(this.posts.values())
-            .filter(post => relevantUserIds.includes(post.authorId))
-            .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
-    }
-    
-    likePost(postId: string, userId: string): boolean {
-        const post = this.getPost(postId);
-        if (!post) return false;
-        
-        if (!post.likes.includes(userId)) {
-            post.likes.push(userId);
-            console.log(` User ${userId} liked post ${postId}`);
-            return true;
-        }
-        
-        return false;
-    }
-    
-    unlikePost(postId: string, userId: string): boolean {
-        const post = this.getPost(postId);
-        if (!post) return false;
-        
-        const index = post.likes.indexOf(userId);
-        if (index > -1) {
-            post.likes.splice(index, 1);
-            console.log(` User ${userId} unliked post ${postId}`);
-            return true;
-        }
-        
-        return false;
-    }
-    
-    addComment(postId: string, authorId: string, content: string): Comment | undefined {
-        const post = this.getPost(postId);
-        if (!post) return undefined;
-        
-        const comment: Comment = {
-            id: this.generateId(),
-            postId,
-            authorId,
-            content: content.trim(),
-            likes: [],
-            replies: [],
-            createdAt: new Date()
-        };
-        
-        post.comments.push(comment);
-        console.log(` Added comment to post ${postId}`);
-        return comment;
-    }
-    
-    addReply(postId: string, commentId: string, authorId: string, content: string): Reply | undefined {
-        const post = this.getPost(postId);
-        if (!post) return undefined;
-        
-        const comment = post.comments.find(c => c.id === commentId);
-        if (!comment) return undefined;
-        
-        const reply: Reply = {
-            id: this.generateId(),
-            commentId,
-            authorId,
-            content: content.trim(),
-            likes: [],
-            createdAt: new Date()
-        };
-        
-        comment.replies.push(reply);
-        console.log(` Added reply to comment ${commentId}`);
-        return reply;
-    }
-    
-    deletePost(postId: string, userId: string): boolean {
-        const post = this.getPost(postId);
-        if (!post || post.authorId !== userId) return false;
-        
-        this.posts.delete(postId);
-        console.log(`🗑️ Deleted post ${postId}`);
-        return true;
-    }
-    
-    searchPosts(query: string): Post[] {
-        const searchTerm = query.toLowerCase();
-        return Array.from(this.posts.values()).filter(post =>
-            post.content.toLowerCase().includes(searchTerm) ||
-            post.hashtags.some(tag => tag.toLowerCase().includes(searchTerm))
-        );
-    }
-    
-    getPostsByHashtag(hashtag: string): Post[] {
-        return Array.from(this.posts.values()).filter(post =>
-            post.hashtags.includes(hashtag.toLowerCase().replace('#', ''))
-        );
-    }
-    
-    private extractHashtags(content: string): string[] {
-        const hashtags = content.match(/#[a-zA-Z0-9_]+/g) || [];
-        return hashtags.map(tag => tag.substring(1).toLowerCase());
-    }
-    
-    private extractMentions(content: string): string[] {
-        const mentions = content.match(/@[a-zA-Z0-9_]+/g) || [];
-        return mentions.map(mention => mention.substring(1).toLowerCase());
-    }
-    
-    private generateId(): string {
-        return Math.random().toString(36).substr(2, 9) + Date.now().toString(36);
-    }
-}
-
-// socialMediaApp.ts - Main application
-import { UserService } from './userService';
-import { PostService } from './postService';
-
-class SocialMediaApp {
-    private userService: UserService;
-    private postService: PostService;
-    
-    constructor() {
-        this.userService = new UserService();
-        this.postService = new PostService();
-    }
-    
-    // User operations
-    registerUser(username: string, email: string, displayName: string) {
-        try {
-            return this.userService.createUser(username, email, displayName);
-        } catch (error) {
-            console.log(`Registration failed: ${error.message}`);
-            return null;
-        }
-    }
-    
-    loginUser(username: string): boolean {
-        const user = this.userService.findUserByUsername(username);
-        if (user) {
-            user.lastActive = new Date();
-            console.log(` @${username} logged in`);
-            return true;
-        }
-        console.log(` User @${username} not found`);
-        return false;
-    }
-    
-    // Social operations
-    followUser(followerUsername: string, targetUsername: string): boolean {
-        const follower = this.userService.findUserByUsername(followerUsername);
-        const target = this.userService.findUserByUsername(targetUsername);
-        
-        if (!follower || !target) {
-            console.log(` One or both users not found`);
-            return false;
-        }
-        
-        return this.userService.followUser(follower.id, target.id);
-    }
-    
-    // Content operations
-    createPost(username: string, content: string, imageUrl?: string) {
-        const user = this.userService.findUserByUsername(username);
-        if (!user) {
-            console.log(` User @${username} not found`);
-            return null;
-        }
-        
-        return this.postService.createPost(user.id, content, imageUrl);
-    }
-    
-    likePost(username: string, postId: string): boolean {
-        const user = this.userService.findUserByUsername(username);
-        if (!user) return false;
-        
-        return this.postService.likePost(postId, user.id);
-    }
-    
-    commentOnPost(username: string, postId: string, content: string) {
-        const user = this.userService.findUserByUsername(username);
-        if (!user) return null;
-        
-        return this.postService.addComment(postId, user.id, content);
-    }
-    
-    // Analytics
-    getUserProfile(username: string) {
-        const user = this.userService.findUserByUsername(username);
-        if (!user) return null;
-        
-        const stats = this.userService.getUserStats(user.id, this.postService);
-        const recentPosts = this.postService.getPostsByUser(user.id)
-            .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
-            .slice(0, 5);
-        
-        return {
-            user,
-            stats,
-            recentPosts
-        };
-    }
-    
-    getFeed(username: string) {
-        const user = this.userService.findUserByUsername(username);
-        if (!user) return [];
-        
-        return this.postService.getFeed(user.id, user.following);
-    }
-    
-    searchContent(query: string) {
-        return {
-            posts: this.postService.searchPosts(query),
-            users: this.searchUsers(query)
-        };
-    }
-    
-    private searchUsers(query: string) {
-        // This would normally search through users
-        // Simplified for demo
-        return [];
-    }
-    
-    // Demo method
-    generateDemoData() {
-        console.log(" Generating demo social media data...\n");
-        
-        // Create users
-        const alice = this.registerUser("alice_codes", "alice@example.com", "Alice Johnson");
-        const bob = this.registerUser("bob_designs", "bob@example.com", "Bob Smith");
-        const charlie = this.registerUser("charlie_writes", "charlie@example.com", "Charlie Brown");
-        
-        if (!alice || !bob || !charlie) return;
-        
-        // Users follow each other
-        this.followUser("alice_codes", "bob_designs");
-        this.followUser("alice_codes", "charlie_writes");
-        this.followUser("bob_designs", "alice_codes");
-        
-        // Create posts
-        const post1 = this.createPost("alice_codes", "Just finished my first TypeScript project! 🎉 #typescript #coding #webdev");
-        const post2 = this.createPost("bob_designs", "Working on a new UI design. What do you think about minimalist approaches? #design #ui");
-        const post3 = this.createPost("charlie_writes", "Writing is like coding for the soul. Both require structure, creativity, and debugging! #writing #philosophy");
-        
-        if (post1 && post2 && post3) {
-            // Add interactions
-            this.likePost("bob_designs", post1.id);
-            this.likePost("charlie_writes", post1.id);
-            this.likePost("alice_codes", post2.id);
-            
-            this.commentOnPost("bob_designs", post1.id, "Congratulations! TypeScript is amazing for large projects!");
-            this.commentOnPost("charlie_writes", post1.id, "Can't wait to see what you build next! 🚀");
-        }
-        
-        // Show results
-        console.log("\n👥 User Profiles:");
-        ["alice_codes", "bob_designs", "charlie_writes"].forEach(username => {
-            const profile = this.getUserProfile(username);
-            if (profile) {
-                console.log(`\n@${username} (${profile.user.displayName})`);
-                console.log(`  Posts: ${profile.stats?.postsCount} | Followers: ${profile.stats?.followersCount} | Following: ${profile.stats?.followingCount}`);
-                console.log(`  Total Likes: ${profile.stats?.totalLikes}`);
-            }
-        });
-        
-        console.log("\n Alice's Feed:");
-        const feed = this.getFeed("alice_codes");
-        feed.slice(0, 3).forEach(post => {
-            const author = this.userService.findUserById(post.authorId);
-            console.log(`\n@${author?.username}: ${post.content}`);
-            console.log(`   ${post.likes.length} likes |  ${post.comments.length} comments`);
-            if (post.hashtags.length > 0) {
-                console.log(`   ${post.hashtags.map(tag => '#' + tag).join(' ')}`);
-            }
-        });
-    }
-}
-
-// Run the demo
-const app = new SocialMediaApp();
-app.generateDemoData();</div>
-                    </div>
-
-                    <div class="exercise">
-                        <h4> Your Challenge: Extend the Social Media App</h4>
-                        <p>Take the social media app to the next level!</p>
-                        <ol class="exercise-steps">
-                            <li>Add a <code class="code-inline">NotificationService</code> that creates notifications for likes, follows, and comments</li>
-                            <li>Implement a <code class="code-inline">MessagingService</code> for direct messages between users</li>
-                            <li>Add user privacy settings (public/private profiles)</li>
-                            <li>Create a trending hashtags feature</li>
-                            <li>Add content moderation features</li>
-                            <li>Implement user blocking functionality</li>
-                        </ol>
-                    </div>
-
-                    <div class="tip">
-                        <h4> Project Development Tips</h4>
-                        <ul style="margin-left: 1.5rem;">
-                            <li><strong>Start Small:</strong> Build core features first, then add complexity</li>
-                            <li><strong>Type Everything:</strong> Use TypeScript's type system to catch errors early</li>
-                            <li><strong>Test as You Go:</strong> Create test data to verify your features work</li>
-                            <li><strong>Document Your Code:</strong> Add comments explaining complex logic</li>
-                            <li><strong>Refactor Often:</strong> Improve your code structure as you learn</li>
-                        </ul>
-                    </div>
-
-                    <div class="important">
-                        <h4> What You've Accomplished</h4>
-                        <p>Congratulations! You've built three real TypeScript applications that demonstrate:</p>
-                        <ul style="margin-left: 1.5rem;">
-                            <li>✅ <strong>Complex Type Systems</strong> - Interfaces, enums, and type unions</li>
-                            <li>✅ <strong>Object-Oriented Programming</strong> - Classes, inheritance, and encapsulation</li>
-                            <li>✅ <strong>Module Organization</strong> - Separating concerns across multiple files</li>
-                            <li>✅ <strong>Generic Programming</strong> - Reusable, type-safe components</li>
-                            <li>✅ <strong>Real-World Patterns</strong> - Service classes, data management, and APIs</li>
-                            <li>✅ <strong>Error Handling</strong> - Graceful error management and validation</li>
-                        </ul>
-                    </div>
-
-                    <h3>Next Steps in Your TypeScript Journey </h3>
-                    <div class="code-container">
-                        <div class="code-header">Continue your learning with these topics</div>
-                        <div class="code-block">// Advanced TypeScript Topics to Explore:
-
-1.  Framework Integration
-   - React with TypeScript
-   - Node.js APIs with Express + TypeScript
-   - Vue.js or Angular with TypeScript
-
-2.  Build Tools & Configuration
-   - Webpack configuration for TypeScript
-   - TSConfig advanced options
-   - ESLint and Prettier setup
-
-3.  Testing
-   - Jest with TypeScript
-   - Unit testing strategies
-   - Mock objects and test utilities
-
-4.  Package Development
-   - Creating npm packages in TypeScript
-   - Publishing type definitions
-   - Contributing to DefinitelyTyped
-
-5. Advanced Patterns
-   - Decorators and metadata
-   - Advanced type manipulation
-   - Conditional types and mapped types
-
-6. Architecture
-   - Clean Architecture with TypeScript
-   - Domain-Driven Design
-   - Microservices with TypeScript</div>
-                    </div>
-
-                    <div class="analogy">
-                        <h4> You're Now a TypeScript Developer!</h4>
-                        <p>You started this journey as a beginner, and now you have the skills to build real applications with TypeScript. You understand types, interfaces, classes, modules, and generics. You've built actual projects that solve real problems. That's the difference between learning syntax and becoming a developer!</p>
-                    </div>
-
-                    <button class="try-it-button" onclick="showCongratulations()"> I'm ready to build amazing things! →</button>
-                </section>
-
-                <section id="congratulations" class="fade-in" style="display: none; text-align: center; padding: 3rem;">
-                    <h2> Congratulations, TypeScript Developer! </h2>
-                    
-                    <div style="font-size: 4rem; margin: 2rem 0;">
-                        
-                    </div>
-                    
-                    <p style="font-size: 1.3rem; margin-bottom: 2rem;">
-                        You've successfully completed your TypeScript journey! You're now equipped with the knowledge and skills to build amazing applications.
-                    </p>
-                    
-                    <div style="background: linear-gradient(135deg, var(--primary), var(--accent)); color: white; padding: 2rem; border-radius: var(--radius-lg); margin: 2rem 0;">
-                        <h3> What You've Mastered</h3>
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
-                            <div>✅ Type Systems</div>
-                            <div>✅ Interfaces & Classes</div>
-                            <div>✅ Modules & Organization</div>
-                            <div>✅ Generics & Advanced Types</div>
-                            <div>✅ Real-World Projects</div>
-                            <div>✅ Best Practices</div>
-                        </div>
-                    </div>
-                    
-                    <p style="font-size: 1.1rem; margin-bottom: 2rem;">
-                        Keep building, keep learning, and remember - every expert was once a beginner. You've got this! 
-                    </p>
-                    
-                    <div style="margin-top: 2rem;">
-                        <button class="try-it-button" onclick="restartJourney()" style="margin: 0.5rem;">🔄 Review the Guide</button>
-                        <button class="try-it-button" onclick="window.open('https://www.typescriptlang.org/', '_blank')" style="margin: 0.5rem;">📚 Official TypeScript Docs</button>
-                    </div>
-                </section>
-            </main>
-        </div>
-    </div>
-
-    <script>
-        let currentChapter = 'introduction';
-        const chapters = ['introduction', 'setup', 'types', 'interfaces', 'classes', 'modules', 'generics', 'projects'];
-        let completedChapters = new Set();
-
-        function navigateToSection(sectionId) {
-            // Hide all sections
-            const sections = document.querySelectorAll('main section');
-            sections.forEach(section => {
-                section.style.display = 'none';
-                section.classList.remove('fade-in');
-            });
-
-            // Show selected section
-            const targetSection = document.getElementById(sectionId);
-            if (targetSection) {
-                targetSection.style.display = 'block';
-                targetSection.classList.add('fade-in');
-                currentChapter = sectionId;
-                updateProgressBar();
-                
-                // Update current chapter icon
-                updateChapterIcons();
-            }
-        }
-
-        function markChapterComplete(chapterId) {
-            completedChapters.add(chapterId);
-            updateChapterIcons();
-            
-            // Move to next chapter
-            const currentIndex = chapters.indexOf(chapterId);
-            if (currentIndex < chapters.length - 1) {
-                const nextChapter = chapters[currentIndex + 1];
-                setTimeout(() => {
-                    navigateToSection(nextChapter);
-                }, 500);
-            } else {
-                // Completed all chapters
-                setTimeout(() => {
-                    navigateToSection('congratulations');
-                }, 500);
-            }
-            
-            updateProgressBar();
-        }
-
-        function updateChapterIcons() {
-            chapters.forEach(chapter => {
-                const icon = document.getElementById(`${chapter}-icon`);
-                if (icon) {
-                    icon.className = 'progress-icon';
-                    
-                    if (completedChapters.has(chapter)) {
-                        icon.classList.add('completed');
-                        icon.textContent = '✓';
-                    } else if (chapter === currentChapter) {
-                        icon.classList.add('current');
-                    } else {
-                        icon.classList.add('pending');
-                    }
-                }
-            });
-        }
-
-        function updateProgressBar() {
-            const progress = (completedChapters.size / chapters.length) * 100;
-            const progressFill = document.getElementById('progress-fill');
-            const progressText = document.getElementById('progress-text');
-            
-            if (progressFill && progressText) {
-                progressFill.style.width = `${progress}%`;
-                
-                if (progress === 100) {
-                    progressText.textContent = ' Journey Complete! You\'re now a TypeScript developer!';
-                } else if (progress > 0) {
-                    progressText.textContent = `Progress: ${Math.round(progress)}% complete - ${completedChapters.size}/${chapters.length} chapters mastered!`;
-                } else {
-                    progressText.textContent = 'Ready to start your TypeScript journey!';
-                }
-            }
-        }
-
-        function showCongratulations() {
-            completedChapters.add('projects');
-            updateChapterIcons();
-            updateProgressBar();
-            navigateToSection('congratulations');
-        }
-
-        function restartJourney() {
-            completedChapters.clear();
-            currentChapter = 'introduction';
-            updateChapterIcons();
-            updateProgressBar();
-            navigateToSection('introduction');
-        }
-
-        // Initialize the app
-        document.addEventListener('DOMContentLoaded', function() {
-            navigateToSection('introduction');
-            updateChapterIcons();
-            updateProgressBar();
-        });
-
-        // Add keyboard navigation
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
-                const currentIndex = chapters.indexOf(currentChapter);
-                if (currentIndex < chapters.length - 1) {
-                    navigateToSection(chapters[currentIndex + 1]);
-                }
-            } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
-                const currentIndex = chapters.indexOf(currentChapter);
-                if (currentIndex > 0) {
-                    navigateToSection(chapters[currentIndex - 1]);
-                }
-            }
-        });
-    </script>
-</body>
-</html>                    </div>
-
-                    <h3>Using Your Module</h3>
-                    <p>Now let's use our math utilities in another file!</p>
-
-                    <div class="code-container">
-                        <div class="code-header">main.ts - Using our module</div>
-                        <div class="code-block">// Import specific functions from our module
-import { add, multiply, PI, Calculator } from './mathUtils';
-
-// Import everything with a namespace
-import * as MathUtils from './mathUtils';
-
-// Using imported functions
-console.log("Addition:", add(5, 3)); // 8
-console.log("Multiplication:", multiply(4, 7)); // 28
-console.log("PI value:", PI); // 3.14159
-
-// Using the imported class
-const calc = new Calculator();
-calc.add(10, 5);
-calc.add(20, 8);
-console.log("Calculator history:", calc.getHistory());
-
-// Using namespace import
-console.log("Subtraction:", MathUtils.subtract(10, 3)); // 7
-console.log("Division:", MathUtils.divide(15, 3)); // 5</div>
-                    </div>
-
-                    <h3>Default Exports - The Star of the Show</h3>
-                    <div class="analogy">
-                        <h4>Like the Main Character</h4>
-                        <p>Sometimes a module has one main thing it does - like a movie's main character. Default exports let you highlight that "main character" of your module!</p>
-                    </div>
-
-                    <div class="code-container">
-                        <div class="code-header">gameCharacter.ts - Using default export</div>
-                        <div class="code-block">// Default export - the main thing this module provides
-export default class GameCharacter {
-    private name: string;
-    private level: number;
-    private health: number;
-    private experience: number;
-    
-    constructor(name: string) {
-        this.name = name;
-        this.level = 1;
-        this.health = 100;
-        this.experience = 0;
-    }
-    
-    public getName(): string {
-        return this.name;
-    }
-    
-    public getLevel(): number {
-        return this.level;
-    }
-    
-    public gainExperience(points: number): void {
-        this.experience += points;
-        console.log(`${this.name} gained ${points} XP!`);
-        
-        // Level up every 100 XP
-        if (this.experience >= this.level * 100) {
-            this.levelUp();
-        }
-    }
-    
-    private levelUp(): void {
-        this.level++;
-        this.health += 20;
-        this.experience = 0;
-        console.log(` ${this.name} leveled up! Now level ${this.level}`);
-    }
-    
-    public getStats(): string {
-        return `${this.name} - Level: ${this.level}, Health: ${this.health}, XP: ${this.experience}`;
-    }
-}
-
-// You can still have named exports alongside default export
-export const MAX_LEVEL = 50;
-export const STARTING_HEALTH = 100;
-
-export function createRandomCharacter(): GameCharacter {
-    const names = ["Aria", "Zephyr", "Luna", "Kai", "Nova"];
-    const randomName = names[Math.floor(Math.random() * names.length)];
-    return new GameCharacter(randomName);
-}</div>
-                    </div>
-
-                    <div class="code-container">
-                        <div class="code-header">game.ts - Using default and named imports</div>
-                        <div class="code-block">// Import the default export (can name it whatever you want)
-import GameCharacter from './gameCharacter';
-
-// Import named exports alongside default
-import GameCharacter, { MAX_LEVEL, createRandomCharacter } from './gameCharacter';
-
-// Create characters
-const player = new GameCharacter("Hero");
-const npc = createRandomCharacter();
-
-console.log("Player:", player.getStats());
-console.log("NPC:", npc.getStats());
-
-// Level up the player
-player.gainExperience(250);
-console.log("After training:", player.getStats());
-
-console.log("Max level in this game:", MAX_LEVEL);</div>
-                    </div>
-
-                    <h3>Re-exporting - Creating Module Collections</h3>
-                    <p>Sometimes you want to group related modules together for easy importing.</p>
-
-                    <div class="code-container">
-                        <div class="code-header">index.ts - Creating a module barrel</div>
-                        <div class="code-block">// index.ts - Barrel file that re-exports from multiple modules
-
-// Re-export everything from mathUtils
-export * from './mathUtils';
-
-// Re-export default and named exports from gameCharacter
-export { default as GameCharacter } from './gameCharacter';
-export { MAX_LEVEL, createRandomCharacter } from './gameCharacter';
-
-// You can also create your own exports
-export const APP_VERSION = "1.0.0";
-export const APP_NAME = "My Awesome Game";
-
-// Create convenience functions
-export function initializeGame() {
-    console.log(`🎮 Starting ${APP_NAME} v${APP_VERSION}`);
-    return {
-        player: new GameCharacter("Player"),
-        calculator: new Calculator()
-    };
-}</div>
-                    </div>
-
-                    <div class="code-container">
-                        <div class="code-header">app.ts - Using the barrel file</div>
-                        <div class="code-block">// Now you can import everything from one place!
-import { 
-    add, 
-    multiply, 
-    GameCharacter, 
-    createRandomCharacter, 
-    initializeGame,
-    APP_NAME 
-} from './index';
-
-console.log(`Welcome to ${APP_NAME}!`);
-
-// Initialize the game
-const gameData = initializeGame();
-
-// Use math functions
-const score = add(multiply(10, 5), 25);
-console.log("Player score:", score);
-
-// Create characters
-const boss = createRandomCharacter();
-console.log("Boss character:", boss.getStats());</div>
-                    </div>
-
-                    <h3>Module Resolution - How TypeScript Finds Your Modules</h3>
-                    <div class="analogy">
-                        <h4> Like GPS for Code</h4>
-                        <p>When you import a module, TypeScript needs to find it. It's like using GPS to find a friend's house - TypeScript follows specific rules to locate your modules!</p>
-                    </div>
-
-                    <div class="code-container">
-                        <div class="code-header">Different ways to import modules</div>
-                        <div class="code-block">// Relative imports (files in your project)
-import { add } from './mathUtils';           // Same folder
-import { GameCharacter } from '../game/character';  // Parent folder then game folder
-import { Database } from '../../db/connection';      // Two levels up then db folder
-
-// Absolute imports (npm packages)
-import * as React from 'react';              // React library
-import { Component } from '@angular/core';   // Angular framework
-import axios from 'axios';                   // HTTP client library
-
-// Node.js built-in modules
-import * as fs from 'fs';                    // File system
-import * as path from 'path';                // Path utilities</div>
-                    </div>
-
-                    <h3>Creating a Real-World Module Example</h3>
-                    <p>Let's build a student management system with multiple modules!</p>
-
-                    <div class="code-container">
-                        <div class="code-header">types.ts - Shared type definitions</div>
-                        <div class="code-block">// types.ts - Shared interfaces and types
-export interface Student {
-    id: number;
-    name: string;
-    email: string;
-    grade: number;
-    courses: string[];
-}
-
-export interface Course {
-    id: string;
-    name: string;
-    credits: number;
-    instructor: string;
-}
-
-export interface Grade {
-    studentId: number;
-    courseId: string;
-    score: number;
-    letterGrade: string;
-}
-
-export type GradeLevel = 9 | 10 | 11 | 12;</div>
-                    </div>
-
-                    <div class="code-container">
-                        <div class="code-header">studentService.ts - Student operations</div>
-                        <div class="code-block">// studentService.ts - Handle student operations
-import { Student, GradeLevel } from './types';
-
-class StudentService {
-    private students: Student[] = [];
-    private nextId: number = 1;
-    
-    public addStudent(name: string, email: string, grade: GradeLevel): Student {
-        const student: Student = {
-            id: this.nextId++,
-            name,
-            email,
-            grade,
-            courses: []
-        };
-        
-        this.students.push(student);
-        console.log(` Added student: ${name}`);
-        return student;
-    }
-    
-    public findStudent(id: number): Student | undefined {
-        return this.students.find(student => student.id === id);
-    }
-    
-    public enrollInCourse(studentId: number, courseId: string): boolean {
-        const student = this.findStudent(studentId);
-        if (student && !student.courses.includes(courseId)) {
-            student.courses.push(courseId);
-            console.log(` ${student.name} enrolled in course ${courseId}`);
-            return true;
-        }
-        return false;
-    }
-    
-    public getStudentsByGrade(grade: GradeLevel): Student[] {
-        return this.students.filter(student => student.grade === grade);
-    }
-    
-    public getAllStudents(): Student[] {
-        return [...this.students]; // Return a copy
-    }
-}
-
-// Export a singleton instance
-export default new StudentService();</div>
-                    </div>
-
-                    <div class="code-container">
-                        <div class="code-header">gradeCalculator.ts - Grade calculations</div>
-                        <div class="code-block">// gradeCalculator.ts - Handle grade calculations
-import { Grade } from './types';
-
-export function calculateLetterGrade(score: number): string {
-    if (score >= 97) return 'A+';
-    if (score >= 93) return 'A';
-    if (score >= 90) return 'A-';
-    if (score >= 87) return 'B+';
-    if (score >= 83) return 'B';
-    if (score >= 80) return 'B-';
-    if (score >= 77) return 'C+';
-    if (score >= 73) return 'C';
-    if (score >= 70) return 'C-';
-    if (score >= 67) return 'D+';
-    if (score >= 65) return 'D';
-    return 'F';
-}
-
-export function calculateGPA(grades: Grade[]): number {
-    if (grades.length === 0) return 0;
-    
-    const gradePoints: { [key: string]: number } = {
-        'A+': 4.0, 'A': 4.0, 'A-': 3.7,
-        'B+': 3.3, 'B': 3.0, 'B-': 2.7,
-        'C+': 2.3, 'C': 2.0, 'C-': 1.7,
-        'D+': 1.3, 'D': 1.0, 'F': 0.0
-    };
-    
-    const totalPoints = grades.reduce((sum, grade) => {
-        return sum + (gradePoints[grade.letterGrade] || 0);
-    }, 0);
-    
-    return Math.round((totalPoints / grades.length) * 100) / 100;
-}
-
-export function isPassingGrade(letterGrade: string): boolean {
-    return letterGrade !== 'F';
-}
-
-export function getGradeDescription(letterGrade: string): string {
-    const descriptions: { [key: string]: string } = {
-        'A+': 'Exceptional', 'A': 'Excellent', 'A-': 'Very Good',
-        'B+': 'Good', 'B': 'Above Average', 'B-': 'Satisfactory',
-        'C+': 'Fair', 'C': 'Average', 'C-': 'Below Average',
-        'D+': 'Poor', 'D': 'Very Poor', 'F': 'Failing'
-    };
-    
-    return descriptions[letterGrade] || 'Unknown';
-}</div>
-                    </div>
-
-                    <div class="code-container">
-                        <div class="code-header">schoolApp.ts - Using all modules together</div>
-                        <div class="code-block">// schoolApp.ts - Main application using all modules
-import studentService from './studentService';
-import { calculateLetterGrade, calculateGPA, getGradeDescription } from './gradeCalculator';
-import { Student, Grade } from './types';
-
-// Create some students
-const alice = studentService.addStudent("Alice Johnson", "alice@school.edu", 11);
-const bob = studentService.addStudent("Bob Smith", "bob@school.edu", 11);
-const charlie = studentService.addStudent("Charlie Brown", "charlie@school.edu", 10);
-
-// Enroll students in courses
-studentService.enrollInCourse(alice.id, "MATH101");
-studentService.enrollInCourse(alice.id, "ENG101");
-studentService.enrollInCourse(bob.id, "MATH101");
-studentService.enrollInCourse(bob.id, "SCI101");
-
-// Create some grades
-const grades: Grade[] = [
-    { studentId: alice.id, courseId: "MATH101", score: 95, letterGrade: calculateLetterGrade(95) },
-    { studentId: alice.id, courseId: "ENG101", score: 88, letterGrade: calculateLetterGrade(88) },
-    { studentId: bob.id, courseId: "MATH101", score: 82, letterGrade: calculateLetterGrade(82) },
-    { studentId: bob.id, courseId: "SCI101", score: 91, letterGrade: calculateLetterGrade(91) }
-];
-
-// Calculate GPAs
-const aliceGrades = grades.filter(g => g.studentId === alice.id);
-const bobGrades = grades.filter(g => g.studentId === bob.id);
-
-console.log("\n📊 Student Report Cards:");
-console.log("=" * 50);
-
-console.log(`\n${alice.name}:`);
-aliceGrades.forEach(grade => {
-    console.log(`  ${grade.courseId}: ${grade.score}% (${grade.letterGrade} - ${getGradeDescription(grade.letterGrade)})`);
-});
-console.log(`  GPA: ${calculateGPA(aliceGrades)}`);
-
-console.log(`\n${bob.name}:`);
-bobGrades.forEach(grade => {
-    console.log(`  ${grade.courseId}: ${grade.score}% (${grade.letterGrade} - ${getGradeDescription(grade.letterGrade)})`);
-});
-console.log(`  GPA: ${calculateGPA(bobGrades)}`);
-
-// Show all 11th graders
-console.log("\n👥 11th Grade Students:");
-const eleventhGraders = studentService.getStudentsByGrade(11);
-eleventhGraders.forEach(student => {
-    console.log(`  - ${student.name} (${student.courses.length} courses)`);
-});</div>
-                    </div>
-
-                    <div class="exercise">
-                        <h4> Build Your Own Library System</h4>
-                        <p>Create a modular library management system!</p>
-                        <ol class="exercise-steps">
-                            <li>Create a <code class="code-inline">types.ts</code> file with Book, Author, and Member interfaces</li>
-                            <li>Create a <code class="code-inline">bookService.ts</code> module for book operations</li>
-                            <li>Create a <code class="code-inline">memberService.ts</code> module for member management</li>
-                            <li>Create a <code class="code-inline">libraryUtils.ts</code> module with utility functions</li>
-                            <li>Create a main <code class="code-inline">library.ts</code> file that uses all modules</li>
-                            <li>Use both default and named exports appropriately</li>
-                        </ol>
-                    </div>
-
-                    <div class="tip">
-                        <h4>💡 Module Best Practices</h4>
-                        <ul style="margin-left: 1.5rem;">
-                            <li><strong>Single Responsibility:</strong> Each module should have one clear purpose</li>
-                            <li><strong>Clear Names:</strong> Use descriptive file and export names</li>
-                            <li><strong>Minimal Exports:</strong> Only export what others need to use</li>
-                            <li><strong>Consistent Structure:</strong> Follow the same patterns across your project</li>
-                            <li><strong>Documentation:</strong> Comment your exports to explain their purpose</li>
-                        </ul>
-                    </div>
-
-                    <button class="try-it-button" onclick="markChapterComplete('modules')">Modules mastered! Time for generics →</button>
-                </section>
-
-                <section id="generics" class="fade-in" style="display: none;">
-                    <h2>Generics - Writing Flexible, Reusable Code </h2>
-                    
-                    <div class="analogy">
-                        <h4> Generics are Like Adjustable Tools</h4>
-                        <p>Think of an adjustable wrench - it can fit different sized bolts without needing a separate tool for each size. Generics let you write code that works with different types without writing separate functions for each type!</p>
-                    </div>
-
-                    <h3>The Problem Generics Solve</h3>
-                    <p>Imagine you need functions to work with different types of data:</p>
-
-                    <div class="comparison">
-                        <div class="comparison-item bad">
-                            <h4> Without Generics (Repetitive)</h4>
-                            <div class="code-container">
-                                <div class="code-block">// Need separate functions for each type
-function getFirstString(items: string[]): string {
-    return items[0];
-}
-
-function getFirstNumber(items: number[]): number {
-    return items[0];
-}
-
-function getFirstBoolean(items: boolean[]): boolean {
-    return items[0];
-}
-
-// This gets tedious and hard to maintain!</div>
-                            </div>
-                        </div>
-                        <div class="comparison-item good">
-                            <h4>✅ With Generics (One Solution)</h4>
-                            <div class="code-container">
-                                <div class="code-block">// One function that works with any type!
-function getFirst<T>(items: T[]): T {
-    return items[0];
-}
-
-// Works with any type
-const firstString = getFirst(["a", "b", "c"]); // string
-const firstNumber = getFirst([1, 2, 3]); // number
-const firstBoolean = getFirst([true, false]); // boolean</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <h3>Your First Generic Function</h3>
-                    <p>Let's start with a simple example - a function that creates a box to store any type of item:</p>
-
-                    <div class="code-container">
-                        <div class="code-header">Basic generic function</div>
-                        <div class="code-block">// T is a "type parameter" - a placeholder for any type
-function createBox<T>(item: T): { content: T; isEmpty: boolean } {
-    return {
-        content: item,
-        isEmpty: false
-    };
-}
-
-// TypeScript automatically figures out the type!
-const stringBox = createBox("Hello!"); // T becomes string
-const numberBox = createBox(42); // T becomes number
-const booleanBox = createBox(true); // T becomes boolean
-
-// You can also be explicit about the type
-const explicitBox = createBox<string>("Explicit type!");
-
-console.log(stringBox.content); // "Hello!" (TypeScript knows it's a string)
-console.log(numberBox.content); // 42 (TypeScript knows it's a number)</div>
-                    </div>
-
-                    <h3>Generic Classes - Containers for Any Type</h3>
-                    <div class="analogy">
-                        <h4> Like Different Sized Storage Boxes</h4>
-                        <p>A storage company might have the same box design but in different sizes - small for books, medium for clothes, large for furniture. Generic classes work similarly - same structure, different content types!</p>
-                    </div>
-
-                    <div class="code-container">
-                        <div class="code-header">Generic class example</div>
-                        <div class="code-block">class Stack<T> {
-    private items: T[] = [];
-    
-    // Add item to top of stack
-    push(item: T): void {
-        this.items.push(item);
-        console.log(`Added ${item} to stack`);
-    }
-    
-    // Remove and return top item
-    pop(): T | undefined {
-        const item = this.items.pop();
-        if (item !== undefined) {
-            console.log(`Removed ${item} from stack`);
-        }
-        return item;
-    }
-    
-    // Look at top item without removing it
-    peek(): T | undefined {
-        return this.items[this.items.length - 1];
-    }
-    
-    // Check if stack is empty
-    isEmpty(): boolean {
-        return this.items.length === 0;
-    }
-    
-    // Get stack size
-    size(): number {
-        return this.items.length;
-    }
-    
-    // Get all items as array
-    toArray(): T[] {
-        return [...this.items]; // Return copy
-    }
-}
-
-// Create different types of stacks
-const numberStack = new Stack<number>();
-numberStack.push(1);
-numberStack.push(2);
-numberStack.push(3);
-console.log("Top number:", numberStack.peek()); // 3
-
-const stringStack = new Stack<string>();
-stringStack.push("first");
-stringStack.push("second");
-stringStack.push("third");
-console.log("Top string:", stringStack.peek()); // "third"
-
-// Even works with custom types!
-interface Task {
-    id: number;
-    description: string;
-    completed: boolean;
-}
-
-const taskStack = new Stack<Task>();
-taskStack.push({ id: 1, description: "Learn TypeScript", completed: false });
-taskStack.push({ id: 2, description: "Build a project", completed: false });
-
-console.log("Current tasks:", taskStack.toArray());</div>
-                    </div>
-
-                    <h3>Generic Interfaces - Flexible Contracts</h3>
-                    <p>Interfaces can also use generics to create flexible contracts:</p>
-
-                    <div class="code-container">
-                        <div class="code-header">Generic interfaces</div>
-                        <div class="code-block">// Generic interface for any type of response
-interface ApiResponse<T> {
-    data: T;
-    status: number;
-    message: string;
-    timestamp: Date;
-}
-
-// Generic interface for database operations
-interface Repository<T> {
-    findById(id: number): T | undefined;
-    findAll(): T[];
-    save(item: T): T;
-    delete(id: number): boolean;
-}
-
-// Use with specific types
-interface User {
-    id: number;
-    name: string;
-    email: string;
-}
-
-interface Product {
-    id: number;
-    name: string;
-    price: number;
-    category: string;
-}
-
-// API responses for different data types
-const userResponse: ApiResponse<User> = {
-    data: { id: 1, name: "Alice", email: "alice@example.com" },
-    status: 200,
-    message: "User retrieved successfully",
-    timestamp: new Date()
-};
-
-const productsResponse: ApiResponse<Product[]> = {
-    data: [
-        { id: 1, name: "Laptop", price: 999, category: "Electronics" },
-        { id: 2, name: "Book", price: 25, category: "Education" }
-    ],
-    status: 200,
-    message: "Products retrieved successfully",
-    timestamp: new Date()
-};
-
-// Repository implementations
-class UserRepository implements Repository<User> {
-    private users: User[] = [];
-    private nextId = 1;
-    
-    findById(id: number): User | undefined {
-        return this.users.find(user => user.id === id);
-    }
-    
-    findAll(): User[] {
-        return [...this.users];
-    }
-    
-    save(user: User): User {
-        if (user.id === 0) {
-            user.id = this.nextId++;
-        }
-        
-        const existingIndex = this.users.findIndex(u => u.id === user.id);
-        if (existingIndex >= 0) {
-            this.users[existingIndex] = user;
-        } else {
-            this.users.push(user);
-        }
-        
-        return user;
-    }
-    
-    delete(id: number): boolean {
-        const index = this.users.findIndex(user => user.id === id);
-        if (index >= 0) {
-            this.users.splice(index, 1);
-            return true;
-        }
-        return false;
-    }
-}</div>
-                    </div>
-
-                    <h3>Generic Constraints - Setting Boundaries</h3>
-                    <div class="analogy">
-                        <h4>🚧 Like Setting Rules for a Game</h4>
-                        <p>Sometimes you want generics to be flexible, but not TOO flexible. It's like saying "you can use any card game, but it must have standard playing cards" - you're setting a boundary while keeping flexibility!</p>
-                    </div>
-
-                    <div class="code-container">
-                        <div class="code-header">Generic constraints</div>
-                        <div class="code-block">// Constraint: T must have a 'length' property
-function logLength<T extends { length: number }>(item: T): T {
-    console.log(`Item has length: ${item.length}`);
-    return item;
-}
-
-// These work because they have 'length' property
-logLength("Hello World"); // string has length
-logLength([1, 2, 3, 4, 5]); // array has length
-logLength({ name: "test", length: 10 }); // object with length property
-
-// This would NOT work:
-// logLength(123); //  Error! number doesn't have length
-
-// Constraint: T must extend a base interface
-interface Identifiable {
-    id: number;
-}
-
-function updateEntity<T extends Identifiable>(entity: T, updates: Partial<T>): T {
-    console.log(`Updating entity with ID: ${entity.id}`);
-    return { ...entity, ...updates };
-}
-
-// Works with any object that has an id
-const user = { id: 1, name: "Alice", email: "alice@example.com" };
-const product = { id: 101, name: "Laptop", price: 999, category: "Electronics" };
-
-const updatedUser = updateEntity(user, { name: "Alice Johnson" });
-const updatedProduct = updateEntity(product, { price: 899 });
-
-// Multiple constraints
-interface Named {
-    name: string;
-}
-
-interface Aged {
-    age: number;
-}
-
-// T must have both name and age
-function introduce<T extends Named & Aged>(person: T): string {
-    return `Hi, I'm ${person.name} and I'm ${person.age} years old.`;
-}
-
-const student = { name: "Emma", age: 16, grade: 11 };
-console.log(introduce(student)); // Works!
-
-// This would NOT work:
-// introduce({ name: "Bob" }); //  Error! Missing age property</div>
-                    </div>
-
-                    <h3>Real-World Example: Generic Event System</h3>
-                    <p>Let's build a type-safe event system that can handle different types of events!</p>
-
-                    <div class="code-container">
-                        <div class="code-header">eventSystem.ts - Real-world generics</div>
-                        <div class="code-block">// Base event interface
-interface BaseEvent {
-    type: string;
-    timestamp: Date;
-}
-
-// Specific event types
-interface UserLoginEvent extends BaseEvent {
-    type: 'user-login';
-    userId: number;
-    username: string;
-}
-
-interface ProductPurchaseEvent extends BaseEvent {
-    type: 'product-purchase';
-    userId: number;
-    productId: number;
-    amount: number;
-}
-
-interface SystemErrorEvent extends BaseEvent {
-    type: 'system-error';
-    errorCode: string;
-    message: string;
-    severity: 'low' | 'medium' | 'high' | 'critical';
-}
-
-// Generic event handler type
-type EventHandler<T extends BaseEvent> = (event: T) => void;
-
-// Generic event emitter class
-class EventEmitter<T extends BaseEvent> {
-    private handlers: Map<string, EventHandler<T>[]> = new Map();
-    
-    // Subscribe to events of a specific type
-    on<K extends T['type']>(
-        eventType: K, 
-        handler: EventHandler<Extract<T, { type: K }>>
-    ): void {
-        if (!this.handlers.has(eventType)) {
-            this.handlers.set(eventType, []);
-        }
-        
-        const handlers = this.handlers.get(eventType)!;
-        handlers.push(handler as EventHandler<T>);
-        
-        console.log(` Subscribed to ${eventType} events`);
-    }
-    
-    // Emit an event
-    emit(event: T): void {
-        const handlers = this.handlers.get(event.type) || [];
-        
-        console.log(` Emitting ${event.type} event`);
-        handlers.forEach(handler => {
-            try {
-                handler(event);
-            } catch (error) {
-                console.error(`Error in event handler:`, error);
-            }
-        });
-    }
-    
-    // Remove all handlers for an event type
-    off(eventType: string): void {
-        this.handlers.delete(eventType);
-        console.log(` Unsubscribed from ${eventType} events`);
-    }
-}
-
-// Union type of all possible events
-type AppEvent = UserLoginEvent | ProductPurchaseEvent | SystemErrorEvent;
-
-// Create event emitter
-const eventBus = new EventEmitter<AppEvent>();
-
-// Set up event handlers
-eventBus.on('user-login', (event) => {
-    console.log(` User ${event.username} (ID: ${event.userId}) logged in`);
-    // TypeScript knows event is UserLoginEvent here!
-});
-
-eventBus.on('product-purchase', (event) => {
-    console.log(` User ${event.userId} purchased product ${event.productId} for ${event.amount}`);
-    // TypeScript knows event is ProductPurchaseEvent here!
-});
-
-eventBus.on('system-error', (event) => {
-    console.log(` ${event.severity.toUpperCase()} ERROR: ${event.message} (Code: ${event.errorCode})`);
-    // TypeScript knows event is SystemErrorEvent here!
-});
-
-// Emit some events
-eventBus.emit({
-    type: 'user-login',
-    timestamp: new Date(),
-    userId: 123,
-    username: 'alice_coder'
-});
-
-eventBus.emit({
-    type: 'product-purchase',
-    timestamp: new Date(),
-    userId: 123,
-    productId: 456,
-    amount: 99.99
-});
-
-eventBus.emit({
-    type: 'system-error',
-    timestamp: new Date(),
-    errorCode: 'DB_CONNECTION_FAILED',
-    message: 'Unable to connect to database',
-    severity: 'high'
-});</div>
-                    </invoke><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TypeScript for Beginners - Complete Guide</title>
-    <meta name="description" content="A comprehensive, beginner-friendly guide to TypeScript with real-world examples, step-by-step tutorials, and practical exercises">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #3178c6;
-            --primary-dark: #2c5aa0;
-            --secondary: #64748b;
-            --accent: #06b6d4;
-            --success: #10b981;
-            --warning: #f59e0b;
-            --error: #ef4444;
-            --text-primary: #0f172a;
-            --text-secondary: #475569;
-            --text-muted: #64748b;
-            --bg-primary: #ffffff;
-            --bg-secondary: #f8fafc;
-            --bg-tertiary: #f1f5f9;
-            --bg-code: #1e293b;
-            --border: #e2e8f0;
-            --border-light: #f1f5f9;
-            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-            --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-            --radius: 0.5rem;
-            --radius-lg: 0.75rem;
-            --radius-xl: 1rem;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-            line-height: 1.7;
-            color: var(--text-primary);
-            background: var(--bg-primary);
-            font-size: 16px;
-            font-weight: 400;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-        }
-
-        /* Header */
-        .header {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: white;
-            padding: 3rem 0;
-            margin-bottom: 2rem;
-            text-align: center;
-        }
-
-        .header h1 {
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            letter-spacing: -0.025em;
-        }
-
-        .header .subtitle {
-            font-size: 1.25rem;
-            opacity: 0.9;
-            margin-bottom: 1.5rem;
-            font-weight: 500;
-        }
-
-        .header .intro {
-            max-width: 700px;
-            margin: 0 auto;
-            font-size: 1.1rem;
-            opacity: 0.8;
-            line-height: 1.6;
-        }
-
-        /* Progress Bar */
-        .progress-container {
-            background: var(--bg-secondary);
-            border-radius: var(--radius-lg);
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-            border: 1px solid var(--border);
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 8px;
-            background: var(--border);
-            border-radius: 4px;
-            overflow: hidden;
-            margin-bottom: 1rem;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-            width: 0%;
-            transition: width 0.3s ease;
-        }
-
-        .progress-text {
-            text-align: center;
-            color: var(--text-secondary);
-            font-weight: 500;
-        }
-
-        /* Navigation */
-        .nav {
-            background: var(--bg-primary);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: var(--shadow);
-        }
-
-        .nav h2 {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 1.5rem;
-            text-align: center;
-        }
-
-        .nav-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1rem;
-        }
-
-        .nav-item {
-            display: block;
-            padding: 1rem 1.25rem;
-            background: var(--bg-secondary);
-            border: 2px solid var(--border);
-            border-radius: var(--radius);
-            color: var(--text-primary);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.95rem;
-            transition: all 0.2s ease;
-            cursor: pointer;
-        }
-
-        .nav-item:hover {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .nav-item.completed {
-            background: var(--success);
-            color: white;
-            border-color: var(--success);
-        }
-
-        /* Main Layout */
-        .main {
-            display: grid;
-            grid-template-columns: 300px 1fr;
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .sidebar {
-            background: var(--bg-primary);
-            border-radius: var(--radius-lg);
-            padding: 2rem;
-            box-shadow: var(--shadow);
-            height: fit-content;
-            position: sticky;
-            top: 1rem;
-        }
-
-        .content {
-            background: var(--bg-primary);
-            border-radius: var(--radius-lg);
-            padding: 2.5rem;
-            box-shadow: var(--shadow);
-            min-height: 800px;
-        }
-
-        /* Typography */
-        h2 {
-            font-size: 2.25rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin: 2.5rem 0 1.5rem 0;
-            padding-bottom: 0.75rem;
-            border-bottom: 2px solid var(--primary);
-            position: relative;
-        }
-
-        h2:first-child {
-            margin-top: 0;
-        }
-
-        h2::before {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 60px;
-            height: 2px;
-            background: var(--accent);
-        }
-
-        h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin: 2rem 0 1rem 0;
-        }
-
-        h4 {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin: 1.5rem 0 0.75rem 0;
-        }
-
-        p {
-            margin-bottom: 1.25rem;
-            color: var(--text-secondary);
-            line-height: 1.7;
-            font-size: 1.05rem;
-        }
-
-        /* Callouts */
-        .callout {
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-            border-radius: var(--radius);
-            border-left: 4px solid;
-            font-size: 1rem;
-        }
-
-        .analogy {
-            border-left-color: var(--accent);
-            background: #f0f9ff;
-            border: 1px solid #bae6fd;
-        }
-
-        .analogy h4 {
-            color: var(--accent);
-            margin-top: 0;
-            margin-bottom: 0.75rem;
-            font-size: 1.1rem;
-        }
-
-        .tip {
-            border-left-color: var(--success);
-            background: #f0fdf4;
-            border: 1px solid #bbf7d0;
-        }
-
-        .tip h4 {
-            color: var(--success);
-            margin-top: 0;
-            margin-bottom: 0.75rem;
-            font-size: 1.1rem;
-        }
-
-        .warning {
-            border-left-color: var(--warning);
-            background: #fffbeb;
-            border: 1px solid #fed7aa;
-        }
-
-        .warning h4 {
-            color: var(--warning);
-            margin-top: 0;
-            margin-bottom: 0.75rem;
-            font-size: 1.1rem;
-        }
-
-        .important {
-            border-left-color: var(--error);
-            background: #fef2f2;
-            border: 1px solid #fecaca;
-        }
-
-        .important h4 {
-            color: var(--error);
-            margin-top: 0;
-            margin-bottom: 0.75rem;
-            font-size: 1.1rem;
-        }
-
-        /* Code Blocks */
-        .code-container {
-            margin: 1.5rem 0;
-            border-radius: var(--radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-        }
-
-        .code-header {
-            background: var(--bg-tertiary);
-            padding: 0.75rem 1.25rem;
-            border-bottom: 1px solid var(--border);
-            font-size: 0.875rem;
-            font-weight: 500;
-            color: var(--text-secondary);
-        }
-
-        .code-block {
-            background: var(--bg-code);
-            color: #e2e8f0;
-            padding: 1.5rem;
-            font-family: 'Fira Code', 'SF Mono', 'Monaco', 'Inconsolata', 'Consolas', monospace;
-            font-size: 0.9rem;
-            overflow-x: auto;
-            line-height: 1.6;
-            white-space: pre-wrap;
-        }
-
-        .code-inline {
-            background: var(--bg-secondary);
-            padding: 0.2rem 0.4rem;
-            border-radius: 0.25rem;
-            font-family: 'Fira Code', 'SF Mono', 'Monaco', 'Inconsolata', 'Consolas', monospace;
-            font-size: 0.85rem;
-            color: var(--primary);
-            border: 1px solid var(--border);
-        }
-
-        /* Comparison Tables */
-        .comparison {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-
-        .comparison-item {
-            background: var(--bg-secondary);
-            border-radius: var(--radius);
-            padding: 1.5rem;
-            border: 1px solid var(--border);
-        }
-
-        .comparison-item h4 {
-            margin-top: 0;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
-        }
-
-        .comparison-item.good {
-            border-left: 4px solid var(--success);
-        }
-
-        .comparison-item.bad {
-            border-left: 4px solid var(--error);
-        }
-
-        /* Exercise Boxes */
-        .exercise {
-            background: var(--bg-secondary);
-            border: 2px solid var(--primary);
-            border-radius: var(--radius-lg);
-            padding: 2rem;
-            margin: 2rem 0;
-        }
-
-        .exercise h4 {
-            color: var(--primary);
-            margin-top: 0;
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
-        }
-
-        .exercise-steps {
-            list-style: none;
-            counter-reset: step-counter;
-        }
-
-        .exercise-steps li {
-            counter-increment: step-counter;
-            margin-bottom: 1rem;
-            padding-left: 2.5rem;
-            position: relative;
-        }
-
-        .exercise-steps li::before {
-            content: counter(step-counter);
-            position: absolute;
-            left: 0;
-            top: 0;
-            background: var(--primary);
-            color: white;
-            width: 1.5rem;
-            height: 1.5rem;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
-        /* Sidebar */
-        .sidebar h3 {
-            margin-top: 0;
-            margin-bottom: 1rem;
-            font-size: 1rem;
-            color: var(--text-primary);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            font-weight: 600;
-        }
-
-        .sidebar-section {
-            margin-bottom: 2rem;
-        }
-
-        .sidebar-list {
-            list-style: none;
-        }
-
-        .sidebar-list li {
-            padding: 0.5rem 0;
-            border-bottom: 1px solid var(--border-light);
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-        }
-
-        .sidebar-list li:last-child {
-            border-bottom: none;
-        }
-
-        .sidebar-list a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: color 0.2s ease;
-        }
-
-        .sidebar-list a:hover {
-            color: var(--primary);
-        }
-
-        /* Progress Tracker */
-        .chapter-progress {
-            background: var(--bg-tertiary);
-            border-radius: var(--radius);
-            padding: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .progress-item {
-            display: flex;
-            align-items: center;
-            padding: 0.5rem 0;
-            font-size: 0.9rem;
-        }
-
-        .progress-icon {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            margin-right: 0.75rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.7rem;
-            font-weight: bold;
-        }
-
-        .progress-icon.completed {
-            background: var(--success);
-            color: white;
-        }
-
-        .progress-icon.current {
-            background: var(--primary);
-            color: white;
-        }
-
-        .progress-icon.pending {
-            background: var(--border);
-            color: var(--text-muted);
-        }
-
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .main {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-
-            .sidebar {
-                position: static;
-                order: 2;
-            }
-
-            .content {
-                order: 1;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 0 1rem;
-            }
-
-            .header h1 {
-                font-size: 2.25rem;
-            }
-
-            .content {
-                padding: 1.5rem;
-            }
-
-            .nav {
-                padding: 1.5rem;
-            }
-
-            .nav-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .comparison {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Animation */
-        .fade-in {
-            animation: fadeIn 0.6s ease-in;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Interactive Elements */
-        .try-it-button {
-            background: var(--accent);
-            color: white;
-            border: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: var(--radius);
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            margin: 1rem 0;
-        }
-
-        .try-it-button:hover {
-            background: #0891b2;
-            transform: translateY(-1px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .example-output {
-            background: var(--bg-tertiary);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 1rem;
-            margin: 1rem 0;
-            font-family: monospace;
-            color: var(--text-primary);
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <title>TypeScript Masterclass: From Basics to Advanced</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f8fc;
+      color: #222;
+      margin: 0;
+      padding: 0 1.2em 3em 1.2em;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 900px;
+      margin: 2em auto;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 0 16px #a8bed8;
+      padding: 2.8em 3em;
+    }
+    h1, h2 {
+      color: #0277bd;
+      font-weight: 700;
+    }
+    h1 {
+      text-align: center;
+      font-size: 2.6em;
+      margin-bottom: 0.6em;
+    }
+    h2 {
+      margin-top: 2.2em;
+      border-bottom: 3px solid #4fc3f7;
+      padding-bottom: 0.4em;
+      font-size: 1.85em;
+    }
+    h3 {
+      margin-top: 1.5em;
+      color: #0288d1;
+    }
+    p, ul, ol {
+      margin-top: 1em;
+      margin-bottom: 1em;
+      font-size: 1.1em;
+      max-width: 850px;
+    }
+    ul, ol {
+      margin-left: 2.2em;
+    }
+    code {
+      background: #e1f5fe;
+      color: #01579b;
+      font-family: Consolas, monospace;
+      padding: 2px 7px;
+      border-radius: 5px;
+      font-size: 1em;
+    }
+    pre.cmd {
+      background: #bbdefb;
+      border-radius: 10px;
+      padding: 1.3em 1.6em;
+      font-family: Consolas, monospace;
+      font-size: 1em;
+      overflow-x: auto;
+      margin: 1.6em 0;
+      color: #01579b;
+      white-space: pre-wrap;
+      box-shadow: 0 3px 10px rgba(2,87,155,0.2);
+    }
+    .tip, .fnote {
+      background: #e1f5fe;
+      border-left: 6px solid #4fc3f7;
+      padding: 1.3em;
+      margin: 1.8em 0;
+      border-radius: 10px;
+      font-size: 1em;
+      color: #01579b;
+    }
+    .diagram {
+      text-align: center;
+      margin: 2.6em 0;
+    }
+    .diagram img {
+      max-width: 95%;
+      height: auto;
+      border-radius: 14px;
+      box-shadow: 0 5px 18px rgba(2,87,155,0.25);
+      background: #fff;
+      padding: 18px;
+    }
+    hr {
+      border: none;
+      border-top: 1.8px solid #81d4fa;
+      margin: 3.8em 0;
+    }
+    a {
+      color: #0277bd;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .quiz-block {
+      background: #e1f5fe;
+      border-left: 8px solid #4fc3f7;
+      padding: 1.5em 1.8em;
+      border-radius: 12px;
+      margin: 2.8em 0;
+      font-size: 1.15em;
+      color: #01579b;
+      max-width: 850px;
+    }
+    .quiz-block input[type="radio"] {
+      margin-right: 15px;
+      vertical-align: middle;
+      transform: scale(1.1);
+    }
+    .quiz-result {
+      font-weight: 700;
+      margin-top: 1.2em;
+      font-size: 1.15em;
+    }
+    iframe {
+      border: 1.8px solid #4fc3f7;
+      border-radius: 12px;
+      width: 100%;
+      min-height: 480px;
+      margin: 1.8em 0;
+      display: block;
+    }
+    button.check-btn {
+      background: #0277bd;
+      color: #fff;
+      border: none;
+      padding: 7.5px 26px;
+      font-size: 1.05em;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 12px;
+      transition: background 0.3s;
+    }
+    button.check-btn:hover {
+      background: #01579b;
+    }
+  </style>
 </head>
 <body>
-    <header class="header">
-        <div class="container">
-            <h1>TypeScript for Beginners</h1>
-            <div class="subtitle">Your Complete Journey from Zero to Hero</div>
-            <div class="intro">
-                Learn TypeScript step-by-step with real-world examples, practical exercises, and clear explanations. Perfect for students, new developers, and anyone curious about modern web development!
-            </div>
-        </div>
-    </header>
+  <div class="container">
+    <h1> Learning TypeScript</h1>
+    <p>Hey there! TypeScript is like JavaScript with superpowers - it adds extra safety features that help you catch errors before they happen. Think of it as JavaScript wearing a safety helmet! Whether you're new to TypeScript or moving from JavaScript, this guide will help you master TypeScript's powerful features step-by-step with practical examples, helpful diagrams, and fun quizzes.</p>
 
-    <div class="container">
-        <div class="progress-container">
-            <div class="progress-bar">
-                <div class="progress-fill" id="progress-fill"></div>
-            </div>
-            <div class="progress-text" id="progress-text">Ready to start your TypeScript journey!</div>
-        </div>
+    <hr />
 
-        <nav class="nav">
-            <h2>Learning Path</h2>
-            <div class="nav-grid">
-                <a href="#introduction" class="nav-item" onclick="navigateToSection('introduction')"> What is TypeScript?</a>
-                <a href="#setup" class="nav-item" onclick="navigateToSection('setup')">⚙ Getting Started</a>
-                <a href="#types" class="nav-item" onclick="navigateToSection('types')">🏷 Understanding Types</a>
-                <a href="#interfaces" class="nav-item" onclick="navigateToSection('interfaces')"> Interfaces Explained</a>
-                <a href="#classes" class="nav-item" onclick="navigateToSection('classes')">🏗 Classes & Objects</a>
-                <a href="#modules" class="nav-item" onclick="navigateToSection('modules')"> Modules & Organization</a>
-                <a href="#generics" class="nav-item" onclick="navigateToSection('generics')"> Generics Made Simple</a>
-                <a href="#projects" class="nav-item" onclick="navigateToSection('projects')"> Real Projects</a>
-            </div>
-        </nav>
-
-        <div class="main">
-            <aside class="sidebar">
-                <div class="sidebar-section">
-                    <h3>Your Progress</h3>
-                    <div class="chapter-progress">
-                        <div class="progress-item">
-                            <div class="progress-icon pending" id="intro-icon">1</div>
-                            <span>Introduction</span>
-                        </div>
-                        <div class="progress-item">
-                            <div class="progress-icon pending" id="setup-icon">2</div>
-                            <span>Setup</span>
-                        </div>
-                        <div class="progress-item">
-                            <div class="progress-icon pending" id="types-icon">3</div>
-                            <span>Types</span>
-                        </div>
-                        <div class="progress-item">
-                            <div class="progress-icon pending" id="interfaces-icon">4</div>
-                            <span>Interfaces</span>
-                        </div>
-                        <div class="progress-item">
-                            <div class="progress-icon pending" id="classes-icon">5</div>
-                            <span>Classes</span>
-                        </div>
-                        <div class="progress-item">
-                            <div class="progress-icon pending" id="modules-icon">6</div>
-                            <span>Modules</span>
-                        </div>
-                        <div class="progress-item">
-                            <div class="progress-icon pending" id="generics-icon">7</div>
-                            <span>Generics</span>
-                        </div>
-                        <div class="progress-item">
-                            <div class="progress-icon pending" id="projects-icon">8</div>
-                            <span>Projects</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="sidebar-section">
-                    <h3>Quick Tips</h3>
-                    <ul class="sidebar-list">
-                        <li>Practice as you learn</li>
-                        <li>Don't rush - understanding is key</li>
-                        <li>Use real examples</li>
-                        <li>Ask questions if stuck</li>
-                        <li>Build small projects</li>
-                    </ul>
-                </div>
-
-                <div class="sidebar-section">
-                    <h3>Resources</h3>
-                    <ul class="sidebar-list">
-                        <li><a href="https://www.typescriptlang.org/" target="_blank">Official TypeScript Site</a></li>
-                        <li><a href="https://code.visualstudio.com/" target="_blank">VS Code Editor</a></li>
-                        <li><a href="https://nodejs.org/" target="_blank">Node.js</a></li>
-                        <li><a href="https://developer.mozilla.org/" target="_blank">MDN Web Docs</a></li>
-                    </ul>
-                </div>
-            </aside>
-
-            <main class="content">
-                <section id="introduction" class="fade-in">
-                    <h2>What is TypeScript? </h2>
-                    
-                    <div class="analogy">
-                        <h4> Think of it Like This</h4>
-                        <p>Imagine JavaScript is like writing with a pencil - you can write anything, but sometimes you make mistakes that are hard to catch. TypeScript is like having a smart grammar checker that helps you write better, clearer code and catches mistakes before they become problems!</p>
-                    </div>
-
-                    <p>TypeScript is a programming language created by Microsoft that builds on JavaScript by adding <strong>static type definitions</strong>. Don't worry if that sounds complicated - we'll break it down!</p>
-
-                    <h3>Why Should You Care About TypeScript?</h3>
-
-                    <div class="comparison">
-                        <div class="comparison-item good">
-                            <h4> With TypeScript</h4>
-                            <div class="code-container">
-                                <div class="code-header">TypeScript - Catches errors early!</div>
-                                <div class="code-block">function greetUser(name: string) {
-    return "Hello, " + name;
-}
-
-greetUser(123); //  Error! Numbers not allowed
-greetUser("Alice"); //  Perfect!</div>
-                            </div>
-                        </div>
-                        <div class="comparison-item bad">
-                            <h4> Regular JavaScript</h4>
-                            <div class="code-container">
-                                <div class="code-header">JavaScript - Error happens at runtime</div>
-                                <div class="code-block">function greetUser(name) {
-    return "Hello, " + name;
-}
-
-greetUser(123); // Returns "Hello, 123" 
-// Might cause bugs later!</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <h3>Real-World Benefits</h3>
-                    <p>Think about popular apps you use daily:</p>
-                    <ul style="margin-left: 2rem; margin-bottom: 1.5rem;">
-                        <li><strong>Slack</strong> - Uses TypeScript to manage millions of messages</li>
-                        <li><strong>Discord</strong> - Keeps chat features reliable with TypeScript</li>
-                        <li><strong>Spotify</strong> - Manages your music library with type safety</li>
-                        <li><strong>Netflix</strong> - Ensures smooth video streaming</li>
-                    </ul>
-
-                    <div class="tip">
-                        <h4> Fun Fact</h4>
-                        <p>According to the 2024 Stack Overflow Survey, 92% of JavaScript developers now use TypeScript! It's not just a trend - it's becoming the standard.</p>
-                    </div>
-
-                    <button class="try-it-button" onclick="markChapterComplete('introduction')">I understand TypeScript basics! →</button>
-                </section>
-
-                <section id="setup" class="fade-in" style="display: none;">
-                    <h2>Getting Your TypeScript Environment Ready ⚙</h2>
-                    
-                    <div class="analogy">
-                        <h4> Setting Up Your Workshop</h4>
-                        <p>Just like a carpenter needs tools before building furniture, we need to set up our development environment before writing TypeScript. Don't worry - it's easier than setting up a gaming console!</p>
-                    </div>
-
-                    <h3>Step 1: Install Node.js</h3>
-                    <p>Node.js is like the engine that runs our TypeScript code. It's free and easy to install!</p>
-
-                    <div class="exercise">
-                        <h4> Your First Setup Mission</h4>
-                        <ol class="exercise-steps">
-                            <li>Go to <a href="https://nodejs.org" target="_blank">nodejs.org</a></li>
-                            <li>Download the LTS (Long Term Support) version</li>
-                            <li>Install it just like any other program</li>
-                            <li>Open your terminal/command prompt</li>
-                            <li>Type <code class="code-inline">node --version</code> to verify it worked</li>
-                        </ol>
-                    </div>
-
-                    <h3>Step 2: Install TypeScript</h3>
-                    <p>Now we'll install TypeScript globally so you can use it anywhere on your computer.</p>
-
-                    <div class="code-container">
-                        <div class="code-header">Terminal/Command Prompt</div>
-                        <div class="code-block">npm install -g typescript</div>
-                    </div>
-
-                    <p>Test if it worked:</p>
-                    <div class="code-container">
-                        <div class="code-header">Check TypeScript version</div>
-                        <div class="code-block">tsc --version</div>
-                    </div>
-
-                    <h3>Step 3: Get a Code Editor</h3>
-                    <p>We recommend <strong>Visual Studio Code</strong> (it's free!) because it has amazing TypeScript support built-in.</p>
-
-                    <div class="tip">
-                        <h4> VS Code Superpowers</h4>
-                        <p>VS Code will automatically show you errors, suggest fixes, and even complete your code as you type. It's like having a coding mentor sitting next to you!</p>
-                    </div>
-
-                    <h3>Your First TypeScript File</h3>
-                    <p>Let's create your first TypeScript program!</p>
-
-                    <div class="exercise">
-                        <h4> Create Your First TypeScript Program</h4>
-                        <ol class="exercise-steps">
-                            <li>Create a new folder called "my-typescript-journey"</li>
-                            <li>Open this folder in VS Code</li>
-                            <li>Create a new file called <code class="code-inline">hello.ts</code></li>
-                            <li>Copy the code below into your file</li>
-                            <li>Save the file</li>
-                        </ol>
-                    </div>
-
-                    <div class="code-container">
-                        <div class="code-header">hello.ts - Your first TypeScript program!</div>
-                        <div class="code-block">// This is your first TypeScript program! 
-function sayHello(name: string): string {
-    return `Hello, ${name}! Welcome to TypeScript!`;
-}
-
-// Let's use our function
-const userName: string = "Future Developer";
-const greeting: string = sayHello(userName);
-
-console.log(greeting);
-console.log(" Congratulations! You're now writing TypeScript!");</div>
-                    </div>
-
-                    <h3>Running Your Code</h3>
-                    <p>To run TypeScript, we need to compile it to JavaScript first:</p>
-
-                    <div class="code-container">
-                        <div class="code-header">Compile and run your code</div>
-                        <div class="code-block"># Compile TypeScript to JavaScript
-tsc hello.ts
-
-# Run the JavaScript file
-node hello.js</div>
-                    </div>
-
-                    <div class="example-output">
-                        Expected output:<br>
-                        Hello, Future Developer! Welcome to TypeScript!<br>
-                         Congratulations! You're now writing TypeScript!
-                    </div>
-
-                    <div class="warning">
-                        <h4> Troubleshooting Tips</h4>
-                        <p>If you get an error, make sure you're in the right folder and that your file is saved. Don't worry - even experienced developers make these mistakes!</p>
-                    </div>
-
-                    <button class="try-it-button" onclick="markChapterComplete('setup')">Setup complete! Let's learn types →</button>
-                </section>
-
-                <section id="types" class="fade-in" style="display: none;">
-                    <h2>Understanding Types - The Heart of TypeScript 🏷</h2>
-                    
-                    <div class="analogy">
-                        <h4> Types are Like Labels in a Store</h4>
-                        <p>Imagine you're organizing a store. You put labels on shelves: "Books," "Electronics," "Clothing." Types in TypeScript work the same way - they're labels that tell us what kind of data we're working with. This prevents confusion like accidentally putting a banana in the electronics section!</p>
-                    </div>
-
-                    <h3>The Basic Types - Your Foundation</h3>
-                    <p>TypeScript has several basic types that cover most of what you'll need. Let's explore them with real examples!</p>
-
-                    <h4>1. String - For Text</h4>
-                    <div class="code-container">
-                        <div class="code-header">Working with strings</div>
-                        <div class="code-block">// Strings hold text - like usernames, messages, or names
-let studentName: string = "Alex Johnson";
-let favoriteQuote: string = "The only way to do great work is to love what you do";
-let emailAddress: string = "alex@example.com";
-
-// You can use single quotes, double quotes, or template literals
-let message: string = `Welcome back, ${studentName}!`;
-
-console.log(message); // "Welcome back, Alex Johnson!"</div>
-                    </div>
-
-                    <h4>2. Number - For All Numeric Values</h4>
-                    <div class="code-container">
-                        <div class="code-header">Working with numbers</div>
-                        <div class="code-block">// TypeScript uses one type for all numbers (integers, decimals, etc.)
-let age: number = 17;
-let gpa: number = 3.85;
-let temperature: number = -5.2;
-let phoneNumber: number = 5551234567;
-
-// Math operations work as expected
-let yearsUntilGraduation: number = 18 - age;
-console.log(`Years until graduation: ${yearsUntilGraduation}`);</div>
-                    </div>
-
-                    <h4>3. Boolean - For True/False Values</h4>
-                    <div class="code-container">
-                        <div class="code-header">Working with booleans</div>
-                        <div class="code-block">// Booleans represent yes/no, on/off, true/false
-let isStudent: boolean = true;
-let hasDriversLicense: boolean = false;
-let isWeekend: boolean = true;
-
-// Great for making decisions in your code
-if (isStudent && isWeekend) {
-    console.log("Time to relax and maybe do some homework!");
-}</div>
-                    </div>
-
-                    <h4>4. Array - For Lists of Things</h4>
-                    <div class="code-container">
-                        <div class="code-header">Working with arrays</div>
-                        <div class="code-block">// Arrays hold multiple values of the same type
-let favoriteColors: string[] = ["blue", "green", "purple"];
-let testScores: number[] = [95, 87, 92, 88];
-let daysOff: boolean[] = [false, false, false, false, false, true, true];
-
-// Alternative syntax (both work the same way)
-let hobbies: Array<string> = ["reading", "gaming", "coding", "music"];
-
-// Access items by their position (starting from 0)
-console.log(`My favorite color is ${favoriteColors[0]}`); // "blue"</div>
-                    </div>
-
-                    <h3>Type Inference - TypeScript's Smart Feature</h3>
-                    <div class="analogy">
-                        <h4> TypeScript is Like a Detective</h4>
-                        <p>Sometimes you don't need to tell TypeScript what type something is - it can figure it out! It's like when you see someone carrying a basketball - you can guess they're probably going to play basketball.</p>
-                    </div>
-
-                    <div class="comparison">
-                        <div class="comparison-item good">
-                            <h4> TypeScript Figures It Out</h4>
-                            <div class="code-container">
-                                <div class="code-block">// TypeScript automatically knows these types!
-let name = "Sarah"; // TypeScript knows: string
-let score = 95; // TypeScript knows: number
-let passed = true; // TypeScript knows: boolean
-
-// Hover over these in VS Code to see the types!</div>
-                            </div>
-                        </div>
-                        <div class="comparison-item">
-                            <h4> Being Explicit (Also Good!)</h4>
-                            <div class="code-container">
-                                <div class="code-block">// Sometimes it's better to be clear
-let name: string = "Sarah";
-let score: number = 95;
-let passed: boolean = true;
-
-// Especially helpful for others reading your code</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <h3>Union Types - When You Need Flexibility</h3>
-                    <p>Sometimes a variable might hold different types of data. Union types let you handle this safely!</p>
-
-                    <div class="code-container">
-                        <div class="code-header">Union types in action</div>
-                        <div class="code-block">// A user ID might be a number or a string
-let userId: number | string;
-userId = 12345; //  Works!
-userId = "user_abc123"; //  Also works!
-
-// Phone numbers could be numbers or strings
-let phoneNumber: number | string = "555-123-4567";
-
-// Function that accepts multiple types
-function printId(id: number | string) {
-    console.log(`Your ID is: ${id}`);
-}
-
-printId(123); //  Works
-printId("abc"); //  Also works</div>
-                    </div>
-
-                    <div class="exercise">
-                        <h4> Practice Time: Create a Student Profile</h4>
-                        <p>Create a TypeScript file that describes a student. Try to use all the types we've learned!</p>
-                        <ol class="exercise-steps">
-                            <li>Create a file called <code class="code-inline">student-profile.ts</code></li>
-                            <li>Add variables for: student name, age, grade level, favorite subjects (array), is honor student (boolean)</li>
-                            <li>Use both explicit types and let TypeScript infer some types</li>
-                            <li>Print out a summary of the student</li>
-                        </ol>
-                    </div>
-
-                    <div class="tip">
-                        <h4> Pro Tip: Type Annotations</h4>
-                        <p>When you're starting out, it's totally fine to be explicit with types. As you get comfortable, you'll naturally start letting TypeScript infer more. Both approaches are correct!</p>
-                    </div>
-
-                    <button class="try-it-button" onclick="markChapterComplete('types')">I understand types! Show me interfaces →</button>
-                </section>
-
-                <section id="interfaces" class="fade-in" style="display: none;">
-                    <h2>Interfaces - Creating Blueprints for Objects 📋</h2>
-                    
-                    <div class="analogy">
-                        <h4> Interfaces are Like Architectural Blueprints</h4>
-                        <p>Imagine you're designing a house. Before building, you create a blueprint that shows where the kitchen, bedrooms, and bathrooms should go. Interfaces work the same way - they're blueprints that define what properties an object should have!</p>
-                    </div>
-
-                    <h3>Your First Interface</h3>
-                    <p>Let's start with something relatable - describing a student!</p>
-
-                    <div class="code-container">
-                        <div class="code-header">Creating a Student interface</div>
-                        <div class="code-block">// Interface: The blueprint for what a Student should look like
-interface Student {
-    name: string;
-    age: number;
-    grade: number;
-    email: string;
-    isEnrolled: boolean;
-}
-
-// Using the interface to create actual student objects
-const student1: Student = {
-    name: "Emma Thompson",
-    age: 16,
-    grade: 11,
-    email: "emma.thompson@school.edu",
-    isEnrolled: true
-};
-
-const student2: Student = {
-    name: "Marcus Rodriguez", 
-    age: 17,
-    grade: 12,
-    email: "marcus.r@school.edu",
-    isEnrolled: true
-};</div>
-                    </div>
-
-                    <div class="tip">
-                        <h4 Why Interfaces Rock</h4>
-                        <p>If you try to create a student without all the required properties, TypeScript will immediately tell you what's missing. It's like having a checklist that prevents you from forgetting important details!</p>
-                    </div>
-
-                    <h3>Optional Properties - When Things Might Be Missing</h3>
-                    <p>Sometimes, not every property is required. Use the <code class="code-inline">?</code> symbol to make properties optional.</p>
-
-                    <div class="code-container">
-                        <div class="code-header">Optional properties with ?</div>
-                        <div class="code-block">interface SocialMediaProfile {
-    username: string;
-    displayName: string;
-    bio?: string; // Optional - not everyone has a bio
-    profilePicture?: string; // Optional
-    followerCount: number;
-    isVerified?: boolean; // Optional - defaults to false
-}
-
-// This works even without the optional properties!
-const profile1: SocialMediaProfile = {
-    username: "coding_teen",
-    displayName: "Alex the Coder",
-    followerCount: 1250
-};
-
-// This also works with optional properties included
-const profile2: SocialMediaProfile = {
-    username: "music_lover_17",
-    displayName: "Taylor Swift Fan",
-    bio: "🎵 Music is life! Senior at Valley High 🎓",
-    followerCount: 523,
-    isVerified: false
-};</div>
-                    </div>
-
-                    <h3>Readonly Properties - Values That Never Change</h3>
-                    <p>Some properties should never be changed after they're set, like a student ID number.</p>
-
-                    <div class="code-container">
-                        <div class="code-header">Readonly properties</div>
-                        <div class="code-block">interface Student {
-    readonly studentId: number; // Can't be changed after creation
-    readonly schoolEmail: string; // School assigns this
-    name: string; // Can be changed (if someone changes their name)
-    grade: number; // Can be updated each year
-}
-
-const student: Student = {
-    studentId: 2024001,
-    schoolEmail: "s2024001@valleyhigh.edu", 
-    name: "Jordan Smith",
-    grade: 10
-};
-
-// This is allowed
-student.name = "Jordan Smith-Johnson"; // Name change is okay
-student.grade = 11; // Grade update is fine
-
-// This would cause an error!
-// student.studentId = 2024002; //  Error! readonly property</div>
-                    </div>
-
-                    <h3>Interfaces with Methods - Adding Behavior</h3>
-                    <p>Interfaces can also describe functions (methods) that an object should have.</p>
-
-                    <div class="code-container">
-                        <div class="code-header">Interfaces with methods</div>
-                        <div class="code-block">interface GameCharacter {
-    name: string;
-    level: number;
-    health: number;
+    <h2>1. What is TypeScript & Why Use It?</h2>
+    <p>TypeScript is JavaScript with a safety net! It adds <b>static types</b>—this means you can catch errors early and write more reliable code. It's like having a spell-checker for your code that catches mistakes before you even run it.</p>
     
-    // Methods the character should have
-    attack(target: string): string;
-    heal(amount: number): void;
-    levelUp(): void;
+
+    
+    <p>Key benefits:</p>
+    <ul>
+      <li>Helps prevent many common bugs by typing variables and functions.</li>
+      <li>Improves your code editor: better autocomplete, refactoring, and error detection.</li>
+      <li>Great for large projects and teams to maintain code quality.</li>
+      <li>Compatible with existing JavaScript libraries and frameworks.</li>
+    </ul>
+
+
+
+    <hr />
+
+    <h2>2. Getting Started with TypeScript</h2>
+    <ol>
+      <li>Install <a href="https://nodejs.org" target="_blank" rel="noopener noreferrer">Node.js</a> (includes npm).</li>
+      <li>Open your command line and install TypeScript globally:
+        <pre class="cmd">npm install -g typescript</pre>
+      </li>
+      <li>Create a <code>tsconfig.json</code> to configure your project (optional but recommended):
+        <pre class="cmd">{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "strict": true
+  }
+}</pre>
+      </li>
+      <li>Compile your first file:
+        <pre class="cmd">tsc filename.ts</pre>
+      </li>
+    </ol>
+    <p>This generates plain JavaScript you can run in any JavaScript environment.</p>
+
+    <div class="tip">
+      Quick tip: Use <code>tsc --watch</code> to auto-compile on file changes during development.
+    </div>
+
+
+
+    <hr />
+
+    <h2>3. Basic Types - Your TypeScript Toolbox</h2>
+    <p>TypeScript has several built-in types to declare your variables. Think of types as labels that tell TypeScript what kind of data you're working with:</p>
+    
+
+    
+    <ul>
+      <li><code>string</code>: Text (like "Hello World")</li>
+      <li><code>number</code>: All numeric values (integers, decimals)</li>
+      <li><code>boolean</code>: <code>true</code> or <code>false</code></li>
+      <li><code>any</code>: Any kind of value (use sparingly - it's like turning off TypeScript)</li>
+      <li><code>unknown</code>: Like <code>any</code>, but safer</li>
+      <li><code>void</code>: For functions returning nothing</li>
+      <li><code>null</code> and <code>undefined</code></li>
+      <li><code>tuple</code>: Fixed-length arrays with typed elements</li>
+      <li><code>enum</code>: Named constants</li>
+    </ul>
+
+    <pre class="cmd">
+// Examples of type annotations
+let username: string = "Alice";
+let age: number = 28;
+let isActive: boolean = true;
+let data: any = "Surprise!";
+
+let tupleExample: [string, number];
+tupleExample = ["hello", 42];
+
+enum Color { Red, Green, Blue }
+let c: Color = Color.Green;
+
+console.log(username, age, isActive, tupleExample, c);
+    </pre>
+
+    <hr />
+
+    <h2>4. Functions - Making Your Code Type-Safe</h2>
+    <p>Functions in TypeScript have typed parameters and return types. This means you can be sure about what goes in and what comes out:</p>
+    <pre class="cmd">
+// Function with typed parameters and return value
+function add(x: number, y: number): number {
+  return x + y;
 }
 
-// Creating a character that follows the interface
-const hero: GameCharacter = {
-    name: "Aria the Brave",
-    level: 5,
-    health: 100,
-    
-    attack(target: string): string {
-        return `${this.name} attacks ${target} for 25 damage!`;
-    },
-    
-    heal(amount: number): void {
-        this.health += amount;
-        console.log(`${this.name} heals for ${amount} HP. Health: ${this.health}`);
-    },
-    
-    levelUp(): void {
-        this.level++;
-        this.health += 20;
-        console.log(` ${this.name} reached level ${this.level}!`);
-    }
-};</div>
-                    </div>
+console.log(add(5, 3)); // 8
 
-                    <h3>Extending Interfaces - Building on What You Have</h3>
-                    <div class="analogy">
-                        <h4> Like Inheriting Traits from Parents</h4>
-                        <p>Just like you might inherit your mom's eyes and your dad's height, interfaces can inherit properties from other interfaces. This helps avoid repeating code!</p>
-                    </div>
+// Optional and default parameters
+function greet(name: string, msg: string = "Hello"): void {
+  console.log(`${msg}, ${name}!`);
+}
 
-                    <div class="code-container">
-                        <div class="code-header">Extending interfaces</div>
-                        <div class="code-block">// Base interface for any person
+greet("Alice");      // Hello, Alice!
+greet("Bob", "Hi");  // Hi, Bob
+    </pre>
+
+
+
+    <hr />
+
+    <h2>5. Interfaces & Types - Defining Object Shapes</h2>
+    <p>Define object shapes for better type safety. Think of interfaces as blueprints that describe what an object should look like:</p>
+    
+
+    
+    <pre class="cmd">
+// Interface example
 interface Person {
-    name: string;
-    age: number;
-    email: string;
+  name: string;
+  age?: number;  // optional
 }
 
-// Student extends Person and adds school-specific properties
-interface Student extends Person {
-    studentId: number;
-    grade: number;
-    gpa: number;
+function printPerson(p: Person) {
+  console.log(`Name: ${p.name}`);
+  if (p.age) console.log(`Age: ${p.age}`);
 }
 
-// Teacher also extends Person but with different additions
-interface Teacher extends Person {
-    employeeId: number;
-    subject: string;
-    yearsExperience: number;
-}
+printPerson({ name: "Alice", age: 30 });
+printPerson({ name: "Bob" });
+    </pre>
 
-// Now we can create students and teachers easily
-const student: Student = {
-    name: "Maya Patel",
-    age: 16,
-    email: "maya.patel@student.edu",
-    studentId: 2024078,
-    grade: 11,
-    gpa: 3.8
+    <p>Type aliases provide similar functionality with some additional flexibility:</p>
+    <pre class="cmd">
+type Animal = {
+  species: string;
+  age: number;
 };
 
-const teacher: Teacher = {
-    name: "Dr. Lisa Chen",
-    age: 34,
-    email: "l.chen@school.edu",
-    employeeId: 501,
-    subject: "Computer Science",
-    yearsExperience: 8
-};</div>
-                    </div>
+const dog: Animal = { species: "Dog", age: 5 };
+console.log(dog);
+    </pre>
 
-                    <div class="exercise">
-                        <h4> Build Your Own Social Media App Interfaces</h4>
-                        <p>Let's practice by creating interfaces for a social media app!</p>
-                        <ol class="exercise-steps">
-                            <li>Create a base <code class="code-inline">User</code> interface with username, email, joinDate</li>
-                            <li>Create a <code class="code-inline">Post</code> interface with author, content, timestamp, likes</li>
-                            <li>Create a <code class="code-inline">Comment</code> interface that extends from a base comment structure</li>
-                            <li>Add optional properties where it makes sense</li>
-                            <li>Include at least one method in your interfaces</li>
-                        </ol>
-                    </div>
+    <hr />
 
-                    <div class="comparison">
-                        <div class="comparison-item good">
-                            <h4>✅ Good Interface Design</h4>
-                            <ul style="margin: 1rem 0; padding-left: 1.5rem;">
-                                <li>Clear, descriptive property names</li>
-                                <li>Logical grouping of related properties</li>
-                                <li>Appropriate use of optional properties</li>
-                                <li>Methods that make sense for the object</li>
-                            </ul>
-                        </div>
-                        <div class="comparison-item bad">
-                            <h4> Avoid These Mistakes</h4>
-                            <ul style="margin: 1rem 0; padding-left: 1.5rem;">
-                                <li>Vague property names like "data" or "info"</li>
-                                <li>Making everything optional</li>
-                                <li>Huge interfaces with unrelated properties</li>
-                                <li>Missing obvious required properties</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <button class="try-it-button" onclick="markChapterComplete('interfaces')">Interfaces mastered! Let's learn classes →</button>
-                </section>
-
-                <section id="classes" class="fade-in" style="display: none;">
-                    <h2>Classes - Building Objects with Behavior </h2>
-                    
-                    <div class="analogy">
-                        <h4> Classes are Like Cookie Cutters</h4>
-                        <p>Think of a class as a cookie cutter and objects as the cookies. The cookie cutter (class) defines the shape and properties, but each cookie (object) you make can have different flavors, colors, or decorations while keeping the same basic structure!</p>
-                    </div>
-
-                    <h3>Your First Class</h3>
-                    <p>Let's create a class to represent something familiar - a smartphone!</p>
-
-                    <div class="code-container">
-                        <div class="code-header">Creating a Smartphone class</div>
-                        <div class="code-block">class Smartphone {
-    // Properties (characteristics of the phone)
-    brand: string;
-    model: string;
-    batteryLevel: number;
-    isOn: boolean;
-    
-    // Constructor - runs when creating a new phone
-    constructor(brand: string, model: string) {
-        this.brand = brand;
-        this.model = model;
-        this.batteryLevel = 100; // New phones start at 100%
-        this.isOn = false; // Phones start turned off
-    }
-    
-    // Methods (things the phone can do)
-    turnOn(): void {
-        this.isOn = true;
-        console.log(`${this.brand} ${this.model} is now ON! `);
-    }
-    
-    turnOff(): void {
-        this.isOn = false;
-        console.log(`${this.brand} ${this.model} is now OFF `);
-    }
-    
-    useBattery(percentage: number): void {
-        this.batteryLevel -= percentage;
-        if (this.batteryLevel <= 0) {
-            this.batteryLevel = 0;
-            this.turnOff();
-            console.log(" Battery dead! Phone shutting down...");
-        }
-    }
-    
-    charge(percentage: number): void {
-        this.batteryLevel += percentage;
-        if (this.batteryLevel > 100) {
-            this.batteryLevel = 100;
-        }
-        console.log(` Charging... Battery at ${this.batteryLevel}%`);
-    }
-}
-
-// Creating instances (actual phone objects)
-const myPhone = new Smartphone("Apple", "iPhone 15");
-const friendPhone = new Smartphone("Samsung", "Galaxy S24");
-
-// Using the phones
-myPhone.turnOn(); // Apple iPhone 15 is now ON! 
-myPhone.useBattery(25); // Battery goes to 75%
-myPhone.charge(15); // Battery goes to 90%</div>
-                    </div>
-
-                    <h3>Access Modifiers - Controlling What's Visible</h3>
-                    <div class="analogy">
-                        <h4> Like Rooms in Your House</h4>
-                        <p>Your bedroom is private (only you can enter), the living room is public (anyone can visit), and maybe the home office is protected (only family members can use it). Classes work similarly with access modifiers!</p>
-                    </div>
-
-                    <div class="code-container">
-                        <div class="code-header">Access modifiers in action</div>
-                        <div class="code-block">class BankAccount {
-    public accountHolder: string; // Anyone can see this
-    private balance: number; // Only this class can access
-    protected accountNumber: string; // This class and subclasses
-    
-    constructor(holder: string, initialBalance: number) {
-        this.accountHolder = holder;
-        this.balance = initialBalance;
-        this.accountNumber = this.generateAccountNumber();
-    }
-    
-    // Public method - anyone can use
-    public deposit(amount: number): void {
-        if (amount > 0) {
-            this.balance += amount;
-            console.log(` Deposited ${amount}. New balance: ${this.balance}`);
-        }
-    }
-    
-    // Public method - anyone can use
-    public withdraw(amount: number): boolean {
-        if (this.canWithdraw(amount)) {
-            this.balance -= amount;
-            console.log(`💸 Withdrew ${amount}. New balance: ${this.balance}`);
-            return true;
-        }
-        console.log(" Insufficient funds!");
-        return false;
-    }
-    
-    // Public method to safely check balance
-    public getBalance(): number {
-        return this.balance;
-    }
-    
-    // Private method - only this class can use
-    private canWithdraw(amount: number): boolean {
-        return amount > 0 && amount <= this.balance;
-    }
-    
-    // Private method - only this class can use
-    private generateAccountNumber(): string {
-        return Math.random().toString(36).substr(2, 9).toUpperCase();
-    }
-}
-
-const myAccount = new BankAccount("Alex Johnson", 1000);
-
-// These work (public methods)
-myAccount.deposit(500);
-console.log(`Account holder: ${myAccount.accountHolder}`);
-console.log(`Current balance: ${myAccount.getBalance()}`);
-
-// These would cause errors (private/protected access)
-// console.log(myAccount.balance); //  Error! Private
-// console.log(myAccount.accountNumber); // Error! Protected</div>
-                    </div>
-
-                    <h3>Inheritance - Classes Learning from Other Classes</h3>
-                    <div class="analogy">
-                        <h4> Like Family Traits</h4>
-                        <p>Just like you might inherit your parent's eye color or height, classes can inherit properties and methods from parent classes. A "Student" class might inherit basic "Person" properties and add school-specific features!</p>
-                    </div>
-
-                    <div class="code-container">
-                        <div class="code-header">Class inheritance</div>
-                        <div class="code-block">// Base class - what all vehicles have in common
+    <h2>6. Classes & Object-Oriented Programming</h2>
+    <p>TypeScript supports classes with strong typing, access modifiers, and more. It's like building with LEGO blocks - you can create complex structures from simple pieces:</p>
+    <pre class="cmd">
 class Vehicle {
-    protected brand: string;
-    protected year: number;
-    protected color: string;
-    
-    constructor(brand: string, year: number, color: string) {
-        this.brand = brand;
-        this.year = year;
-        this.color = color;
-    }
-    
-    public getInfo(): string {
-        return `${this.year} ${this.color} ${this.brand}`;
-    }
-    
-    public start(): void {
-        console.log(`${this.getInfo()} is starting... `);
-    }
+  protected brand: string;
+
+  constructor(brand: string) {
+    this.brand = brand;
+  }
+
+  public honk(): void {
+    console.log(`${this.brand} goes beep beep!`);
+  }
 }
 
-// Car class extends Vehicle - inherits all Vehicle properties and methods
 class Car extends Vehicle {
-    private numberOfDoors: number;
-    private fuelLevel: number;
-    
-    constructor(brand: string, year: number, color: string, doors: number) {
-        super(brand, year, color); // Call parent constructor
-        this.numberOfDoors = doors;
-        this.fuelLevel = 100;
-    }
-    
-    // New method specific to cars
-    public honk(): void {
-        console.log(`${this.getInfo()} says BEEP BEEP! `);
-    }
-    
-    // Override parent method with car-specific behavior
-    public start(): void {
-        if (this.fuelLevel > 0) {
-            console.log(` Starting ${this.getInfo()}... Engine running!`);
-        } else {
-            console.log(` ${this.getInfo()} needs fuel to start!`);
+  private model: string;
+
+  constructor(brand: string, model: string) {
+    super(brand);
+    this.model = model;
+  }
+
+  public showModel(): void {
+    console.log(`Model: ${this.model}`);
+  }
+}
+
+const myCar = new Car("Toyota", "Corolla");
+myCar.honk();          // Toyota goes beep beep!
+myCar.showModel();     // Model: Corolla
+    </pre>
+
+
+
+    <hr />
+
+    <h2>7. Advanced Types - TypeScript's Superpowers</h2>
+    <ul>
+      <li>Union Types: variables that can hold multiple types (like a Swiss Army knife).</li>
+      <li>Intersection Types: combine multiple types into one (like mixing colors).</li>
+      <li>Type Guards: check types at runtime to narrow type (like detective work).</li>
+      <li>Literal Types: restrict variable to exact values (like a strict teacher).</li>
+      <li>Mapped Types and Conditional Types (advanced utility types).</li>
+    </ul>
+    <pre class="cmd">
+// Union type example
+function printId(id: number | string) {
+  if (typeof id === "string") {
+    console.log(`ID (string): ${id.toUpperCase()}`);
+  } else {
+    console.log(`ID (number): ${id}`);
+  }
+}
+
+printId("abc123");
+printId(101);
+    </pre>
+
+    <hr />
+
+    <h2>8. Generics - Reusable Type Templates</h2>
+    <p>Write reusable and type-safe functions/classes. Think of generics as templates that work with any type you give them:</p>
+    <pre class="cmd">
+function identity<T>(arg: T): T {
+  return arg;
+}
+
+let output1 = identity<string>("my String");
+let output2 = identity<number>(100);
+
+console.log(output1, output2);
+
+class Box<T> {
+  contents: T;
+  constructor(value: T) {
+    this.contents = value;
+  }
+}
+
+const box = new Box<number>(42);
+console.log(box.contents);
+    </pre>
+
+    <hr />
+
+    <h2>9. Modules & Namespaces - Organizing Your Code</h2>
+    <p>Organize code into separate files and namespaces for modularity. It's like organizing your closet - everything has its place:</p>
+    <ul>
+      <li><code>export</code> and <code>import</code> to share code across files.</li>
+      <li>Namespaces group related code internally.</li>
+    </ul>
+
+    <pre class="cmd">
+// math.ts
+export function add(x: number, y: number): number {
+  return x + y;
+}
+
+// app.ts
+import { add } from './math';
+
+console.log(add(2, 3));
+    </pre>
+
+    <hr />
+
+    <h2>10. Async Programming - Handling Time-Based Operations</h2>
+    <p>Handle asynchronous code gracefully with promises and async/await. This is like managing multiple tasks at once:</p>
+    <pre class="cmd">
+// Promise example
+function wait(ms: number): Promise<void> {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+wait(1000).then(() => console.log("Waited 1 second"));
+
+// Async/await example
+async function asyncCall() {
+  console.log("Start");
+  await wait(1500);
+  console.log("End");
+}
+
+asyncCall();
+    </pre>
+
+
+
+    <hr />
+
+    <h2>11. Exception Handling - Dealing with Errors Gracefully</h2>
+    <pre class="cmd">
+try {
+  throw new Error("Oops!");
+} catch (error) {
+  console.error("Caught error:", error.message);
+} finally {
+  console.log("Cleanup code always runs.");
+}
+    </pre>
+
+    <hr />
+
+    <h2>12. Decorators - Adding Extra Functionality</h2>
+    <p>Decorators are special annotations for classes and methods (enable with compiler options). Think of them as stickers you put on your code to add extra features:</p>
+    <pre class="cmd">
+// Simple class decorator example
+function sealed(constructor: Function) {
+  Object.seal(constructor);
+  Object.seal(constructor.prototype);
+}
+
+@sealed
+class Greeter {
+  greeting: string;
+  constructor(message: string) {
+    this.greeting = message;
+  }
+  greet() {
+    return "Hello, " + this.greeting;
+  }
+}
+    </pre>
+
+    <hr />
+
+    <h2>13. Best Practices & Tips for Success</h2>
+    <ul>
+      <li>Always enable <code>strict</code> mode in <code>tsconfig.json</code> for better type safety.</li>
+      <li>Use interfaces for large or complex object shapes.</li>
+      <li>Prefer <code>const</code> and <code>let</code> over <code>var</code>.</li>
+      <li>Write small, reusable functions with clear types.</li>
+      <li>Use type aliases and utility types to reduce duplication.</li>
+      <li>Keep your code organized with modules and namespaces.</li>
+      <li>Practice with small projects and explore DefinitelyTyped for types of third-party libraries.</li>
+    </ul>
+
+    <hr />
+
+    <h2>Try These Questions!</h2>
+
+    <div class="quiz-block" id="quiz1">
+      <b>Quiz 1: What does <code>let username: string = "Alice";</code> mean?</b><br />
+      <form>
+        <input type="radio" name="q1" value="1" id="q1a1"/><label for="q1a1"> Username is a variable of type string with initial value "Alice"</label><br />
+        <input type="radio" name="q1" value="0" id="q1a2"/><label for="q1a2"> Assigning number 1 to variable username</label><br />
+        <input type="radio" name="q1" value="0" id="q1a3"/><label for="q1a3"> A function declaration</label><br />
+        <button type="button" class="check-btn" onclick="checkQuiz('quiz1', 1)">Check Answer</button>
+      </form>
+      <div class="quiz-result" id="quiz1-result"></div>
+    </div>
+
+    <div class="quiz-block" id="quiz2">
+      <b>Quiz 2: Which of these is a correct TypeScript function definition?</b><br />
+      <form>
+        <input type="radio" name="q2" value="0" id="q2a1"/><label for="q2a1"> <code>function add(x, y): number {} </code></label><br />
+        <input type="radio" name="q2" value="1" id="q2a2"/><label for="q2a2"> <code>function add(x: number, y: number): number { return x + y; }</code></label><br />
+        <input type="radio" name="q2" value="0" id="q2a3"/><label for="q2a3"> <code>function add(x: number, y: number) -> number {}</code></label><br />
+        <button type="button" class="check-btn" onclick="checkQuiz('quiz2', 1)">Check Answer</button>
+      </form>
+      <div class="quiz-result" id="quiz2-result"></div>
+    </div>
+
+    <div class="quiz-block" id="quiz3">
+      <b>Quiz 3: What is the purpose of interfaces in TypeScript?</b><br />
+      <form>
+        <input type="radio" name="q3" value="1" id="q3a1"/><label for="q3a1"> Define a contract for object shapes and enforce type checking</label><br />
+        <input type="radio" name="q3" value="0" id="q3a2"/><label for="q3a2"> Hold values</label><br />
+        <input type="radio" name="q3" value="0" id="q3a3"/><label for="q3a3"> Replace classes</label><br />
+        <button type="button" class="check-btn" onclick="checkQuiz('quiz3', 1)">Check Answer</button>
+      </form>
+      <div class="quiz-result" id="quiz3-result"></div>
+    </div>
+
+    <div class="quiz-block" id="quiz4">
+      <b>Quiz 4: Which keyword is used to define a class in TypeScript?</b><br />
+      <form>
+        <input type="radio" name="q4" value="0" id="q4a1"/><label for="q4a1"> interface</label><br />
+        <input type="radio" name="q4" value="0" id="q4a2"/><label for="q4a2"> type</label><br />
+        <input type="radio" name="q4" value="1" id="q4a3"/><label for="q4a3"> class</label><br />
+        <button type="button" class="check-btn" onclick="checkQuiz('quiz4', 1)">Check Answer</button>
+      </form>
+      <div class="quiz-result" id="quiz4-result"></div>
+    </div>
+
+    <div class="quiz-block" id="quiz5">
+      <b>Quiz 5: How do you write an asynchronous function in TypeScript?</b><br />
+      <form>
+        <input type="radio" name="q5" value="0" id="q5a1"/><label for="q5a1"> function async() { }</label><br />
+        <input type="radio" name="q5" value="1" id="q5a2"/><label for="q5a2"> async function functionName() { }</label><br />
+        <input type="radio" name="q5" value="0" id="q5a3"/><label for="q5a3"> function async functionName() { }</label><br />
+        <button type="button" class="check-btn" onclick="checkQuiz('quiz5', 1)">Check Answer</button>
+      </form>
+      <div class="quiz-result" id="quiz5-result"></div>
+    </div>
+
+  </div>
+
+  <script>
+    function checkQuiz(quizId, correctValue) {
+      const quiz = document.getElementById(quizId);
+      const radios = quiz.getElementsByTagName('input');
+      const result = quiz.querySelector('.quiz-result');
+      for(let i=0; i < radios.length; i++) {
+        if(radios[i].checked) {
+          if(parseInt(radios[i].value) === correctValue) {
+            result.textContent = " Correct!";
+          } else {
+            result.textContent = " Oops....Try again!";
+          }
+          return;
         }
+      }
+      result.textContent = "❗ Please select an answer!";
     }
-    
-    public drive(distance: number): void {
-        const fuelUsed = distance / 10; // 10 miles per fuel unit
-        if (this.fuelLevel >= fuelUsed) {
-            this.fuelLevel -= fuelUsed;
-            console.log(` Drove ${distance} miles. Fuel remaining: ${this.fuelLevel.toFixed(1)}`);
-        } else {
-            console.log(" Not enough fuel for this trip!");
-        }
-    }
-}
-
-// Motorcycle class also extends Vehicle
-class Motorcycle extends Vehicle {
-    private hasSidecar: boolean;
-    
-    constructor(brand: string, year: number, color: string, sidecar: boolean = false) {
-        super(brand, year, color);
-        this.hasSidecar = sidecar;
-    }
-    
-    public wheelie(): void {
-        console.log(` ${this.getInfo()} is doing a wheelie! 🤸‍♂️`);
-    }
-    
-    public start(): void {
-        console.log(` ${this.getInfo()} roars to life! VROOM VROOM!`);
-    }
-}
-
-// Using our classes
-const myCar = new Car("Toyota", 2023, "Blue", 4);
-const myBike = new Motorcycle("Harley Davidson", 2022, "Black", false);
-
-myCar.start(); // Car-specific start
-myCar.honk(); // Car-specific method
-myCar.drive(50); // Car-specific method
-
-myBike.start(); // Motorcycle-specific start
-myBike.wheelie(); // Motorcycle-specific method</div>
-                    </div>
-
-                    <h3>Abstract Classes - Templates for Other Classes</h3>
-                    <p>Sometimes you want to create a template that other classes must follow, but you never want to create instances of the template itself.</p>
-
-                    <div class="code-container">
-                        <div class="code-header">Abstract classes</div>
-                        <div class="code-block">// Abstract class - can't be instantiated directly
-abstract class Animal {
-    protected name: string;
-    protected age: number;
-    
-    constructor(name: string, age: number) {
-        this.name = name;
-        this.age = age;
-    }
-    
-    // Concrete method - all animals can do this
-    public sleep(): void {
-        console.log(`${this.name} is sleeping... `);
-    }
-    
-    // Abstract method - each animal type must implement this differently
-    abstract makeSound(): void;
-    abstract move(): void;
-}
-
-class Dog extends Animal {
-    private breed: string;
-    
-    constructor(name: string, age: number, breed: string) {
-        super(name, age);
-        this.breed = breed;
-    }
-    
-    makeSound(): void {
-        console.log(`${this.name} the ${this.breed} says WOOF! `);
-    }
-    
-    move(): void {
-        console.log(`${this.name} runs happily! `);
-    }
-    
-    fetch(): void {
-        console.log(`${this.name} fetches the ball! `);
-    }
-}
-
-class Bird extends Animal {
-    private canFly: boolean;
-    
-    constructor(name: string, age: number, canFly: boolean = true) {
-        super(name, age);
-        this.canFly = canFly;
-    }
-    
-    makeSound(): void {
-        console.log(`${this.name} chirps melodiously! `);
-    }
-    
-    move(): void {
-        if (this.canFly) {
-            console.log(`${this.name} soars through the sky! ✈️`);
-        } else {
-            console.log(`${this.name} walks on the ground! 🚶‍♂️`);
-        }
-    }
-}
-
-// Using the classes
-const myDog = new Dog("Buddy", 3, "Golden Retriever");
-const myBird = new Bird("Tweety", 1, true);
-
-myDog.makeSound(); // WOOF!
-myDog.move(); // runs happily
-myDog.fetch(); // Dog-specific method
-
-myBird.makeSound(); // chirps
-myBird.move(); // soars through sky
-
-// This would NOT work:
-// const animal = new Animal("Generic", 1); // ❌ Error! Can't instantiate abstract class</div>
-                    </div>
-
-                    <div class="exercise">
-                        <h4> Create Your Own Gaming System</h4>
-                        <p>Build a simple RPG character system using classes!</p>
-                        <ol class="exercise-steps">
-                            <li>Create a base <code class="code-inline">Character</code> class with name, level, health, and basic methods</li>
-                            <li>Create <code class="code-inline">Warrior</code> and <code class="code-inline">Mage</code> classes that extend Character</li>
-                            <li>Add unique abilities for each class type</li>
-                            <li>Include proper access modifiers (public, private, protected)</li>
-                            <li>Create instances and demonstrate their abilities</li>
-                        </ol>
-                    </div>
-
-                    <div class="tip">
-                        <h4> When to Use Classes vs Interfaces</h4>
-                        <p><strong>Use Classes when:</strong> You need to create objects with behavior and state<br>
-                        <strong>Use Interfaces when:</strong> You just need to define the shape/structure of objects</p>
-                    </div>
-
-                    <button class="try-it-button" onclick="markChapterComplete('classes')">Classes conquered! Time for modules →</button>
-                </section>
-
-                <section id="modules" class="fade-in" style="display: none;">
-                    <h2>Modules - Organizing Your Code Like a Pro </h2>
-                    
-                    <div class="analogy">
-                        <h4>📚 Modules are Like School Subjects</h4>
-                        <p>Imagine if all your school subjects were taught in one giant room with no organization - math, science, English, history all mixed together! That would be chaos. Modules help organize your code like separate classrooms, each with a specific purpose and clear boundaries.</p>
-                    </div>
-
-                    <h3>Why Do We Need Modules?</h3>
-                    <p>As your projects grow, putting everything in one file becomes a nightmare. Modules help you:</p>
-                    <ul style="margin-left: 2rem; margin-bottom: 2rem;">
-                        <li><strong> Organize code</strong> - Keep related functions together</li>
-                        <li><strong> Encapsulation</strong> - Hide internal details</li>
-                        <li><strong>♻ Reusability</strong> - Use code in multiple places</li>
-                        <li><strong> Collaboration</strong> - Team members can work on different modules</li>
-                        <li><strong> Debugging</strong> - Easier to find and fix issues</li>
-                    </ul>
-
-                    <h3>Creating Your First Module</h3>
-                    <p>Let's build a simple math utilities module!</p>
-
-                    <div class="code-container">
-                        <div class="code-header">mathUtils.ts - Your first module</div>
-                        <div class="code-block">// mathUtils.ts - A module for math operations
-
-// Export individual functions
-export function add(a: number, b: number): number {
-    return a + b;
-}
-
-export function subtract(a: number, b: number): number {
-    return a - b;
-}
-
-export function multiply(a: number, b: number): number {
-    return a * b;
-}
-
-export function divide(a: number, b: number): number {
-    if (b === 0) {
-        throw new Error("Cannot divide by zero!");
-    }
-    return a / b;
-}
-
-// Export a constant
-export const PI = 3.14159;
-
-// Export a class
-export class Calculator {
-    private history: string[] = [];
-    
-    add(a: number, b: number): number {
-        const result = a + b;
-        this.history.push(`${a} + ${b} = ${result}`);
-        return result;
-    }
-    
-    getHistory(): string[] {
-        return [...this.history]; // Return a copy
-    }
-    
-    clearHistory(): void {
-        this.history = [];
-    }
-}
-
-// You can also export an interface
-export interface MathOperation {
-    operand1: number;
-    operand2: number;
-    operator: string;
-    result: number;
-}</div>
-                    </invoke>
+  </script>
+</body>
+</html>
