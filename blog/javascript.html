@@ -463,17 +463,17 @@
             <p>Here's how to create your very own JavaScript playground:</p>
 
             <div class="code-container">
-                <div class="code-header">my-first-page.html - Save this as an HTML file</div>
-                <div class="code-content">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-    &lt;title&gt;My JavaScript Playground&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;h1&gt;Welcome to My JavaScript Journey!&lt;/h1&gt;
-    &lt;p&gt;Check the browser console to see what JavaScript is doing.&lt;/p&gt;
+                <div class="code-header">my-first-page.html - Copy this code to create your practice file</div>
+                <div class="code-content"><!DOCTYPE html>
+<html>
+<head>
+    <title>My JavaScript Playground</title>
+</head>
+<body>
+    <h1>Welcome to My JavaScript Journey!</h1>
+    <p>Check the browser console to see what JavaScript is doing.</p>
     
-    &lt;script&gt;
+    <script>
         // This is a comment - JavaScript ignores everything after //
         // Comments are notes you write to yourself or other programmers
         
@@ -484,9 +484,9 @@
         // You can do simple math too!
         console.log("What's 5 + 3?", 5 + 3);
         console.log("What's 10 * 4?", 10 * 4);
-    &lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;</div>
+    </script>
+</body>
+</html></div>
             </div>
 
             <div class="info-box">
@@ -1052,28 +1052,54 @@ if (age === 18) {  // Compares values
             }
         });
 
-        // Simple easter egg for learners
-        let keySequence = [];
-        document.addEventListener('keydown', function(event) {
-            keySequence.push(event.key.toLowerCase());
-            keySequence = keySequence.slice(-10);
+        // Practice code runner
+        function runPracticeCode() {
+            const code = document.getElementById('practice-code').value;
+            const output = document.getElementById('practice-output');
             
-            if (keySequence.join('').includes('javascript')) {
-                const display = document.getElementById('demo-display');
-                if (display) {
-                    display.textContent = '🎉 You found the easter egg! Keep coding!';
-                    display.style.background = 'linear-gradient(45deg, #ff6b6b, #4ecdc4)';
-                    display.style.color = 'white';
-                    
-                    setTimeout(() => {
-                        display.style.background = '#f8f9fa';
-                        display.style.color = '#2c3e50';
-                        display.textContent = 'Click the buttons below to see JavaScript in action!';
-                    }, 3000);
+            // Clear previous output
+            output.innerHTML = '';
+            
+            // Create a custom console.log function that captures output
+            const originalLog = console.log;
+            const logs = [];
+            
+            console.log = function(...args) {
+                logs.push(args.map(arg => 
+                    typeof arg === 'object' ? JSON.stringify(arg, null, 2) : String(arg)
+                ).join(' '));
+                originalLog.apply(console, args);
+            };
+            
+            try {
+                // Execute the user's code
+                eval(code);
+                
+                // Display the captured output
+                if (logs.length > 0) {
+                    output.innerHTML = logs.map(log => 
+                        `<div style="margin-bottom: 5px; color: #e2e8f0;">${escapeHtml(log)}</div>`
+                    ).join('');
+                } else {
+                    output.innerHTML = '<div style="color: #ffd700;">Code executed successfully! (No console.log output)</div>';
                 }
-                keySequence = [];
+            } catch (error) {
+                output.innerHTML = `<div style="color: #ff6b6b;">Error: ${escapeHtml(error.message)}</div>`;
+            } finally {
+                // Restore original console.log
+                console.log = originalLog;
             }
-        });
+        }
+        
+        function clearPracticeOutput() {
+            document.getElementById('practice-output').innerHTML = 'Output cleared. Click "Run Code" to execute your JavaScript!';
+        }
+        
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
     </script>
 </body>
 </html>
