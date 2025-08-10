@@ -464,16 +464,16 @@
 
             <div class="code-container">
                 <div class="code-header">my-first-page.html - Save this as an HTML file</div>
-                <div class="code-content"><!DOCTYPE html>
-<html>
-<head>
-    <title>My JavaScript Playground</title>
-</head>
-<body>
-    <h1>Welcome to My JavaScript Journey!</h1>
-    <p>Check the browser console to see what JavaScript is doing.</p>
+                <div class="code-content">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;My JavaScript Playground&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Welcome to My JavaScript Journey!&lt;/h1&gt;
+    &lt;p&gt;Check the browser console to see what JavaScript is doing.&lt;/p&gt;
     
-    <script>
+    &lt;script&gt;
         // This is a comment - JavaScript ignores everything after //
         // Comments are notes you write to yourself or other programmers
         
@@ -484,9 +484,9 @@
         // You can do simple math too!
         console.log("What's 5 + 3?", 5 + 3);
         console.log("What's 10 * 4?", 10 * 4);
-    </script>
-</body>
-</html></div>
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</div>
             </div>
 
             <div class="info-box">
@@ -500,6 +500,35 @@
                     <li>Press F12 to open the console and see your JavaScript messages!</li>
                 </ol>
                 <p style="margin-top: 15px;">This HTML file is now your personal JavaScript laboratory. You can experiment, make mistakes, and learn without breaking anything!</p>
+            </div>
+
+            <h3>Practice Right Here - Live JavaScript Playground</h3>
+            <p>You can also practice JavaScript directly in this guide! Try the interactive demo below:</p>
+
+            <!-- Practice Section -->
+            <div class="demo-section" style="background: #f0f8ff; border-color: #28a745;">
+                <div class="demo-title" style="color: #28a745;">✨ Your Personal JavaScript Practice Area ✨</div>
+                
+                <div style="background: white; border: 1px solid #dee2e6; border-radius: 5px; padding: 15px; margin-bottom: 20px;">
+                    <h4 style="margin-bottom: 10px; color: #495057;">Try Your Own JavaScript Code:</h4>
+                    <textarea id="practice-code" style="width: 100%; height: 120px; font-family: 'Courier New', monospace; font-size: 14px; padding: 10px; border: 1px solid #ccc; border-radius: 4px;" placeholder="// Type your JavaScript code here and click Run!
+console.log('Hello, World!');
+let myName = 'Your Name';
+console.log('Hi, I am ' + myName);">// Type your JavaScript code here and click Run!
+console.log('Hello, World!');
+let myName = 'Your Name';
+console.log('Hi, I am ' + myName);</textarea>
+                    
+                    <div style="margin-top: 10px; display: flex; gap: 10px;">
+                        <button class="demo-button" onclick="runPracticeCode()" style="background: #28a745;">Run Code</button>
+                        <button class="demo-button" onclick="clearPracticeOutput()" style="background: #6c757d;">Clear Output</button>
+                    </div>
+                </div>
+                
+                <div style="background: #2d3748; color: #e2e8f0; border-radius: 5px; padding: 15px; font-family: 'Courier New', monospace; font-size: 14px; min-height: 100px;">
+                    <div style="color: #4fd1c7; font-weight: bold; margin-bottom: 10px;">Console Output:</div>
+                    <div id="practice-output">Click "Run Code" to see your JavaScript output here!</div>
+                </div>
             </div>
 
             <h3>Understanding Comments - Your Future Self Will Thank You</h3>
@@ -898,17 +927,17 @@ if (age === 18) {  // Compares values
 
             <div class="learning-path">
                 <div class="step-card">
-                    <div class="step-number">*</div>
+                    <div class="step-number">📚</div>
                     <div class="step-title">Learn More</div>
                     <div class="step-desc">Async/await, Classes, Modern JavaScript</div>
                 </div>
                 <div class="step-card">
-                    <div class="step-number">*</div>
+                    <div class="step-number">🎯</div>
                     <div class="step-title">Practice Projects</div>
                     <div class="step-desc">Calculator, Todo app, Weather app</div>
                 </div>
                 <div class="step-card">
-                    <div class="step-number">*</div>
+                    <div class="step-number">🚀</div>
                     <div class="step-title">Frameworks</div>
                     <div class="step-desc">React, Vue, Node.js</div>
                 </div>
@@ -1032,7 +1061,7 @@ if (age === 18) {  // Compares values
             if (keySequence.join('').includes('javascript')) {
                 const display = document.getElementById('demo-display');
                 if (display) {
-                    display.textContent = ' You found the easter egg! Keep coding!';
+                    display.textContent = '🎉 You found the easter egg! Keep coding!';
                     display.style.background = 'linear-gradient(45deg, #ff6b6b, #4ecdc4)';
                     display.style.color = 'white';
                     
