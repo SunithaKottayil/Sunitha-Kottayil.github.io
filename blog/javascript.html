@@ -813,35 +813,420 @@ console.log("Short names:", shortNames);</div>
 
             <p>DOM stands for "Document Object Model," but don't let the fancy name intimidate you. Think of the DOM as JavaScript's way of seeing and interacting with your web page. It's like giving JavaScript a pair of hands so it can reach into your HTML and change things in real-time.</p>
 
+            <h3>How JavaScript Sees Your Web Page</h3>
+            <p>When your browser loads an HTML page, it creates a map of everything on the page - every heading, paragraph, button, and image. This map is the DOM, and JavaScript can use this map to find and modify any element on the page.</p>
+
+            <p>Imagine your web page as a family tree. The <code>&lt;html&gt;</code> tag is the grandparent, <code>&lt;head&gt;</code> and <code>&lt;body&gt;</code> are the parents, and all the other elements like <code>&lt;h1&gt;</code>, <code>&lt;p&gt;</code>, and <code>&lt;button&gt;</code> are the children. JavaScript can navigate this family tree and change any family member!</p>
+
+            <h3>Finding Elements - JavaScript's Search Functions</h3>
+            <p>Before JavaScript can change something on your page, it needs to find it first. It's like telling someone "go to the kitchen and get the red mug" - first they need to find the kitchen, then find the red mug.</p>
+
             <div class="code-container">
-                <div class="code-header">DOM Manipulation Example</div>
-                <div class="code-content">// Finding elements on your page
-let title = document.getElementById("main-title");
-let button = document.querySelector(".my-button");
-let allParagraphs = document.querySelectorAll("p");
+                <div class="code-header">Different ways to find HTML elements</div>
+                <div class="code-content">// Method 1: Finding by ID (most common and reliable)
+// HTML: &lt;h1 id="main-title"&gt;Welcome&lt;/h1&gt;
+let titleElement = document.getElementById("main-title");
 
-// Changing content
-title.textContent = "New title!";
-title.style.color = "blue";
-title.style.fontSize = "24px";
+// Method 2: Finding by class name
+// HTML: &lt;p class="intro-text"&gt;Hello&lt;/p&gt;
+let introText = document.getElementsByClassName("intro-text")[0];
 
-// Adding event listeners
-button.addEventListener("click", function() {
-    alert("Button was clicked!");
+// Method 3: Finding by tag name
+// HTML: &lt;button&gt;Click me&lt;/button&gt;
+let allButtons = document.getElementsByTagName("button");
+
+// Method 4: Modern way - querySelector (very flexible)
+let title = document.querySelector("#main-title");      // # means ID
+let intro = document.querySelector(".intro-text");      // . means class
+let firstButton = document.querySelector("button");     // Just the tag name
+
+console.log("Found title:", titleElement);
+console.log("Found intro:", introText);</div>
+            </div>
+
+            <h3>Changing Content - Making Text Come Alive</h3>
+            <p>Once you've found an element, you can change what it says! This is like having a magic eraser and pen that can instantly rewrite any text on your web page.</p>
+
+            <div class="code-container">
+                <div class="code-header">Changing text content</div>
+                <div class="code-content">// Find the element first
+let titleElement = document.getElementById("main-title");
+
+// Change the text content (safe way)
+titleElement.textContent = "JavaScript is Controlling This Page!";
+
+// You can also use innerHTML to add HTML tags (be careful with this!)
+let resultElement = document.getElementById("result");
+resultElement.innerHTML = "&lt;strong&gt;This text is bold!&lt;/strong&gt; And this is normal.";
+
+// Combining text with variables
+let userName = "Sarah";
+let currentTime = new Date().toLocaleTimeString();
+
+resultElement.textContent = `Welcome ${userName}! Current time: ${currentTime}`;
+
+// You can even do calculations in your text
+let num1 = 15;
+let num2 = 27;
+resultElement.textContent = `Math Quiz: ${num1} + ${num2} = ${num1 + num2}!`;</div>
+            </div>
+
+            <h3>Changing Styles - Making Things Look Different</h3>
+            <p>JavaScript can also change how elements look by modifying their CSS styles. It's like having a magic paintbrush that can instantly redecorate your web page!</p>
+
+            <div class="code-container">
+                <div class="code-header">Changing element styles</div>
+                <div class="code-content">// Find an element to style
+let titleElement = document.getElementById("main-title");
+
+// Change individual style properties
+titleElement.style.color = "blue";
+titleElement.style.fontSize = "48px";
+titleElement.style.backgroundColor = "yellow";
+titleElement.style.padding = "20px";
+titleElement.style.borderRadius = "10px";
+
+// You can use variables for dynamic styling
+let colors = ["red", "green", "blue", "purple", "orange"];
+let randomColor = colors[Math.floor(Math.random() * colors.length)];
+titleElement.style.color = randomColor;
+
+// Working with CSS classes (often better than inline styles)
+titleElement.classList.add("highlight");        // Add a CSS class
+titleElement.classList.remove("old-style");     // Remove a CSS class
+titleElement.classList.toggle("blinking");      // Add if not present, remove if present
+
+// Check if an element has a specific class
+if (titleElement.classList.contains("highlight")) {
+    console.log("Element is highlighted!");
+}</div>
+            </div>
+
+            <h3>Event Listeners - Responding to User Actions</h3>
+            <p>This is where the real magic happens! Event listeners let your JavaScript respond when users interact with your page - clicking buttons, typing in forms, moving the mouse, or pressing keys. It's like giving your web page ears so it can "hear" what users are doing.</p>
+
+            <div class="code-container">
+                <div class="code-header">Your first interactive button</div>
+                <div class="code-content">// Find the button
+let magicButton = document.getElementById("magic-button");
+let resultArea = document.getElementById("result");
+
+// Add an event listener - "listen" for clicks
+magicButton.addEventListener("click", function() {
+    // This code runs every time the button is clicked
+    resultArea.textContent = "Button was clicked! Magic happened!";
+    resultArea.style.color = "green";
+    resultArea.style.fontWeight = "bold";
 });
 
-// Creating new elements
-let newParagraph = document.createElement("p");
-newParagraph.textContent = "This was created by JavaScript!";
-document.body.appendChild(newParagraph);
+// More advanced: counting clicks
+let clickCount = 0;
 
-// Responding to user input
-let inputField = document.getElementById("user-input");
-inputField.addEventListener("keypress", function(event) {
-    if (event.key === "Enter") {
-        console.log("User typed: " + inputField.value);
+magicButton.addEventListener("click", function() {
+    clickCount = clickCount + 1;  // or clickCount++
+    
+    if (clickCount === 1) {
+        resultArea.textContent = "First click!";
+        resultArea.style.backgroundColor = "lightblue";
+    } else if (clickCount <= 5) {
+        resultArea.textContent = `Click number ${clickCount}`;
+        resultArea.style.backgroundColor = "lightgreen";
+    } else {
+        resultArea.textContent = `Wow! ${clickCount} clicks! You're really into this!`;
+        magicButton.style.backgroundColor = "gold";
+        magicButton.textContent = "I'm popular!";
     }
 });</div>
+            </div>
+
+            <h3>Different Types of Events You Can Listen For</h3>
+            <p>Clicks are just the beginning! JavaScript can respond to many different types of user interactions. Think of events as different ways users can communicate with your web page:</p>
+
+            <div class="code-container">
+                <div class="code-header">Various event types with examples</div>
+                <div class="code-content">let button = document.getElementById("my-button");
+let inputField = document.getElementById("user-input");
+
+// Mouse events
+button.addEventListener("click", () => {
+    console.log("Button was clicked!");
+});
+
+button.addEventListener("mouseover", () => {
+    console.log("Mouse is hovering over the button");
+    button.style.backgroundColor = "lightblue";
+});
+
+button.addEventListener("mouseout", () => {
+    console.log("Mouse left the button");
+    button.style.backgroundColor = "";
+});
+
+// Keyboard events
+inputField.addEventListener("keydown", function(event) {
+    console.log("Key pressed:", event.key);
+    
+    if (event.key === "Enter") {
+        console.log("Enter key was pressed! Time to submit!");
+    }
+    
+    if (event.key === "Escape") {
+        inputField.value = "";  // Clear the input
+        console.log("Input cleared!");
+    }
+});
+
+// Input events (fires every time user types)
+inputField.addEventListener("input", function(event) {
+    let currentText = event.target.value;
+    console.log("User typed:", currentText);
+    
+    // Real-time character counter
+    let charCount = currentText.length;
+    console.log(`Character count: ${charCount}`);
+});
+
+// Focus events (when user clicks into input)
+inputField.addEventListener("focus", () => {
+    console.log("User clicked in the input field");
+    inputField.style.backgroundColor = "lightyellow";
+});
+
+inputField.addEventListener("blur", () => {
+    console.log("User left the input field");
+    inputField.style.backgroundColor = "white";
+});</div>
+            </div>
+
+            <h3>Creating New Elements - Building HTML with JavaScript</h3>
+            <p>JavaScript doesn't just change existing elements - it can create brand new ones! This is like having a magical construction crew that can build new parts of your web page on command.</p>
+
+            <div class="code-container">
+                <div class="code-header">Creating and adding new elements</div>
+                <div class="code-content">// Create a new paragraph element
+let newParagraph = document.createElement("p");
+
+// Set its content
+newParagraph.textContent = "This paragraph was created by JavaScript!";
+
+// Style it
+newParagraph.style.color = "purple";
+newParagraph.style.fontSize = "18px";
+newParagraph.style.border = "2px solid purple";
+newParagraph.style.padding = "10px";
+newParagraph.style.margin = "10px 0";
+
+// Add it to the page
+document.body.appendChild(newParagraph);
+
+// Creating a more complex interactive element
+function createMessageBox(text, type) {
+    // Create the container
+    let messageDiv = document.createElement("div");
+    
+    // Set up content and styles based on type
+    messageDiv.textContent = text;
+    messageDiv.style.padding = "15px";
+    messageDiv.style.margin = "10px 0";
+    messageDiv.style.borderRadius = "8px";
+    messageDiv.style.fontWeight = "bold";
+    
+    if (type === "success") {
+        messageDiv.style.backgroundColor = "lightgreen";
+        messageDiv.style.color = "darkgreen";
+    } else if (type === "warning") {
+        messageDiv.style.backgroundColor = "lightyellow";
+        messageDiv.style.color = "darkorange";
+    } else if (type === "error") {
+        messageDiv.style.backgroundColor = "lightcoral";
+        messageDiv.style.color = "darkred";
+    }
+    
+    // Add close button
+    let closeButton = document.createElement("button");
+    closeButton.textContent = "×";
+    closeButton.style.marginLeft = "10px";
+    closeButton.style.backgroundColor = "transparent";
+    closeButton.style.border = "none";
+    closeButton.style.fontSize = "20px";
+    closeButton.style.cursor = "pointer";
+    
+    // Make close button work
+    closeButton.addEventListener("click", function() {
+        messageDiv.remove();  // Remove the entire message
+    });
+    
+    messageDiv.appendChild(closeButton);
+    document.body.appendChild(messageDiv);
+}
+
+// Using our message creator
+createMessageBox("Success! Your data was saved.", "success");
+createMessageBox("Warning: Please check your input.", "warning");
+createMessageBox("Error: Something went wrong!", "error");</div>
+            </div>
+
+            <h3>Real-World Example - Interactive To-Do List</h3>
+            <p>Let's put everything together with a practical example that shows how DOM manipulation works in real applications. We'll build a simple to-do list that you can actually use!</p>
+
+            <div class="code-container">
+                <div class="code-header">Complete interactive to-do list</div>
+                <div class="code-content">// HTML you'd need:
+// &lt;input type="text" id="todo-input" placeholder="Enter a new task..."&gt;
+// &lt;button id="add-todo"&gt;Add Task&lt;/button&gt;
+// &lt;ul id="todo-list"&gt;&lt;/ul&gt;
+
+let todoInput = document.getElementById("todo-input");
+let addButton = document.getElementById("add-todo");
+let todoList = document.getElementById("todo-list");
+let todos = [];  // Array to store our tasks
+
+// Function to add a new todo
+function addTodo() {
+    let taskText = todoInput.value.trim();
+    
+    if (taskText === "") {
+        alert("Please enter a task!");
+        return;
+    }
+    
+    // Create todo object
+    let todo = {
+        id: Date.now(),  // Unique ID using timestamp
+        text: taskText,
+        completed: false
+    };
+    
+    // Add to our array
+    todos.push(todo);
+    
+    // Clear input
+    todoInput.value = "";
+    
+    // Update the display
+    displayTodos();
+}
+
+// Function to display all todos
+function displayTodos() {
+    // Clear the list
+    todoList.innerHTML = "";
+    
+    // Create each todo item
+    todos.forEach(todo => {
+        // Create list item
+        let li = document.createElement("li");
+        li.style.padding = "10px";
+        li.style.borderBottom = "1px solid #ccc";
+        li.style.display = "flex";
+        li.style.justifyContent = "space-between";
+        li.style.alignItems = "center";
+        
+        // Create text span
+        let textSpan = document.createElement("span");
+        textSpan.textContent = todo.text;
+        
+        if (todo.completed) {
+            textSpan.style.textDecoration = "line-through";
+            textSpan.style.color = "#888";
+        }
+        
+        // Create button container
+        let buttonContainer = document.createElement("div");
+        
+        // Create complete button
+        let completeButton = document.createElement("button");
+        completeButton.textContent = todo.completed ? "Undo" : "Complete";
+        completeButton.style.marginRight = "5px";
+        completeButton.style.backgroundColor = todo.completed ? "#ffc107" : "#28a745";
+        completeButton.style.color = "white";
+        completeButton.style.border = "none";
+        completeButton.style.padding = "5px 10px";
+        completeButton.style.borderRadius = "3px";
+        completeButton.style.cursor = "pointer";
+        
+        // Add complete functionality
+        completeButton.addEventListener("click", () => {
+            todo.completed = !todo.completed;
+            displayTodos();
+        });
+        
+        // Create delete button
+        let deleteButton = document.createElement("button");
+        deleteButton.textContent = "Delete";
+        deleteButton.style.backgroundColor = "#dc3545";
+        deleteButton.style.color = "white";
+        deleteButton.style.border = "none";
+        deleteButton.style.padding = "5px 10px";
+        deleteButton.style.borderRadius = "3px";
+        deleteButton.style.cursor = "pointer";
+        
+        // Add delete functionality
+        deleteButton.addEventListener("click", () => {
+            todos = todos.filter(t => t.id !== todo.id);
+            displayTodos();
+        });
+        
+        // Assemble the todo item
+        buttonContainer.appendChild(completeButton);
+        buttonContainer.appendChild(deleteButton);
+        li.appendChild(textSpan);
+        li.appendChild(buttonContainer);
+        todoList.appendChild(li);
+    });
+    
+    // Update counter
+    updateCounter();
+}
+
+// Function to update task counter
+function updateCounter() {
+    let total = todos.length;
+    let completed = todos.filter(todo => todo.completed).length;
+    let remaining = total - completed;
+    
+    console.log(`Tasks: ${remaining} remaining, ${completed} completed, ${total} total`);
+}
+
+// Event listeners
+addButton.addEventListener("click", addTodo);
+
+todoInput.addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+        addTodo();
+    }
+});
+
+// Initialize display
+displayTodos();</div>
+            </div>
+
+            <div class="info-box">
+                <strong>What This Example Teaches You</strong>
+                <p style="margin-top: 10px;">This to-do list example demonstrates several crucial web development concepts:</p>
+                <ul style="margin-top: 10px;">
+                    <li><strong>DOM Creation</strong> - Building HTML elements with JavaScript</li>
+                    <li><strong>Event Handling</strong> - Responding to clicks and keyboard input</li>
+                    <li><strong>Data Management</strong> - Using arrays to store and manipulate data</li>
+                    <li><strong>Dynamic Updates</strong> - Changing the page based on user actions</li>
+                    <li><strong>User Experience</strong> - Making interfaces that feel responsive and intuitive</li>
+                    <li><strong>Real-world Application</strong> - This is the kind of code used in actual web applications!</li>
+                </ul>
+            </div>
+
+            <h3>Practice Challenge - Try Building Your Own Interactive Elements!</h3>
+            <p>Now that you understand DOM manipulation, try creating these interactive elements in the practice area:</p>
+
+            <div class="tip-box">
+                <strong>DOM Practice Challenges:</strong>
+                <ol style="margin-top: 10px;">
+                    <li><strong>Color Changer:</strong> Create a button that changes the background color of the page</li>
+                    <li><strong>Text Size Controller:</strong> Make buttons to increase/decrease text size</li>
+                    <li><strong>Image Gallery:</strong> Create buttons that show/hide different images</li>
+                    <li><strong>Simple Calculator:</strong> Build a basic calculator with buttons and display</li>
+                    <li><strong>Form Validator:</strong> Check if user input meets certain requirements</li>
+                </ol>
+                <p style="margin-top: 15px;">Use the practice area above to experiment with these ideas. Remember: the best way to learn DOM manipulation is by doing it!</p>
             </div>
 
             <!-- Common Mistakes -->
@@ -919,27 +1304,20 @@ if (age === 18) {  // Compares values
             </div>
 
             <div class="tip-box">
-                <strong>Recommended Practice Projects:</strong>
-                <ol style="margin-top: 10px;">
-                    <li><strong>Beginner:</strong> Build a tip calculator or random quote generator</li>
-                    <li><strong>Intermediate:</strong> Create a todo list or memory game</li>
-                    <li><strong>Advanced:</strong> Build a weather app using real data</li>
-                </ol>
+                <strong>Congratulations! You've Completed Your JavaScript Journey!</strong>
+                <p style="margin-top: 10px;">You've learned the fundamentals of JavaScript programming:</p>
+                <ul style="margin-top: 10px;">
+                    <li>✅ <strong>Variables and Data Types</strong> - Storing and working with information</li>
+                    <li>✅ <strong>Conditional Logic</strong> - Making decisions in your code</li>
+                    <li>✅ <strong>Functions</strong> - Creating reusable code blocks</li>
+                    <li>✅ <strong>Arrays</strong> - Managing lists of data</li>
+                    <li>✅ <strong>DOM Manipulation</strong> - Making websites interactive</li>
+                    <li>✅ <strong>Event Handling</strong> - Responding to user actions</li>
+                </ul>
+                <p style="margin-top: 15px;"><strong>What's Next?</strong> Keep practicing with the interactive examples above, build your own projects, and gradually explore more advanced JavaScript concepts like APIs, frameworks (React, Vue), and backend development with Node.js. Remember: the best way to solidify your learning is by building real projects!</p>
+                <p style="margin-top: 10px;"><em>You're now equipped with the essential JavaScript skills needed to create interactive web applications. Happy coding! 🚀</em></p>
             </div>
         </main>
-
-        <footer class="footer">
-            <h3>Keep Learning!</h3>
-            <p>Questions? Want to share your progress? Let's connect:</p>
-            <div class="social-links">
-                <a href="https://github.com/yourusername">GitHub</a>
-                <a href="https://twitter.com/yourusername">Twitter</a>
-                <a href="https://linkedin.com/in/yourprofile">LinkedIn</a>
-            </div>
-            <p style="color: #6c757d; font-size: 0.9rem; margin-top: 20px;">
-                This guide is updated regularly based on community feedback.
-            </p>
-        </footer>
     </div>
 
     <script>
@@ -1145,7 +1523,7 @@ console.log("5 + 3 =", addNumbers(5, 3));`
             if (keySequence.join('').includes('javascript')) {
                 const display = document.getElementById('demo-display');
                 if (display) {
-                    display.textContent = ' You found the easter egg! Keep coding!';
+                    display.textContent = '🎉 You found the easter egg! Keep coding!';
                     display.style.background = 'linear-gradient(45deg, #ff6b6b, #4ecdc4)';
                     display.style.color = 'white';
                     
