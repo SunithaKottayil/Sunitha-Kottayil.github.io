@@ -728,7 +728,7 @@
             <div style="margin-top: 2rem; opacity: 0.8; font-size: 0.9rem;">
                 <span style="background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 2rem; margin: 0 0.5rem;">✓ Interactive Learning</span>
                 <span style="background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 2rem; margin: 0 0.5rem;">✓ Real Projects</span>
-                <span style="background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 2rem; margin: 0 0.5rem;">✓ Simple Guidance</span>
+                <span style="background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 2rem; margin: 0 0.5rem;">✓ Expert Guidance</span>
             </div>
         </div>
     </header>
@@ -737,14 +737,14 @@
         <nav class="nav">
             <h2>Learning Path</h2>
                             <div class="nav-grid">
-                    <a href="#introduction" class="nav-item" onclick="navigateToSection('introduction')">Introduction</a>
-                    <a href="#setup" class="nav-item" onclick="navigateToSection('setup')">Setup</a>
-                    <a href="#types" class="nav-item" onclick="navigateToSection('types')">Data Types</a>
-                    <a href="#interfaces" class="nav-item" onclick="navigateToSection('interfaces')">Interfaces</a>
-                    <a href="#classes" class="nav-item" onclick="navigateToSection('classes')">Classes</a>
-                    <a href="#modules" class="nav-item" onclick="navigateToSection('modules')">Modules</a>
-                    <a href="#generics" class="nav-item" onclick="navigateToSection('generics')"> Generics</a>
-                    <a href="#projects" class="nav-item" onclick="navigateToSection('projects')">Projects</a>
+                    <a href="#introduction" class="nav-item" onclick="navigateToSection('introduction')">BEGIN: What is TypeScript?</a>
+                    <a href="#setup" class="nav-item" onclick="navigateToSection('setup')">TOOLS: Getting Started</a>
+                    <a href="#types" class="nav-item" onclick="navigateToSection('types')">FOUNDATION: Understanding Types</a>
+                    <a href="#interfaces" class="nav-item" onclick="navigateToSection('interfaces')">BLUEPRINT: Interfaces Explained</a>
+                    <a href="#classes" class="nav-item" onclick="navigateToSection('classes')">BUILD: Classes & Objects</a>
+                    <a href="#modules" class="nav-item" onclick="navigateToSection('modules')">ORGANIZE: Modules & Organization</a>
+                    <a href="#generics" class="nav-item" onclick="navigateToSection('generics')">FLEXIBLE: Generics Made Simple</a>
+                    <a href="#projects" class="nav-item" onclick="navigateToSection('projects')">PROJECTS: Real Projects</a>
                 </div>
         </nav>
 
@@ -877,7 +877,7 @@
                     <p>Let's create your first TypeScript program!</p>
 
                     <div class="exercise">
-                        <h4> Create Your First TypeScript Program</h4>
+                        <h4>🚀 Create Your First TypeScript Program</h4>
                         <ol class="exercise-steps">
                             <li>Create a new folder called "my-typescript-journey"</li>
                             <li>Open this folder in VS Code</li>
@@ -1936,7 +1936,7 @@ class GradeTracker {
     addCourse(id: string, name: string, credits: number, instructor: string): Course {
         const course: Course = { id, name, credits, instructor };
         this.courses.push(course);
-        console.log(` Course added: ${name}`);
+        console.log(`📚 Course added: ${name}`);
         return course;
     }
 
@@ -2351,6 +2351,18 @@ console.log("User stats:", stats);</div>
     </div>
 
     <script>
+        // Define the order of sections for navigation
+        const sectionOrder = [
+            'introduction',
+            'setup', 
+            'types',
+            'interfaces',
+            'classes',
+            'modules',
+            'generics',
+            'projects'
+        ];
+
         function navigateToSection(sectionId) {
             // Hide all sections
             const sections = document.querySelectorAll('section');
@@ -2362,14 +2374,55 @@ console.log("User stats:", stats);</div>
             const selectedSection = document.getElementById(sectionId);
             if (selectedSection) {
                 selectedSection.style.display = 'block';
+                
+                // Update progress indicators
+                updateProgressIndicators(sectionId);
+                
+                // Smooth scroll to top
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
             }
         }
 
         function markChapterComplete(chapterId) {
+            // Mark current chapter as completed
             const icon = document.getElementById(chapterId + '-icon');
             if (icon) {
                 icon.className = 'progress-icon completed';
             }
+            
+            // Find the next section to navigate to
+            const currentIndex = sectionOrder.indexOf(chapterId);
+            if (currentIndex !== -1 && currentIndex < sectionOrder.length - 1) {
+                const nextSectionId = sectionOrder[currentIndex + 1];
+                
+                // Add a small delay for visual feedback
+                setTimeout(() => {
+                    navigateToSection(nextSectionId);
+                }, 300);
+            }
+        }
+
+        function updateProgressIndicators(currentSectionId) {
+            const currentIndex = sectionOrder.indexOf(currentSectionId);
+            
+            sectionOrder.forEach((sectionId, index) => {
+                const icon = document.getElementById(sectionId + '-icon');
+                if (icon) {
+                    if (index < currentIndex) {
+                        // Previous sections - completed
+                        icon.className = 'progress-icon completed';
+                    } else if (index === currentIndex) {
+                        // Current section - current
+                        icon.className = 'progress-icon current';
+                    } else {
+                        // Future sections - pending
+                        icon.className = 'progress-icon pending';
+                    }
+                }
+            });
         }
 
         // Initialize with introduction visible
