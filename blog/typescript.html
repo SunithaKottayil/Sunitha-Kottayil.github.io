@@ -499,16 +499,16 @@
     <div class="container">
         <nav class="nav">
             <h2>Learning Path</h2>
-            <div class="nav-grid">
-                <a href="#introduction" class="nav-item" onclick="navigateToSection('introduction')">[START] What is TypeScript?</a>
-                <a href="#setup" class="nav-item" onclick="navigateToSection('setup')">[SETUP] Getting Started</a>
-                <a href="#types" class="nav-item" onclick="navigateToSection('types')">[TYPES] Understanding Types</a>
-                <a href="#interfaces" class="nav-item" onclick="navigateToSection('interfaces')">[INTERFACES] Interfaces Explained</a>
-                <a href="#classes" class="nav-item" onclick="navigateToSection('classes')">[CLASSES] Classes & Objects</a>
-                <a href="#modules" class="nav-item" onclick="navigateToSection('modules')">[MODULES] Modules & Organization</a>
-                <a href="#generics" class="nav-item" onclick="navigateToSection('generics')">[GENERICS] Generics Made Simple</a>
-                <a href="#projects" class="nav-item" onclick="navigateToSection('projects')">[PROJECTS] Real Projects</a>
-            </div>
+                            <div class="nav-grid">
+                    <a href="#introduction" class="nav-item" onclick="navigateToSection('introduction')">BEGIN: What is TypeScript?</a>
+                    <a href="#setup" class="nav-item" onclick="navigateToSection('setup')">TOOLS: Getting Started</a>
+                    <a href="#types" class="nav-item" onclick="navigateToSection('types')">FOUNDATION: Understanding Types</a>
+                    <a href="#interfaces" class="nav-item" onclick="navigateToSection('interfaces')">BLUEPRINT: Interfaces Explained</a>
+                    <a href="#classes" class="nav-item" onclick="navigateToSection('classes')">BUILD: Classes & Objects</a>
+                    <a href="#modules" class="nav-item" onclick="navigateToSection('modules')">ORGANIZE: Modules & Organization</a>
+                    <a href="#generics" class="nav-item" onclick="navigateToSection('generics')">FLEXIBLE: Generics Made Simple</a>
+                    <a href="#projects" class="nav-item" onclick="navigateToSection('projects')">PROJECTS: Real Projects</a>
+                </div>
         </nav>
 
         <div class="main">
@@ -565,10 +565,10 @@
 
             <main class="content">
                 <section id="introduction">
-                    <h2>What is TypeScript? [QUESTION]</h2>
+                    <h2>What is TypeScript?</h2>
                     
                     <div class="analogy">
-                        <h4>[TARGET] Think of it Like This</h4>
+                        <h4>ANALOGY: Think of it Like This</h4>
                         <p>Imagine JavaScript is like writing with a pencil - you can write anything, but sometimes you make mistakes that are hard to catch. TypeScript is like having a smart grammar checker that helps you write better, clearer code and catches mistakes before they become problems!</p>
                     </div>
 
@@ -585,7 +585,7 @@
                     </ul>
 
                     <div class="tip">
-                        <h4>[LIGHTBULB] Fun Fact</h4>
+                        <h4>FACT: Fun Fact</h4>
                         <p>According to the 2024 Stack Overflow Survey, 92% of JavaScript developers now use TypeScript! It's not just a trend - it's becoming the standard.</p>
                     </div>
 
@@ -593,10 +593,10 @@
                 </section>
 
                 <section id="setup" style="display: none;">
-                    <h2>Getting Your TypeScript Environment Ready [SETUP]</h2>
+                    <h2>Getting Your TypeScript Environment Ready</h2>
                     
                     <div class="analogy">
-                        <h4>[HOUSE] Setting Up Your Workshop</h4>
+                        <h4>WORKSHOP: Setting Up Your Environment</h4>
                         <p>Just like a carpenter needs tools before building furniture, we need to set up our development environment before writing TypeScript. Don't worry - it's easier than setting up a gaming console!</p>
                     </div>
 
@@ -604,7 +604,7 @@
                     <p>Node.js is like the engine that runs our TypeScript code. It's free and easy to install!</p>
 
                     <div class="exercise">
-                        <h4>🎯 Your First Setup Mission</h4>
+                        <h4>MISSION: Your First Setup Mission</h4>
                         <ol class="exercise-steps">
                             <li>Go to <a href="https://nodejs.org" target="_blank">nodejs.org</a></li>
                             <li>Download the LTS (Long Term Support) version</li>
@@ -632,7 +632,7 @@
                     <p>We recommend <strong>Visual Studio Code</strong> (it's free!) because it has amazing TypeScript support built-in.</p>
 
                     <div class="tip">
-                        <h4>💡 VS Code Superpowers</h4>
+                        <h4>SUPERPOWERS: VS Code Features</h4>
                         <p>VS Code will automatically show you errors, suggest fixes, and even complete your code as you type. It's like having a coding mentor sitting next to you!</p>
                     </div>
 
@@ -652,7 +652,7 @@
 
                     <div class="code-container">
                         <div class="code-header">hello.ts - Your first TypeScript program!</div>
-                        <div class="code-block">// This is your first TypeScript program! 🎉
+                        <div class="code-block">// This is your first TypeScript program!
 function sayHello(name: string): string {
     return `Hello, ${name}! Welcome to TypeScript!`;
 }
@@ -662,7 +662,7 @@ const userName: string = "Future Developer";
 const greeting: string = sayHello(userName);
 
 console.log(greeting);
-console.log("🎉 Congratulations! You're now writing TypeScript!");</div>
+console.log("Congratulations! You're now writing TypeScript!");</div>
                     </div>
 
                     <h3>Running Your Code</h3>
@@ -678,7 +678,7 @@ node hello.js</div>
                     </div>
 
                     <div class="warning">
-                        <h4>[WARNING] Troubleshooting Tips</h4>
+                        <h4>NOTE: Troubleshooting Tips</h4>
                         <p>If you get an error, make sure you're in the right folder and that your file is saved. Don't worry - even experienced developers make these mistakes!</p>
                     </div>
 
@@ -686,10 +686,10 @@ node hello.js</div>
                 </section>
 
                 <section id="types" style="display: none;">
-                    <h2>Understanding Types - The Heart of TypeScript [TYPES]</h2>
+                    <h2>Understanding Types - The Heart of TypeScript</h2>
                     
                     <div class="analogy">
-                        <h4>[STORE] Types are Like Labels in a Store</h4>
+                        <h4>STORE: Types are Like Labels in a Store</h4>
                         <p>Imagine you're organizing a store. You put labels on shelves: "Books," "Electronics," "Clothing." Types in TypeScript work the same way - they're labels that tell us what kind of data we're working with. This prevents confusion like accidentally putting a banana in the electronics section!</p>
                     </div>
 
@@ -755,7 +755,7 @@ console.log(`My favorite color is ${favoriteColors[0]}`); // "blue"</div>
 
                     <h3>Type Inference - TypeScript's Smart Feature</h3>
                     <div class="analogy">
-                        <h4>[MAGNIFYING] TypeScript is Like a Detective</h4>
+                        <h4>DETECTIVE: TypeScript is Like a Detective</h4>
                         <p>Sometimes you don't need to tell TypeScript what type something is - it can figure it out! It's like when you see someone carrying a basketball - you can guess they're probably going to play basketball.</p>
                     </div>
 
@@ -770,7 +770,7 @@ let passed = true; // TypeScript knows: boolean
                     </div>
 
                     <div class="exercise">
-                        <h4>[TARGET] Practice Time: Create a Student Profile</h4>
+                        <h4>PRACTICE: Create a Student Profile</h4>
                         <p>Create a TypeScript file that describes a student. Try to use all the types we've learned!</p>
                         <ol class="exercise-steps">
                             <li>Create a file called <code class="code-inline">student-profile.ts</code></li>
@@ -781,7 +781,7 @@ let passed = true; // TypeScript knows: boolean
                     </div>
 
                     <div class="tip">
-                        <h4>💡 Pro Tip: Type Annotations</h4>
+                        <h4>TIP: Type Annotations</h4>
                         <p>When you're starting out, it's totally fine to be explicit with types. As you get comfortable, you'll naturally start letting TypeScript infer more. Both approaches are correct!</p>
                     </div>
 
@@ -789,10 +789,10 @@ let passed = true; // TypeScript knows: boolean
                 </section>
 
                 <section id="interfaces" style="display: none;">
-                    <h2>Interfaces - Creating Blueprints for Objects [INTERFACES]</h2>
+                    <h2>Interfaces - Creating Blueprints for Objects</h2>
                     
                     <div class="analogy">
-                        <h4>[BLUEPRINT] Interfaces are Like Architectural Blueprints</h4>
+                        <h4>ARCHITECTURE: Interfaces are Like Blueprints</h4>
                         <p>Imagine you're designing a house. Before building, you create a blueprint that shows where the kitchen, bedrooms, and bathrooms should go. Interfaces work the same way - they're blueprints that define what properties an object should have!</p>
                     </div>
 
@@ -829,7 +829,7 @@ const student2: Student = {
                     </div>
 
                     <div class="tip">
-                        <h4>[LIGHTBULB] Why Interfaces Rock</h4>
+                        <h4>BENEFIT: Why Interfaces Rock</h4>
                         <p>If you try to create a student without all the required properties, TypeScript will immediately tell you what's missing. It's like having a checklist that prevents you from forgetting important details!</p>
                     </div>
 
@@ -898,13 +898,13 @@ const hero: GameCharacter = {
     levelUp(): void {
         this.level++;
         this.health += 20;
-        console.log(`🎉 ${this.name} reached level ${this.level}!`);
+        console.log(`${this.name} reached level ${this.level}!`);
     }
 };</div>
                     </div>
 
                     <div class="exercise">
-                        <h4>🎯 Build Your Own Social Media App Interfaces</h4>
+                        <h4>PROJECT: Build Your Own Social Media App Interfaces</h4>
                         <p>Let's practice by creating interfaces for a social media app!</p>
                         <ol class="exercise-steps">
                             <li>Create a base <code class="code-inline">User</code> interface with username, email, joinDate</li>
@@ -919,10 +919,10 @@ const hero: GameCharacter = {
                 </section>
 
                 <section id="classes" style="display: none;">
-                    <h2>Classes - Building Objects with Behavior [CLASSES]</h2>
+                    <h2>Classes - Building Objects with Behavior</h2>
                     
                     <div class="analogy">
-                        <h4>[FACTORY] Classes are Like Cookie Cutters</h4>
+                        <h4>FACTORY: Classes are Like Cookie Cutters</h4>
                         <p>Think of a class as a cookie cutter and objects as the cookies. The cookie cutter (class) defines the shape and properties, but each cookie (object) you make can have different flavors, colors, or decorations while keeping the same basic structure!</p>
                     </div>
 
@@ -947,32 +947,32 @@ const hero: GameCharacter = {
     }
     
     // Methods (things the phone can do)
-    turnOn(): void {
-        this.isOn = true;
-        console.log(`${this.brand} ${this.model} is now ON! [PHONE]`);
-    }
-    
-    turnOff(): void {
-        this.isOn = false;
-        console.log(`${this.brand} ${this.model} is now OFF [SLEEP]`);
-    }
-    
-    useBattery(percentage: number): void {
-        this.batteryLevel -= percentage;
-        if (this.batteryLevel <= 0) {
-            this.batteryLevel = 0;
-            this.turnOff();
-            console.log("[BATTERY] Battery dead! Phone shutting down...");
+            turnOn(): void {
+            this.isOn = true;
+            console.log(`${this.brand} ${this.model} is now ON!`);
         }
-    }
-    
-    charge(percentage: number): void {
-        this.batteryLevel += percentage;
-        if (this.batteryLevel > 100) {
-            this.batteryLevel = 100;
+        
+        turnOff(): void {
+            this.isOn = false;
+            console.log(`${this.brand} ${this.model} is now OFF`);
         }
-        console.log(`[LIGHTNING] Charging... Battery at ${this.batteryLevel}%`);
-    }
+        
+        useBattery(percentage: number): void {
+            this.batteryLevel -= percentage;
+            if (this.batteryLevel <= 0) {
+                this.batteryLevel = 0;
+                this.turnOff();
+                console.log("Battery dead! Phone shutting down...");
+            }
+        }
+        
+        charge(percentage: number): void {
+            this.batteryLevel += percentage;
+            if (this.batteryLevel > 100) {
+                this.batteryLevel = 100;
+            }
+            console.log(`Charging... Battery at ${this.batteryLevel}%`);
+        }
 }
 
 // Creating instances (actual phone objects)
@@ -980,14 +980,14 @@ const myPhone = new Smartphone("Apple", "iPhone 15");
 const friendPhone = new Smartphone("Samsung", "Galaxy S24");
 
 // Using the phones
-myPhone.turnOn(); // Apple iPhone 15 is now ON! [PHONE]
+myPhone.turnOn(); // Apple iPhone 15 is now ON!
 myPhone.useBattery(25); // Battery goes to 75%
 myPhone.charge(15); // Battery goes to 90%</div>
                     </div>
 
                     <h3>Inheritance - Classes Learning from Other Classes</h3>
                     <div class="analogy">
-                        <h4>[DNA] Like Family Traits</h4>
+                        <h4>INHERITANCE: Like Family Traits</h4>
                         <p>Just like you might inherit your parent's eye color or height, classes can inherit properties and methods from parent classes. A "Student" class might inherit basic "Person" properties and add school-specific features!</p>
                     </div>
 
@@ -1010,7 +1010,7 @@ class Vehicle {
     }
     
     public start(): void {
-        console.log(`${this.getInfo()} is starting... [CAR]`);
+        console.log(`${this.getInfo()} is starting...`);
     }
 }
 
@@ -1027,15 +1027,15 @@ class Car extends Vehicle {
     
     // New method specific to cars
     public honk(): void {
-        console.log(`${this.getInfo()} says BEEP BEEP! 📯`);
+        console.log(`${this.getInfo()} says BEEP BEEP!`);
     }
     
     // Override parent method with car-specific behavior
     public start(): void {
         if (this.fuelLevel > 0) {
-            console.log(`🔑 Starting ${this.getInfo()}... Engine running!`);
+            console.log(`Starting ${this.getInfo()}... Engine running!`);
         } else {
-            console.log(`[FUEL] ${this.getInfo()} needs fuel to start!`);
+            console.log(`${this.getInfo()} needs fuel to start!`);
         }
     }
     
@@ -1043,9 +1043,9 @@ class Car extends Vehicle {
         const fuelUsed = distance / 10; // 10 miles per fuel unit
         if (this.fuelLevel >= fuelUsed) {
             this.fuelLevel -= fuelUsed;
-            console.log(`[ROAD] Drove ${distance} miles. Fuel remaining: ${this.fuelLevel.toFixed(1)}`);
+            console.log(`Drove ${distance} miles. Fuel remaining: ${this.fuelLevel.toFixed(1)}`);
         } else {
-            console.log("[FUEL] Not enough fuel for this trip!");
+            console.log("Not enough fuel for this trip!");
         }
     }
 }
@@ -1058,7 +1058,7 @@ myCar.drive(50); // Car-specific method</div>
                     </div>
 
                     <div class="exercise">
-                        <h4>🎯 Create Your Own Gaming System</h4>
+                        <h4>GAME: Create Your Own Gaming System</h4>
                         <p>Build a simple RPG character system using classes!</p>
                         <ol class="exercise-steps">
                             <li>Create a base <code class="code-inline">Character</code> class with name, level, health, and basic methods</li>
@@ -1070,7 +1070,7 @@ myCar.drive(50); // Car-specific method</div>
                     </div>
 
                     <div class="tip">
-                        <h4>💡 When to Use Classes vs Interfaces</h4>
+                        <h4>GUIDE: When to Use Classes vs Interfaces</h4>
                         <p><strong>Use Classes when:</strong> You need to create objects with behavior and state<br>
                         <strong>Use Interfaces when:</strong> You just need to define the shape/structure of objects</p>
                     </div>
@@ -1079,21 +1079,21 @@ myCar.drive(50); // Car-specific method</div>
                 </section>
 
                 <section id="modules" style="display: none;">
-                    <h2>Modules - Organizing Your Code Like a Pro 📦</h2>
+                    <h2>Modules - Organizing Your Code Like a Pro</h2>
                     
                     <div class="analogy">
-                        <h4>📚 Modules are Like School Subjects</h4>
+                        <h4>ORGANIZATION: Modules are Like School Subjects</h4>
                         <p>Imagine if all your school subjects were taught in one giant room with no organization - math, science, English, history all mixed together! That would be chaos. Modules help organize your code like separate classrooms, each with a specific purpose and clear boundaries.</p>
                     </div>
 
                     <h3>Why Do We Need Modules?</h3>
                     <p>As your projects grow, putting everything in one file becomes a nightmare. Modules help you:</p>
                     <ul style="margin-left: 2rem; margin-bottom: 2rem;">
-                        <li><strong>[FOLDER] Organize code</strong> - Keep related functions together</li>
-                        <li><strong>[LOCK] Encapsulation</strong> - Hide internal details</li>
-                        <li><strong>[RECYCLE] Reusability</strong> - Use code in multiple places</li>
-                        <li><strong>[TEAM] Collaboration</strong> - Team members can work on different modules</li>
-                        <li><strong>[BUG] Debugging</strong> - Easier to find and fix issues</li>
+                        <li><strong>ORGANIZE: Keep related functions together</strong></li>
+                        <li><strong>ENCAPSULATE: Hide internal details</strong></li>
+                        <li><strong>REUSE: Use code in multiple places</strong></li>
+                        <li><strong>COLLABORATE: Team members can work on different modules</strong></li>
+                        <li><strong>DEBUG: Easier to find and fix issues</strong></li>
                     </ul>
 
                     <h3>Creating Your First Module</h3>
@@ -1210,7 +1210,7 @@ export default class GameCharacter {
         this.level++;
         this.health += 20;
         this.experience = 0;
-        console.log(`🎉 ${this.name} leveled up! Now level ${this.level}`);
+        console.log(`${this.name} leveled up! Now level ${this.level}`);
     }
     
     public getStats(): string {
@@ -1243,7 +1243,7 @@ console.log("Max level in this game:", MAX_LEVEL);</div>
                     </div>
 
                     <div class="exercise">
-                        <h4>🎯 Build Your Own Library System</h4>
+                        <h4>LIBRARY: Build Your Own Library System</h4>
                         <p>Create a modular library management system!</p>
                         <ol class="exercise-steps">
                             <li>Create a <code class="code-inline">types.ts</code> file with Book, Author, and Member interfaces</li>
@@ -1256,7 +1256,7 @@ console.log("Max level in this game:", MAX_LEVEL);</div>
                     </div>
 
                     <div class="tip">
-                        <h4>💡 Module Best Practices</h4>
+                        <h4>BEST PRACTICES: Module Organization</h4>
                         <ul style="margin-left: 1.5rem;">
                             <li><strong>Single Responsibility:</strong> Each module should have one clear purpose</li>
                             <li><strong>Clear Names:</strong> Use descriptive file and export names</li>
@@ -1270,10 +1270,10 @@ console.log("Max level in this game:", MAX_LEVEL);</div>
                 </section>
 
                 <section id="generics" style="display: none;">
-                    <h2>Generics - Writing Flexible, Reusable Code 🔄</h2>
+                    <h2>Generics - Writing Flexible, Reusable Code</h2>
                     
                     <div class="analogy">
-                        <h4>🧰 Generics are Like Adjustable Tools</h4>
+                        <h4>FLEXIBILITY: Generics are Like Adjustable Tools</h4>
                         <p>Think of an adjustable wrench - it can fit different sized bolts without needing a separate tool for each size. Generics let you write code that works with different types without writing separate functions for each type!</p>
                     </div>
 
@@ -1338,7 +1338,7 @@ console.log(numberBox.content); // 42 (TypeScript knows it's a number)</div>
 
                     <h3>Generic Classes - Containers for Any Type</h3>
                     <div class="analogy">
-                        <h4>📦 Like Different Sized Storage Boxes</h4>
+                        <h4>STORAGE: Like Different Sized Storage Boxes</h4>
                         <p>A storage company might have the same box design but in different sizes - small for books, medium for clothes, large for furniture. Generic classes work similarly - same structure, different content types!</p>
                     </div>
 
@@ -1446,7 +1446,7 @@ const updatedProduct = updateEntity(product, { price: 899 });</div>
                     </div>
 
                     <div class="exercise">
-                        <h4>🎯 Create Your Own Generic Data Structures</h4>
+                        <h4>DATA STRUCTURES: Create Your Own Generic Data Structures</h4>
                         <p>Build flexible data structures that work with any type!</p>
                         <ol class="exercise-steps">
                             <li>Create a generic <code class="code-inline">Queue</code> class (first in, first out)</li>
@@ -1458,7 +1458,7 @@ const updatedProduct = updateEntity(product, { price: 899 });</div>
                     </div>
 
                     <div class="tip">
-                        <h4>💡 When to Use Generics</h4>
+                        <h4>GUIDE: When to Use Generics</h4>
                         <p><strong>Use Generics when:</strong> You need to write code that works with multiple types but maintains type safety<br>
                         <strong>Examples:</strong> Collections, utility functions, API responses, data structures</p>
                     </div>
@@ -1467,10 +1467,10 @@ const updatedProduct = updateEntity(product, { price: 899 });</div>
                 </section>
 
                 <section id="projects" style="display: none;">
-                    <h2>Real-World Projects - Put It All Together! 💼</h2>
+                    <h2>Real-World Projects - Put It All Together!</h2>
                     
                     <div class="analogy">
-                        <h4>[BUILDING] Building Your Portfolio</h4>
+                        <h4>PORTFOLIO: Building Your Portfolio</h4>
                         <p>Now that you've learned all the tools, it's time to build something amazing! These projects will help you create a portfolio that shows off your TypeScript skills to potential employers or collaborators.</p>
                     </div>
 
@@ -1516,7 +1516,7 @@ class TaskManager {
         };
         
         this.tasks.push(task);
-        console.log(`✅ Task added: ${title}`);
+        console.log(`Task added: ${title}`);
         return task;
     }
 
@@ -1525,7 +1525,7 @@ class TaskManager {
         const task = this.tasks.find(t => t.id === id);
         if (task) {
             task.completed = true;
-            console.log(`🎉 Task completed: ${task.title}`);
+            console.log(`Task completed: ${task.title}`);
             return true;
         }
         console.log(`❌ Task not found with ID: ${id}`);
@@ -1571,7 +1571,7 @@ class TaskManager {
         const index = this.tasks.findIndex(t => t.id === id);
         if (index !== -1) {
             const deletedTask = this.tasks.splice(index, 1)[0];
-            console.log(`[TRASH] Task deleted: ${deletedTask.title}`);
+            console.log(`Task deleted: ${deletedTask.title}`);
             return true;
         }
         return false;
@@ -1591,11 +1591,11 @@ taskManager.completeTask(1);
 
 // Get statistics
 const stats = taskManager.getStats();
-console.log("📊 Task Statistics:", stats);
+        console.log("Task Statistics:", stats);
 
 // Get pending tasks
 const pendingTasks = taskManager.getTasks({ completed: false });
-console.log("📝 Pending tasks:", pendingTasks.length);</div>
+console.log("Pending tasks:", pendingTasks.length);</div>
                     </div>
 
                     <h3>Project 2: Student Grade Tracker</h3>
@@ -1713,7 +1713,7 @@ class GradeTracker {
             weight
         };
         this.assignments.push(assignment);
-        console.log(`📝 Assignment added: ${name}`);
+        console.log(`Assignment added: ${name}`);
         return assignment;
     }
 
@@ -1735,7 +1735,7 @@ class GradeTracker {
         };
 
         this.grades.push(grade);
-        console.log(`📊 Grade added: ${points}/${assignment.maxPoints} (${letterGrade})`);
+        console.log(`Grade added: ${points}/${assignment.maxPoints} (${letterGrade})`);
         return grade;
     }
 
@@ -2052,7 +2052,7 @@ const user1 = socialMedia.createUser("alice_dev", "alice@example.com", "Alice De
 const user2 = socialMedia.createUser("bob_coder", "bob@example.com", "Bob Coder", "TypeScript enthusiast");
 
 // Create posts
-const post1 = socialMedia.createPost(user1.id, "Just finished learning TypeScript! 🎉", true, ["typescript", "programming"]);
+const post1 = socialMedia.createPost(user1.id, "Just finished learning TypeScript!", true, ["typescript", "programming"]);
 const post2 = socialMedia.createPost(user2.id, "TypeScript is amazing for building scalable applications", true, ["typescript", "webdev"]);
 
 // Add comments
@@ -2069,11 +2069,11 @@ console.log("[PHONE] Feed:", feed.length, "posts");
 
 // Get user stats
 const stats = socialMedia.getUserStats(user1.id);
-console.log("📊 User stats:", stats);</div>
+console.log("User stats:", stats);</div>
                     </div>
 
                     <div class="exercise">
-                        <h4>🎯 Your Final Challenge: Build Something Amazing!</h4>
+                        <h4>CHALLENGE: Your Final Challenge - Build Something Amazing!</h4>
                         <p>Now it's your turn to create something unique! Choose one of these project ideas or create your own:</p>
                         <ol class="exercise-steps">
                             <li><strong>E-commerce Inventory System:</strong> Track products, categories, and sales with TypeScript</li>
@@ -2085,7 +2085,7 @@ console.log("📊 User stats:", stats);</div>
                     </div>
 
                     <div class="tip">
-                        <h4>💡 Project Tips</h4>
+                        <h4>ADVICE: Project Tips</h4>
                         <ul style="margin-left: 1.5rem;">
                             <li><strong>Start Small:</strong> Begin with basic features and add complexity</li>
                             <li><strong>Use TypeScript Strictly:</strong> Enable strict mode and avoid <code class="code-inline">any</code></li>
@@ -2107,7 +2107,7 @@ console.log("📊 User stats:", stats);</div>
                         </ul>
                     </div>
 
-                    <button class="try-it-button" onclick="markChapterComplete('projects')">🎉 Tutorial Complete! I'm ready to build amazing things! →</button>
+                    <button class="try-it-button" onclick="markChapterComplete('projects')">Tutorial Complete! I'm ready to build amazing things! →</button>
                 </section>
             </main>
         </div>
