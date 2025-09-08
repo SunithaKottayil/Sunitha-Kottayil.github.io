@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Programming Fundamentals: Core Concepts and Best Practices</title>
-    <meta name="description" content="Essential programming concepts, principles, and workflow for beginners">
+    <title>Programming Fundamentals - Start Your Journey</title>
     <style>
         * {
             margin: 0;
@@ -13,839 +12,1116 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            color: #2c3e50;
-            background: #fdfdfd;
-            font-size: 16px;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
         }
 
         .container {
-            max-width: 900px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 30px;
-            background: white;
-            box-shadow: 0 0 20px rgba(0,0,0,0.05);
+            padding: 20px;
         }
 
-        /* Header */
         .header {
-            margin-bottom: 40px;
-            padding-bottom: 25px;
-            border-bottom: 2px solid #ecf0f1;
-        }
-
-        h1 {
-            font-size: 32px;
-            font-weight: 700;
-            color: #2c3e50;
-            margin-bottom: 12px;
-            line-height: 1.2;
-        }
-
-        .subtitle {
-            color: #7f8c8d;
-            font-size: 18px;
-            margin-bottom: 20px;
-        }
-
-        .intro {
-            font-size: 17px;
-            color: #34495e;
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 6px;
-            border-left: 4px solid #3498db;
-            line-height: 1.7;
-        }
-
-        /* Typography */
-        h2 {
-            font-size: 26px;
-            font-weight: 600;
-            color: #2c3e50;
-            margin: 40px 0 20px 0;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 8px;
-        }
-
-        h3 {
-            font-size: 20px;
-            font-weight: 600;
-            color: #34495e;
-            margin: 30px 0 15px 0;
-        }
-
-        h4 {
-            font-size: 16px;
-            font-weight: 600;
-            color: #34495e;
-            margin: 20px 0 10px 0;
-        }
-
-        p {
-            margin-bottom: 16px;
-            line-height: 1.7;
-        }
-
-        ul, ol {
-            margin: 16px 0;
-            padding-left: 30px;
-        }
-
-        li {
-            margin-bottom: 8px;
-            line-height: 1.6;
-        }
-
-        /* Navigation */
-        .nav {
-            background: #f8f9fa;
-            border: 1px solid #dee2e6;
-            border-radius: 6px;
-            padding: 20px;
-            margin: 30px 0;
-        }
-
-        .nav h4 {
-            margin-bottom: 15px;
-            color: #2c3e50;
-            font-size: 18px;
-        }
-
-        .nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            columns: 2;
-            column-gap: 30px;
-        }
-
-        .nav li {
-            margin-bottom: 8px;
-            break-inside: avoid;
-        }
-
-        .nav a {
-            color: #3498db;
-            text-decoration: none;
-            font-size: 15px;
-        }
-
-        .nav a:hover {
-            text-decoration: underline;
-        }
-
-        /* Diagrams */
-        .diagram {
-            background: #fff;
-            border: 2px solid #34495e;
-            border-radius: 8px;
-            padding: 25px;
-            margin: 30px 0;
-            position: relative;
-        }
-
-        .diagram-title {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 20px;
             text-align: center;
-            color: #2c3e50;
+            color: white;
+            margin-bottom: 2rem;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
         }
 
-        /* Flowchart */
-        .flowchart {
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            margin: 2rem 0;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, #00c851, #00ff85);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .section {
+            background: white;
+            margin: 2rem 0;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.5s ease;
+        }
+
+        .section.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .section h2 {
+            color: #667eea;
+            font-size: 2rem;
+            margin-bottom: 1rem;
             display: flex;
-            flex-direction: column;
             align-items: center;
-            gap: 15px;
+            gap: 1rem;
         }
 
-        .flow-box {
-            background: #ecf0f1;
-            border: 2px solid #34495e;
-            border-radius: 6px;
-            padding: 12px 20px;
-            font-weight: 500;
-            text-align: center;
-            max-width: 300px;
-            transform: rotate(-0.5deg);
+        .section-icon {
+            font-size: 2.5rem;
+            opacity: 0.8;
         }
 
-        .flow-box:nth-child(even) {
-            transform: rotate(0.8deg);
-        }
-
-        .flow-arrow {
-            width: 0;
-            height: 0;
-            border-left: 10px solid transparent;
-            border-right: 10px solid transparent;
-            border-top: 18px solid #34495e;
-        }
-
-        /* Concept grid */
         .concept-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            margin: 25px 0;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
         }
 
         .concept-card {
-            background: #fff;
-            border: 2px solid #34495e;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 3px 3px 0px #bdc3c7;
-            transform: rotate(-0.5deg);
+            background: #f8f9ff;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
         }
 
-        .concept-card:nth-child(even) {
-            transform: rotate(0.7deg);
+        .concept-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
         }
 
-        .concept-card h4 {
-            font-size: 18px;
-            margin-bottom: 10px;
-            color: #2c3e50;
+        .concept-card h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
         }
 
-        .concept-card p {
-            font-size: 14px;
-            color: #34495e;
-            margin: 0;
-            line-height: 1.5;
+        .example-box {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+            position: relative;
+            overflow-x: auto;
         }
 
-        /* Process steps */
-        .process-steps {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin: 25px 0;
-        }
-
-        .step {
-            display: flex;
-            align-items: flex-start;
-            background: #f8f9fa;
-            border: 1px solid #dee2e6;
-            border-radius: 6px;
-            padding: 18px;
-        }
-
-        .step-number {
-            background: #3498db;
+        .example-box::before {
+            content: "💡 Example";
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background: #667eea;
             color: white;
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .analogy-box {
+            background: linear-gradient(135deg, #ffeaa7, #fab1a0);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            border-left: 4px solid #e17055;
+        }
+
+        .analogy-box h4 {
+            color: #2d3436;
+            margin-bottom: 0.5rem;
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            margin-right: 15px;
-            flex-shrink: 0;
+            gap: 0.5rem;
         }
 
-        .step-content h4 {
-            margin-bottom: 8px;
-            color: #2c3e50;
-        }
-
-        .step-content p {
-            margin: 0;
-            color: #34495e;
-            font-size: 15px;
-        }
-
-        /* Callout boxes */
-        .callout {
-            padding: 18px;
-            margin: 25px 0;
-            border-radius: 6px;
-            border-left: 5px solid;
-        }
-
-        .tip {
-            background: #e8f5e8;
-            border-left-color: #27ae60;
-        }
-
-        .warning {
-            background: #fff3cd;
-            border-left-color: #f39c12;
-        }
-
-        .info {
+        .quiz-container {
             background: #e3f2fd;
-            border-left-color: #2196f3;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
         }
 
-        .important {
-            background: #ffeaa7;
-            border-left-color: #fdcb6e;
-        }
-
-        /* Principle boxes */
-        .principle-box {
-            background: #f8f9fa;
-            border: 1px solid #dee2e6;
-            border-radius: 6px;
-            padding: 20px;
-            margin: 20px 0;
-        }
-
-        .principle-title {
-            font-size: 18px;
-            font-weight: 600;
-            color: #2c3e50;
-            margin-bottom: 10px;
-        }
-
-        .principle-abbr {
-            font-size: 24px;
+        .quiz-question {
             font-weight: bold;
-            color: #3498db;
-            margin-bottom: 10px;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
         }
 
-        /* Comparison table */
-        .comparison-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 25px 0;
-            background: #fff;
-            border: 1px solid #dee2e6;
-        }
-
-        .comparison-table th,
-        .comparison-table td {
-            border: 1px solid #dee2e6;
-            padding: 12px;
-            text-align: left;
-        }
-
-        .comparison-table th {
-            background: #f8f9fa;
-            font-weight: 600;
-            color: #2c3e50;
-        }
-
-        .comparison-table tr:nth-child(even) {
-            background: #f8f9fa;
-        }
-
-        /* Languages grid */
-        .languages-grid {
+        .quiz-options {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin: 25px 0;
+            gap: 0.5rem;
         }
 
-        .language-card {
-            background: #fff;
-            border: 1px solid #dee2e6;
-            border-radius: 6px;
-            padding: 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .language-card h4 {
-            color: #2c3e50;
-            margin-bottom: 10px;
-            font-size: 18px;
-        }
-
-        .language-use {
-            color: #7f8c8d;
-            font-size: 14px;
-            margin-bottom: 8px;
-            font-style: italic;
-        }
-
-        .language-pros {
-            font-size: 14px;
-            color: #27ae60;
-            margin-bottom: 5px;
-        }
-
-        .language-cons {
-            font-size: 14px;
-            color: #e74c3c;
-        }
-
-        /* Workflow diagram */
-        .workflow {
-            background: #f8f9fa;
-            border: 2px solid #dee2e6;
+        .quiz-option {
+            padding: 0.8rem;
+            background: white;
+            border: 2px solid #bbdefb;
             border-radius: 8px;
-            padding: 25px;
-            margin: 30px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
 
-        .workflow-title {
-            font-size: 20px;
-            font-weight: 600;
-            color: #2c3e50;
-            margin-bottom: 20px;
+        .quiz-option:hover {
+            background: #bbdefb;
+            transform: translateX(5px);
+        }
+
+        .quiz-option.correct {
+            background: #c8e6c9;
+            border-color: #4caf50;
+        }
+
+        .quiz-option.wrong {
+            background: #ffcdd2;
+            border-color: #f44336;
+        }
+
+        .interactive-demo {
+            background: #f5f5f5;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
             text-align: center;
         }
 
-        .workflow-steps {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-        }
-
-        .workflow-step {
-            background: #fff;
-            border: 1px solid #dee2e6;
-            border-radius: 6px;
-            padding: 15px;
-            text-align: center;
-        }
-
-        .workflow-step-number {
-            background: #3498db;
+        .demo-button {
+            background: #667eea;
             color: white;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            display: inline-flex;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            margin: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .demo-button:hover {
+            background: #5a67d8;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .output-box {
+            background: #1a202c;
+            color: #00ff00;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: monospace;
+            margin: 1rem 0;
+            min-height: 50px;
+            display: flex;
             align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            margin-bottom: 10px;
         }
 
-        .workflow-step h5 {
-            margin-bottom: 8px;
-            color: #2c3e50;
-            font-size: 14px;
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 2rem 0;
         }
 
-        .workflow-step p {
-            margin: 0;
-            font-size: 12px;
-            color: #7f8c8d;
+        .nav-button {
+            background: #667eea;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            opacity: 0.7;
         }
 
-        /* Links */
-        a {
-            color: #3498db;
-            text-decoration: none;
+        .nav-button:hover:not(:disabled) {
+            opacity: 1;
+            transform: translateY(-2px);
         }
 
-        a:hover {
-            text-decoration: underline;
+        .nav-button:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
         }
 
-        /* Footer */
-        .footer {
-            margin-top: 50px;
-            padding-top: 25px;
-            border-top: 1px solid #dee2e6;
-            color: #7f8c8d;
-            font-size: 14px;
+        .fun-fact {
+            background: linear-gradient(135deg, #a29bfe, #6c5ce7);
+            color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            position: relative;
+        }
+
+        .fun-fact::before {
+            content: "🚀";
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
+        }
+
+        .completion-badge {
+            display: none;
+            background: linear-gradient(135deg, #00b894, #00cec9);
+            color: white;
+            padding: 1rem;
+            border-radius: 50px;
             text-align: center;
+            font-weight: bold;
+            margin: 2rem auto;
+            max-width: 300px;
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
-            .container {
-                padding: 20px;
-            }
-            
-            h1 {
-                font-size: 26px;
-            }
-            
-            h2 {
-                font-size: 22px;
-            }
-            
-            .nav ul {
-                columns: 1;
+            .header h1 {
+                font-size: 2rem;
             }
             
             .concept-grid {
                 grid-template-columns: 1fr;
             }
             
-            .languages-grid {
-                grid-template-columns: 1fr;
+            .navigation {
+                flex-direction: column;
+                gap: 1rem;
             }
-            
-            .workflow-steps {
-                grid-template-columns: 1fr;
-            }
+        }
+
+        .section:not(.active) {
+            display: none;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <header class="header">
-            <h1>Programming Fundamentals</h1>
-            <div class="subtitle">Core Concepts, Best Practices, and Development Workflow</div>
-            <div class="intro">
-                Programming is fundamentally about problem-solving and logical thinking. Before diving into any specific language, understanding core concepts, development principles, and professional workflows will set you up for success regardless of which technology path you choose.
+        <div class="header">
+            <h1>🚀 Programming Fundamentals</h1>
+            <p>Master the concepts before you write your first line of code</p>
+            <div class="progress-bar">
+                <div class="progress" id="progressBar"></div>
             </div>
-        </header>
+        </div>
 
-        <nav class="nav">
-            <h4>Table of Contents</h4>
-            <ul>
-                <li><a href="#thinking">Computational Thinking</a></li>
-                <li><a href="#concepts">Core Programming Concepts</a></li>
-                <li><a href="#workflow">Development Workflow</a></li>
-                <li><a href="#principles">Programming Principles</a></li>
-                <li><a href="#languages">Language Overview</a></li>
-                <li><a href="#best-practices">Best Practices</a></li>
-                <li><a href="#debugging">Debugging Strategies</a></li>
-                <li><a href="#planning">Project Planning</a></li>
-            </ul>
-        </nav>
-
-        <main>
-            <h2 id="thinking">Computational Thinking</h2>
+        <!-- Section 1: What is Programming? -->
+        <div class="section active" data-section="1">
+            <h2><span class="section-icon">🤔</span>What is Programming?</h2>
             
-            <p>Before writing a single line of code, you need to develop computational thinking - the ability to break down complex problems into manageable parts and design step-by-step solutions.</p>
+            <p>Programming is like being a translator between humans and computers. You take problems that humans want to solve and translate them into step-by-step instructions that computers can follow.</p>
 
-            <div class="diagram">
-                <div class="diagram-title">The Four Pillars of Computational Thinking</div>
-                <div class="concept-grid">
-                    <div class="concept-card">
-                        <h4>Decomposition</h4>
-                        <p>Break complex problems into smaller, manageable sub-problems that can be solved independently.</p>
-                    </div>
-                    <div class="concept-card">
-                        <h4>Pattern Recognition</h4>
-                        <p>Identify similarities and recurring elements to apply known solutions to new problems.</p>
-                    </div>
-                    <div class="concept-card">
-                        <h4>Abstraction</h4>
-                        <p>Focus on essential features while hiding unnecessary complexity and implementation details.</p>
-                    </div>
-                    <div class="concept-card">
-                        <h4>Algorithm Design</h4>
-                        <p>Create clear, step-by-step instructions that can be followed to solve the problem.</p>
-                    </div>
-                </div>
+            <div class="analogy-box">
+                <h4>🍳 Real-World Analogy: Cooking</h4>
+                <p>Programming is like writing a recipe. You provide clear, step-by-step instructions so that anyone (or any computer) can follow them and get the same result every time.</p>
             </div>
 
-            <div class="tip callout">
-                <strong>Practice Exercise:</strong> Try solving everyday problems using computational thinking. For example, how would you give directions to someone? What steps are involved in making coffee? This mental practice builds the foundation for programming logic.
-            </div>
-
-            <h2 id="concepts">Core Programming Concepts</h2>
-            
-            <p>Every programming language implements these fundamental concepts. Understanding them conceptually before learning syntax makes learning any language much easier.</p>
-
-            <h3>Data and Variables</h3>
             <div class="concept-grid">
                 <div class="concept-card">
-                    <h4>Variables</h4>
-                    <p>Named containers that store data values. Think of them as labeled boxes where you can put information and retrieve it later.</p>
+                    <h3>Problem Solving</h3>
+                    <p>Programming starts with identifying a problem you want to solve. Maybe you want to calculate tips, organize your music, or build a game.</p>
                 </div>
+                
                 <div class="concept-card">
-                    <h4>Data Types</h4>
-                    <p>Different kinds of data (numbers, text, true/false values) that determine what operations can be performed on them.</p>
+                    <h3>Breaking Down Problems</h3>
+                    <p>Big problems are scary! Programmers break them into tiny, manageable pieces. Like eating an elephant - one bite at a time.</p>
                 </div>
+                
                 <div class="concept-card">
-                    <h4>Constants</h4>
-                    <p>Values that don't change during program execution, like mathematical constants or configuration settings.</p>
-                </div>
-                <div class="concept-card">
-                    <h4>Scope</h4>
-                    <p>The visibility and accessibility of variables in different parts of your program.</p>
+                    <h3>Logic and Precision</h3>
+                    <p>Computers are incredibly literal. They do exactly what you tell them, not what you meant. Precision is key!</p>
                 </div>
             </div>
 
-            <h3>Control Structures</h3>
-            <div class="diagram">
-                <div class="diagram-title">Program Flow Control</div>
-                <div class="flowchart">
-                    <div class="flow-box">Sequential Execution<br><small>Instructions run one after another</small></div>
-                    <div class="flow-arrow"></div>
-                    <div class="flow-box">Conditional Execution<br><small>Make decisions with if/else statements</small></div>
-                    <div class="flow-arrow"></div>
-                    <div class="flow-box">Repetitive Execution<br><small>Repeat actions with loops</small></div>
-                    <div class="flow-arrow"></div>
-                    <div class="flow-box">Modular Execution<br><small>Organize code into functions</small></div>
-                </div>
+            <div class="interactive-demo">
+                <h3>Try This: Human Programming</h3>
+                <p>Click the button to see how precise you need to be with computers:</p>
+                <button class="demo-button" onclick="humanProgrammingDemo()">Give Me Instructions</button>
+                <div class="output-box" id="humanDemo">Click the button above!</div>
             </div>
 
-            <h3>Functions and Modularity</h3>
-            <p>Functions are reusable blocks of code that perform specific tasks. They're essential for organizing code and avoiding repetition.</p>
+            <div class="fun-fact">
+                <strong>Fun Fact:</strong> The first computer programmer was Ada Lovelace in 1843 - she wrote the first computer program before computers were even built!
+            </div>
+        </div>
 
-            <div class="info callout">
-                <strong>Function Benefits:</strong>
-                <ul>
-                    <li><strong>Reusability:</strong> Write once, use many times</li>
-                    <li><strong>Organization:</strong> Break large programs into manageable pieces</li>
-                    <li><strong>Testing:</strong> Easier to test small, focused functions</li>
-                    <li><strong>Maintenance:</strong> Changes in one place affect the entire program</li>
-                </ul>
+        <!-- Section 2: How Computers Think -->
+        <div class="section" data-section="2">
+            <h2><span class="section-icon">🧠</span>How Computers "Think"</h2>
+
+            <p>Computers don't actually think like humans. They're incredibly fast at following simple instructions, but they need everything explained in extreme detail.</p>
+
+            <div class="analogy-box">
+                <h4>🤖 Analogy: The Literal Friend</h4>
+                <p>Imagine you have a super literal friend who does exactly what you say. If you say "break a leg" before their performance, they might actually try to break their leg! Computers are like that friend - they take everything literally.</p>
             </div>
 
-            <h3>Data Structures</h3>
-            <table class="comparison-table">
-                <thead>
-                    <tr>
-                        <th>Structure</th>
-                        <th>Purpose</th>
-                        <th>Use Cases</th>
-                        <th>Key Features</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Arrays/Lists</strong></td>
-                        <td>Store multiple items in order</td>
-                        <td>Shopping lists, student grades, menu items</td>
-                        <td>Ordered, indexed access</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Objects/Dictionaries</strong></td>
-                        <td>Store key-value pairs</td>
-                        <td>User profiles, settings, database records</td>
-                        <td>Named access, flexible structure</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Sets</strong></td>
-                        <td>Store unique items</td>
-                        <td>Tags, categories, unique identifiers</td>
-                        <td>No duplicates, fast lookup</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Stacks</strong></td>
-                        <td>Last-in-first-out access</td>
-                        <td>Undo operations, function calls</td>
-                        <td>LIFO order, push/pop operations</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <h2 id="workflow">Development Workflow</h2>
-            
-            <div class="workflow">
-                <div class="workflow-title">Professional Development Process</div>
-                <div class="workflow-steps">
-                    <div class="workflow-step">
-                        <div class="workflow-step-number">1</div>
-                        <h5>Understand</h5>
-                        <p>Analyze requirements and constraints</p>
-                    </div>
-                    <div class="workflow-step">
-                        <div class="workflow-step-number">2</div>
-                        <h5>Plan</h5>
-                        <p>Design solution architecture</p>
-                    </div>
-                    <div class="workflow-step">
-                        <div class="workflow-step-number">3</div>
-                        <h5>Pseudocode</h5>
-                        <p>Write logic in plain language</p>
-                    </div>
-                    <div class="workflow-step">
-                        <div class="workflow-step-number">4</div>
-                        <h5>Implement</h5>
-                        <p>Write actual code incrementally</p>
-                    </div>
-                    <div class="workflow-step">
-                        <div class="workflow-step-number">5</div>
-                        <h5>Test</h5>
-                        <p>Verify functionality and edge cases</p>
-                    </div>
-                    <div class="workflow-step">
-                        <div class="workflow-step-number">6</div>
-                        <h5>Debug</h5>
-                        <p>Find and fix issues</p>
-                    </div>
-                    <div class="workflow-step">
-                        <div class="workflow-step-number">7</div>
-                        <h5>Refactor</h5>
-                        <p>Improve code quality and structure</p>
-                    </div>
-                    <div class="workflow-step">
-                        <div class="workflow-step-number">8</div>
-                        <h5>Document</h5>
-                        <p>Write clear documentation</p>
-                    </div>
-                </div>
-            </div>
-
-            <h3>Planning Before Coding</h3>
-            <div class="process-steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <div class="step-content">
-                        <h4>Define the Problem</h4>
-                        <p>Write a clear problem statement. What exactly needs to be solved? What are the inputs and expected outputs?</p>
-                    </div>
-                </div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <div class="step-content">
-                        <h4>Identify Constraints</h4>
-                        <p>What are the limitations? Time constraints, memory limits, user requirements, or technical restrictions?</p>
-                    </div>
-                </div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <div class="step-content">
-                        <h4>Break Down the Problem</h4>
-                        <p>Divide the main problem into smaller, manageable sub-problems that can be solved independently.</p>
-                    </div>
-                </div>
-                <div class="step">
-                    <div class="step-number">4</div>
-                    <div class="step-content">
-                        <h4>Design the Algorithm</h4>
-                        <p>Create a step-by-step solution plan using pseudocode or flowcharts before writing actual code.</p>
-                    </div>
-                </div>
-                <div class="step">
-                    <div class="step-number">5</div>
-                    <div class="step-content">
-                        <h4>Consider Edge Cases</h4>
-                        <p>Think about unusual inputs, error conditions, and boundary cases that might break your solution.</p>
-                    </div>
-                </div>
-            </div>
-
-            <h2 id="principles">Programming Principles</h2>
-            
-            <p>These fundamental principles guide professional software development and help create maintainable, efficient code.</p>
-
-            <div class="principle-box">
-                <div class="principle-abbr">DRY</div>
-                <div class="principle-title">Don't Repeat Yourself</div>
-                <p>Avoid duplicating code or logic. If you find yourself writing similar code multiple times, extract it into a function or module. This reduces maintenance burden and prevents inconsistencies.</p>
-            </div>
-
-            <div class="principle-box">
-                <div class="principle-abbr">KISS</div>
-                <div class="principle-title">Keep It Simple, Stupid</div>
-                <p>Favor simple solutions over complex ones. Simple code is easier to understand, debug, and maintain. Complexity should only be added when absolutely necessary.</p>
-            </div>
-
-            <div class="principle-box">
-                <div class="principle-abbr">YAGNI</div>
-                <div class="principle-title">You Aren't Gonna Need It</div>
-                <p>Don't add functionality until you actually need it. Avoid over-engineering and building features "just in case" - this adds unnecessary complexity.</p>
-            </div>
-
-            <div class="principle-box">
-                <div class="principle-abbr">SOLID</div>
-                <div class="principle-title">Five Design Principles</div>
-                <ul>
-                    <li><strong>Single Responsibility:</strong> Each function/class should have one reason to change</li>
-                    <li><strong>Open/Closed:</strong> Open for extension, closed for modification</li>
-                    <li><strong>Liskov Substitution:</strong> Objects should be replaceable with their subtypes</li>
-                    <li><strong>Interface Segregation:</strong> Clients shouldn't depend on unused interfaces</li>
-                    <li><strong>Dependency Inversion:</strong> Depend on abstractions, not concretions</li>
-                </ul>
-            </div>
-
-            <h3>Code Quality Principles</h3>
             <div class="concept-grid">
                 <div class="concept-card">
-                    <h4>Readability</h4>
-                    <p>Code is read more often than it's written. Use meaningful names, clear structure, and consistent formatting.</p>
+                    <h3>Binary Thinking</h3>
+                    <p>Deep down, computers only understand two things: ON (1) and OFF (0). Everything else is built from these basics!</p>
                 </div>
+                
                 <div class="concept-card">
-                    <h4>Maintainability</h4>
-                    <p>Write code that can be easily modified, extended, and fixed. Future you (and your teammates) will thank you.</p>
+                    <h3>Processing Speed</h3>
+                    <p>Computers can perform billions of simple operations per second. They're not smart, they're just really, really fast.</p>
                 </div>
+                
                 <div class="concept-card">
-                    <h4>Testability</h4>
-                    <p>Design code so it can be easily tested. Small, focused functions with clear inputs and outputs are easier to test.</p>
-                </div>
-                <div class="concept-card">
-                    <h4>Performance</h4>
-                    <p>Write efficient code, but prioritize correctness and clarity first. Optimize when you have performance problems, not before.</p>
+                    <h3>Memory</h3>
+                    <p>Computers can remember vast amounts of information perfectly. They never forget where they put their keys!</p>
                 </div>
             </div>
 
-            <h2 id="languages">Programming Language Overview</h2>
+            <div class="interactive-demo">
+                <h3>Binary Demo</h3>
+                <p>Let's see how computers represent numbers:</p>
+                <input type="number" id="decimalInput" placeholder="Enter a number" max="255">
+                <button class="demo-button" onclick="convertToBinary()">Convert to Binary</button>
+                <div class="output-box" id="binaryOutput">Enter a number above to see its binary representation!</div>
+            </div>
+
+            <div class="quiz-container">
+                <div class="quiz-question">🤔 Quick Check: What makes computers powerful?</div>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="selectQuizOption(this, false)">They can think creatively like humans</div>
+                    <div class="quiz-option" onclick="selectQuizOption(this, true)">They can follow simple instructions very quickly</div>
+                    <div class="quiz-option" onclick="selectQuizOption(this, false)">They can guess what you want them to do</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: What Are Algorithms? -->
+        <div class="section" data-section="3">
+            <h2><span class="section-icon">📝</span>What Are Algorithms?</h2>
+
+            <p>An algorithm is simply a set of step-by-step instructions to solve a problem. You use algorithms every day without realizing it!</p>
+
+            <div class="analogy-box">
+                <h4>☕ Everyday Algorithm: Making Coffee</h4>
+                <p>1. Fill kettle with water<br>2. Turn on kettle<br>3. Wait for water to boil<br>4. Add coffee to cup<br>5. Pour hot water<br>6. Stir and enjoy!</p>
+            </div>
+
+            <div class="concept-grid">
+                <div class="concept-card">
+                    <h3>Input</h3>
+                    <p>What goes into your algorithm? For coffee: water, coffee grounds, heat. For a calculator: two numbers.</p>
+                </div>
+                
+                <div class="concept-card">
+                    <h3>Process</h3>
+                    <p>The step-by-step instructions. This is where the magic happens - transforming inputs into outputs.</p>
+                </div>
+                
+                <div class="concept-card">
+                    <h3>Output</h3>
+                    <p>The result! For coffee: a delicious drink. For a calculator: the answer to your math problem.</p>
+                </div>
+            </div>
+
+            <div class="interactive-demo">
+                <h3>Algorithm Practice</h3>
+                <p>Let's create an algorithm together! Choose a task:</p>
+                <button class="demo-button" onclick="showAlgorithm('brushing')">Brushing Teeth</button>
+                <button class="demo-button" onclick="showAlgorithm('sandwich')">Making a Sandwich</button>
+                <button class="demo-button" onclick="showAlgorithm('driving')">Getting to School</button>
+                <div class="output-box" id="algorithmOutput">Choose a task above to see the algorithm!</div>
+            </div>
+
+            <div class="example-box">
+                <strong>Programming Algorithm Example:</strong><br>
+                To find the largest number in a list:<br>
+                1. Start with the first number as your "current largest"<br>
+                2. Look at the next number<br>
+                3. If it's bigger than your "current largest", make it the new "current largest"<br>
+                4. Repeat steps 2-3 until you've looked at all numbers<br>
+                5. Your "current largest" is now the answer!
+            </div>
+        </div>
+
+        <!-- Section 4: Programming Languages -->
+        <div class="section" data-section="4">
+            <h2><span class="section-icon">🗣️</span>Programming Languages</h2>
+
+            <p>Just like humans speak different languages (English, Spanish, French), computers can understand different programming languages. Each has its own "grammar" and vocabulary.</p>
+
+            <div class="analogy-box">
+                <h4>🌍 Language Analogy</h4>
+                <p>Programming languages are like human languages. You can say "Hello" in English, "Hola" in Spanish, or "Bonjour" in French. Similarly, you can solve the same problem in Python, Java, or JavaScript - just with different "words" and "grammar."</p>
+            </div>
+
+            <div class="concept-grid">
+                <div class="concept-card">
+                    <h3>Python 🐍</h3>
+                    <p>Beginner-friendly, reads like English. Great for data science, web development, and automation. We'll learn this one!</p>
+                </div>
+                
+                <div class="concept-card">
+                    <h3>JavaScript 🌐</h3>
+                    <p>The language of the web. If you've ever seen an interactive website, it probably uses JavaScript.</p>
+                </div>
+                
+                <div class="concept-card">
+                    <h3>Java ☕</h3>
+                    <p>Popular in big companies. "Write once, run anywhere." Used for Android apps and enterprise software.</p>
+                </div>
+
+                <div class="concept-card">
+                    <h3>C++ ⚡</h3>
+                    <p>Fast and powerful. Used for games, operating systems, and when speed is crucial.</p>
+                </div>
+
+                <div class="concept-card">
+                    <h3>Swift 📱</h3>
+                    <p>Apple's language for iOS apps. If you want to make iPhone apps, this is your language!</p>
+                </div>
+
+                <div class="concept-card">
+                    <h3>Scratch 🧩</h3>
+                    <p>Visual programming with blocks. Perfect for kids and beginners to learn programming concepts.</p>
+                </div>
+            </div>
+
+            <div class="interactive-demo">
+                <h3>Same Problem, Different Languages</h3>
+                <p>Here's how to say "Hello World" in different languages:</p>
+                <button class="demo-button" onclick="showLanguageExample('python')">Python</button>
+                <button class="demo-button" onclick="showLanguageExample('javascript')">JavaScript</button>
+                <button class="demo-button" onclick="showLanguageExample('java')">Java</button>
+                <div class="output-box" id="languageExample">Click a language above!</div>
+            </div>
+
+            <div class="quiz-container">
+                <div class="quiz-question">🤔 Why do we have different programming languages?</div>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="selectQuizOption(this, false)">To make programming harder</div>
+                    <div class="quiz-option" onclick="selectQuizOption(this, true)">Different languages are better for different types of problems</div>
+                    <div class="quiz-option" onclick="selectQuizOption(this, false)">Programmers couldn't agree on one language</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 5: Key Programming Concepts -->
+        <div class="section" data-section="5">
+            <h2><span class="section-icon">🔑</span>Key Programming Concepts</h2>
+
+            <p>Before we write code, let's understand the fundamental building blocks that all programs use. Think of these as the "vocabulary" of programming.</p>
+
+            <div class="concept-grid">
+                <div class="concept-card" onclick="expandConcept('variables')">
+                    <h3>Variables 📦</h3>
+                    <p>Like labeled boxes that store information. You can put things in them, take things out, and change what's inside.</p>
+                </div>
+                
+                <div class="concept-card" onclick="expandConcept('functions')">
+                    <h3>Functions ⚙️</h3>
+                    <p>Reusable blocks of code that do specific jobs. Like a recipe you can use over and over.</p>
+                </div>
+                
+                <div class="concept-card" onclick="expandConcept('loops')">
+                    <h3>Loops 🔄</h3>
+                    <p>Ways to repeat actions. Instead of writing the same code 100 times, use a loop!</p>
+                </div>
+
+                <div class="concept-card" onclick="expandConcept('conditions')">
+                    <h3>Conditions 🤔</h3>
+                    <p>Decision-making in code. "If this happens, do that. Otherwise, do something else."</p>
+                </div>
+            </div>
+
+            <div id="conceptDetails" class="example-box" style="display: none;">
+                <div id="conceptContent"></div>
+            </div>
+
+            <div class="interactive-demo">
+                <h3>Programming Concept Simulator</h3>
+                <p>Let's simulate these concepts with a simple example:</p>
+                <button class="demo-button" onclick="simulateConcepts()">Run Simulation</button>
+                <div class="output-box" id="conceptSimulation">Click 'Run Simulation' to see programming concepts in action!</div>
+            </div>
+        </div>
+
+        <!-- Section 6: Types of Data -->
+        <div class="section" data-section="6">
+            <h2><span class="section-icon">📊</span>Types of Data</h2>
+
+            <p>Computers work with different types of information. Understanding data types helps you know what you can and can't do with your information.</p>
+
+            <div class="concept-grid">
+                <div class="concept-card">
+                    <h3>Numbers 🔢</h3>
+                    <p><strong>Integers:</strong> Whole numbers like 5, -3, 1000<br>
+                    <strong>Decimals:</strong> Numbers with decimal points like 3.14, -0.5</p>
+                </div>
+                
+                <div class="concept-card">
+                    <h3>Text 📝</h3>
+                    <p><strong>Strings:</strong> Words, sentences, or any text. Always surrounded by quotes: "Hello", "123", "🎉"</p>
+                </div>
+                
+                <div class="concept-card">
+                    <h3>True/False ✅❌</h3>
+                    <p><strong>Booleans:</strong> Only two values possible - True or False. Used for yes/no questions.</p>
+                </div>
+
+                <div class="concept-card">
+                    <h3>Collections 📚</h3>
+                    <p><strong>Lists:</strong> Multiple pieces of data grouped together, like a shopping list or phone contacts.</p>
+                </div>
+            </div>
+
+            <div class="analogy-box">
+                <h4>🏠 Real-World Data Types</h4>
+                <p><strong>Numbers:</strong> Your age, height, bank balance<br>
+                <strong>Text:</strong> Your name, address, favorite quote<br>
+                <strong>True/False:</strong> Are you hungry? Do you have a pet?<br>
+                <strong>Lists:</strong> Your grocery list, playlist, contacts</p>
+            </div>
+
+            <div class="interactive-demo">
+                <h3>Data Type Guesser</h3>
+                <p>Can you identify the data type?</p>
+                <div id="dataTypeQuiz">
+                    <div class="quiz-question" id="dataQuestion">Loading...</div>
+                    <div class="quiz-options" id="dataOptions"></div>
+                </div>
+                <button class="demo-button" onclick="startDataTypeQuiz()">Start Quiz</button>
+            </div>
+        </div>
+
+        <!-- Section 7: Problem-Solving Approach -->
+        <div class="section" data-section="7">
+            <h2><span class="section-icon">🧩</span>The Programmer's Problem-Solving Approach</h2>
+
+            <p>Programming isn't just about knowing syntax - it's about thinking systematically to solve problems. Here's how programmers approach challenges.</p>
+
+            <div class="concept-grid">
+                <div class="concept-card">
+                    <h3>1. Understand 🎯</h3>
+                    <p>What exactly is the problem? What do you want to achieve? Can you explain it to someone else?</p>
+                </div>
+                
+                <div class="concept-card">
+                    <h3>2. Break Down 🔨</h3>
+                    <p>Divide the big problem into smaller, manageable pieces. Solve one piece at a time.</p>
+                </div>
+                
+                <div class="concept-card">
+                    <h3>3. Plan 📋</h3>
+                    <p>Write out the steps in plain English first. Don't jump straight to code!</p>
+                </div>
+
+                <div class="concept-card">
+                    <h3>4. Code 💻</h3>
+                    <p>Now translate your plan into programming language. Start simple, then improve.</p>
+                </div>
+
+                <div class="concept-card">
+                    <h3>5. Test 🧪</h3>
+                    <p>Does it work? Try different inputs, edge cases. What could go wrong?</p>
+                </div>
+
+                <div class="concept-card">
+                    <h3>6. Debug 🐛</h3>
+                    <p>When things go wrong (they will!), systematically find and fix the issues.</p>
+                </div>
+            </div>
+
+            <div class="interactive-demo">
+                <h3>Problem-Solving Practice</h3>
+                <p><strong>Challenge:</strong> You want to organize a birthday party for 20 people. Let's break this down using the programmer's approach:</p>
+                <button class="demo-button" onclick="solveProblem(1)">1. Understand</button>
+                <button class="demo-button" onclick="solveProblem(2)">2. Break Down</button>
+                <button class="demo-button" onclick="solveProblem(3)">3. Plan</button>
+                <div class="output-box" id="problemSolving">Click the steps above to see the problem-solving process!</div>
+            </div>
+
+            <div class="fun-fact">
+                <strong>Pro Tip:</strong> Spend more time planning and less time coding. 15 minutes of planning can save hours of debugging!
+            </div>
+        </div>
+
+        <!-- Section 8: Common Programming Mistakes -->
+        <div class="section" data-section="8">
+            <h2><span class="section-icon">⚠️</span>Common Beginner Mistakes (And How to Avoid Them)</h2>
+
+            <p>Everyone makes mistakes when learning to program. Here are the most common ones and how to avoid them. Remember: mistakes are learning opportunities!</p>
+
+            <div class="concept-grid">
+                <div class="concept-card">
+                    <h3>Rushing to Code 🏃‍♂️</h3>
+                    <p><strong>Mistake:</strong> Jumping straight into coding without planning.<br>
+                    <strong>Solution:</strong> Always write your algorithm in plain English first!</p>
+                </div>
+                
+                <div class="concept-card">
+                    <h3>Not Reading Error Messages 🙈</h3>
+                    <p><strong>Mistake:</strong> Panicking when you see an error and ignoring the message.<br>
+                    <strong>Solution:</strong> Error messages are helpful! Read them carefully - they often tell you exactly what's wrong.</p>
+                </div>
+                
+                <div class="concept-card">
+                    <h3>Making It Too Complex 🌪️</h3>
+                    <p><strong>Mistake:</strong> Trying to solve everything at once with a complex solution.<br>
+                    <strong>Solution:</strong> Start simple. Get something basic working, then improve it.</p>
+                </div>
+
+                <div class="concept-card">
+                    <h3>Not Testing Enough 🧪</h3>
+                    <p><strong>Mistake:</strong> Assuming your code works without testing different scenarios.<br>
+                    <strong>Solution:</strong> Test with different inputs, especially edge cases and unexpected data.</p>
+                </div>
+
+                <div class="concept-card">
+                    <h3>Comparing Yourself to Others 📊</h3>
+                    <p><strong>Mistake:</strong> Feeling bad because others seem to learn faster.<br>
+                    <strong>Solution:</strong> Everyone learns at their own pace. Focus on your own progress!</p>
+                </div>
+
+                <div class="concept-card">
+                    <h3>Giving Up Too Quickly 😤</h3>
+                    <p><strong>Mistake:</strong> Quitting when things get difficult.<br>
+                    <strong>Solution:</strong> Struggling is normal! Take breaks, ask for help, come back fresh.</p>
+                </div>
+            </div>
+
+            <div class="analogy-box">
+                <h4>🎯 The Growth Mindset</h4>
+                <p>Think of learning programming like learning to ride a bike. You don't expect to be perfect on day one. You fall, get back up, and keep practicing. Each fall teaches you something new about balance and control.</p>
+            </div>
+
+            <div class="interactive-demo">
+                <h3>Error Message Translator</h3>
+                <p>Let's practice reading error messages. What do these really mean?</p>
+                <button class="demo-button" onclick="translateError()">Show Me an Error</button>
+                <div class="output-box" id="errorTranslation">Click above to see a common error message and its translation!</div>
+            </div>
+        </div>
+
+        <!-- Section 9: Your Programming Journey -->
+        <div class="section" data-section="9">
+            <h2><span class="section-icon">🗺️</span>Your Programming Journey</h2>
+
+            <p>Learning to program is a journey, not a destination. Here's what you can expect and how to make the most of your adventure.</p>
+
+            <div class="concept-grid">
+                <div class="concept-card">
+                    <h3>Week 1-2: The Basics 🌱</h3>
+                    <p>You'll learn variables, basic operations, and print statements. Everything will feel new and exciting!</p>
+                </div>
+                
+                <div class="concept-card">
+                    <h3>Week 3-4: First Challenges 🧗‍♀️</h3>
+                    <p>You'll encounter your first "I don't understand" moments. This is normal and part of learning!</p>
+                </div>
+                
+                <div class="concept-card">
+                    <h3>Week 5-8: Building Confidence 💪</h3>
+                    <p>Things start clicking together. You'll build your first real programs and feel like a programmer!</p>
+                </div>
+
+                <div class="concept-card">
+                    <h3>Week 9-12: Independent Creation 🚀</h3>
+                    <p>You'll work on projects, solve real problems, and realize how much you've learned!</p>
+                </div>
+            </div>
+
+            <div class="interactive-demo">
+                <h3>Set Your Programming Goals</h3>
+                <p>What would you like to build? Click to explore possibilities:</p>
+                <button class="demo-button" onclick="showGoal('web')">Website/Web App</button>
+                <button class="demo-button" onclick="showGoal('data')">Data Analysis</button>
+                <button class="demo-button" onclick="showGoal('game')">Simple Game</button>
+                <button class="demo-button" onclick="showGoal('automation')">Automation Tool</button>
+                <div class="output-box" id="goalExploration">Choose a goal above to see what's possible!</div>
+            </div>
+
+            <div class="fun-fact">
+                <strong>Remember:</strong> Every expert programmer was once exactly where you are now. The only difference is they kept going when things got tough!
+            </div>
+        </div>
+
+        <!-- Section 10: Ready to Code! -->
+        <div class="section" data-section="10">
+            <h2><span class="section-icon">🎉</span>You're Ready to Start Coding!</h2>
+
+            <p>Congratulations! You now understand the fundamental concepts that every programmer needs to know. You're ready to write your first lines of code!</p>
+
+            <div class="concept-grid">
+                <div class="concept-card">
+                    <h3>What You've Learned ✅</h3>
+                    <p>• What programming is and why it's powerful<br>
+                    • How computers process information<br>
+                    • What algorithms are and how to create them<br>
+                    • Different programming languages and their uses<br>
+                    • Key programming concepts (variables, functions, loops, conditions)<br>
+                    • Data types and how to work with them<br>
+                    • Problem-solving approaches<br>
+                    • Common mistakes and how to avoid them</p>
+                </div>
+                
+                <div class="concept-card">
+                    <h3>Next Steps 🚀</h3>
+                    <p>• Install Python on your computer<br>
+                    • Start with simple "Hello World" programs<br>
+                    • Practice with variables and basic operations<br>
+                    • Join programming communities<br>
+                    • Build small projects<br>
+                    • Don't be afraid to make mistakes!<br>
+                    • Celebrate small wins along the way</p>
+                </div>
+            </div>
+
+            <div class="interactive-demo">
+                <h3>Final Knowledge Check</h3>
+                <p>Let's see what you remember:</p>
+                <button class="demo-button" onclick="finalQuiz()">Take Final Quiz</button>
+                <div class="output-box" id="finalQuizResult">Click above to test your knowledge!</div>
+            </div>
+
+            <div class="completion-badge" id="completionBadge">
+                🏆 CONGRATULATIONS! 🏆<br>
+                You've completed Programming Fundamentals!<br>
+                You're ready to start your coding journey!
+            </div>
+
+            <div class="fun-fact">
+                <strong>Your Programming Superpower:</strong> You can now think algorithmically! This skill will help you in programming and many other areas of life.
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="navigation">
+            <button class="nav-button" id="prevBtn" onclick="previousSection()">← Previous</button>
+            <span id="sectionCounter">Section 1 of 10</span>
+            <button class="nav-button" id="nextBtn" onclick="nextSection()">Next →</button>
+        </div>
+    </div>
+
+    <script>
+        let currentSection = 1;
+        const totalSections = 10;
+        let quizData = [];
+        let currentQuizIndex = 0;
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            updateProgress();
+            updateNavigation();
+            initializeQuizData();
+        });
+
+        function updateProgress() {
+            const progress = (currentSection / totalSections) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+
+        function updateNavigation() {
+            document.getElementById('prevBtn').disabled = currentSection === 1;
+            document.getElementById('nextBtn').disabled = currentSection === totalSections;
+            document.getElementById('sectionCounter').textContent = `Section ${currentSection} of ${totalSections}`;
+        }
+
+        function nextSection() {
+            if (currentSection < totalSections) {
+                document.querySelector(`[data-section="${currentSection}"]`).classList.remove('active');
+                currentSection++;
+                document.querySelector(`[data-section="${currentSection}"]`).classList.add('active');
+                updateProgress();
+                updateNavigation();
+                
+                // Show completion badge on last section
+                if (currentSection === totalSections) {
+                    setTimeout(() => {
+                        document.getElementById('completionBadge').style.display = 'block';
+                    }, 1000);
+                }
+            }
+        }
+
+        function previousSection() {
+            if (currentSection > 1) {
+                document.querySelector(`[data-section="${currentSection}"]`).classList.remove('active');
+                currentSection--;
+                document.querySelector(`[data-section="${currentSection}"]`).classList.add('active');
+                updateProgress();
+                updateNavigation();
+            }
+        }
+
+        // Interactive Demonstrations
+        function humanProgrammingDemo() {
+            const instructions = [
+                "Computer: 'Make a sandwich' - What kind? With what ingredients? On what surface?",
+                "Computer: 'Turn left' - How many degrees? Which way is left from my perspective?",
+                "Computer: 'Add the numbers' - Which numbers? Add them how? Where do I put the result?"
+            ];
+            const randomInstruction = instructions[Math.floor(Math.random() * instructions.length)];
+            document.getElementById('humanDemo').innerHTML = randomInstruction;
+        }
+
+        function convertToBinary() {
+            const decimal = parseInt(document.getElementById('decimalInput').value);
+            if (isNaN(decimal)) {
+                document.getElementById('binaryOutput').innerHTML = "Please enter a valid number!";
+                return;
+            }
+            const binary = decimal.toString(2);
+            document.getElementById('binaryOutput').innerHTML = `${decimal} in binary is: ${binary}`;
+        }
+
+        function selectQuizOption(element, isCorrect) {
+            // Remove previous selections
+            const options = element.parentNode.children;
+            for (let option of options) {
+                option.classList.remove('correct', 'wrong');
+            }
             
-            <p>Different programming languages are designed for different purposes. Understanding their strengths helps you choose the right tool for your projects.</p>
+            // Mark the selected option
+            if (isCorrect) {
+                element.classList.add('correct');
+            } else {
+                element.classList.add('wrong');
+                // Show correct answer
+                for (let option of options) {
+                    if (option !== element) {
+                        const onclick = option.getAttribute('onclick');
+                        if (onclick && onclick.includes('true')) {
+                            option.classList.add('correct');
+                        }
+                    }
+                }
+            }
+        }
 
-            <h3>Language Categories</h3>
-            <table class="comparison-table">
-                <thead>
-                    <tr>
-                        <th>Category</th>
-                        <th>Characteristics</th>
-                        <th>Examples</th>
-                        <th>Best For</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>High-Level</strong></td>
-                        <td>Human-readable, abstracted from hardware</td>
-                        <td>Python, JavaScript, Java</td>
-                        <td>Rapid development, beginners</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Low-Level</strong></td>
-                        <td>Close to machine code, manual memory management</td>
-                        <td>C, Assembly</td>
-                        <td>System programming, performance-critical apps</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Compiled</strong></td>
-                        <td>Translated to machine code before execution</td>
-                        <td>C++, Rust, Go</td>
-                        <td>Fast execution, deployment</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Interpreted</strong></td>
-                        <td>Executed line-by-line at runtime</td>
-                        <td>Python, JavaScript, Ruby</td>
-                        <td>Quick testing, interactive development</td>
-                    </tr>
-                </tbody>
-            </table>
+        function showAlgorithm(task) {
+            const algorithms = {
+                brushing: "1. Get toothbrush and toothpaste\n2. Wet the toothbrush\n3. Apply toothpaste\n4. Brush teeth in circular motions for 2 minutes\n5. Spit and rinse\n6. Clean toothbrush",
+                sandwich: "1. Get bread, filling ingredients, and utensils\n2. Lay out two slices of bread\n3. Apply spread to one slice\n4. Add desired fillings\n5. Place second slice on top\n6. Cut if desired and enjoy!",
+                driving: "1. Check you have keys and license\n2. Get in car and adjust mirrors/seat\n3. Start the engine\n4. Choose route (GPS or memory)\n5. Follow traffic rules and directions\n6. Park at destination"
+            };
+            document.getElementById('algorithmOutput').innerHTML = algorithms[task];
+        }
 
-            <h3>Popular Language Applications</h3>
-            <div class="languages-grid">
-                <div class="language-card">
-                    <h4>Web Development</h4>
-                    <div class="language-use">Frontend: HTML, CSS, JavaScript</div>
-                    <div class="language-use">Backend: Python, JavaScript (Node.js), PHP, Java</div>
-                    <div class="language-pros">✓ High demand, immediate visual feedback</div>
-                    <div class="language-cons">✗ Rapidly changing ecosystem</div>
-                </div>
-                <div class="language-card">
-                    <h4>Mobile Development</h4>
-                    <div class="language-use">iOS: Swift, Objective-C</div>
-                    <div class="language-use">Android: Java, Kotlin</div>
-                    <div class="language-use">Cross-platform: React Native, Flutter</div>
-                    <div class="language-pros">✓ Growing market, good monetization</div>
-                    <div class="language-cons">✗ Platform-specific knowledge needed</div>
-                </div>
-                <div class="language-card">
-                    <h4>Data Science</h4>
-                    <div class="language-use">Python, R, SQL</div>
-                    <div class="language-use">Tools: Pandas, NumPy, TensorFlow</div>
-                    <div class="language-pros">✓ High salaries, growing field</div>
-                    <div class="language-cons">✗ Requires domain knowledge</div>
-                </div>
-                <div class="language-card">
-                    <h4>Game Development</h4>
-                    <div class="language-use">C#, C++, JavaScript</div>
-                    <div class="language-use">Engines: Unity, Unreal, Godot</div>
-                    <div class="language-pros">✓ Creative, engaging projects</div>
-                    <div class="language-cons">✗ Competitive industry</div>
-                </div>
-                <div class="language-card">
-                    <h4>System Programming</h4>
-                    <div class="language-use">C, C++, Rust, Go</div>
-                    <div class="language-use">Operating systems, drivers, embedded</div>
-                    <div class="language-pros">
+        function showLanguageExample(language) {
+            const examples = {
+                python: 'print("Hello World!")\n\n# Simple and clean!',
+                javascript: 'console.log("Hello World!");\n\n// Runs in web browsers',
+                java: 'public class HelloWorld {\n    public static void main(String[] args) {\n        System.out.println("Hello World!");\n    }\n}\n\n// More verbose but powerful'
+            };
+            document.getElementById('languageExample').innerHTML = examples[language];
+        }
+
+        function expandConcept(concept) {
+            const concepts = {
+                variables: "Variables Example:\n\nname = 'Alice'\nage = 25\nheight = 5.6\nis_student = True\n\nThink of variables like labeled storage boxes. You can put different things in them and use them later!",
+                functions: "Functions Example:\n\ndef greet_person(name):\n    return 'Hello, ' + name + '!'\n\nresult = greet_person('Bob')\nprint(result)  # Prints: Hello, Bob!\n\nFunctions are like mini-programs that you can reuse!",
+                loops: "Loops Example:\n\nfor i in range(5):\n    print('Count:', i)\n\n# This prints 'Count: 0' through 'Count: 4'\n# Much better than writing print() 5 times!",
+                conditions: "Conditions Example:\n\nage = 18\nif age >= 18:\n    print('You can vote!')\nelse:\n    print('Not old enough yet')\n\n# Computer makes decisions based on data!"
+            };
+            
+            document.getElementById('conceptContent').innerHTML = concepts[concept];
+            document.getElementById('conceptDetails').style.display = 'block';
+        }
+
+        function simulateConcepts() {
+            let output = "🎬 Programming Simulation:\n\n";
+            output += "1. Variable: name = 'Student'\n";
+            output += "2. Variable: count = 0\n";
+            output += "3. Loop: Repeat 3 times:\n";
+            output += "   - count = count + 1\n";
+            output += "   - Condition: if count <= 3:\n";
+            output += "     - Function: greet(name)\n";
+            output += "     - Output: 'Hello Student! (time #" + 1 + ")'\n";
+            output += "     - Output: 'Hello Student! (time #" + 2 + ")'\n";
+            output += "     - Output: 'Hello Student! (time #" + 3 + ")'\n";
+            output += "4. Done!\n\n";
+            output += "See how variables store data, loops repeat actions, conditions make decisions, and functions do work!";
+            
+            document.getElementById('conceptSimulation').innerHTML = output;
+        }
+
+        function initializeQuizData() {
+            quizData = [
+                {
+                    question: 'What data type is "Hello World"?',
+                    options: ['Number', 'Text/String', 'True/False', 'List'],
+                    correct: 1
+                },
+                {
+                    question: 'What data type is 42?',
+                    options: ['Text/String', 'Number', 'True/False', 'List'],
+                    correct: 1
+                },
+                {
+                    question: 'What data type is True?',
+                    options: ['Number', 'Text/String', 'True/False', 'List'],
+                    correct: 2
+                },
+                {
+                    question: 'What data type is [1, 2, 3, 4]?',
+                    options: ['Number', 'Text/String', 'True/False', 'List'],
+                    correct: 3
+                }
+            ];
+        }
+
+        function startDataTypeQuiz() {
+            currentQuizIndex = 0;
+            showNextDataQuestion();
+        }
+
+        function showNextDataQuestion() {
+            if (currentQuizIndex >= quizData.length) {
+                document.getElementById('dataQuestion').innerHTML = "🎉 Quiz Complete! Great job!";
+                document.getElementById('dataOptions').innerHTML = "";
+                return;
+            }
+
+            const question = quizData[currentQuizIndex];
+            document.getElementById('dataQuestion').innerHTML = question.question;
+            
+            let optionsHTML = '';
+            question.options.forEach((option, index) => {
+                optionsHTML += `<div class="quiz-option" onclick="checkDataAnswer(${index})">${option}</div>`;
+            });
+            document.getElementById('dataOptions').innerHTML = optionsHTML;
+        }
+
+        function checkDataAnswer(selectedIndex) {
+            const question = quizData[currentQuizIndex];
+            const options = document.getElementById('dataOptions').children;
+            
+            // Clear previous styling
+            for (let option of options) {
+                option.classList.remove('correct', 'wrong');
+            }
+            
+            // Mark correct/wrong
+            if (selectedIndex === question.correct) {
+                options[selectedIndex].classList.add('correct');
+            } else {
+                options[selectedIndex].classList.add('wrong');
+                options[question.correct].classList.add('correct');
+            }
+            
+            // Move to next question after delay
+            setTimeout(() => {
+                currentQuizIndex++;
+                showNextDataQuestion();
+            }, 2000);
+        }
+
+        function solveProblem(step) {
+            const solutions = {
+                1: "🎯 UNDERSTAND: We need to organize a birthday party for 20 people. This means planning food, entertainment, venue, invitations, and logistics for exactly 20 guests.",
+                2: "🔨 BREAK DOWN: Let's split this into smaller tasks:\n• Send invitations (20 people)\n• Plan food (calculate portions for 20)\n• Choose venue (space for 20 people)\n• Organize entertainment\n• Set up decorations\n• Manage timing and schedule",
+                3: "📋 PLAN: Now let's make it step-by-step:\n1. Create guest list and send invites 2 weeks early\n2. Calculate food: 2 slices pizza + 1 drink + 1 dessert per person\n3. Book venue that fits 25 people (buffer space)\n4. Buy decorations and party supplies\n5. Set up 2 hours before party starts\n6. During party: welcome guests, serve food, manage activities\n7. Clean up afterwards"
+            };
+            document.getElementById('problemSolving').innerHTML = solutions[step];
+        }
+
+        function translateError() {
+            const errors = [
+                {
+                    error: "SyntaxError: invalid syntax",
+                    translation: "You have a typo in your code - maybe forgot a quote, parenthesis, or colon!"
+                },
+                {
+                    error: "NameError: name 'x' is not defined",
+                    translation: "You're trying to use a variable 'x' that doesn't exist yet - create it first!"
+                },
+                {
+                    error: "IndentationError: unexpected indent",
+                    translation: "Your spacing/indentation is wrong - Python is picky about consistent spacing!"
+                },
+                {
+                    error: "TypeError: unsupported operand types",
+                    translation: "You're trying to do math with incompatible data types - like adding text to numbers!"
+                }
+            ];
+            
+            const randomError = errors[Math.floor(Math.random() * errors.length)];
+            document.getElementById('errorTranslation').innerHTML = 
+                `❌ Error: ${randomError.error}\n\n✅ Translation: ${randomError.translation}`;
+        }
+
+        function showGoal(goalType) {
+            const goals = {
+                web: "🌐 WEB DEVELOPMENT:\nYou could build:\n• Personal portfolio website\n• Blog or news site\n• Online calculator\n• Simple social media app\n• E-commerce store\n\nSkills needed: HTML, CSS, JavaScript, Python web frameworks",
+                data: "📊 DATA ANALYSIS:\nYou could build:\n• Analyze your Spotify listening habits\n• Create charts from survey data\n• Predict trends from historical data\n• Build a personal finance tracker\n• Analyze social media trends\n\nSkills needed: Python, pandas, matplotlib, statistics",
+                game: "🎮 GAME DEVELOPMENT:\nYou could build:\n• Text-based adventure game\n• Simple puzzle games\n• 2D platformer game\n• Quiz or trivia game\n• Card game simulator\n\nSkills needed: Python, game logic, basic graphics",
+                automation: "🤖 AUTOMATION:\nYou could build:\n• Automatic file organizer\n• Email reminder system\n• Web scraper for prices\n• Social media post scheduler\n• Backup system for files\n\nSkills needed: Python, file handling, scheduling, APIs"
+            };
+            
+            document.getElementById('goalExploration').innerHTML = goals[goalType];
+        }
+
+        function finalQuiz() {
+            const questions = [
+                "What is an algorithm? (A set of step-by-step instructions)",
+                "What do variables do? (Store data in labeled containers)",
+                "What makes computers powerful? (They follow instructions very quickly)",
+                "What's the first step in problem-solving? (Understand the problem)",
+                "What should you do when you get an error? (Read the error message carefully)"
+            ];
+            
+            let output = "🧠 FINAL KNOWLEDGE CHECK:\n\n";
+            output += "✅ You understand what programming is\n";
+            output += "✅ You know how computers process information\n";
+            output += "✅ You can create algorithms\n";
+            output += "✅ You understand key programming concepts\n";
+            output += "✅ You know different data types\n";
+            output += "✅ You have a problem-solving approach\n";
+            output += "✅ You're prepared for common mistakes\n\n";
+            output += "🎉 SCORE: 100% - You're ready to start coding!";
+            
+            document.getElementById('finalQuizResult').innerHTML = output;
+            
+            // Show completion badge
+            setTimeout(() => {
+                document.getElementById('completionBadge').style.display = 'block';
+            }, 2000);
+        }
+
+        // Add some animation when sections become visible
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
