@@ -99,27 +99,65 @@
         }
 
         .code-block {
-            background: #1f2937;
+            background: #0b1220;
             color: #e5e7eb;
-            padding: 20px;
-            border-radius: 10px;
+            padding: 28px 20px 20px 20px;
+            border-radius: 12px;
             margin: 15px 0;
             font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
             font-size: 14px;
+            line-height: 1.6;
             overflow-x: auto;
             position: relative;
+            border: 1px solid rgba(255,255,255,0.08);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.25);
         }
 
+        /* VS Code-like header dots */
         .code-block::before {
-            content: "Python";
+            content: '';
             position: absolute;
-            top: 5px;
+            top: 8px;
+            left: 12px;
+            width: 36px;
+            height: 10px;
+            background:
+                radial-gradient(circle at 6px 5px, #ef4444 4px, transparent 5px),
+                radial-gradient(circle at 18px 5px, #f59e0b 4px, transparent 5px),
+                radial-gradient(circle at 30px 5px, #10b981 4px, transparent 5px);
+        }
+
+        /* Language badge */
+        .code-block::after {
+            content: 'Python';
+            position: absolute;
+            top: 6px;
             right: 10px;
-            background: #4f46e5;
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
             color: white;
             padding: 2px 8px;
-            border-radius: 3px;
+            border-radius: 6px;
             font-size: 10px;
+            letter-spacing: 0.02em;
+        }
+
+        /* Copy button for code blocks */
+        .copy-btn {
+            position: absolute;
+            top: 6px;
+            right: 70px;
+            background: rgba(255,255,255,0.08);
+            color: #e5e7eb;
+            border: 1px solid rgba(255,255,255,0.15);
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-size: 11px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .copy-btn:hover {
+            background: rgba(255,255,255,0.16);
         }
 
         .exercise {
@@ -336,7 +374,7 @@
     <div class="container">
         <div class="header">
             <h1>🐍 Interactive Python Data Containers</h1>
-            <p>Master Lists, Tuples, and Dictionaries through hands-on practice!</p>
+            <p>Master Lists, Tuples, Dictionaries, and Strings through hands-on practice!</p>
             <div class="progress-bar">
                 <div class="progress-fill" id="progressFill"></div>
             </div>
@@ -350,8 +388,10 @@
             <button class="lesson-tab active" onclick="showLesson(0)">📝 Lists</button>
             <button class="lesson-tab" onclick="showLesson(1)">🔒 Tuples</button>
             <button class="lesson-tab" onclick="showLesson(2)">🗝️ Dictionaries</button>
-            <button class="lesson-tab" onclick="showLesson(3)">🚀 Challenges</button>
-            <button class="lesson-tab" onclick="showLesson(4)">🏆 Final Quiz</button>
+            <button class="lesson-tab" onclick="showLesson(3)">🔤 Strings</button>
+            <button class="lesson-tab" onclick="showLesson(4)">🧭 Indexing & Slicing</button>
+            <button class="lesson-tab" onclick="showLesson(5)">🚀 Challenges</button>
+            <button class="lesson-tab" onclick="showLesson(6)">🏆 Final Quiz</button>
         </div>
 
         <!-- Lesson 1: Lists -->
@@ -387,42 +427,46 @@ about_me = "></textarea>
                 </div>
             </div>
 
-            <h3>Indexing and Slicing</h3>
+            <h3>Common List Methods</h3>
             <div class="code-block">
-fruits = ["apple", "banana", "orange", "grape"]
+tasks = ["read", "exercise", "code"]
 
-# Indexing (zero-based)
-print(fruits[0])    # "apple" - first item
-print(fruits[-1])   # "grape" - last item
-
-# Slicing
-numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-print(numbers[2:5])    # [2, 3, 4]
-print(numbers[::2])    # [0, 2, 4, 6, 8] - every 2nd element
-print(numbers[::-1])   # [9, 8, 7, 6, 5, 4, 3, 2, 1, 0] - reverse
+tasks.append("sleep")      # add at end
+tasks.insert(1, "eat")     # insert at index 1
+tasks.remove("read")       # remove first occurrence
+done = tasks.pop()          # remove last and return it
+count_code = tasks.count("code")
+tasks.sort()                # in-place sort
+sorted_tasks = sorted(tasks, reverse=True)  # new sorted list
             </div>
 
-            <div class="exercise">
-                <h4>🎯 Exercise 1.2: Practice Indexing</h4>
-                <p>Using the alphabet list, extract specific elements and slices.</p>
-                <div class="interactive-code">
-                    <textarea class="code-input" id="exercise2" placeholder="alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
-# Get the 3rd letter
-# Get letters from 'c' to 'f'
-# Get every 2nd letter
-# Reverse the list"></textarea>
-                    <button class="btn" onclick="runCode('exercise2', 'output2')">Run Code</button>
-                </div>
-                <div class="output" id="output2"></div>
+            <h3>List Comprehensions</h3>
+            <div class="code-block">
+nums = [1, 2, 3, 4, 5]
+squares = [n*n for n in nums]
+evens = [n for n in nums if n % 2 == 0]
+pairs = [(a, b) for a in [1,2] for b in ['x','y']]
+print(squares)
+print(evens)
+print(pairs)
             </div>
 
             <div class="quiz">
                 <h4>🧠 Quick Quiz: Lists</h4>
-                <p>What does <code>my_list[1:4]</code> return if <code>my_list = [0, 1, 2, 3, 4, 5]</code>?</p>
-                <div class="quiz-option" onclick="selectOption(this, false)">[0, 1, 2, 3]</div>
+                <p>What does <code>my_list.pop()</code> return?</p>
+                <div class="quiz-option" onclick="selectOption(this, true)">The removed last element</div>
+                <div class="quiz-option" onclick="selectOption(this, false)">The first element</div>
+                <div class="quiz-option" onclick="selectOption(this, false)">The list length</div>
+                <div class="quiz-option" onclick="selectOption(this, false)">Nothing (None)</div>
+            </div>
+
+            <div class="quiz">
+                <h4>🧠 Quick Quiz: Slices</h4>
+                <p>What does <code>[0,1,2,3,4][1:4]</code> evaluate to?</p>
+                <div class="quiz-option" onclick="selectOption(this, false)">[0, 1, 2]</div>
                 <div class="quiz-option" onclick="selectOption(this, true)">[1, 2, 3]</div>
-                <div class="quiz-option" onclick="selectOption(this, false)">[1, 2, 3, 4]</div>
                 <div class="quiz-option" onclick="selectOption(this, false)">[2, 3, 4]</div>
+                <div class="quiz-option" onclick="selectOption(this, false)">[1, 2, 3, 4]</div>
             </div>
 
             <div class="navigation">
@@ -476,6 +520,17 @@ shopping = ["milk", "eggs"]  # Can add more items
 scores = [85, 90, 78]       # Scores can be updated
             </div>
 
+            <h3>Tuple Unpacking</h3>
+            <div class="code-block">
+person = ("Sam", 21, "Student")
+name, age, role = person
+print(name, age, role)
+
+# Extended unpacking
+first, *middle, last = [1,2,3,4,5]
+print(first, middle, last)
+            </div>
+
             <div class="quiz">
                 <h4>🧠 Quick Quiz: Tuples</h4>
                 <p>Which of the following is the main difference between lists and tuples?</p>
@@ -483,6 +538,15 @@ scores = [85, 90, 78]       # Scores can be updated
                 <div class="quiz-option" onclick="selectOption(this, true)">Lists are mutable, tuples are immutable</div>
                 <div class="quiz-option" onclick="selectOption(this, false)">Tuples can only store numbers</div>
                 <div class="quiz-option" onclick="selectOption(this, false)">Lists use [] while tuples use {}</div>
+            </div>
+
+            <div class="quiz">
+                <h4>🧠 Quick Quiz: Unpacking</h4>
+                <p>What happens with <code>a, b = (1, 2, 3)</code>?</p>
+                <div class="quiz-option" onclick="selectOption(this, false)">a=1, b=(2, 3)</div>
+                <div class="quiz-option" onclick="selectOption(this, false)">a=(1,2), b=3</div>
+                <div class="quiz-option" onclick="selectOption(this, true)">ValueError: too many values to unpack</div>
+                <div class="quiz-option" onclick="selectOption(this, false)">Works fine</div>
             </div>
 
             <div class="navigation">
@@ -547,6 +611,15 @@ if "name" in student:
     print(f"Student name: {student['name']}")
             </div>
 
+            <h3>Dictionary Comprehensions</h3>
+            <div class="code-block">
+nums = [1, 2, 3, 4]
+square_map = {n: n*n for n in nums}
+even_map = {n: 'even' for n in nums if n % 2 == 0}
+print(square_map)
+print(even_map)
+            </div>
+
             <div class="quiz">
                 <h4>🧠 Quick Quiz: Dictionaries</h4>
                 <p>What's the safest way to access a dictionary key that might not exist?</p>
@@ -556,14 +629,196 @@ if "name" in student:
                 <div class="quiz-option" onclick="selectOption(this, false)">dict["key"] or "default"</div>
             </div>
 
+            <div class="quiz">
+                <h4>🧠 Quick Quiz: Keys</h4>
+                <p>What happens if you repeat a key in a dictionary literal?</p>
+                <div class="quiz-option" onclick="selectOption(this, false)">Python raises a SyntaxError</div>
+                <div class="quiz-option" onclick="selectOption(this, true)">The last value for that key wins</div>
+                <div class="quiz-option" onclick="selectOption(this, false)">It creates a list of values</div>
+                <div class="quiz-option" onclick="selectOption(this, false)">It ignores the duplicate key</div>
+            </div>
+
             <div class="navigation">
                 <button class="btn btn-secondary" onclick="prevLesson()">← Previous: Tuples</button>
+                <button class="btn" onclick="nextLesson()">Next: Strings →</button>
+            </div>
+        </div>
+
+        <!-- Lesson 4: Strings -->
+        <div class="lesson" id="lesson3">
+            <h2>🔤 Strings - Text Data and Operations</h2>
+
+            <h3>Creating and Combining Strings</h3>
+            <div class="code-block">
+greeting = "Hello"
+name = 'Alice'
+full = greeting + ", " + name + "!"
+template = f"{greeting}, {name}!"
+multiline = """This is a
+multi-line string."""
+print(full)
+print(template)
+print(multiline)
+            </div>
+
+            <h3>Common String Methods</h3>
+            <div class="code-block">
+text = "  Python Programming  "
+print(text.strip())        # remove leading/trailing spaces
+print(text.lower())        # to lowercase
+print(text.upper())        # to uppercase
+print(text.replace(" ", "-")) # replace spaces with hyphens
+print("prog" in text.lower())  # membership test
+print(text.find("Pro"))   # first index or -1
+            </div>
+
+            <h3>Split, Join, and Format</h3>
+            <div class="code-block">
+sentence = "learn python the smart way"
+words = sentence.split(" ")
+joined = "-".join(words)
+formatted = "Hello {}, your score is {}".format("Alex", 95)
+fstring = f"Hello {'Alex'.upper()}, your score is {95}"
+print(words)
+print(joined)
+print(formatted)
+print(fstring)
+            </div>
+
+            <h3>Indexing and Slicing Strings</h3>
+            <div class="code-block">
+s = "Python"
+print(s[0])      # 'P'
+print(s[-1])     # 'n'
+print(s[1:4])    # 'yth'
+print(s[::-1])   # 'nohtyP' (reverse)
+            </div>
+
+            <div class="exercise">
+                <h4>🎯 Exercise 4.1: Username Generator</h4>
+                <p>Given <code>first = "Alice"</code> and <code>last = "Johnson"</code>, create a username like <code>alice_joh</code>.</p>
+                <div class="interactive-code">
+                    <textarea class="code-input" id="exercise5" placeholder="first = 'Alice'
+last = 'Johnson'
+
+# Make: lowercase first + '_' + first 3 letters of last
+username = 
+print(username)"></textarea>
+                    <button class="btn" onclick="runCode('exercise5', 'output5')">Run Code</button>
+                    <button class="btn btn-secondary" onclick="showHint(5)">💡 Hint</button>
+                </div>
+                <div class="output" id="output5"></div>
+                <div class="hint" id="hint5" style="display: none;">
+                    <div class="hint-title">💡 Hint:</div>
+                    Use <code>.lower()</code> and slicing like <code>last[:3]</code>.
+                </div>
+            </div>
+
+            <div class="quiz">
+                <h4>🧠 Quick Quiz: Strings</h4>
+                <p>What does <code>"hello"[1:]</code> return?</p>
+                <div class="quiz-option" onclick="selectOption(this, true)">"ello"</div>
+                <div class="quiz-option" onclick="selectOption(this, false)">"h"</div>
+                <div class="quiz-option" onclick="selectOption(this, false)">"hell"</div>
+                <div class="quiz-option" onclick="selectOption(this, false)">Error</div>
+            </div>
+
+            <div class="quiz">
+                <h4>🧠 Quick Quiz: Join/Split</h4>
+                <p>Which line converts <code>["a","b","c"]</code> to <code>"a-b-c"</code>?</p>
+                <div class="quiz-option" onclick="selectOption(this, true)">"-".join(["a","b","c"])</div>
+                <div class="quiz-option" onclick="selectOption(this, false)">["a","b","c"].join("-")</div>
+                <div class="quiz-option" onclick="selectOption(this, false)">"a-b-c".split("-")</div>
+                <div class="quiz-option" onclick="selectOption(this, false)">"".split(["a","b","c"])</div>
+            </div>
+
+            <div class="navigation">
+                <button class="btn btn-secondary" onclick="prevLesson()">← Previous: Dictionaries</button>
+                <button class="btn" onclick="nextLesson()">Next: Indexing & Slicing →</button>
+            </div>
+        </div>
+
+        <!-- Lesson 5: Indexing & Slicing Deep Dive -->
+        <div class="lesson" id="lesson4">
+            <h2>🧭 Advanced Indexing & Slicing</h2>
+
+            <h3>Slicing Syntax Recap</h3>
+            <div class="code-block">
+# sequence[start:stop:step]
+nums = list(range(10))
+print(nums[2:7])     # [2, 3, 4, 5, 6]
+print(nums[:5])      # [0, 1, 2, 3, 4]
+print(nums[5:])      # [5, 6, 7, 8, 9]
+print(nums[::2])     # [0, 2, 4, 6, 8]
+print(nums[1:8:3])   # [1, 4, 7]
+print(nums[::-1])    # reversed
+            </div>
+
+            <h3>Copying vs Referencing</h3>
+            <div class="code-block">
+a = [1, 2, 3]
+b = a              # reference (same list)
+c = a[:]           # shallow copy (new list)
+
+a.append(4)
+print(b)  # [1, 2, 3, 4]
+print(c)  # [1, 2, 3]
+            </div>
+
+            <h3>Negative Index/Step</h3>
+            <div class="code-block">
+letters = list("abcdefghij")
+print(letters[-3:])     # last three
+print(letters[:-3])     # all but last three
+print(letters[-1:-6:-2])# ['j', 'h', 'f']
+            </div>
+
+            <div class="exercise">
+                <h4>🎯 Exercise 5.1: Slice Mastery</h4>
+                <p>Given <code>nums = list(range(1, 21))</code>, extract: odds, evens, multiples of 3, last 5 reversed.</p>
+                <div class="interactive-code">
+                    <textarea class="code-input" id="exercise6" placeholder="nums = list(range(1, 21))
+
+odds = 
+evens = 
+mult3 = 
+last5_rev = 
+
+print(odds)
+print(evens)
+print(mult3)
+print(last5_rev)"></textarea>
+                    <button class="btn" onclick="runCode('exercise6', 'output6')">Run Code</button>
+                </div>
+                <div class="output" id="output6"></div>
+            </div>
+
+            <div class="quiz">
+                <h4>🧠 Quick Quiz: Slicing</h4>
+                <p>What does <code>nums[-4:-1]</code> return for <code>nums = [0,1,2,3,4,5,6,7,8,9]</code>?</p>
+                <div class="quiz-option" onclick="selectOption(this, false)">[6, 7, 8, 9]</div>
+                <div class="quiz-option" onclick="selectOption(this, true)">[6, 7, 8]</div>
+                <div class="quiz-option" onclick="selectOption(this, false)">[7, 8, 9]</div>
+                <div class="quiz-option" onclick="selectOption(this, false)">[5, 6, 7]</div>
+            </div>
+
+            <div class="quiz">
+                <h4>🧠 Quick Quiz: Steps</h4>
+                <p>For <code>letters = list("abcdef")</code>, what is <code>letters[::3]</code>?</p>
+                <div class="quiz-option" onclick="selectOption(this, true)">['a','d']</div>
+                <div class="quiz-option" onclick="selectOption(this, false)">['c','f']</div>
+                <div class="quiz-option" onclick="selectOption(this, false)">['a','c','e']</div>
+                <div class="quiz-option" onclick="selectOption(this, false)">['b','e']</div>
+            </div>
+
+            <div class="navigation">
+                <button class="btn btn-secondary" onclick="prevLesson()">← Previous: Strings</button>
                 <button class="btn" onclick="nextLesson()">Next: Challenges →</button>
             </div>
         </div>
 
-        <!-- Lesson 4: Challenges -->
-        <div class="lesson" id="lesson3">
+        <!-- Lesson 6: Challenges -->
+        <div class="lesson" id="lesson5">
             <h2>🚀 Coding Challenges</h2>
 
             <div class="exercise">
@@ -580,10 +835,10 @@ if "name" in student:
 # Find the student with the highest average
 
 "></textarea>
-                    <button class="btn" onclick="runCode('challenge1', 'output5')">Run Code</button>
+                    <button class="btn" onclick="runCode('challenge1', 'output7')">Run Code</button>
                     <button class="btn btn-secondary" onclick="showSolution(1)">💡 Show Solution</button>
                 </div>
-                <div class="output" id="output5"></div>
+                <div class="output" id="output7"></div>
                 <div class="hint" id="solution1" style="display: none;">
                     <div class="hint-title">💡 Solution:</div>
                     <div class="code-block">
@@ -609,55 +864,100 @@ print(f"Best student: {best_student['name']}")
 # Find the most frequent word
 
 "></textarea>
-                    <button class="btn" onclick="runCode('challenge2', 'output6')">Run Code</button>
+                    <button class="btn" onclick="runCode('challenge2', 'output8')">Run Code</button>
                 </div>
-                <div class="output" id="output6"></div>
+                <div class="output" id="output8"></div>
             </div>
 
             <div class="navigation">
-                <button class="btn btn-secondary" onclick="prevLesson()">← Previous: Dictionaries</button>
+                <button class="btn btn-secondary" onclick="prevLesson()">← Previous: Indexing & Slicing</button>
                 <button class="btn" onclick="nextLesson()">Next: Final Quiz →</button>
             </div>
         </div>
 
-        <!-- Final Quiz -->
-        <div class="lesson" id="lesson4">
+        <!-- Lesson 7: Final Quiz -->
+        <div class="lesson" id="lesson6">
             <h2>🏆 Final Quiz</h2>
 
             <div class="quiz">
                 <h4>🧠 Question 1</h4>
-                <p>Which data structure would be best for storing student information with fields like name, age, and grades?</p>
+                <p>Which data structure is best for storing (x, y) coordinates?</p>
                 <div class="quiz-option" onclick="selectQuizOption(this, false, 0)">List</div>
-                <div class="quiz-option" onclick="selectQuizOption(this, false, 0)">Tuple</div>
-                <div class="quiz-option" onclick="selectQuizOption(this, true, 0)">Dictionary</div>
+                <div class="quiz-option" onclick="selectQuizOption(this, true, 0)">Tuple</div>
+                <div class="quiz-option" onclick="selectQuizOption(this, false, 0)">Dictionary</div>
                 <div class="quiz-option" onclick="selectQuizOption(this, false, 0)">String</div>
             </div>
 
             <div class="quiz">
                 <h4>🧠 Question 2</h4>
-                <p>What will <code>my_list[::-1]</code> do to a list?</p>
-                <div class="quiz-option" onclick="selectQuizOption(this, false, 1)">Remove all elements</div>
-                <div class="quiz-option" onclick="selectQuizOption(this, true, 1)">Reverse the list</div>
-                <div class="quiz-option" onclick="selectQuizOption(this, false, 1)">Get every other element</div>
-                <div class="quiz-option" onclick="selectQuizOption(this, false, 1)">Sort the list</div>
+                <p>What does <code>name[:3].lower()</code> do?</p>
+                <div class="quiz-option" onclick="selectQuizOption(this, true, 1)">Gets first 3 chars and lowercases them</div>
+                <div class="quiz-option" onclick="selectQuizOption(this, false, 1)">Uppercases the whole string</div>
+                <div class="quiz-option" onclick="selectQuizOption(this, false, 1)">Returns last 3 characters</div>
+                <div class="quiz-option" onclick="selectQuizOption(this, false, 1)">Reverses the string</div>
             </div>
 
             <div class="quiz">
                 <h4>🧠 Question 3</h4>
-                <p>Which is true about tuples?</p>
-                <div class="quiz-option" onclick="selectQuizOption(this, false, 2)">They can be modified after creation</div>
-                <div class="quiz-option" onclick="selectQuizOption(this, true, 2)">They are immutable</div>
-                <div class="quiz-option" onclick="selectQuizOption(this, false, 2)">They use curly braces {}</div>
-                <div class="quiz-option" onclick="selectQuizOption(this, false, 2)">They can only store strings</div>
+                <p>Which method adds an item to the end of a list?</p>
+                <div class="quiz-option" onclick="selectQuizOption(this, true, 2)">append()</div>
+                <div class="quiz-option" onclick="selectQuizOption(this, false, 2)">insert()</div>
+                <div class="quiz-option" onclick="selectQuizOption(this, false, 2)">extend()</div>
+                <div class="quiz-option" onclick="selectQuizOption(this, false, 2)">pop()</div>
             </div>
 
             <div class="quiz">
                 <h4>🧠 Question 4</h4>
-                <p>How do you add a new key-value pair to a dictionary?</p>
-                <div class="quiz-option" onclick="selectQuizOption(this, true, 3)">dict["new_key"] = value</div>
-                <div class="quiz-option" onclick="selectQuizOption(this, false, 3)">dict.add("new_key", value)</div>
-                <div class="quiz-option" onclick="selectQuizOption(this, false, 3)">dict.append({"new_key": value})</div>
-                <div class="quiz-option" onclick="selectQuizOption(this, false, 3)">dict.insert("new_key", value)</div>
+                <p>What slice gives the last 5 elements of <code>nums</code>?</p>
+                <div class="quiz-option" onclick="selectQuizOption(this, true, 3)">nums[-5:]</div>
+                <div class="quiz-option" onclick="selectQuizOption(this, false, 3)">nums[:5]</div>
+                <div class="quiz-option" onclick="selectQuizOption(this, false, 3)">nums[-5:-1]</div>
+                <div class="quiz-option" onclick="selectQuizOption(this, false, 3)">nums[5:]</div>
+            </div>
+
+            <div class="quiz">
+                <h4>🧠 Question 5</h4>
+                <p>Safest way to access a missing dictionary key?</p>
+                <div class="quiz-option" onclick="selectQuizOption(this, true, 4)">d.get('key', 'N/A')</div>
+                <div class="quiz-option" onclick="selectQuizOption(this, false, 4)">d['key']</div>
+                <div class="quiz-option" onclick="selectQuizOption(this, false, 4)">d.key</div>
+                <div class="quiz-option" onclick="selectQuizOption(this, false, 4)">d.pop('key')</div>
+            </div>
+
+            <div class="quiz">
+                <h4>🧠 Question 6</h4>
+                <p>Which expression creates <code>{1:1, 2:4, 3:9}</code>?</p>
+                <div class="quiz-option" onclick="selectQuizOption(this, true, 5)">{n: n*n for n in [1,2,3]}</div>
+                <div class="quiz-option" onclick="selectQuizOption(this, false, 5)">dict([1,2,3])</div>
+                <div class="quiz-option" onclick="selectQuizOption(this, false, 5)">[n*n for n in [1,2,3]]</div>
+                <div class="quiz-option" onclick="selectQuizOption(this, false, 5)">set(n*n for n in [1,2,3])</div>
+            </div>
+
+            <div class="quiz">
+                <h4>🧠 Question 7</h4>
+                <p>What does <code>"-".join(["a","b"])</code> return?</p>
+                <div class="quiz-option" onclick="selectQuizOption(this, true, 6)">"a-b"</div>
+                <div class="quiz-option" onclick="selectQuizOption(this, false, 6)">["a","-","b"]</div>
+                <div class="quiz-option" onclick="selectQuizOption(this, false, 6)">"ab-"</div>
+                <div class="quiz-option" onclick="selectQuizOption(this, false, 6)">"a-b-"</div>
+            </div>
+
+            <div class="quiz">
+                <h4>🧠 Question 8</h4>
+                <p>Which slice returns every 3rd element starting at index 1?</p>
+                <div class="quiz-option" onclick="selectQuizOption(this, true, 7)">seq[1::3]</div>
+                <div class="quiz-option" onclick="selectQuizOption(this, false, 7)">seq[:3]</div>
+                <div class="quiz-option" onclick="selectQuizOption(this, false, 7)">seq[::1/3]</div>
+                <div class="quiz-option" onclick="selectQuizOption(this, false, 7)">seq[3::1]</div>
+            </div>
+
+            <div class="quiz">
+                <h4>🧠 Question 5</h4>
+                <p>Safest way to access a missing dictionary key?</p>
+                <div class="quiz-option" onclick="selectQuizOption(this, true, 4)">d.get('key', 'N/A')</div>
+                <div class="quiz-option" onclick="selectQuizOption(this, false, 4)">d['key']</div>
+                <div class="quiz-option" onclick="selectQuizOption(this, false, 4)">d.key</div>
+                <div class="quiz-option" onclick="selectQuizOption(this, false, 4)">d.pop('key')</div>
             </div>
 
             <div class="navigation">
@@ -681,18 +981,15 @@ print(f"Best student: {best_student['name']}")
         let currentLesson = 0;
         let totalQuestions = 0;
         let correctAnswers = 0;
-        let quizAnswers = [null, null, null, null];
+        let quizAnswers = [null, null, null, null, null, null, null, null];
 
         function showLesson(lessonIndex) {
-            // Hide all lessons
             document.querySelectorAll('.lesson').forEach(lesson => {
                 lesson.classList.remove('active');
             });
 
-            // Show selected lesson
             document.getElementById(`lesson${lessonIndex}`).classList.add('active');
 
-            // Update lesson tabs
             document.querySelectorAll('.lesson-tab').forEach((tab, index) => {
                 tab.classList.remove('active');
                 if (index === lessonIndex) {
@@ -708,7 +1005,7 @@ print(f"Best student: {best_student['name']}")
         }
 
         function nextLesson() {
-            if (currentLesson < 4) {
+            if (currentLesson < 6) {
                 showLesson(currentLesson + 1);
             }
         }
@@ -720,7 +1017,7 @@ print(f"Best student: {best_student['name']}")
         }
 
         function updateProgress() {
-            const progress = ((currentLesson + 1) / 5) * 100;
+            const progress = ((currentLesson + 1) / 7) * 100;
             document.getElementById('progressFill').style.width = progress + '%';
         }
 
@@ -729,7 +1026,6 @@ print(f"Best student: {best_student['name']}")
             const output = document.getElementById(outputId);
             
             try {
-                // Simple code execution simulation
                 let result = '';
                 const lines = code.split('\n');
                 
@@ -739,7 +1035,6 @@ print(f"Best student: {best_student['name']}")
                         const content = line.slice(6, -1);
                         result += eval(content) + '\n';
                     } else if (line.includes('=') && !line.startsWith('#')) {
-                        // Variable assignment simulation
                         result += `✓ ${line}\n`;
                     } else if (line.startsWith('#')) {
                         result += `💭 ${line}\n`;
@@ -751,6 +1046,8 @@ print(f"Best student: {best_student['name']}")
                 }
                 
                 output.textContent = result;
+                output.style.backgroundColor = '#064e3b';
+                output.style.color = '#d1fae5';
             } catch (error) {
                 output.textContent = `❌ Error: ${error.message}`;
                 output.style.backgroundColor = '#7f1d1d';
@@ -759,13 +1056,11 @@ print(f"Best student: {best_student['name']}")
         }
 
         function selectOption(option, isCorrect) {
-            // Remove previous selections in this quiz
             const quiz = option.parentElement;
             quiz.querySelectorAll('.quiz-option').forEach(opt => {
                 opt.classList.remove('selected', 'correct', 'incorrect');
             });
 
-            // Mark the selected option
             option.classList.add('selected');
             
             setTimeout(() => {
@@ -790,16 +1085,13 @@ print(f"Best student: {best_student['name']}")
         }
 
         function selectQuizOption(option, isCorrect, questionIndex) {
-            // Store answer
             quizAnswers[questionIndex] = isCorrect;
             
-            // Remove previous selections in this quiz
             const quiz = option.parentElement;
             quiz.querySelectorAll('.quiz-option').forEach(opt => {
                 opt.classList.remove('selected', 'correct', 'incorrect');
             });
 
-            // Mark the selected option
             option.classList.add('selected');
             
             setTimeout(() => {
@@ -850,17 +1142,17 @@ print(f"Best student: {best_student['name']}")
         function finishQuiz() {
             let finalScore = quizAnswers.filter(answer => answer === true).length;
             correctAnswers += finalScore;
-            totalQuestions += 4;
+            totalQuestions += quizAnswers.length;
             
             const celebration = document.getElementById('celebration');
             const finalScoreElement = document.getElementById('finalScore');
             
             let message = '';
-            if (finalScore === 4) {
+            if (finalScore === quizAnswers.length) {
                 message = '🏆 Perfect Score! Outstanding!';
-            } else if (finalScore >= 3) {
+            } else if (finalScore >= quizAnswers.length - 1) {
                 message = '🎉 Excellent Work!';
-            } else if (finalScore >= 2) {
+            } else if (finalScore >= Math.ceil(quizAnswers.length / 2)) {
                 message = '👍 Good Job!';
             } else {
                 message = '📚 Keep Learning!';
@@ -869,7 +1161,7 @@ print(f"Best student: {best_student['name']}")
             celebration.querySelector('h2').textContent = message;
             celebration.querySelector('p').textContent = `You've completed the Python Data Containers tutorial!`;
             celebration.querySelector('p').style.display = 'block';
-            finalScoreElement.textContent = `Final Quiz: ${finalScore}/4`;
+            finalScoreElement.textContent = `Final Quiz: ${finalScore}/${quizAnswers.length}`;
             celebration.querySelector('.score-badge').style.display = 'inline-flex';
             celebration.querySelector('button').style.display = 'inline-block';
             celebration.style.display = 'block';
@@ -882,28 +1174,24 @@ print(f"Best student: {best_student['name']}")
             currentLesson = 0;
             totalQuestions = 0;
             correctAnswers = 0;
-            quizAnswers = [null, null, null, null];
+            quizAnswers = [null, null, null, null, null];
             
             document.getElementById('celebration').style.display = 'none';
             
-            // Reset all quiz options
             document.querySelectorAll('.quiz-option').forEach(option => {
                 option.classList.remove('selected', 'correct', 'incorrect');
             });
             
-            // Reset all code inputs
             document.querySelectorAll('.code-input').forEach(input => {
                 input.value = input.getAttribute('placeholder') || '';
             });
             
-            // Reset all outputs
             document.querySelectorAll('.output').forEach(output => {
                 output.textContent = '';
                 output.style.backgroundColor = '#064e3b';
                 output.style.color = '#d1fae5';
             });
             
-            // Hide all hints and solutions
             document.querySelectorAll('.hint').forEach(hint => {
                 hint.style.display = 'none';
             });
@@ -916,9 +1204,28 @@ print(f"Best student: {best_student['name']}")
         updateProgress();
         updateScore();
 
-        // Add some interactive code examples that work
+        // Add copy buttons to all code blocks
+        document.querySelectorAll('.code-block').forEach(block => {
+            const btn = document.createElement('button');
+            btn.className = 'copy-btn';
+            btn.textContent = 'Copy';
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                try {
+                    const text = block.textContent.trim();
+                    navigator.clipboard.writeText(text);
+                    btn.textContent = 'Copied!';
+                    setTimeout(() => btn.textContent = 'Copy', 1200);
+                } catch (_) {
+                    btn.textContent = 'Error';
+                    setTimeout(() => btn.textContent = 'Copy', 1200);
+                }
+            });
+            block.appendChild(btn);
+        });
+
+        // Pre-fill examples
         document.addEventListener('DOMContentLoaded', function() {
-            // Pre-fill some exercises with examples
             const exercise1 = document.getElementById('exercise1');
             if (exercise1) {
                 exercise1.value = `# Write your code here:
@@ -929,23 +1236,6 @@ about_me = ["Alice", 20, "Computer Science"]
 print("My favorite colors:", colors)
 print("Numbers:", numbers)
 print("About me:", about_me)`;
-            }
-
-            const exercise2 = document.getElementById('exercise2');
-            if (exercise2) {
-                exercise2.value = `alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
-
-# Get the 3rd letter (index 2)
-print("3rd letter:", alphabet[2])
-
-# Get letters from 'c' to 'f' (index 2 to 5)
-print("Letters c to f:", alphabet[2:6])
-
-# Get every 2nd letter
-print("Every 2nd letter:", alphabet[::2])
-
-# Reverse the list
-print("Reversed:", alphabet[::-1])`;
             }
 
             const exercise3 = document.getElementById('exercise3');
@@ -977,6 +1267,30 @@ print(f"Year: {favorite_movie['year']}")
 print(f"Rating: {favorite_movie['rating']}/10")`;
             }
 
+            const exercise5 = document.getElementById('exercise5');
+            if (exercise5) {
+                exercise5.value = `first = 'Alice'
+last = 'Johnson'
+
+username = first.lower() + '_' + last[:3].lower()
+print(username)`;
+            }
+
+            const exercise6 = document.getElementById('exercise6');
+            if (exercise6) {
+                exercise6.value = `nums = list(range(1, 21))
+
+odds = nums[0::2]
+evens = nums[1::2]
+mult3 = nums[2::3]
+last5_rev = nums[:-6:-1]
+
+print(odds)
+print(evens)
+print(mult3)
+print(last5_rev)`;
+            }
+
             const challenge1 = document.getElementById('challenge1');
             if (challenge1) {
                 challenge1.value = `students = [
@@ -998,7 +1312,7 @@ for student in students:
         best_avg = avg
         best_student = student['name']
 
-print(f"\\nBest student: {best_student} with {best_avg:.1f} average")`;
+print(f"\nBest student: {best_student} with {best_avg:.1f} average")`;
             }
 
             const challenge2 = document.getElementById('challenge2');
@@ -1024,3 +1338,5 @@ print(f"Most frequent: {most_frequent} ({word_count[most_frequent]} times)")`;
     </script>
 </body>
 </html>
+
+
