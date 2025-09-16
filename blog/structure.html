@@ -127,6 +127,10 @@
             position: relative;
             border: 1px solid rgba(255,255,255,0.08);
             box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+            white-space: pre;              /* preserve line breaks and spacing */
+            tab-size: 4;                   /* consistent tab width */
+            -moz-tab-size: 4;
+            font-variant-ligatures: none;  /* avoid ligature confusion in code */
         }
 
         /* VS Code-like header dots */
@@ -1371,13 +1375,16 @@ print(f"Best student: {best_student['name']}")
 
         // Add copy buttons to all code blocks
         document.querySelectorAll('.code-block').forEach(block => {
+            // Normalize CRLF to LF to avoid broken formatting after copy
+            const getCleanText = () => block.textContent.replace(/\r\n/g, '\n').replace(/\u00A0/g, ' ');
+
             const btn = document.createElement('button');
             btn.className = 'copy-btn';
             btn.textContent = 'Copy';
             btn.addEventListener('click', (e) => {
                 e.stopPropagation();
                 try {
-                    const text = block.textContent.trim();
+                    const text = getCleanText().trimEnd();
                     navigator.clipboard.writeText(text);
                     btn.textContent = 'Copied!';
                     setTimeout(() => btn.textContent = 'Copy', 1200);
