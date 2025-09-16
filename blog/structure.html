@@ -39,6 +39,22 @@
             margin-bottom: 10px;
         }
 
+        /* Intro/Landing */
+        .intro-hero {
+            background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+            color: #e5e7eb;
+            border-radius: 20px;
+            padding: 36px 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.35);
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+        .intro-title { font-size: 2rem; font-weight: 800; color: #fff; margin-bottom: 10px; }
+        .intro-sub { font-size: 1rem; color: #c7d2fe; margin-bottom: 18px; }
+        .intro-cta { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+        .btn-primary { background: linear-gradient(135deg, #10b981, #059669); }
+        .btn-outline { background: transparent; border: 2px solid #9ca3af; color: #e5e7eb; }
+
         .progress-bar {
             width: 100%;
             height: 10px;
@@ -284,6 +300,9 @@
             border-color: #ef4444;
             background: rgba(239, 68, 68, 0.1);
         }
+
+        /* Hide per-lesson quizzes; keep only final quiz in #lesson6 */
+        .lesson:not(#lesson6) .quiz { display: none; }
 
         .navigation {
             display: flex;
@@ -539,6 +558,16 @@ words = ["python", "java", "python", "javascript", "python", "java", "c++"]</div
             </div>
         </div>
         <div class="header">
+            <div class="intro-hero" id="introHero">
+                <div class="intro-title">🐍 Interactive Python Data Containers</div>
+                <div class="intro-sub">Learn Lists, Tuples, Dictionaries, Strings, and Slicing with hands-on practice and quizzes.</div>
+                <div class="intro-cta">
+                    <button class="btn btn-primary" onclick="startTutorial()">▶ Start Tutorial</button>
+                    <button class="btn btn-outline" onclick="jumpToFinalQuiz()">🏁 Take Final Quiz</button>
+                    <button class="btn btn-outline" onclick="toggleTeacherNotes()">📘 Teacher Notes</button>
+                </div>
+            </div>
+
             <h1>🐍 Interactive Python Data Containers</h1>
             <p>Master Lists, Tuples, Dictionaries, and Strings through hands-on practice!</p>
             <div class="progress-bar">
@@ -557,7 +586,7 @@ words = ["python", "java", "python", "javascript", "python", "java", "c++"]</div
             <button class="lesson-tab" onclick="showLesson(3)">🔤 Strings</button>
             <button class="lesson-tab" onclick="showLesson(4)">🧭 Indexing & Slicing</button>
             <button class="lesson-tab" onclick="showLesson(5)">🚀 Challenges</button>
-            <button class="lesson-tab" onclick="showLesson(6)">🏆 Final Quiz</button>
+            <button class="lesson-tab" onclick="showLesson(6)"><strong>🏁 Final Quiz (All Topics)</strong></button>
         </div>
 
         <!-- Lesson 1: Lists -->
@@ -1044,78 +1073,27 @@ print(f"Best student: {best_student['name']}")
         <!-- Lesson 7: Final Quiz -->
         <div class="lesson" id="lesson6">
             <h2>🏆 Final Quiz</h2>
-
-            <div class="quiz">
-                <h4>🧠 Question 1</h4>
-                <p>Which data structure is best for storing (x, y) coordinates?</p>
-                <div class="quiz-option" onclick="selectQuizOption(this, false, 0)">List</div>
-                <div class="quiz-option" onclick="selectQuizOption(this, true, 0)">Tuple</div>
-                <div class="quiz-option" onclick="selectQuizOption(this, false, 0)">Dictionary</div>
-                <div class="quiz-option" onclick="selectQuizOption(this, false, 0)">String</div>
-            </div>
-
-            <div class="quiz">
-                <h4>🧠 Question 2</h4>
-                <p>What does <code>name[:3].lower()</code> do?</p>
-                <div class="quiz-option" onclick="selectQuizOption(this, true, 1)">Gets first 3 chars and lowercases them</div>
-                <div class="quiz-option" onclick="selectQuizOption(this, false, 1)">Uppercases the whole string</div>
-                <div class="quiz-option" onclick="selectQuizOption(this, false, 1)">Returns last 3 characters</div>
-                <div class="quiz-option" onclick="selectQuizOption(this, false, 1)">Reverses the string</div>
-            </div>
-
-            <div class="quiz">
-                <h4>🧠 Question 3</h4>
-                <p>Which method adds an item to the end of a list?</p>
-                <div class="quiz-option" onclick="selectQuizOption(this, true, 2)">append()</div>
-                <div class="quiz-option" onclick="selectQuizOption(this, false, 2)">insert()</div>
-                <div class="quiz-option" onclick="selectQuizOption(this, false, 2)">extend()</div>
-                <div class="quiz-option" onclick="selectQuizOption(this, false, 2)">pop()</div>
-            </div>
-
-            <div class="quiz">
-                <h4>🧠 Question 4</h4>
-                <p>What slice gives the last 5 elements of <code>nums</code>?</p>
-                <div class="quiz-option" onclick="selectQuizOption(this, true, 3)">nums[-5:]</div>
-                <div class="quiz-option" onclick="selectQuizOption(this, false, 3)">nums[:5]</div>
-                <div class="quiz-option" onclick="selectQuizOption(this, false, 3)">nums[-5:-1]</div>
-                <div class="quiz-option" onclick="selectQuizOption(this, false, 3)">nums[5:]</div>
-            </div>
-
-            <div class="quiz">
-                <h4>🧠 Question 5</h4>
-                <p>Safest way to access a missing dictionary key?</p>
-                <div class="quiz-option" onclick="selectQuizOption(this, true, 4)">d.get('key', 'N/A')</div>
-                <div class="quiz-option" onclick="selectQuizOption(this, false, 4)">d['key']</div>
-                <div class="quiz-option" onclick="selectQuizOption(this, false, 4)">d.key</div>
-                <div class="quiz-option" onclick="selectQuizOption(this, false, 4)">d.pop('key')</div>
-            </div>
-
-            <div class="quiz">
-                <h4>🧠 Question 6</h4>
-                <p>Which expression creates <code>{1:1, 2:4, 3:9}</code>?</p>
-                <div class="quiz-option" onclick="selectQuizOption(this, true, 5)">{n: n*n for n in [1,2,3]}</div>
-                <div class="quiz-option" onclick="selectQuizOption(this, false, 5)">dict([1,2,3])</div>
-                <div class="quiz-option" onclick="selectQuizOption(this, false, 5)">[n*n for n in [1,2,3]]</div>
-                <div class="quiz-option" onclick="selectQuizOption(this, false, 5)">set(n*n for n in [1,2,3])</div>
-            </div>
-
-            <div class="quiz">
-                <h4>🧠 Question 7</h4>
-                <p>What does <code>"-".join(["a","b"])</code> return?</p>
-                <div class="quiz-option" onclick="selectQuizOption(this, true, 6)">"a-b"</div>
-                <div class="quiz-option" onclick="selectQuizOption(this, false, 6)">["a","-","b"]</div>
-                <div class="quiz-option" onclick="selectQuizOption(this, false, 6)">"ab-"</div>
-                <div class="quiz-option" onclick="selectQuizOption(this, false, 6)">"a-b-"</div>
-            </div>
-
-            <div class="quiz">
-                <h4>🧠 Question 8</h4>
-                <p>Which slice returns every 3rd element starting at index 1?</p>
-                <div class="quiz-option" onclick="selectQuizOption(this, true, 7)">seq[1::3]</div>
-                <div class="quiz-option" onclick="selectQuizOption(this, false, 7)">seq[:3]</div>
-                <div class="quiz-option" onclick="selectQuizOption(this, false, 7)">seq[::1/3]</div>
-                <div class="quiz-option" onclick="selectQuizOption(this, false, 7)">seq[3::1]</div>
-            </div>
+            <!-- Comprehensive Final Quiz (20 questions) -->
+            <div class="quiz"><h4>🧠 Question 1</h4><p>Which structure is best for (x, y) coordinates?</p><div class="quiz-option" onclick="selectQuizOption(this, false, 0)">List</div><div class="quiz-option" onclick="selectQuizOption(this, true, 0)">Tuple</div><div class="quiz-option" onclick="selectQuizOption(this, false, 0)">Dictionary</div><div class="quiz-option" onclick="selectQuizOption(this, false, 0)">String</div></div>
+            <div class="quiz"><h4>🧠 Question 2</h4><p>What does <code>name[:3].lower()</code> do?</p><div class="quiz-option" onclick="selectQuizOption(this, true, 1)">Gets first 3 chars and lowercases them</div><div class="quiz-option" onclick="selectQuizOption(this, false, 1)">Uppercases the whole string</div><div class="quiz-option" onclick="selectQuizOption(this, false, 1)">Returns last 3 characters</div><div class="quiz-option" onclick="selectQuizOption(this, false, 1)">Reverses the string</div></div>
+            <div class="quiz"><h4>🧠 Question 3</h4><p>Which method adds to end of a list?</p><div class="quiz-option" onclick="selectQuizOption(this, true, 2)">append()</div><div class="quiz-option" onclick="selectQuizOption(this, false, 2)">insert()</div><div class="quiz-option" onclick="selectQuizOption(this, false, 2)">extend()</div><div class="quiz-option" onclick="selectQuizOption(this, false, 2)">pop()</div></div>
+            <div class="quiz"><h4>🧠 Question 4</h4><p>Which creates a NEW sorted list?</p><div class="quiz-option" onclick="selectQuizOption(this, true, 3)">sorted(my_list)</div><div class="quiz-option" onclick="selectQuizOption(this, false, 3)">my_list.sort()</div><div class="quiz-option" onclick="selectQuizOption(this, false, 3)">my_list[::-1]</div><div class="quiz-option" onclick="selectQuizOption(this, false, 3)">my_list.append(0)</div></div>
+            <div class="quiz"><h4>🧠 Question 5</h4><p>Safest way to access possibly missing key?</p><div class="quiz-option" onclick="selectQuizOption(this, true, 4)">d.get('key', 'N/A')</div><div class="quiz-option" onclick="selectQuizOption(this, false, 4)">d['key']</div><div class="quiz-option" onclick="selectQuizOption(this, false, 4)">d.key</div><div class="quiz-option" onclick="selectQuizOption(this, false, 4)">d.pop('key')</div></div>
+            <div class="quiz"><h4>🧠 Question 6</h4><p>What does <code>words = sentence.split(' ')</code> produce?</p><div class="quiz-option" onclick="selectQuizOption(this, true, 5)">A list of words</div><div class="quiz-option" onclick="selectQuizOption(this, false, 5)">A dictionary of words</div><div class="quiz-option" onclick="selectQuizOption(this, false, 5)">A tuple of words</div><div class="quiz-option" onclick="selectQuizOption(this, false, 5)">A set of words</div></div>
+            <div class="quiz"><h4>🧠 Question 7</h4><p>Which yields <code>{1:1, 2:4, 3:9}</code>?</p><div class="quiz-option" onclick="selectQuizOption(this, true, 6)">{n: n*n for n in [1,2,3]}</div><div class="quiz-option" onclick="selectQuizOption(this, false, 6)">dict([1,2,3])</div><div class="quiz-option" onclick="selectQuizOption(this, false, 6)">[n*n for n in [1,2,3]]</div><div class="quiz-option" onclick="selectQuizOption(this, false, 6)">set(n*n for n in [1,2,3])</div></div>
+            <div class="quiz"><h4>🧠 Question 8</h4><p>What does <code>"-".join(["a","b","c"]) </code> return?</p><div class="quiz-option" onclick="selectQuizOption(this, true, 7)">"a-b-c"</div><div class="quiz-option" onclick="selectQuizOption(this, false, 7)">"abc"</div><div class="quiz-option" onclick="selectQuizOption(this, false, 7)">["a","-","b","-","c"]</div><div class="quiz-option" onclick="selectQuizOption(this, false, 7)">"a-b-c-"</div></div>
+            <div class="quiz"><h4>🧠 Question 9</h4><p>Which slice gives last 5 elements?</p><div class="quiz-option" onclick="selectQuizOption(this, true, 8)">nums[-5:]</div><div class="quiz-option" onclick="selectQuizOption(this, false, 8)">nums[:5]</div><div class="quiz-option" onclick="selectQuizOption(this, false, 8)">nums[-5:-1]</div><div class="quiz-option" onclick="selectQuizOption(this, false, 8)">nums[5:]</div></div>
+            <div class="quiz"><h4>🧠 Question 10</h4><p>What does <code>nums[::-1]</code> do?</p><div class="quiz-option" onclick="selectQuizOption(this, true, 9)">Returns reversed copy</div><div class="quiz-option" onclick="selectQuizOption(this, false, 9)">Sorts descending</div><div class="quiz-option" onclick="selectQuizOption(this, false, 9)">Removes last element</div><div class="quiz-option" onclick="selectQuizOption(this, false, 9)">Creates deep copy</div></div>
+            <div class="quiz"><h4>🧠 Question 11</h4><p>Extended unpacking: <code>first, *mid, last = [1,2,3,4,5]</code>. What is <code>mid</code>?</p><div class="quiz-option" onclick="selectQuizOption(this, true, 10)">[2,3,4]</div><div class="quiz-option" onclick="selectQuizOption(this, false, 10)">[1,2,3]</div><div class="quiz-option" onclick="selectQuizOption(this, false, 10)">[4,5]</div><div class="quiz-option" onclick="selectQuizOption(this, false, 10)">()</div></div>
+            <div class="quiz"><h4>🧠 Question 12</h4><p>Which is immutable?</p><div class="quiz-option" onclick="selectQuizOption(this, false, 11)">List</div><div class="quiz-option" onclick="selectQuizOption(this, true, 11)">Tuple</div><div class="quiz-option" onclick="selectQuizOption(this, false, 11)">Dictionary</div><div class="quiz-option" onclick="selectQuizOption(this, false, 11)">Set</div></div>
+            <div class="quiz"><h4>🧠 Question 13</h4><p>Which is truthy membership test?</p><div class="quiz-option" onclick="selectQuizOption(this, true, 12)">"py" in "python"</div><div class="quiz-option" onclick="selectQuizOption(this, false, 12)">"py" of "python"</div><div class="quiz-option" onclick="selectQuizOption(this, false, 12)">contains("py","python")</div><div class="quiz-option" onclick="selectQuizOption(this, false, 12)">has("python","py")</div></div>
+            <div class="quiz"><h4>🧠 Question 14</h4><p>Choose slicing that gets every 3rd starting at index 1</p><div class="quiz-option" onclick="selectQuizOption(this, true, 13)">seq[1::3]</div><div class="quiz-option" onclick="selectQuizOption(this, false, 13)">seq[:3]</div><div class="quiz-option" onclick="selectQuizOption(this, false, 13)">seq[::1/3]</div><div class="quiz-option" onclick="selectQuizOption(this, false, 13)">seq[3::1]</div></div>
+            <div class="quiz"><h4>🧠 Question 15</h4><p>What does <code>text.strip()</code> do?</p><div class="quiz-option" onclick="selectQuizOption(this, true, 14)">Removes leading/trailing whitespace</div><div class="quiz-option" onclick="selectQuizOption(this, false, 14)">Removes all spaces</div><div class="quiz-option" onclick="selectQuizOption(this, false, 14)">Uppercases text</div><div class="quiz-option" onclick="selectQuizOption(this, false, 14)">Finds substring</div></div>
+            <div class="quiz"><h4>🧠 Question 16</h4><p>Which line creates a shallow copy of list <code>a</code>?</p><div class="quiz-option" onclick="selectQuizOption(this, true, 15)">b = a[:]</div><div class="quiz-option" onclick="selectQuizOption(this, false, 15)">b = a</div><div class="quiz-option" onclick="selectQuizOption(this, false, 15)">b = list</div><div class="quiz-option" onclick="selectQuizOption(this, false, 15)">a.copy = b</div></div>
+            <div class="quiz"><h4>🧠 Question 17</h4><p>Given <code>student = {"age": 20}</code>, what does <code>student.get("gpa", 0)</code> return?</p><div class="quiz-option" onclick="selectQuizOption(this, true, 16)">0</div><div class="quiz-option" onclick="selectQuizOption(this, false, 16)">None</div><div class="quiz-option" onclick="selectQuizOption(this, false, 16)">Error</div><div class="quiz-option" onclick="selectQuizOption(this, false, 16)">True</div></div>
+            <div class="quiz"><h4>🧠 Question 18</h4><p>Which comprehension filters even numbers?</p><div class="quiz-option" onclick="selectQuizOption(this, true, 17)">[n for n in nums if n % 2 == 0]</div><div class="quiz-option" onclick="selectQuizOption(this, false, 17)">[n if n % 2 == 0]</div><div class="quiz-option" onclick="selectQuizOption(this, false, 17)">[n where even]</div><div class="quiz-option" onclick="selectQuizOption(this, false, 17)">filter(even, nums)</div></div>
+            <div class="quiz"><h4>🧠 Question 19</h4><p>Which updates an existing dict key?</p><div class="quiz-option" onclick="selectQuizOption(this, true, 18)">student["age"] = 21</div><div class="quiz-option" onclick="selectQuizOption(this, false, 18)">student.age = 21</div><div class="quiz-option" onclick="selectQuizOption(this, false, 18)">student.update["age"](21)</div><div class="quiz-option" onclick="selectQuizOption(this, false, 18)">student.add("age",21)</div></div>
+            <div class="quiz"><h4>🧠 Question 20</h4><p>What is true about tuples?</p><div class="quiz-option" onclick="selectQuizOption(this, true, 19)">They are immutable</div><div class="quiz-option" onclick="selectQuizOption(this, false, 19)">They are unordered</div><div class="quiz-option" onclick="selectQuizOption(this, false, 19)">They allow item assignment</div><div class="quiz-option" onclick="selectQuizOption(this, false, 19)">They only hold numbers</div></div>
 
             <div class="quiz">
                 <h4>🧠 Question 5</h4>
@@ -1147,7 +1125,7 @@ print(f"Best student: {best_student['name']}")
         let currentLesson = 0;
         let totalQuestions = 0;
         let correctAnswers = 0;
-        let quizAnswers = [null, null, null, null, null, null, null, null];
+        let quizAnswers = new Array(20).fill(null);
 
         function toggleTeacherNotes() {
             const content = document.getElementById('teacherContent');
@@ -1173,6 +1151,22 @@ print(f"Best student: {best_student['name']}")
 
             currentLesson = lessonIndex;
             updateProgress();
+        }
+
+        function startTutorial() {
+            const hero = document.getElementById('introHero');
+            if (hero) hero.style.display = 'none';
+            showLesson(0);
+            updateProgress();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function jumpToFinalQuiz() {
+            const hero = document.getElementById('introHero');
+            if (hero) hero.style.display = 'none';
+            showLesson(6);
+            updateProgress();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function nextLesson() {
