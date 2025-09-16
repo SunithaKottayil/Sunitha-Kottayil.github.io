@@ -368,10 +368,176 @@
             color: #1e40af;
             margin-bottom: 5px;
         }
+
+        /* Teacher Notes */
+        .teacher-notes {
+            background: rgba(255, 255, 255, 0.98);
+            border: 2px dashed #c7d2fe;
+            border-radius: 14px;
+            padding: 18px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+        }
+
+        .teacher-notes h2 {
+            margin: 0 0 10px 0;
+            font-size: 1.4rem;
+            color: #4338ca;
+            border: none;
+            padding: 0;
+        }
+
+        .teacher-toggle {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #4338ca, #7c3aed);
+            color: #fff;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 999px;
+            cursor: pointer;
+            font-weight: 600;
+            box-shadow: 0 6px 16px rgba(67,56,202,0.35);
+        }
+
+        .teacher-content { display: none; margin-top: 14px; }
+        .teacher-section { margin: 10px 0; }
+        .teacher-section h3 { color: #4f46e5; font-size: 1.1rem; margin: 10px 0; }
+        .teacher-bullets { margin-left: 20px; color: #374151; }
+        .teacher-bullets li { margin: 6px 0; }
+        .teacher-time { font-size: 0.9rem; color: #6b7280; }
+        .print-note { font-size: 0.85rem; color: #6b7280; margin-top: 8px; }
     </style>
 </head>
 <body>
     <div class="container">
+        <div class="teacher-notes">
+            <button class="teacher-toggle" onclick="toggleTeacherNotes()">📘 Teacher Notes: 90‑minute lesson plan</button>
+            <div class="teacher-content" id="teacherContent">
+                <h2>90‑minute verbal teaching script (beginner-friendly)</h2>
+                <div class="teacher-time">Agenda: 0–5 Welcome · 5–20 Lists · 20–32 Tuples · 32–50 Dicts · 50–67 Strings · 67–80 Slicing · 80–88 Challenge · 88–90 Wrap</div>
+
+                <div class="teacher-section">
+                    <h3>0) Welcome (0–5)</h3>
+                    <ul class="teacher-bullets">
+                        <li>Goal: lists, tuples, dictionaries, strings, slicing.</li>
+                        <li>Flow: short demos → tiny practices → quick checks.</li>
+                    </ul>
+                </div>
+
+                <div class="teacher-section">
+                    <h3>1) Lists (5–20)</h3>
+                    <div class="code-block"># Creating lists
+shopping_list = []
+fruits = ["apple", "banana", "orange"]
+numbers = [1, 2, 3, 4, 5]
+mixed = ["hello", 42, True]
+
+# Methods
+tasks = ["read", "exercise", "code"]
+tasks.append("sleep")
+tasks.insert(1, "eat")
+tasks.remove("read")
+last = tasks.pop()
+tasks.sort()
+sorted_copy = sorted(tasks, reverse=True)
+
+# Comprehensions
+nums = [1, 2, 3, 4, 5]
+squares = [n*n for n in nums]
+evens = [n for n in nums if n % 2 == 0]</div>
+                    <ul class="teacher-bullets">
+                        <li>Ask: “What does pop() return?” → the removed item.</li>
+                        <li>Practice: build [2,4,6] from [1..6] using a comprehension.</li>
+                    </ul>
+                </div>
+
+                <div class="teacher-section">
+                    <h3>2) Tuples (20–32)</h3>
+                    <div class="code-block">point = (10, 20)
+colors = ("red", "green", "blue")
+single = (42,)  # note the comma
+
+person = ("Sam", 21, "Student")
+name, age, role = person
+
+first, *middle, last = [1, 2, 3, 4, 5]</div>
+                    <ul class="teacher-bullets">
+                        <li>Check: “a, b = (1, 2, 3)” → ValueError (too many values).</li>
+                        <li>Use tuples for fixed-structure data.</li>
+                    </ul>
+                </div>
+
+                <div class="teacher-section">
+                    <h3>3) Dictionaries (32–50)</h3>
+                    <div class="code-block">student = {"name": "Sarah", "age": 19, "major": "Biology"}
+name = student["name"]
+height = student.get("height", "N/A")
+student["age"] = 20
+student["gpa"] = 3.7
+square_map = {n: n*n for n in [1,2,3,4]}</div>
+                    <ul class="teacher-bullets">
+                        <li>Best safe access: get(key, default).</li>
+                        <li>Duplicate key in a literal: last value wins.</li>
+                        <li>Practice: build favorite_movie dict and print a summary.</li>
+                    </ul>
+                </div>
+
+                <div class="teacher-section">
+                    <h3>4) Strings (50–67)</h3>
+                    <div class="code-block">greeting = "Hello"; name = "Alice"
+full = greeting + ", " + name + "!"
+template = f"{greeting}, {name}!"
+text = "  Python Programming  "
+text.strip(); text.lower(); text.upper(); text.replace(" ", "-")
+text.find("Pro")
+sentence = "learn python the smart way"
+words = sentence.split(" "); joined = "-".join(words)
+msg = "Hello {}, your score is {}".format("Alex", 95)
+fmsg = f"Hello { 'Alex'.upper() }, your score is {95}"
+s = "Python"; s[0]; s[-1]; s[1:4]; s[::-1]</div>
+                    <ul class="teacher-bullets">
+                        <li>Practice: username = first.lower() + '_' + last[:3].lower()</li>
+                        <li>Quiz: "-".join(["a","b","c"]) → "a-b-c"</li>
+                    </ul>
+                </div>
+
+                <div class="teacher-section">
+                    <h3>5) Indexing & Slicing (67–80)</h3>
+                    <div class="code-block">nums = list(range(10))
+nums[2:7]; nums[:5]; nums[5:]; nums[::2]; nums[1:8:3]; nums[::-1]
+a = [1,2,3]; b = a; c = a[:]
+letters = list("abcdefghij")
+letters[-3:]; letters[:-3]; letters[-1:-6:-2]</div>
+                    <ul class="teacher-bullets">
+                        <li>Practice: from 1..20 → odds, evens, multiples of 3, last 5 reversed.</li>
+                    </ul>
+                </div>
+
+                <div class="teacher-section">
+                    <h3>6) Challenge (80–88)</h3>
+                    <div class="code-block"># A) Grade averages + best student
+students = [
+    {"name": "Alex", "grades": [85, 90, 78]},
+    {"name": "Beth", "grades": [92, 88, 95]},
+    {"name": "Carl", "grades": [76, 82, 80]}
+]
+
+# B) Word counter
+words = ["python", "java", "python", "javascript", "python", "java", "c++"]</div>
+                    <div class="print-note">Tip: Parse → compute → report. Encourage printing intermediate results.</div>
+                </div>
+
+                <div class="teacher-section">
+                    <h3>7) Wrap (88–90)</h3>
+                    <ul class="teacher-bullets">
+                        <li>Recap key ideas and differences (sort vs sorted, list vs tuple, .get).</li>
+                        <li>Homework: contacts app with dict; stretch—export joined names.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
         <div class="header">
             <h1>🐍 Interactive Python Data Containers</h1>
             <p>Master Lists, Tuples, Dictionaries, and Strings through hands-on practice!</p>
@@ -982,6 +1148,11 @@ print(f"Best student: {best_student['name']}")
         let totalQuestions = 0;
         let correctAnswers = 0;
         let quizAnswers = [null, null, null, null, null, null, null, null];
+
+        function toggleTeacherNotes() {
+            const content = document.getElementById('teacherContent');
+            content.style.display = content.style.display === 'block' ? 'none' : 'block';
+        }
 
         function showLesson(lessonIndex) {
             document.querySelectorAll('.lesson').forEach(lesson => {
