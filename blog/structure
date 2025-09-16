@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Python Data Containers Tutorial</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .header h1 {
+            color: #4f46e5;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #e5e7eb;
+            border-radius: 5px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #10b981, #3b82f6);
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 5px;
+        }
+
+        .lesson {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            display: none;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        .lesson.active {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .lesson h2 {
+            color: #1f2937;
+            font-size: 2em;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .lesson h3 {
+            color: #4f46e5;
+            font-size: 1.4em;
+            margin: 20px 0 10px 0;
+            border-left: 4px solid #4f46e5;
+            padding-left: 15px;
+        }
+
+        .code-block {
+            background: #1f2937;
+            color: #e5e7eb;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 14px;
+            overflow-x: auto;
+            position: relative;
+        }
+
+        .code-block::before {
+            content: "Python";
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            background: #4f46e5;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 10px;
+        }
+
+        .exercise {
+            background: linear-gradient(135deg, #fef3c7, #fbbf24);
+            border: 2px solid #f59e0b;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .exercise h4 {
+            color: #92400e;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .interactive-code {
+            margin: 15px 0;
+        }
+
+        .code-input {
+            width: 100%;
+            min-height: 100px;
+            padding: 15px;
+            border: 2px solid #d1d5db;
+            border-radius: 8px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 14px;
+            resize: vertical;
+            background: #f9fafb;
+        }
+
+        .code-input:focus {
+            outline: none;
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px 5px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(79, 70, 229, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #6b7280, #4b5563);
+        }
+
+        .output {
+            background: #064e3b;
+            color: #d1fae5;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 14px;
+            white-space: pre-wrap;
+            min-height: 50px;
+            border-left: 4px solid #10b981;
+        }
+
+        .quiz {
+            background: linear-gradient(135deg, #ddd6fe, #8b5cf6);
+            border: 2px solid #7c3aed;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .quiz h4 {
+            color: #581c87;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .quiz-option {
+            background: rgba(255, 255, 255, 0.9);
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .quiz-option:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: translateX(5px);
+        }
+
+        .quiz-option.selected {
+            border-color: #4f46e5;
+            background: rgba(79, 70, 229, 0.1);
+        }
+
+        .quiz-option.correct {
+            border-color: #10b981;
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        .quiz-option.incorrect {
+            border-color: #ef4444;
+            background: rgba(239, 68, 68, 0.1);
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .score-badge {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .celebration {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            text-align: center;
+            animation: bounce 0.5s ease;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translate(-50%, -50%) translateY(0); }
+            40% { transform: translate(-50%, -50%) translateY(-10px); }
+            60% { transform: translate(-50%, -50%) translateY(-5px); }
+        }
+
+        .lesson-nav {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .lesson-tab {
+            padding: 10px 20px;
+            border-radius: 20px;
+            background: #e5e7eb;
+            color: #6b7280;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            border: none;
+        }
+
+        .lesson-tab.active {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+        }
+
+        .lesson-tab.completed {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+        }
+
+        .hint {
+            background: rgba(59, 130, 246, 0.1);
+            border-left: 4px solid #3b82f6;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .hint-title {
+            font-weight: bold;
+            color: #1e40af;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🐍 Interactive Python Data Containers</h1>
+            <p>Master Lists, Tuples, and Dictionaries through hands-on practice!</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="score-badge">
+                <span>📊</span>
+                <span id="score">Score: 0/0</span>
+            </div>
+        </div>
+
+        <div class="lesson-nav">
+            <button class="lesson-tab active" onclick="showLesson(0)">📝 Lists</button>
+            <button class="lesson-tab" onclick="showLesson(1)">🔒 Tuples</button>
+            <button class="lesson-tab" onclick="showLesson(2)">🗝️ Dictionaries</button>
+            <button class="lesson-tab" onclick="showLesson(3)">🚀 Challenges</button>
+            <button class="lesson-tab" onclick="showLesson(4)">🏆 Final Quiz</button>
+        </div>
+
+        <!-- Lesson 1: Lists -->
+        <div class="lesson active" id="lesson0">
+            <h2>📝 Lists - The Flexible Container</h2>
+            
+            <h3>What is a List?</h3>
+            <p>A <strong>list</strong> is an ordered collection of items that can be changed (mutable). Think of it like a shopping list where you can add, remove, or modify items.</p>
+
+            <div class="code-block">
+# Creating Lists
+shopping_list = []  # Empty list
+fruits = ["apple", "banana", "orange", "grape"]
+numbers = [1, 2, 3, 4, 5]
+mixed_list = ["hello", 42, True, 3.14]
+            </div>
+
+            <div class="exercise">
+                <h4>🎯 Exercise 1.1: Create Your Lists</h4>
+                <p>Create three lists: your favorite colors, numbers 1-5, and a mixed list about yourself.</p>
+                <div class="interactive-code">
+                    <textarea class="code-input" id="exercise1" placeholder="# Write your code here:
+colors = 
+numbers = 
+about_me = "></textarea>
+                    <button class="btn" onclick="runCode('exercise1', 'output1')">Run Code</button>
+                    <button class="btn btn-secondary" onclick="showHint(1)">💡 Hint</button>
+                </div>
+                <div class="output" id="output1"></div>
+                <div class="hint" id="hint1" style="display: none;">
+                    <div class="hint-title">💡 Hint:</div>
+                    Remember to use square brackets [] and separate items with commas. Strings need quotes!
+                </div>
+            </div>
+
+            <h3>Indexing and Slicing</h3>
+            <div class="code-block">
+fruits = ["apple", "banana", "orange", "grape"]
+
+# Indexing (zero-based)
+print(fruits[0])    # "apple" - first item
+print(fruits[-1])   # "grape" - last item
+
+# Slicing
+numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+print(numbers[2:5])    # [2, 3, 4]
+print(numbers[::2])    # [0, 2, 4, 6, 8] - every 2nd element
+print(numbers[::-1])   # [9, 8, 7, 6, 5, 4, 3, 2, 1, 0] - reverse
+            </div>
+
+            <div class="exercise">
+                <h4>🎯 Exercise 1.2: Practice Indexing</h4>
+                <p>Using the alphabet list, extract specific elements and slices.</p>
+                <div class="interactive-code">
+                    <textarea class="code-input" id="exercise2" placeholder="alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
+# Get the 3rd letter
+# Get letters from 'c' to 'f'
+# Get every 2nd letter
+# Reverse the list"></textarea>
+                    <button class="btn" onclick="runCode('exercise2', 'output2')">Run Code</button>
+                </div>
+                <div class="output" id="output2"></div>
+            </div>
+
+            <div class="quiz">
+                <h4>🧠 Quick Quiz: Lists</h4>
+                <p>What does <code>my_list[1:4]</code> return if <code>my_list = [0, 1, 2, 3, 4, 5]</code>?</p>
+                <div class="quiz-option" onclick="selectOption(this, false)">[0, 1, 2, 3]</div>
+                <div class="quiz-option" onclick="selectOption(this, true)">[1, 2, 3]</div>
+                <div class="quiz-option" onclick="selectOption(this, false)">[1, 2, 3, 4]</div>
+                <div class="quiz-option" onclick="selectOption(this, false)">[2, 3, 4]</div>
+            </div>
+
+            <div class="navigation">
+                <button class="btn btn-secondary" disabled>← Previous</button>
+                <button class="btn" onclick="nextLesson()">Next: Tuples →</button>
+            </div>
+        </div>
+
+        <!-- Lesson 2: Tuples -->
+        <div class="lesson" id="lesson1">
+            <h2>🔒 Tuples - The Immutable Container</h2>
+            
+            <h3>What is a Tuple?</h3>
+            <p>A <strong>tuple</strong> is an ordered collection of items that cannot be changed (immutable). Think of it like coordinates (x, y) that represent a fixed point.</p>
+
+            <div class="code-block">
+# Creating Tuples
+coordinates = (10, 20)
+colors = ("red", "green", "blue")
+mixed_tuple = ("John", 25, "Engineer")
+
+# Single item tuple (note the comma!)
+single_item = (42,)
+            </div>
+
+            <div class="exercise">
+                <h4>🎯 Exercise 2.1: Create Tuples</h4>
+                <p>Create tuples for your birth date, RGB color values, and room dimensions.</p>
+                <div class="interactive-code">
+                    <textarea class="code-input" id="exercise3" placeholder="# Create your tuples here:
+birth_date = 
+favorite_color_rgb = 
+room_dimensions = 
+
+print(birth_date)
+print(favorite_color_rgb)
+print(room_dimensions)"></textarea>
+                    <button class="btn" onclick="runCode('exercise3', 'output3')">Run Code</button>
+                </div>
+                <div class="output" id="output3"></div>
+            </div>
+
+            <h3>Tuple vs List - When to Use Which?</h3>
+            <div class="code-block">
+# Use tuples for fixed data
+point = (10, 20)          # Coordinates don't change
+rgb = (255, 128, 0)       # Color values are fixed
+
+# Use lists for changeable data
+shopping = ["milk", "eggs"]  # Can add more items
+scores = [85, 90, 78]       # Scores can be updated
+            </div>
+
+            <div class="quiz">
+                <h4>🧠 Quick Quiz: Tuples</h4>
+                <p>Which of the following is the main difference between lists and tuples?</p>
+                <div class="quiz-option" onclick="selectOption(this, false)">Lists are faster than tuples</div>
+                <div class="quiz-option" onclick="selectOption(this, true)">Lists are mutable, tuples are immutable</div>
+                <div class="quiz-option" onclick="selectOption(this, false)">Tuples can only store numbers</div>
+                <div class="quiz-option" onclick="selectOption(this, false)">Lists use [] while tuples use {}</div>
+            </div>
+
+            <div class="navigation">
+                <button class="btn btn-secondary" onclick="prevLesson()">← Previous: Lists</button>
+                <button class="btn" onclick="nextLesson()">Next: Dictionaries →</button>
+            </div>
+        </div>
+
+        <!-- Lesson 3: Dictionaries -->
+        <div class="lesson" id="lesson2">
+            <h2>🗝️ Dictionaries - The Key-Value Container</h2>
+            
+            <h3>What is a Dictionary?</h3>
+            <p>A <strong>dictionary</strong> is a collection of key-value pairs. Think of it like a real dictionary where you look up a word (key) to find its definition (value).</p>
+
+            <div class="code-block">
+# Creating Dictionaries
+student = {
+    "name": "Sarah",
+    "age": 19,
+    "major": "Biology",
+    "gpa": 3.7
+}
+
+# Accessing values
+print(student["name"])              # "Sarah"
+print(student.get("height", "N/A")) # "N/A" (default value)
+            </div>
+
+            <div class="exercise">
+                <h4>🎯 Exercise 3.1: Create Your Dictionary</h4>
+                <p>Create a dictionary representing your favorite movie with title, director, year, and rating.</p>
+                <div class="interactive-code">
+                    <textarea class="code-input" id="exercise4" placeholder="# Create your movie dictionary:
+favorite_movie = {
+    # Add your keys and values here
+}
+
+# Print different values from your dictionary
+print(f\"Movie: {favorite_movie['title']}\")
+# Add more print statements"></textarea>
+                    <button class="btn" onclick="runCode('exercise4', 'output4')">Run Code</button>
+                </div>
+                <div class="output" id="output4"></div>
+            </div>
+
+            <h3>Working with Dictionaries</h3>
+            <div class="code-block">
+student = {"name": "Sarah", "age": 19}
+
+# Adding/updating values
+student["major"] = "Biology"    # Add new key-value pair
+student["age"] = 20            # Update existing value
+
+# Get all keys, values, or items
+print(student.keys())          # dict_keys(['name', 'age', 'major'])
+print(student.values())        # dict_values(['Sarah', 20, 'Biology'])
+print(student.items())         # key-value pairs
+
+# Check if key exists
+if "name" in student:
+    print(f"Student name: {student['name']}")
+            </div>
+
+            <div class="quiz">
+                <h4>🧠 Quick Quiz: Dictionaries</h4>
+                <p>What's the safest way to access a dictionary key that might not exist?</p>
+                <div class="quiz-option" onclick="selectOption(this, false)">dict["key"]</div>
+                <div class="quiz-option" onclick="selectOption(this, true)">dict.get("key", default_value)</div>
+                <div class="quiz-option" onclick="selectOption(this, false)">dict.key</div>
+                <div class="quiz-option" onclick="selectOption(this, false)">dict["key"] or "default"</div>
+            </div>
+
+            <div class="navigation">
+                <button class="btn btn-secondary" onclick="prevLesson()">← Previous: Tuples</button>
+                <button class="btn" onclick="nextLesson()">Next: Challenges →</button>
+            </div>
+        </div>
+
+        <!-- Lesson 4: Challenges -->
+        <div class="lesson" id="lesson3">
+            <h2>🚀 Coding Challenges</h2>
+
+            <div class="exercise">
+                <h4>🎯 Challenge 1: Student Grade Calculator</h4>
+                <p>Create a program that calculates average grades for students.</p>
+                <div class="interactive-code">
+                    <textarea class="code-input" id="challenge1" placeholder="students = [
+    {'name': 'Alex', 'grades': [85, 90, 78]},
+    {'name': 'Beth', 'grades': [92, 88, 95]},
+    {'name': 'Carl', 'grades': [76, 82, 80]}
+]
+
+# Calculate and print average grade for each student
+# Find the student with the highest average
+
+"></textarea>
+                    <button class="btn" onclick="runCode('challenge1', 'output5')">Run Code</button>
+                    <button class="btn btn-secondary" onclick="showSolution(1)">💡 Show Solution</button>
+                </div>
+                <div class="output" id="output5"></div>
+                <div class="hint" id="solution1" style="display: none;">
+                    <div class="hint-title">💡 Solution:</div>
+                    <div class="code-block">
+for student in students:
+    average = sum(student['grades']) / len(student['grades'])
+    print(f"{student['name']}: {average:.1f}")
+
+# Find highest average
+best_student = max(students, key=lambda s: sum(s['grades'])/len(s['grades']))
+print(f"Best student: {best_student['name']}")
+                    </div>
+                </div>
+            </div>
+
+            <div class="exercise">
+                <h4>🎯 Challenge 2: Word Counter</h4>
+                <p>Count how many times each word appears in a list.</p>
+                <div class="interactive-code">
+                    <textarea class="code-input" id="challenge2" placeholder="words = ['python', 'java', 'python', 'javascript', 'python', 'java', 'c++']
+
+# Count occurrences of each word
+# Create a dictionary with words as keys and counts as values
+# Find the most frequent word
+
+"></textarea>
+                    <button class="btn" onclick="runCode('challenge2', 'output6')">Run Code</button>
+                </div>
+                <div class="output" id="output6"></div>
+            </div>
+
+            <div class="navigation">
+                <button class="btn btn-secondary" onclick="prevLesson()">← Previous: Dictionaries</button>
+                <button class="btn" onclick="nextLesson()">Next: Final Quiz →</button>
+            </div>
+        </div>
+
+        <!-- Final Quiz -->
+        <div class="lesson" id="lesson4">
+            <h2>🏆 Final Quiz</h2>
+
+            <div class="quiz">
+                <h4>🧠 Question 1</h4>
+                <p>Which data structure would be best for storing student information with fields like name, age, and grades?</p>
+                <div class="quiz-option" onclick="selectQuizOption(this, false, 0)">List</div>
+                <div class="quiz-option" onclick="selectQuizOption(this, false, 0)">Tuple</div>
+                <div class="quiz-option" onclick="selectQuizOption(this, true, 0)">Dictionary</div>
+                <div class="quiz-option" onclick="selectQuizOption(this, false, 0)">String</div>
+            </div>
+
+            <div class="quiz">
+                <h4>🧠 Question 2</h4>
+                <p>What will <code>my_list[::-1]</code> do to a list?</p>
+                <div class="quiz-option" onclick="selectQuizOption(this, false, 1)">Remove all elements</div>
+                <div class="quiz-option" onclick="selectQuizOption(this, true, 1)">Reverse the list</div>
+                <div class="quiz-option" onclick="selectQuizOption(this, false, 1)">Get every other element</div>
+                <div class="quiz-option" onclick="selectQuizOption(this, false, 1)">Sort the list</div>
+            </div>
+
+            <div class="quiz">
+                <h4>🧠 Question 3</h4>
+                <p>Which is true about tuples?</p>
+                <div class="quiz-option" onclick="selectQuizOption(this, false, 2)">They can be modified after creation</div>
+                <div class="quiz-option" onclick="selectQuizOption(this, true, 2)">They are immutable</div>
+                <div class="quiz-option" onclick="selectQuizOption(this, false, 2)">They use curly braces {}</div>
+                <div class="quiz-option" onclick="selectQuizOption(this, false, 2)">They can only store strings</div>
+            </div>
+
+            <div class="quiz">
+                <h4>🧠 Question 4</h4>
+                <p>How do you add a new key-value pair to a dictionary?</p>
+                <div class="quiz-option" onclick="selectQuizOption(this, true, 3)">dict["new_key"] = value</div>
+                <div class="quiz-option" onclick="selectQuizOption(this, false, 3)">dict.add("new_key", value)</div>
+                <div class="quiz-option" onclick="selectQuizOption(this, false, 3)">dict.append({"new_key": value})</div>
+                <div class="quiz-option" onclick="selectQuizOption(this, false, 3)">dict.insert("new_key", value)</div>
+            </div>
+
+            <div class="navigation">
+                <button class="btn btn-secondary" onclick="prevLesson()">← Previous: Challenges</button>
+                <button class="btn" onclick="finishQuiz()">🎉 Finish Tutorial</button>
+            </div>
+        </div>
+
+        <div class="celebration" id="celebration">
+            <h2>🎉 Congratulations!</h2>
+            <p>You've completed the Python Data Containers tutorial!</p>
+            <div class="score-badge">
+                <span>🏆</span>
+                <span id="finalScore">Final Score: 0/0</span>
+            </div>
+            <button class="btn" onclick="restartTutorial()">🔄 Start Over</button>
+        </div>
+    </div>
+
+    <script>
+        let currentLesson = 0;
+        let totalQuestions = 0;
+        let correctAnswers = 0;
+        let quizAnswers = [null, null, null, null];
+
+        function showLesson(lessonIndex) {
+            // Hide all lessons
+            document.querySelectorAll('.lesson').forEach(lesson => {
+                lesson.classList.remove('active');
+            });
+
+            // Show selected lesson
+            document.getElementById(`lesson${lessonIndex}`).classList.add('active');
+
+            // Update lesson tabs
+            document.querySelectorAll('.lesson-tab').forEach((tab, index) => {
+                tab.classList.remove('active');
+                if (index === lessonIndex) {
+                    tab.classList.add('active');
+                }
+                if (index < lessonIndex) {
+                    tab.classList.add('completed');
+                }
+            });
+
+            currentLesson = lessonIndex;
+            updateProgress();
+        }
+
+        function nextLesson() {
+            if (currentLesson < 4) {
+                showLesson(currentLesson + 1);
+            }
+        }
+
+        function prevLesson() {
+            if (currentLesson > 0) {
+                showLesson(currentLesson - 1);
+            }
+        }
+
+        function updateProgress() {
+            const progress = ((currentLesson + 1) / 5) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+        }
+
+        function runCode(textareaId, outputId) {
+            const code = document.getElementById(textareaId).value;
+            const output = document.getElementById(outputId);
+            
+            try {
+                // Simple code execution simulation
+                let result = '';
+                const lines = code.split('\n');
+                
+                for (let line of lines) {
+                    line = line.trim();
+                    if (line.startsWith('print(') && line.endsWith(')')) {
+                        const content = line.slice(6, -1);
+                        result += eval(content) + '\n';
+                    } else if (line.includes('=') && !line.startsWith('#')) {
+                        // Variable assignment simulation
+                        result += `✓ ${line}\n`;
+                    } else if (line.startsWith('#')) {
+                        result += `💭 ${line}\n`;
+                    }
+                }
+                
+                if (result === '') {
+                    result = '✓ Code executed successfully! Try adding print() statements to see output.';
+                }
+                
+                output.textContent = result;
+            } catch (error) {
+                output.textContent = `❌ Error: ${error.message}`;
+                output.style.backgroundColor = '#7f1d1d';
+                output.style.color = '#fca5a5';
+            }
+        }
+
+        function selectOption(option, isCorrect) {
+            // Remove previous selections in this quiz
+            const quiz = option.parentElement;
+            quiz.querySelectorAll('.quiz-option').forEach(opt => {
+                opt.classList.remove('selected', 'correct', 'incorrect');
+            });
+
+            // Mark the selected option
+            option.classList.add('selected');
+            
+            setTimeout(() => {
+                quiz.querySelectorAll('.quiz-option').forEach(opt => {
+                    if (opt.onclick.toString().includes('true')) {
+                        opt.classList.add('correct');
+                    } else if (opt.classList.contains('selected') && !isCorrect) {
+                        opt.classList.add('incorrect');
+                    }
+                });
+
+                if (isCorrect) {
+                    correctAnswers++;
+                    showCelebration('🎉 Correct!');
+                } else {
+                    showCelebration('❌ Not quite right. Try again!');
+                }
+
+                totalQuestions++;
+                updateScore();
+            }, 500);
+        }
+
+        function selectQuizOption(option, isCorrect, questionIndex) {
+            // Store answer
+            quizAnswers[questionIndex] = isCorrect;
+            
+            // Remove previous selections in this quiz
+            const quiz = option.parentElement;
+            quiz.querySelectorAll('.quiz-option').forEach(opt => {
+                opt.classList.remove('selected', 'correct', 'incorrect');
+            });
+
+            // Mark the selected option
+            option.classList.add('selected');
+            
+            setTimeout(() => {
+                quiz.querySelectorAll('.quiz-option').forEach(opt => {
+                    if (opt.onclick.toString().includes('true')) {
+                        opt.classList.add('correct');
+                    } else if (opt.classList.contains('selected') && !isCorrect) {
+                        opt.classList.add('incorrect');
+                    }
+                });
+
+                if (isCorrect) {
+                    showCelebration('🎉 Correct!');
+                } else {
+                    showCelebration('❌ Not quite right, but keep learning!');
+                }
+            }, 500);
+        }
+
+        function showCelebration(message) {
+            const celebration = document.getElementById('celebration');
+            celebration.style.display = 'block';
+            celebration.querySelector('h2').textContent = message;
+            celebration.querySelector('p').style.display = 'none';
+            celebration.querySelector('.score-badge').style.display = 'none';
+            celebration.querySelector('button').style.display = 'none';
+            
+            setTimeout(() => {
+                celebration.style.display = 'none';
+            }, 1500);
+        }
+
+        function updateScore() {
+            const scoreElement = document.getElementById('score');
+            scoreElement.textContent = `Score: ${correctAnswers}/${totalQuestions}`;
+        }
+
+        function showHint(hintNumber) {
+            const hint = document.getElementById(`hint${hintNumber}`);
+            hint.style.display = hint.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function showSolution(solutionNumber) {
+            const solution = document.getElementById(`solution${solutionNumber}`);
+            solution.style.display = solution.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function finishQuiz() {
+            let finalScore = quizAnswers.filter(answer => answer === true).length;
+            correctAnswers += finalScore;
+            totalQuestions += 4;
+            
+            const celebration = document.getElementById('celebration');
+            const finalScoreElement = document.getElementById('finalScore');
+            
+            let message = '';
+            if (finalScore === 4) {
+                message = '🏆 Perfect Score! Outstanding!';
+            } else if (finalScore >= 3) {
+                message = '🎉 Excellent Work!';
+            } else if (finalScore >= 2) {
+                message = '👍 Good Job!';
+            } else {
+                message = '📚 Keep Learning!';
+            }
+            
+            celebration.querySelector('h2').textContent = message;
+            celebration.querySelector('p').textContent = `You've completed the Python Data Containers tutorial!`;
+            celebration.querySelector('p').style.display = 'block';
+            finalScoreElement.textContent = `Final Quiz: ${finalScore}/4`;
+            celebration.querySelector('.score-badge').style.display = 'inline-flex';
+            celebration.querySelector('button').style.display = 'inline-block';
+            celebration.style.display = 'block';
+            
+            updateScore();
+            updateProgress();
+        }
+
+        function restartTutorial() {
+            currentLesson = 0;
+            totalQuestions = 0;
+            correctAnswers = 0;
+            quizAnswers = [null, null, null, null];
+            
+            document.getElementById('celebration').style.display = 'none';
+            
+            // Reset all quiz options
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.classList.remove('selected', 'correct', 'incorrect');
+            });
+            
+            // Reset all code inputs
+            document.querySelectorAll('.code-input').forEach(input => {
+                input.value = input.getAttribute('placeholder') || '';
+            });
+            
+            // Reset all outputs
+            document.querySelectorAll('.output').forEach(output => {
+                output.textContent = '';
+                output.style.backgroundColor = '#064e3b';
+                output.style.color = '#d1fae5';
+            });
+            
+            // Hide all hints and solutions
+            document.querySelectorAll('.hint').forEach(hint => {
+                hint.style.display = 'none';
+            });
+            
+            showLesson(0);
+            updateScore();
+        }
+
+        // Initialize the tutorial
+        updateProgress();
+        updateScore();
+
+        // Add some interactive code examples that work
+        document.addEventListener('DOMContentLoaded', function() {
+            // Pre-fill some exercises with examples
+            const exercise1 = document.getElementById('exercise1');
+            if (exercise1) {
+                exercise1.value = `# Write your code here:
+colors = ["blue", "green", "red"]
+numbers = [1, 2, 3, 4, 5]
+about_me = ["Alice", 20, "Computer Science"]
+
+print("My favorite colors:", colors)
+print("Numbers:", numbers)
+print("About me:", about_me)`;
+            }
+
+            const exercise2 = document.getElementById('exercise2');
+            if (exercise2) {
+                exercise2.value = `alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
+
+# Get the 3rd letter (index 2)
+print("3rd letter:", alphabet[2])
+
+# Get letters from 'c' to 'f' (index 2 to 5)
+print("Letters c to f:", alphabet[2:6])
+
+# Get every 2nd letter
+print("Every 2nd letter:", alphabet[::2])
+
+# Reverse the list
+print("Reversed:", alphabet[::-1])`;
+            }
+
+            const exercise3 = document.getElementById('exercise3');
+            if (exercise3) {
+                exercise3.value = `# Create your tuples here:
+birth_date = (15, 6, 2005)  # day, month, year
+favorite_color_rgb = (64, 128, 255)  # blue color
+room_dimensions = (12, 10, 8)  # length, width, height
+
+print("Birth date:", birth_date)
+print("RGB color:", favorite_color_rgb)
+print("Room dimensions:", room_dimensions)`;
+            }
+
+            const exercise4 = document.getElementById('exercise4');
+            if (exercise4) {
+                exercise4.value = `# Create your movie dictionary:
+favorite_movie = {
+    "title": "The Matrix",
+    "director": "The Wachowskis",
+    "year": 1999,
+    "rating": 8.7
+}
+
+# Print different values from your dictionary
+print(f"Movie: {favorite_movie['title']}")
+print(f"Director: {favorite_movie['director']}")
+print(f"Year: {favorite_movie['year']}")
+print(f"Rating: {favorite_movie['rating']}/10")`;
+            }
+
+            const challenge1 = document.getElementById('challenge1');
+            if (challenge1) {
+                challenge1.value = `students = [
+    {'name': 'Alex', 'grades': [85, 90, 78]},
+    {'name': 'Beth', 'grades': [92, 88, 95]},
+    {'name': 'Carl', 'grades': [76, 82, 80]}
+]
+
+# Calculate and print average grade for each student
+print("Student Averages:")
+best_avg = 0
+best_student = ""
+
+for student in students:
+    avg = sum(student['grades']) / len(student['grades'])
+    print(f"{student['name']}: {avg:.1f}")
+    
+    if avg > best_avg:
+        best_avg = avg
+        best_student = student['name']
+
+print(f"\\nBest student: {best_student} with {best_avg:.1f} average")`;
+            }
+
+            const challenge2 = document.getElementById('challenge2');
+            if (challenge2) {
+                challenge2.value = `words = ['python', 'java', 'python', 'javascript', 'python', 'java', 'c++']
+
+# Count occurrences of each word
+word_count = {}
+
+for word in words:
+    if word in word_count:
+        word_count[word] += 1
+    else:
+        word_count[word] = 1
+
+print("Word counts:", word_count)
+
+# Find the most frequent word
+most_frequent = max(word_count, key=word_count.get)
+print(f"Most frequent: {most_frequent} ({word_count[most_frequent]} times)")`;
+            }
+        });
+    </script>
+</body>
+</html>
