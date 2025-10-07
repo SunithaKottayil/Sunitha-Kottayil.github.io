@@ -1,0 +1,2207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Quiz App - Complete Tutorial</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #f5f7fa;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            margin-bottom: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            font-size: 1.3em;
+            opacity: 0.95;
+        }
+        
+        nav {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+        }
+        
+        nav h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        nav a {
+            color: #667eea;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            background: #f0f3ff;
+            transition: all 0.3s;
+            font-size: 0.95em;
+        }
+        
+        nav a:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .section {
+            background: white;
+            padding: 40px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .section h2 {
+            color: #667eea;
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+        
+        .section h3 {
+            color: #764ba2;
+            font-size: 1.6em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        
+        .section h4 {
+            color: #667eea;
+            font-size: 1.3em;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .prereq-badge {
+            display: inline-block;
+            background: #28a745;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .code-editor-container {
+            margin: 20px 0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .code-header {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 10px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #667eea;
+        }
+        
+        .code-header span {
+            font-family: monospace;
+            font-size: 0.9em;
+        }
+        
+        .code-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .btn-run {
+            background: #28a745;
+            color: white;
+        }
+        
+        .btn-run:hover {
+            background: #218838;
+            transform: translateY(-2px);
+        }
+        
+        .btn-copy {
+            background: #667eea;
+            color: white;
+        }
+        
+        .btn-copy:hover {
+            background: #5568d3;
+        }
+        
+        .btn-reset {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .btn-reset:hover {
+            background: #545b62;
+        }
+        
+        .code-editor {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            min-height: 200px;
+            max-height: 500px;
+            overflow-y: auto;
+            border: none;
+            outline: none;
+            resize: vertical;
+            width: 100%;
+            white-space: pre;
+        }
+        
+        .output-container {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 15px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 13px;
+            line-height: 1.5;
+            min-height: 100px;
+            max-height: 300px;
+            overflow-y: auto;
+            border-top: 2px solid #667eea;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        
+        .output-container.hidden {
+            display: none;
+        }
+        
+        .alert {
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 5px solid;
+        }
+        
+        .alert-info {
+            background: #d1ecf1;
+            border-color: #17a2b8;
+            color: #0c5460;
+        }
+        
+        .alert-success {
+            background: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+        }
+        
+        .alert-warning {
+            background: #fff3cd;
+            border-color: #ffc107;
+            color: #856404;
+        }
+        
+        .alert-danger {
+            background: #f8d7da;
+            border-color: #dc3545;
+            color: #721c24;
+        }
+        
+        .example-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .example-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            nav ul {
+                flex-direction: column;
+            }
+        }
+        
+        ul, ol {
+            margin-left: 30px;
+            margin-bottom: 15px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            color: #e83e8c;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background: #667eea;
+            color: white;
+        }
+        
+        tr:hover {
+            background: #f5f5f5;
+        }
+
+        .code-editor:focus {
+            outline: 2px solid #667eea;
+            outline-offset: 2px;
+        }
+        
+        .btn:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Building a Python Quiz App</h1>
+            <p>Complete Interactive Tutorial - From Basics to Final Project</p>
+        </header>
+
+        <nav>
+            <h3>Quick Navigation</h3>
+            <ul>
+                <li><a href="#intro">Introduction</a></li>
+                <li><a href="#variables">Variables</a></li>
+                <li><a href="#print">Print/Input</a></li>
+                <li><a href="#conditionals">If/Else</a></li>
+                <li><a href="#lists">Lists</a></li>
+                <li><a href="#dicts">Dictionaries</a></li>
+                <li><a href="#loops">Loops</a></li>
+                <li><a href="#functions">Functions</a></li>
+                <li><a href="#csv">CSV Files</a></li>
+                <li><a href="#project">Build the Quiz</a></li>
+            </ul>
+        </nav>
+
+        <!-- Introduction -->
+        <section id="intro" class="section">
+            <h2>Introduction</h2>
+            <p>Welcome to this comprehensive tutorial on building a Python quiz application! This guide takes you from the fundamentals of Python programming all the way to creating a fully functional console-based quiz game.</p>
+            
+            <h3>What You'll Build</h3>
+            <ul>
+                <li>An interactive quiz application that reads questions from a CSV file</li>
+                <li>A program that displays multiple-choice questions to users</li>
+                <li>A system that checks answers and keeps score</li>
+                <li>A menu system that allows users to play multiple times</li>
+            </ul>
+
+            <h3>How to Use This Tutorial</h3>
+            <ul>
+                <li><strong>Read the explanations:</strong> Each concept is explained in detail</li>
+                <li><strong>Edit the code:</strong> All code examples are editable - try changing them!</li>
+                <li><strong>Run the code:</strong> Click "Run Code" to see results right in your browser</li>
+                <li><strong>Experiment:</strong> Don't be afraid to break things - that's how you learn!</li>
+            </ul>
+
+            <div class="alert alert-info">
+                <strong>Note:</strong> This browser-based Python environment simulates Python execution. Some features like file I/O work differently than in a real Python environment, but the concepts are identical.
+            </div>
+        </section>
+
+        <!-- Variables Section -->
+        <section id="variables" class="section">
+            <h2><span class="prereq-badge">PREREQUISITE 1</span> Variables & Data Types</h2>
+            
+            <p>Variables are containers that store data. Think of them as labeled boxes where you can put information and retrieve it later.</p>
+
+            <h3>Basic Variable Types</h3>
+            
+            <div class="example-grid">
+                <div>
+                    <h4>Strings (Text)</h4>
+                    <p>Text data enclosed in quotes</p>
+                </div>
+                <div>
+                    <h4>Integers (Whole Numbers)</h4>
+                    <p>Numbers without decimal points</p>
+                </div>
+                <div>
+                    <h4>Floats (Decimals)</h4>
+                    <p>Numbers with decimal points</p>
+                </div>
+                <div>
+                    <h4>Booleans (True/False)</h4>
+                    <p>Logical values</p>
+                </div>
+            </div>
+
+            <h3>Try It Yourself</h3>
+            <div class="code-editor-container">
+                <div class="code-header">
+                    <span>example_variables.py</span>
+                    <div class="code-actions">
+                        <button class="btn btn-run" onclick="runCode(this)">Run Code</button>
+                        <button class="btn btn-copy" onclick="copyCode(this)">Copy</button>
+                        <button class="btn btn-reset" onclick="resetCode(this)">Reset</button>
+                    </div>
+                </div>
+                <textarea class="code-editor" spellcheck="false"># Strings - text data
+player_name = "Alex"
+game_title = "Quiz Master"
+
+# Integers - whole numbers
+score = 0
+questions_total = 10
+
+# Floats - decimal numbers
+accuracy = 85.5
+time_taken = 12.3
+
+# Booleans - True or False
+is_correct = True
+game_over = False
+
+# Print all variables
+print("Player:", player_name)
+print("Game:", game_title)
+print("Score:", score)
+print("Total Questions:", questions_total)
+print("Accuracy:", accuracy, "%")
+print("Time Taken:", time_taken, "seconds")
+print("Is Correct:", is_correct)
+print("Game Over:", game_over)</textarea>
+                <div class="output-container hidden"></div>
+            </div>
+
+            <div class="alert alert-success">
+                <strong>Key Points:</strong>
+                <ul>
+                    <li>Variable names should be descriptive (e.g., <code>player_name</code> not <code>pn</code>)</li>
+                    <li>Use lowercase with underscores for variable names (snake_case)</li>
+                    <li>Python automatically determines the data type</li>
+                    <li>You can change a variable's value and type at any time</li>
+                </ul>
+            </div>
+
+            <h3>Variable Operations</h3>
+            <div class="code-editor-container">
+                <div class="code-header">
+                    <span>variable_operations.py</span>
+                    <div class="code-actions">
+                        <button class="btn btn-run" onclick="runCode(this)">Run Code</button>
+                        <button class="btn btn-copy" onclick="copyCode(this)">Copy</button>
+                        <button class="btn btn-reset" onclick="resetCode(this)">Reset</button>
+                    </div>
+                </div>
+                <textarea class="code-editor" spellcheck="false"># Math operations
+score = 0
+score = score + 10  # Add 10
+print("After scoring:", score)
+
+score += 5  # Shorthand for score = score + 5
+print("After bonus:", score)
+
+# String operations
+first_name = "John"
+last_name = "Doe"
+full_name = first_name + " " + last_name  # Concatenation
+print("Full name:", full_name)
+
+# Repeat strings
+separator = "=" * 20
+print(separator)
+print("QUIZ RESULTS")
+print(separator)</textarea>
+                <div class="output-container hidden"></div>
+            </div>
+        </section>
+
+        <!-- Print and Input Section -->
+        <section id="print" class="section">
+            <h2><span class="prereq-badge">PREREQUISITE 2</span> Print & Input</h2>
+            
+            <p>Communication between your program and users happens through printing output and receiving input.</p>
+
+            <h3>Printing Output</h3>
+            
+            <div class="code-editor-container">
+                <div class="code-header">
+                    <span>printing_basics.py</span>
+                    <div class="code-actions">
+                        <button class="btn btn-run" onclick="runCode(this)">Run Code</button>
+                        <button class="btn btn-copy" onclick="copyCode(this)">Copy</button>
+                        <button class="btn btn-reset" onclick="resetCode(this)">Reset</button>
+                    </div>
+                </div>
+                <textarea class="code-editor" spellcheck="false"># Basic printing
+print("Hello, World!")
+print("Welcome to Python!")
+
+# Print multiple items
+name = "Alice"
+age = 15
+print("Name:", name, "Age:", age)
+
+# Print with separator
+print("One", "Two", "Three", sep=" | ")
+
+# F-strings - Modern Python (best way!)
+player = "Bob"
+score = 95
+print(f"Player {player} scored {score} points!")
+
+# F-strings with expressions
+x = 10
+y = 20
+print(f"The sum of {x} and {y} is {x + y}")
+
+# F-strings with formatting
+pi = 3.14159265
+print(f"Pi rounded to 2 decimals: {pi:.2f}")</textarea>
+                <div class="output-container hidden"></div>
+            </div>
+
+            <div class="alert alert-info">
+                <strong>F-String Tips:</strong>
+                <ul>
+                    <li>Start string with <code>f</code> before the quote: <code>f"text"</code></li>
+                    <li>Put variables and expressions inside curly braces: <code>{variable}</code></li>
+                    <li>Can do math inside: <code>{5 + 3}</code> outputs 8</li>
+                    <li>Format numbers: <code>{number:.2f}</code> shows 2 decimal places</li>
+                </ul>
+            </div>
+
+            <h3>Getting User Input</h3>
+            
+            <div class="code-editor-container">
+                <div class="code-header">
+                    <span>input_basics.py</span>
+                    <div class="code-actions">
+                        <button class="btn btn-run" onclick="runCode(this)">Run Code</button>
+                        <button class="btn btn-copy" onclick="copyCode(this)">Copy</button>
+                        <button class="btn btn-reset" onclick="resetCode(this)">Reset</button>
+                    </div>
+                </div>
+                <textarea class="code-editor" spellcheck="false"># Simulated input (in browser environment)
+# In real Python, this would wait for user input
+
+# String input
+name = "Jordan"  # Simulating: input("What's your name? ")
+print(f"Hello, {name}!")
+
+# Number input - IMPORTANT: input() returns strings!
+age_text = "16"  # Simulating: input("How old are you? ")
+age = int(age_text)  # Convert string to integer
+print(f"Next year you'll be {age + 1}")
+
+# Direct conversion
+score_text = "85"
+score = int(score_text)
+print(f"Your score: {score}")
+
+# Float conversion
+height_text = "5.8"
+height = float(height_text)
+print(f"Your height: {height} feet")</textarea>
+                <div class="output-container hidden"></div>
+            </div>
+
+            <div class="alert alert-warning">
+                <strong>Important:</strong> The <code>input()</code> function ALWAYS returns a string, even if the user types a number. You must convert it using <code>int()</code> or <code>float()</code> to do math with it.
+            </div>
+        </section>
+
+        <!-- Conditionals Section -->
+        <section id="conditionals" class="section">
+            <h2><span class="prereq-badge">PREREQUISITE 3</span> Conditionals (If/Else)</h2>
+            
+            <p>Conditionals allow your program to make decisions and execute different code based on conditions.</p>
+
+            <h3>Basic If Statements</h3>
+            
+            <div class="code-editor-container">
+                <div class="code-header">
+                    <span>if_statements.py</span>
+                    <div class="code-actions">
+                        <button class="btn btn-run" onclick="runCode(this)">Run Code</button>
+                        <button class="btn btn-copy" onclick="copyCode(this)">Copy</button>
+                        <button class="btn btn-reset" onclick="resetCode(this)">Reset</button>
+                    </div>
+                </div>
+                <textarea class="code-editor" spellcheck="false"># Simple if statement
+score = 85
+
+if score >= 90:
+    print("Grade: A - Excellent!")
+elif score >= 80:
+    print("Grade: B - Good job!")
+elif score >= 70:
+    print("Grade: C - Not bad")
+elif score >= 60:
+    print("Grade: D - Need improvement")
+else:
+    print("Grade: F - Study harder")
+
+# Multiple conditions with and/or
+age = 16
+has_permission = True
+
+if age >= 13 and has_permission:
+    print("You can create an account")
+else:
+    print("Sorry, you cannot create an account")
+
+# Checking multiple values
+answer = "paris"
+
+if answer == "paris" or answer == "Paris":
+    print("Correct!")
+else:
+    print("Wrong answer")</textarea>
+                <div class="output-container hidden"></div>
+            </div>
+
+            <h3>Comparison Operators</h3>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Operator</th>
+                        <th>Meaning</th>
+                        <th>Example</th>
+                        <th>Result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>==</code></td>
+                        <td>Equal to</td>
+                        <td><code>5 == 5</code></td>
+                        <td>True</td>
+                    </tr>
+                    <tr>
+                        <td><code>!=</code></td>
+                        <td>Not equal to</td>
+                        <td><code>5 != 3</code></td>
+                        <td>True</td>
+                    </tr>
+                    <tr>
+                        <td><code>&gt;</code></td>
+                        <td>Greater than</td>
+                        <td><code>7 &gt; 3</code></td>
+                        <td>True</td>
+                    </tr>
+                    <tr>
+                        <td><code>&lt;</code></td>
+                        <td>Less than</td>
+                        <td><code>2 &lt; 10</code></td>
+                        <td>True</td>
+                    </tr>
+                    <tr>
+                        <td><code>&gt;=</code></td>
+                        <td>Greater than or equal</td>
+                        <td><code>5 &gt;= 5</code></td>
+                        <td>True</td>
+                    </tr>
+                    <tr>
+                        <td><code>&lt;=</code></td>
+                        <td>Less than or equal</td>
+                        <td><code>3 &lt;= 10</code></td>
+                        <td>True</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Practical Example: Quiz Answer Checking</h3>
+            
+            <div class="code-editor-container">
+                <div class="code-header">
+                    <span>quiz_answer_check.py</span>
+                    <div class="code-actions">
+                        <button class="btn btn-run" onclick="runCode(this)">Run Code</button>
+                        <button class="btn btn-copy" onclick="copyCode(this)">Copy</button>
+                        <button class="btn btn-reset" onclick="resetCode(this)">Reset</button>
+                    </div>
+                </div>
+                <textarea class="code-editor" spellcheck="false"># Quiz answer checking
+correct_answer = "Paris"
+user_answer = "paris"
+
+# Case-insensitive comparison
+if user_answer.lower() == correct_answer.lower():
+    print("✅ Correct!")
+    score = 10
+else:
+    print(f"❌ Wrong! The correct answer was: {correct_answer}")
+    score = 0
+
+print(f"Points earned: {score}")
+
+# Checking multiple choice
+print("\n--- Multiple Choice Example ---")
+question = "What is 2 + 2?"
+options = ["3", "4", "5"]
+user_choice = "4"
+correct_choice = "4"
+
+if user_choice == correct_choice:
+    print("✅ Correct! 2 + 2 = 4")
+else:
+    print(f"❌ Wrong! The answer was {correct_choice}")</textarea>
+                <div class="output-container hidden"></div>
+            </div>
+        </section>
+
+        <!-- Lists Section -->
+        <section id="lists" class="section">
+            <h2><span class="prereq-badge">PREREQUISITE 4</span> Lists</h2>
+            
+            <p>Lists store multiple items in a single variable. They're ordered, changeable, and allow duplicate values.</p>
+
+            <h3>Creating and Accessing Lists</h3>
+            
+            <div class="code-editor-container">
+                <div class="code-header">
+                    <span>lists_basics.py</span>
+                    <div class="code-actions">
+                        <button class="btn btn-run" onclick="runCode(this)">Run Code</button>
+                        <button class="btn btn-copy" onclick="copyCode(this)">Copy</button>
+                        <button class="btn btn-reset" onclick="resetCode(this)">Reset</button>
+                    </div>
+                </div>
+                <textarea class="code-editor" spellcheck="false"># Creating lists
+fruits = ["apple", "banana", "orange", "grape"]
+scores = [85, 92, 78, 95, 88]
+mixed = ["Alice", 25, True, 9.5]
+
+# Accessing items (indexing starts at 0!)
+print("First fruit:", fruits[0])
+print("Second fruit:", fruits[1])
+print("Last fruit:", fruits[-1])  # Negative indexing from end
+
+# List length
+print(f"\nTotal fruits: {len(fruits)}")
+print(f"Total scores: {len(scores)}")
+
+# Accessing items in a loop
+print("\nAll fruits:")
+for fruit in fruits:
+    print(f"  - {fruit}")
+
+# Accessing with index numbers
+print("\nScores with position:")
+for i in range(len(scores)):
+    print(f"Score {i+1}: {scores[i]}")</textarea>
+                <div class="output-container hidden"></div>
+            </div>
+
+            <h3>List Operations</h3>
+            
+            <div class="code-editor-container">
+                <div class="code-header">
+                    <span>list_operations.py</span>
+                    <div class="code-actions">
+                        <button class="btn btn-run" onclick="runCode(this)">Run Code</button>
+                        <button class="btn btn-copy" onclick="copyCode(this)">Copy</button>
+                        <button class="btn btn-reset" onclick="resetCode(this)">Reset</button>
+                    </div>
+                </div>
+                <textarea class="code-editor" spellcheck="false"># Starting with empty list
+quiz_scores = []
+print("Initial:", quiz_scores)
+
+# Adding items
+quiz_scores.append(85)
+quiz_scores.append(92)
+quiz_scores.append(78)
+print("After adding scores:", quiz_scores)
+
+# Checking if item exists
+if 92 in quiz_scores:
+    print("Score of 92 is in the list!")
+
+if 100 not in quiz_scores:
+    print("Perfect score not yet achieved")
+
+# Removing items
+quiz_scores.remove(78)  # Remove specific value
+print("After removing 78:", quiz_scores)
+
+# Getting and removing last item
+last_score = quiz_scores.pop()
+print(f"Removed last score: {last_score}")
+print("Remaining scores:", quiz_scores)
+
+# List slicing
+numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+print("\nFirst 5 numbers:", numbers[0:5])
+print("Last 3 numbers:", numbers[-3:])
+print("Every other number:", numbers[::2])</textarea>
+                <div class="output-container hidden"></div>
+            </div>
+
+            <h3>Practical Example: Quiz Questions List</h3>
+            
+            <div class="code-editor-container">
+                <div class="code-header">
+                    <span>quiz_questions_list.py</span>
+                    <div class="code-actions">
+                        <button class="btn btn-run" onclick="runCode(this)">Run Code</button>
+                        <button class="btn btn-copy" onclick="copyCode(this)">Copy</button>
+                        <button class="btn btn-reset" onclick="resetCode(this)">Reset</button>
+                    </div>
+                </div>
+                <textarea class="code-editor" spellcheck="false"># Store quiz questions
+questions = [
+    "What is the capital of France?",
+    "What is 2 + 2?",
+    "What color is the sky?"
+]
+
+# Store correct answers
+answers = ["Paris", "4", "Blue"]
+
+# Display all questions
+print("=== Quiz Questions ===")
+for i in range(len(questions)):
+    print(f"\nQuestion {i+1}: {questions[i]}")
+    print(f"Answer: {answers[i]}")
+
+# Check total questions
+print(f"\nTotal questions in quiz: {len(questions)}")</textarea>
+                <div class="output-container hidden"></div>
+            </div>
+        </section>
+
+        <!-- Dictionaries Section -->
+        <section id="dicts" class="section">
+            <h2><span class="prereq-badge">PREREQUISITE 5</span> Dictionaries</h2>
+            
+            <p>Dictionaries store data in key-value pairs, like a real dictionary where you look up a word (key) to find its meaning (value).</p>
+
+            <h3>Creating and Using Dictionaries</h3>
+            
+            <div class="code-editor-container">
+                <div class="code-header">
+                    <span>dict_basics.py</span>
+                    <div class="code-actions">
+                        <button class="btn btn-run" onclick="runCode(this)">Run Code</button>
+                        <button class="btn btn-copy" onclick="copyCode(this)">Copy</button>
+                        <button class="btn btn-reset" onclick="resetCode(this)">Reset</button>
+                    </div>
+                </div>
+                <textarea class="code-editor" spellcheck="false"># Creating a dictionary
+student = {
+    "name": "Emma",
+    "age": 16,
+    "grade": "A",
+    "school": "Lincoln High"
+}
+
+# Accessing values
+print("Student name:", student["name"])
+print("Student age:", student["age"])
+print("Grade:", student["grade"])
+
+# Adding new key-value pairs
+student["gpa"] = 3.8
+print("\nAfter adding GPA:", student)
+
+# Modifying existing values
+student["age"] = 17
+print("Updated age:", student["age"])
+
+#
+                  # Checking if key exists
+if "grade" in student:
+    print(f"\nGrade found: {student['grade']}")
+
+if "phone" not in student:
+    print("Phone number not recorded")
+
+# Getting all keys and values
+print("\nAll keys:", list(student.keys()))
+print("All values:", list(student.values()))</textarea>
+                <div class="output-container hidden"></div>
+            </div>
+
+            <h3>Lists of Dictionaries (Critical for Quiz App!)</h3>
+            
+            <div class="code-editor-container">
+                <div class="code-header">
+                    <span>list_of_dicts.py</span>
+                    <div class="code-actions">
+                        <button class="btn btn-run" onclick="runCode(this)">Run Code</button>
+                        <button class="btn btn-copy" onclick="copyCode(this)">Copy</button>
+                        <button class="btn btn-reset" onclick="resetCode(this)">Reset</button>
+                    </div>
+                </div>
+                <textarea class="code-editor" spellcheck="false"># List of student dictionaries
+students = [
+    {"name": "Alex", "score": 85, "grade": "B"},
+    {"name": "Sam", "score": 92, "grade": "A"},
+    {"name": "Jordan", "score": 78, "grade": "C"}
+]
+
+# Loop through list of dictionaries
+print("=== Student Records ===")
+for student in students:
+    print(f"\nName: {student['name']}")
+    print(f"Score: {student['score']}")
+    print(f"Grade: {student['grade']}")
+
+# Calculate average
+total = 0
+for student in students:
+    total += student['score']
+
+average = total / len(students)
+print(f"\n=== Class Average: {average:.1f} ===")</textarea>
+                <div class="output-container hidden"></div>
+            </div>
+
+            <h3>Practical Example: Quiz Question as Dictionary</h3>
+            
+            <div class="code-editor-container">
+                <div class="code-header">
+                    <span>quiz_dict_example.py</span>
+                    <div class="code-actions">
+                        <button class="btn btn-run" onclick="runCode(this)">Run Code</button>
+                        <button class="btn btn-copy" onclick="copyCode(this)">Copy</button>
+                        <button class="btn btn-reset" onclick="resetCode(this)">Reset</button>
+                    </div>
+                </div>
+                <textarea class="code-editor" spellcheck="false"># Single quiz question stored as a dictionary
+question = {
+    "text": "What is the capital of France?",
+    "option1": "London",
+    "option2": "Berlin",
+    "option3": "Paris",
+    "correct": "Paris"
+}
+
+# Display the question
+print("Question:", question["text"])
+print("1.", question["option1"])
+print("2.", question["option2"])
+print("3.", question["option3"])
+
+# Simulate user answer
+user_answer = "Paris"
+
+# Check answer
+if user_answer == question["correct"]:
+    print("\n✅ Correct!")
+else:
+    print(f"\n❌ Wrong! Answer was: {question['correct']}")
+
+print("\n" + "="*40)
+
+# Multiple questions
+questions = [
+    {
+        "text": "What is 2 + 2?",
+        "option1": "3",
+        "option2": "4",
+        "option3": "5",
+        "correct": "4"
+    },
+    {
+        "text": "What color is the sky?",
+        "option1": "Red",
+        "option2": "Blue",
+        "option3": "Green",
+        "correct": "Blue"
+    }
+]
+
+# Display all questions
+for i, q in enumerate(questions, start=1):
+    print(f"\nQuestion {i}: {q['text']}")
+    print(f"  1) {q['option1']}")
+    print(f"  2) {q['option2']}")
+    print(f"  3) {q['option3']}")
+    print(f"  Correct Answer: {q['correct']}")</textarea>
+                <div class="output-container hidden"></div>
+            </div>
+
+            <div class="alert alert-success">
+                <strong>This is EXACTLY how we'll store quiz questions in our final project!</strong> Each question is a dictionary with keys for the question text, options, and correct answer.
+            </div>
+        </section>
+
+        <!-- Loops Section -->
+        <section id="loops" class="section">
+            <h2><span class="prereq-badge">PREREQUISITE 6</span> Loops</h2>
+            
+            <p>Loops allow you to repeat actions multiple times without writing the same code over and over.</p>
+
+            <h3>For Loops - Iterating Through Lists</h3>
+            
+            <div class="code-editor-container">
+                <div class="code-header">
+                    <span>for_loops.py</span>
+                    <div class="code-actions">
+                        <button class="btn btn-run" onclick="runCode(this)">Run Code</button>
+                        <button class="btn btn-copy" onclick="copyCode(this)">Copy</button>
+                        <button class="btn btn-reset" onclick="resetCode(this)">Reset</button>
+                    </div>
+                </div>
+                <textarea class="code-editor" spellcheck="false"># Loop through a list
+fruits = ["apple", "banana", "orange", "grape"]
+
+print("=== Fruit List ===")
+for fruit in fruits:
+    print(f"I like {fruit}")
+
+# Loop through numbers
+print("\n=== Counting ===")
+for i in range(5):
+    print(f"Count: {i}")
+
+# Range with start and end
+print("\n=== Range 5 to 10 ===")
+for num in range(5, 11):
+    print(num, end=" ")
+
+print("\n\n=== Even Numbers ===")
+for num in range(0, 21, 2):  # Start, end, step
+    print(num, end=" ")
+
+# Loop with calculations
+print("\n\n=== Multiplication Table ===")
+for i in range(1, 11):
+    print(f"5 x {i} = {5 * i}")</textarea>
+                <div class="output-container hidden"></div>
+            </div>
+
+            <h3>Enumerate - Get Index and Value</h3>
+            
+            <div class="code-editor-container">
+                <div class="code-header">
+                    <span>enumerate_example.py</span>
+                    <div class="code-actions">
+                        <button class="btn btn-run" onclick="runCode(this)">Run Code</button>
+                        <button class="btn btn-copy" onclick="copyCode(this)">Copy</button>
+                        <button class="btn btn-reset" onclick="resetCode(this)">Reset</button>
+                    </div>
+                </div>
+                <textarea class="code-editor" spellcheck="false"># Without enumerate (manual counting)
+fruits = ["apple", "banana", "orange"]
+count = 1
+
+print("=== Without Enumerate ===")
+for fruit in fruits:
+    print(f"{count}. {fruit}")
+    count += 1
+
+# With enumerate (automatic counting)
+print("\n=== With Enumerate ===")
+for i, fruit in enumerate(fruits, start=1):
+    print(f"{i}. {fruit}")
+
+# Practical example: Quiz questions
+questions = [
+    "What is 2 + 2?",
+    "What is the capital of France?",
+    "What color is the sky?"
+]
+
+print("\n=== Quiz Questions ===")
+for i, question in enumerate(questions, start=1):
+    print(f"\nQuestion {i}:")
+    print(f"  {question}")
+
+# Enumerate with start=0 (default)
+print("\n=== With Index Starting at 0 ===")
+for index, question in enumerate(questions):
+    print(f"Index {index}: {question}")</textarea>
+                <div class="output-container hidden"></div>
+            </div>
+
+            <h3>While Loops - Repeat Until Condition</h3>
+            
+            <div class="code-editor-container">
+                <div class="code-header">
+                    <span>while_loops.py</span>
+                    <div class="code-actions">
+                        <button class="btn btn-run" onclick="runCode(this)">Run Code</button>
+                        <button class="btn btn-copy" onclick="copyCode(this)">Copy</button>
+                        <button class="btn btn-reset" onclick="resetCode(this)">Reset</button>
+                    </div>
+                </div>
+                <textarea class="code-editor" spellcheck="false"># Count up to 5
+print("=== Counting with While Loop ===")
+count = 1
+while count <= 5:
+    print(f"Count: {count}")
+    count += 1
+
+# Input validation simulation
+print("\n=== Input Validation Example ===")
+attempts = 0
+max_attempts = 3
+valid_choices = ["1", "2", "3"]
+
+# Simulating user inputs
+simulated_inputs = ["5", "abc", "2"]  # First two invalid, third valid
+
+for user_input in simulated_inputs:
+    attempts += 1
+    print(f"\nAttempt {attempts}: User entered '{user_input}'")
+    
+    if user_input in valid_choices:
+        print("✅ Valid input!")
+        break
+    else:
+        print("❌ Invalid! Please enter 1, 2, or 3")
+        
+    if attempts >= max_attempts:
+        print("Too many attempts!")
+        break
+
+# Practical quiz example
+print("\n=== Quiz Loop Example ===")
+score = 0
+questions_answered = 0
+total_questions = 3
+
+while questions_answered < total_questions:
+    questions_answered += 1
+    print(f"\nQuestion {questions_answered} of {total_questions}")
+    # In real quiz, would ask question here
+    is_correct = True  # Simulating correct answer
+    if is_correct:
+        score += 1
+        print("Correct!")
+
+print(f"\nFinal Score: {score}/{total_questions}")</textarea>
+                <div class="output-container hidden"></div>
+            </div>
+        </section>
+
+        <!-- Functions Section -->
+        <section id="functions" class="section">
+            <h2><span class="prereq-badge">PREREQUISITE 7</span> Functions</h2>
+            
+            <p>Functions are reusable blocks of code that perform specific tasks. They help organize code and avoid repetition.</p>
+
+            <h3>Creating Basic Functions</h3>
+            
+            <div class="code-editor-container">
+                <div class="code-header">
+                    <span>functions_basics.py</span>
+                    <div class="code-actions">
+                        <button class="btn btn-run" onclick="runCode(this)">Run Code</button>
+                        <button class="btn btn-copy" onclick="copyCode(this)">Copy</button>
+                        <button class="btn btn-reset" onclick="resetCode(this)">Reset</button>
+                    </div>
+                </div>
+                <textarea class="code-editor" spellcheck="false"># Function without parameters
+def greet():
+    print("Hello, welcome to Python!")
+    print("Let's learn functions!")
+
+# Call the function
+greet()
+print()
+
+# Function with parameters
+def greet_person(name):
+    print(f"Hello, {name}!")
+    print(f"Nice to meet you, {name}!")
+
+greet_person("Alice")
+print()
+greet_person("Bob")
+print()
+
+# Function with multiple parameters
+def introduce(name, age, city):
+    print(f"My name is {name}")
+    print(f"I am {age} years old")
+    print(f"I live in {city}")
+
+introduce("Emma", 16, "New York")
+print()
+
+# Function with default parameters
+def greet_with_time(name, time="day"):
+    print(f"Good {time}, {name}!")
+
+greet_with_time("Charlie")
+greet_with_time("Diana", "evening")</textarea>
+                <div class="output-container hidden"></div>
+            </div>
+
+            <h3>Functions That Return Values</h3>
+            
+            <div class="code-editor-container">
+                <div class="code-header">
+                    <span>return_values.py</span>
+                    <div class="code-actions">
+                        <button class="btn btn-run" onclick="runCode(this)">Run Code</button>
+                        <button class="btn btn-copy" onclick="copyCode(this)">Copy</button>
+                        <button class="btn btn-reset" onclick="resetCode(this)">Reset</button>
+                    </div>
+                </div>
+                <textarea class="code-editor" spellcheck="false"># Function that returns a value
+def add_numbers(a, b):
+    result = a + b
+    return result
+
+# Use the returned value
+total = add_numbers(5, 3)
+print(f"5 + 3 = {total}")
+
+sum_result = add_numbers(10, 20)
+print(f"10 + 20 = {sum_result}")
+
+# Function that returns calculation result
+def calculate_percentage(score, total):
+    percentage = (score / total) * 100
+    return percentage
+
+quiz_score = calculate_percentage(8, 10)
+print(f"\nQuiz score: {quiz_score}%")
+
+# Function returning boolean
+def is_passing(score):
+    if score >= 60:
+        return True
+    else:
+        return False
+
+# Shorter version (same thing)
+def is_passing_short(score):
+    return score >= 60
+
+student_score = 75
+if is_passing(student_score):
+    print(f"\nScore {student_score}: PASS")
+else:
+    print(f"\nScore {student_score}: FAIL")
+
+# Function returning multiple values
+def get_grade_info(score):
+    if score >= 90:
+        grade = "A"
+        message = "Excellent!"
+    elif score >= 80:
+        grade = "B"
+        message = "Good job!"
+    elif score >= 70:
+        grade = "C"
+        message = "Not bad"
+    else:
+        grade = "F"
+        message = "Need improvement"
+    
+    return grade, message
+
+my_grade, feedback = get_grade_info(85)
+print(f"\nGrade: {my_grade}")
+print(f"Feedback: {feedback}")</textarea>
+                <div class="output-container hidden"></div>
+            </div>
+
+            <div class="alert alert-info">
+                <strong>Why Functions Matter:</strong>
+                <ul>
+                    <li><strong>Reusability:</strong> Write once, use many times</li>
+                    <li><strong>Organization:</strong> Each function has one clear purpose</li>
+                    <li><strong>Testing:</strong> Easy to test individual parts</li>
+                    <li><strong>Maintenance:</strong> Changes in one place affect everywhere</li>
+                    <li><strong>Readability:</strong> Code becomes self-documenting</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- CSV Section -->
+        <section id="csv" class="section">
+            <h2><span class="prereq-badge">PREREQUISITE 8</span> Working with CSV Files</h2>
+            
+            <p>CSV (Comma Separated Values) files are a simple way to store tabular data. They're perfect for storing quiz questions!</p>
+
+            <h3>Understanding CSV Format</h3>
+            
+            <div class="alert alert-info">
+                <strong>What is CSV?</strong>
+                <p>A CSV file stores data in plain text where:</p>
+                <ul>
+                    <li>Each line represents one row of data</li>
+                    <li>Values are separated by commas</li>
+                    <li>First row typically contains column headers</li>
+                </ul>
+            </div>
+
+            <h4>Example CSV File (questions.csv):</h4>
+            <div class="code-editor-container">
+                <div class="code-header">
+                    <span>questions.csv</span>
+                </div>
+                <textarea class="code-editor" spellcheck="false" style="min-height: 150px;">question,option1,option2,option3,correct
+What is 2+2?,3,4,5,4
+What color is the sky?,Red,Blue,Green,Blue
+What is the capital of France?,London,Berlin,Paris,Paris
+Python was created by?,Bill Gates,Guido van Rossum,Steve Jobs,Guido van Rossum</textarea>
+            </div>
+
+            <h3>Reading CSV Files in Python</h3>
+            
+            <div class="code-editor-container">
+                <div class="code-header">
+                    <span>csv_reading.py</span>
+                    <div class="code-actions">
+                        <button class="btn btn-run" onclick="runCode(this)">Run Code</button>
+                        <button class="btn btn-copy" onclick="copyCode(this)">Copy</button>
+                        <button class="btn btn-reset" onclick="resetCode(this)">Reset</button>
+                    </div>
+                </div>
+                <textarea class="code-editor" spellcheck="false"># Note: In a real Python environment, you would use:
+# import csv
+# with open("questions.csv", newline='') as file:
+#     reader = csv.DictReader(file)
+
+# For this tutorial, we'll simulate CSV data
+csv_data = """question,option1,option2,option3,correct
+What is 2+2?,3,4,5,4
+What color is the sky?,Red,Blue,Green,Blue
+What is the capital of France?,London,Berlin,Paris,Paris"""
+
+# Simulating csv.DictReader behavior
+questions = []
+lines = csv_data.strip().split('\n')
+headers = lines[0].split(',')
+
+for line in lines[1:]:
+    values = line.split(',')
+    question_dict = {}
+    for i, header in enumerate(headers):
+        question_dict[header] = values[i]
+    questions.append(question_dict)
+
+# Display loaded questions
+print("=== Loaded Questions from CSV ===\n")
+for i, q in enumerate(questions, start=1):
+    print(f"Question {i}: {q['question']}")
+    print(f"  Option 1: {q['option1']}")
+    print(f"  Option 2: {q['option2']}")
+    print(f"  Option 3: {q['option3']}")
+    print(f"  Correct Answer: {q['correct']}")
+    print()</textarea>
+                <div class="output-container hidden"></div>
+            </div>
+        </section>
+
+        <!-- Main Project Section -->
+        <section id="project" class="section">
+            <h2>🎯 Building the Quiz Application</h2>
+            
+            <p>Now that you've learned all the prerequisites, let's put everything together to build our quiz application!</p>
+
+            <h3>Project Overview</h3>
+            <div class="alert alert-info">
+                <strong>What We're Building:</strong>
+                <ul>
+                    <li>A console-based quiz game</li>
+                    <li>Questions loaded from a CSV file</li>
+                    <li>Multiple-choice questions with 3 options each</li>
+                    <li>Score tracking and final results</li>
+                    <li>Menu system to play multiple times</li>
+                </ul>
+            </div>
+
+            <h3>Step 1: Simple Version - Load and Display</h3>
+            <p>Let's start by just loading questions and displaying them.</p>
+            
+            <div class="code-editor-container">
+                <div class="code-header">
+                    <span>quiz_v1_simple.py</span>
+                    <div class="code-actions">
+                        <button class="btn btn-run" onclick="runCode(this)">Run Code</button>
+                        <button class="btn btn-copy" onclick="copyCode(this)">Copy</button>
+                        <button class="btn btn-reset" onclick="resetCode(this)">Reset</button>
+                    </div>
+                </div>
+                <textarea class="code-editor" spellcheck="false"># Version 1: Load questions and display them
+
+# Simulating CSV data (in real Python, would use csv.DictReader)
+csv_data = """question,option1,option2,option3,correct
+What is 2+2?,3,4,5,4
+What color is the sky?,Red,Blue,Green,Blue
+What is the capital of France?,London,Berlin,Paris,Paris"""
+
+# Parse CSV into list of dictionaries
+questions = []
+lines = csv_data.strip().split('\n')
+headers = lines[0].split(',')
+
+for line in lines[1:]:
+    values = line.split(',')
+    question_dict = {headers[i]: values[i] for i in range(len(headers))}
+    questions.append(question_dict)
+
+# Display all questions
+print("=== Quiz Questions ===\n")
+for q in questions:
+    print("Question:", q['question'])
+    print("  1.", q['option1'])
+    print("  2.", q['option2'])
+    print("  3.", q['option3'])
+    print("  Correct:", q['correct'])
+    print()</textarea>
+                <div class="output-container hidden"></div>
+            </div>
+
+            <h3>Step 2: Add User Interaction</h3>
+            <p>Now let's ask one question and check the answer.</p>
+            
+            <div class="code-editor-container">
+                <div class="code-header">
+                    <span>quiz_v2_interaction.py</span>
+                    <div class="code-actions">
+                        <button class="btn btn-run" onclick="runCode(this)">Run Code</button>
+                        <button class="btn btn-copy" onclick="copyCode(this)">Copy</button>
+                        <button class="btn btn-reset" onclick="resetCode(this)">Reset</button>
+                    </div>
+                </div>
+                <textarea class="code-editor" spellcheck="false"># Version 2: Display question and check answer
+
+# Simulating CSV data
+csv_data = """question,option1,option2,option3,correct
+What is 2+2?,3,4,5,4
+What color is the sky?,Red,Blue,Green,Blue"""
+
+# Parse CSV
+questions = []
+lines = csv_data.strip().split('\n')
+headers = lines[0].split(',')
+
+for line in lines[1:]:
+    values = line.split(',')
+    question_dict = {headers[i]: values[i] for i in range(len(headers))}
+    questions.append(question_dict)
+
+# Get first question
+q = questions[0]
+
+# Display question
+print("Question:", q['question'])
+print("1.", q['option1'])
+print("2.", q['option2'])
+print("3.", q['option3'])
+
+# Simulate user input (in real program: input("Your answer: "))
+user_choice = "2"  # Simulating user choosing option 2
+print(f"\nUser selected: {user_choice}")
+
+# Convert choice number to actual option text
+if user_choice == "1":
+    selected_answer = q['option1']
+elif user_choice == "2":
+    selected_answer = q['option2']
+elif user_choice == "3":
+    selected_answer = q['option3']
+else:
+    selected_answer = ""
+
+print(f"User's answer: {selected_answer}")
+
+# Check if correct
+if selected_answer == q['correct']:
+    print("✅ Correct!")
+else:
+    print(f"❌ Wrong! The correct answer was: {q['correct']}")</textarea>
+                <div class="output-container hidden"></div>
+            </div>
+
+            <h3>Step 3: Loop Through All Questions</h3>
+            <p>Now let's ask ALL questions and keep score.</p>
+            
+            <div class="code-editor-container">
+                <div class="code-header">
+                    <span>quiz_v3_full_loop.py</span>
+                    <div class="code-actions">
+                        <button class="btn btn-run" onclick="runCode(this)">Run Code</button>
+                        <button class="btn btn-copy" onclick="copyCode(this)">Copy</button>
+                        <button class="btn btn-reset" onclick="resetCode(this)">Reset</button>
+                    </div>
+                </div>
+                <textarea class="code-editor" spellcheck="false"># Version 3: Full quiz with scoring
+
+# Simulating CSV data
+csv_data = """question,option1,option2,option3,correct
+What is 2+2?,3,4,5,4
+What color is the sky?,Red,Blue,Green,Blue
+What is the capital of France?,London,Berlin,Paris,Paris"""
+
+# Parse CSV
+questions = []
+lines = csv_data.strip().split('\n')
+headers = lines[0].split(',')
+
+for line in lines[1:]:
+    values = line.split(',')
+    question_dict = {headers[i]: values[i] for i in range(len(headers))}
+    questions.append(question_dict)
+
+# Initialize score
+score = 0
+
+# Simulate user answers for each question
+simulated_answers = ["2", "2", "3"]  # User's choices
+
+# Loop through all questions
+for i, q in enumerate(questions):
+    print(f"\n{'='*50}")
+    print(f"Question {i+1}: {q['question']}")
+    print(f"1. {q['option1']}")
+    print(f"2. {q['option2']}")
+    print(f"3. {q['option3']}")
+    
+    # Get simulated user input
+    user_choice = simulated_answers[i]
+    print(f"Your answer: {user_choice}")
+    
+    # Convert choice to answer text
+    if user_choice == "1":
+        selected = q['option1']
+    elif user_choice == "2":
+        selected = q['option2']
+    elif user_choice == "3":
+        selected = q['option3']
+    else:
+        selected = ""
+    
+    # Check answer
+    if selected == q['correct']:
+        print("✅ Correct!")
+        score += 1
+    else:
+        print(f"❌ Wrong! The answer was: {q['correct']}")
+
+# Display final results
+print(f"\n{'='*50}")
+print("QUIZ COMPLETE!")
+print(f"{'='*50}")
+print(f"Final Score: {score}/{len(questions)}")
+percentage = (score / len(questions)) * 100
+print(f"Percentage: {percentage:.1f}%")
+
+if percentage >= 80:
+    print("Grade: Excellent! 🌟")
+elif percentage >= 60:
+    print("Grade: Good job! 👍")
+else:
+    print("Grade: Keep practicing! 📚")</textarea>
+                <div class="output-container hidden"></div>
+            </div>
+
+            <h3>Step 4: Final Version - Complete Quiz App</h3>
+            <p>Here's the complete, production-ready quiz application with all features!</p>
+            
+            <div class="code-editor-container">
+                <div class="code-header">
+                    <span>quiz_final.py</span>
+                    <div class="code-actions">
+                        <button class="btn btn-run" onclick="runCode(this)">Run Code</button>
+                        <button class="btn btn-copy" onclick="copyCode(this)">Copy</button>
+                        <button class="btn btn-reset" onclick="resetCode(this)">Reset</button>
+                    </div>
+                </div>
+                <textarea class="code-editor" spellcheck="false">"""
+Complete Quiz Application
+A fully functional quiz game with CSV file support
+"""
+
+def load_questions():
+    """Load questions from CSV format"""
+    csv_data = """question,option1,option2,option3,correct
+What is 2+2?,3,4,5,4
+What color is the sky?,Red,Blue,Green,Blue
+What is the capital of France?,London,Berlin,Paris,Paris
+Python was created by?,Bill Gates,Guido van Rossum,Steve Jobs,Guido van Rossum
+What is 10 / 2?,3,4,5,5"""
+    
+    questions = []
+    lines = csv_data.strip().split('\n')
+    headers = lines[0].split(',')
+    
+    for line in lines[1:]:
+        values = line.split(',')
+        question_dict = {}
+        for i, header in enumerate(headers):
+            question_dict[header] = values[i]
+        questions.append(question_dict)
+    
+    return questions
+
+def display_welcome():
+    """Display welcome message"""
+    print("="*60)
+    print(" "*15 + "🧠 QUIZ MASTER 3000 🧠")
+    print("="*60)
+    print("Test your knowledge with this interactive quiz!")
+    print("="*60)
+
+def display_question(question_num, total_questions, question):
+    """Display a formatted question"""
+    print(f"\n{'='*60}")
+    print(f"Question {question_num} of {total_questions}")
+    print(f"{'='*60}")
+    print(f"\n{question['question']}")
+    print(f"\n  1) {question['option1']}")
+    print(f"  2) {question['option2']}")
+    print(f"  3) {question['option3']}")
+    print(f"\n{'='*60}")
+
+def check_answer(selected, correct):
+    """Check if answer is correct"""
+    return selected == correct
+
+def display_results(score, total):
+    """Display final quiz results"""
+    percentage = (score / total) * 100
+    
+    print(f"\n\n{'='*60}")
+    print(" "*20 + "QUIZ RESULTS")
+    print(f"{'='*60}")
+    print(f"\nScore: {score}/{total}")
+    print(f"Percentage: {percentage:.1f}%")
+    
+    if percentage >= 90:
+        print("Grade: A - Outstanding! 🌟")
+    elif percentage >= 80:
+        print("Grade: B - Great job! 👍")
+    elif percentage >= 70:
+        print("Grade: C - Good effort! 📚")
+    else:
+        print("Grade: Keep studying! 💪")
+    print(f"\n{'='*60}")
+
+def run_quiz(questions):
+    """Execute the main quiz logic"""
+    score = 0
+    total_questions = len(questions)
+    
+    # Simulated user answers
+    simulated_answers = ["2", "2", "3", "2", "3"]
+    
+    for i, question in enumerate(questions):
+        display_question(i + 1, total_questions, question)
+        
+        # Get user answer (simulated)
+        user_choice = simulated_answers[i]
+        print(f"Your choice: {user_choice}")
+        
+        # Get selected answer text
+        if user_choice == "1":
+            selected = question['option1']
+        elif user_choice == "2":
+            selected = question['option2']
+        elif user_choice == "3":
+            selected = question['option3']
+        else:
+            selected = ""
+        
+        # Check if correct
+        if check_answer(selected, question['correct']):
+            print("\n✅ Correct!")
+            score += 1
+        else:
+            print(f"\n❌ Wrong! Answer: {question['correct']}")
+    
+    display_results(score, total_questions)
+
+def main():
+    """Main program entry point"""
+    display_welcome()
+    questions = load_questions()
+    print(f"\nLoaded {len(questions)} questions!")
+    run_quiz(questions)
+    print("\n🎉 Thanks for playing!\n")
+
+# Run the program
+main()</textarea>
+                <div class="output-container hidden"></div>
+            </div>
+
+            <div class="alert alert-success">
+                <strong>🎉 Congratulations!</strong> You now have a complete, working quiz application!
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer style="text-align: center; padding: 40px 20px
+
+          <!-- Footer -->
+        <footer style="text-align: center; padding: 40px 20px; color: #666;">
+            <p>Happy Coding! 🎉</p>
+            <p style="margin-top: 10px;">Remember: The best way to learn is by doing. Experiment, break things, and have fun!</p>
+        </footer>
+    </div>
+
+    <script>
+        // Store original code for reset functionality
+        const originalCode = new Map();
+        
+        // Initialize original code storage
+        document.querySelectorAll('.code-editor').forEach(editor => {
+            originalCode.set(editor, editor.value);
+        });
+
+        function runCode(button) {
+            const container = button.closest('.code-editor-container');
+            const editor = container.querySelector('.code-editor');
+            const output = container.querySelector('.output-container');
+            
+            output.classList.remove('hidden');
+            output.textContent = 'Running code...\n\n';
+            
+            setTimeout(() => {
+                try {
+                    const code = editor.value;
+                    let outputText = '';
+                    let variables = {};
+                    
+                    // Split into lines
+                    const lines = code.split('\n');
+                    let i = 0;
+                    
+                    while (i < lines.length) {
+                        const line = lines[i];
+                        const trimmed = line.trim();
+                        
+                        // Skip empty lines and comments
+                        if (!trimmed || trimmed.startsWith('#')) {
+                            i++;
+                            continue;
+                        }
+                        
+                        // Handle imports (ignore)
+                        if (trimmed.startsWith('import ') || trimmed.startsWith('from ')) {
+                            i++;
+                            continue;
+                        }
+                        
+                        // Handle print statements
+                        if (trimmed.includes('print(')) {
+                            const result = executePrint(trimmed, variables);
+                            outputText += result + '\n';
+                        }
+                        // Handle variable assignments
+                        else if (trimmed.includes('=') && !trimmed.includes('==') && 
+                                !trimmed.startsWith('def ') && !trimmed.startsWith('if ') && 
+                                !trimmed.startsWith('elif ') && !trimmed.startsWith('while ') && 
+                                !trimmed.startsWith('for ')) {
+                            executeAssignment(trimmed, variables);
+                        }
+                        // Handle for loops
+                        else if (trimmed.startsWith('for ')) {
+                            const loopResult = executeForLoop(lines, i, variables);
+                            outputText += loopResult.output;
+                            i = loopResult.nextLine - 1;
+                        }
+                        // Handle function definitions
+                        else if (trimmed.startsWith('def ')) {
+                            const funcResult = captureFunction(lines, i);
+                            variables[funcResult.name] = funcResult;
+                            i = funcResult.endLine - 1;
+                        }
+                        // Handle function calls
+                        else if (trimmed.includes('(') && trimmed.includes(')')) {
+                            const funcName = trimmed.split('(')[0].trim();
+                            if (variables[funcName] && variables[funcName].type === 'function') {
+                                const funcOutput = executeFunction(variables[funcName], trimmed, variables);
+                                outputText += funcOutput;
+                            }
+                        }
+                        
+                        i++;
+                    }
+                    
+                    output.textContent = outputText || 'Code executed successfully!';
+                    
+                } catch (error) {
+                    output.textContent = `Error: ${error.message}\n\nThis is a simplified Python simulator.`;
+                }
+            }, 100);
+        }
+        
+        function executePrint(line, vars) {
+            const match = line.match(/print\((.*)\)/);
+            if (!match) return '';
+            
+            const content = match[1];
+            const parts = [];
+            let currentPart = '';
+            let inString = false;
+            let stringChar = '';
+            let depth = 0;
+            
+            for (let i = 0; i < content.length; i++) {
+                const char = content[i];
+                
+                if ((char === '"' || char === "'") && (i === 0 || content[i-1] !== '\\')) {
+                    if (!inString) {
+                        inString = true;
+                        stringChar = char;
+                    } else if (char === stringChar) {
+                        inString = false;
+                        stringChar = '';
+                    }
+                }
+                
+                if (!inString && char === ',' && depth === 0) {
+                    parts.push(currentPart.trim());
+                    currentPart = '';
+                } else {
+                    if (char === '(') depth++;
+                    if (char === ')') depth--;
+                    currentPart += char;
+                }
+            }
+            if (currentPart) parts.push(currentPart.trim());
+            
+            // Check for sep parameter
+            let separator = ' ';
+            let endChar = '\n';
+            const realParts = [];
+            
+            for (let part of parts) {
+                if (part.startsWith('sep=')) {
+                    separator = evaluateExpression(part.substring(4), vars);
+                } else if (part.startsWith('end=')) {
+                    endChar = evaluateExpression(part.substring(4), vars);
+                } else {
+                    realParts.push(part);
+                }
+            }
+            
+            const results = realParts.map(part => evaluateExpression(part, vars));
+            return results.join(separator);
+        }
+        
+        function executeAssignment(line, vars) {
+            const eqIndex = line.indexOf('=');
+            const varName = line.substring(0, eqIndex).trim();
+            const value = line.substring(eqIndex + 1).trim();
+            
+            try {
+                vars[varName] = evaluateExpression(value, vars);
+            } catch (e) {
+                vars[varName] = value;
+            }
+        }
+        
+        function executeForLoop(lines, startLine, vars) {
+            const forLine = lines[startLine].trim();
+            const match = forLine.match(/for\s+(\w+)(?:,\s*(\w+))?\s+in\s+(.+):/);
+            
+            if (!match) return { output: '', nextLine: startLine + 1 };
+            
+            const loopVar1 = match[1];
+            const loopVar2 = match[2];
+            const iterable = match[3];
+            
+            let items = evaluateExpression(iterable, vars);
+            
+            // Handle enumerate
+            if (iterable.includes('enumerate(')) {
+                const enumMatch = iterable.match(/enumerate\(([^,]+)(?:,\s*start=(\d+))?\)/);
+                if (enumMatch) {
+                    const listName = enumMatch[1].trim();
+                    const start = enumMatch[2] ? parseInt(enumMatch[2]) : 0;
+                    const originalList = vars[listName];
+                    if (Array.isArray(originalList)) {
+                        items = originalList.map((item, idx) => [idx + start, item]);
+                    }
+                }
+            }
+            
+            // Find loop body
+            let loopBody = [];
+            let j = startLine + 1;
+            while (j < lines.length && (lines[j].startsWith('    ') || lines[j].trim() === '')) {
+                if (lines[j].trim()) {
+                    loopBody.push(lines[j].trim());
+                }
+                j++;
+            }
+            
+            let output = '';
+            
+            // Execute loop
+            if (Array.isArray(items)) {
+                for (let item of items) {
+                    if (loopVar2 && Array.isArray(item)) {
+                        vars[loopVar1] = item[0];
+                        vars[loopVar2] = item[1];
+                    } else {
+                        vars[loopVar1] = item;
+                    }
+                    
+                    for (let bodyLine of loopBody) {
+                        if (bodyLine.includes('print(')) {
+                            output += executePrint(bodyLine, vars) + '\n';
+                        } else if (bodyLine.includes('=')) {
+                            executeAssignment(bodyLine, vars);
+                        }
+                    }
+                }
+            }
+            
+            return { output, nextLine: j };
+        }
+        
+        function captureFunction(lines, startLine) {
+            const defLine = lines[startLine].trim();
+            const match = defLine.match(/def\s+(\w+)\((.*?)\):/);
+            
+            if (!match) return { type: 'function', name: '', params: [], body: [], endLine: startLine + 1 };
+            
+            const funcName = match[1];
+            const params = match[2] ? match[2].split(',').map(p => p.trim()) : [];
+            
+            let body = [];
+            let j = startLine + 1;
+            while (j < lines.length && (lines[j].startsWith('    ') || lines[j].trim() === '')) {
+                if (lines[j].trim() && !lines[j].trim().startsWith('"""')) {
+                    body.push(lines[j].trim());
+                }
+                j++;
+            }
+            
+            return { type: 'function', name: funcName, params, body, endLine: j };
+        }
+        
+        function executeFunction(func, callLine, vars) {
+            // Extract arguments from call
+            const argsMatch = callLine.match(/\((.*)\)/);
+            const args = argsMatch && argsMatch[1] ? argsMatch[1].split(',').map(a => evaluateExpression(a.trim(), vars)) : [];
+            
+            // Create local scope
+            const localVars = { ...vars };
+            func.params.forEach((param, idx) => {
+                if (args[idx] !== undefined) {
+                    localVars[param] = args[idx];
+                }
+            });
+            
+            let output = '';
+            for (let line of func.body) {
+                if (line.includes('print(')) {
+                    output += executePrint(line, localVars) + '\n';
+                } else if (line.includes('=')) {
+                    executeAssignment(line, localVars);
+                }
+            }
+            
+            return output;
+        }
+        
+        function evaluateExpression(expr, vars) {
+            expr = expr.trim();
+            
+            // Handle strings
+            if ((expr.startsWith('"') && expr.endsWith('"')) || 
+                (expr.startsWith("'") && expr.endsWith("'"))) {
+                return expr.slice(1, -1);
+            }
+            
+            // Handle f-strings
+            if (expr.startsWith('f"') || expr.startsWith("f'")) {
+                let str = expr.slice(2, -1);
+                str = str.replace(/\{([^}]+)\}/g, (match, varName) => {
+                    varName = varName.trim();
+                    
+                    // Handle formatting
+                    if (varName.includes(':')) {
+                        const parts = varName.split(':');
+                        const variable = parts[0].trim();
+                        const format = parts[1].trim();
+                        
+                        let value = vars[variable] !== undefined ? vars[variable] : evaluateExpression(variable, vars);
+                        
+                        if (format.includes('f')) {
+                            const decimals = parseInt(format.match(/\.(\d+)/)?.[1] || '2');
+                            return Number(value).toFixed(decimals);
+                        }
+                        return value;
+                    }
+                    
+                    if (vars[varName] !== undefined) {
+                        return vars[varName];
+                    }
+                    try {
+                        return evaluateExpression(varName, vars);
+                    } catch {
+                        return match;
+                    }
+                });
+                return str;
+            }
+            
+            // Handle variables
+            if (vars[expr] !== undefined) {
+                return vars[expr];
+            }
+            
+            // Handle lists
+            if (expr.startsWith('[') && expr.endsWith(']')) {
+                const content = expr.slice(1, -1);
+                if (!content) return [];
+                const items = content.split(',').map(item => {
+                    item = item.trim();
+                    if (item.startsWith('"') || item.startsWith("'")) {
+                        return item.slice(1, -1);
+                    }
+                    return evaluateExpression(item, vars);
+                });
+                return items;
+            }
+            
+            // Handle dictionaries
+            if (expr.startsWith('{') && expr.endsWith('}')) {
+                const content = expr.slice(1, -1);
+                if (!content) return {};
+                // Simplified dict parsing
+                return {};
+            }
+            
+            // Handle range()
+            if (expr.startsWith('range(')) {
+                const argsMatch = expr.match(/range\((.*)\)/);
+                if (argsMatch) {
+                    const args = argsMatch[1].split(',').map(x => parseInt(x.trim()));
+                    const start = args.length === 1 ? 0 : args[0];
+                    const end = args.length === 1 ? args[0] : args[1];
+                    const step = args.length === 3 ? args[2] : 1;
+                    const result = [];
+                    for (let i = start; i < end; i += step) {
+                        result.push(i);
+                    }
+                    return result;
+                }
+            }
+            
+            // Handle len()
+            if (expr.startsWith('len(')) {
+                const varMatch = expr.match(/len\((\w+)\)/);
+                if (varMatch) {
+                    const varName = varMatch[1];
+                    if (vars[varName] && (Array.isArray(vars[varName]) || typeof vars[varName] === 'string')) {
+                        return vars[varName].length;
+                    }
+                }
+            }
+            
+            // Handle list/dict access
+            if (expr.includes('[') && expr.includes(']')) {
+                const match = expr.match(/(\w+)\[['"]?([^'"]+)['"]?\]/);
+                if (match) {
+                    const varName = match[1];
+                    const key = match[2];
+                    if (vars[varName]) {
+                        if (Array.isArray(vars[varName])) {
+                            return vars[varName][parseInt(key)];
+                        }
+                        return vars[varName][key];
+                    }
+                }
+            }
+            
+            // Handle .lower()
+            if (expr.includes('.lower()')) {
+                const varName = expr.replace('.lower()', '').trim();
+                if (vars[varName]) {
+                    return String(vars[varName]).toLowerCase();
+                }
+            }
+            
+            // Handle .upper()
+            if (expr.includes('.upper()')) {
+                const varName = expr.replace('.upper()', '').trim();
+                if (vars[varName]) {
+                    return String(vars[varName]).toUpperCase();
+                }
+            }
+            
+            // Handle numbers
+            if (!isNaN(expr)) {
+                return Number(expr);
+            }
+            
+            // Handle booleans
+            if (expr === 'True') return true;
+            if (expr === 'False') return false;
+            
+            // Handle string concatenation
+            if (expr.includes('+')) {
+                const parts = expr.split('+').map(p => evaluateExpression(p.trim(), vars));
+                return parts.join('');
+            }
+            
+            // Handle string repetition
+            if (expr.includes('*')) {
+                const parts = expr.split('*').map(p => p.trim());
+                if (parts.length === 2) {
+                    const str = evaluateExpression(parts[0], vars);
+                    const num = evaluateExpression(parts[1], vars);
+                    if (typeof str === 'string' && !isNaN(num)) {
+                        return str.repeat(Number(num));
+                    }
+                }
+            }
+            
+            return expr;
+        }
+        
+        function copyCode(button) {
+            const container = button.closest('.code-editor-container');
+            const editor = container.querySelector('.code-editor');
+            
+            navigator.clipboard.writeText(editor.value).then(() => {
+                const originalText = button.textContent;
+                button.textContent = 'Copied!';
+                button.style.background = '#28a745';
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = '#667eea';
+                }, 2000);
+            }).catch(err => {
+                alert('Failed to copy code');
+            });
+        }
+        
+        function resetCode(button) {
+            const container = button.closest('.code-editor-container');
+            const editor = container.querySelector('.code-editor');
+            const output = container.querySelector('.output-container');
+            
+            if (originalCode.has(editor)) {
+                editor.value = originalCode.get(editor);
+            }
+            
+            output.classList.add('hidden');
+            output.textContent = '';
+            
+            const originalText = button.textContent;
+            button.textContent = 'Reset!';
+            button.style.background = '#28a745';
+            
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.style.background = '#6c757d';
+            }, 1000);
+        }
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                
+                if (targetSection) {
+                    targetSection.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Make textareas auto-resize
+        document.querySelectorAll('.code-editor').forEach(editor => {
+            editor.addEventListener('input', function() {
+                this.style.height = 'auto';
+                this.style.height = this.scrollHeight + 'px';
+            });
+            
+            // Initial resize
+            editor.style.height = editor.scrollHeight + 'px';
+        });
+        
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            // Ctrl/Cmd + Enter to run code
+            if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+                const activeElement = document.activeElement;
+                if (activeElement.classList.contains('code-editor')) {
+                    const container = activeElement.closest('.code-editor-container');
+                    const runButton = container.querySelector('.btn-run');
+                    if (runButton) runButton.click();
+                }
+            }
+        });
+        
+        console.log('Python Quiz Tutorial - Interactive Learning Environment Loaded');
+        console.log('Tip: Press Ctrl+Enter (or Cmd+Enter on Mac) while in a code editor to run code!');
+    </script>
+</body>
+</html>
