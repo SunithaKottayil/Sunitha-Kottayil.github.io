@@ -33,12 +33,6 @@ Simulated internship project focused on customer churn and performance metrics.
 
 ---
 
-##  GitHub Stats
-
-![SunithaKottayil's GitHub stats](https://github-readme-stats.vercel.app/api?username=SunithaKottayil&show_icons=true&theme=default)
-
----
-
 ##  Let's Connect
 
 - [GitHub](https://github.com/SunithaKottayil)
