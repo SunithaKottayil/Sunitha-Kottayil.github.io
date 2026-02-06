@@ -1538,10 +1538,10 @@ for i, q in enumerate(questions):
     
     # Check answer
     if selected == q['correct']:
-        print("✅ Correct!")
+        print(" Correct!")
         score += 1
     else:
-        print(f"❌ Wrong! The answer was: {q['correct']}")
+        print(f" Wrong! The answer was: {q['correct']}")
 
 # Display final results
 print(f"\n{'='*50}")
@@ -1552,11 +1552,11 @@ percentage = (score / len(questions)) * 100
 print(f"Percentage: {percentage:.1f}%")
 
 if percentage >= 80:
-    print("Grade: Excellent! 🌟")
+    print("Grade: Excellent! ")
 elif percentage >= 60:
-    print("Grade: Good job! 👍")
+    print("Grade: Good job! ")
 else:
-    print("Grade: Keep practicing! 📚")</textarea>
+    print("Grade: Keep practicing! ")</textarea>
                 <div class="output-container hidden"></div>
             </div>
 
@@ -1602,7 +1602,7 @@ What is 10 / 2?,3,4,5,5"""
 def display_welcome():
     """Display welcome message"""
     print("="*60)
-    print(" "*15 + "🧠 QUIZ MASTER 3000 🧠")
+    print(" "*15 + " QUIZ MASTER 3000 ")
     print("="*60)
     print("Test your knowledge with this interactive quiz!")
     print("="*60)
@@ -1633,13 +1633,13 @@ def display_results(score, total):
     print(f"Percentage: {percentage:.1f}%")
     
     if percentage >= 90:
-        print("Grade: A - Outstanding! 🌟")
+        print("Grade: A - Outstanding! ")
     elif percentage >= 80:
-        print("Grade: B - Great job! 👍")
+        print("Grade: B - Great job! ")
     elif percentage >= 70:
-        print("Grade: C - Good effort! 📚")
+        print("Grade: C - Good effort! ")
     else:
-        print("Grade: Keep studying! 💪")
+        print("Grade: Keep studying! ")
     print(f"\n{'='*60}")
 
 def run_quiz(questions):
@@ -1669,10 +1669,10 @@ def run_quiz(questions):
         
         # Check if correct
         if check_answer(selected, question['correct']):
-            print("\n✅ Correct!")
+            print("\n Correct!")
             score += 1
         else:
-            print(f"\n❌ Wrong! Answer: {question['correct']}")
+            print(f"\n Wrong! Answer: {question['correct']}")
     
     display_results(score, total_questions)
 
@@ -1682,7 +1682,7 @@ def main():
     questions = load_questions()
     print(f"\nLoaded {len(questions)} questions!")
     run_quiz(questions)
-    print("\n🎉 Thanks for playing!\n")
+    print("\n Thanks for playing!\n")
 
 # Run the program
 main()</textarea>
@@ -1690,7 +1690,7 @@ main()</textarea>
             </div>
 
             <div class="alert alert-success">
-                <strong>🎉 Congratulations!</strong> You now have a complete, working quiz application!
+                <strong> Congratulations!</strong> You now have a complete, working quiz application!
             </div>
         </section>
 
@@ -1699,7 +1699,7 @@ main()</textarea>
 
           <!-- Footer -->
         <footer style="text-align: center; padding: 40px 20px; color: #666;">
-            <p>Happy Coding! 🎉</p>
+            <p>Happy Coding! </p>
             <p style="margin-top: 10px;">Remember: The best way to learn is by doing. Experiment, break things, and have fun!</p>
         </footer>
     </div>
