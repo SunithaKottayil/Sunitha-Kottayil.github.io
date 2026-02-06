@@ -50,8 +50,8 @@ Simulated internship project focused on customer churn and performance metrics.
 
 ##  Personal Tagline
 
-**Data Enthusiast | Python programmor | Typescript   & C# Developer | Power BI Specialist | Git Advocate | Transforming Data into Stories**
+**Data Enthusiast | Python programmor | Typescript   & C# Developer | Power BI Specialist | System Developer | Transforming Data into Stories**
 
 ---
 
-> _Thanks for visiting! Feel free to check out my projects and connect with me._  
+> _Thanks for visiting! 
