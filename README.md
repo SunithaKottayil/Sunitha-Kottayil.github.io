@@ -35,9 +35,9 @@ Simulated internship project focused on customer churn and performance metrics.
 
 ##  Let's Connect
 
-- [GitHub](https://github.com/SunithaKottayil)
-- [LinkedIn](www.linkedin.com/in/sunitha-kottayil) 
-- [Email](vgsuniashok@gmail.com)
+- GitHub (https://github.com/SunithaKottayil)
+- LinkedIn (www.linkedin.com/in/sunitha-kottayil) 
+- Email (vgsuniashok@gmail.com)
 - Website (https://sunithakottayil.github.io/Sunitha-Kottayil.github.io/)
 
 ---
