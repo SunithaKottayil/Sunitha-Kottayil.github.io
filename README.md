@@ -2,7 +2,7 @@
 
 <img align="right" src="https://avatars.githubusercontent.com/u/168712946?v=4" width="150" />
 
-Welcome to my GitHub profile! I'm a junior Data Technician with a deep passion for Data analytics and software development. I enjoy transforming raw data into actionable insights and building user-focused solutions using Python,C#, typescript  Power BI, and visualization tools.
+Welcome to my GitHub profile! I am a junior Data Technician with a deep passion for Data analytics and software development. I enjoy transforming raw data into actionable insights and building user-focused solutions using Python,C#, typescript  Power BI, and visualization tools.
 
 ---
 
