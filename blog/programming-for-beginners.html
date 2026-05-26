@@ -3,998 +3,1510 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Programming Fundamentals &mdash; Complete Guide</title>
+<title>Programming Fundamentals</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=Nunito+Sans:opsz,wght@6..12,300;6..12,400;6..12,500;6..12,600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
 :root{
-  --bg:#f5f4f0;--sf:#fff;--b1:#e0ded8;--b2:#ccc9c1;
-  --tx:#1c1b18;--t2:#575550;--t3:#9a9690;
-  --bl:#2563eb;--bll:#eff6ff;--blb:#bfdbfe;
-  --gn:#15803d;--gnl:#f0fdf4;--am:#92400e;--aml:#fffbeb;
-  --rd:#dc2626;--rdl:#fef2f2;
-  --cd:#18181b;--cdf:#d4d0c8;
-  --r:5px;
-  --sans:"Nunito Sans",system-ui,sans-serif;
-  --serif:"Lora",Georgia,serif;
-  --mono:"JetBrains Mono",monospace;
+  --black:#0d0d0d;
+  --white:#fafaf8;
+  --ink:#1a1a18;
+  --muted:#6b6b65;
+  --faint:#e8e8e4;
+  --rule:#d4d4ce;
+  --accent:#2d5a27;
+  --accent-light:#edf4eb;
+  --code-bg:#1c1c1a;
+  --code-fg:#a8d89a;
+  --serif:'Instrument Serif',Georgia,serif;
+  --sans:'DM Sans',sans-serif;
+  --mono:'DM Mono',monospace;
+  --max:1100px;
+  --col:680px;
 }
-html{font-size:15px;scroll-behavior:smooth}
-body{font-family:var(--sans);background:var(--bg);color:var(--tx);line-height:1.65;min-height:100vh}
 
-/* TOP BAR */
-.bar{position:sticky;top:0;z-index:300;height:48px;background:var(--sf);border-bottom:1px solid var(--b1);display:flex;align-items:center;justify-content:space-between;padding:0 1.5rem}
-.bar-l{display:flex;align-items:center;gap:10px}
-.bar-ico{width:24px;height:24px;background:var(--bl);border-radius:4px;display:grid;place-items:center;flex-shrink:0}
-.bar-ico svg{width:13px;height:13px;fill:#fff}
-.bar-t{font-size:13.5px;font-weight:600;letter-spacing:-.01em}
-.bar-r{display:flex;align-items:center;gap:1rem}
-.bar-c{font-family:var(--mono);font-size:11px;color:var(--t3);letter-spacing:.04em}
-.pb{width:110px;height:2px;background:var(--b1);border-radius:1px;overflow:hidden}
-.pf{height:100%;background:var(--bl);width:7.14%;transition:width .35s ease}
+html{scroll-behavior:smooth;font-size:16px}
 
-/* SHELL */
-.shell{display:grid;grid-template-columns:200px 1fr;max-width:1200px;margin:0 auto;padding:0 1rem}
+body{
+  font-family:var(--sans);
+  background:var(--white);
+  color:var(--ink);
+  line-height:1.7;
+  min-height:100vh;
+}
 
-/* SIDEBAR */
-.sidebar{border-right:1px solid var(--b1);padding:1.5rem 0 3rem;position:sticky;top:48px;height:calc(100vh - 48px);overflow-y:auto}
-.sidebar::-webkit-scrollbar{width:3px}.sidebar::-webkit-scrollbar-thumb{background:var(--b1)}
-.sb-lbl{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--t3);padding:.75rem 1rem .3rem;display:block}
-.sb-i{display:flex;align-items:center;gap:7px;padding:.38rem 1rem;font-size:12.5px;color:var(--t2);cursor:pointer;border-left:2px solid transparent;transition:all .12s;line-height:1.35;user-select:none}
-.sb-i:hover{color:var(--tx);background:#faf9f7}
-.sb-i.on{color:var(--bl);border-left-color:var(--bl);background:var(--bll);font-weight:600}
-.sb-n{font-family:var(--mono);font-size:9.5px;color:var(--t3);flex-shrink:0;width:16px}
-.sb-i.on .sb-n{color:var(--bl)}
+/* ── MASTHEAD ───────────────────────────────────── */
+.masthead{
+  border-bottom:1px solid var(--rule);
+  padding:0 2rem;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  height:56px;
+  position:sticky;
+  top:0;
+  background:rgba(250,250,248,.92);
+  backdrop-filter:blur(8px);
+  z-index:100;
+}
+.masthead-title{
+  font-family:var(--mono);
+  font-size:13px;
+  font-weight:400;
+  color:var(--muted);
+  letter-spacing:.04em;
+  text-transform:uppercase;
+}
+.progress-track{
+  width:160px;
+  height:2px;
+  background:var(--faint);
+  border-radius:1px;
+  overflow:hidden;
+}
+.progress-fill{
+  height:100%;
+  background:var(--accent);
+  border-radius:1px;
+  width:10%;
+  transition:width .4s cubic-bezier(.4,0,.2,1);
+}
+.section-label{
+  font-family:var(--mono);
+  font-size:12px;
+  color:var(--muted);
+  letter-spacing:.06em;
+}
 
-/* MAIN */
-.main{padding:0 0 4rem 2.5rem;min-width:0}
+/* ── HERO ───────────────────────────────────────── */
+.hero{
+  max-width:var(--max);
+  margin:0 auto;
+  padding:6rem 2rem 4rem;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:4rem;
+  align-items:end;
+  border-bottom:1px solid var(--rule);
+}
+.hero-eyebrow{
+  font-family:var(--mono);
+  font-size:12px;
+  color:var(--accent);
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  margin-bottom:1.25rem;
+}
+.hero-heading{
+  font-family:var(--serif);
+  font-size:clamp(2.4rem,5vw,4rem);
+  line-height:1.1;
+  font-weight:400;
+  color:var(--black);
+  margin-bottom:1.5rem;
+}
+.hero-heading em{
+  font-style:italic;
+  color:var(--accent);
+}
+.hero-body{
+  font-size:1.05rem;
+  color:var(--muted);
+  max-width:400px;
+  line-height:1.8;
+}
+.hero-aside{
+  font-family:var(--mono);
+  font-size:13px;
+  color:var(--muted);
+  line-height:2;
+  border-left:2px solid var(--rule);
+  padding-left:2rem;
+}
+.hero-aside strong{
+  color:var(--ink);
+  display:block;
+  font-weight:500;
+  margin-bottom:.5rem;
+  font-size:11px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
 
-/* HERO */
-.hero{padding:2.5rem 0 2rem;border-bottom:1px solid var(--b1)}
-.hero-bdg{display:inline-flex;align-items:center;gap:5px;background:var(--bll);border:1px solid var(--blb);color:var(--bl);font-size:11px;font-weight:700;padding:2px 9px 2px 7px;border-radius:20px;margin-bottom:1rem}
-.hero-bdg::before{content:"";width:5px;height:5px;background:var(--bl);border-radius:50%}
-.hero h1{font-family:var(--serif);font-size:clamp(1.7rem,3.5vw,2.6rem);font-weight:500;line-height:1.18;letter-spacing:-.015em;margin-bottom:.8rem}
-.hero h1 em{font-style:italic;color:var(--bl)}
-.hero-sub{font-size:.925rem;color:var(--t2);max-width:580px;line-height:1.7;margin-bottom:1.5rem}
-.stats{display:flex;gap:2rem}
-.stat-n{font-family:var(--serif);font-size:1.3rem;font-weight:500;display:block}
-.stat-l{font-size:11px;color:var(--t3)}
+/* ── LAYOUT ─────────────────────────────────────── */
+.page-body{
+  max-width:var(--max);
+  margin:0 auto;
+  padding:0 2rem;
+  display:grid;
+  grid-template-columns:200px 1fr;
+  gap:0 4rem;
+  min-height:80vh;
+}
 
-/* SECTIONS */
-.sec{display:none;padding:2rem 0 1rem;animation:fadeup .22s ease}
-.sec.on{display:block}
-@keyframes fadeup{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-.sec-top{display:grid;grid-template-columns:1fr auto;gap:1rem;align-items:start;margin-bottom:1.5rem;padding-bottom:1.25rem;border-bottom:1px solid var(--b1)}
-.kk{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--bl);margin-bottom:.4rem;display:block}
-.sh{font-family:var(--serif);font-size:1.75rem;font-weight:500;line-height:1.2;letter-spacing:-.01em;margin-bottom:.6rem}
-.si{font-size:.9rem;color:var(--t2);line-height:1.72;max-width:580px}
-.st{font-family:var(--mono);font-size:10px;color:var(--t3);letter-spacing:.06em}
+/* ── SIDEBAR NAV ────────────────────────────────── */
+.sidebar{
+  padding:3rem 0;
+  position:sticky;
+  top:56px;
+  height:calc(100vh - 56px);
+  overflow-y:auto;
+}
+.sidebar-nav{
+  list-style:none;
+}
+.sidebar-nav li{
+  border-bottom:1px solid var(--faint);
+}
+.sidebar-nav a{
+  display:block;
+  padding:.7rem 0;
+  font-family:var(--mono);
+  font-size:11.5px;
+  color:var(--muted);
+  text-decoration:none;
+  letter-spacing:.04em;
+  transition:color .2s;
+  cursor:pointer;
+}
+.sidebar-nav a:hover{color:var(--ink)}
+.sidebar-nav a.active{
+  color:var(--accent);
+  font-weight:500;
+}
+.sidebar-num{
+  display:inline-block;
+  width:24px;
+  color:var(--rule);
+}
 
-/* TWO COLUMN */
-.two{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin:1.25rem 0}
+/* ── CONTENT ────────────────────────────────────── */
+.content{
+  padding:3rem 0 6rem;
+}
 
-/* PROSE */
-.prose{font-size:.9rem;color:var(--t2);line-height:1.75}
-.prose p{margin-bottom:.75rem}
-.prose p:last-child{margin-bottom:0}
-.prose strong{color:var(--tx);font-weight:600}
+/* ── SECTION ────────────────────────────────────── */
+.section{
+  display:none;
+  animation:fadeUp .35s ease both;
+}
+.section.active{display:block}
 
-/* CALLOUT */
-.co{display:flex;gap:.75rem;padding:.9rem 1rem;border-radius:var(--r);margin:.75rem 0;border:1px solid}
-.co.bl{background:var(--bll);border-color:var(--blb);color:#1e40af}
-.co.am{background:var(--aml);border-color:#fcd34d;color:var(--am)}
-.co.gn{background:var(--gnl);border-color:#86efac;color:var(--gn)}
-.co-ico{font-size:.9rem;flex-shrink:0;margin-top:1px}
-.co-lbl{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:2px;opacity:.75}
-.co p{font-size:.85rem;line-height:1.65}
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(12px)}
+  to{opacity:1;transform:translateY(0)}
+}
 
-/* MINI GRID */
-.mg{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:1px;background:var(--b1);border:1px solid var(--b1);border-radius:var(--r);overflow:hidden;margin:.75rem 0}
-/* WIDE GRID 3-col */
-.wg{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--b1);border:1px solid var(--b1);border-radius:var(--r);overflow:hidden;margin:.75rem 0}
-.mc{background:var(--sf);padding:1.1rem;transition:background .13s}
-.mc:hover{background:#faf9f6}
-.mc-t{font-family:var(--mono);font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--t3);margin-bottom:.4rem;display:block}
-.mc h4{font-family:var(--serif);font-size:.975rem;font-weight:500;color:var(--tx);margin-bottom:.35rem;line-height:1.3}
-.mc p{font-size:.825rem;color:var(--t2);line-height:1.6}
+.section-header{
+  margin-bottom:3rem;
+  padding-bottom:2rem;
+  border-bottom:1px solid var(--rule);
+}
+.section-num{
+  font-family:var(--mono);
+  font-size:12px;
+  color:var(--muted);
+  letter-spacing:.08em;
+  display:block;
+  margin-bottom:.75rem;
+}
+.section-title{
+  font-family:var(--serif);
+  font-size:2.4rem;
+  line-height:1.15;
+  font-weight:400;
+  color:var(--black);
+}
+.section-intro{
+  margin-top:1rem;
+  font-size:1.05rem;
+  color:var(--muted);
+  max-width:580px;
+  line-height:1.8;
+}
 
-/* CODE BLOCK */
-.cb{background:var(--cd);border-radius:var(--r);overflow:hidden;margin:.75rem 0}
-.cb-h{display:flex;align-items:center;justify-content:space-between;padding:.5rem .9rem;border-bottom:1px solid #27272a}
-.cb-l{font-family:var(--mono);font-size:10px;color:#52525b;letter-spacing:.05em;text-transform:uppercase}
-.dots{display:flex;gap:4px}.dots span{width:8px;height:8px;border-radius:50%;background:#3f3f46}
-.cb-b{padding:1rem 1.1rem;font-family:var(--mono);font-size:12.5px;color:var(--cdf);line-height:1.85;white-space:pre;overflow-x:auto}
-.kw{color:#c792ea}.str{color:#c3e88d}.cm{color:#4a4a52;font-style:italic}.fn{color:#82aaff}.num{color:#f78c6c}.cl{color:#ffcb6b}
+/* ── CONCEPT GRID ───────────────────────────────── */
+.concept-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:1px;
+  background:var(--rule);
+  border:1px solid var(--rule);
+  margin:2.5rem 0;
+}
+.concept-card{
+  background:var(--white);
+  padding:1.75rem;
+  transition:background .2s;
+  cursor:default;
+}
+.concept-card:hover{background:#f4f4f1}
+.concept-card-label{
+  font-family:var(--mono);
+  font-size:10.5px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--accent);
+  margin-bottom:.75rem;
+}
+.concept-card h3{
+  font-family:var(--serif);
+  font-size:1.25rem;
+  font-weight:400;
+  color:var(--black);
+  margin-bottom:.6rem;
+}
+.concept-card p{
+  font-size:.9rem;
+  color:var(--muted);
+  line-height:1.7;
+}
 
-/* TABS */
-.tabs{border:1px solid var(--b1);border-radius:var(--r);overflow:hidden;margin:.75rem 0}
-.tb-bar{display:flex;border-bottom:1px solid var(--b1);background:var(--bg);overflow-x:auto}
-.tb-btn{font-family:var(--mono);font-size:11px;letter-spacing:.04em;padding:.5rem .9rem;border:none;background:none;color:var(--t3);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .13s}
-.tb-btn:hover{color:var(--tx)}.tb-btn.on{color:var(--bl);border-bottom-color:var(--bl);background:var(--sf)}
-.tb-p{display:none;padding:1.1rem}.tb-p.on{display:block}
+/* ── ANALOGY BOX ────────────────────────────────── */
+.analogy{
+  border-left:3px solid var(--accent);
+  padding:1.25rem 1.5rem;
+  margin:2rem 0;
+  background:var(--accent-light);
+}
+.analogy-label{
+  font-family:var(--mono);
+  font-size:10.5px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--accent);
+  margin-bottom:.5rem;
+}
+.analogy p{
+  font-size:.95rem;
+  color:#2a3d28;
+  line-height:1.7;
+}
 
-/* DEMO */
-.dm{border:1px solid var(--b1);border-radius:var(--r);overflow:hidden;margin:.75rem 0;background:var(--sf)}
-.dm-h{display:flex;align-items:center;gap:7px;padding:.5rem .9rem;border-bottom:1px solid var(--b1);background:var(--bg)}
-.dm-d{width:6px;height:6px;border-radius:50%;background:var(--b2)}
-.dm-t{font-family:var(--mono);font-size:10px;color:var(--t3);letter-spacing:.05em;text-transform:uppercase}
-.dm-b{padding:1.1rem}
-.dm-p{font-size:.85rem;color:var(--t2);margin-bottom:.75rem;line-height:1.6}
-.btns{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:.75rem}
-.btn{font-family:var(--sans);font-size:12.5px;font-weight:500;padding:.38rem .85rem;border:1px solid var(--b2);background:var(--sf);color:var(--t2);border-radius:var(--r);cursor:pointer;transition:all .13s}
-.btn:hover{border-color:var(--bl);color:var(--bl);background:var(--bll)}
-.btn.p{background:var(--bl);color:#fff;border-color:var(--bl)}.btn.p:hover{background:#1d4ed8;border-color:#1d4ed8;color:#fff}
-.term{background:var(--cd);border-radius:4px;padding:.75rem 1rem;font-family:var(--mono);font-size:12px;color:#6b7280;min-height:44px;line-height:1.8;white-space:pre-wrap;overflow-x:auto}
-.tp{color:#3f3f46}.to{color:#b0ada6}.tg{color:#86c88a}.te{color:#e07070}.tb2{color:#7baaf7}
-input[type=number]{font-family:var(--mono);font-size:12.5px;padding:.35rem .65rem;border:1px solid var(--b2);border-radius:var(--r);background:var(--sf);color:var(--tx);outline:none;width:130px;transition:border-color .13s}
-input[type=number]:focus{border-color:var(--bl)}
+/* ── CODE BLOCK ─────────────────────────────────── */
+.code-block{
+  background:var(--code-bg);
+  border-radius:4px;
+  margin:2rem 0;
+  overflow:hidden;
+}
+.code-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:.6rem 1rem;
+  border-bottom:1px solid #2e2e2b;
+}
+.code-lang{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.08em;
+  color:#5a5a55;
+  text-transform:uppercase;
+}
+.code-dots{
+  display:flex;
+  gap:5px;
+}
+.code-dots span{
+  width:10px;height:10px;border-radius:50%;
+}
+.code-dots span:nth-child(1){background:#3a3a38}
+.code-dots span:nth-child(2){background:#3a3a38}
+.code-dots span:nth-child(3){background:#3a3a38}
+.code-body{
+  padding:1.5rem;
+  font-family:var(--mono);
+  font-size:13.5px;
+  color:var(--code-fg);
+  line-height:2;
+  white-space:pre;
+  overflow-x:auto;
+}
+.kw{color:#c792ea}
+.str{color:#c3e88d}
+.cm{color:#4a4a45;font-style:italic}
+.fn{color:#82aaff}
+.num{color:#f78c6c}
 
-/* QUIZ */
-.qz{border:1px solid var(--b1);border-radius:var(--r);overflow:hidden;margin:.75rem 0;background:var(--sf)}
-.qz-q{padding:.75rem 1rem;font-size:.875rem;font-weight:600;color:var(--tx);background:var(--bg);border-bottom:1px solid var(--b1);line-height:1.5}
-.qz-o{list-style:none}
-.qz-o li{display:flex;align-items:center;gap:8px;padding:.65rem 1rem;border-bottom:1px solid var(--b1);font-size:.85rem;color:var(--t2);cursor:pointer;transition:background .12s}
-.qz-o li:last-child{border:none}.qz-o li:hover{background:var(--bg);color:var(--tx)}
-.qd{width:14px;height:14px;border:1.5px solid var(--b2);border-radius:50%;flex-shrink:0;transition:all .13s}
-.qz-o li.ok{background:var(--gnl);color:var(--gn)}.qz-o li.ok .qd{background:var(--gn);border-color:var(--gn)}
-.qz-o li.bad{background:var(--rdl);color:var(--rd)}.qz-o li.bad .qd{background:var(--rd);border-color:var(--rd)}
+/* ── INTERACTIVE DEMO ───────────────────────────── */
+.demo{
+  border:1px solid var(--rule);
+  border-radius:4px;
+  overflow:hidden;
+  margin:2rem 0;
+}
+.demo-header{
+  background:var(--faint);
+  padding:.75rem 1.25rem;
+  border-bottom:1px solid var(--rule);
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+.demo-body{
+  padding:1.5rem;
+}
+.demo-row{
+  display:flex;
+  gap:.75rem;
+  flex-wrap:wrap;
+  margin-bottom:1rem;
+}
+.btn{
+  font-family:var(--mono);
+  font-size:12px;
+  letter-spacing:.04em;
+  padding:.55rem 1.1rem;
+  border:1px solid var(--rule);
+  background:var(--white);
+  color:var(--ink);
+  border-radius:3px;
+  cursor:pointer;
+  transition:all .15s;
+}
+.btn:hover{
+  border-color:var(--accent);
+  color:var(--accent);
+  background:var(--accent-light);
+}
+.btn-primary{
+  background:var(--accent);
+  color:var(--white);
+  border-color:var(--accent);
+}
+.btn-primary:hover{
+  background:#1f4019;
+  color:var(--white);
+  border-color:#1f4019;
+}
+.terminal{
+  background:var(--code-bg);
+  border-radius:3px;
+  padding:1rem 1.25rem;
+  font-family:var(--mono);
+  font-size:13px;
+  color:#a0a09a;
+  min-height:52px;
+  line-height:1.8;
+  white-space:pre-wrap;
+  margin-top:1rem;
+}
+.terminal .prompt{color:#4a4a45}
+.terminal .output{color:var(--code-fg)}
+.terminal .error{color:#e06c75}
+input[type=number],input[type=text]{
+  font-family:var(--mono);
+  font-size:13px;
+  padding:.5rem .8rem;
+  border:1px solid var(--rule);
+  border-radius:3px;
+  background:var(--white);
+  color:var(--ink);
+  outline:none;
+  width:160px;
+}
+input[type=number]:focus,input[type=text]:focus{
+  border-color:var(--accent);
+}
 
-/* TABLE */
-.tbl{width:100%;border-collapse:collapse;font-size:.85rem;margin:.75rem 0;background:var(--sf);border:1px solid var(--b1);border-radius:var(--r);overflow:hidden}
-.tbl th{font-family:var(--mono);font-size:9.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--t3);font-weight:400;text-align:left;padding:.55rem .9rem;background:var(--bg);border-bottom:1px solid var(--b1)}
-.tbl td{padding:.6rem .9rem;border-bottom:1px solid var(--b1);color:var(--t2);vertical-align:top;line-height:1.5}
-.tbl tr:last-child td{border-bottom:none}.tbl tr:hover td{background:#faf9f6}
-.tbl td:first-child{font-weight:600;color:var(--tx)}
+/* ── QUIZ ───────────────────────────────────────── */
+.quiz{
+  margin:2rem 0;
+  border:1px solid var(--rule);
+  border-radius:4px;
+  overflow:hidden;
+}
+.quiz-q{
+  padding:1rem 1.25rem;
+  background:var(--faint);
+  border-bottom:1px solid var(--rule);
+  font-size:.95rem;
+  font-weight:500;
+  color:var(--ink);
+}
+.quiz-opts{
+  list-style:none;
+}
+.quiz-opts li{
+  padding:.9rem 1.25rem;
+  border-bottom:1px solid var(--faint);
+  cursor:pointer;
+  font-size:.9rem;
+  color:var(--muted);
+  transition:all .15s;
+  display:flex;
+  align-items:center;
+  gap:.75rem;
+}
+.quiz-opts li:last-child{border-bottom:none}
+.quiz-opts li:hover{background:var(--faint);color:var(--ink)}
+.quiz-marker{
+  width:18px;height:18px;
+  border:1px solid var(--rule);
+  border-radius:50%;
+  flex-shrink:0;
+  transition:all .15s;
+}
+.quiz-opts li.correct{background:#edf4eb;color:var(--accent)}
+.quiz-opts li.correct .quiz-marker{background:var(--accent);border-color:var(--accent)}
+.quiz-opts li.wrong{background:#fef2f2;color:#b91c1c}
+.quiz-opts li.wrong .quiz-marker{background:#ef4444;border-color:#ef4444}
 
-/* NOTE */
-.note{display:flex;gap:.65rem;padding:.8rem 1rem;background:var(--bg);border:1px solid var(--b1);border-radius:var(--r);margin:.75rem 0}
-.note-l{font-family:var(--mono);font-size:9.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--t3);white-space:nowrap;padding-top:1px}
-.note p{font-size:.85rem;color:var(--t2);line-height:1.65}.note strong{color:var(--tx)}
+/* ── NOTE ───────────────────────────────────────── */
+.note{
+  display:flex;
+  gap:1rem;
+  padding:1.25rem;
+  background:var(--faint);
+  border-radius:3px;
+  margin:2rem 0;
+  align-items:flex-start;
+}
+.note-icon{
+  font-family:var(--mono);
+  font-size:11px;
+  color:var(--muted);
+  letter-spacing:.06em;
+  white-space:nowrap;
+  padding-top:2px;
+  text-transform:uppercase;
+}
+.note p{
+  font-size:.9rem;
+  color:var(--muted);
+  line-height:1.7;
+}
+.note strong{color:var(--ink)}
 
-/* CHECKLIST */
-.chk{list-style:none}
-.chk li{display:flex;gap:7px;align-items:baseline;padding:.35rem 0;font-size:.85rem;color:var(--t2);border-bottom:1px solid var(--b1)}
-.chk li:last-child{border:none}
-.chk li::before{content:"--";color:var(--b2);font-family:var(--mono);flex-shrink:0;font-size:.75em}
+/* ── CHECKLIST ──────────────────────────────────── */
+.checklist{
+  list-style:none;
+  margin:1.5rem 0;
+}
+.checklist li{
+  padding:.5rem 0;
+  border-bottom:1px solid var(--faint);
+  font-size:.95rem;
+  color:var(--muted);
+  display:flex;
+  gap:.75rem;
+  align-items:baseline;
+}
+.checklist li::before{
+  content:'—';
+  color:var(--rule);
+  flex-shrink:0;
+  font-family:var(--mono);
+}
 
-/* BADGE */
-.bdg{display:inline-block;font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;padding:1px 6px;border-radius:3px;border:1px solid;vertical-align:middle;margin-left:4px}
-.bdg.new{color:var(--gn);border-color:#86efac;background:var(--gnl)}
+/* ── NAV CONTROLS ───────────────────────────────── */
+.nav-bar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:2rem 0 0;
+  border-top:1px solid var(--rule);
+  margin-top:3rem;
+}
+.nav-btn{
+  font-family:var(--mono);
+  font-size:12px;
+  letter-spacing:.06em;
+  padding:.65rem 1.25rem;
+  border:1px solid var(--rule);
+  background:transparent;
+  color:var(--muted);
+  border-radius:3px;
+  cursor:pointer;
+  transition:all .15s;
+  text-transform:uppercase;
+}
+.nav-btn:hover:not(:disabled){
+  border-color:var(--ink);
+  color:var(--ink);
+}
+.nav-btn:disabled{opacity:.3;cursor:default}
+.nav-btn.primary{
+  background:var(--accent);
+  color:#fff;
+  border-color:var(--accent);
+}
+.nav-btn.primary:hover{background:#1f4019;border-color:#1f4019}
+.nav-info{
+  font-family:var(--mono);
+  font-size:11px;
+  color:var(--muted);
+  letter-spacing:.06em;
+  text-align:center;
+}
 
-/* NAV */
-.navrow{display:flex;align-items:center;justify-content:space-between;padding:1.75rem 0 2.5rem;margin-top:1.25rem;border-top:1px solid var(--b1)}
-.nb{font-family:var(--sans);font-size:12.5px;font-weight:500;padding:.42rem 1.1rem;border:1px solid var(--b2);background:var(--sf);color:var(--t2);border-radius:var(--r);cursor:pointer;transition:all .13s}
-.nb:hover:not(:disabled){border-color:var(--tx);color:var(--tx)}.nb:disabled{opacity:.3;cursor:default}
-.nb.f{background:var(--bl);color:#fff;border-color:var(--bl)}.nb.f:hover:not(:disabled){background:#1d4ed8;border-color:#1d4ed8}
-.nc{font-family:var(--mono);font-size:10.5px;color:var(--t3);letter-spacing:.05em}
+/* ── COMPLETION ─────────────────────────────────── */
+.completion{
+  display:none;
+  margin:3rem 0 0;
+  padding:2.5rem;
+  border:1px solid var(--accent);
+  border-radius:4px;
+  background:var(--accent-light);
+  text-align:center;
+}
+.completion h3{
+  font-family:var(--serif);
+  font-size:1.8rem;
+  font-weight:400;
+  color:var(--accent);
+  margin-bottom:.75rem;
+}
+.completion p{
+  font-size:.95rem;
+  color:#2a3d28;
+}
 
-/* DONE */
-.done{display:none;margin:1.5rem 0 0;padding:1.75rem;border:1px solid #86efac;background:var(--gnl);border-radius:var(--r);text-align:center}
-.done h3{font-family:var(--serif);font-size:1.4rem;font-weight:500;color:var(--gn);margin-bottom:.4rem}
-.done p{font-size:.875rem;color:#166534;line-height:1.65}
+/* ── TABLE ──────────────────────────────────────── */
+.comparison-table{
+  width:100%;
+  border-collapse:collapse;
+  margin:2rem 0;
+  font-size:.9rem;
+}
+.comparison-table th{
+  font-family:var(--mono);
+  font-size:10.5px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--muted);
+  text-align:left;
+  padding:.75rem 1rem;
+  border-bottom:2px solid var(--rule);
+}
+.comparison-table td{
+  padding:.75rem 1rem;
+  border-bottom:1px solid var(--faint);
+  color:var(--ink);
+  vertical-align:top;
+}
+.comparison-table tr:hover td{background:var(--faint)}
 
-/* RESPONSIVE */
-@media(max-width:820px){.shell{grid-template-columns:1fr}.sidebar{display:none}.main{padding:0}.two{grid-template-columns:1fr}.wg{grid-template-columns:1fr 1fr}}
-@media(max-width:500px){.wg{grid-template-columns:1fr}}
+/* ── RESPONSIVE ─────────────────────────────────── */
+@media(max-width:768px){
+  .hero{grid-template-columns:1fr;gap:2rem}
+  .hero-aside{display:none}
+  .page-body{grid-template-columns:1fr}
+  .sidebar{display:none}
+  .section-title{font-size:1.8rem}
+}
 </style>
 </head>
 <body>
 
-<header class="bar">
-  <div class="bar-l">
-    <div class="bar-ico"><svg viewBox="0 0 16 16"><path d="M2 3h12v2H2zm0 4h8v2H2zm0 4h10v2H2z"/></svg></div>
-    <span class="bar-t">Programming Fundamentals</span>
-  </div>
-  <div class="bar-r">
-    <span class="bar-c" id="bc">01 / 14</span>
-    <div class="pb"><div class="pf" id="pf"></div></div>
+<!-- MASTHEAD -->
+<header class="masthead">
+  <span class="masthead-title">Programming Fundamentals</span>
+  <div style="display:flex;align-items:center;gap:1.5rem">
+    <span class="section-label" id="sectionLabel">01 / 10</span>
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
   </div>
 </header>
 
-<div class="shell">
-<nav class="sidebar">
-  <span class="sb-lbl" style="margin-top:1rem">Foundations</span>
-  <div class="sb-i on" onclick="go(1)" id="sb1"><span class="sb-n">01</span>What is programming</div>
-  <div class="sb-i" onclick="go(2)" id="sb2"><span class="sb-n">02</span>How computers think</div>
-  <div class="sb-i" onclick="go(3)" id="sb3"><span class="sb-n">03</span>Algorithms</div>
-  <div class="sb-i" onclick="go(4)" id="sb4"><span class="sb-n">04</span>Languages</div>
-  <span class="sb-lbl">Core concepts</span>
-  <div class="sb-i" onclick="go(5)" id="sb5"><span class="sb-n">05</span>Four building blocks</div>
-  <div class="sb-i" onclick="go(6)" id="sb6"><span class="sb-n">06</span>Data types</div>
-  <div class="sb-i" onclick="go(7)" id="sb7"><span class="sb-n">07</span>OOP intro</div>
-  <span class="sb-lbl">Practice</span>
-  <div class="sb-i" onclick="go(8)" id="sb8"><span class="sb-n">08</span>Problem-solving</div>
-  <div class="sb-i" onclick="go(9)" id="sb9"><span class="sb-n">09</span>Debugging</div>
-  <div class="sb-i" onclick="go(10)" id="sb10"><span class="sb-n">10</span>Code &amp; docs habits</div>
-  <span class="sb-lbl">Real world</span>
-  <div class="sb-i" onclick="go(11)" id="sb11"><span class="sb-n">11</span>Git &amp; version control</div>
-  <div class="sb-i" onclick="go(12)" id="sb12"><span class="sb-n">12</span>The web &amp; APIs</div>
-  <div class="sb-i" onclick="go(13)" id="sb13"><span class="sb-n">13</span>Common mistakes</div>
-  <div class="sb-i" onclick="go(14)" id="sb14"><span class="sb-n">14</span>Your roadmap</div>
-</nav>
-
-<main class="main">
-<div class="hero">
-  <div class="hero-bdg">Complete beginner guide &mdash; 14 sections</div>
-  <h1>Before you write <em>a single line</em> of code</h1>
-  <p class="hero-sub">Every concept a programmer actually needs &mdash; including the ones most tutorials skip. No assumed knowledge. Interactive examples throughout.</p>
-  <div class="stats">
-    <div><span class="stat-n">14</span><span class="stat-l">Sections</span></div>
-    <div><span class="stat-n">~75 min</span><span class="stat-l">Read time</span></div>
-    <div><span class="stat-n">0</span><span class="stat-l">Prerequisites</span></div>
-    <div><span class="stat-n">30+</span><span class="stat-l">Interactives</span></div>
-  </div>
-</div>
-
-<!-- S1 -->
-<article class="sec on" id="s1">
-<div class="sec-top"><div><span class="kk">01 &mdash; Foundation</span><h2 class="sh">What is programming?</h2><p class="si">Programming is expressing human intent as precise, unambiguous instructions a machine can execute reliably, every time. It is as much about thinking as it is about typing.</p></div><div><span class="st">~5 min</span></div></div>
-<div class="two">
+<!-- HERO -->
+<section class="hero">
   <div>
-    <div class="co bl"><span class="co-ico">&#x1F4CB;</span><div><div class="co-lbl">Analogy</div><p>Think of a recipe. It produces the same dish every time regardless of who follows it. A program is exactly that &mdash; except the cook is a machine that is perfectly literal, never improvises, and works at billions of steps per second.</p></div></div>
-    <div class="prose"><p>The word "computer" originally described a <strong>person</strong> who computed things by hand. Machines took over &mdash; but the word stuck. Programming is directing those machines.</p><p>Most beginners assume the hard part is memorising syntax. It is not. The hard part is <strong>learning to think precisely</strong> &mdash; leaving no ambiguity, no implicit assumption. Syntax is easy; you look it up.</p></div>
+    <p class="hero-eyebrow">Course Introduction</p>
+    <h1 class="hero-heading">Before you write<br><em>a single line</em> of code</h1>
+    <p class="hero-body">Ten concepts every programmer needs to understand — explained clearly, with interactive examples and no assumed knowledge.</p>
   </div>
-  <div class="mg">
-    <div class="mc"><span class="mc-t">01a</span><h4>Problem solving</h4><p>Programming begins with a problem. The craft is translating a fuzzy human need into something a machine can execute exactly.</p></div>
-    <div class="mc"><span class="mc-t">01b</span><h4>Decomposition</h4><p>Large problems become manageable when broken into small, independent pieces. One of the most durable mental habits programming builds.</p></div>
-    <div class="mc"><span class="mc-t">01c</span><h4>Precision</h4><p>Computers do exactly what they are told &mdash; not what you meant. Ambiguity is the root cause of nearly every bug you will encounter.</p></div>
-    <div class="mc"><span class="mc-t">01d</span><h4>Abstraction</h4><p>Good programmers hide complexity behind simple interfaces. You call a function without knowing how it works inside &mdash; that is abstraction.</p></div>
+  <div class="hero-aside">
+    <strong>What you will learn</strong>
+    01 — What is programming<br>
+    02 — How computers think<br>
+    03 — Algorithms<br>
+    04 — Languages<br>
+    05 — Core concepts<br>
+    06 — Data types<br>
+    07 — Problem-solving<br>
+    08 — Common mistakes<br>
+    09 — Your journey<br>
+    10 — Getting started
   </div>
-</div>
-<div class="dm"><div class="dm-h"><span class="dm-d"></span><span class="dm-t">Interactive &mdash; how ambiguous is natural language?</span></div><div class="dm-b"><p class="dm-p">Instructions that seem obvious to humans are full of gaps a computer cannot fill. Click to see examples.</p><div class="btns"><button class="btn" onclick="ambig()">Show example</button></div><div class="term" id="t1"><span class="tp">$</span> click above</div></div></div>
-<div class="note"><span class="note-l">History</span><p>Ada Lovelace wrote the first computer program in 1843 &mdash; for a machine that did not yet exist. She understood the conceptual framework of computation before the hardware caught up.</p></div>
-<div class="navrow"><button class="nb" disabled>&larr; Prev</button><span class="nc">1 / 14</span><button class="nb f" onclick="go(2)">Next &rarr;</button></div>
-</article>
+</section>
 
-<!-- S2 -->
-<article class="sec" id="s2">
-<div class="sec-top"><div><span class="kk">02 &mdash; Hardware</span><h2 class="sh">How computers think</h2><p class="si">Computers do not think &mdash; they switch. Understanding this removes the mystery from programming and explains why precision matters so much.</p></div><div><span class="st">~5 min</span></div></div>
-<div class="two">
-  <div class="prose">
-    <p>At the lowest level, a computer's entire operation is identical to a light switch: <strong>on or off, 1 or 0</strong>. That is binary. Stack a billion switches, cycle them billions of times per second, and you get a modern processor.</p>
-    <p>This is not intelligence &mdash; it is speed. Computers cannot reason, improvise, or fill gaps. But they execute simple rules faster than any human, making them extraordinarily powerful when given precise instructions.</p>
-    <p>Memory comes in layers: <strong>Registers</strong> (fastest, a few bytes), <strong>RAM</strong> (fast, temporary &mdash; clears on shutdown), <strong>Storage</strong> (slow, permanent). Programs live in RAM while running and storage when at rest.</p>
-  </div>
-  <div class="mg">
-    <div class="mc"><span class="mc-t">Binary</span><h4>1s and 0s</h4><p>Every number, letter, image, and sound is a sequence of 1s and 0s. All other representations are conventions layered on top.</p></div>
-    <div class="mc"><span class="mc-t">Speed</span><h4>Billions/second</h4><p>A modern CPU runs at 3&ndash;5 GHz. Not clever &mdash; fast. Speed at scale produces the appearance of intelligence.</p></div>
-    <div class="mc"><span class="mc-t">RAM</span><h4>Working memory</h4><p>RAM holds what a program is actively using. Lose power, lose contents. Why unsaved work vanishes in a crash.</p></div>
-    <div class="mc"><span class="mc-t">CPU cycle</span><h4>Fetch &rarr; decode &rarr; execute</h4><p>That four-step loop, running billions of times per second, is all a CPU actually does.</p></div>
-  </div>
-</div>
-<div class="dm"><div class="dm-h"><span class="dm-d"></span><span class="dm-t">Interactive &mdash; decimal to binary</span></div><div class="dm-b"><p class="dm-p">Enter 0&ndash;255 to see the exact binary representation stored in memory.</p><div class="btns"><input type="number" id="di" placeholder="e.g. 42" min="0" max="255"><button class="btn p" onclick="tobin()">Convert</button></div><div class="term" id="t2"><span class="tp">$</span> enter a number</div></div></div>
-<div class="qz"><div class="qz-q">What makes computers powerful?</div><ul class="qz-o" id="q2"><li onclick="ans(this,'q2',false)"><span class="qd"></span>They reason like humans</li><li onclick="ans(this,'q2',true)"><span class="qd"></span>They execute simple instructions at enormous speed</li><li onclick="ans(this,'q2',false)"><span class="qd"></span>They infer what you intended to write</li></ul></div>
-<div class="navrow"><button class="nb" onclick="go(1)">&larr; Prev</button><span class="nc">2 / 14</span><button class="nb f" onclick="go(3)">Next &rarr;</button></div>
-</article>
+<!-- PAGE BODY -->
+<div class="page-body">
 
-<!-- S3 -->
-<article class="sec" id="s3">
-<div class="sec-top"><div><span class="kk">03 &mdash; Logic</span><h2 class="sh">Algorithms</h2><p class="si">A finite, ordered sequence of unambiguous steps that transforms an input into an output. You use dozens of algorithms every day without realising it.</p></div><div><span class="st">~5 min</span></div></div>
-<div class="two">
-  <div class="prose">
-    <p>"Algorithm" sounds academic but the concept is mundane: a recipe, assembly guide, morning routine. What makes it a proper algorithm is that each step is <strong>finite</strong>, <strong>ordered</strong>, and <strong>unambiguous</strong>.</p>
-    <p>A good algorithm is correct for <em>all</em> valid inputs &mdash; not just the easy ones. "Sort the list" is a goal. A sorting algorithm describes exactly how to move items. Dozens of sorting algorithms exist, each with different speed and memory trade-offs.</p>
-    <p>Write your algorithm in plain English before writing any code. If it is unclear in English, it will be wrong in code.</p>
-  </div>
-  <div class="mg">
-    <div class="mc"><span class="mc-t">Input</span><h4>What goes in</h4><p>Every algorithm operates on defined inputs. Specifying them precisely is often the hardest part.</p></div>
-    <div class="mc"><span class="mc-t">Process</span><h4>The steps</h4><p>"Compare adjacent elements and swap if out of order" is a step. "Sort the list" is a goal. Each step must be executable without ambiguity.</p></div>
-    <div class="mc"><span class="mc-t">Output</span><h4>What comes out</h4><p>Same input &rarr; same output, every time. Predictability is the defining quality of a correct algorithm.</p></div>
-    <div class="mc"><span class="mc-t">Efficiency</span><h4>Time &amp; space</h4><p>Two algorithms can solve the same problem at very different speeds. Big O notation describes how performance scales with input size.</p></div>
-  </div>
-</div>
-<div class="dm"><div class="dm-h"><span class="dm-d"></span><span class="dm-t">Interactive &mdash; real-world algorithms</span></div><div class="dm-b"><p class="dm-p">Select a task to see it written as a properly structured algorithm.</p><div class="btns"><button class="btn" onclick="algo('teeth')">Brush teeth</button><button class="btn" onclick="algo('sandwich')">Sandwich</button><button class="btn" onclick="algo('sort')">Bubble sort</button><button class="btn" onclick="algo('login')">Login flow</button></div><div class="term" id="t3"><span class="tp">$</span> select a task</div></div></div>
-<div class="cb"><div class="cb-h"><div class="dots"><span></span><span></span><span></span></div><span class="cb-l">Pseudocode &mdash; binary search O(log n)</span></div><div class="cb-b"><span class="kw">FUNCTION</span> <span class="fn">binarySearch</span>(list, target):
-  low = <span class="num">0</span>;  high = length(list) - <span class="num">1</span>
-  <span class="kw">WHILE</span> low &lt;= high:
-    mid = (low + high) / <span class="num">2</span>
-    <span class="kw">IF</span> list[mid] == target: <span class="kw">RETURN</span> mid       <span class="cm"># found</span>
-    <span class="kw">IF</span> list[mid] &lt; target:  low  = mid + <span class="num">1</span>   <span class="cm"># go right</span>
-    <span class="kw">ELSE</span>:                   high = mid - <span class="num">1</span>   <span class="cm"># go left</span>
-  <span class="kw">RETURN</span> -<span class="num">1</span>   <span class="cm"># not found</span></div></div>
-<div class="navrow"><button class="nb" onclick="go(2)">&larr; Prev</button><span class="nc">3 / 14</span><button class="nb f" onclick="go(4)">Next &rarr;</button></div>
-</article>
+  <!-- SIDEBAR -->
+  <nav class="sidebar">
+    <ul class="sidebar-nav" id="sidebarNav">
+      <li><a onclick="goToSection(1)" class="active"><span class="sidebar-num">01</span>What is programming</a></li>
+      <li><a onclick="goToSection(2)"><span class="sidebar-num">02</span>How computers think</a></li>
+      <li><a onclick="goToSection(3)"><span class="sidebar-num">03</span>Algorithms</a></li>
+      <li><a onclick="goToSection(4)"><span class="sidebar-num">04</span>Languages</a></li>
+      <li><a onclick="goToSection(5)"><span class="sidebar-num">05</span>Core concepts</a></li>
+      <li><a onclick="goToSection(6)"><span class="sidebar-num">06</span>Data types</a></li>
+      <li><a onclick="goToSection(7)"><span class="sidebar-num">07</span>Problem-solving</a></li>
+      <li><a onclick="goToSection(8)"><span class="sidebar-num">08</span>Common mistakes</a></li>
+      <li><a onclick="goToSection(9)"><span class="sidebar-num">09</span>Your journey</a></li>
+      <li><a onclick="goToSection(10)"><span class="sidebar-num">10</span>Getting started</a></li>
+    </ul>
+  </nav>
 
-<!-- S4 -->
-<article class="sec" id="s4">
-<div class="sec-top"><div><span class="kk">04 &mdash; Languages</span><h2 class="sh">Programming languages</h2><p class="si">A formal notation for expressing algorithms. Each language makes different trade-offs between readability, performance, and domain fit.</p></div><div><span class="st">~5 min</span></div></div>
-<table class="tbl"><thead><tr><th>Language</th><th>Best for</th><th>Characteristic</th><th>Level</th></tr></thead><tbody>
-<tr><td>Python</td><td>Data, automation, learning</td><td>Reads like English; minimal syntax noise</td><td>Beginner-friendly</td></tr>
-<tr><td>JavaScript</td><td>Web interfaces, servers</td><td>Runs natively in every browser</td><td>Beginner-friendly</td></tr>
-<tr><td>Java</td><td>Enterprise, Android</td><td>Strongly typed; write once, run anywhere</td><td>Moderate</td></tr>
-<tr><td>C++</td><td>Games, systems, performance</td><td>Direct hardware access; maximum speed</td><td>Advanced</td></tr>
-<tr><td>Swift</td><td>iOS and macOS</td><td>Safe by design; Apple's modern language</td><td>Moderate</td></tr>
-<tr><td>Rust</td><td>Systems, safety-critical</td><td>Memory-safe without garbage collection</td><td>Advanced</td></tr>
-<tr><td>SQL</td><td>Databases</td><td>Declarative &mdash; describe the result, not the steps</td><td>Beginner-friendly</td></tr>
-<tr><td>TypeScript</td><td>Large web applications</td><td>JavaScript with types added for safety</td><td>Moderate</td></tr>
-</tbody></table>
-<div class="co am"><span class="co-ico">&#x26A1;</span><div><div class="co-lbl">Compiled vs interpreted</div><p>Compiled languages (C++, Rust) translate to machine code before running &mdash; fast. Interpreted languages (Python, JavaScript) translate at runtime &mdash; slower but easier to write and test.</p></div></div>
-<div class="dm"><div class="dm-h"><span class="dm-d"></span><span class="dm-t">Interactive &mdash; hello world across languages</span></div><div class="dm-b"><p class="dm-p">Same output, completely different syntax. The concept is identical; only the expression differs.</p><div class="btns"><button class="btn" onclick="lang('py')">Python</button><button class="btn" onclick="lang('js')">JavaScript</button><button class="btn" onclick="lang('java')">Java</button><button class="btn" onclick="lang('rust')">Rust</button><button class="btn" onclick="lang('sql')">SQL</button></div><div class="term" id="t4"><span class="tp">$</span> select a language</div></div></div>
-<div class="qz"><div class="qz-q">Why do multiple programming languages exist?</div><ul class="qz-o" id="q4"><li onclick="ans(this,'q4',false)"><span class="qd"></span>No one could agree on a single standard</li><li onclick="ans(this,'q4',true)"><span class="qd"></span>Different problems benefit from different trade-offs</li><li onclick="ans(this,'q4',false)"><span class="qd"></span>To make programming harder to learn</li></ul></div>
-<div class="navrow"><button class="nb" onclick="go(3)">&larr; Prev</button><span class="nc">4 / 14</span><button class="nb f" onclick="go(5)">Next &rarr;</button></div>
-</article>
+  <!-- CONTENT -->
+  <main class="content">
 
-<!-- S5 -->
-<article class="sec" id="s5">
-<div class="sec-top"><div><span class="kk">05 &mdash; Core concepts</span><h2 class="sh">Four building blocks</h2><p class="si">These four patterns appear in virtually every program ever written. Understand them and the rest of programming becomes variations on a theme.</p></div><div><span class="st">~8 min</span></div></div>
-<div class="tabs"><div class="tb-bar"><button class="tb-btn on" onclick="tb(this,'cv')">Variables</button><button class="tb-btn" onclick="tb(this,'cf')">Functions</button><button class="tb-btn" onclick="tb(this,'cl')">Loops</button><button class="tb-btn" onclick="tb(this,'cc')">Conditions</button></div>
-<div class="tb-p on" id="cv"><div class="two">
-  <div class="prose"><p>A <strong>variable</strong> is a name bound to a value stored in memory. You can read it, update it, and pass it around. Like a labeled box &mdash; the label is the name, the contents can change.</p><p>Variables have <strong>scope</strong>: where in a program they are visible. A variable inside a function usually cannot be seen outside it. Understanding scope prevents entire categories of bugs.</p><p>Variables also have <strong>types</strong>, even if the language infers them (Python) rather than requiring explicit declaration (Java).</p></div>
-  <div class="cb" style="margin:0"><div class="cb-h"><div class="dots"><span></span><span></span><span></span></div><span class="cb-l">Python &mdash; variables</span></div><div class="cb-b">name   = <span class="str">"Alice"</span>    <span class="cm"># string</span>
-age    = <span class="num">29</span>          <span class="cm"># integer</span>
-height = <span class="num">1.72</span>        <span class="cm"># float</span>
-active = <span class="kw">True</span>        <span class="cm"># boolean</span>
+    <!-- SECTION 1 -->
+    <article class="section active" id="sec1">
+      <header class="section-header">
+        <span class="section-num">01 — Foundation</span>
+        <h2 class="section-title">What is programming?</h2>
+        <p class="section-intro">Programming is the act of translating human intent into precise, unambiguous instructions a computer can execute. It is as much about thinking as it is about typing.</p>
+      </header>
 
-age  = age + <span class="num">1</span>        <span class="cm"># now 30</span>
-name = name.upper()   <span class="cm"># "ALICE"</span>
-x, y, z = <span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>    <span class="cm"># multiple assignment</span></div></div>
-</div></div>
-<div class="tb-p" id="cf"><div class="two">
-  <div class="prose"><p>A <strong>function</strong> is a named, reusable block of code. Define it once, call it as many times as you need. Without functions you would copy the same logic everywhere &mdash; and fix bugs in every copy.</p><p>Functions take <strong>parameters</strong> (inputs) and optionally <strong>return</strong> a value (output). This is the primary tool for keeping code <strong>DRY</strong> &mdash; Do not Repeat Yourself.</p><p>A well-named function documents itself. Code that reads <code style="font-family:var(--mono);font-size:.85em">calculateTax(income)</code> needs no comment.</p></div>
-  <div class="cb" style="margin:0"><div class="cb-h"><div class="dots"><span></span><span></span><span></span></div><span class="cb-l">Python &mdash; functions</span></div><div class="cb-b"><span class="kw">def</span> <span class="fn">greet</span>(name, formal=<span class="kw">False</span>):
-    <span class="kw">if</span> formal:
-        <span class="kw">return</span> <span class="str">"Good day, " + name + "."</span>
-    <span class="kw">return</span> <span class="str">"Hey, " + name + "!"</span>
+      <div class="analogy">
+        <p class="analogy-label">Analogy</p>
+        <p>Think of a recipe. A recipe is a set of steps that, if followed exactly, produces the same dish every time regardless of who cooks it. A program is exactly that — except the "cook" is a machine that follows instructions with perfect literalness, at enormous speed.</p>
+      </div>
 
-<span class="fn">print</span>(<span class="fn">greet</span>(<span class="str">"Alice"</span>))            <span class="cm"># Hey, Alice!</span>
-<span class="fn">print</span>(<span class="fn">greet</span>(<span class="str">"Bob"</span>, formal=<span class="kw">True</span>)) <span class="cm"># Good day, Bob.</span></div></div>
-</div></div>
-<div class="tb-p" id="cl"><div class="two">
-  <div class="prose"><p>A <strong>loop</strong> executes a block of code repeatedly. Without loops, processing 1,000 items means writing 1,000 lines. With a loop, four lines regardless of count.</p><p><strong>for loops</strong> iterate over a known collection. <strong>while loops</strong> repeat as long as a condition is true. The danger with while loops is accidentally writing an infinite loop &mdash; one that never stops.</p><p>Loops can be nested. A 1,000-item loop inside another 1,000-item loop runs one million iterations &mdash; be careful.</p></div>
-  <div class="cb" style="margin:0"><div class="cb-h"><div class="dots"><span></span><span></span><span></span></div><span class="cb-l">Python &mdash; loops</span></div><div class="cb-b"><span class="cm"># For loop &mdash; iterate a collection</span>
-fruits = [<span class="str">"apple"</span>, <span class="str">"banana"</span>, <span class="str">"cherry"</span>]
-<span class="kw">for</span> fruit <span class="kw">in</span> fruits:
-    <span class="fn">print</span>(fruit.upper())
+      <div class="concept-grid">
+        <div class="concept-card">
+          <p class="concept-card-label">01a</p>
+          <h3>Problem solving</h3>
+          <p>Programming begins with a problem worth solving. The craft lies in translating a fuzzy human need into something precise enough for a machine to execute.</p>
+        </div>
+        <div class="concept-card">
+          <p class="concept-card-label">01b</p>
+          <h3>Decomposition</h3>
+          <p>Large problems become approachable when broken into small, independent pieces. This is one of the most valuable mental habits programming builds.</p>
+        </div>
+        <div class="concept-card">
+          <p class="concept-card-label">01c</p>
+          <h3>Precision</h3>
+          <p>Computers do exactly what they are told — not what you meant. Imprecision is the root cause of almost every bug you will ever encounter.</p>
+        </div>
+      </div>
 
-<span class="cm"># While loop &mdash; condition-based</span>
-count = <span class="num">0</span>
-<span class="kw">while</span> count &lt; <span class="num">5</span>:
-    <span class="fn">print</span>(<span class="str">"Step"</span>, count)
-    count += <span class="num">1</span>   <span class="cm"># must progress toward exit!</span></div></div>
-</div></div>
-<div class="tb-p" id="cc"><div class="two">
-  <div class="prose"><p>A <strong>condition</strong> lets the program take different paths based on data. Without conditions, every run produces the same result regardless of input.</p><p>The core type is <strong>if / elif / else</strong>. Conditions evaluate to <strong>boolean</strong> (True/False). Comparison operators (&gt;, ==, !=) return booleans. Logical operators (and, or, not) combine them.</p><p>A very common mistake: using a single = (assignment) instead of == (comparison) inside a condition.</p></div>
-  <div class="cb" style="margin:0"><div class="cb-h"><div class="dots"><span></span><span></span><span></span></div><span class="cb-l">Python &mdash; conditions</span></div><div class="cb-b">temp = <span class="num">28</span>
+      <div class="demo">
+        <div class="demo-header">Interactive — Ambiguous vs. precise instructions</div>
+        <div class="demo-body">
+          <p style="font-size:.9rem;color:var(--muted);margin-bottom:1rem">See how an instruction that seems clear to a human is actually deeply ambiguous to a computer.</p>
+          <div class="demo-row">
+            <button class="btn" onclick="showAmbiguity()">Show me an example</button>
+          </div>
+          <div class="terminal" id="ambiguityTerminal"><span class="prompt">$</span> click the button above</div>
+        </div>
+      </div>
 
-<span class="kw">if</span> temp &gt; <span class="num">30</span>:
-    <span class="fn">print</span>(<span class="str">"Hot"</span>)
-<span class="kw">elif</span> temp &gt; <span class="num">20</span>:
-    <span class="fn">print</span>(<span class="str">"Warm"</span>)    <span class="cm"># this runs</span>
-<span class="kw">else</span>:
-    <span class="fn">print</span>(<span class="str">"Cool"</span>)
+      <div class="note">
+        <span class="note-icon">Note</span>
+        <p>Ada Lovelace wrote what is considered the first computer program in 1843 — for a machine that did not yet exist. She understood the conceptual framework of computation before the hardware caught up.</p>
+      </div>
 
-<span class="kw">if</span> temp &gt; <span class="num">20</span> <span class="kw">and</span> temp &lt; <span class="num">30</span>:
-    <span class="fn">print</span>(<span class="str">"Perfect"</span>)   <span class="cm"># True</span></div></div>
-</div></div>
-</div>
-<div class="dm"><div class="dm-h"><span class="dm-d"></span><span class="dm-t">Interactive &mdash; all four concepts working together</span></div><div class="dm-b"><p class="dm-p">Watch a short program use a variable, function, loop, and condition, step by step.</p><div class="btns"><button class="btn p" onclick="runsim()">Run simulation</button></div><div class="term" id="t5"><span class="tp">$</span> click run</div></div></div>
-<div class="navrow"><button class="nb" onclick="go(4)">&larr; Prev</button><span class="nc">5 / 14</span><button class="nb f" onclick="go(6)">Next &rarr;</button></div>
-</article>
+      <div class="nav-bar">
+        <button class="nav-btn" disabled>← Previous</button>
+        <div class="nav-info">Section 1 of 10</div>
+        <button class="nav-btn primary" onclick="goToSection(2)">Next →</button>
+      </div>
+    </article>
 
-<!-- S6 -->
-<article class="sec" id="s6">
-<div class="sec-top"><div><span class="kk">06 &mdash; Data</span><h2 class="sh">Types of data</h2><p class="si">Every value in a program has a type. Types determine what operations are valid and how data is stored in memory.</p></div><div><span class="st">~6 min</span></div></div>
-<div class="wg">
-  <div class="mc"><span class="mc-t">Integer</span><h4>Whole numbers</h4><p>0, 1, -3, 1000. Counting, indices, ages. No decimal point. Math is exact.</p></div>
-  <div class="mc"><span class="mc-t">Float</span><h4>Decimal numbers</h4><p>3.14, -0.5. Note: floats have rounding errors. 0.1 + 0.2 does not equal 0.3 in most languages.</p></div>
-  <div class="mc"><span class="mc-t">String</span><h4>Text</h4><p>"hello", "42", "user@mail.com". Always quoted. "42" and 42 are completely different types.</p></div>
-  <div class="mc"><span class="mc-t">Boolean</span><h4>True / False</h4><p>Exactly two values. Every comparison returns a boolean. Essential for all conditions.</p></div>
-  <div class="mc"><span class="mc-t">None / Null</span><h4>Absence of value</h4><p>Represents "nothing" or "not yet set". Forgetting to handle None is a very common source of crashes.</p></div>
-  <div class="mc"><span class="mc-t">List / Array</span><h4>Ordered collection</h4><p>[1, 2, 3]. Items accessed by index starting at 0. Can hold any type, even mixed.</p></div>
-  <div class="mc"><span class="mc-t">Dictionary</span><h4>Key-value pairs</h4><p>{"name":"Alice","age":30}. Look up by key, not position. Fast and very flexible.</p></div>
-  <div class="mc"><span class="mc-t">Tuple</span><h4>Immutable list</h4><p>(1, 2, 3). Like a list but cannot be changed. Good for data that must stay fixed.</p></div>
-  <div class="mc"><span class="mc-t">Set</span><h4>Unique values</h4><p>{1, 2, 3}. No duplicates. Useful for membership tests and de-duplication.</p></div>
-</div>
-<div class="co am"><span class="co-ico">&#x26A0;&#xFE0F;</span><div><div class="co-lbl">Type errors are very common</div><p>Trying to add a string to a number ("5" + 2) crashes in most languages. Data from files, APIs, and user input almost always arrives as a string and needs converting before use.</p></div></div>
-<div class="dm"><div class="dm-h"><span class="dm-d"></span><span class="dm-t">Interactive &mdash; data type quiz</span></div><div class="dm-b"><p class="dm-p">Identify the type of each value. Advances automatically.</p><button class="btn p" onclick="startDT()" style="margin-bottom:.75rem">Start quiz</button><div id="dtb"></div></div></div>
-<div class="navrow"><button class="nb" onclick="go(5)">&larr; Prev</button><span class="nc">6 / 14</span><button class="nb f" onclick="go(7)">Next &rarr;</button></div>
-</article>
+    <!-- SECTION 2 -->
+    <article class="section" id="sec2">
+      <header class="section-header">
+        <span class="section-num">02 — Hardware</span>
+        <h2 class="section-title">How computers think</h2>
+        <p class="section-intro">Computers do not think. They switch. Understanding this distinction removes the mystery from programming and explains why precision matters so much.</p>
+      </header>
 
-<!-- S7 -->
-<article class="sec" id="s7">
-<div class="sec-top"><div><span class="kk">07 &mdash; OOP <span class="bdg new">New</span></span><h2 class="sh">Object-oriented programming</h2><p class="si">OOP structures code around objects &mdash; bundles of data and the functions that operate on them. Most modern codebases use it. You will encounter it constantly.</p></div><div><span class="st">~7 min</span></div></div>
-<div class="two">
-  <div class="prose">
-    <p>Imagine modelling a bank account. You need to store a <strong>balance</strong> and support <strong>deposit</strong> and <strong>withdraw</strong> operations. OOP lets you bundle those together into a single <strong>class</strong>.</p>
-    <p>A <strong>class</strong> is a blueprint. An <strong>object</strong> (or instance) is what you actually use &mdash; like a cookie cutter (class) and the cookies it makes (objects). Thousands of BankAccount objects from one BankAccount class.</p>
-    <p>The four core OOP concepts: <strong>Encapsulation</strong> (keep data and behavior together), <strong>Inheritance</strong> (one class extends another), <strong>Polymorphism</strong> (different objects, same interface), <strong>Abstraction</strong> (hide complexity behind simple methods).</p>
-    <p>You do not need to master OOP to start programming &mdash; but you will encounter it immediately when reading real code.</p>
-  </div>
-  <div class="cb" style="margin:0"><div class="cb-h"><div class="dots"><span></span><span></span><span></span></div><span class="cb-l">Python &mdash; class example</span></div><div class="cb-b"><span class="kw">class</span> <span class="cl">BankAccount</span>:
-    <span class="kw">def</span> <span class="fn">__init__</span>(self, owner, balance=<span class="num">0</span>):
-        self.owner   = owner
-        self.balance = balance
+      <div class="analogy">
+        <p class="analogy-label">Analogy</p>
+        <p>A computer's core operation is identical to a light switch: on or off, 1 or 0. Stack billions of those switches, cycle them billions of times per second, and complex behaviour emerges — not from intelligence, but from sheer speed and scale.</p>
+      </div>
 
-    <span class="kw">def</span> <span class="fn">deposit</span>(self, amount):
-        self.balance += amount
-        <span class="fn">print</span>(<span class="str">"Deposited"</span>, amount)
+      <div class="concept-grid">
+        <div class="concept-card">
+          <p class="concept-card-label">02a</p>
+          <h3>Binary</h3>
+          <p>Every number, letter, image, and sound your computer handles is ultimately a sequence of 1s and 0s. All other representations are conventions built on top.</p>
+        </div>
+        <div class="concept-card">
+          <p class="concept-card-label">02b</p>
+          <h3>Speed</h3>
+          <p>A modern processor executes several billion operations per second. Computers are not clever — they are fast, and speed at scale produces the appearance of intelligence.</p>
+        </div>
+        <div class="concept-card">
+          <p class="concept-card-label">02c</p>
+          <h3>Memory</h3>
+          <p>Computers store data in a hierarchy: registers (fastest, tiny), RAM (fast, temporary), storage (slow, permanent). Understanding this matters for writing efficient programs.</p>
+        </div>
+      </div>
 
-    <span class="kw">def</span> <span class="fn">withdraw</span>(self, amount):
-        <span class="kw">if</span> amount &gt; self.balance:
-            <span class="fn">print</span>(<span class="str">"Insufficient funds"</span>)
-        <span class="kw">else</span>:
-            self.balance -= amount
+      <div class="demo">
+        <div class="demo-header">Interactive — Decimal to binary converter</div>
+        <div class="demo-body">
+          <p style="font-size:.9rem;color:var(--muted);margin-bottom:1rem">Enter any number between 0 and 255 to see how a computer actually stores it.</p>
+          <div class="demo-row">
+            <input type="number" id="decInput" placeholder="e.g. 42" min="0" max="255">
+            <button class="btn btn-primary" onclick="toBinary()">Convert</button>
+          </div>
+          <div class="terminal" id="binTerminal"><span class="prompt">$</span> awaiting input</div>
+        </div>
+      </div>
 
-acc = <span class="cl">BankAccount</span>(<span class="str">"Alice"</span>, <span class="num">1000</span>)
-acc.<span class="fn">deposit</span>(<span class="num">500</span>)    <span class="cm"># balance &rarr; 1500</span>
-acc.<span class="fn">withdraw</span>(<span class="num">200</span>)   <span class="cm"># balance &rarr; 1300</span></div></div>
-</div>
-<div class="wg">
-  <div class="mc"><span class="mc-t">Encapsulation</span><h4>Bundle data + behavior</h4><p>Keep data and the code that operates on it in the same place. Prevents other parts of the program from accidentally corrupting it.</p></div>
-  <div class="mc"><span class="mc-t">Inheritance</span><h4>Extend a class</h4><p>A SavingsAccount can inherit from BankAccount and add interest logic without rewriting everything. Code reuse at the structural level.</p></div>
-  <div class="mc"><span class="mc-t">Polymorphism</span><h4>Same interface, different behavior</h4><p>A draw() method on Circle and Square can both be called the same way, but each behaves differently internally.</p></div>
-</div>
-<div class="navrow"><button class="nb" onclick="go(6)">&larr; Prev</button><span class="nc">7 / 14</span><button class="nb f" onclick="go(8)">Next &rarr;</button></div>
-</article>
-
-<!-- S8 -->
-<article class="sec" id="s8">
-<div class="sec-top"><div><span class="kk">08 &mdash; Method</span><h2 class="sh">How programmers solve problems</h2><p class="si">Writing code is the last step, not the first. Experienced programmers spend more time thinking than typing &mdash; and their programs reflect it.</p></div><div><span class="st">~6 min</span></div></div>
-<div class="wg">
-  <div class="mc"><span class="mc-t">Step 01</span><h4>Understand</h4><p>Can you explain it to someone else in plain language? If not, you do not understand it well enough to code it.</p></div>
-  <div class="mc"><span class="mc-t">Step 02</span><h4>Decompose</h4><p>Break into the smallest possible independent sub-problems. Solve each one, then combine.</p></div>
-  <div class="mc"><span class="mc-t">Step 03</span><h4>Plan in English</h4><p>Write numbered steps before touching the keyboard. If it is unclear in English, it will be wrong in code.</p></div>
-  <div class="mc"><span class="mc-t">Step 04</span><h4>Simplest version first</h4><p>Make it correct before making it fast or elegant. A slow correct solution beats a fast wrong one every time.</p></div>
-  <div class="mc"><span class="mc-t">Step 05</span><h4>Test thoroughly</h4><p>Try expected inputs, then edge cases: empty, negatives, maximums, wrong types. Bugs live in corners.</p></div>
-  <div class="mc"><span class="mc-t">Step 06</span><h4>Refactor</h4><p>Once working and tested, improve clarity and efficiency. Never refactor broken code &mdash; fix first, clean second.</p></div>
-</div>
-<div class="dm"><div class="dm-h"><span class="dm-d"></span><span class="dm-t">Interactive &mdash; work through a real problem</span></div><div class="dm-b"><p class="dm-p"><strong>Problem:</strong> Build a program that finds the most common word in a text file.</p><div class="btns"><button class="btn" onclick="prob(1)">1 &mdash; Understand</button><button class="btn" onclick="prob(2)">2 &mdash; Decompose</button><button class="btn" onclick="prob(3)">3 &mdash; Plan</button><button class="btn" onclick="prob(4)">4 &mdash; Edge cases</button></div><div class="term" id="t8"><span class="tp">$</span> select a step</div></div></div>
-<div class="note"><span class="note-l">Tip</span><p><strong>Fifteen minutes of planning prevents hours of debugging.</strong> The ratio of thinking to typing is one of the clearest markers of programmer experience. Junior devs type immediately; senior devs think first.</p></div>
-<div class="navrow"><button class="nb" onclick="go(7)">&larr; Prev</button><span class="nc">8 / 14</span><button class="nb f" onclick="go(9)">Next &rarr;</button></div>
-</article>
-
-<!-- S9 -->
-<article class="sec" id="s9">
-<div class="sec-top"><div><span class="kk">09 &mdash; Debugging <span class="bdg new">New</span></span><h2 class="sh">Finding and fixing bugs</h2><p class="si">Debugging is not a sign of failure &mdash; it is the normal state of programming. Getting good at it is as important as writing code.</p></div><div><span class="st">~7 min</span></div></div>
-<div class="two">
-  <div class="prose">
-    <p>Bugs come in three varieties: <strong>Syntax errors</strong> (grammatically wrong &mdash; the program will not run), <strong>runtime errors</strong> (the program crashes while running), and <strong>logic errors</strong> (runs but produces wrong results &mdash; the hardest to find).</p>
-    <p>Rule one: <strong>read the error message</strong>. It tells you what went wrong and usually where. Most beginners panic and ignore it. Do not.</p>
-    <p>Rule two: <strong>change one thing at a time</strong>. If you change three things and the bug disappears, you do not know what fixed it &mdash; or whether it is truly fixed.</p>
-    <p><strong>Stack traces</strong>: when a program crashes, it prints the chain of function calls that led there. Read it bottom-up &mdash; the actual error is usually at the bottom.</p>
-  </div>
-  <div class="prose">
-    <p><strong>Print debugging</strong> is the most accessible technique: insert print() statements to see what values variables hold at each point. Simple, always available, works everywhere. Remove them when done.</p>
-    <p>Every serious editor has a <strong>debugger</strong>: pause the program at any line, inspect all variable values, and step through execution one line at a time. Learning to use it is one of the highest-leverage skills you can develop early.</p>
-    <p><strong>Rubber duck debugging</strong>: explain your code out loud to an inanimate object, line by line. The act of explaining forces precision, and you will often spot the bug mid-sentence. It sounds absurd. It works.</p>
-  </div>
-</div>
-<div class="dm"><div class="dm-h"><span class="dm-d"></span><span class="dm-t">Interactive &mdash; error message decoder</span></div><div class="dm-b"><p class="dm-p">Common Python errors decoded into plain English. Click through each one.</p><div class="btns"><button class="btn" onclick="showerr('t9')">Show next error</button></div><div class="term" id="t9"><span class="tp">$</span> click above</div></div></div>
-<div class="wg">
-  <div class="mc"><span class="mc-t">Technique 01</span><h4>Print debugging</h4><p>Insert print statements to trace variable values. Simple, always available, works everywhere.</p></div>
-  <div class="mc"><span class="mc-t">Technique 02</span><h4>Breakpoints</h4><p>Pause at a specific line and inspect everything. Available in VS Code, PyCharm, browser DevTools. Far more powerful than print once you learn it.</p></div>
-  <div class="mc"><span class="mc-t">Technique 03</span><h4>Rubber duck</h4><p>Explain your code out loud, line by line, to anything. You will hear your own incorrect assumptions.</p></div>
-  <div class="mc"><span class="mc-t">Technique 04</span><h4>Binary search</h4><p>Comment out half your code. Does the bug still occur? No means bug is in commented half. Repeat until isolated.</p></div>
-  <div class="mc"><span class="mc-t">Technique 05</span><h4>Stack traces</h4><p>Read bottom-up. The actual error is usually at the bottom. The top shows how you got there.</p></div>
-  <div class="mc"><span class="mc-t">Technique 06</span><h4>Fresh eyes</h4><p>If stuck for 30+ minutes, take a break. Return fresh. The solution almost always appears within minutes.</p></div>
-</div>
-<div class="navrow"><button class="nb" onclick="go(8)">&larr; Prev</button><span class="nc">9 / 14</span><button class="nb f" onclick="go(10)">Next &rarr;</button></div>
-</article>
-
-<!-- S10 -->
-<article class="sec" id="s10">
-<div class="sec-top"><div><span class="kk">10 &mdash; Habits <span class="bdg new">New</span></span><h2 class="sh">Comments, docs &amp; clean code</h2><p class="si">Code is read far more often than it is written. The programmer who will read your code most is you, six months from now, having completely forgotten what you were thinking.</p></div><div><span class="st">~6 min</span></div></div>
-<div class="two">
-  <div>
-    <div class="prose"><p>A <strong>comment</strong> is a line ignored by the computer but read by humans. Use comments to explain <em>why</em> a decision was made, not <em>what</em> the code does &mdash; that should be clear from the code itself.</p><p><strong>Documentation</strong> is comments at the function or module level describing what something does, what it expects, and what it returns. Python uses docstrings; Java uses Javadoc.</p></div>
-    <div class="co gn"><span class="co-ico">&#x2713;</span><div><div class="co-lbl">Good comment</div><p># Retry 3x &mdash; this API returns 503 intermittently on deploy<br>Explains <em>why</em>, not what. No redundancy with the code.</p></div></div>
-    <div class="co am"><span class="co-ico">&#x2717;</span><div><div class="co-lbl">Redundant comment</div><p># Add 1 to count &nbsp;&nbsp; count = count + 1<br>Restates the obvious. Adds noise, no value whatsoever.</p></div></div>
-  </div>
-  <div class="cb" style="margin:0"><div class="cb-h"><div class="dots"><span></span><span></span><span></span></div><span class="cb-l">Python &mdash; docstrings and naming</span></div><div class="cb-b"><span class="kw">def</span> <span class="fn">calculate_discount</span>(price, pct):
-    <span class="str">"""
-    Apply a percentage discount to a price.
-
-    Args:
-        price (float): Original price in GBP
-        pct   (int):   Discount percentage, 0-100
-
-    Returns:
-        float: Discounted price, rounded to 2dp
-
-    Raises:
-        ValueError: if pct not between 0 and 100
-    """</span>
-    <span class="kw">if not</span> (<span class="num">0</span> &lt;= pct &lt;= <span class="num">100</span>):
-        <span class="kw">raise</span> <span class="cl">ValueError</span>(<span class="str">"pct must be 0-100"</span>)
-    <span class="kw">return</span> <span class="fn">round</span>(price * (<span class="num">1</span> - pct / <span class="num">100</span>), <span class="num">2</span>)</div></div>
-</div>
-<div class="wg">
-  <div class="mc"><span class="mc-t">Naming</span><h4>Names matter enormously</h4><p>d vs discount_percentage. The second takes a second longer to type and saves minutes every time anyone reads it. Always use descriptive names.</p></div>
-  <div class="mc"><span class="mc-t">DRY</span><h4>Do not repeat yourself</h4><p>If you wrote the same logic twice, it will eventually be in two different states. Extract it into a function &mdash; one source of truth.</p></div>
-  <div class="mc"><span class="mc-t">KISS</span><h4>Keep it simple</h4><p>The simplest solution that works is usually the best. Cleverness in code is a liability; clarity is an asset.</p></div>
-</div>
-<div class="navrow"><button class="nb" onclick="go(9)">&larr; Prev</button><span class="nc">10 / 14</span><button class="nb f" onclick="go(11)">Next &rarr;</button></div>
-</article>
-
-<!-- S11 -->
-<article class="sec" id="s11">
-<div class="sec-top"><div><span class="kk">11 &mdash; Git <span class="bdg new">New</span></span><h2 class="sh">Version control &amp; Git</h2><p class="si">Git lets you track every change, undo mistakes, and collaborate without overwriting each other's work. Every professional programmer uses it. Start from day one.</p></div><div><span class="st">~7 min</span></div></div>
-<div class="two">
-  <div class="prose">
-    <p>Think of Git as an infinite undo history that works at the project level. Every <strong>commit</strong> is a snapshot of your entire project. You can return to any snapshot at any time.</p>
-    <p><strong>Branching</strong>: create a separate copy of your code to experiment on, then merge the changes back when ready &mdash; without touching the working version. If the experiment fails, discard the branch; nothing is lost.</p>
-    <p><strong>GitHub</strong> (and GitLab, Bitbucket) is an online host for Git repositories. Your code lives on their servers as a backup, and it is where the open-source community lives &mdash; you can view and contribute to millions of real projects.</p>
-    <p>Three concepts explain 80% of Git usage: <strong>commit</strong> (save a snapshot), <strong>push</strong> (upload to GitHub), <strong>pull</strong> (download changes). Everything else builds on these.</p>
-  </div>
-  <div class="cb" style="margin:0"><div class="cb-h"><div class="dots"><span></span><span></span><span></span></div><span class="cb-l">Git &mdash; essential commands</span></div><div class="cb-b"><span class="cm"># Start tracking a project</span>
-git init
-
-<span class="cm"># Stage changes</span>
-git add .              <span class="cm"># everything</span>
-git add script.py      <span class="cm"># one file</span>
-
-<span class="cm"># Commit with a message</span>
-git commit -m <span class="str">"Add login validation"</span>
-
-<span class="cm"># Upload to GitHub</span>
-git push origin main
-
-<span class="cm"># Download latest changes</span>
-git pull
-
-<span class="cm"># See what changed</span>
-git status
-git log --oneline</div></div>
-</div>
-<div class="wg">
-  <div class="mc"><span class="mc-t">Commit</span><h4>Save a snapshot</h4><p>Records what changed, when, and why. Good messages read like a changelog: "Fix null pointer in login handler."</p></div>
-  <div class="mc"><span class="mc-t">Branch</span><h4>Parallel development</h4><p>Work on a feature in isolation. Merge when done. If it fails, discard &mdash; nothing on main is affected.</p></div>
-  <div class="mc"><span class="mc-t">Pull request</span><h4>Code review</h4><p>On GitHub, propose merging a branch. Others review, comment, approve before it goes in. Standard practice on every team.</p></div>
-</div>
-<div class="co bl"><span class="co-ico">&#x1F4A1;</span><div><div class="co-lbl">Start immediately</div><p>Create a GitHub account and commit your practice code from day one. Your commit history is evidence of your learning journey &mdash; and eventually part of your portfolio. Employers look at GitHub profiles.</p></div></div>
-<div class="navrow"><button class="nb" onclick="go(10)">&larr; Prev</button><span class="nc">11 / 14</span><button class="nb f" onclick="go(12)">Next &rarr;</button></div>
-</article>
-
-<!-- S12 -->
-<article class="sec" id="s12">
-<div class="sec-top"><div><span class="kk">12 &mdash; Web &amp; APIs <span class="bdg new">New</span></span><h2 class="sh">How the web works &amp; APIs</h2><p class="si">Most software today is connected. Understanding how programs talk to each other unlocks an enormous range of things you can build.</p></div><div><span class="st">~7 min</span></div></div>
-<div class="two">
-  <div class="prose">
-    <p>When you type a URL, your computer sends an <strong>HTTP request</strong> to a server. The server processes it and sends back a <strong>response</strong> &mdash; usually HTML, JSON, or an image.</p>
-    <p>HTTP has four main <strong>methods</strong>: <strong>GET</strong> (retrieve data), <strong>POST</strong> (send new data), <strong>PUT</strong> (update existing data), <strong>DELETE</strong> (remove data). These four cover almost everything.</p>
-    <p>An <strong>API</strong> (Application Programming Interface) is a defined way for programs to talk to each other. Your weather app calls a weather API. Login with Google is an API call. Most useful internet programs expose an API.</p>
-    <p><strong>JSON</strong> is the most common format APIs use to exchange data. It looks exactly like a Python dictionary and every language can parse it easily.</p>
-  </div>
-  <div class="cb" style="margin:0"><div class="cb-h"><div class="dots"><span></span><span></span><span></span></div><span class="cb-l">Python &mdash; calling a real API</span></div><div class="cb-b"><span class="kw">import</span> requests
-
-url = <span class="str">"https://api.github.com/users/torvalds"</span>
-response = requests.<span class="fn">get</span>(url)
-
-<span class="fn">print</span>(response.status_code)    <span class="cm"># 200 = success</span>
-
-data = response.<span class="fn">json</span>()
-<span class="fn">print</span>(data[<span class="str">"name"</span>])             <span class="cm"># Linus Torvalds</span>
-<span class="fn">print</span>(data[<span class="str">"public_repos"</span>])    <span class="cm"># number of repos</span></div></div>
-</div>
-<div class="wg">
-  <div class="mc"><span class="mc-t">HTTP 200</span><h4>OK</h4><p>Request succeeded. You got what you asked for.</p></div>
-  <div class="mc"><span class="mc-t">HTTP 404</span><h4>Not found</h4><p>The resource does not exist at that URL.</p></div>
-  <div class="mc"><span class="mc-t">HTTP 401</span><h4>Unauthorized</h4><p>You need to authenticate first &mdash; API key, token, or login.</p></div>
-  <div class="mc"><span class="mc-t">HTTP 500</span><h4>Server error</h4><p>Something went wrong on the server's side. Usually not your fault.</p></div>
-  <div class="mc"><span class="mc-t">JSON</span><h4>Universal data format</h4><p>{"key": "value"} &mdash; identical to a Python dict. Every language can parse it. The lingua franca of APIs.</p></div>
-  <div class="mc"><span class="mc-t">REST</span><h4>API design style</h4><p>A convention for structuring APIs using HTTP methods. GitHub, Stripe, Twitter &mdash; most public APIs are REST.</p></div>
-</div>
-<div class="navrow"><button class="nb" onclick="go(11)">&larr; Prev</button><span class="nc">12 / 14</span><button class="nb f" onclick="go(13)">Next &rarr;</button></div>
-</article>
-
-<!-- S13 -->
-<article class="sec" id="s13">
-<div class="sec-top"><div><span class="kk">13 &mdash; Pitfalls</span><h2 class="sh">Common beginner mistakes</h2><p class="si">Everyone makes these. Knowing them in advance does not make you immune &mdash; but you will recognise them faster and recover quicker.</p></div><div><span class="st">~5 min</span></div></div>
-<div class="wg">
-  <div class="mc"><span class="mc-t">01</span><h4>Coding before thinking</h4><p>Jumping straight to the editor. Result: code that solves a slightly different problem than the one you meant to solve.</p></div>
-  <div class="mc"><span class="mc-t">02</span><h4>Ignoring error messages</h4><p>Error messages tell you what went wrong and usually where. Read every word before changing anything.</p></div>
-  <div class="mc"><span class="mc-t">03</span><h4>Over-engineering early</h4><p>Building a complex solution before a simple one works. Get it working first, then improve.</p></div>
-  <div class="mc"><span class="mc-t">04</span><h4>Insufficient testing</h4><p>Only testing the happy path. Real bugs live in edge cases: empty inputs, negatives, very large values.</p></div>
-  <div class="mc"><span class="mc-t">05</span><h4>Tutorial purgatory</h4><p>Watching tutorials indefinitely without building anything. Understanding is not ability. You learn to code by coding.</p></div>
-  <div class="mc"><span class="mc-t">06</span><h4>Copy-pasting blindly</h4><p>Taking code from Stack Overflow without reading it. Paste it, yes &mdash; but understand every line before moving on.</p></div>
-  <div class="mc"><span class="mc-t">07</span><h4>Comparing your progress</h4><p>Measuring yourself against people at a different stage. The only useful comparison is yourself six months ago.</p></div>
-  <div class="mc"><span class="mc-t">08</span><h4>Quitting at friction</h4><p>Confusion is not a signal to stop &mdash; it is a signal that learning is happening. The discomfort is your mental model changing.</p></div>
-  <div class="mc"><span class="mc-t">09</span><h4>Never committing to Git</h4><p>Working for days without commits. One bad edit and you lose everything. Commit early, commit often.</p></div>
-</div>
-<div class="dm"><div class="dm-h"><span class="dm-d"></span><span class="dm-t">Interactive &mdash; error message translator</span></div><div class="dm-b"><p class="dm-p">Common errors decoded. Click through each one.</p><div class="btns"><button class="btn" onclick="showerr('t13')">Next error</button></div><div class="term" id="t13"><span class="tp">$</span> click above</div></div></div>
-<div class="navrow"><button class="nb" onclick="go(12)">&larr; Prev</button><span class="nc">13 / 14</span><button class="nb f" onclick="go(14)">Next &rarr;</button></div>
-</article>
-
-<!-- S14 -->
-<article class="sec" id="s14">
-<div class="sec-top"><div><span class="kk">14 &mdash; Roadmap</span><h2 class="sh">Your roadmap from here</h2><p class="si">You now hold the conceptual framework every programmer carries. What comes next is practice &mdash; and a clear path to follow.</p></div><div><span class="st">~5 min</span></div></div>
-<div class="two">
-  <div>
-    <div class="wg" style="grid-template-columns:1fr 1fr">
-      <div class="mc"><span class="mc-t">Weeks 1&ndash;2</span><h4>The basics</h4><p>Variables, print, arithmetic, simple input. Write small programs just to see them run.</p></div>
-      <div class="mc"><span class="mc-t">Weeks 3&ndash;4</span><h4>First friction</h4><p>Loops and conditions. You will hit your first wall. Slow down &mdash; do not stop.</p></div>
-      <div class="mc"><span class="mc-t">Weeks 5&ndash;8</span><h4>Things click</h4><p>Concepts connect. You build programs that do something genuinely useful. Confidence grows noticeably.</p></div>
-      <div class="mc"><span class="mc-t">Weeks 9&ndash;12</span><h4>Independent creation</h4><p>You build things without tutorials. You solve new problems without asking for help every time.</p></div>
-    </div>
-  </div>
-  <div>
-    <div class="mg" style="grid-template-columns:1fr">
-      <div class="mc"><span class="mc-t">This week</span><h4>Immediate first steps</h4>
-        <ul class="chk" style="margin-top:.5rem">
-          <li>Install Python from python.org (free, 2 min)</li>
-          <li>Install VS Code &mdash; the most popular free editor</li>
-          <li>Write a program that prints your name</li>
-          <li>Then one that asks for your name first</li>
-          <li>Create a GitHub account and commit everything</li>
+      <div class="quiz">
+        <div class="quiz-q">What actually makes computers powerful?</div>
+        <ul class="quiz-opts" id="q2">
+          <li onclick="answer(this,'q2',false)"><span class="quiz-marker"></span>They reason like humans do</li>
+          <li onclick="answer(this,'q2',true)"><span class="quiz-marker"></span>They execute simple instructions at enormous speed</li>
+          <li onclick="answer(this,'q2',false)"><span class="quiz-marker"></span>They can infer what you intended</li>
         </ul>
       </div>
-      <div class="mc"><span class="mc-t">Resources worth your time</span><h4>Where to go next</h4>
-        <ul class="chk" style="margin-top:.5rem">
-          <li><strong>python.org/docs</strong> &mdash; official docs, better than expected</li>
-          <li><strong>exercism.org</strong> &mdash; free exercises with human code review</li>
-          <li><strong>cs50.harvard.edu</strong> &mdash; free Harvard intro CS course</li>
-          <li><strong>stackoverflow.com</strong> &mdash; search before asking; it is probably answered</li>
-          <li><strong>realpython.com</strong> &mdash; practical Python written by humans</li>
+
+      <div class="nav-bar">
+        <button class="nav-btn" onclick="goToSection(1)">← Previous</button>
+        <div class="nav-info">Section 2 of 10</div>
+        <button class="nav-btn primary" onclick="goToSection(3)">Next →</button>
+      </div>
+    </article>
+
+    <!-- SECTION 3 -->
+    <article class="section" id="sec3">
+      <header class="section-header">
+        <span class="section-num">03 — Logic</span>
+        <h2 class="section-title">Algorithms</h2>
+        <p class="section-intro">An algorithm is a finite sequence of unambiguous steps that transforms an input into an output. You already use dozens of them every day.</p>
+      </header>
+
+      <div class="analogy">
+        <p class="analogy-label">Everyday example — making coffee</p>
+        <p>Fill kettle → boil water → add grounds → pour → wait → serve. Each step is discrete, ordered, and unambiguous. That structure is an algorithm. The same logic applies to sorting a list, routing a packet, or recommending a video.</p>
+      </div>
+
+      <div class="concept-grid">
+        <div class="concept-card">
+          <p class="concept-card-label">Input</p>
+          <h3>What goes in</h3>
+          <p>Every algorithm starts with inputs — data it will process. Defining inputs precisely is often the hardest part of writing a good algorithm.</p>
+        </div>
+        <div class="concept-card">
+          <p class="concept-card-label">Process</p>
+          <h3>The steps</h3>
+          <p>The ordered sequence of operations that transforms the inputs. Each step must be finite and executable without ambiguity.</p>
+        </div>
+        <div class="concept-card">
+          <p class="concept-card-label">Output</p>
+          <h3>What comes out</h3>
+          <p>A correct algorithm always produces a predictable output for the same input. Consistency and correctness are the two measures of a good algorithm.</p>
+        </div>
+      </div>
+
+      <div class="demo">
+        <div class="demo-header">Interactive — Algorithm explorer</div>
+        <div class="demo-body">
+          <p style="font-size:.9rem;color:var(--muted);margin-bottom:1rem">Select a task to see it written as a proper algorithm.</p>
+          <div class="demo-row">
+            <button class="btn" onclick="showAlgo('teeth')">Brush teeth</button>
+            <button class="btn" onclick="showAlgo('sandwich')">Make sandwich</button>
+            <button class="btn" onclick="showAlgo('sort')">Sort a list</button>
+          </div>
+          <div class="terminal" id="algoTerminal"><span class="prompt">$</span> select a task</div>
+        </div>
+      </div>
+
+      <div class="code-block">
+        <div class="code-header">
+          <div class="code-dots"><span></span><span></span><span></span></div>
+          <span class="code-lang">Algorithm — find largest number</span>
+        </div>
+        <div class="code-body"><span class="cm"># Given: a list of numbers</span>
+<span class="cm"># Goal: return the largest</span>
+
+<span class="kw">FUNCTION</span> <span class="fn">findLargest</span>(numbers):
+  largest = numbers[<span class="num">0</span>]           <span class="cm"># assume first is largest</span>
+  <span class="kw">FOR EACH</span> n <span class="kw">IN</span> numbers:
+    <span class="kw">IF</span> n > largest:
+      largest = n              <span class="cm"># update if we found bigger</span>
+  <span class="kw">RETURN</span> largest</div>
+      </div>
+
+      <div class="nav-bar">
+        <button class="nav-btn" onclick="goToSection(2)">← Previous</button>
+        <div class="nav-info">Section 3 of 10</div>
+        <button class="nav-btn primary" onclick="goToSection(4)">Next →</button>
+      </div>
+    </article>
+
+    <!-- SECTION 4 -->
+    <article class="section" id="sec4">
+      <header class="section-header">
+        <span class="section-num">04 — Languages</span>
+        <h2 class="section-title">Programming languages</h2>
+        <p class="section-intro">A programming language is a formal notation for expressing algorithms in a way a computer can execute. Each language makes different trade-offs between readability, performance, and scope.</p>
+      </header>
+
+      <div class="analogy">
+        <p class="analogy-label">Analogy</p>
+        <p>Human languages differ in grammar, vocabulary, and idiom — but they can express the same ideas. Programming languages are similar: the same algorithm can be written in Python, Java, or C++. The choice of language shapes how you express the idea, not what idea you can express.</p>
+      </div>
+
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>Language</th>
+            <th>Best for</th>
+            <th>Characteristic</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Python</strong></td><td>Data, automation, learning</td><td>Reads like English; minimal syntax noise</td></tr>
+          <tr><td><strong>JavaScript</strong></td><td>Web interfaces</td><td>Runs natively in every browser</td></tr>
+          <tr><td><strong>Java</strong></td><td>Enterprise, Android</td><td>Strongly typed; "write once, run anywhere"</td></tr>
+          <tr><td><strong>C++</strong></td><td>Games, systems, performance</td><td>Direct hardware access; maximum speed</td></tr>
+          <tr><td><strong>Swift</strong></td><td>iOS / macOS apps</td><td>Safe by design; Apple's modern language</td></tr>
+          <tr><td><strong>SQL</strong></td><td>Databases</td><td>Declarative — describe the result, not the steps</td></tr>
+        </tbody>
+      </table>
+
+      <div class="demo">
+        <div class="demo-header">Interactive — "Hello, world" across languages</div>
+        <div class="demo-body">
+          <p style="font-size:.9rem;color:var(--muted);margin-bottom:1rem">The same program written in three different languages. Same result, different syntax.</p>
+          <div class="demo-row">
+            <button class="btn" onclick="showLang('python')">Python</button>
+            <button class="btn" onclick="showLang('javascript')">JavaScript</button>
+            <button class="btn" onclick="showLang('java')">Java</button>
+          </div>
+          <div class="terminal" id="langTerminal"><span class="prompt">$</span> select a language</div>
+        </div>
+      </div>
+
+      <div class="quiz">
+        <div class="quiz-q">Why do multiple programming languages exist?</div>
+        <ul class="quiz-opts" id="q4">
+          <li onclick="answer(this,'q4',false)"><span class="quiz-marker"></span>No one could agree on a single standard</li>
+          <li onclick="answer(this,'q4',true)"><span class="quiz-marker"></span>Different problems benefit from different trade-offs</li>
+          <li onclick="answer(this,'q4',false)"><span class="quiz-marker"></span>To make programming more difficult</li>
         </ul>
       </div>
-    </div>
-  </div>
-</div>
-<div class="dm"><div class="dm-h"><span class="dm-d"></span><span class="dm-t">Interactive &mdash; what could you build?</span></div><div class="dm-b"><p class="dm-p">Realistic projects achievable in 3&ndash;6 months of consistent practice.</p><div class="btns"><button class="btn" onclick="showgoal('web')">Web</button><button class="btn" onclick="showgoal('data')">Data</button><button class="btn" onclick="showgoal('game')">Games</button><button class="btn" onclick="showgoal('auto')">Automation</button><button class="btn" onclick="showgoal('api')">APIs</button></div><div class="term" id="t14"><span class="tp">$</span> choose an area</div></div></div>
-<div class="dm" style="margin-top:.75rem"><div class="dm-h"><span class="dm-d"></span><span class="dm-t">Final knowledge check &mdash; 10 questions</span></div><div class="dm-b"><p class="dm-p">Covers everything in the guide. True / false format. Auto-advances.</p><button class="btn p" onclick="startFQ()" style="margin-bottom:.75rem">Begin quiz</button><div id="fqb"></div></div></div>
-<div class="done" id="donebox">
-  <h3>Guide complete</h3>
-  <p>You have covered what most beginners take months to piece together.<br>Every expert programmer was once exactly where you are now.<br>The only difference is they kept going.</p>
-</div>
-<div class="navrow"><button class="nb" onclick="go(13)">&larr; Prev</button><span class="nc">14 / 14</span><button class="nb" disabled>Done</button></div>
-</article>
-</main>
+
+      <div class="nav-bar">
+        <button class="nav-btn" onclick="goToSection(3)">← Previous</button>
+        <div class="nav-info">Section 4 of 10</div>
+        <button class="nav-btn primary" onclick="goToSection(5)">Next →</button>
+      </div>
+    </article>
+
+    <!-- SECTION 5 -->
+    <article class="section" id="sec5">
+      <header class="section-header">
+        <span class="section-num">05 — Concepts</span>
+        <h2 class="section-title">Core concepts</h2>
+        <p class="section-intro">Four building blocks appear in virtually every program ever written. Master these and the rest of programming starts to feel like variations on a theme.</p>
+      </header>
+
+      <div class="concept-grid">
+        <div class="concept-card" style="cursor:pointer" onclick="showConcept('variables')">
+          <p class="concept-card-label">01 — Variables</p>
+          <h3>Named storage</h3>
+          <p>A variable is a name bound to a value. It lets you store, retrieve, and update data. Click to see an example.</p>
+        </div>
+        <div class="concept-card" style="cursor:pointer" onclick="showConcept('functions')">
+          <p class="concept-card-label">02 — Functions</p>
+          <h3>Reusable logic</h3>
+          <p>A function is a named block of code you can call repeatedly. The alternative is copying the same logic everywhere.</p>
+        </div>
+        <div class="concept-card" style="cursor:pointer" onclick="showConcept('loops')">
+          <p class="concept-card-label">03 — Loops</p>
+          <h3>Repetition</h3>
+          <p>Loops execute a block of code multiple times without you writing it multiple times. Essential for working with collections.</p>
+        </div>
+        <div class="concept-card" style="cursor:pointer" onclick="showConcept('conditions')">
+          <p class="concept-card-label">04 — Conditions</p>
+          <h3>Decision making</h3>
+          <p>Conditions let a program take different paths based on data. Without them, every program would do the same thing every time.</p>
+        </div>
+      </div>
+
+      <div class="code-block" id="conceptCode" style="display:none">
+        <div class="code-header">
+          <div class="code-dots"><span></span><span></span><span></span></div>
+          <span class="code-lang" id="conceptCodeLang">Python</span>
+        </div>
+        <div class="code-body" id="conceptCodeBody"></div>
+      </div>
+
+      <div class="demo">
+        <div class="demo-header">Interactive — Live simulation</div>
+        <div class="demo-body">
+          <p style="font-size:.9rem;color:var(--muted);margin-bottom:1rem">See all four concepts working together in a single short program.</p>
+          <div class="demo-row">
+            <button class="btn btn-primary" onclick="runSimulation()">Run simulation</button>
+          </div>
+          <div class="terminal" id="simTerminal"><span class="prompt">$</span> click run</div>
+        </div>
+      </div>
+
+      <div class="nav-bar">
+        <button class="nav-btn" onclick="goToSection(4)">← Previous</button>
+        <div class="nav-info">Section 5 of 10</div>
+        <button class="nav-btn primary" onclick="goToSection(6)">Next →</button>
+      </div>
+    </article>
+
+    <!-- SECTION 6 -->
+    <article class="section" id="sec6">
+      <header class="section-header">
+        <span class="section-num">06 — Data</span>
+        <h2 class="section-title">Types of data</h2>
+        <p class="section-intro">Every piece of information your program handles has a type. Types determine what operations you can perform and how the data is stored.</p>
+      </header>
+
+      <div class="concept-grid">
+        <div class="concept-card">
+          <p class="concept-card-label">Integer</p>
+          <h3>Whole numbers</h3>
+          <p>Used for counting: 0, 1, -3, 1000. No decimal point. Common for indices, ages, counts of things.</p>
+        </div>
+        <div class="concept-card">
+          <p class="concept-card-label">Float</p>
+          <h3>Decimal numbers</h3>
+          <p>Numbers with fractional parts: 3.14, -0.5, 2.718. Used for measurements, prices, scientific values.</p>
+        </div>
+        <div class="concept-card">
+          <p class="concept-card-label">String</p>
+          <h3>Text</h3>
+          <p>Any sequence of characters: "hello", "42", "user@email.com". Always quoted. The number "42" and the integer 42 are different things.</p>
+        </div>
+        <div class="concept-card">
+          <p class="concept-card-label">Boolean</p>
+          <h3>True or false</h3>
+          <p>Exactly two possible values. The result of any comparison is a boolean. Essential for conditions and control flow.</p>
+        </div>
+        <div class="concept-card">
+          <p class="concept-card-label">List / Array</p>
+          <h3>Ordered collection</h3>
+          <p>Multiple values grouped together: [1, 2, 3] or ["alice", "bob"]. Lets you work with many items using a single variable.</p>
+        </div>
+        <div class="concept-card">
+          <p class="concept-card-label">Dictionary</p>
+          <h3>Key-value pairs</h3>
+          <p>Labelled data: {"name": "Alice", "age": 30}. Used when you need to look things up by name rather than position.</p>
+        </div>
+      </div>
+
+      <div class="demo">
+        <div class="demo-header">Interactive — Data type quiz</div>
+        <div class="demo-body">
+          <p style="font-size:.9rem;color:var(--muted);margin-bottom:1rem">Identify the data type of each value.</p>
+          <button class="btn btn-primary" onclick="startDTQuiz()" style="margin-bottom:1rem">Start quiz</button>
+          <div id="dtQuizBody"></div>
+        </div>
+      </div>
+
+      <div class="nav-bar">
+        <button class="nav-btn" onclick="goToSection(5)">← Previous</button>
+        <div class="nav-info">Section 6 of 10</div>
+        <button class="nav-btn primary" onclick="goToSection(7)">Next →</button>
+      </div>
+    </article>
+
+    <!-- SECTION 7 -->
+    <article class="section" id="sec7">
+      <header class="section-header">
+        <span class="section-num">07 — Method</span>
+        <h2 class="section-title">The problem-solving approach</h2>
+        <p class="section-intro">Writing code is the last step, not the first. Experienced programmers spend most of their time thinking, not typing.</p>
+      </header>
+
+      <div class="concept-grid">
+        <div class="concept-card">
+          <p class="concept-card-label">Step 01</p>
+          <h3>Understand</h3>
+          <p>Can you explain the problem to someone else? If not, you do not understand it well enough to solve it. Restate it in your own words first.</p>
+        </div>
+        <div class="concept-card">
+          <p class="concept-card-label">Step 02</p>
+          <h3>Decompose</h3>
+          <p>Break the problem into the smallest possible sub-problems. Solve each independently. Combine the solutions.</p>
+        </div>
+        <div class="concept-card">
+          <p class="concept-card-label">Step 03</p>
+          <h3>Plan in plain English</h3>
+          <p>Write out your approach as numbered steps before touching a keyboard. If the steps are unclear in English, they will be wrong in code.</p>
+        </div>
+        <div class="concept-card">
+          <p class="concept-card-label">Step 04</p>
+          <h3>Code the simplest version</h3>
+          <p>Make it work before making it fast or elegant. A slow correct solution beats a fast incorrect one every time.</p>
+        </div>
+        <div class="concept-card">
+          <p class="concept-card-label">Step 05</p>
+          <h3>Test with real data</h3>
+          <p>Try expected inputs. Then try edge cases: empty lists, negative numbers, very large values. Bugs hide in corners.</p>
+        </div>
+        <div class="concept-card">
+          <p class="concept-card-label">Step 06</p>
+          <h3>Debug systematically</h3>
+          <p>When something fails, isolate where it fails. Change one thing at a time. Read the error message — it is trying to help you.</p>
+        </div>
+      </div>
+
+      <div class="demo">
+        <div class="demo-header">Interactive — Walk through a real problem</div>
+        <div class="demo-body">
+          <p style="font-size:.9rem;color:var(--muted);margin-bottom:1rem"><strong>Problem:</strong> Organise a birthday party for 20 people. Work through each step.</p>
+          <div class="demo-row">
+            <button class="btn" onclick="solveProblem(1)">1 — Understand</button>
+            <button class="btn" onclick="solveProblem(2)">2 — Decompose</button>
+            <button class="btn" onclick="solveProblem(3)">3 — Plan</button>
+          </div>
+          <div class="terminal" id="problemTerminal"><span class="prompt">$</span> select a step</div>
+        </div>
+      </div>
+
+      <div class="note">
+        <span class="note-icon">Tip</span>
+        <p>Fifteen minutes of planning can prevent hours of debugging. The ratio of thinking time to typing time is the clearest indicator of programmer experience.</p>
+      </div>
+
+      <div class="nav-bar">
+        <button class="nav-btn" onclick="goToSection(6)">← Previous</button>
+        <div class="nav-info">Section 7 of 10</div>
+        <button class="nav-btn primary" onclick="goToSection(8)">Next →</button>
+      </div>
+    </article>
+
+    <!-- SECTION 8 -->
+    <article class="section" id="sec8">
+      <header class="section-header">
+        <span class="section-num">08 — Pitfalls</span>
+        <h2 class="section-title">Common beginner mistakes</h2>
+        <p class="section-intro">Every programmer makes these mistakes. Knowing them in advance does not mean you will avoid them — but it means you will recognise them faster when they happen.</p>
+      </header>
+
+      <div class="concept-grid">
+        <div class="concept-card">
+          <p class="concept-card-label">Mistake 01</p>
+          <h3>Coding before thinking</h3>
+          <p>Jumping straight to the editor without a plan. The result is code that solves a slightly different problem than the one you meant to solve.</p>
+        </div>
+        <div class="concept-card">
+          <p class="concept-card-label">Mistake 02</p>
+          <h3>Ignoring error messages</h3>
+          <p>Error messages tell you exactly what went wrong and often where. Most beginners panic and ignore them. Read every word before changing anything.</p>
+        </div>
+        <div class="concept-card">
+          <p class="concept-card-label">Mistake 03</p>
+          <h3>Over-engineering early</h3>
+          <p>Building a complex solution before the simple one works. Start with the most naive approach that could possibly be correct, then improve it.</p>
+        </div>
+        <div class="concept-card">
+          <p class="concept-card-label">Mistake 04</p>
+          <h3>Insufficient testing</h3>
+          <p>Testing only the happy path. Real software fails on edge cases: empty inputs, unexpected characters, values at the boundary of valid ranges.</p>
+        </div>
+        <div class="concept-card">
+          <p class="concept-card-label">Mistake 05</p>
+          <h3>Comparing your progress</h3>
+          <p>Measuring yourself against others at a different stage of their journey. The only meaningful comparison is yourself six months ago.</p>
+        </div>
+        <div class="concept-card">
+          <p class="concept-card-label">Mistake 06</p>
+          <h3>Giving up at friction</h3>
+          <p>Confusion is not a signal to stop — it is a signal that learning is happening. The discomfort you feel is the sensation of your mental model changing.</p>
+        </div>
+      </div>
+
+      <div class="demo">
+        <div class="demo-header">Interactive — Error message translator</div>
+        <div class="demo-body">
+          <p style="font-size:.9rem;color:var(--muted);margin-bottom:1rem">Common error messages decoded into plain English.</p>
+          <div class="demo-row">
+            <button class="btn" onclick="showError()">Show me an error</button>
+          </div>
+          <div class="terminal" id="errorTerminal"><span class="prompt">$</span> click above</div>
+        </div>
+      </div>
+
+      <div class="nav-bar">
+        <button class="nav-btn" onclick="goToSection(7)">← Previous</button>
+        <div class="nav-info">Section 8 of 10</div>
+        <button class="nav-btn primary" onclick="goToSection(9)">Next →</button>
+      </div>
+    </article>
+
+    <!-- SECTION 9 -->
+    <article class="section" id="sec9">
+      <header class="section-header">
+        <span class="section-num">09 — Roadmap</span>
+        <h2 class="section-title">Your learning journey</h2>
+        <p class="section-intro">What to expect in the weeks and months ahead. Progress is rarely linear, but there are common patterns in how people develop as programmers.</p>
+      </header>
+
+      <div class="concept-grid">
+        <div class="concept-card">
+          <p class="concept-card-label">Weeks 1–2</p>
+          <h3>The basics</h3>
+          <p>Variables, printing, arithmetic, simple input. Everything is new. Write small programs just to see them run.</p>
+        </div>
+        <div class="concept-card">
+          <p class="concept-card-label">Weeks 3–4</p>
+          <h3>First friction</h3>
+          <p>Loops and conditions introduce complexity. You will hit your first "I don't understand" wall. This is expected. Slow down, not stop.</p>
+        </div>
+        <div class="concept-card">
+          <p class="concept-card-label">Weeks 5–8</p>
+          <h3>Things click</h3>
+          <p>Concepts that seemed independent start connecting. You build programs that do something genuinely useful. Confidence grows.</p>
+        </div>
+        <div class="concept-card">
+          <p class="concept-card-label">Weeks 9–12</p>
+          <h3>Independent creation</h3>
+          <p>You start building things without following tutorials step by step. You encounter new problems and figure them out without asking for help every time.</p>
+        </div>
+      </div>
+
+      <div class="demo">
+        <div class="demo-header">Interactive — Explore what you could build</div>
+        <div class="demo-body">
+          <p style="font-size:.9rem;color:var(--muted);margin-bottom:1rem">Choose an area of interest to see what is possible with a few months of learning.</p>
+          <div class="demo-row">
+            <button class="btn" onclick="showGoal('web')">Web</button>
+            <button class="btn" onclick="showGoal('data')">Data</button>
+            <button class="btn" onclick="showGoal('game')">Games</button>
+            <button class="btn" onclick="showGoal('automation')">Automation</button>
+          </div>
+          <div class="terminal" id="goalTerminal"><span class="prompt">$</span> choose an area</div>
+        </div>
+      </div>
+
+      <div class="nav-bar">
+        <button class="nav-btn" onclick="goToSection(8)">← Previous</button>
+        <div class="nav-info">Section 9 of 10</div>
+        <button class="nav-btn primary" onclick="goToSection(10)">Next →</button>
+      </div>
+    </article>
+
+    <!-- SECTION 10 -->
+    <article class="section" id="sec10">
+      <header class="section-header">
+        <span class="section-num">10 — Next steps</span>
+        <h2 class="section-title">You are ready to start</h2>
+        <p class="section-intro">You now hold the conceptual framework every programmer carries. The syntax is just vocabulary — and vocabularies are learned by using them.</p>
+      </header>
+
+      <div class="concept-grid">
+        <div class="concept-card">
+          <p class="concept-card-label">What you covered</p>
+          <h3>Foundations</h3>
+          <ul class="checklist" style="margin:0">
+            <li>What programming is and is not</li>
+            <li>How computers process information</li>
+            <li>Algorithms and how to write them</li>
+            <li>Programming languages and their trade-offs</li>
+            <li>Variables, functions, loops, conditions</li>
+            <li>Data types and when to use them</li>
+            <li>A systematic problem-solving approach</li>
+            <li>Common mistakes and how to recognise them</li>
+          </ul>
+        </div>
+        <div class="concept-card">
+          <p class="concept-card-label">What comes next</p>
+          <h3>Immediate actions</h3>
+          <ul class="checklist" style="margin:0">
+            <li>Install Python (python.org — it is free)</li>
+            <li>Write a program that prints your name</li>
+            <li>Then one that asks for your name before printing it</li>
+            <li>Work through one exercise per day, not one per week</li>
+            <li>Join a community — Stack Overflow, Discord, Reddit</li>
+            <li>Build something you actually want to use</li>
+            <li>When stuck, read the error message first</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="demo">
+        <div class="demo-header">Final check</div>
+        <div class="demo-body">
+          <p style="font-size:.9rem;color:var(--muted);margin-bottom:1rem">One last quiz covering everything you have learned.</p>
+          <div class="demo-row">
+            <button class="btn btn-primary" onclick="runFinalQuiz()">Begin final quiz</button>
+          </div>
+          <div id="finalQuizBody"></div>
+        </div>
+      </div>
+
+      <div class="completion" id="completionMsg">
+        <h3>Course complete</h3>
+        <p>You have covered the foundations of programming. The rest is practice.<br>Every expert programmer started exactly where you are now.</p>
+      </div>
+
+      <div class="nav-bar">
+        <button class="nav-btn" onclick="goToSection(9)">← Previous</button>
+        <div class="nav-info">Section 10 of 10</div>
+        <button class="nav-btn" disabled>Complete</button>
+      </div>
+    </article>
+
+  </main>
 </div>
 
 <script>
-let cur=1,tot=14;
-function go(n){
-  document.getElementById('s'+cur).classList.remove('on');
-  document.getElementById('sb'+cur).classList.remove('on');
-  cur=n;
-  document.getElementById('s'+cur).classList.add('on');
-  document.getElementById('sb'+cur).classList.add('on');
-  document.getElementById('bc').textContent=(n<10?'0'+n:n)+' / 14';
-  document.getElementById('pf').style.width=(n/tot*100)+'%';
-  window.scrollTo({top:0,behavior:'smooth'});
-  if(n===tot)setTimeout(function(){document.getElementById('donebox').style.display='block';},900);
+let current = 1;
+const total = 10;
+
+function goToSection(n) {
+  document.getElementById('sec' + current).classList.remove('active');
+  document.querySelectorAll('.sidebar-nav a').forEach((a, i) => a.classList.toggle('active', i === n - 1));
+  current = n;
+  document.getElementById('sec' + current).classList.add('active');
+  document.getElementById('sectionLabel').textContent = (n < 10 ? '0' + n : n) + ' / 10';
+  document.getElementById('progressFill').style.width = (n / total * 100) + '%';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  if (n === total) setTimeout(() => document.getElementById('completionMsg').style.display = 'block', 800);
 }
 
-// S1 ambiguity
-var amb=[
-  '"Make a sandwich" -- which bread? how much filling? on what surface? hot or cold?',
-  '"Turn left" -- from my perspective or yours? how many degrees? walking or driving?',
-  '"Clean the room" -- define clean. which room. to whose standard. by when.',
-  '"Add the numbers" -- which numbers? where do I store the result? display it how?',
-  '"Fix the bug" -- which bug? how do you know when it is fixed?'
+// S1
+const ambiguities = [
+  '"Make a sandwich" — which bread? which filling? on what surface? with what tools?',
+  '"Turn left" — from my perspective or yours? how many degrees? in a car or on foot?',
+  '"Add the numbers" — which numbers? store the result where? display it how?',
+  '"Send the file" — which file? to whom? by what method? when?'
 ];
-var ai=0;
-function ambig(){document.getElementById('t1').innerHTML='<span class="tp">instruction</span>  <span class="to">'+amb[ai++%amb.length]+'</span>';}
-
-// S2 binary
-function tobin(){
-  var v=parseInt(document.getElementById('di').value),t=document.getElementById('t2');
-  if(isNaN(v)||v<0||v>255){t.innerHTML='<span class="te">Error: enter an integer 0-255</span>';return;}
-  var bits=v.toString(2).padStart(8,'0').split('').map(function(b){return '<span style="color:'+(b==='1'?'#86c88a':'#3a3835')+'">'+b+'</span>';}).join(' ');
-  t.innerHTML='<span class="tp">decimal  </span> <span class="to">'+v+'</span>
-<span class="tp">binary   </span> '+bits+'
-<span class="tp">hex      </span> <span class="tb2">0x'+v.toString(16).toUpperCase().padStart(2,'0')+'</span>
-<span class="tp">octal    </span> <span class="to">'+v.toString(8)+'</span>';
+let aIdx = 0;
+function showAmbiguity() {
+  const t = document.getElementById('ambiguityTerminal');
+  t.innerHTML = '<span class="prompt">instruction:</span> <span class="output">' + ambiguities[aIdx % ambiguities.length] + '</span>';
+  aIdx++;
 }
 
-// Quiz
-function ans(el,id,ok){
-  var opts=document.getElementById(id).querySelectorAll('li');
-  opts.forEach(function(o){o.classList.remove('ok','bad');});
-  el.classList.add(ok?'ok':'bad');
-  if(!ok)opts.forEach(function(o){if(o.getAttribute('onclick')&&o.getAttribute('onclick').indexOf('true')!==-1)o.classList.add('ok');});
+// S2
+function toBinary() {
+  const v = parseInt(document.getElementById('decInput').value);
+  const t = document.getElementById('binTerminal');
+  if (isNaN(v) || v < 0 || v > 255) {
+    t.innerHTML = '<span class="error">Error: enter a number between 0 and 255</span>'; return;
+  }
+  const bin = v.toString(2).padStart(8, '0');
+  const bits = bin.split('').map((b, i) => '<span style="color:' + (b === '1' ? '#a8d89a' : '#4a4a45') + '">' + b + '</span>').join(' ');
+  t.innerHTML = '<span class="prompt">decimal:</span> <span class="output">' + v + '</span>\n<span class="prompt">binary: </span> ' + bits + '\n<span class="prompt">hex:    </span> <span class="output">0x' + v.toString(16).toUpperCase().padStart(2,'0') + '</span>';
 }
 
-// S3 algorithms
-var algos={
-  teeth:'INPUT: toothbrush, toothpaste, water
+// Quiz handler
+function answer(el, groupId, correct) {
+  const opts = document.getElementById(groupId).querySelectorAll('li');
+  opts.forEach(o => o.classList.remove('correct','wrong'));
+  el.classList.add(correct ? 'correct' : 'wrong');
+  if (!correct) opts.forEach(o => { if (o.getAttribute('onclick') && o.getAttribute('onclick').includes('true')) o.classList.add('correct'); });
+}
 
-1. Apply 2cm toothpaste to brush
-2. Wet brush under tap (2 seconds)
-3. Brush outer surfaces -- 30s per quadrant (x4 = 2 min)
-4. Brush inner surfaces -- 30s per quadrant
-5. Brush chewing surfaces -- 30s
-6. Rinse mouth with water
-7. Rinse brush; return to holder
-
-OUTPUT: clean teeth, fresh breath',
-  sandwich:'INPUT: bread (x2), filling, spread, plate, knife
-
-1. Place bread slices on plate
-2. IF spread required: apply to one slice
-3. Layer filling evenly on that slice
-4. Place second slice on top
-5. IF halving desired: cut diagonally
-6. Return unused ingredients to storage
-
-OUTPUT: assembled sandwich',
-  sort:'INPUT: unsorted list of numbers
-
-# Bubble sort -- simple, O(n squared)
-1. SET swapped = True
-2. WHILE swapped is True:
-     swapped = False
-     FOR i = 0 to length - 2:
-       IF list[i] > list[i+1]:
-         SWAP list[i] and list[i+1]
-         swapped = True
-3. RETURN sorted list',
-  login:'INPUT: username, password
-
-1. Validate: inputs not empty
-2. Look up username in database
-3. IF not found: RETURN "Invalid credentials"
-4. Hash the provided password
-5. Compare hash to stored hash
-6. IF no match: RETURN "Invalid credentials"
-7. Create session token
-8. RETURN token + redirect
-
-Note: same error message for steps 3 and 6
--- never reveal which part failed'
+// S3
+const algos = {
+  teeth: '1. Retrieve toothbrush and toothpaste from storage\n2. Apply 2cm of toothpaste to brush\n3. Wet brush under tap\n4. Brush outer surfaces: 30 seconds each quadrant\n5. Brush inner surfaces: 30 seconds each quadrant\n6. Brush chewing surfaces: 30 seconds\n7. Rinse mouth with water\n8. Rinse brush, return to holder',
+  sandwich: '1. Retrieve: bread (2 slices), filling, utensils, plate\n2. Place bread slices on plate\n3. IF spread needed: apply to slice 1\n4. Layer filling evenly on slice 1\n5. Place slice 2 on top\n6. IF cutting required: cut diagonally\n7. Return unused ingredients to storage\n8. Serve',
+  sort: '# Bubble sort — clearest to read, not fastest\n\n1. Compare element[0] with element[1]\n2. IF element[0] > element[1]: swap them\n3. Move to next pair: element[1] and element[2]\n4. Repeat until end of list\n5. Repeat entire pass until no swaps occur\n→ List is now sorted ascending'
 };
-function algo(k){document.getElementById('t3').innerHTML='<span class="to">'+algos[k]+'</span>';}
-
-// S4 languages
-var langs={
-  py:'>>> print("Hello, world!")
-Hello, world!
-
-# 1 line. No boilerplate. Reads like English.',
-  js:'> console.log("Hello, world!");
-Hello, world!
-
-// Runs in any browser or Node.js without setup.',
-  java:'public class Hello {
-    public static void main(String[] args) {
-        System.out.println("Hello, world!");
-    }
+function showAlgo(k) {
+  document.getElementById('algoTerminal').innerHTML = '<span class="output">' + algos[k] + '</span>';
 }
 
-// More ceremony -- but explicit contracts.',
-  rust:'fn main() {
-    println!("Hello, world!");
-}
-
-// Compiled, memory-safe, very fast.
-// Steeper learning curve; excellent for systems.',
-  sql:'SELECT 'Hello, world!' AS greeting;
-
--- Result:
--- greeting
--- ---------------
--- Hello, world!'
+// S4
+const langs = {
+  python: '>>> print("Hello, world!")\nHello, world!\n\n# 1 line. No boilerplate. Reads like English.',
+  javascript: '> console.log("Hello, world!");\nHello, world!\n\n// Runs in any browser or Node.js environment.',
+  java: '// Java requires more structure:\n\npublic class Hello {\n    public static void main(String[] args) {\n        System.out.println("Hello, world!");\n    }\n}\n\n// More ceremony — but also more explicit contracts.'
 };
-function lang(k){document.getElementById('t4').innerHTML='<span class="to">'+langs[k]+'</span>';}
-
-// S5 tabs
-function tb(btn,id){
-  document.querySelectorAll('.tb-btn').forEach(function(b){b.classList.remove('on');});
-  document.querySelectorAll('.tb-p').forEach(function(p){p.classList.remove('on');});
-  btn.classList.add('on');
-  document.getElementById(id).classList.add('on');
+function showLang(k) {
+  document.getElementById('langTerminal').innerHTML = '<span class="output">' + langs[k] + '</span>';
 }
 
-// S5 simulation
-function runsim(){
-  var lines=[
-    '-> [variable]   name = "Student"',
-    '-> [variable]   score = 0',
-    '-> [function]   greet(name) defined',
-    '-> [loop]       for round in range(1, 4):',
-    '   [condition] if round <= 3  ->  True',
-    '   [function]  greet("Student")  ->  "Hey, Student!"',
-    '   [variable]  score = score + 10  ->  10',
-    '   [loop]      round = 2 ...',
-    '   [function]  greet("Student")  ->  "Hey, Student!"',
-    '   [variable]  score = 20',
-    '   [loop]      round = 3 ...',
-    '   [function]  greet("Student")  ->  "Hey, Student!"',
-    '   [variable]  score = 30',
-    '-> [loop ends]  3 iterations complete',
-    '-> [condition]  if score >= 30  ->  True',
+// S5
+const conceptCode = {
+  variables: {
+    lang: 'Python — variables',
+    code: `<span class="cm"># Variables store values under a name</span>
+name = <span class="str">"Alice"</span>          <span class="cm"># string</span>
+age = <span class="num">29</span>               <span class="cm"># integer</span>
+height = <span class="num">1.72</span>           <span class="cm"># float</span>
+is_student = <span class="kw">False</span>     <span class="cm"># boolean</span>
+
+<span class="cm"># You can update them at any time</span>
+age = age + <span class="num">1</span>          <span class="cm"># age is now 30</span>`
+  },
+  functions: {
+    lang: 'Python — functions',
+    code: `<span class="cm"># A function is named, reusable logic</span>
+<span class="kw">def</span> <span class="fn">greet</span>(name):
+    <span class="kw">return</span> <span class="str">"Hello, "</span> + name + <span class="str">"!"</span>
+
+<span class="cm"># Call it as many times as you like</span>
+<span class="fn">print</span>(<span class="fn">greet</span>(<span class="str">"Alice"</span>))   <span class="cm"># Hello, Alice!</span>
+<span class="fn">print</span>(<span class="fn">greet</span>(<span class="str">"Bob"</span>))     <span class="cm"># Hello, Bob!</span>`
+  },
+  loops: {
+    lang: 'Python — loops',
+    code: `<span class="cm"># Without a loop: repetitive and fragile</span>
+<span class="fn">print</span>(<span class="str">"Step 1"</span>)
+<span class="fn">print</span>(<span class="str">"Step 2"</span>)
+<span class="fn">print</span>(<span class="str">"Step 3"</span>)
+
+<span class="cm"># With a loop: concise and flexible</span>
+<span class="kw">for</span> step <span class="kw">in</span> <span class="fn">range</span>(<span class="num">1</span>, <span class="num">4</span>):
+    <span class="fn">print</span>(<span class="str">"Step"</span>, step)  <span class="cm"># runs 3 times</span>`
+  },
+  conditions: {
+    lang: 'Python — conditions',
+    code: `<span class="cm"># Conditions let programs make decisions</span>
+temperature = <span class="num">28</span>
+
+<span class="kw">if</span> temperature > <span class="num">25</span>:
+    <span class="fn">print</span>(<span class="str">"Warm day"</span>)
+<span class="kw">elif</span> temperature > <span class="num">15</span>:
+    <span class="fn">print</span>(<span class="str">"Mild day"</span>)
+<span class="kw">else</span>:
+    <span class="fn">print</span>(<span class="str">"Cool day"</span>)
+
+<span class="cm"># Output: Warm day</span>`
+  }
+};
+
+function showConcept(k) {
+  const c = conceptCode[k];
+  document.getElementById('conceptCodeLang').textContent = c.lang;
+  document.getElementById('conceptCodeBody').innerHTML = c.code;
+  document.getElementById('conceptCode').style.display = 'block';
+}
+
+function runSimulation() {
+  const lines = [
+    '→ Variable:   name = "Student"',
+    '→ Variable:   score = 0',
+    '→ Loop:       for each round in [1, 2, 3]:',
+    '   Condition: if round <= 3 → True',
+    '   Function:  greet("Student") → "Hello, Student!"',
+    '   Variable:  score = score + 10',
+    '→ Loop ends. score = 30',
+    '→ Condition:  if score >= 30 → print "Passed!"',
     '',
-    'OUTPUT:  Hey, Student! (x3)   |   Score: 30 -- Passed!'
+    'Output: Hello, Student! (×3)  |  Passed!'
   ];
-  var t=document.getElementById('t5');t.textContent='';
-  lines.forEach(function(l,i){
-    setTimeout(function(){t.innerHTML+=(i?'
-':'')+'<span class="to">'+l+'</span>';},i*130);
+  const t = document.getElementById('simTerminal');
+  t.textContent = '';
+  lines.forEach((line, i) => {
+    setTimeout(() => {
+      t.innerHTML += (i ? '\n' : '') + '<span class="output">' + line + '</span>';
+    }, i * 180);
   });
 }
 
-// S6 data type quiz
-var dtq=[
-  {v:'"Hello, world"',a:'String',o:['Integer','String','Boolean','List']},
-  {v:'42',a:'Integer',o:['Integer','Float','String','Boolean']},
-  {v:'True',a:'Boolean',o:['String','Integer','Boolean','Float']},
-  {v:'[1, 2, 3]',a:'List',o:['String','Boolean','Integer','List']},
-  {v:'3.14',a:'Float',o:['Integer','Float','String','List']},
-  {v:'None',a:'None / Null',o:['Boolean','String','None / Null','Integer']},
-  {v:'{"name":"Alice"}',a:'Dictionary',o:['List','String','Dictionary','Tuple']},
-  {v:'(1, 2, 3)',a:'Tuple',o:['List','Tuple','Set','Dictionary']}
+// S6
+const dtQuiz = [
+  { val: '"hello"', answer: 'String', opts: ['Integer','String','Boolean','List'] },
+  { val: '42', answer: 'Integer', opts: ['Integer','Float','String','Boolean'] },
+  { val: 'True', answer: 'Boolean', opts: ['String','Integer','Boolean','Float'] },
+  { val: '[1, 2, 3]', answer: 'List', opts: ['String','Boolean','Integer','List'] },
+  { val: '3.14', answer: 'Float', opts: ['Integer','Float','String','List'] }
 ];
-var dti=0;
-function startDT(){dti=0;renderDT();}
-function renderDT(){
-  if(dti>=dtq.length){
-    document.getElementById('dtb').innerHTML='<div class="term"><span class="tg">Complete -- all '+dtq.length+' types identified correctly.</span></div>';
+let dtIdx = 0;
+function startDTQuiz() {
+  dtIdx = 0;
+  renderDTQ();
+}
+function renderDTQ() {
+  if (dtIdx >= dtQuiz.length) {
+    document.getElementById('dtQuizBody').innerHTML = '<div class="terminal"><span class="output">Quiz complete — all data types identified correctly.</span></div>'; return;
+  }
+  const q = dtQuiz[dtIdx];
+  let html = '<div class="quiz"><div class="quiz-q">What type is: <code style="font-family:var(--mono);background:var(--code-bg);color:var(--code-fg);padding:2px 8px;border-radius:3px">' + q.val + '</code> ?</div><ul class="quiz-opts" id="dtq">';
+  q.opts.forEach(o => {
+    html += '<li onclick="checkDT(this,\'' + o + '\',\'' + q.answer + '\')"><span class="quiz-marker"></span>' + o + '</li>';
+  });
+  html += '</ul></div>';
+  document.getElementById('dtQuizBody').innerHTML = html;
+}
+function checkDT(el, chosen, correct) {
+  const opts = document.getElementById('dtq').querySelectorAll('li');
+  opts.forEach(o => o.classList.remove('correct','wrong'));
+  el.classList.add(chosen === correct ? 'correct' : 'wrong');
+  if (chosen !== correct) opts.forEach(o => { if (o.textContent.trim() === correct) o.classList.add('correct'); });
+  setTimeout(() => { dtIdx++; renderDTQ(); }, 1400);
+}
+
+// S7
+const problemSteps = {
+  1: 'UNDERSTAND\n\nWe need to organise a birthday party for exactly 20 guests.\nThis means planning: venue, food, drinks, entertainment, invitations, schedule.\nConstraints: budget, date, dietary needs, location.',
+  2: 'DECOMPOSE\n\nSub-problem 1: Guest list → 20 names, contact details, dietary needs\nSub-problem 2: Venue → capacity ≥ 25 (buffer), date availability\nSub-problem 3: Food → quantity × 20, dietary restrictions accounted for\nSub-problem 4: Invitations → send 3 weeks in advance, track RSVPs\nSub-problem 5: Entertainment → duration, audience, setup requirements\nSub-problem 6: Day-of schedule → setup, welcome, food, activities, cleanup',
+  3: 'PLAN\n\nWeek −3: Finalise guest list. Book venue. Send invitations.\nWeek −2: Confirm dietary needs. Order food and supplies.\nWeek −1: Confirm RSVPs. Finalise quantities. Arrange entertainment.\nDay −1: Collect supplies. Prepare anything possible in advance.\nDay:     Arrive 2h early. Set up. Welcome guests. Serve food.\n         Run activities. Thank guests. Clean up.'
+};
+function solveProblem(n) {
+  document.getElementById('problemTerminal').innerHTML = '<span class="output">' + problemSteps[n] + '</span>';
+}
+
+// S8
+const errors = [
+  { raw: 'SyntaxError: invalid syntax (line 7)', plain: 'You have a typo on line 7 — often a missing colon (:), quote, or bracket. Check the character just before where Python is pointing.' },
+  { raw: "NameError: name 'total' is not defined", plain: "You used a variable called 'total' before creating it. Check spelling, and make sure you assigned it before the line that's failing." },
+  { raw: 'IndentationError: unexpected indent', plain: 'Python uses indentation (spaces) to define blocks. Something on this line is indented differently from its neighbours. Use 4 spaces consistently — never mix tabs and spaces.' },
+  { raw: "TypeError: can only concatenate str (not 'int') to str", plain: "You're trying to combine text and a number directly. Convert the number first: str(42) turns 42 into \"42\" so you can join them." }
+];
+let eIdx = 0;
+function showError() {
+  const e = errors[eIdx % errors.length];
+  document.getElementById('errorTerminal').innerHTML = '<span class="error">' + e.raw + '</span>\n\n<span class="output">Plain English: ' + e.plain + '</span>';
+  eIdx++;
+}
+
+// S9
+const goals = {
+  web: 'WEB DEVELOPMENT\n\nProjects you could build in 3–6 months:\n  — Personal portfolio with contact form\n  — Simple blog with categories and search\n  — Price comparison tool using public APIs\n  — Habit tracker with charts and local storage\n\nLanguages: HTML, CSS, JavaScript, then Python (Flask/Django)',
+  data: 'DATA ANALYSIS\n\nProjects you could build in 3–6 months:\n  — Visualise your own bank statements as charts\n  — Analyse Spotify listening history (they export it)\n  — Scrape and track prices for something you want to buy\n  — Build a simple dashboard for a CSV of your choice\n\nLanguages: Python (pandas, matplotlib, seaborn)',
+  game: 'GAME DEVELOPMENT\n\nProjects you could build in 3–6 months:\n  — Text-based adventure game with branching narrative\n  — Number guessing game with difficulty levels\n  — Noughts and crosses with a simple AI opponent\n  — Wordle clone — much less code than you would expect\n\nLanguages: Python (pygame) or JavaScript',
+  automation: 'AUTOMATION\n\nProjects you could build in 3–6 months:\n  — Rename 1000 files according to rules you define\n  — Email yourself a daily summary of a website\n  — Automatically organise downloaded files into folders\n  — Scrape a job board and filter results by keywords\n\nLanguages: Python (os, shutil, requests, BeautifulSoup)'
+};
+function showGoal(k) {
+  document.getElementById('goalTerminal').innerHTML = '<span class="output">' + goals[k] + '</span>';
+}
+
+// S10 — final quiz
+const fqData = [
+  { q: 'An algorithm must always produce the same output for the same input.', answer: 'True', opts: ['True','False'] },
+  { q: 'Python is the only language suitable for beginners.', answer: 'False', opts: ['True','False'] },
+  { q: 'The first step in solving a programming problem is to start coding immediately.', answer: 'False', opts: ['True','False'] },
+  { q: 'The string "42" and the integer 42 are the same data type.', answer: 'False', opts: ['True','False'] },
+  { q: 'Reading an error message carefully is usually the fastest way to find a bug.', answer: 'True', opts: ['True','False'] }
+];
+let fqIdx = 0;
+let fqScore = 0;
+
+function runFinalQuiz() {
+  fqIdx = 0; fqScore = 0;
+  renderFQ();
+}
+function renderFQ() {
+  if (fqIdx >= fqData.length) {
+    document.getElementById('finalQuizBody').innerHTML = '<div class="terminal"><span class="output">Score: ' + fqScore + ' / ' + fqData.length + '\n\n' + (fqScore >= 4 ? 'Strong result. You are ready to start.' : 'Review sections where you were uncertain, then try again.') + '</span></div>';
+    if (fqScore >= 4) setTimeout(() => document.getElementById('completionMsg').style.display = 'block', 600);
     return;
   }
-  var q=dtq[dti];
-  var opts=q.o.map(function(o){
-    return '<li onclick="chkDT(this,''+o+'',''+q.a+'')"><span class="qd"></span>'+o+'</li>';
-  }).join('');
-  document.getElementById('dtb').innerHTML='<div class="qz"><div class="qz-q">What type is: <code style="font-family:var(--mono);background:var(--cd);color:var(--cdf);padding:1px 7px;border-radius:3px;font-size:.85em">'+q.v+'</code></div><ul class="qz-o" id="dtq">'+opts+'</ul></div>';
+  const q = fqData[fqIdx];
+  let html = '<div class="quiz" style="margin-top:1rem"><div class="quiz-q">' + (fqIdx+1) + '. ' + q.q + '</div><ul class="quiz-opts" id="fqq">';
+  q.opts.forEach(o => {
+    html += '<li onclick="checkFQ(this,\'' + o + '\',\'' + q.answer + '\')"><span class="quiz-marker"></span>' + o + '</li>';
+  });
+  html += '</ul></div>';
+  document.getElementById('finalQuizBody').innerHTML = html;
 }
-function chkDT(el,chosen,correct){
-  var opts=document.getElementById('dtq').querySelectorAll('li');
-  opts.forEach(function(o){o.classList.remove('ok','bad');});
-  el.classList.add(chosen===correct?'ok':'bad');
-  if(chosen!==correct)opts.forEach(function(o){if(o.textContent.trim()===correct)o.classList.add('ok');});
-  setTimeout(function(){dti++;renderDT();},1200);
-}
-
-// S8 problem solving
-var probs={
-  1:'UNDERSTAND
-
-Goal: given any text file, return the single most common word.
-
-Questions to answer before coding:
-  -- What counts as a word? (punctuation? numbers? case-sensitive?)
-  -- What if there is a tie? (return all? return the first?)
-  -- What if the file is empty? Does not exist?
-  -- How large could the file be? (affects memory strategy)
-  -- What should the output look like?',
-  2:'DECOMPOSE
-
-Sub-problem 1 -- Read the file
-  Input: file path  |  Output: raw text string
-
-Sub-problem 2 -- Extract words
-  Input: raw text  |  Output: list of cleaned words
-  Decisions: lowercase? strip punctuation?
-
-Sub-problem 3 -- Count words
-  Input: list of words  |  Output: {word: count}
-
-Sub-problem 4 -- Find maximum
-  Input: count dict  |  Output: word with highest count
-
-Sub-problem 5 -- Edge cases
-  Empty file, ties, file not found',
-  3:'PLAN (plain English)
-
-1.  Open the file; if missing, raise a clear error
-2.  Read all text into memory
-3.  Convert to lowercase
-4.  Remove all punctuation
-5.  Split on whitespace -> list of words
-6.  If list is empty: return None
-7.  Create counts = {}
-8.  For each word:
-      if word in counts: counts[word] += 1
-      else: counts[word] = 1
-9.  Find the key with the largest value
-10. Return that word and its count',
-  4:'EDGE CASES TO TEST
-
-  -- Empty file -> should not crash
-  -- File with one word -> that word is the answer
-  -- All words appear once -> tie; define behavior
-  -- Very large file (1GB) -> check memory usage
-  -- File with only punctuation -> no words found
-  -- Non-existent file path -> clear error message
-  -- Numbers as words -> include or exclude?'
-};
-function prob(n){document.getElementById('t8').innerHTML='<span class="to">'+probs[n]+'</span>';}
-
-// S9 + S13 errors
-var errs=[
-  {raw:'SyntaxError: invalid syntax (line 7)',plain:'Typo on line 7 -- often a missing colon (:), quote, or bracket. Look just before where Python is pointing.'},
-  {raw:"NameError: name 'total' is not defined",plain:"You used 'total' before creating it. Check spelling (Python is case-sensitive). Make sure you assigned it before this line."},
-  {raw:'IndentationError: unexpected indent',plain:'Python uses indentation to define blocks. Something here is inconsistently indented. Use exactly 4 spaces. Never mix tabs and spaces.'},
-  {raw:"TypeError: can only concatenate str (not 'int') to str",plain:"You are joining text and a number directly. Convert first: str(42) turns 42 into the string '42' so they can be joined."},
-  {raw:'IndexError: list index out of range',plain:"You accessed a position that does not exist. A list with 3 items has valid indices 0, 1, 2 -- not 3. Check your loop boundaries."},
-  {raw:'AttributeError: NoneType has no attribute split',plain:"A variable expected to hold a string is actually None. A function above returned nothing. Add a None check before using it."},
-  {raw:'RecursionError: maximum recursion depth exceeded',plain:"A function is calling itself endlessly -- probably missing a base case. Check your recursive function's exit condition."}
-];
-var ei1=0,ei2=0;
-function showerr(tid){
-  var idx=(tid==='t9')?ei1++:ei2++;
-  var e=errs[idx%errs.length];
-  document.getElementById(tid).innerHTML='<span class="te">'+e.raw+'</span>
-
-<span class="tp">plain english  </span><span class="to">'+e.plain+'</span>';
-}
-
-// S14 goals
-var goals={
-  web:'WEB DEVELOPMENT -- 3-6 months
-
-  -- Personal portfolio with working contact form
-  -- Blog engine with categories and search
-  -- Price tracker using public APIs + email alerts
-  -- Habit tracker with charts
-  -- Clone of a simple site you use and like
-
-Path: HTML -> CSS -> JavaScript -> Python (Flask) -> PostgreSQL',
-  data:'DATA ANALYSIS -- 3-6 months
-
-  -- Chart your own bank statements
-  -- Analyse your Spotify history (they let you export it)
-  -- Dashboard from any CSV you care about
-  -- Scrape and track prices for something you want to buy
-
-Path: Python -> pandas -> matplotlib -> seaborn -> Jupyter',
-  game:'GAME DEVELOPMENT -- 3-6 months
-
-  -- Text adventure with branching narrative and inventory
-  -- Wordle clone (less code than you expect)
-  -- Noughts and crosses with minimax AI opponent
-  -- Snake or Pong with pygame
-
-Path: Python -> pygame -> game logic -> OOP patterns',
-  auto:'AUTOMATION -- 3-6 months
-
-  -- Rename and organise 1,000 files by date/type
-  -- Email yourself a daily summary from a website
-  -- Auto-sort downloads into labelled folders
-  -- Scrape a job board and filter by keywords to CSV
-
-Path: Python -> os/shutil -> requests -> BeautifulSoup -> schedule',
-  api:'API PROJECTS -- 3-6 months
-
-  -- Weather dashboard using OpenWeatherMap API
-  -- GitHub activity tracker for any user
-  -- Currency converter with live exchange rates
-  -- Movie info lookup using TMDB API
-  -- Slack or Discord bot that answers questions
-
-Path: Python -> requests -> JSON parsing -> API keys -> deployment'
-};
-function showgoal(k){document.getElementById('t14').innerHTML='<span class="to">'+goals[k]+'</span>';}
-
-// Final quiz
-var fq=[
-  {q:'A correct algorithm always produces the same output for the same input.',a:'True',o:['True','False']},
-  {q:'Python is the only suitable language for beginners.',a:'False',o:['True','False']},
-  {q:'The first step when solving a problem is to start writing code immediately.',a:'False',o:['True','False']},
-  {q:'The string "42" and the integer 42 are the same data type.',a:'False',o:['True','False']},
-  {q:'Reading an error message carefully is usually the fastest path to a fix.',a:'True',o:['True','False']},
-  {q:'Git allows you to go back to any previous state of your code.',a:'True',o:['True','False']},
-  {q:'A runtime error means your code has a grammatical mistake and will not run at all.',a:'False',o:['True','False']},
-  {q:'OOP stands for Object-Oriented Programming.',a:'True',o:['True','False']},
-  {q:'HTTP 404 means a server-side error occurred.',a:'False',o:['True','False']},
-  {q:'Comments should explain WHY a decision was made, not just WHAT the code does.',a:'True',o:['True','False']}
-];
-var fqi=0,fqs=0;
-function startFQ(){fqi=0;fqs=0;renderFQ();}
-function renderFQ(){
-  if(fqi>=fq.length){
-    var pct=Math.round(fqs/fq.length*100);
-    var msg=fqs>=8?'<span class="tg">Excellent. You understand the foundations. Start writing code.</span>':fqs>=6?'<span class="to">Good. Review uncertain sections, then try again.</span>':'<span class="te">Work through the guide again at your own pace -- these concepts take time.</span>';
-    document.getElementById('fqb').innerHTML='<div class="term"><span class="to">Score: '+fqs+' / '+fq.length+' ('+pct+'%)
-
-</span>'+msg+'</div>';
-    if(fqs>=8)setTimeout(function(){document.getElementById('donebox').style.display='block';},400);
-    return;
-  }
-  var q=fq[fqi];
-  var opts=q.o.map(function(o){
-    return '<li onclick="chkFQ(this,''+o+'',''+q.a+'')"><span class="qd"></span>'+o+'</li>';
-  }).join('');
-  document.getElementById('fqb').innerHTML='<div class="qz" style="margin-top:.75rem"><div class="qz-q">'+(fqi+1)+'. '+q.q+'</div><ul class="qz-o" id="fqq">'+opts+'</ul></div>';
-}
-function chkFQ(el,chosen,correct){
-  var opts=document.getElementById('fqq').querySelectorAll('li');
-  opts.forEach(function(o){o.classList.remove('ok','bad');});
-  el.classList.add(chosen===correct?'ok':'bad');
-  if(chosen!==correct)opts.forEach(function(o){if(o.textContent.trim()===correct)o.classList.add('ok');});
-  if(chosen===correct)fqs++;
-  setTimeout(function(){fqi++;renderFQ();},1200);
+function checkFQ(el, chosen, correct) {
+  const opts = document.getElementById('fqq').querySelectorAll('li');
+  opts.forEach(o => o.classList.remove('correct','wrong'));
+  const right = chosen === correct;
+  el.classList.add(right ? 'correct' : 'wrong');
+  if (!right) opts.forEach(o => { if (o.textContent.trim() === correct) o.classList.add('correct'); });
+  if (right) fqScore++;
+  setTimeout(() => { fqIdx++; renderFQ(); }, 1400);
 }
 </script>
 </body>
