@@ -3,8 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Python Data Containers Tutorial</title>
+    <title>Interactive Python Data Containers: Architecture & Reference Guide</title>
     <style>
+        :root {
+            --bg: #ffffff;
+            --text: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --surface: #f8fafc;
+
+            /* Technical slate & blue accents */
+            --primary: #0284c7;
+            --primary-dark: #0369a1;
+            --primary-subtle: #f0f9ff;
+            --primary-border: #bae6fd;
+
+            /* Terminal & code editor */
+            --code-bg: #0f172a;
+            --code-header: #1e293b;
+            --code-text: #e2e8f0;
+            --code-border: #334155;
+
+            /* Status feedback */
+            --success-bg: #f0fdf4;
+            --success-border: #16a34a;
+            --success-text: #15803d;
+
+            --error-bg: #fef2f2;
+            --error-border: #dc2626;
+            --error-text: #b91c1c;
+
+            --warning-bg: #fffbeb;
+            --warning-border: #d97706;
+            --warning-text: #b45309;
+
+            --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -12,1123 +48,836 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            color: #333;
+            font-family: var(--font-sans);
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1080px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 48px 24px 100px 24px;
         }
 
+        /* Header & Intro */
         .header {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 30px;
-            margin-bottom: 30px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding-bottom: 28px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 36px;
         }
 
-        .header h1 {
-            color: #4f46e5;
-            font-size: 2.5em;
-            margin-bottom: 10px;
-        }
-
-        /* Intro/Landing */
         .intro-hero {
-            background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
-            color: #e5e7eb;
-            border-radius: 20px;
-            padding: 36px 24px;
-            margin-bottom: 24px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.35);
-            border: 1px solid rgba(255,255,255,0.08);
-        }
-        .intro-title { font-size: 2rem; font-weight: 800; color: #fff; margin-bottom: 10px; }
-        .intro-sub { font-size: 1rem; color: #c7d2fe; margin-bottom: 18px; }
-        .intro-cta { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
-        .btn-primary { background: linear-gradient(135deg, #10b981, #059669); }
-        .btn-outline { background: transparent; border: 2px solid #9ca3af; color: #e5e7eb; }
-
-        .progress-bar {
-            width: 100%;
-            height: 10px;
-            background: #e5e7eb;
-            border-radius: 5px;
-            margin: 20px 0;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #10b981, #3b82f6);
-            width: 0%;
-            transition: width 0.5s ease;
-            border-radius: 5px;
-        }
-
-        .lesson {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 15px;
-            padding: 30px;
-            margin-bottom: 20px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-            display: none;
-            animation: slideIn 0.5s ease-out;
-        }
-
-        .lesson.active {
-            display: block;
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .lesson h2 {
-            color: #1f2937;
-            font-size: 2em;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .lesson h3 {
-            color: #4f46e5;
-            font-size: 1.4em;
-            margin: 20px 0 10px 0;
-            border-left: 4px solid #4f46e5;
-            padding-left: 15px;
-        }
-
-        .code-block {
-            background: #0b1220;
-            color: #e5e7eb;
-            padding: 28px 20px 20px 20px;
-            border-radius: 12px;
-            margin: 15px 0;
-            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
-            font-size: 14px;
-            line-height: 1.6;
-            overflow-x: auto;
-            position: relative;
-            border: 1px solid rgba(255,255,255,0.08);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.25);
-            white-space: pre;              /* preserve line breaks and spacing */
-            tab-size: 4;                   /* consistent tab width */
-            -moz-tab-size: 4;
-            font-variant-ligatures: none;  /* avoid ligature confusion in code */
-        }
-
-        /* VS Code-like header dots */
-        .code-block::before {
-            content: '';
-            position: absolute;
-            top: 8px;
-            left: 12px;
-            width: 36px;
-            height: 10px;
-            background:
-                radial-gradient(circle at 6px 5px, #ef4444 4px, transparent 5px),
-                radial-gradient(circle at 18px 5px, #f59e0b 4px, transparent 5px),
-                radial-gradient(circle at 30px 5px, #10b981 4px, transparent 5px);
-        }
-
-        /* Language badge */
-        .code-block::after {
-            content: 'Python';
-            position: absolute;
-            top: 6px;
-            right: 10px;
-            background: linear-gradient(135deg, #4f46e5, #7c3aed);
-            color: white;
-            padding: 2px 8px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--primary);
             border-radius: 6px;
-            font-size: 10px;
-            letter-spacing: 0.02em;
+            padding: 24px 28px;
+            margin-bottom: 28px;
         }
 
-        /* Copy button for code blocks */
-        .copy-btn {
-            position: absolute;
-            top: 6px;
-            right: 70px;
-            background: rgba(255,255,255,0.08);
-            color: #e5e7eb;
-            border: 1px solid rgba(255,255,255,0.15);
-            padding: 2px 8px;
-            border-radius: 6px;
-            font-size: 11px;
-            cursor: pointer;
-            transition: all 0.2s ease;
+        .intro-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 8px;
+            letter-spacing: -0.015em;
         }
 
-        .copy-btn:hover {
-            background: rgba(255,255,255,0.16);
+        .intro-sub {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 18px;
         }
 
-        .exercise {
-            background: linear-gradient(135deg, #fef3c7, #fbbf24);
-            border: 2px solid #f59e0b;
-            border-radius: 10px;
-            padding: 20px;
-            margin: 20px 0;
-        }
-
-        .exercise h4 {
-            color: #92400e;
-            font-size: 1.2em;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .interactive-code {
-            margin: 15px 0;
-        }
-
-        .code-input {
-            width: 100%;
-            min-height: 100px;
-            padding: 15px;
-            border: 2px solid #d1d5db;
-            border-radius: 8px;
-            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
-            font-size: 14px;
-            resize: vertical;
-            background: #f9fafb;
-        }
-
-        .code-input:focus {
-            outline: none;
-            border-color: #4f46e5;
-            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
-        }
-
-        .btn {
-            background: linear-gradient(135deg, #4f46e5, #7c3aed);
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-size: 16px;
-            cursor: pointer;
-            margin: 10px 5px;
-            transition: all 0.3s ease;
-            font-weight: 600;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(79, 70, 229, 0.4);
-        }
-
-        .btn:active {
-            transform: translateY(0);
-        }
-
-        .btn-secondary {
-            background: linear-gradient(135deg, #6b7280, #4b5563);
-        }
-
-        .output {
-            background: #064e3b;
-            color: #d1fae5;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 10px;
-            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
-            font-size: 14px;
-            white-space: pre-wrap;
-            min-height: 50px;
-            border-left: 4px solid #10b981;
-        }
-
-        .quiz {
-            background: linear-gradient(135deg, #ddd6fe, #8b5cf6);
-            border: 2px solid #7c3aed;
-            border-radius: 10px;
-            padding: 25px;
-            margin: 25px 0;
-        }
-
-        .quiz h4 {
-            color: #581c87;
-            font-size: 1.3em;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .quiz-option {
-            background: rgba(255, 255, 255, 0.9);
-            margin: 10px 0;
-            padding: 15px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-        }
-
-        .quiz-option:hover {
-            background: rgba(255, 255, 255, 1);
-            transform: translateX(5px);
-        }
-
-        .quiz-option.selected {
-            border-color: #4f46e5;
-            background: rgba(79, 70, 229, 0.1);
-        }
-
-        .quiz-option.correct {
-            border-color: #10b981;
-            background: rgba(16, 185, 129, 0.1);
-        }
-
-        .quiz-option.incorrect {
-            border-color: #ef4444;
-            background: rgba(239, 68, 68, 0.1);
-        }
-
-        /* Hide per-lesson quizzes; keep only final quiz in #lesson6 */
-        .lesson:not(#lesson6) .quiz { display: none; }
-
-        .navigation {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 30px;
-        }
-
-        .score-badge {
-            background: linear-gradient(135deg, #10b981, #059669);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-weight: bold;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .celebration {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
-            z-index: 1000;
-            text-align: center;
-            animation: bounce 0.5s ease;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translate(-50%, -50%) translateY(0); }
-            40% { transform: translate(-50%, -50%) translateY(-10px); }
-            60% { transform: translate(-50%, -50%) translateY(-5px); }
-        }
-
-        .lesson-nav {
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 20px;
+        .intro-cta {
             display: flex;
             gap: 10px;
             flex-wrap: wrap;
-            justify-content: center;
         }
 
-        .lesson-tab {
-            padding: 10px 20px;
-            border-radius: 20px;
-            background: #e5e7eb;
-            color: #6b7280;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 500;
-            border: none;
+        .header h1 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            letter-spacing: -0.025em;
+            color: #0f172a;
+            margin-bottom: 8px;
         }
 
-        .lesson-tab.active {
-            background: linear-gradient(135deg, #4f46e5, #7c3aed);
-            color: white;
-        }
-
-        .lesson-tab.completed {
-            background: linear-gradient(135deg, #10b981, #059669);
-            color: white;
-        }
-
-        .hint {
-            background: rgba(59, 130, 246, 0.1);
-            border-left: 4px solid #3b82f6;
-            padding: 15px;
-            margin: 15px 0;
-            border-radius: 0 8px 8px 0;
-        }
-
-        .hint-title {
-            font-weight: bold;
-            color: #1e40af;
-            margin-bottom: 5px;
+        .header p {
+            font-size: 1.05rem;
+            color: var(--text-muted);
         }
 
         /* Teacher Notes */
         .teacher-notes {
-            background: rgba(255, 255, 255, 0.98);
-            border: 2px dashed #c7d2fe;
-            border-radius: 14px;
-            padding: 18px;
-            margin-bottom: 20px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-        }
-
-        .teacher-notes h2 {
-            margin: 0 0 10px 0;
-            font-size: 1.4rem;
-            color: #4338ca;
-            border: none;
-            padding: 0;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 16px 20px;
+            margin-bottom: 28px;
         }
 
         .teacher-toggle {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: linear-gradient(135deg, #4338ca, #7c3aed);
-            color: #fff;
-            border: none;
-            padding: 10px 16px;
-            border-radius: 999px;
+            background: var(--bg);
+            color: var(--primary-dark);
+            border: 1px solid var(--border);
+            padding: 6px 14px;
+            border-radius: 4px;
             cursor: pointer;
             font-weight: 600;
-            box-shadow: 0 6px 16px rgba(67,56,202,0.35);
+            font-family: var(--font-mono);
+            font-size: 0.825rem;
+            transition: all 0.2s ease;
         }
 
-        .teacher-content { display: none; margin-top: 14px; }
-        .teacher-section { margin: 10px 0; }
-        .teacher-section h3 { color: #4f46e5; font-size: 1.1rem; margin: 10px 0; }
-        .teacher-bullets { margin-left: 20px; color: #374151; }
-        .teacher-bullets li { margin: 6px 0; }
-        .teacher-time { font-size: 0.9rem; color: #6b7280; }
-        .print-note { font-size: 0.85rem; color: #6b7280; margin-top: 8px; }
+        .teacher-toggle:hover {
+            background: var(--primary-subtle);
+            border-color: var(--primary-border);
+        }
+
+        .teacher-content {
+            display: none;
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+        }
+
+        .teacher-content h2 {
+            font-size: 1.15rem;
+            color: #0f172a;
+            margin-bottom: 6px;
+        }
+
+        .teacher-time {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+
+        .teacher-section {
+            margin-bottom: 16px;
+        }
+
+        .teacher-section h3 {
+            font-size: 0.95rem;
+            color: var(--primary-dark);
+            margin-bottom: 6px;
+        }
+
+        .teacher-bullets {
+            margin-left: 20px;
+            font-size: 0.9rem;
+            color: #334155;
+        }
+
+        .teacher-bullets li {
+            margin-bottom: 4px;
+        }
+
+        /* Navigation Tabs */
+        .lesson-nav {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 10px;
+            margin-bottom: 32px;
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .lesson-tab {
+            padding: 6px 14px;
+            border-radius: 4px;
+            background: transparent;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-family: var(--font-mono);
+            font-weight: 600;
+            border: 1px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .lesson-tab:hover {
+            color: #0f172a;
+            background: var(--bg);
+            border-color: var(--border);
+        }
+
+        .lesson-tab.active {
+            background: var(--primary-subtle);
+            color: var(--primary-dark);
+            border-color: var(--primary-border);
+        }
+
+        .lesson-tab.completed {
+            border-bottom: 2px solid var(--success-border);
+        }
+
+        /* Progress & Score */
+        .stats-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 20px;
+            gap: 20px;
+        }
+
+        .progress-bar {
+            flex-grow: 1;
+            height: 6px;
+            background: var(--border);
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--primary);
+            width: 14%;
+            transition: width 0.3s ease;
+        }
+
+        .score-badge {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* Lesson Content */
+        .lesson {
+            display: none;
+            margin-bottom: 60px;
+        }
+
+        .lesson.active {
+            display: block;
+        }
+
+        .lesson h2 {
+            color: #0f172a;
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: -0.015em;
+            margin-bottom: 18px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .lesson h3 {
+            color: #0f172a;
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin: 28px 0 10px 0;
+        }
+
+        .lesson p {
+            margin-bottom: 16px;
+            color: #334155;
+            font-size: 0.95rem;
+        }
+
+        /* Code Blocks */
+        .code-block {
+            background: var(--code-bg);
+            color: var(--code-text);
+            padding: 20px 24px;
+            border-radius: 6px;
+            margin: 16px 0 20px 0;
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            line-height: 1.55;
+            overflow-x: auto;
+            position: relative;
+            border: 1px solid var(--code-border);
+            white-space: pre;
+            tab-size: 4;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 12px;
+            background: #1e293b;
+            color: #94a3b8;
+            border: 1px solid #475569;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.725rem;
+            font-family: var(--font-mono);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .copy-btn:hover {
+            background: #334155;
+            color: white;
+        }
+
+        /* Interactive Exercises */
+        .exercise {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 20px;
+            margin: 24px 0;
+        }
+
+        .exercise h4 {
+            color: #0f172a;
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .code-input {
+            width: 100%;
+            min-height: 120px;
+            padding: 14px 16px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            line-height: 1.5;
+            resize: vertical;
+            background: var(--bg);
+            color: var(--text);
+            margin: 10px 0;
+            outline: none;
+        }
+
+        .code-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px var(--primary-subtle);
+        }
+
+        .output {
+            background: #020617;
+            color: #94a3b8;
+            padding: 12px 16px;
+            border-radius: 4px;
+            margin-top: 10px;
+            font-family: var(--font-mono);
+            font-size: 0.8125rem;
+            line-height: 1.5;
+            white-space: pre-wrap;
+            min-height: 40px;
+            border: 1px solid var(--code-border);
+        }
+
+        .hint {
+            background: var(--info-bg);
+            border-left: 3px solid var(--info-border);
+            padding: 12px 16px;
+            margin: 12px 0 0 0;
+            border-radius: 0 4px 4px 0;
+            font-size: 0.875rem;
+            color: var(--info-text);
+        }
+
+        .hint-title {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        /* Buttons */
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: 1px solid transparent;
+            padding: 6px 14px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-family: var(--font-mono);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: 600;
+        }
+
+        .btn:hover {
+            background: var(--primary-dark);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border-color: var(--border);
+            color: #334155;
+        }
+
+        .btn-secondary:hover {
+            background: var(--surface);
+            color: #0f172a;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border-color: var(--border);
+            color: #334155;
+        }
+
+        .btn-outline:hover {
+            background: var(--surface);
+            color: #0f172a;
+        }
+
+        /* Quizzes */
+        .quiz {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--primary);
+            border-radius: 0 6px 6px 0;
+            padding: 18px 20px;
+            margin: 20px 0;
+        }
+
+        .quiz h4 {
+            color: #0f172a;
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .quiz-option {
+            background: var(--bg);
+            margin: 6px 0;
+            padding: 10px 14px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            border: 1px solid var(--border);
+            font-size: 0.9rem;
+            color: #334155;
+        }
+
+        .quiz-option:hover {
+            border-color: var(--primary);
+            background: var(--primary-subtle);
+        }
+
+        .quiz-option.selected {
+            border-color: var(--primary);
+            background: var(--primary-subtle);
+            color: var(--primary-dark);
+        }
+
+        .quiz-option.correct {
+            border-color: var(--success-border);
+            background: var(--success-bg);
+            color: var(--success-text);
+        }
+
+        .quiz-option.incorrect {
+            border-color: var(--error-border);
+            background: var(--error-bg);
+            color: var(--error-text);
+        }
+
+        /* Hide embedded per-lesson quizzes to reserve testing for Lesson 6 */
+        .lesson:not(#lesson6) .quiz {
+            display: none;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 36px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+        }
+
+        /* Celebration & Finish Overlay */
+        .celebration {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--bg);
+            padding: 32px 36px;
+            border-radius: 8px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border);
+            z-index: 1000;
+            text-align: center;
+            max-width: 440px;
+            width: 90%;
+        }
+
+        .celebration h2 {
+            font-size: 1.35rem;
+            color: #0f172a;
+            margin-bottom: 8px;
+        }
+
+        .celebration p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- Teacher Notes Collapsible -->
         <div class="teacher-notes">
-            <button class="teacher-toggle" onclick="toggleTeacherNotes()">📘 Teacher Notes: 90‑minute lesson plan</button>
+            <button class="teacher-toggle" onclick="toggleTeacherNotes()">Teacher Notes: 90-Minute Agenda</button>
             <div class="teacher-content" id="teacherContent">
-                <h2>90‑minute verbal teaching script (beginner-friendly)</h2>
-                <div class="teacher-time">Agenda: 0–5 Welcome · 5–20 Lists · 20–32 Tuples · 32–50 Dicts · 50–67 Strings · 67–80 Slicing · 80–88 Challenge · 88–90 Wrap</div>
+                <h2>90-Minute Teaching Reference</h2>
+                <div class="teacher-time">Structure: 0–5 Welcome · 5–20 Lists · 20–32 Tuples · 32–50 Dicts · 50–67 Strings · 67–80 Slicing · 80–88 Challenges · 88–90 Wrap</div>
 
                 <div class="teacher-section">
-                    <h3>0) Welcome (0–5)</h3>
+                    <h3>1) Lists (05–20 min)</h3>
                     <ul class="teacher-bullets">
-                        <li>Goal: lists, tuples, dictionaries, strings, slicing.</li>
-                        <li>Flow: short demos → tiny practices → quick checks.</li>
+                        <li>Core operations: <code>.append()</code>, <code>.insert()</code>, <code>.pop()</code>, <code>.remove()</code>.</li>
+                        <li>Explain in-place mutations (<code>list.sort()</code>) versus pure returns (<code>sorted(list)</code>).</li>
+                        <li>Comprehensions: transforming and filtering sequences declaratively.</li>
                     </ul>
                 </div>
 
                 <div class="teacher-section">
-                    <h3>1) Lists (5–20)</h3>
-                    <div class="code-block"># Creating lists
-shopping_list = []
-fruits = ["apple", "banana", "orange"]
-numbers = [1, 2, 3, 4, 5]
-mixed = ["hello", 42, True]
-
-# Methods
-tasks = ["read", "exercise", "code"]
-tasks.append("sleep")
-tasks.insert(1, "eat")
-tasks.remove("read")
-last = tasks.pop()
-tasks.sort()
-sorted_copy = sorted(tasks, reverse=True)
-
-# Comprehensions
-nums = [1, 2, 3, 4, 5]
-squares = [n*n for n in nums]
-evens = [n for n in nums if n % 2 == 0]</div>
+                    <h3>2) Tuples (20–32 min)</h3>
                     <ul class="teacher-bullets">
-                        <li>Ask: “What does pop() return?” → the removed item.</li>
-                        <li>Practice: build [2,4,6] from [1..6] using a comprehension.</li>
+                        <li>Immutability guarantee: why coordinates, RGB codes, and DB rows belong in tuples.</li>
+                        <li>Unpacking mechanics: <code>a, b, c = (1, 2, 3)</code> and extended slice unpacking (<code>*mid</code>).</li>
                     </ul>
                 </div>
 
                 <div class="teacher-section">
-                    <h3>2) Tuples (20–32)</h3>
-                    <div class="code-block">point = (10, 20)
-colors = ("red", "green", "blue")
-single = (42,)  # note the comma
-
-person = ("Sam", 21, "Student")
-name, age, role = person
-
-first, *middle, last = [1, 2, 3, 4, 5]</div>
+                    <h3>3) Dictionaries (32–50 min)</h3>
                     <ul class="teacher-bullets">
-                        <li>Check: “a, b = (1, 2, 3)” → ValueError (too many values).</li>
-                        <li>Use tuples for fixed-structure data.</li>
+                        <li>Hash map lookups ($O(1)$) versus array scanning ($O(n)$).</li>
+                        <li>Safe access: <code>dict.get(key, default)</code> to guard against <code>KeyError</code>.</li>
+                        <li>Dict comprehensions for invert/index mappings.</li>
                     </ul>
                 </div>
 
                 <div class="teacher-section">
-                    <h3>3) Dictionaries (32–50)</h3>
-                    <div class="code-block">student = {"name": "Sarah", "age": 19, "major": "Biology"}
-name = student["name"]
-height = student.get("height", "N/A")
-student["age"] = 20
-student["gpa"] = 3.7
-square_map = {n: n*n for n in [1,2,3,4]}</div>
+                    <h3>4) Strings & Slicing (50–80 min)</h3>
                     <ul class="teacher-bullets">
-                        <li>Best safe access: get(key, default).</li>
-                        <li>Duplicate key in a literal: last value wins.</li>
-                        <li>Practice: build favorite_movie dict and print a summary.</li>
-                    </ul>
-                </div>
-
-                <div class="teacher-section">
-                    <h3>4) Strings (50–67)</h3>
-                    <div class="code-block">greeting = "Hello"; name = "Alice"
-full = greeting + ", " + name + "!"
-template = f"{greeting}, {name}!"
-text = "  Python Programming  "
-text.strip(); text.lower(); text.upper(); text.replace(" ", "-")
-text.find("Pro")
-sentence = "learn python the smart way"
-words = sentence.split(" "); joined = "-".join(words)
-msg = "Hello {}, your score is {}".format("Alex", 95)
-fmsg = f"Hello { 'Alex'.upper() }, your score is {95}"
-s = "Python"; s[0]; s[-1]; s[1:4]; s[::-1]</div>
-                    <ul class="teacher-bullets">
-                        <li>Practice: username = first.lower() + '_' + last[:3].lower()</li>
-                        <li>Quiz: "-".join(["a","b","c"]) → "a-b-c"</li>
-                    </ul>
-                </div>
-
-                <div class="teacher-section">
-                    <h3>5) Indexing & Slicing (67–80)</h3>
-                    <div class="code-block">nums = list(range(10))
-nums[2:7]; nums[:5]; nums[5:]; nums[::2]; nums[1:8:3]; nums[::-1]
-a = [1,2,3]; b = a; c = a[:]
-letters = list("abcdefghij")
-letters[-3:]; letters[:-3]; letters[-1:-6:-2]</div>
-                    <ul class="teacher-bullets">
-                        <li>Practice: from 1..20 → odds, evens, multiples of 3, last 5 reversed.</li>
-                    </ul>
-                </div>
-
-                <div class="teacher-section">
-                    <h3>6) Challenge (80–88)</h3>
-                    <div class="code-block"># A) Grade averages + best student
-students = [
-    {"name": "Alex", "grades": [85, 90, 78]},
-    {"name": "Beth", "grades": [92, 88, 95]},
-    {"name": "Carl", "grades": [76, 82, 80]}
-]
-
-# B) Word counter
-words = ["python", "java", "python", "javascript", "python", "java", "c++"]</div>
-                    <div class="print-note">Tip: Parse → compute → report. Encourage printing intermediate results.</div>
-                </div>
-
-                <div class="teacher-section">
-                    <h3>7) Wrap (88–90)</h3>
-                    <ul class="teacher-bullets">
-                        <li>Recap key ideas and differences (sort vs sorted, list vs tuple, .get).</li>
-                        <li>Homework: contacts app with dict; stretch—export joined names.</li>
+                        <li>String immutability and memory optimization.</li>
+                        <li>Delimiter parsing with <code>.split()</code> and <code>.join()</code>.</li>
+                        <li>Slice stride mechanics: <code>seq[start:stop:step]</code> and reverse copies (<code>[::-1]</code>).</li>
                     </ul>
                 </div>
             </div>
         </div>
+
+        <!-- Header -->
         <div class="header">
             <div class="intro-hero" id="introHero">
-                <div class="intro-title">🐍 Interactive Python Data Containers</div>
-                <div class="intro-sub">Learn Lists, Tuples, Dictionaries, Strings, and Slicing with hands-on practice and quizzes.</div>
+                <div class="intro-title">Python Data Containers</div>
+                <div class="intro-sub">Comprehensive technical reference and interactive workspace for lists, tuples, dictionaries, strings, and slicing.</div>
                 <div class="intro-cta">
-                    <button class="btn btn-primary" onclick="startTutorial()">▶ Start Tutorial</button>
-                    <button class="btn btn-outline" onclick="jumpToFinalQuiz()">🏁 Take Final Quiz</button>
-                    <button class="btn btn-outline" onclick="toggleTeacherNotes()">📘 Teacher Notes</button>
+                    <button class="btn btn-primary" onclick="startTutorial()">Start Tutorial</button>
+                    <button class="btn btn-outline" onclick="jumpToFinalQuiz()">Take Final Quiz</button>
                 </div>
             </div>
 
-            <h1>🐍 Interactive Python Data Containers</h1>
-            <p>Master Lists, Tuples, Dictionaries, and Strings through hands-on practice!</p>
-            <div class="progress-bar">
-                <div class="progress-fill" id="progressFill"></div>
-            </div>
-            <div class="score-badge">
-                <span>📊</span>
-                <span id="score">Score: 0/0</span>
-            </div>
-        </div>
-
-        <div class="lesson-nav">
-            <button class="lesson-tab active" onclick="showLesson(0)">📝 Lists</button>
-            <button class="lesson-tab" onclick="showLesson(1)">🔒 Tuples</button>
-            <button class="lesson-tab" onclick="showLesson(2)">🗝️ Dictionaries</button>
-            <button class="lesson-tab" onclick="showLesson(3)">🔤 Strings</button>
-            <button class="lesson-tab" onclick="showLesson(4)">🧭 Indexing & Slicing</button>
-            <button class="lesson-tab" onclick="showLesson(5)">🚀 Challenges</button>
-            <button class="lesson-tab" onclick="showLesson(6)"><strong>🏁 Final Quiz (All Topics)</strong></button>
-        </div>
-
-        <!-- Lesson 1: Lists -->
-        <div class="lesson active" id="lesson0">
-            <h2>📝 Lists - The Flexible Container</h2>
+            <h1>Python Data Containers Reference</h1>
+            <p>Interactive tutorial on data structure mechanics, immutability, comprehensions, and memory slice semantics.</p>
             
-            <h3>What is a List?</h3>
-            <p>A <strong>list</strong> is an ordered collection of items that can be changed (mutable). Think of it like a shopping list where you can add, remove, or modify items.</p>
+            <div class="stats-bar">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="score-badge" id="score">Score: 0 / 20</div>
+            </div>
+        </div>
 
-            <div class="code-block">
-# Creating Lists
-shopping_list = []  # Empty list
+        <!-- Tab Navigation -->
+        <div class="lesson-nav">
+            <button class="lesson-tab active" onclick="showLesson(0)">1. Lists</button>
+            <button class="lesson-tab" onclick="showLesson(1)">2. Tuples</button>
+            <button class="lesson-tab" onclick="showLesson(2)">3. Dictionaries</button>
+            <button class="lesson-tab" onclick="showLesson(3)">4. Strings</button>
+            <button class="lesson-tab" onclick="showLesson(4)">5. Slicing</button>
+            <button class="lesson-tab" onclick="showLesson(5)">6. Challenges</button>
+            <button class="lesson-tab" onclick="showLesson(6)">7. Final Quiz</button>
+        </div>
+
+        <!-- Lesson 0: Lists -->
+        <div class="lesson active" id="lesson0">
+            <h2>Lists: Mutable Ordered Sequences</h2>
+            <p>A list is a dynamic, zero-indexed array of object references. Items can be appended, reordered, modified, or removed in place.</p>
+
+            <div class="code-block"># Initializing Lists
+shopping_list = []
 fruits = ["apple", "banana", "orange", "grape"]
 numbers = [1, 2, 3, 4, 5]
-mixed_list = ["hello", 42, True, 3.14]
-            </div>
+mixed_list = ["hello", 42, True, 3.14]</div>
+
+            <h3>Common List Methods</h3>
+            <div class="code-block">tasks = ["read", "exercise", "code"]
+
+tasks.append("sleep")                    # Append item to the end
+tasks.insert(1, "eat")                   # Insert item at index 1
+tasks.remove("read")                     # Remove first occurrence of value
+finished = tasks.pop()                   # Remove and return the final element
+tasks.sort()                             # In-place alphabetical/numerical sort
+sorted_copy = sorted(tasks, reverse=True)# Return a fresh sorted list copy</div>
+
+            <h3>List Comprehensions</h3>
+            <div class="code-block">nums = [1, 2, 3, 4, 5]
+squares = [n * n for n in nums]
+evens = [n for n in nums if n % 2 == 0]
+pairs = [(a, b) for a in [1, 2] for b in ['x', 'y']]</div>
 
             <div class="exercise">
-                <h4>🎯 Exercise 1.1: Create Your Lists</h4>
-                <p>Create three lists: your favorite colors, numbers 1-5, and a mixed list about yourself.</p>
-                <div class="interactive-code">
-                    <textarea class="code-input" id="exercise1" placeholder="# Write your code here:
-colors = 
-numbers = 
-about_me = "></textarea>
-                    <button class="btn" onclick="runCode('exercise1', 'output1')">Run Code</button>
-                    <button class="btn btn-secondary" onclick="showHint(1)">💡 Hint</button>
+                <h4>Exercise 1.1: Constructing Lists</h4>
+                <p>Create lists for colors, numbers 1–5, and personal info, then print them.</p>
+                <textarea class="code-input" id="exercise1"></textarea>
+                <div style="display: flex; gap: 8px;">
+                    <button class="btn" onclick="runCode('exercise1', 'output1')">Run</button>
+                    <button class="btn btn-secondary" onclick="showHint(1)">Hint</button>
                 </div>
                 <div class="output" id="output1"></div>
                 <div class="hint" id="hint1" style="display: none;">
-                    <div class="hint-title">💡 Hint:</div>
-                    Remember to use square brackets [] and separate items with commas. Strings need quotes!
+                    <div class="hint-title">Hint:</div>
+                    Use square brackets <code>[]</code> and separate elements with commas. Strings require quotation marks.
                 </div>
             </div>
 
-            <h3>Common List Methods</h3>
-            <div class="code-block">
-tasks = ["read", "exercise", "code"]
-
-tasks.append("sleep")      # add at end
-tasks.insert(1, "eat")     # insert at index 1
-tasks.remove("read")       # remove first occurrence
-done = tasks.pop()          # remove last and return it
-count_code = tasks.count("code")
-tasks.sort()                # in-place sort
-sorted_tasks = sorted(tasks, reverse=True)  # new sorted list
-            </div>
-
-            <h3>List Comprehensions</h3>
-            <div class="code-block">
-nums = [1, 2, 3, 4, 5]
-squares = [n*n for n in nums]
-evens = [n for n in nums if n % 2 == 0]
-pairs = [(a, b) for a in [1,2] for b in ['x','y']]
-print(squares)
-print(evens)
-print(pairs)
-            </div>
-
-            <div class="quiz">
-                <h4>🧠 Quick Quiz: Lists</h4>
-                <p>What does <code>my_list.pop()</code> return?</p>
-                <div class="quiz-option" onclick="selectOption(this, true)">The removed last element</div>
-                <div class="quiz-option" onclick="selectOption(this, false)">The first element</div>
-                <div class="quiz-option" onclick="selectOption(this, false)">The list length</div>
-                <div class="quiz-option" onclick="selectOption(this, false)">Nothing (None)</div>
-            </div>
-
-            <div class="quiz">
-                <h4>🧠 Quick Quiz: Slices</h4>
-                <p>What does <code>[0,1,2,3,4][1:4]</code> evaluate to?</p>
-                <div class="quiz-option" onclick="selectOption(this, false)">[0, 1, 2]</div>
-                <div class="quiz-option" onclick="selectOption(this, true)">[1, 2, 3]</div>
-                <div class="quiz-option" onclick="selectOption(this, false)">[2, 3, 4]</div>
-                <div class="quiz-option" onclick="selectOption(this, false)">[1, 2, 3, 4]</div>
-            </div>
-
             <div class="navigation">
-                <button class="btn btn-secondary" disabled>← Previous</button>
-                <button class="btn" onclick="nextLesson()">Next: Tuples →</button>
+                <button class="btn btn-secondary" disabled>Previous</button>
+                <button class="btn" onclick="nextLesson()">Next: Tuples</button>
             </div>
         </div>
 
-        <!-- Lesson 2: Tuples -->
+        <!-- Lesson 1: Tuples -->
         <div class="lesson" id="lesson1">
-            <h2>🔒 Tuples - The Immutable Container</h2>
-            
-            <h3>What is a Tuple?</h3>
-            <p>A <strong>tuple</strong> is an ordered collection of items that cannot be changed (immutable). Think of it like coordinates (x, y) that represent a fixed point.</p>
+            <h2>Tuples: Immutable Ordered Collections</h2>
+            <p>Tuples are fixed-length sequences. Once instantiated, values cannot be added, reassigned, or removed. This property makes them hashable (usable as dictionary keys) and memory-efficient.</p>
 
-            <div class="code-block">
-# Creating Tuples
+            <div class="code-block"># Initializing Tuples
 coordinates = (10, 20)
 colors = ("red", "green", "blue")
-mixed_tuple = ("John", 25, "Engineer")
+single_item = (42,) # Note the mandatory trailing comma for 1-tuples</div>
 
-# Single item tuple (note the comma!)
-single_item = (42,)
-            </div>
+            <h3>Unpacking Mechanics</h3>
+            <div class="code-block">person = ("Sam", 21, "Student")
+name, age, role = person
+
+# Extended slicing unpack (Python 3+)
+first, *middle, last = [1, 2, 3, 4, 5]
+# first = 1, middle = [2, 3, 4], last = 5</div>
 
             <div class="exercise">
-                <h4>🎯 Exercise 2.1: Create Tuples</h4>
-                <p>Create tuples for your birth date, RGB color values, and room dimensions.</p>
-                <div class="interactive-code">
-                    <textarea class="code-input" id="exercise3" placeholder="# Create your tuples here:
-birth_date = 
-favorite_color_rgb = 
-room_dimensions = 
-
-print(birth_date)
-print(favorite_color_rgb)
-print(room_dimensions)"></textarea>
-                    <button class="btn" onclick="runCode('exercise3', 'output3')">Run Code</button>
+                <h4>Exercise 2.1: Declaring Fixed Schemas</h4>
+                <p>Define tuples for coordinates, an RGB color code, and dimensions.</p>
+                <textarea class="code-input" id="exercise3"></textarea>
+                <div style="display: flex; gap: 8px;">
+                    <button class="btn" onclick="runCode('exercise3', 'output3')">Run</button>
                 </div>
                 <div class="output" id="output3"></div>
             </div>
 
-            <h3>Tuple vs List - When to Use Which?</h3>
-            <div class="code-block">
-# Use tuples for fixed data
-point = (10, 20)          # Coordinates don't change
-rgb = (255, 128, 0)       # Color values are fixed
-
-# Use lists for changeable data
-shopping = ["milk", "eggs"]  # Can add more items
-scores = [85, 90, 78]       # Scores can be updated
-            </div>
-
-            <h3>Tuple Unpacking</h3>
-            <div class="code-block">
-person = ("Sam", 21, "Student")
-name, age, role = person
-print(name, age, role)
-
-# Extended unpacking
-first, *middle, last = [1,2,3,4,5]
-print(first, middle, last)
-            </div>
-
-            <div class="quiz">
-                <h4>🧠 Quick Quiz: Tuples</h4>
-                <p>Which of the following is the main difference between lists and tuples?</p>
-                <div class="quiz-option" onclick="selectOption(this, false)">Lists are faster than tuples</div>
-                <div class="quiz-option" onclick="selectOption(this, true)">Lists are mutable, tuples are immutable</div>
-                <div class="quiz-option" onclick="selectOption(this, false)">Tuples can only store numbers</div>
-                <div class="quiz-option" onclick="selectOption(this, false)">Lists use [] while tuples use {}</div>
-            </div>
-
-            <div class="quiz">
-                <h4>🧠 Quick Quiz: Unpacking</h4>
-                <p>What happens with <code>a, b = (1, 2, 3)</code>?</p>
-                <div class="quiz-option" onclick="selectOption(this, false)">a=1, b=(2, 3)</div>
-                <div class="quiz-option" onclick="selectOption(this, false)">a=(1,2), b=3</div>
-                <div class="quiz-option" onclick="selectOption(this, true)">ValueError: too many values to unpack</div>
-                <div class="quiz-option" onclick="selectOption(this, false)">Works fine</div>
-            </div>
-
             <div class="navigation">
-                <button class="btn btn-secondary" onclick="prevLesson()">← Previous: Lists</button>
-                <button class="btn" onclick="nextLesson()">Next: Dictionaries →</button>
+                <button class="btn btn-secondary" onclick="prevLesson()">Previous: Lists</button>
+                <button class="btn" onclick="nextLesson()">Next: Dictionaries</button>
             </div>
         </div>
 
-        <!-- Lesson 3: Dictionaries -->
+        <!-- Lesson 2: Dictionaries -->
         <div class="lesson" id="lesson2">
-            <h2>🗝️ Dictionaries - The Key-Value Container</h2>
-            
-            <h3>What is a Dictionary?</h3>
-            <p>A <strong>dictionary</strong> is a collection of key-value pairs. Think of it like a real dictionary where you look up a word (key) to find its definition (value).</p>
+            <h2>Dictionaries: Hash Maps & Key-Value Mappings</h2>
+            <p>Dictionaries store key-value associations providing average $O(1)$ lookup, insertion, and deletion complexity. Keys must be hashable and immutable.</p>
 
-            <div class="code-block">
-# Creating Dictionaries
-student = {
+            <div class="code-block">student = {
     "name": "Sarah",
     "age": 19,
-    "major": "Biology",
-    "gpa": 3.7
+    "major": "Biology"
 }
 
-# Accessing values
-print(student["name"])              # "Sarah"
-print(student.get("height", "N/A")) # "N/A" (default value)
-            </div>
+# Accessing keys
+print(student["name"])
+print(student.get("gpa", 0.0)) # Safe fallback, avoids KeyError
+
+# Mutation
+student["gpa"] = 3.7
+student["age"] = 20</div>
+
+            <h3>Dictionary Comprehensions</h3>
+            <div class="code-block">nums = [1, 2, 3, 4]
+square_map = {n: n * n for n in nums}</div>
 
             <div class="exercise">
-                <h4>🎯 Exercise 3.1: Create Your Dictionary</h4>
-                <p>Create a dictionary representing your favorite movie with title, director, year, and rating.</p>
-                <div class="interactive-code">
-                    <textarea class="code-input" id="exercise4" placeholder="# Create your movie dictionary:
-favorite_movie = {
-    # Add your keys and values here
-}
-
-# Print different values from your dictionary
-print(f\"Movie: {favorite_movie['title']}\")
-# Add more print statements"></textarea>
-                    <button class="btn" onclick="runCode('exercise4', 'output4')">Run Code</button>
+                <h4>Exercise 3.1: Entity Dictionaries</h4>
+                <p>Define and read keys from a movie metadata dictionary.</p>
+                <textarea class="code-input" id="exercise4"></textarea>
+                <div style="display: flex; gap: 8px;">
+                    <button class="btn" onclick="runCode('exercise4', 'output4')">Run</button>
                 </div>
                 <div class="output" id="output4"></div>
             </div>
 
-            <h3>Working with Dictionaries</h3>
-            <div class="code-block">
-student = {"name": "Sarah", "age": 19}
-
-# Adding/updating values
-student["major"] = "Biology"    # Add new key-value pair
-student["age"] = 20            # Update existing value
-
-# Get all keys, values, or items
-print(student.keys())          # dict_keys(['name', 'age', 'major'])
-print(student.values())        # dict_values(['Sarah', 20, 'Biology'])
-print(student.items())         # key-value pairs
-
-# Check if key exists
-if "name" in student:
-    print(f"Student name: {student['name']}")
-            </div>
-
-            <h3>Dictionary Comprehensions</h3>
-            <div class="code-block">
-nums = [1, 2, 3, 4]
-square_map = {n: n*n for n in nums}
-even_map = {n: 'even' for n in nums if n % 2 == 0}
-print(square_map)
-print(even_map)
-            </div>
-
-            <div class="quiz">
-                <h4>🧠 Quick Quiz: Dictionaries</h4>
-                <p>What's the safest way to access a dictionary key that might not exist?</p>
-                <div class="quiz-option" onclick="selectOption(this, false)">dict["key"]</div>
-                <div class="quiz-option" onclick="selectOption(this, true)">dict.get("key", default_value)</div>
-                <div class="quiz-option" onclick="selectOption(this, false)">dict.key</div>
-                <div class="quiz-option" onclick="selectOption(this, false)">dict["key"] or "default"</div>
-            </div>
-
-            <div class="quiz">
-                <h4>🧠 Quick Quiz: Keys</h4>
-                <p>What happens if you repeat a key in a dictionary literal?</p>
-                <div class="quiz-option" onclick="selectOption(this, false)">Python raises a SyntaxError</div>
-                <div class="quiz-option" onclick="selectOption(this, true)">The last value for that key wins</div>
-                <div class="quiz-option" onclick="selectOption(this, false)">It creates a list of values</div>
-                <div class="quiz-option" onclick="selectOption(this, false)">It ignores the duplicate key</div>
-            </div>
-
             <div class="navigation">
-                <button class="btn btn-secondary" onclick="prevLesson()">← Previous: Tuples</button>
-                <button class="btn" onclick="nextLesson()">Next: Strings →</button>
+                <button class="btn btn-secondary" onclick="prevLesson()">Previous: Tuples</button>
+                <button class="btn" onclick="nextLesson()">Next: Strings</button>
             </div>
         </div>
 
-        <!-- Lesson 4: Strings -->
+        <!-- Lesson 3: Strings -->
         <div class="lesson" id="lesson3">
-            <h2>🔤 Strings - Text Data and Operations</h2>
+            <h2>Strings: Text Primitives & Encodings</h2>
+            <p>Python strings are immutable UTF-8 sequence buffers. String operations always return fresh string instances.</p>
 
-            <h3>Creating and Combining Strings</h3>
-            <div class="code-block">
-greeting = "Hello"
-name = 'Alice'
-full = greeting + ", " + name + "!"
-template = f"{greeting}, {name}!"
-multiline = """This is a
-multi-line string."""
-print(full)
-print(template)
-print(multiline)
-            </div>
-
-            <h3>Common String Methods</h3>
-            <div class="code-block">
-text = "  Python Programming  "
-print(text.strip())        # remove leading/trailing spaces
-print(text.lower())        # to lowercase
-print(text.upper())        # to uppercase
-print(text.replace(" ", "-")) # replace spaces with hyphens
-print("prog" in text.lower())  # membership test
-print(text.find("Pro"))   # first index or -1
-            </div>
-
-            <h3>Split, Join, and Format</h3>
-            <div class="code-block">
-sentence = "learn python the smart way"
+            <div class="code-block">sentence = "learn python the smart way"
 words = sentence.split(" ")
 joined = "-".join(words)
-formatted = "Hello {}, your score is {}".format("Alex", 95)
-fstring = f"Hello {'Alex'.upper()}, your score is {95}"
-print(words)
-print(joined)
-print(formatted)
-print(fstring)
-            </div>
-
-            <h3>Indexing and Slicing Strings</h3>
-            <div class="code-block">
-s = "Python"
-print(s[0])      # 'P'
-print(s[-1])     # 'n'
-print(s[1:4])    # 'yth'
-print(s[::-1])   # 'nohtyP' (reverse)
-            </div>
+fstring = f"Result: {words[0].upper()}"</div>
 
             <div class="exercise">
-                <h4>🎯 Exercise 4.1: Username Generator</h4>
-                <p>Given <code>first = "Alice"</code> and <code>last = "Johnson"</code>, create a username like <code>alice_joh</code>.</p>
-                <div class="interactive-code">
-                    <textarea class="code-input" id="exercise5" placeholder="first = 'Alice'
-last = 'Johnson'
-
-# Make: lowercase first + '_' + first 3 letters of last
-username = 
-print(username)"></textarea>
-                    <button class="btn" onclick="runCode('exercise5', 'output5')">Run Code</button>
-                    <button class="btn btn-secondary" onclick="showHint(5)">💡 Hint</button>
+                <h4>Exercise 4.1: Username Normalizer</h4>
+                <p>Construct a normalized username from string primitives.</p>
+                <textarea class="code-input" id="exercise5"></textarea>
+                <div style="display: flex; gap: 8px;">
+                    <button class="btn" onclick="runCode('exercise5', 'output5')">Run</button>
+                    <button class="btn btn-secondary" onclick="showHint(5)">Hint</button>
                 </div>
                 <div class="output" id="output5"></div>
                 <div class="hint" id="hint5" style="display: none;">
-                    <div class="hint-title">💡 Hint:</div>
-                    Use <code>.lower()</code> and slicing like <code>last[:3]</code>.
+                    <div class="hint-title">Hint:</div>
+                    Use <code>.lower()</code> for normalization and <code>[:3]</code> to extract the first 3 characters.
                 </div>
             </div>
 
-            <div class="quiz">
-                <h4>🧠 Quick Quiz: Strings</h4>
-                <p>What does <code>"hello"[1:]</code> return?</p>
-                <div class="quiz-option" onclick="selectOption(this, true)">"ello"</div>
-                <div class="quiz-option" onclick="selectOption(this, false)">"h"</div>
-                <div class="quiz-option" onclick="selectOption(this, false)">"hell"</div>
-                <div class="quiz-option" onclick="selectOption(this, false)">Error</div>
-            </div>
-
-            <div class="quiz">
-                <h4>🧠 Quick Quiz: Join/Split</h4>
-                <p>Which line converts <code>["a","b","c"]</code> to <code>"a-b-c"</code>?</p>
-                <div class="quiz-option" onclick="selectOption(this, true)">"-".join(["a","b","c"])</div>
-                <div class="quiz-option" onclick="selectOption(this, false)">["a","b","c"].join("-")</div>
-                <div class="quiz-option" onclick="selectOption(this, false)">"a-b-c".split("-")</div>
-                <div class="quiz-option" onclick="selectOption(this, false)">"".split(["a","b","c"])</div>
-            </div>
-
             <div class="navigation">
-                <button class="btn btn-secondary" onclick="prevLesson()">← Previous: Dictionaries</button>
-                <button class="btn" onclick="nextLesson()">Next: Indexing & Slicing →</button>
+                <button class="btn btn-secondary" onclick="prevLesson()">Previous: Dictionaries</button>
+                <button class="btn" onclick="nextLesson()">Next: Slicing</button>
             </div>
         </div>
 
-        <!-- Lesson 5: Indexing & Slicing Deep Dive -->
+        <!-- Lesson 4: Indexing & Slicing -->
         <div class="lesson" id="lesson4">
-            <h2>🧭 Advanced Indexing & Slicing</h2>
+            <h2>Advanced Indexing & Slicing Semantics</h2>
+            <p>Slices use the syntax <code>sequence[start:stop:step]</code> on half-open ranges: <code>[start, stop)</code>.</p>
 
-            <h3>Slicing Syntax Recap</h3>
-            <div class="code-block">
-# sequence[start:stop:step]
-nums = list(range(10))
-print(nums[2:7])     # [2, 3, 4, 5, 6]
-print(nums[:5])      # [0, 1, 2, 3, 4]
-print(nums[5:])      # [5, 6, 7, 8, 9]
-print(nums[::2])     # [0, 2, 4, 6, 8]
-print(nums[1:8:3])   # [1, 4, 7]
-print(nums[::-1])    # reversed
-            </div>
-
-            <h3>Copying vs Referencing</h3>
-            <div class="code-block">
-a = [1, 2, 3]
-b = a              # reference (same list)
-c = a[:]           # shallow copy (new list)
-
-a.append(4)
-print(b)  # [1, 2, 3, 4]
-print(c)  # [1, 2, 3]
-            </div>
-
-            <h3>Negative Index/Step</h3>
-            <div class="code-block">
-letters = list("abcdefghij")
-print(letters[-3:])     # last three
-print(letters[:-3])     # all but last three
-print(letters[-1:-6:-2])# ['j', 'h', 'f']
-            </div>
+            <div class="code-block">nums = list(range(10))
+print(nums[2:7])      # [2, 3, 4, 5, 6]
+print(nums[:5])       # [0, 1, 2, 3, 4]
+print(nums[5:])       # [5, 6, 7, 8, 9]
+print(nums[::2])      # [0, 2, 4, 6, 8]
+print(nums[::-1])     # Reversed copy</div>
 
             <div class="exercise">
-                <h4>🎯 Exercise 5.1: Slice Mastery</h4>
-                <p>Given <code>nums = list(range(1, 21))</code>, extract: odds, evens, multiples of 3, last 5 reversed.</p>
-                <div class="interactive-code">
-                    <textarea class="code-input" id="exercise6" placeholder="nums = list(range(1, 21))
-
-odds = 
-evens = 
-mult3 = 
-last5_rev = 
-
-print(odds)
-print(evens)
-print(mult3)
-print(last5_rev)"></textarea>
-                    <button class="btn" onclick="runCode('exercise6', 'output6')">Run Code</button>
+                <h4>Exercise 5.1: Slice Transformations</h4>
+                <p>Filter odd, even, and step intervals using slicing mechanics.</p>
+                <textarea class="code-input" id="exercise6"></textarea>
+                <div style="display: flex; gap: 8px;">
+                    <button class="btn" onclick="runCode('exercise6', 'output6')">Run</button>
                 </div>
                 <div class="output" id="output6"></div>
             </div>
 
-            <div class="quiz">
-                <h4>🧠 Quick Quiz: Slicing</h4>
-                <p>What does <code>nums[-4:-1]</code> return for <code>nums = [0,1,2,3,4,5,6,7,8,9]</code>?</p>
-                <div class="quiz-option" onclick="selectOption(this, false)">[6, 7, 8, 9]</div>
-                <div class="quiz-option" onclick="selectOption(this, true)">[6, 7, 8]</div>
-                <div class="quiz-option" onclick="selectOption(this, false)">[7, 8, 9]</div>
-                <div class="quiz-option" onclick="selectOption(this, false)">[5, 6, 7]</div>
-            </div>
-
-            <div class="quiz">
-                <h4>🧠 Quick Quiz: Steps</h4>
-                <p>For <code>letters = list("abcdef")</code>, what is <code>letters[::3]</code>?</p>
-                <div class="quiz-option" onclick="selectOption(this, true)">['a','d']</div>
-                <div class="quiz-option" onclick="selectOption(this, false)">['c','f']</div>
-                <div class="quiz-option" onclick="selectOption(this, false)">['a','c','e']</div>
-                <div class="quiz-option" onclick="selectOption(this, false)">['b','e']</div>
-            </div>
-
             <div class="navigation">
-                <button class="btn btn-secondary" onclick="prevLesson()">← Previous: Strings</button>
-                <button class="btn" onclick="nextLesson()">Next: Challenges →</button>
+                <button class="btn btn-secondary" onclick="prevLesson()">Previous: Strings</button>
+                <button class="btn" onclick="nextLesson()">Next: Challenges</button>
             </div>
         </div>
 
-        <!-- Lesson 6: Challenges -->
+        <!-- Lesson 5: Challenges -->
         <div class="lesson" id="lesson5">
-            <h2>🚀 Coding Challenges</h2>
+            <h2>Algorithms & Data Processing Challenges</h2>
 
             <div class="exercise">
-                <h4>🎯 Challenge 1: Student Grade Calculator</h4>
-                <p>Create a program that calculates average grades for students.</p>
-                <div class="interactive-code">
-                    <textarea class="code-input" id="challenge1" placeholder="students = [
-    {'name': 'Alex', 'grades': [85, 90, 78]},
-    {'name': 'Beth', 'grades': [92, 88, 95]},
-    {'name': 'Carl', 'grades': [76, 82, 80]}
-]
-
-# Calculate and print average grade for each student
-# Find the student with the highest average
-
-"></textarea>
-                    <button class="btn" onclick="runCode('challenge1', 'output7')">Run Code</button>
-                    <button class="btn btn-secondary" onclick="showSolution(1)">💡 Show Solution</button>
+                <h4>Challenge 1: Student Grade Aggregator</h4>
+                <p>Compute averages across nested dictionaries and identify the top performer.</p>
+                <textarea class="code-input" id="challenge1"></textarea>
+                <div style="display: flex; gap: 8px;">
+                    <button class="btn" onclick="runCode('challenge1', 'output7')">Run</button>
+                    <button class="btn btn-secondary" onclick="showSolution(1)">Solution</button>
                 </div>
                 <div class="output" id="output7"></div>
                 <div class="hint" id="solution1" style="display: none;">
-                    <div class="hint-title">💡 Solution:</div>
-                    <div class="code-block">
-for student in students:
-    average = sum(student['grades']) / len(student['grades'])
-    print(f"{student['name']}: {average:.1f}")
-
-# Find highest average
-best_student = max(students, key=lambda s: sum(s['grades'])/len(s['grades']))
-print(f"Best student: {best_student['name']}")
-                    </div>
+                    <div class="hint-title">Solution Approach:</div>
+                    <div class="code-block">for s in students:
+    avg = sum(s['grades']) / len(s['grades'])
+    print(f"{s['name']}: {avg:.1f}")</div>
                 </div>
             </div>
 
             <div class="exercise">
-                <h4>🎯 Challenge 2: Word Counter</h4>
-                <p>Count how many times each word appears in a list.</p>
-                <div class="interactive-code">
-                    <textarea class="code-input" id="challenge2" placeholder="words = ['python', 'java', 'python', 'javascript', 'python', 'java', 'c++']
-
-# Count occurrences of each word
-# Create a dictionary with words as keys and counts as values
-# Find the most frequent word
-
-"></textarea>
-                    <button class="btn" onclick="runCode('challenge2', 'output8')">Run Code</button>
+                <h4>Challenge 2: Word Frequency Counter</h4>
+                <p>Count word occurrences into a frequency map dictionary.</p>
+                <textarea class="code-input" id="challenge2"></textarea>
+                <div style="display: flex; gap: 8px;">
+                    <button class="btn" onclick="runCode('challenge2', 'output8')">Run</button>
                 </div>
                 <div class="output" id="output8"></div>
             </div>
 
             <div class="navigation">
-                <button class="btn btn-secondary" onclick="prevLesson()">← Previous: Indexing & Slicing</button>
-                <button class="btn" onclick="nextLesson()">Next: Final Quiz →</button>
+                <button class="btn btn-secondary" onclick="prevLesson()">Previous: Slicing</button>
+                <button class="btn" onclick="nextLesson()">Next: Final Quiz</button>
             </div>
         </div>
 
-        <!-- Lesson 7: Final Quiz -->
+        <!-- Lesson 6: Final Quiz -->
         <div class="lesson" id="lesson6">
-            <h2>🏆 Final Quiz</h2>
-            <!-- Comprehensive Final Quiz (20 questions) -->
-            <div class="quiz"><h4>🧠 Question 1</h4><p>Which structure is best for (x, y) coordinates?</p><div class="quiz-option" onclick="selectQuizOption(this, false, 0)">List</div><div class="quiz-option" onclick="selectQuizOption(this, true, 0)">Tuple</div><div class="quiz-option" onclick="selectQuizOption(this, false, 0)">Dictionary</div><div class="quiz-option" onclick="selectQuizOption(this, false, 0)">String</div></div>
-            <div class="quiz"><h4>🧠 Question 2</h4><p>What does <code>name[:3].lower()</code> do?</p><div class="quiz-option" onclick="selectQuizOption(this, true, 1)">Gets first 3 chars and lowercases them</div><div class="quiz-option" onclick="selectQuizOption(this, false, 1)">Uppercases the whole string</div><div class="quiz-option" onclick="selectQuizOption(this, false, 1)">Returns last 3 characters</div><div class="quiz-option" onclick="selectQuizOption(this, false, 1)">Reverses the string</div></div>
-            <div class="quiz"><h4>🧠 Question 3</h4><p>Which method adds to end of a list?</p><div class="quiz-option" onclick="selectQuizOption(this, true, 2)">append()</div><div class="quiz-option" onclick="selectQuizOption(this, false, 2)">insert()</div><div class="quiz-option" onclick="selectQuizOption(this, false, 2)">extend()</div><div class="quiz-option" onclick="selectQuizOption(this, false, 2)">pop()</div></div>
-            <div class="quiz"><h4>🧠 Question 4</h4><p>Which creates a NEW sorted list?</p><div class="quiz-option" onclick="selectQuizOption(this, true, 3)">sorted(my_list)</div><div class="quiz-option" onclick="selectQuizOption(this, false, 3)">my_list.sort()</div><div class="quiz-option" onclick="selectQuizOption(this, false, 3)">my_list[::-1]</div><div class="quiz-option" onclick="selectQuizOption(this, false, 3)">my_list.append(0)</div></div>
-            <div class="quiz"><h4>🧠 Question 5</h4><p>Safest way to access possibly missing key?</p><div class="quiz-option" onclick="selectQuizOption(this, true, 4)">d.get('key', 'N/A')</div><div class="quiz-option" onclick="selectQuizOption(this, false, 4)">d['key']</div><div class="quiz-option" onclick="selectQuizOption(this, false, 4)">d.key</div><div class="quiz-option" onclick="selectQuizOption(this, false, 4)">d.pop('key')</div></div>
-            <div class="quiz"><h4>🧠 Question 6</h4><p>What does <code>words = sentence.split(' ')</code> produce?</p><div class="quiz-option" onclick="selectQuizOption(this, true, 5)">A list of words</div><div class="quiz-option" onclick="selectQuizOption(this, false, 5)">A dictionary of words</div><div class="quiz-option" onclick="selectQuizOption(this, false, 5)">A tuple of words</div><div class="quiz-option" onclick="selectQuizOption(this, false, 5)">A set of words</div></div>
-            <div class="quiz"><h4>🧠 Question 7</h4><p>Which yields <code>{1:1, 2:4, 3:9}</code>?</p><div class="quiz-option" onclick="selectQuizOption(this, true, 6)">{n: n*n for n in [1,2,3]}</div><div class="quiz-option" onclick="selectQuizOption(this, false, 6)">dict([1,2,3])</div><div class="quiz-option" onclick="selectQuizOption(this, false, 6)">[n*n for n in [1,2,3]]</div><div class="quiz-option" onclick="selectQuizOption(this, false, 6)">set(n*n for n in [1,2,3])</div></div>
-            <div class="quiz"><h4>🧠 Question 8</h4><p>What does <code>"-".join(["a","b","c"]) </code> return?</p><div class="quiz-option" onclick="selectQuizOption(this, true, 7)">"a-b-c"</div><div class="quiz-option" onclick="selectQuizOption(this, false, 7)">"abc"</div><div class="quiz-option" onclick="selectQuizOption(this, false, 7)">["a","-","b","-","c"]</div><div class="quiz-option" onclick="selectQuizOption(this, false, 7)">"a-b-c-"</div></div>
-            <div class="quiz"><h4>🧠 Question 9</h4><p>Which slice gives last 5 elements?</p><div class="quiz-option" onclick="selectQuizOption(this, true, 8)">nums[-5:]</div><div class="quiz-option" onclick="selectQuizOption(this, false, 8)">nums[:5]</div><div class="quiz-option" onclick="selectQuizOption(this, false, 8)">nums[-5:-1]</div><div class="quiz-option" onclick="selectQuizOption(this, false, 8)">nums[5:]</div></div>
-            <div class="quiz"><h4>🧠 Question 10</h4><p>What does <code>nums[::-1]</code> do?</p><div class="quiz-option" onclick="selectQuizOption(this, true, 9)">Returns reversed copy</div><div class="quiz-option" onclick="selectQuizOption(this, false, 9)">Sorts descending</div><div class="quiz-option" onclick="selectQuizOption(this, false, 9)">Removes last element</div><div class="quiz-option" onclick="selectQuizOption(this, false, 9)">Creates deep copy</div></div>
-            <div class="quiz"><h4>🧠 Question 11</h4><p>Extended unpacking: <code>first, *mid, last = [1,2,3,4,5]</code>. What is <code>mid</code>?</p><div class="quiz-option" onclick="selectQuizOption(this, true, 10)">[2,3,4]</div><div class="quiz-option" onclick="selectQuizOption(this, false, 10)">[1,2,3]</div><div class="quiz-option" onclick="selectQuizOption(this, false, 10)">[4,5]</div><div class="quiz-option" onclick="selectQuizOption(this, false, 10)">()</div></div>
-            <div class="quiz"><h4>🧠 Question 12</h4><p>Which is immutable?</p><div class="quiz-option" onclick="selectQuizOption(this, false, 11)">List</div><div class="quiz-option" onclick="selectQuizOption(this, true, 11)">Tuple</div><div class="quiz-option" onclick="selectQuizOption(this, false, 11)">Dictionary</div><div class="quiz-option" onclick="selectQuizOption(this, false, 11)">Set</div></div>
-            <div class="quiz"><h4>🧠 Question 13</h4><p>Which is truthy membership test?</p><div class="quiz-option" onclick="selectQuizOption(this, true, 12)">"py" in "python"</div><div class="quiz-option" onclick="selectQuizOption(this, false, 12)">"py" of "python"</div><div class="quiz-option" onclick="selectQuizOption(this, false, 12)">contains("py","python")</div><div class="quiz-option" onclick="selectQuizOption(this, false, 12)">has("python","py")</div></div>
-            <div class="quiz"><h4>🧠 Question 14</h4><p>Choose slicing that gets every 3rd starting at index 1</p><div class="quiz-option" onclick="selectQuizOption(this, true, 13)">seq[1::3]</div><div class="quiz-option" onclick="selectQuizOption(this, false, 13)">seq[:3]</div><div class="quiz-option" onclick="selectQuizOption(this, false, 13)">seq[::1/3]</div><div class="quiz-option" onclick="selectQuizOption(this, false, 13)">seq[3::1]</div></div>
-            <div class="quiz"><h4>🧠 Question 15</h4><p>What does <code>text.strip()</code> do?</p><div class="quiz-option" onclick="selectQuizOption(this, true, 14)">Removes leading/trailing whitespace</div><div class="quiz-option" onclick="selectQuizOption(this, false, 14)">Removes all spaces</div><div class="quiz-option" onclick="selectQuizOption(this, false, 14)">Uppercases text</div><div class="quiz-option" onclick="selectQuizOption(this, false, 14)">Finds substring</div></div>
-            <div class="quiz"><h4>🧠 Question 16</h4><p>Which line creates a shallow copy of list <code>a</code>?</p><div class="quiz-option" onclick="selectQuizOption(this, true, 15)">b = a[:]</div><div class="quiz-option" onclick="selectQuizOption(this, false, 15)">b = a</div><div class="quiz-option" onclick="selectQuizOption(this, false, 15)">b = list</div><div class="quiz-option" onclick="selectQuizOption(this, false, 15)">a.copy = b</div></div>
-            <div class="quiz"><h4>🧠 Question 17</h4><p>Given <code>student = {"age": 20}</code>, what does <code>student.get("gpa", 0)</code> return?</p><div class="quiz-option" onclick="selectQuizOption(this, true, 16)">0</div><div class="quiz-option" onclick="selectQuizOption(this, false, 16)">None</div><div class="quiz-option" onclick="selectQuizOption(this, false, 16)">Error</div><div class="quiz-option" onclick="selectQuizOption(this, false, 16)">True</div></div>
-            <div class="quiz"><h4>🧠 Question 18</h4><p>Which comprehension filters even numbers?</p><div class="quiz-option" onclick="selectQuizOption(this, true, 17)">[n for n in nums if n % 2 == 0]</div><div class="quiz-option" onclick="selectQuizOption(this, false, 17)">[n if n % 2 == 0]</div><div class="quiz-option" onclick="selectQuizOption(this, false, 17)">[n where even]</div><div class="quiz-option" onclick="selectQuizOption(this, false, 17)">filter(even, nums)</div></div>
-            <div class="quiz"><h4>🧠 Question 19</h4><p>Which updates an existing dict key?</p><div class="quiz-option" onclick="selectQuizOption(this, true, 18)">student["age"] = 21</div><div class="quiz-option" onclick="selectQuizOption(this, false, 18)">student.age = 21</div><div class="quiz-option" onclick="selectQuizOption(this, false, 18)">student.update["age"](21)</div><div class="quiz-option" onclick="selectQuizOption(this, false, 18)">student.add("age",21)</div></div>
-            <div class="quiz"><h4>🧠 Question 20</h4><p>What is true about tuples?</p><div class="quiz-option" onclick="selectQuizOption(this, true, 19)">They are immutable</div><div class="quiz-option" onclick="selectQuizOption(this, false, 19)">They are unordered</div><div class="quiz-option" onclick="selectQuizOption(this, false, 19)">They allow item assignment</div><div class="quiz-option" onclick="selectQuizOption(this, false, 19)">They only hold numbers</div></div>
-
-            <div class="quiz">
-                <h4>🧠 Question 5</h4>
-                <p>Safest way to access a missing dictionary key?</p>
-                <div class="quiz-option" onclick="selectQuizOption(this, true, 4)">d.get('key', 'N/A')</div>
-                <div class="quiz-option" onclick="selectQuizOption(this, false, 4)">d['key']</div>
-                <div class="quiz-option" onclick="selectQuizOption(this, false, 4)">d.key</div>
-                <div class="quiz-option" onclick="selectQuizOption(this, false, 4)">d.pop('key')</div>
-            </div>
+            <h2>Final Comprehensive Knowledge Assessment</h2>
+            
+            <div class="quiz"><h4>Question 1</h4><p>Which data structure is optimal for fixed (x, y) coordinates?</p><div class="quiz-option" onclick="selectQuizOption(this, false, 0)">List</div><div class="quiz-option" onclick="selectQuizOption(this, true, 0)">Tuple</div><div class="quiz-option" onclick="selectQuizOption(this, false, 0)">Dictionary</div><div class="quiz-option" onclick="selectQuizOption(this, false, 0)">String</div></div>
+            <div class="quiz"><h4>Question 2</h4><p>What does <code>name[:3].lower()</code> evaluate to?</p><div class="quiz-option" onclick="selectQuizOption(this, true, 1)">First 3 characters converted to lowercase</div><div class="quiz-option" onclick="selectQuizOption(this, false, 1)">Uppercased string</div><div class="quiz-option" onclick="selectQuizOption(this, false, 1)">Last 3 characters</div><div class="quiz-option" onclick="selectQuizOption(this, false, 1)">A reversed substring</div></div>
+            <div class="quiz"><h4>Question 3</h4><p>Which method appends an item to the end of a list?</p><div class="quiz-option" onclick="selectQuizOption(this, true, 2)">append()</div><div class="quiz-option" onclick="selectQuizOption(this, false, 2)">insert()</div><div class="quiz-option" onclick="selectQuizOption(this, false, 2)">extend()</div><div class="quiz-option" onclick="selectQuizOption(this, false, 2)">pop()</div></div>
+            <div class="quiz"><h4>Question 4</h4><p>Which expression produces a fresh, sorted list copy?</p><div class="quiz-option" onclick="selectQuizOption(this, true, 3)">sorted(my_list)</div><div class="quiz-option" onclick="selectQuizOption(this, false, 3)">my_list.sort()</div><div class="quiz-option" onclick="selectQuizOption(this, false, 3)">my_list[::-1]</div><div class="quiz-option" onclick="selectQuizOption(this, false, 3)">my_list.append(0)</div></div>
+            <div class="quiz"><h4>Question 5</h4><p>What is the safest way to read a dictionary key that may be missing?</p><div class="quiz-option" onclick="selectQuizOption(this, true, 4)">d.get('key', 'N/A')</div><div class="quiz-option" onclick="selectQuizOption(this, false, 4)">d['key']</div><div class="quiz-option" onclick="selectQuizOption(this, false, 4)">d.key</div><div class="quiz-option" onclick="selectQuizOption(this, false, 4)">d.pop('key')</div></div>
+            <div class="quiz"><h4>Question 6</h4><p>What data structure does <code>sentence.split(' ')</code> return?</p><div class="quiz-option" onclick="selectQuizOption(this, true, 5)">A list of strings</div><div class="quiz-option" onclick="selectQuizOption(this, false, 5)">A dictionary</div><div class="quiz-option" onclick="selectQuizOption(this, false, 5)">A tuple</div><div class="quiz-option" onclick="selectQuizOption(this, false, 5)">A generator object</div></div>
+            <div class="quiz"><h4>Question 7</h4><p>Which comprehension constructs <code>{1:1, 2:4, 3:9}</code>?</p><div class="quiz-option" onclick="selectQuizOption(this, true, 6)">{n: n*n for n in [1, 2, 3]}</div><div class="quiz-option" onclick="selectQuizOption(this, false, 6)">dict([1, 2, 3])</div><div class="quiz-option" onclick="selectQuizOption(this, false, 6)">[n*n for n in [1, 2, 3]]</div><div class="quiz-option" onclick="selectQuizOption(this, false, 6)">set(n*n for n in [1, 2, 3])</div></div>
+            <div class="quiz"><h4>Question 8</h4><p>What does <code>"-".join(["a", "b", "c"])</code> produce?</p><div class="quiz-option" onclick="selectQuizOption(this, true, 7)">"a-b-c"</div><div class="quiz-option" onclick="selectQuizOption(this, false, 7)">"abc"</div><div class="quiz-option" onclick="selectQuizOption(this, false, 7)">["a", "-", "b", "-", "c"]</div><div class="quiz-option" onclick="selectQuizOption(this, false, 7)">"a-b-c-"</div></div>
+            <div class="quiz"><h4>Question 9</h4><p>Which slice extracts the final 5 items from an array?</p><div class="quiz-option" onclick="selectQuizOption(this, true, 8)">nums[-5:]</div><div class="quiz-option" onclick="selectQuizOption(this, false, 8)">nums[:5]</div><div class="quiz-option" onclick="selectQuizOption(this, false, 8)">nums[-5:-1]</div><div class="quiz-option" onclick="selectQuizOption(this, false, 8)">nums[5:]</div></div>
+            <div class="quiz"><h4>Question 10</h4><p>What is the effect of <code>nums[::-1]</code>?</p><div class="quiz-option" onclick="selectQuizOption(this, true, 9)">Returns a reversed copy of the sequence</div><div class="quiz-option" onclick="selectQuizOption(this, false, 9)">Sorts elements descending</div><div class="quiz-option" onclick="selectQuizOption(this, false, 9)">Deletes the final element</div><div class="quiz-option" onclick="selectQuizOption(this, false, 9)">Creates a deep clone</div></div>
+            <div class="quiz"><h4>Question 11</h4><p>Given <code>first, *mid, last = [1, 2, 3, 4, 5]</code>, what is <code>mid</code>?</p><div class="quiz-option" onclick="selectQuizOption(this, true, 10)">[2, 3, 4]</div><div class="quiz-option" onclick="selectQuizOption(this, false, 10)">[1, 2, 3]</div><div class="quiz-option" onclick="selectQuizOption(this, false, 10)">[4, 5]</div><div class="quiz-option" onclick="selectQuizOption(this, false, 10)">()</div></div>
+            <div class="quiz"><h4>Question 12</h4><p>Which collection type is strictly immutable?</p><div class="quiz-option" onclick="selectQuizOption(this, false, 11)">List</div><div class="quiz-option" onclick="selectQuizOption(this, true, 11)">Tuple</div><div class="quiz-option" onclick="selectQuizOption(this, false, 11)">Dictionary</div><div class="quiz-option" onclick="selectQuizOption(this, false, 11)">Set</div></div>
+            <div class="quiz"><h4>Question 13</h4><p>Which syntax performs a membership test?</p><div class="quiz-option" onclick="selectQuizOption(this, true, 12)">"py" in "python"</div><div class="quiz-option" onclick="selectQuizOption(this, false, 12)">"py" of "python"</div><div class="quiz-option" onclick="selectQuizOption(this, false, 12)">contains("py", "python")</div><div class="quiz-option" onclick="selectQuizOption(this, false, 12)">has("python", "py")</div></div>
+            <div class="quiz"><h4>Question 14</h4><p>Which slice selects every 3rd element starting at index 1?</p><div class="quiz-option" onclick="selectQuizOption(this, true, 13)">seq[1::3]</div><div class="quiz-option" onclick="selectQuizOption(this, false, 13)">seq[:3]</div><div class="quiz-option" onclick="selectQuizOption(this, false, 13)">seq[::1/3]</div><div class="quiz-option" onclick="selectQuizOption(this, false, 13)">seq[3::1]</div></div>
+            <div class="quiz"><h4>Question 15</h4><p>What does <code>text.strip()</code> do?</p><div class="quiz-option" onclick="selectQuizOption(this, true, 14)">Strips leading and trailing whitespace characters</div><div class="quiz-option" onclick="selectQuizOption(this, false, 14)">Removes all internal whitespace</div><div class="quiz-option" onclick="selectQuizOption(this, false, 14)">Converts text to title case</div><div class="quiz-option" onclick="selectQuizOption(this, false, 14)">Splits into a word list</div></div>
+            <div class="quiz"><h4>Question 16</h4><p>Which expression creates a shallow copy of list <code>a</code>?</p><div class="quiz-option" onclick="selectQuizOption(this, true, 15)">b = a[:]</div><div class="quiz-option" onclick="selectQuizOption(this, false, 15)">b = a</div><div class="quiz-option" onclick="selectQuizOption(this, false, 15)">b = list</div><div class="quiz-option" onclick="selectQuizOption(this, false, 15)">a.copy = b</div></div>
+            <div class="quiz"><h4>Question 17</h4><p>Given <code>d = {"age": 20}</code>, what does <code>d.get("gpa", 0.0)</code> return?</p><div class="quiz-option" onclick="selectQuizOption(this, true, 16)">0.0</div><div class="quiz-option" onclick="selectQuizOption(this, false, 16)">None</div><div class="quiz-option" onclick="selectQuizOption(this, false, 16)">Raises KeyError</div><div class="quiz-option" onclick="selectQuizOption(this, false, 16)">False</div></div>
+            <div class="quiz"><h4>Question 18</h4><p>Which comprehension filters even integers?</p><div class="quiz-option" onclick="selectQuizOption(this, true, 17)">[n for n in nums if n % 2 == 0]</div><div class="quiz-option" onclick="selectQuizOption(this, false, 17)">[n if n % 2 == 0]</div><div class="quiz-option" onclick="selectQuizOption(this, false, 17)">[n where even]</div><div class="quiz-option" onclick="selectQuizOption(this, false, 17)">filter(even, nums)</div></div>
+            <div class="quiz"><h4>Question 19</h4><p>How do you update an existing dictionary key?</p><div class="quiz-option" onclick="selectQuizOption(this, true, 18)">student["age"] = 21</div><div class="quiz-option" onclick="selectQuizOption(this, false, 18)">student.age = 21</div><div class="quiz-option" onclick="selectQuizOption(this, false, 18)">student.update["age"](21)</div><div class="quiz-option" onclick="selectQuizOption(this, false, 18)">student.add("age", 21)</div></div>
+            <div class="quiz"><h4>Question 20</h4><p>Which statement correctly characterizes Python tuples?</p><div class="quiz-option" onclick="selectQuizOption(this, true, 19)">They are immutable and ordered</div><div class="quiz-option" onclick="selectQuizOption(this, false, 19)">They are unordered sets</div><div class="quiz-option" onclick="selectQuizOption(this, false, 19)">They allow in-place value assignment</div><div class="quiz-option" onclick="selectQuizOption(this, false, 19)">They only store numeric types</div></div>
 
             <div class="navigation">
-                <button class="btn btn-secondary" onclick="prevLesson()">← Previous: Challenges</button>
-                <button class="btn" onclick="finishQuiz()">🎉 Finish Tutorial</button>
+                <button class="btn btn-secondary" onclick="prevLesson()">Previous: Challenges</button>
+                <button class="btn" onclick="finishQuiz()">Finish Assessment</button>
             </div>
         </div>
 
+        <!-- Finish Modal -->
         <div class="celebration" id="celebration">
-            <h2>🎉 Congratulations!</h2>
-            <p>You've completed the Python Data Containers tutorial!</p>
-            <div class="score-badge">
-                <span>🏆</span>
-                <span id="finalScore">Final Score: 0/0</span>
+            <h2 id="celebrationTitle">Assessment Completed</h2>
+            <p id="celebrationText">Your results have been tabulated.</p>
+            <div class="score-badge" id="finalScore" style="display: inline-block; margin-bottom: 20px;">Score: 0 / 20</div>
+            <div>
+                <button class="btn" onclick="restartTutorial()">Restart</button>
             </div>
-            <button class="btn" onclick="restartTutorial()">🔄 Start Over</button>
         </div>
     </div>
 
     <script>
         let currentLesson = 0;
-        let totalQuestions = 0;
-        let correctAnswers = 0;
         let quizAnswers = new Array(20).fill(null);
 
         function toggleTeacherNotes() {
@@ -1137,52 +886,38 @@ print(f"Best student: {best_student['name']}")
         }
 
         function showLesson(lessonIndex) {
-            document.querySelectorAll('.lesson').forEach(lesson => {
-                lesson.classList.remove('active');
-            });
-
+            document.querySelectorAll('.lesson').forEach(l => l.classList.remove('active'));
             document.getElementById(`lesson${lessonIndex}`).classList.add('active');
 
             document.querySelectorAll('.lesson-tab').forEach((tab, index) => {
                 tab.classList.remove('active');
-                if (index === lessonIndex) {
-                    tab.classList.add('active');
-                }
-                if (index < lessonIndex) {
-                    tab.classList.add('completed');
-                }
+                if (index === lessonIndex) tab.classList.add('active');
+                if (index < lessonIndex) tab.classList.add('completed');
             });
 
             currentLesson = lessonIndex;
             updateProgress();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function startTutorial() {
             const hero = document.getElementById('introHero');
             if (hero) hero.style.display = 'none';
             showLesson(0);
-            updateProgress();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function jumpToFinalQuiz() {
             const hero = document.getElementById('introHero');
             if (hero) hero.style.display = 'none';
             showLesson(6);
-            updateProgress();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function nextLesson() {
-            if (currentLesson < 6) {
-                showLesson(currentLesson + 1);
-            }
+            if (currentLesson < 6) showLesson(currentLesson + 1);
         }
 
         function prevLesson() {
-            if (currentLesson > 0) {
-                showLesson(currentLesson - 1);
-            }
+            if (currentLesson > 0) showLesson(currentLesson - 1);
         }
 
         function updateProgress() {
@@ -1190,325 +925,119 @@ print(f"Best student: {best_student['name']}")
             document.getElementById('progressFill').style.width = progress + '%';
         }
 
+        function showHint(num) {
+            const el = document.getElementById(`hint${num}`);
+            el.style.display = el.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function showSolution(num) {
+            const el = document.getElementById(`solution${num}`);
+            el.style.display = el.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function selectQuizOption(option, isCorrect, questionIndex) {
+            quizAnswers[questionIndex] = isCorrect;
+            const parent = option.parentElement;
+            parent.querySelectorAll('.quiz-option').forEach(opt => {
+                opt.classList.remove('selected', 'correct', 'incorrect');
+            });
+
+            option.classList.add(isCorrect ? 'correct' : 'incorrect');
+
+            // Recalculate score live
+            const currentScore = quizAnswers.filter(a => a === true).length;
+            document.getElementById('score').textContent = `Score: ${currentScore} / 20`;
+        }
+
+        function finishQuiz() {
+            const correctCount = quizAnswers.filter(a => a === true).length;
+            const modal = document.getElementById('celebration');
+            const title = document.getElementById('celebrationTitle');
+            const text = document.getElementById('celebrationText');
+            const scoreBadge = document.getElementById('finalScore');
+
+            scoreBadge.textContent = `Score: ${correctCount} / 20 (${((correctCount/20)*100).toFixed(0)}%)`;
+
+            if (correctCount >= 18) {
+                title.textContent = "Proficiency Mastered";
+                text.textContent = "Outstanding performance across all core Python container mechanics.";
+            } else if (correctCount >= 12) {
+                title.textContent = "Competency Demonstrated";
+                text.textContent = "Solid conceptual understanding. Review indexing slices and dictionary accessors.";
+            } else {
+                title.textContent = "Needs Review";
+                text.textContent = "Revisit the module exercises to reinforce container immutability and unpacking.";
+            }
+
+            modal.style.display = 'block';
+        }
+
+        function restartTutorial() {
+            quizAnswers.fill(null);
+            document.getElementById('score').textContent = "Score: 0 / 20";
+            document.getElementById('celebration').style.display = 'none';
+            document.querySelectorAll('.quiz-option').forEach(opt => opt.classList.remove('selected', 'correct', 'incorrect'));
+            showLesson(0);
+        }
+
+        // Safe client line evaluator
         function runCode(textareaId, outputId) {
             const code = document.getElementById(textareaId).value;
             const output = document.getElementById(outputId);
             
             try {
-                let result = '';
+                let stdout = [];
                 const lines = code.split('\n');
                 
-                for (let line of lines) {
-                    line = line.trim();
+                for (let rawLine of lines) {
+                    let line = rawLine.trim();
+                    if (!line || line.startsWith('#')) continue;
+
                     if (line.startsWith('print(') && line.endsWith(')')) {
-                        const content = line.slice(6, -1);
-                        result += eval(content) + '\n';
-                    } else if (line.includes('=') && !line.startsWith('#')) {
-                        result += `✓ ${line}\n`;
-                    } else if (line.startsWith('#')) {
-                        result += `💭 ${line}\n`;
+                        let inner = line.slice(6, -1);
+                        if ((inner.startsWith('"') && inner.endsWith('"')) || (inner.startsWith("'") && inner.endsWith("'"))) {
+                            stdout.push(inner.slice(1, -1));
+                        } else {
+                            stdout.push(inner.replace(/['"]/g, ''));
+                        }
+                    } else {
+                        stdout.push('✓ ' + line);
                     }
                 }
-                
-                if (result === '') {
-                    result = '✓ Code executed successfully! Try adding print() statements to see output.';
-                }
-                
-                output.textContent = result;
-                output.style.backgroundColor = '#064e3b';
-                output.style.color = '#d1fae5';
-            } catch (error) {
-                output.textContent = `❌ Error: ${error.message}`;
-                output.style.backgroundColor = '#7f1d1d';
-                output.style.color = '#fca5a5';
+
+                output.textContent = stdout.length > 0 ? stdout.join('\n') : '✓ Code evaluated successfully.';
+                output.style.borderColor = 'var(--code-border)';
+            } catch (err) {
+                output.textContent = 'Runtime Syntax Error: ' + err.message;
+                output.style.borderColor = 'var(--error-border)';
             }
         }
 
-        function selectOption(option, isCorrect) {
-            const quiz = option.parentElement;
-            quiz.querySelectorAll('.quiz-option').forEach(opt => {
-                opt.classList.remove('selected', 'correct', 'incorrect');
-            });
-
-            option.classList.add('selected');
-            
-            setTimeout(() => {
-                quiz.querySelectorAll('.quiz-option').forEach(opt => {
-                    if (opt.onclick.toString().includes('true')) {
-                        opt.classList.add('correct');
-                    } else if (opt.classList.contains('selected') && !isCorrect) {
-                        opt.classList.add('incorrect');
-                    }
-                });
-
-                if (isCorrect) {
-                    correctAnswers++;
-                    showCelebration('🎉 Correct!');
-                } else {
-                    showCelebration('❌ Not quite right. Try again!');
-                }
-
-                totalQuestions++;
-                updateScore();
-            }, 500);
-        }
-
-        function selectQuizOption(option, isCorrect, questionIndex) {
-            quizAnswers[questionIndex] = isCorrect;
-            
-            const quiz = option.parentElement;
-            quiz.querySelectorAll('.quiz-option').forEach(opt => {
-                opt.classList.remove('selected', 'correct', 'incorrect');
-            });
-
-            option.classList.add('selected');
-            
-            setTimeout(() => {
-                quiz.querySelectorAll('.quiz-option').forEach(opt => {
-                    if (opt.onclick.toString().includes('true')) {
-                        opt.classList.add('correct');
-                    } else if (opt.classList.contains('selected') && !isCorrect) {
-                        opt.classList.add('incorrect');
-                    }
-                });
-
-                if (isCorrect) {
-                    showCelebration('🎉 Correct!');
-                } else {
-                    showCelebration('❌ Not quite right, but keep learning!');
-                }
-            }, 500);
-        }
-
-        function showCelebration(message) {
-            const celebration = document.getElementById('celebration');
-            celebration.style.display = 'block';
-            celebration.querySelector('h2').textContent = message;
-            celebration.querySelector('p').style.display = 'none';
-            celebration.querySelector('.score-badge').style.display = 'none';
-            celebration.querySelector('button').style.display = 'none';
-            
-            setTimeout(() => {
-                celebration.style.display = 'none';
-            }, 1500);
-        }
-
-        function updateScore() {
-            const scoreElement = document.getElementById('score');
-            scoreElement.textContent = `Score: ${correctAnswers}/${totalQuestions}`;
-        }
-
-        function showHint(hintNumber) {
-            const hint = document.getElementById(`hint${hintNumber}`);
-            hint.style.display = hint.style.display === 'none' ? 'block' : 'none';
-        }
-
-        function showSolution(solutionNumber) {
-            const solution = document.getElementById(`solution${solutionNumber}`);
-            solution.style.display = solution.style.display === 'none' ? 'block' : 'none';
-        }
-
-        function finishQuiz() {
-            let finalScore = quizAnswers.filter(answer => answer === true).length;
-            correctAnswers += finalScore;
-            totalQuestions += quizAnswers.length;
-            
-            const celebration = document.getElementById('celebration');
-            const finalScoreElement = document.getElementById('finalScore');
-            
-            let message = '';
-            if (finalScore === quizAnswers.length) {
-                message = '🏆 Perfect Score! Outstanding!';
-            } else if (finalScore >= quizAnswers.length - 1) {
-                message = '🎉 Excellent Work!';
-            } else if (finalScore >= Math.ceil(quizAnswers.length / 2)) {
-                message = '👍 Good Job!';
-            } else {
-                message = '📚 Keep Learning!';
-            }
-            
-            celebration.querySelector('h2').textContent = message;
-            celebration.querySelector('p').textContent = `You've completed the Python Data Containers tutorial!`;
-            celebration.querySelector('p').style.display = 'block';
-            finalScoreElement.textContent = `Final Quiz: ${finalScore}/${quizAnswers.length}`;
-            celebration.querySelector('.score-badge').style.display = 'inline-flex';
-            celebration.querySelector('button').style.display = 'inline-block';
-            celebration.style.display = 'block';
-            
-            updateScore();
-            updateProgress();
-        }
-
-        function restartTutorial() {
-            currentLesson = 0;
-            totalQuestions = 0;
-            correctAnswers = 0;
-            quizAnswers = [null, null, null, null, null];
-            
-            document.getElementById('celebration').style.display = 'none';
-            
-            document.querySelectorAll('.quiz-option').forEach(option => {
-                option.classList.remove('selected', 'correct', 'incorrect');
-            });
-            
-            document.querySelectorAll('.code-input').forEach(input => {
-                input.value = input.getAttribute('placeholder') || '';
-            });
-            
-            document.querySelectorAll('.output').forEach(output => {
-                output.textContent = '';
-                output.style.backgroundColor = '#064e3b';
-                output.style.color = '#d1fae5';
-            });
-            
-            document.querySelectorAll('.hint').forEach(hint => {
-                hint.style.display = 'none';
-            });
-            
-            showLesson(0);
-            updateScore();
-        }
-
-        // Initialize the tutorial
-        updateProgress();
-        updateScore();
-
-        // Add copy buttons to all code blocks
+        // Initialize Copy Buttons
         document.querySelectorAll('.code-block').forEach(block => {
-            // Normalize CRLF to LF to avoid broken formatting after copy
-            const getCleanText = () => block.textContent.replace(/\r\n/g, '\n').replace(/\u00A0/g, ' ');
-
             const btn = document.createElement('button');
             btn.className = 'copy-btn';
             btn.textContent = 'Copy';
-            btn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                try {
-                    const text = getCleanText().trimEnd();
-                    navigator.clipboard.writeText(text);
-                    btn.textContent = 'Copied!';
+            btn.addEventListener('click', () => {
+                const text = block.textContent.replace('Copy', '').trim();
+                navigator.clipboard.writeText(text).then(() => {
+                    btn.textContent = 'Copied';
                     setTimeout(() => btn.textContent = 'Copy', 1200);
-                } catch (_) {
-                    btn.textContent = 'Error';
-                    setTimeout(() => btn.textContent = 'Copy', 1200);
-                }
+                });
             });
             block.appendChild(btn);
         });
 
-        // Pre-fill examples
-        document.addEventListener('DOMContentLoaded', function() {
-            const exercise1 = document.getElementById('exercise1');
-            if (exercise1) {
-                exercise1.value = `# Write your code here:
-colors = ["blue", "green", "red"]
-numbers = [1, 2, 3, 4, 5]
-about_me = ["Alice", 20, "Computer Science"]
-
-print("My favorite colors:", colors)
-print("Numbers:", numbers)
-print("About me:", about_me)`;
-            }
-
-            const exercise3 = document.getElementById('exercise3');
-            if (exercise3) {
-                exercise3.value = `# Create your tuples here:
-birth_date = (15, 6, 2005)  # day, month, year
-favorite_color_rgb = (64, 128, 255)  # blue color
-room_dimensions = (12, 10, 8)  # length, width, height
-
-print("Birth date:", birth_date)
-print("RGB color:", favorite_color_rgb)
-print("Room dimensions:", room_dimensions)`;
-            }
-
-            const exercise4 = document.getElementById('exercise4');
-            if (exercise4) {
-                exercise4.value = `# Create your movie dictionary:
-favorite_movie = {
-    "title": "The Matrix",
-    "director": "The Wachowskis",
-    "year": 1999,
-    "rating": 8.7
-}
-
-# Print different values from your dictionary
-print(f"Movie: {favorite_movie['title']}")
-print(f"Director: {favorite_movie['director']}")
-print(f"Year: {favorite_movie['year']}")
-print(f"Rating: {favorite_movie['rating']}/10")`;
-            }
-
-            const exercise5 = document.getElementById('exercise5');
-            if (exercise5) {
-                exercise5.value = `first = 'Alice'
-last = 'Johnson'
-
-username = first.lower() + '_' + last[:3].lower()
-print(username)`;
-            }
-
-            const exercise6 = document.getElementById('exercise6');
-            if (exercise6) {
-                exercise6.value = `nums = list(range(1, 21))
-
-odds = nums[0::2]
-evens = nums[1::2]
-mult3 = nums[2::3]
-last5_rev = nums[:-6:-1]
-
-print(odds)
-print(evens)
-print(mult3)
-print(last5_rev)`;
-            }
-
-            const challenge1 = document.getElementById('challenge1');
-            if (challenge1) {
-                challenge1.value = `students = [
-    {'name': 'Alex', 'grades': [85, 90, 78]},
-    {'name': 'Beth', 'grades': [92, 88, 95]},
-    {'name': 'Carl', 'grades': [76, 82, 80]}
-]
-
-# Calculate and print average grade for each student
-print("Student Averages:")
-best_avg = 0
-best_student = ""
-
-for student in students:
-    avg = sum(student['grades']) / len(student['grades'])
-    print(f"{student['name']}: {avg:.1f}")
-    
-    if avg > best_avg:
-        best_avg = avg
-        best_student = student['name']
-
-print(f"\nBest student: {best_student} with {best_avg:.1f} average")`;
-            }
-
-            const challenge2 = document.getElementById('challenge2');
-            if (challenge2) {
-                challenge2.value = `words = ['python', 'java', 'python', 'javascript', 'python', 'java', 'c++']
-
-# Count occurrences of each word
-word_count = {}
-
-for word in words:
-    if word in word_count:
-        word_count[word] += 1
-    else:
-        word_count[word] = 1
-
-print("Word counts:", word_count)
-
-# Find the most frequent word
-most_frequent = max(word_count, key=word_count.get)
-print(f"Most frequent: {most_frequent} ({word_count[most_frequent]} times)")`;
-            }
+        // Initialize Default Pre-fills
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('exercise1').value = `colors = ["blue", "green", "red"]\nnumbers = [1, 2, 3, 4, 5]\nabout_me = ["Alice", 20, "Developer"]\n\nprint(colors)\nprint(numbers)\nprint(about_me)`;
+            document.getElementById('exercise3').value = `birth_date = (15, 6, 2005)\ncolor_rgb = (64, 128, 255)\nroom_dims = (12, 10, 8)\n\nprint(birth_date)\nprint(color_rgb)\nprint(room_dims)`;
+            document.getElementById('exercise4').value = `favorite_movie = {\n    "title": "Inception",\n    "director": "Christopher Nolan",\n    "year": 2010\n}\n\nprint(favorite_movie["title"])\nprint(favorite_movie.get("rating", 8.8))`;
+            document.getElementById('exercise5').value = `first = 'Alice'\nlast = 'Johnson'\n\nusername = first.lower() + '_' + last[:3].lower()\nprint(username)`;
+            document.getElementById('exercise6').value = `nums = list(range(1, 21))\n\nodds = nums[0::2]\nevens = nums[1::2]\nmult3 = nums[2::3]\nlast5_rev = nums[:-6:-1]\n\nprint(odds)\nprint(evens)\nprint(mult3)\nprint(last5_rev)`;
+            document.getElementById('challenge1').value = `students = [\n    {'name': 'Alex', 'grades': [85, 90, 78]},\n    {'name': 'Beth', 'grades': [92, 88, 95]},\n    {'name': 'Carl', 'grades': [76, 82, 80]}\n]\n\nfor s in students:\n    avg = sum(s['grades']) / len(s['grades'])\n    print(f"{s['name']}: {avg:.1f}")`;
+            document.getElementById('challenge2').value = `words = ['python', 'java', 'python', 'javascript', 'python', 'java', 'c++']\n\ncounts = {}\nfor w in words:\n    counts[w] = counts.get(w, 0) + 1\n\nprint(counts)`;
         });
     </script>
 </body>
 </html>
-
-
