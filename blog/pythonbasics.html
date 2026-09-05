@@ -2,532 +2,805 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Python Masterclass: From Beginner to Advanced</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Python Core Reference: From Syntax Fundamentals to Advanced Execution</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f5fafe;
-      color: #28313b;
+    :root {
+      --bg: #ffffff;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --surface: #f8fafc;
+
+      /* Professional technical blue palette */
+      --primary: #0284c7;
+      --primary-dark: #0369a1;
+      --primary-subtle: #f0f9ff;
+      --primary-border: #bae6fd;
+
+      /* Terminal and code blocks */
+      --code-bg: #0f172a;
+      --code-text: #e2e8f0;
+      --code-border: #1e293b;
+
+      /* Interaction alerts */
+      --success-bg: #f0fdf4;
+      --success-text: #166534;
+      --success-border: #bbf7d0;
+      --error-bg: #fef2f2;
+      --error-text: #991b1b;
+      --error-border: #fecaca;
+      --warn-bg: #fffbeb;
+      --warn-text: #92400e;
+      --warn-border: #fde68a;
+
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    }
+
+    * {
       margin: 0;
-      padding: 0 1.2em 3em 1.2em;
-      line-height: 1.6;
+      padding: 0;
+      box-sizing: border-box;
     }
+
+    body {
+      font-family: var(--font-sans);
+      line-height: 1.65;
+      color: var(--text);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+
     .container {
-      max-width: 900px;
-      margin: 2em auto;
-      background: #fff;
-      border-radius: 13px;
-      box-shadow: 0 0 16px #bdd4e7;
-      padding: 2.6em 2.2em;
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 56px 24px 100px 24px;
     }
-    h1, h2 {
-      color: #357ae8;
-      font-weight: 700;
+
+    header {
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 40px;
     }
+
     h1 {
-      text-align: center;
-      font-size: 2.4em;
-      margin-bottom: 0.6em;
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      color: #0f172a;
+      margin-bottom: 12px;
     }
+
+    .subtitle {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+    }
+
     h2 {
-      margin-top: 2em;
-      border-bottom: 3px solid #93bafd;
-      padding-bottom: 0.3em;
-      font-size: 1.7em;
+      font-size: 1.45rem;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      margin-top: 48px;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+      color: #0f172a;
     }
+
     h3 {
-      margin-top: 1.5em;
-      color: #2253a7;
+      font-size: 1.12rem;
+      font-weight: 600;
+      margin: 28px 0 10px 0;
+      color: #0f172a;
     }
-    p, ul, ol {
-      font-size: 1.09em;
-      margin: 1.2em 0;
+
+    p {
+      margin-bottom: 16px;
+      color: #334155;
     }
+
     ul, ol {
-      margin-left: 2.2em;
+      margin: 14px 0 20px 24px;
+      color: #334155;
     }
-    code {
-      background: #eaf1fb;
-      color: #154093;
-      font-family: Consolas, monospace;
-      padding: 3px 8px;
-      border-radius: 4px;
-      font-size: 1em;
-      white-space: pre-wrap;
+
+    li {
+      margin-bottom: 8px;
     }
-    pre.cmd {
-      background: #f0f7ff;
-      border: 1.5px solid #93bafd;
-      border-radius: 12px;
-      padding: 1.2em 1.5em;
-      font-family: Consolas, monospace;
-      color: #154093;
-      margin: 1.65em 0;
-      white-space: pre-wrap;
-      font-size: 1em;
-      overflow-x: auto;
-    }
+
     .tip {
-      background: #e2f1fd;
-      border-left: 6px solid #357ae8;
-      padding: 1.2em 1.5em;
-      border-radius: 12px;
-      margin: 1.6em 0;
-      color: #2065b7;
-      font-size: 1em;
+      padding: 16px 20px;
+      margin: 20px 0;
+      border-left: 3px solid var(--primary);
+      background: var(--primary-subtle);
+      border-top: 1px solid var(--primary-border);
+      border-right: 1px solid var(--primary-border);
+      border-bottom: 1px solid var(--primary-border);
+      border-radius: 0 4px 4px 0;
+      font-size: 0.95rem;
+      color: #0c4a6e;
     }
+
     .diagram {
+      margin: 28px 0;
+      padding: 24px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
       text-align: center;
-      margin: 2.3em 0;
     }
+
     .diagram img {
-      max-width: 98%;
+      max-width: 100%;
       height: auto;
-      border-radius: 13px;
-      box-shadow: 0 5px 15px rgba(53,122,232,0.15);
-      background: #fff;
-      padding: 15px;
+      border-radius: 4px;
+      background: transparent;
     }
+
+    .diagram figcaption {
+      margin-top: 12px;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    code {
+      background: var(--surface);
+      color: var(--primary-dark);
+      font-family: var(--font-mono);
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 0.875em;
+      border: 1px solid var(--border);
+    }
+
+    pre.cmd {
+      background: var(--code-bg);
+      color: var(--code-text);
+      padding: 18px 22px;
+      border-radius: 6px;
+      font-family: var(--font-mono);
+      overflow-x: auto;
+      margin: 16px 0 20px 0;
+      line-height: 1.55;
+      font-size: 0.875rem;
+      border: 1px solid var(--code-border);
+      white-space: pre;
+    }
+
+    /* Standard syntax tokens */
+    .keyword { color: #38bdf8; font-weight: 600; }
+    .def { color: #7dd3fc; }
+    .string { color: #bae6fd; }
+    .comment { color: #64748b; font-style: italic; }
+    .self { color: #f472b6; }
+    .number { color: #93c5fd; }
+    .builtin { color: #e2e8f0; }
+    .decorator { color: #fbbf24; }
+
+    /* Comparison table */
+    .table-container {
+      overflow-x: auto;
+      margin: 20px 0 28px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      text-align: left;
+    }
+
+    th, td {
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+    }
+
+    th {
+      background: var(--surface);
+      color: #0f172a;
+      font-weight: 600;
+    }
+
     hr {
       border: none;
-      border-top: 1.8px solid #b2d1fc;
-      margin: 3em 0;
+      border-top: 1px solid var(--border);
+      margin: 40px 0;
     }
+
     a {
-      color: #357ae8;
+      color: var(--primary);
       text-decoration: none;
     }
+
     a:hover {
       text-decoration: underline;
     }
+
+    /* Quiz elements */
     .quiz-block {
-      background: #f0f8fc;
-      border-left: 8px solid #488be1;
-      padding: 1.35em 1.7em;
-      border-radius: 13px;
-      margin: 2.5em 0;
-      font-size: 1.11em;
-      color: #1a4672;
-      max-width: 860px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--primary);
+      padding: 20px 22px;
+      border-radius: 0 6px 6px 0;
+      margin: 28px 0;
     }
-    .quiz-block input[type="radio"] {
-      margin-right: 14px;
-      vertical-align: middle;
-      transform: scale(1.1);
+
+    .quiz-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: #0f172a;
     }
-    .quiz-result {
-      font-weight: 700;
-      margin-top: 1.1em;
-      font-size: 1.1em;
-      color: #2253a7;
+
+    .quiz-block label {
+      font-size: 0.95rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+      color: #334155;
     }
+
     button.check-btn {
-      background: #357ae8;
-      color: #fff;
+      background: var(--primary);
+      color: white;
       border: none;
-      padding: 7px 22px;
-      font-size: 1em;
-      border-radius: 8px;
+      border-radius: 4px;
+      padding: 7px 18px;
+      font-size: 0.875rem;
+      font-weight: 500;
       cursor: pointer;
       margin-top: 10px;
-      transition: background 0.3s;
-      display: inline-block;
+      transition: background 0.2s ease;
     }
+
     button.check-btn:hover {
-      background: #2051a7;
+      background: var(--primary-dark);
+    }
+
+    .quiz-result {
+      font-size: 0.9rem;
+      margin-top: 12px;
+      padding: 10px 14px;
+      border-radius: 4px;
+      display: none;
+      line-height: 1.5;
+    }
+
+    .quiz-result.show {
+      display: block;
+    }
+
+    .quiz-result.correct {
+      background: var(--success-bg);
+      border: 1px solid var(--success-border);
+      color: var(--success-text);
+    }
+
+    .quiz-result.incorrect {
+      background: var(--error-bg);
+      border: 1px solid var(--error-border);
+      color: var(--error-text);
+    }
+
+    .quiz-result.warning {
+      background: var(--warn-bg);
+      border: 1px solid var(--warn-border);
+      color: var(--warn-text);
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>🐍 Learning Python</h1>
-    <p>Hey there! Python is like the friendly programming language that everyone loves. It's perfect for beginners because it reads almost like English, and it's powerful enough to build just about anything. Let's start from the very beginning and work our way up!</p>
+    <header>
+      <h1>Python Language and Runtime Architecture</h1>
+      <p class="subtitle">A complete technical guide covering syntax, type mechanics, control flow, functional primitives, OOP, and deployment workflows.</p>
+    </header>
+
+    <!-- 1. Overview -->
+    <section>
+      <h2>1. What is Python?</h2>
+      <p>Python is a high-level, dynamically typed, garbage-collected programming language that supports procedural, object-oriented, and functional programming paradigms. Source code compiles into an intermediate bytecode format (<code>.pyc</code>), which is executed by the CPython virtual machine.</p>
+      <ul>
+        <li><strong>Automatic Memory Management:</strong> Employs reference counting complemented by a cyclic garbage collector.</li>
+        <li><strong>Cross-Platform Runtime:</strong> Executes portably across POSIX, Windows, and Linux environments without code restructuring.</li>
+        <li><strong>Extensibility:</strong> Features native C-extension interfaces allowing integration with performance-critical libraries (e.g., NumPy, PyTorch).</li>
+      </ul>
+      <figure class="diagram">
+        <img src="https://www.python.org/static/community_logos/python-logo-master-v3-TM.png" alt="Official Python ecosystem logo" width="180"/>
+        <figcaption>The Python runtime powers web services, data processing pipelines, and system scripting environments globally.</figcaption>
+      </figure>
+    </section>
 
     <hr />
 
-    <h2>1. What is Python?</h2>
-    <ul>
-      <li><strong>Python</strong> is like the Swiss Army knife of programming languages - it can do just about anything!</li>
-      <li>You can build websites, analyze data, automate boring tasks, create games, work with AI, and so much more.</li>
-      <li>Best part? It's completely free and works on Windows, Mac, and Linux.</li>
-    </ul>
-    <div class="diagram">
-      <img src="https://www.python.org/static/community_logos/python-logo-master-v3-TM.png" alt="Python logo" width="180"/>
-      <br />
-      <small>Python is everywhere - from your favorite websites to the apps on your phone!</small>
-    </div>
+    <!-- 2. Installation & Workflow -->
+    <section>
+      <h2>2. Environment Setup and Execution</h2>
+      <ol>
+        <li><strong>Runtime Installation:</strong> Obtain the current stable runtime from <a href="https://www.python.org/downloads/" target="_blank" rel="noopener">python.org/downloads</a>, ensuring Python is registered to your system <code>PATH</code> environment variable.</li>
+        <li><strong>Execution Environments:</strong> Write source code using text editors or IDEs (VS Code, PyCharm), run experiments via interactive shells, or execute vectorized analysis in Jupyter Notebooks.</li>
+        <li><strong>Execution Pipeline:</strong> Execute scripts via CLI entry points:
+          <pre class="cmd">python script.py</pre>
+        </li>
+      </ol>
+      <div class="tip">The Read-Eval-Print Loop (REPL) allows rapid prototyping. Launch it by entering <code>python</code> directly into your shell without passing a file argument.</div>
+    </section>
 
     <hr />
 
-    <h2>2. Getting Started</h2>
-    <ol>
-      <li><b>Install Python</b> from <a href="https://www.python.org/downloads/" target="_blank" rel="noopener">python.org/downloads</a>. Don't worry - it's super easy and takes just a few minutes!</li>
-      <li><b>Write code</b> in IDLE (comes with Python), or try <a href="https://replit.com/~" target="_blank">replit.com</a> or <a href="https://jupyter.org/try" target="_blank">Jupyter notebooks</a> online if you want to start coding right away.</li>
-      <li>To run your code, open your editor, type some commands, then click "Run" or type <code>python filename.py</code> in your terminal.</li>
-    </ol>
-    <div class="tip">Quick tip: The interactive shell (just type <code>python</code> in your terminal) lets you try commands instantly without saving files!</div>
+    <!-- 3. First Program -->
+    <section>
+      <h2>3. Program Entry and Standard Output</h2>
+      <pre class="cmd"><span class="builtin">print</span>(<span class="string">"Hello, World!"</span>)</pre>
+      <p>The built-in <code>print()</code> function serializes objects to string format and transmits the payload to standard output (<code>sys.stdout</code>), followed by a newline delimiter by default.</p>
+
+      <div class="quiz-block" id="quiz1">
+        <div class="quiz-title">Quiz 1: What does <code>print("Hello, World!")</code> do?</div>
+        <form>
+          <label><input type="radio" name="q1" value="0" id="q1a1"/> Starts an iterative execution loop</label>
+          <label><input type="radio" name="q1" value="1" id="q1a2"/> Writes formatted text to standard output (sys.stdout)</label>
+          <label><input type="radio" name="q1" value="0" id="q1a3"/> Captures blocking input from standard input</label>
+          <button type="button" class="check-btn" onclick="checkQuiz('quiz1', 1, 'The print() function serializes arguments to strings and emits them to sys.stdout.')">Verify Answer</button>
+        </form>
+        <div class="quiz-result" id="quiz1-result"></div>
+      </div>
+    </section>
 
     <hr />
 
-    <h2>3. Your First Python Program</h2>
-    <pre class="cmd">print("Hello, World!")</pre>
-    <p>This is the classic first program! It prints <b>Hello, World!</b> on your screen. Try changing the message to something else and see what happens!</p>
+    <!-- 4. Data Types -->
+    <section>
+      <h2>4. Data Types and Variable Assignment</h2>
+      <p>Variables in Python are symbolic references (pointers) bound to heap-allocated objects. Data types are bound to the underlying object in memory, not the variable name itself.</p>
+      
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Type</th>
+              <th>Category</th>
+              <th>Mutability</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>int</code></td>
+              <td>Numeric</td>
+              <td>Immutable</td>
+              <td>Arbitrary-precision signed integer (unbounded capacity).</td>
+            </tr>
+            <tr>
+              <td><code>float</code></td>
+              <td>Numeric</td>
+              <td>Immutable</td>
+              <td>Double-precision IEEE 754 floating-point number (64-bit).</td>
+            </tr>
+            <tr>
+              <td><code>str</code></td>
+              <td>Sequence</td>
+              <td>Immutable</td>
+              <td>Unicode code-point sequence encoded in UTF-8.</td>
+            </tr>
+            <tr>
+              <td><code>bool</code></td>
+              <td>Boolean</td>
+              <td>Immutable</td>
+              <td>Subtype of int representing logical <code>True</code> (1) or <code>False</code> (0).</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-    <div class="quiz-block" id="quiz1">
-      <b>Quiz 1: What does <code>print("Hello, World!")</code> do?</b><br />
-      <form>
-        <input type="radio" name="q1" value="0" id="q1a1"/><label for="q1a1"> Starts a loop</label><br />
-        <input type="radio" name="q1" value="1" id="q1a2"/><label for="q1a2"> Displays text in the output</label><br />
-        <input type="radio" name="q1" value="0" id="q1a3"/><label for="q1a3"> Reads user input</label><br />
-        <button type="button" class="check-btn" onclick="checkQuiz('quiz1', 1)">Check Answer</button>
-      </form>
-      <div class="quiz-result" id="quiz1-result"></div>
-    </div>
+      <pre class="cmd"><span class="comment"># Variable initialization and dynamic reference binding</span>
+age = <span class="number">21</span>               <span class="comment"># Bound to an int object</span>
+height = <span class="number">1.70</span>           <span class="comment"># Bound to a float object</span>
+name = <span class="string">"Alex"</span>           <span class="comment"># Bound to an immutable str object</span>
+is_active = <span class="keyword">True</span>        <span class="comment"># Bound to a bool singleton</span>
 
-    <hr />
+<span class="builtin">print</span>(name, age, height, is_active)</pre>
 
-    <h2>4. Variables - Storing Information</h2>
-    <ul>
-      <li><code>int</code>: whole numbers like <code>5</code> or <code>42</code></li>
-      <li><code>float</code>: decimal numbers like <code>3.14</code> or <code>2.5</code></li>
-      <li><code>str</code>: text (strings) like <code>"Hello"</code> or <code>"Python is awesome!"</code></li>
-      <li><code>bool</code>: True/False values (like yes/no questions)</li>
-      <li><code>list</code>, <code>tuple</code>, <code>dict</code>: more advanced ways to store data (we'll get to these later)</li>
-    </ul>
-    <pre class="cmd">
-age = 21
-height = 1.70
-name = "Alex"
-is_cool = True
-
-print(name, age, height, is_cool)
-    </pre>
-
-    <div class="quiz-block" id="quiz2">
-      <b>Quiz 2: Which of these is NOT a valid variable name in Python?</b><br />
-      <form>
-        <input type="radio" name="q2" value="0" id="q2a1"/><label for="q2a1"> first_name</label><br />
-        <input type="radio" name="q2" value="0" id="q2a2"/><label for="q2a2"> user2</label><br />
-        <input type="radio" name="q2" value="1" id="q2a3"/><label for="q2a3"> 2user</label><br />
-        <button type="button" class="check-btn" onclick="checkQuiz('quiz2', 1)">Check Answer</button>
-      </form>
-      <div class="quiz-result" id="quiz2-result"></div>
-    </div>
-
-    <hr />
-
-    <h2>5. Getting Input from Users</h2>
-    <pre class="cmd">
-name = input("What is your name? ")
-print("Hello,", name)
-    </pre>
-    <p>Use <code>input()</code> to ask the user for information. It always gives you text, so if you want numbers, you'll need to convert them with <code>int()</code> or <code>float()</code>.</p>
-
-    <hr />
-
-    <h2>6. Making Decisions - if, elif, else</h2>
-    <pre class="cmd">
-score = int(input("Your score: "))
-if score >= 90:
-    print("Great job!")
-elif score >= 70:
-    print("Good effort.")
-else:
-    print("Keep practicing.")
-    </pre>
+      <div class="quiz-block" id="quiz2">
+        <div class="quiz-title">Quiz 2: Which identifier violates Python lexical naming rules?</div>
+        <form>
+          <label><input type="radio" name="q2" value="0" id="q2a1"/> <code>first_name</code></label>
+          <label><input type="radio" name="q2" value="0" id="q2a2"/> <code>user2</code></label>
+          <label><input type="radio" name="q2" value="1" id="q2a3"/> <code>2user</code></label>
+          <button type="button" class="check-btn" onclick="checkQuiz('quiz2', 1, 'Variable identifiers must begin with an alphabetic character or underscore; numeric prefixes cause a SyntaxError.')">Verify Answer</button>
+        </form>
+        <div class="quiz-result" id="quiz2-result"></div>
+      </div>
+    </section>
 
     <hr />
 
-    <h2>7. Loops - Doing Things Over and Over</h2>
-    <pre class="cmd">
-# Print numbers 1-5
-for i in range(1, 6):
-    print(i)
+    <!-- 5. User Input -->
+    <section>
+      <h2>5. Standard Input and Explicit Type Conversion</h2>
+      <p>The <code>input()</code> function suspends execution, reading a line from <code>sys.stdin</code> and returning it strictly as a string (<code>str</code>). Numeric operations require explicit parsing (type casting) using constructors like <code>int()</code> or <code>float()</code>.</p>
+      <pre class="cmd">name = <span class="builtin">input</span>(<span class="string">"What is your name? "</span>)
+<span class="builtin">print</span>(<span class="string">f"Hello, {name}!"</span>)
 
-# While loop - keep going until something changes
-count = 5
-while count > 0:
-    print(count)
-    count -= 1
-    </pre>
-
-    <div class="quiz-block" id="quiz3">
-      <b>Quiz 3: What does <code>range(1, 6)</code> produce?</b><br />
-      <form>
-        <input type="radio" name="q3" value="1" id="q3a1"/><label for="q3a1"> 1, 2, 3, 4, 5</label><br />
-        <input type="radio" name="q3" value="0" id="q3a2"/><label for="q3a2"> 1, 2, 3, 4, 5, 6</label><br />
-        <input type="radio" name="q3" value="0" id="q3a3"/><label for="q3a3"> 0, 1, 2, 3, 4</label><br />
-        <button type="button" class="check-btn" onclick="checkQuiz('quiz3', 1)">Check Answer</button>
-      </form>
-      <div class="quiz-result" id="quiz3-result"></div>
-    </div>
+<span class="comment"># Explicit conversion from str to int</span>
+raw_age = <span class="builtin">input</span>(<span class="string">"Enter your age: "</span>)
+parsed_age = <span class="builtin">int</span>(raw_age)
+<span class="builtin">print</span>(<span class="string">f"Next year, you will be {parsed_age + 1}."</span>)</pre>
+    </section>
 
     <hr />
 
-    <h2>8. Functions - Reusable Code</h2>
-    <pre class="cmd">
-def greet(name):
-    print("Hello,", name)
+    <!-- 6. Control Flow -->
+    <section>
+      <h2>6. Control Flow: Conditional Branching</h2>
+      <p>Condition evaluation relies on strict indentation boundaries (PEP 8 specifies 4 spaces per block). Logical predicates resolve expressions down to boolean truth values.</p>
+      <pre class="cmd">score = <span class="builtin">int</span>(<span class="builtin">input</span>(<span class="string">"Your score: "</span>))
 
-greet("Sam")
-    </pre>
-    <p>Functions are like little recipes for your code. You write them once and use them over and over. They can take information (parameters), do something with it, and even give you back results.</p>
-
-    <hr />
-
-    <h2>9. Lists, Tuples, and Dictionaries - Storing Multiple Things</h2>
-    <h3>Lists (you can change them):</h3>
-    <pre class="cmd">
-numbers = [10, 20, 30]
-print(numbers[0])  # 10
-numbers.append(40)
-print(numbers)  # [10, 20, 30, 40]
-    </pre>
-    <h3>Tuples (you can't change them):</h3>
-    <pre class="cmd">
-coords = (4, 5)
-print(coords[1])  # 5
-    </pre>
-    <h3>Dictionaries (like a phone book - name and number pairs):</h3>
-    <pre class="cmd">
-person = {"name": "Alex", "age": 30}
-print(person["name"])
-person["country"] = "France"
-    </pre>
+<span class="keyword">if</span> score &gt;= <span class="number">90</span>:
+    <span class="builtin">print</span>(<span class="string">"Status: Excellent"</span>)
+<span class="keyword">elif</span> score &gt;= <span class="number">70</span>:
+    <span class="builtin">print</span>(<span class="string">"Status: Satisfactory"</span>)
+<span class="keyword">else</span>:
+    <span class="builtin">print</span>(<span class="string">"Status: Needs Improvement"</span>)</pre>
+    </section>
 
     <hr />
 
-    <h2>10. Slicing Lists and List Comprehensions</h2>
-    <pre class="cmd">
-mylist = [1, 2, 3, 4, 5]
-print(mylist[1:4])  # [2, 3, 4] - get items from position 1 to 3
+    <!-- 7. Loops -->
+    <section>
+      <h2>7. Iteration: for and while Loops</h2>
+      <p>The <code>for</code> loop in Python operates as an iterator consumer over iterable objects. The <code>range(start, stop, step)</code> constructor generates an immutable arithmetic progression, evaluating half-open intervals: <code>[start, stop)</code>.</p>
+      <pre class="cmd"><span class="comment"># Deterministic iteration: range(1, 6) evaluates 1 through 5</span>
+<span class="keyword">for</span> i <span class="keyword">in</span> <span class="builtin">range</span>(<span class="number">1</span>, <span class="number">6</span>):
+    <span class="builtin">print</span>(i)
 
-# List comprehension - a fancy way to make lists
-evens = [x for x in range(10) if x % 2 == 0]
-print(evens)  # [0, 2, 4, 6, 8]
-    </pre>
+<span class="comment"># Indeterminate condition-driven while loop</span>
+count = <span class="number">5</span>
+<span class="keyword">while</span> count &gt; <span class="number">0</span>:
+    <span class="builtin">print</span>(count)
+    count -= <span class="number">1</span></pre>
 
-    <hr />
-
-    <h2>11. Handling Errors Gracefully</h2>
-    <pre class="cmd">
-try:
-    result = 10 / 0
-except ZeroDivisionError:
-    print("You can't divide by zero!")
-finally:
-    print("This always runs")
-    </pre>
-    <p>Use <code>try</code>/<code>except</code> to catch errors and handle them nicely instead of letting your program crash.</p>
-
-    <hr />
-
-    <h2>12. Object-Oriented Programming - Classes and Objects</h2>
-    <pre class="cmd">
-class Dog:
-    def __init__(self, name):
-        self.name = name
-
-    def bark(self):
-        print(self.name, "says woof!")
-
-fido = Dog("Fido")
-fido.bark()  # Fido says woof!
-    </pre>
-    <ul>
-      <li>Classes are like <b>blueprints</b> for creating objects.</li>
-      <li>Objects are things you create from those blueprints (like building a house from plans).</li>
-      <li>Methods are the things objects can do (like a dog can bark, sit, fetch).</li>
-      <li>You can use inheritance (one class can inherit from another), properties, and special methods.</li>
-    </ul>
+      <div class="quiz-block" id="quiz3">
+        <div class="quiz-title">Quiz 3: What exact sequence does <code>range(1, 6)</code> evaluate to?</div>
+        <form>
+          <label><input type="radio" name="q3" value="1" id="q3a1"/> <code>1, 2, 3, 4, 5</code></label>
+          <label><input type="radio" name="q3" value="0" id="q3a2"/> <code>1, 2, 3, 4, 5, 6</code></label>
+          <label><input type="radio" name="q3" value="0" id="q3a3"/> <code>0, 1, 2, 3, 4</code></label>
+          <button type="button" class="check-btn" onclick="checkQuiz('quiz3', 1, 'The range constructor includes the lower boundary and excludes the upper boundary.')">Verify Answer</button>
+        </form>
+        <div class="quiz-result" id="quiz3-result"></div>
+      </div>
+    </section>
 
     <hr />
 
-    <h2>13. Modules and Packages - Using Other People's Code</h2>
-    <p>
-      Organize your code into modules (Python files) and packages (folders of modules). Import code with:
-    </p>
-    <pre class="cmd">
-import math
-print(math.sqrt(16))  # 4.0
-    </pre>
-    <p>Install external packages using <code>pip</code>:</p>
-    <pre class="cmd">pip install requests</pre>
-    <p>Then <code>import requests</code> in your Python code to use it.</p>
+    <!-- 8. Functions -->
+    <section>
+      <h2>8. Functions and Scope Resolution</h2>
+      <p>Functions are declared with <code>def</code>, accept positional and keyword arguments, and return values using <code>return</code> (defaulting to <code>None</code> if omitted). Python uses LEGB (Local, Enclosing, Global, Built-in) scope rules.</p>
+      <pre class="cmd"><span class="keyword">def</span> <span class="def">calculate_total</span>(price, tax_rate=<span class="number">0.05</span>):
+    <span class="string">"""Compute final order price with tax applied."""</span>
+    <span class="keyword">return</span> price * (<span class="number">1</span> + tax_rate)
+
+final_price = calculate_total(<span class="number">100.0</span>)
+<span class="builtin">print</span>(<span class="string">f"Total: ${final_price:.2f}"</span>)  <span class="comment"># Total: $105.00</span></pre>
+    </section>
 
     <hr />
 
-    <h2>14. Working with Files</h2>
-    <pre class="cmd">
-with open("mydata.txt", "w") as f:
-    f.write("Hello, file!")
+    <!-- 9. Data Structures -->
+    <section>
+      <h2>9. Collections: Lists, Tuples, and Dictionaries</h2>
+      
+      <h3>Lists (Mutable Sequences)</h3>
+      <p>Dynamic arrays backed by continuous memory blocks; items can be appended, mutated, or deleted in place.</p>
+      <pre class="cmd">numbers = [<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>]
+numbers.append(<span class="number">40</span>)
+numbers[<span class="number">0</span>] = <span class="number">99</span>
+<span class="builtin">print</span>(numbers)  <span class="comment"># [99, 20, 30, 40]</span></pre>
 
-with open("mydata.txt") as f:
-    contents = f.read()
-    print(contents)
-    </pre>
+      <h3>Tuples (Immutable Sequences)</h3>
+      <p>Fixed-size, write-protected sequences. Tuples are hashable if their contents are hashable, making them valid dictionary keys.</p>
+      <pre class="cmd">coordinates = (<span class="number">56.1629</span>, <span class="number">10.2039</span>)
+<span class="builtin">print</span>(coordinates[<span class="number">0</span>])  <span class="comment"># 56.1629</span>
+<span class="comment"># coordinates[0] = 0.0  # Throws TypeError: tuple object does not support item assignment</span></pre>
 
-    <hr />
-
-    <h2>15. Some Cool Advanced Stuff</h2>
-    <h3>Decorators</h3>
-    <pre class="cmd">
-def shout(fn):
-    def wrapper():
-        return fn().upper()
-    return wrapper
-
-@shout
-def greet():
-    return "hello"
-
-print(greet())  # HELLO
-    </pre>
-    <h3>Generators & Iterators</h3>
-    <pre class="cmd">
-def countdown(n):
-    while n > 0:
-        yield n
-        n -= 1
-
-for i in countdown(3):
-    print(i)
-    </pre>
+      <h3>Dictionaries (Hash Maps)</h3>
+      <p>Key-value mappings providing average $O(1)$ lookup, insertion, and deletion complexity via hash table architecture.</p>
+      <pre class="cmd">user_profile = {<span class="string">"username"</span>: <span class="string">"akottayil"</span>, <span class="string">"role"</span>: <span class="string">"developer"</span>}
+user_profile[<span class="string">"status"</span>] = <span class="string">"active"</span>
+<span class="builtin">print</span>(user_profile[<span class="string">"username"</span>])</pre>
+    </section>
 
     <hr />
 
-    <h2>16. Lambda Functions and Map/Filter/Reduce</h2>
-    <pre class="cmd">
-nums = [1, 2, 3]
-squared = list(map(lambda x: x ** 2, nums))
-evens = list(filter(lambda x: x % 2 == 0, nums))
-print(squared)  # [1, 4, 9]
-print(evens)    # [2]
-    </pre>
+    <!-- 10. Slicing -->
+    <section>
+      <h2>10. Sequence Slicing and List Comprehensions</h2>
+      <p>Slicing provides copy-free window operations over sequences using the syntax <code>sequence[start:stop:step]</code>.</p>
+      <pre class="cmd">dataset = [<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span>, <span class="number">50</span>]
+<span class="builtin">print</span>(dataset[<span class="number">1</span>:<span class="number">4</span>])    <span class="comment"># Elements at index 1, 2, 3: [20, 30, 40]</span>
+<span class="builtin">print</span>(dataset[::-<span class="number">1</span>])   <span class="comment"># Reverses the sequence: [50, 40, 30, 20, 10]</span>
+
+<span class="comment"># List Comprehension: declarative, compiled sequence transformations</span>
+squares = [x ** <span class="number">2</span> <span class="keyword">for</span> x <span class="keyword">in</span> <span class="builtin">range</span>(<span class="number">10</span>) <span class="keyword">if</span> x % <span class="number">2</span> == <span class="number">0</span>]
+<span class="builtin">print</span>(squares)          <span class="comment"># [0, 4, 16, 36, 64]</span></pre>
+    </section>
 
     <hr />
 
-    <h2>17. List Comprehensions and Advanced Data Structures</h2>
-    <pre class="cmd">
-matrix = [[1, 2], [3, 4]]
-flat = [num for row in matrix for num in row]
-print(flat)  # [1, 2, 3, 4]
-
-myset = {1, 2, 3}  # Sets are like lists but with no duplicates
-    </pre>
-
-    <hr />
-
-    <h2>18. Working with APIs and JSON</h2>
-    <pre class="cmd">
-import requests
-data = requests.get("https://catfact.ninja/fact").json()
-print(data["fact"])
-    </pre>
-    <pre class="cmd">
-import json
-person = {"name": "Zara", "age": 21}
-j = json.dumps(person)
-print(j)
-back = json.loads(j)
-print(back["name"])
-    </pre>
+    <!-- 11. Exception Handling -->
+    <section>
+      <h2>11. Robust Exception Handling (SEH)</h2>
+      <p>Exceptions interrupt standard instruction flow. Handlers intercept specific errors, allowing deterministic resource recovery via <code>finally</code> blocks.</p>
+      <pre class="cmd"><span class="keyword">try</span>:
+    numerator = <span class="number">100</span>
+    denominator = <span class="number">0</span>
+    quotient = numerator / denominator
+<span class="keyword">except</span> ZeroDivisionError <span class="keyword">as</span> err:
+    <span class="builtin">print</span>(<span class="string">f"Handled runtime arithmetic fault: {err}"</span>)
+<span class="keyword">except</span> Exception <span class="keyword">as</span> err:
+    <span class="builtin">print</span>(<span class="string">f"Unexpected general fault: {err}"</span>)
+<span class="keyword">else</span>:
+    <span class="builtin">print</span>(<span class="string">f"Calculation successful: {quotient}"</span>)
+<span class="keyword">finally</span>:
+    <span class="builtin">print</span>(<span class="string">"Cleaned up connection resources."</span>)</pre>
+    </section>
 
     <hr />
 
-    <h2>19. Virtual Environments - Keeping Projects Separate</h2>
-    <pre class="cmd">
-python -m venv venv
-# Activate the environment:
-# Windows:
-venv\Scripts\activate
-# macOS/Linux:
-source venv/bin/activate
-    </pre>
-    <p>Use <code>pip freeze > requirements.txt</code> to save your project's dependencies; <code>pip install -r requirements.txt</code> to install them on another computer.</p>
+    <!-- 12. OOP -->
+    <section>
+      <h2>12. Object-Oriented Programming (OOP)</h2>
+      <p>Classes encapsulate state and behavior into reusable types. Python methods require explicit declaration of the instance reference via <code>self</code>.</p>
+      <pre class="cmd"><span class="keyword">class</span> <span class="def">ServiceNode</span>:
+    <span class="keyword">def</span> <span class="def">__init__</span>(<span class="self">self</span>, node_id, ip_address):
+        <span class="self">self</span>.node_id = node_id
+        <span class="self">self</span>.ip_address = ip_address
+        <span class="self">self</span>._active = <span class="keyword">False</span>
+
+    <span class="keyword">def</span> <span class="def">start</span>(<span class="self">self</span>):
+        <span class="self">self</span>._active = <span class="keyword">True</span>
+        <span class="keyword">return</span> <span class="string">f"Node {self.node_id} ({self.ip_address}) is active."</span>
+
+<span class="comment"># Concrete instantiation</span>
+primary_node = ServiceNode(<span class="string">"DC01"</span>, <span class="string">"192.168.1.10"</span>)
+<span class="builtin">print</span>(primary_node.start())</pre>
+    </section>
 
     <hr />
 
-    <h2>20. Popular Libraries and Frameworks</h2>
-    <ul>
-      <li><b>Flask / Django</b>: Build websites and web apps</li>
-      <li><b>Pandas / Numpy</b>: Work with data and do data science</li>
-      <li><b>Matplotlib / Seaborn</b>: Create charts and graphs</li>
-      <li><b>Pytest</b>: Test your code to make sure it works</li>
-      <li><b>TensorFlow / PyTorch</b>: Build machine learning and AI</li>
-    </ul>
-    <div class="tip">Check out <a href="https://pypi.org" target="_blank">PyPI</a> — it's like an app store for Python packages!</div>
+    <!-- 13. Modules & Packages -->
+    <section>
+      <h2>13. Modular Architecture and Package Management</h2>
+      <p>Python organizes codebases using <strong>Modules</strong> (single <code>.py</code> files) and <strong>Packages</strong> (directories containing an <code>__init__.py</code> file). The Python Package Index (PyPI) distributes third-party software managed through <code>pip</code>.</p>
+      <pre class="cmd"><span class="comment"># Standard Library imports</span>
+<span class="keyword">import</span> math
+<span class="keyword">from</span> pathlib <span class="keyword">import</span> Path
+
+<span class="builtin">print</span>(math.isclose(math.sqrt(<span class="number">16</span>), <span class="number">4.0</span>))  <span class="comment"># True</span></pre>
+      <p>Third-party packages are installed and imported via terminal commands:</p>
+      <pre class="cmd">pip install requests</pre>
+    </section>
 
     <hr />
 
-    <h2>Try These Quizzes!</h2>
+    <!-- 14. File I/O -->
+    <section>
+      <h2>14. File I/O and Context Managers</h2>
+      <p>File access requires careful resource cleanup. Using the <code>with</code> statement invokes the Context Management protocol (<code>__enter__</code> and <code>__exit__</code>), guaranteeing file descriptors close automatically—even if runtime exceptions occur.</p>
+      <pre class="cmd"><span class="comment"># Writing stream content to disk</span>
+<span class="keyword">with</span> <span class="builtin">open</span>(<span class="string">"server_log.txt"</span>, <span class="string">"w"</span>, encoding=<span class="string">"utf-8"</span>) <span class="keyword">as</span> log_file:
+    log_file.write(<span class="string">"2026-09-05 INFO Application startup completed.\n"</span>)
 
-    <div class="quiz-block" id="quiz4">
-      <b>Quiz 4: Which data structure is immutable in Python?</b><br />
-      <form>
-        <input type="radio" name="q4" value="1" id="q4a1"/><label for="q4a1"> tuple</label><br />
-        <input type="radio" name="q4" value="0" id="q4a2"/><label for="q4a2"> list</label><br />
-        <input type="radio" name="q4" value="0" id="q4a3"/><label for="q4a3"> dict</label><br />
-        <button type="button" class="check-btn" onclick="checkQuiz('quiz4', 1)">Check Answer</button>
-      </form>
-      <div class="quiz-result" id="quiz4-result"></div>
-    </div>
+<span class="comment"># Reading content from disk</span>
+<span class="keyword">with</span> <span class="builtin">open</span>(<span class="string">"server_log.txt"</span>, <span class="string">"r"</span>, encoding=<span class="string">"utf-8"</span>) <span class="keyword">as</span> log_file:
+    log_data = log_file.read()
+    <span class="builtin">print</span>(log_data.strip())</pre>
+    </section>
 
-    <div class="quiz-block" id="quiz5">
-      <b>Quiz 5: Which function is used to get the length of a list?</b><br />
-      <form>
-        <input type="radio" name="q5" value="0" id="q5a1"/><label for="q5a1"> count()</label><br />
-        <input type="radio" name="q5" value="1" id="q5a2"/><label for="q5a2"> len()</label><br />
-        <input type="radio" name="q5" value="0" id="q5a3"/><label for="q5a3"> size()</label><br />
-        <button type="button" class="check-btn" onclick="checkQuiz('quiz5', 1)">Check Answer</button>
-      </form>
-      <div class="quiz-result" id="quiz5-result"></div>
-    </div>
-
-    <div class="quiz-block" id="quiz6">
-      <b>Quiz 6: What does <code>@</code> before a function mean?</b><br />
-      <form>
-        <input type="radio" name="q6" value="1" id="q6a1"/><label for="q6a1"> Decorator</label><br />
-        <input type="radio" name="q6" value="0" id="q6a2"/><label for="q6a2"> Start of a list</label><br />
-        <input type="radio" name="q6" value="0" id="q6a3"/><label for="q6a3"> Comment</label><br />
-        <button type="button" class="check-btn" onclick="checkQuiz('quiz6', 1)">Check Answer</button>
-      </form>
-      <div class="quiz-result" id="quiz6-result"></div>
-    </div>
-
-    <div class="tip">The best way to learn Python is by <b>writing lots of code</b>, breaking things, and fixing them. Try mini projects, explore libraries, and always ask "How can I automate this with Python?"</div>
-    
     <hr />
 
-    <h2>Project Ideas to Practice</h2>
-    <ul>
-      <li>Build a simple calculator with functions.</li>
-      <li>Write a guessing game where the computer picks a number.</li>
-      <li>Analyze a CSV file of data with Pandas.</li>
-      <li>Make a to-do list app (terminal or web using Flask).</li>
-      <li>Scrape a website and extract information with BeautifulSoup.</li>
-      <li>Visualize your favorite dataset using Matplotlib.</li>
-    </ul>
+    <!-- 15. Advanced Features: Decorators and Generators -->
+    <section>
+      <h2>15. Advanced Metaprogramming and Lazy Iteration</h2>
+      
+      <h3>Function Decorators</h3>
+      <p>Decorators wrap other functions, altering or extending their behavior without permanently modifying source logic.</p>
+      <pre class="cmd"><span class="keyword">def</span> <span class="def">log_execution</span>(func):
+    <span class="keyword">def</span> <span class="def">wrapper</span>(*args, **kwargs):
+        <span class="builtin">print</span>(<span class="string">f"Invoking method: {func.__name__}"</span>)
+        result = func(*args, **kwargs)
+        <span class="builtin">print</span>(<span class="string">"Method execution completed."</span>)
+        <span class="keyword">return</span> result
+    <span class="keyword">return</span> wrapper
 
-    <div class="tip">You made it!  You now have a solid foundation in Python. Start with the basics and gradually explore the advanced features. The best way to learn is by doing - so get coding!</div>
+<span class="decorator">@log_execution</span>
+<span class="keyword">def</span> <span class="def">query_database</span>():
+    <span class="keyword">return</span> {<span class="string">"status"</span>: <span class="number">200</span>, <span class="string">"rows"</span>: <span class="number">42</span>}
+
+response = query_database()</pre>
+
+      <h3>Generators (Memory-Efficient Streams)</h3>
+      <p>Generators yield values sequentially using <code>yield</code>, freezing execution state between cycles instead of constructing entire collections in memory.</p>
+      <pre class="cmd"><span class="keyword">def</span> <span class="def">stream_records</span>(limit):
+    current = <span class="number">0</span>
+    <span class="keyword">while</span> current &lt; limit:
+        <span class="keyword">yield</span> current
+        current += <span class="number">1</span>
+
+<span class="keyword">for</span> record <span class="keyword">in</span> stream_records(<span class="number">3</span>):
+    <span class="builtin">print</span>(record)  <span class="comment"># Emits 0, 1, 2 sequentially with minimal memory footprint</span></pre>
+    </section>
+
+    <hr />
+
+    <!-- 16. Functional Programming -->
+    <section>
+      <h2>16. Functional Primitives: Lambdas, Map, and Filter</h2>
+      <p>Lambdas are concise, single-expression anonymous functions. Combining them with <code>map()</code> and <code>filter()</code> enables functional transformations over iterators.</p>
+      <pre class="cmd">raw_values = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]
+
+<span class="comment"># Vector transformation and conditional extraction</span>
+squares = <span class="builtin">list</span>(<span class="builtin">map</span>(<span class="keyword">lambda</span> x: x ** <span class="number">2</span>, raw_values))
+even_values = <span class="builtin">list</span>(<span class="builtin">filter</span>(<span class="keyword">lambda</span> x: x % <span class="number">2</span> == <span class="number">0</span>, raw_values))
+
+<span class="builtin">print</span>(squares)      <span class="comment"># [1, 4, 9, 16, 25]</span>
+<span class="builtin">print</span>(even_values)  <span class="comment"># [2, 4]</span></pre>
+    </section>
+
+    <hr />
+
+    <!-- 17. Sets and Flattening -->
+    <section>
+      <h2>17. Advanced Data Structures: Sets and Nested Comprehensions</h2>
+      <p>Sets are mutable, unordered collections of unique, hashable objects. Nested comprehensions handle multi-dimensional transformations in a single pass.</p>
+      <pre class="cmd"><span class="comment"># Multi-dimensional list flattening</span>
+matrix = [[<span class="number">1</span>, <span class="number">2</span>], [<span class="number">3</span>, <span class="number">4</span>]]
+flattened = [val <span class="keyword">for</span> row <span class="keyword">in</span> matrix <span class="keyword">for</span> val <span class="keyword">in</span> row]
+<span class="builtin">print</span>(flattened)  <span class="comment"># [1, 2, 3, 4]</span>
+
+<span class="comment"># Set deduplication and set arithmetic (O(1) lookups)</span>
+unique_ids = {<span class="number">101</span>, <span class="number">102</span>, <span class="number">101</span>, <span class="number">103</span>}
+<span class="builtin">print</span>(unique_ids)  <span class="comment"># {101, 102, 103}</span></pre>
+    </section>
+
+    <hr />
+
+    <!-- 18. APIs & JSON -->
+    <section>
+      <h2>18. Serialization and REST API Consumption</h2>
+      <p>The <code>json</code> module serializes Python dictionaries to JSON strings (<code>dumps</code>) and deserializes JSON strings back to native types (<code>loads</code>).</p>
+      <pre class="cmd"><span class="keyword">import</span> json
+
+payload = {<span class="string">"service"</span>: <span class="string">"gateway"</span>, <span class="string">"status"</span>: <span class="string">"operational"</span>, <span class="string">"code"</span>: <span class="number">200</span>}
+
+<span class="comment"># Serialization (Dictionary to JSON String)</span>
+serialized_data = json.dumps(payload)
+
+<span class="comment"># Deserialization (JSON String back to Dictionary)</span>
+deserialized_data = json.loads(serialized_data)
+<span class="builtin">print</span>(deserialized_data[<span class="string">"service"</span>])</pre>
+    </section>
+
+    <hr />
+
+    <!-- 19. Virtual Environments -->
+    <section>
+      <h2>19. Isolated Environments and Dependency Management</h2>
+      <p>Virtual environments isolate package dependencies per project, preventing version collisions with the system-wide Python installation.</p>
+      <pre class="cmd"><span class="comment"># Initialize dedicated virtual environment</span>
+python -m venv .venv
+
+<span class="comment"># Activate environment</span>
+<span class="comment"># Windows:</span>
+.venv\Scripts\activate
+<span class="comment"># macOS / Linux:</span>
+source .venv/bin/activate
+
+<span class="comment"># Snapshot and reinstall deterministic package dependencies</span>
+pip freeze &gt; requirements.txt
+pip install -r requirements.txt</pre>
+    </section>
+
+    <hr />
+
+    <!-- 20. Ecosystem Frameworks -->
+    <section>
+      <h2>20. Ecosystem Frameworks and Specializations</h2>
+      <ul>
+        <li><strong>Backend Architecture:</strong> FastAPI, Django, Flask (microservices, transactional systems).</li>
+        <li><strong>Data Science &amp; Vector Math:</strong> Pandas, NumPy, SciPy (in-memory dataframes, vectorized array math).</li>
+        <li><strong>Visualization &amp; Reporting:</strong> Matplotlib, Seaborn, Plotly.</li>
+        <li><strong>Quality Assurance &amp; Testing:</strong> Pytest, Unittest (unit and integration testing harnesses).</li>
+        <li><strong>Machine Learning:</strong> PyTorch, TensorFlow, Scikit-learn (deep learning, classical modeling).</li>
+      </ul>
+    </section>
+
+    <hr />
+
+    <!-- Quizzes -->
+    <section>
+      <h2>Knowledge Verification</h2>
+
+      <div class="quiz-block" id="quiz4">
+        <div class="quiz-title">Quiz 4: Which of the following data structures is immutable?</div>
+        <form>
+          <label><input type="radio" name="q4" value="1" id="q4a1"/> <code>tuple</code></label>
+          <label><input type="radio" name="q4" value="0" id="q4a2"/> <code>list</code></label>
+          <label><input type="radio" name="q4" value="0" id="q4a3"/> <code>dict</code></label>
+          <button type="button" class="check-btn" onclick="checkQuiz('quiz4', 1, 'Tuples cannot be altered after instantiation; lists and dictionaries are fully mutable.')">Verify Answer</button>
+        </form>
+        <div class="quiz-result" id="quiz4-result"></div>
+      </div>
+
+      <div class="quiz-block" id="quiz5">
+        <div class="quiz-title">Quiz 5: Which built-in function returns the total number of items in a collection?</div>
+        <form>
+          <label><input type="radio" name="q5" value="0" id="q5a1"/> <code>count()</code></label>
+          <label><input type="radio" name="q5" value="1" id="q5a2"/> <code>len()</code></label>
+          <label><input type="radio" name="q5" value="0" id="q5a3"/> <code>size()</code></label>
+          <button type="button" class="check-btn" onclick="checkQuiz('quiz5', 1, 'len() invokes the object internal __len__() method to return collection size in O(1) time.')">Verify Answer</button>
+        </form>
+        <div class="quiz-result" id="quiz5-result"></div>
+      </div>
+
+      <div class="quiz-block" id="quiz6">
+        <div class="quiz-title">Quiz 6: What architectural pattern is represented by the <code>@decorator</code> syntax?</div>
+        <form>
+          <label><input type="radio" name="q6" value="1" id="q6a1"/> Function Decorator (metaprogramming wrapper)</label>
+          <label><input type="radio" name="q6" value="0" id="q6a2"/> Explicit array initialization</label>
+          <label><input type="radio" name="q6" value="0" id="q6a3"/> Multi-line block comment</label>
+          <button type="button" class="check-btn" onclick="checkQuiz('quiz6', 1, 'The @ prefix denotes a decorator, passing the declared function as an argument to a higher-order wrapper.')">Verify Answer</button>
+        </form>
+        <div class="quiz-result" id="quiz6-result"></div>
+      </div>
+    </section>
+
+    <hr />
+
+    <!-- Projects -->
+    <section>
+      <h2>Practical Implementation Projects</h2>
+      <ul>
+        <li><strong>CLI Automation Utility:</strong> Build a script utilizing <code>sys.argv</code> or <code>argparse</code> to automate file parsing and backup directory syncs.</li>
+        <li><strong>REST API Client:</strong> Query third-party endpoints using <code>requests</code>, parse the JSON payload, and serialize filtered results into local CSV storage.</li>
+        <li><strong>Tabular Data Pipeline:</strong> Load structured datasets with <code>pandas</code>, clean null values, and calculate summary statistical distributions.</li>
+        <li><strong>Microservice Endpoint:</strong> Construct a REST interface using FastAPI or Flask that validates client JSON schemas and queries an SQLite database.</li>
+      </ul>
+    </section>
   </div>
 
   <script>
-    function checkQuiz(quizId, correctIndex) {
+    function checkQuiz(quizId, correctIndex, explanationText) {
       const quiz = document.getElementById(quizId);
       const options = quiz.querySelectorAll('input[type="radio"]');
       const resultArea = quiz.querySelector('.quiz-result');
+      let selected = false;
+
+      resultArea.className = 'quiz-result';
+
       for (let i = 0; i < options.length; i++) {
         if (options[i].checked) {
-          if (parseInt(options[i].value) === correctIndex) {
-            resultArea.textContent = ' Correct!';
+          selected = true;
+          if (parseInt(options[i].value, 10) === correctIndex) {
+            resultArea.textContent = "Correct. " + explanationText;
+            resultArea.classList.add('show', 'correct');
           } else {
-            resultArea.textContent = ' Try again!';
+            resultArea.textContent = "Incorrect. Review the technical specification above and try again.";
+            resultArea.classList.add('show', 'incorrect');
           }
-          return;
+          break;
         }
       }
-      resultArea.textContent = ' Please select an answer!';
+
+      if (!selected) {
+        resultArea.textContent = "Please select an answer choice before verifying.";
+        resultArea.classList.add('show', 'warning');
+      }
     }
   </script>
 </body>
