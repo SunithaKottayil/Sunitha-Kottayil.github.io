@@ -2,455 +2,630 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<title>Fun Interactive OOP Tutorial (With Relatable Example)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Object-Oriented Programming Fundamentals: Complete Reference Guide</title>
 <style>
+  :root {
+    --bg: #ffffff;
+    --text: #1e293b;
+    --text-muted: #64748b;
+    --border: #e2e8f0;
+    --surface: #f8fafc;
+
+    /* Technical blue accents */
+    --primary: #0284c7;
+    --primary-dark: #0369a1;
+    --primary-subtle: #f0f9ff;
+    --primary-border: #bae6fd;
+
+    /* Code editor */
+    --code-bg: #0f172a;
+    --code-text: #e2e8f0;
+    --code-border: #1e293b;
+
+    /* Status states */
+    --success-bg: #f0fdf4;
+    --success-text: #166534;
+    --success-border: #bbf7d0;
+    --error-bg: #fef2f2;
+    --error-text: #991b1b;
+    --error-border: #fecaca;
+    --warn-bg: #fffbeb;
+    --warn-text: #92400e;
+    --warn-border: #fde68a;
+
+    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
   body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #f0f8ff;
-    color: #222;
-    margin: 0; padding: 1.5em 2em 3em;
-    line-height: 1.5;
+    font-family: var(--font-sans);
+    line-height: 1.65;
+    color: var(--text);
+    background: var(--bg);
+    -webkit-font-smoothing: antialiased;
   }
+
   .container {
-    max-width: 800px;
-    margin: 1em auto;
-    background: white;
-    padding: 2em 2.5em;
-    border-radius: 12px;
-    box-shadow: 0 6px 14px rgba(0,0,0,0.12);
-    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 56px 24px 100px 24px;
   }
 
-  .container::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, #004080, #007acc, #00aaff);
-    border-radius: 12px 12px 0 0;
+  header {
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 40px;
   }
-  h1, h2 {
-    color: #004080;
-  }
+
   h1 {
-    text-align: center;
-    font-size: 2.7em;
-    margin-bottom: 0.2em;
-    position: relative;
-  }
-
-  h1::after {
-    content: '';
-    position: absolute;
-    bottom: -8px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 4px;
-    background: linear-gradient(90deg, #004080, #007acc);
-    border-radius: 2px;
-  }
-  h2 {
-    margin-top: 2em;
-    border-bottom: 3px solid #007acc;
-    padding-bottom: 0.3em;
-    position: relative;
-  }
-
-  h2::before {
-    content: '';
-    position: absolute;
-    bottom: -3px;
-    left: 0;
-    width: 60px;
-    height: 3px;
-    background: linear-gradient(90deg, #004080, #007acc);
-    border-radius: 2px;
-  }
-  p {
-    font-size: 1.1em;
-    margin-top: 1em;
-  }
-  code {
-    background: #e5f1fe;
-    color: #003366;
-    font-family: Consolas, monospace;
-    padding: 3px 6px;
-    border-radius: 5px;
-    font-size: 1em;
-    position: relative;
-    transition: all 0.3s ease;
-  }
-
-  code::before {
-    content: '>';
-    position: absolute;
-    top: -1px;
-    left: -1px;
-    color: #004080;
-    font-weight: bold;
-    font-size: 10px;
-    opacity: 0.6;
-  }
-  pre {
-    background: #d0e7ff;
-    color: #003366;
-    padding: 1em 1.2em;
-    border-radius: 10px;
-    font-family: Consolas, monospace;
-    overflow-x: auto;
-    margin-top: 1em;
-    position: relative;
-    transition: all 0.3s ease;
-  }
-
-  pre::before {
-    content: 'Code';
-    position: absolute;
-    top: 8px;
-    right: 12px;
-    font-size: 11px;
-    color: #003366;
-    background: rgba(255,255,255,0.8);
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-weight: 600;
-  }
-
-  pre::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 0 20px 20px 0;
-    border-color: transparent #004080 transparent transparent;
-    border-radius: 0 10px 0 0;
-  }
-  ul {
-    margin-left: 1.8em;
-  }
-
-  ol li {
-    position: relative;
-    margin-bottom: 1.5em;
-    padding-left: 0.5em;
-  }
-
-  ol li::before {
-    content: '';
-    position: absolute;
-    left: -1.5em;
-    top: 0.3em;
-    width: 8px;
-    height: 8px;
-    background: #007acc;
-    border-radius: 50%;
-  }
-  .diagram {
-    text-align: center;
-    margin: 1.8em 0;
-  }
-  .diagram img {
-    max-width: 350px;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: 0 3px 8px rgba(0,112,192,0.3);
-    transition: all 0.3s ease;
-    position: relative;
-  }
-
-  .diagram::before {
-    content: 'Visual Guide';
-    position: absolute;
-    top: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #004080;
-    color: white;
-    padding: 4px 12px;
-    border-radius: 4px;
-    font-size: 12px;
-    font-weight: 600;
-  }
-  .tip {
-    background: #dff4ff;
-    border-left: 6px solid #00aaff;
-    padding: 1em 1.2em;
-    border-radius: 7px;
-    margin: 1.5em 0;
-    font-style: italic;
-    color: #006699;
-    position: relative;
-    transition: all 0.3s ease;
-  }
-
-  .tip::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 6px;
-    height: 100%;
-    background: linear-gradient(to bottom, #00aaff, #007acc);
-    border-radius: 0 3px 3px 0;
-  }
-  .quiz-block {
-    background: #f0faff;
-    border-left: 6px solid #007acc;
-    padding: 1.3em 1.6em;
-    border-radius: 8px;
-    margin: 2em 0 3em;
-    position: relative;
-    transition: all 0.3s ease;
-  }
-
-  .quiz-block::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 6px;
-    height: 100%;
-    background: linear-gradient(to bottom, #007acc, #004080);
-    border-radius: 0 3px 3px 0;
-  }
-
-  .quiz-block::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 0 25px 25px 0;
-    border-color: transparent #007acc transparent transparent;
-    border-radius: 0 8px 0 0;
-  }
-  .quiz-block b {
-    font-size: 1.1em;
-    display: block;
-    margin-bottom: 0.7em;
-  }
-  .quiz-block label {
-    font-size: 1.03em;
-    cursor: pointer;
-    display: block;
-    margin-bottom: 0.5em;
-  }
-  .quiz-result {
+    font-size: 2.2rem;
     font-weight: 700;
-    margin-top: 1em;
-    font-size: 1.05em;
-    color: #004080;
-    padding: 8px 12px;
-    border-radius: 6px;
-    transition: all 0.3s ease;
+    letter-spacing: -0.025em;
+    color: #0f172a;
+    margin-bottom: 12px;
   }
 
-  .quiz-result:not(:empty) {
-    background: #e8f5e8;
-    border-left: 4px solid #4caf50;
-    color: #2e7d32;
+  .subtitle {
+    font-size: 1.1rem;
+    color: var(--text-muted);
   }
+
+  h2 {
+    font-size: 1.45rem;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    margin-top: 48px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+    color: #0f172a;
+  }
+
+  h3 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin: 32px 0 10px 0;
+    color: #0f172a;
+  }
+
+  h4 {
+    font-size: 0.98rem;
+    font-weight: 600;
+    margin: 20px 0 8px 0;
+    color: #0369a1;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  p {
+    margin-bottom: 16px;
+    color: #334155;
+  }
+
+  ul, ol {
+    margin: 14px 0 20px 24px;
+    color: #334155;
+  }
+
+  li {
+    margin-bottom: 8px;
+  }
+
+  .concept-item {
+    margin-bottom: 48px;
+  }
+
+  .callout {
+    padding: 16px 20px;
+    margin: 20px 0;
+    border-left: 3px solid var(--primary);
+    background: var(--primary-subtle);
+    border-top: 1px solid var(--primary-border);
+    border-right: 1px solid var(--primary-border);
+    border-bottom: 1px solid var(--primary-border);
+    border-radius: 0 4px 4px 0;
+    font-size: 0.95rem;
+    color: #0c4a6e;
+  }
+
+  .diagram {
+    margin: 28px 0;
+    padding: 24px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    text-align: center;
+  }
+
+  .diagram img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+  }
+
+  .diagram figcaption {
+    margin-top: 12px;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+  }
+
+  code {
+    background: var(--surface);
+    color: var(--primary-dark);
+    font-family: var(--font-mono);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 0.875em;
+    border: 1px solid var(--border);
+  }
+
+  pre {
+    background: var(--code-bg);
+    color: var(--code-text);
+    padding: 18px 22px;
+    border-radius: 6px;
+    font-family: var(--font-mono);
+    overflow-x: auto;
+    margin: 16px 0 20px 0;
+    line-height: 1.55;
+    font-size: 0.875rem;
+    border: 1px solid var(--code-border);
+    white-space: pre;
+  }
+
+  /* Code syntax tokens */
+  .keyword { color: #38bdf8; font-weight: 600; }
+  .def { color: #7dd3fc; }
+  .string { color: #bae6fd; }
+  .comment { color: #64748b; font-style: italic; }
+  .self { color: #f472b6; }
+  .number { color: #93c5fd; }
+  .decorator { color: #fbbf24; }
+
+  /* Comparison table */
+  .table-container {
+    overflow-x: auto;
+    margin: 24px 0;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    text-align: left;
+  }
+
+  th, td {
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+  }
+
+  th {
+    background: var(--surface);
+    color: #0f172a;
+    font-weight: 600;
+  }
+
+  /* Quiz elements */
+  .quiz-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--primary);
+    padding: 20px 22px;
+    border-radius: 0 6px 6px 0;
+    margin: 24px 0;
+  }
+
+  .quiz-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #0f172a;
+  }
+
+  .quiz-block label {
+    font-size: 0.95rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    color: #334155;
+  }
+
   button.check-btn {
-    background: #007acc;
+    background: var(--primary);
     color: white;
     border: none;
-    border-radius: 7px;
-    padding: 8px 22px;
-    font-size: 1.02em;
+    border-radius: 4px;
+    padding: 7px 18px;
+    font-size: 0.875rem;
+    font-weight: 500;
     cursor: pointer;
-    margin-top: 8px;
-    transition: background 0.3s;
+    margin-top: 10px;
+    transition: background 0.2s ease;
   }
+
   button.check-btn:hover {
-    background: #004f8b;
+    background: var(--primary-dark);
   }
 
-  /* Hover effects for professional interaction */
-  pre:hover {
-    box-shadow: 0 4px 16px rgba(0,112,192,0.2);
-    transform: translateY(-1px);
+  .quiz-result {
+    font-size: 0.9rem;
+    margin-top: 12px;
+    padding: 10px 14px;
+    border-radius: 4px;
+    display: none;
+    line-height: 1.5;
   }
 
-  .tip:hover {
-    transform: translateX(2px);
-    box-shadow: 0 4px 12px rgba(0,170,255,0.2);
+  .quiz-result.show {
+    display: block;
   }
 
-  .quiz-block:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0,122,204,0.2);
+  .quiz-result.correct {
+    background: var(--success-bg);
+    border: 1px solid var(--success-border);
+    color: var(--success-text);
   }
 
-  code:hover {
-    background: #bbdefb;
-    border-color: #004080;
+  .quiz-result.incorrect {
+    background: var(--error-bg);
+    border: 1px solid var(--error-border);
+    color: var(--error-text);
   }
 
-  .diagram img:hover {
-    transform: scale(1.02);
-    box-shadow: 0 6px 20px rgba(0,112,192,0.3);
+  .quiz-result.warning {
+    background: var(--warn-bg);
+    border: 1px solid var(--warn-border);
+    color: var(--warn-text);
   }
 </style>
 </head>
 <body>
 <div class="container">
-  <h1>
-    Meet OOP: Object-Oriented Programming, the "School Class" Way
-  </h1>
+  <header>
+    <h1>Object-Oriented Programming (OOP)</h1>
+    <p class="subtitle">A complete technical breakdown of OOP pillars and architectural concepts using the school classroom model.</p>
+  </header>
 
-  <p>
-    Let’s explore Object-Oriented Programming (OOP) with an example everyone can relate to: <b>a “Student” in a School Class!</b> If you’re 12 or above (or even younger), you’ve been a student somewhere—so you’ll easily connect OOP to your life!
-  </p>
+  <!-- Section 1: Introduction -->
+  <section>
+    <h2>1. What is Object-Oriented Programming?</h2>
+    <p>
+      Object-Oriented Programming (OOP) is an architectural paradigm that organizes software design around data structures called <strong>objects</strong>, rather than functions and sequential logic alone. Each object binds two things together:
+    </p>
+    <ul>
+      <li><strong>State (Attributes / Data):</strong> What the object knows or stores (e.g., a student's name, enrolled grade, or test score).</li>
+      <li><strong>Behavior (Methods / Operations):</strong> What the object can do or compute (e.g., studying, taking a test, or submitting assignments).</li>
+    </ul>
+    <p>
+      In procedural programming, data and functions live separately—functions accept raw data, mutate it, and pass it around. In OOP, data and the operations that mutate it are packaged into a single cohesive boundary.
+    </p>
 
-  <h2>What is OOP?</h2>
-  <p>
-    OOP is like making digital versions of things you see every day (like students, pets, or games) so your programs are easier to understand and build. 
-    <br>
-    Instead of mixing all your information and code together, you bundle everything about a thing (like <b>name</b>, <b>age</b>, <b>study()</b>) into one smart "object."
-  </p>
-  <div class="diagram">
-    <img src="https://i.imgur.com/j8AYVoN.png" alt="Student objects with their properties and activities"/>
-    <small>Each student is unique, but all students are built from the same blueprint.</small>
-  </div>
+    <figure class="diagram">
+      <img src="https://i.imgur.com/j8AYVoN.png" alt="Diagram illustrating the relationship between a class blueprint and individual student object instances." />
+      <figcaption>A single class definition acts as the factory template; runtime objects are independent memory instances created from it.</figcaption>
+    </figure>
+  </section>
 
-  <h2>The Four Big Ideas of OOP</h2>
-  <ol>
-    <li>
-      <b>Class & Object</b><br>
-      - <b>Class</b>: Blueprint, like a template for all students (<b>name</b>, <b>age</b>, <b>study()</b>, <b>take_test()</b>).
-      <br>
-      - <b>Object</b>: Each real student you know! (e.g., You, your friends in class.)
-      <pre>
-class Student:
-    # attributes/properties
-    name
-    age
-    grade
+  <!-- Section 2: Core Pillars -->
+  <section>
+    <h2>2. The Four Pillars of OOP</h2>
 
-    # behavior/methods
-    study()
-    take_test()
-      </pre>
-      <span class="tip">If you have 30 students, you have 30 <b>Student objects</b>—all from the same <b>Student</b> class!</span>
-    </li>
-    <li>
-      <b>Encapsulation</b><br>
-      Keep all info and actions about a student <b>together in one box (object)</b>.
+    <!-- Pillar 1 -->
+    <div class="concept-item">
+      <h3>I. Classes and Objects</h3>
+      <p>
+        A <strong>Class</strong> is a blueprint or programmer-defined type. It defines the names of fields and methods that every instance will have. An <strong>Object</strong> is a physical instance allocated in memory with concrete values assigned to those fields.
+      </p>
+
+      <h4>Technical Mechanics:</h4>
       <ul>
-        <li>You don't need to know how "study()" works—just call it!</li>
-        <li>Only let safe things happen to your student (no one else sets age directly to -5, for example).</li>
+        <li><code>__init__</code>: The constructor method automatically executed by the runtime whenever a new instance is instantiated.</li>
+        <li><code>self</code>: A reference to the current instance being operated on, ensuring operations modify the correct object's memory space.</li>
       </ul>
-    </li>
-    <li>
-      <b>Inheritance</b><br>
-      Make new blueprints based on old ones, saving time and code.<br>
-      <pre>
-class Student:
-    name
-    study()
 
-class ScienceStudent(Student):
-    lab_partner
-    do_lab()
-      </pre>
-      <span class="tip">Now all ScienceStudents can <b>study()</b> and <b>do_lab()</b>—no need to rewrite <b>study()</b>!</span>
-    </li>
-    <li>
-      <b>Polymorphism</b><br>
-      Same operation, different objects, different outcomes!
-      <br>
-      - Maybe <b>take_test()</b> works differently for <b>MathStudent</b> or <b>ArtStudent</b>.<br>
-      <pre>
-class ArtStudent(Student):
-    def take_test():
-        print("Draw a beautiful picture!")
+      <pre><span class="keyword">class</span> <span class="def">Student</span>:
+    <span class="comment"># Class variable (shared by all instances)</span>
+    school_name = <span class="string">"Westfield Academy"</span>
 
-class MathStudent(Student):
-    def take_test():
-        print("Solve this equation!")
-      </pre>
-      <span class="tip">No matter the type of student, you can say student.take_test() and get different behaviors!</span>
-    </li>
-  </ol>
+    <span class="keyword">def</span> <span class="def">__init__</span>(<span class="self">self</span>, name, student_id, grade):
+        <span class="comment"># Instance variables (unique to each object instance)</span>
+        <span class="self">self</span>.name = name
+        <span class="self">self</span>.student_id = student_id
+        <span class="self">self</span>.grade = grade
+        <span class="self">self</span>.gpa = <span class="number">0.0</span>
 
-  <h2>Schoolyard OOP Quiz!</h2>
-  <div class="quiz-block" id="quiz1">
-    <b>1. What is a Class in OOP?</b>
-    <form>
-      <label><input type="radio" name="q1" value="1"> The general template or blueprint for students</label>
-      <label><input type="radio" name="q1" value="0"> A specific student in your class</label>
-      <label><input type="radio" name="q1" value="0"> An answer to a test</label>
-      <button type="button" class="check-btn" onclick="checkQuiz('quiz1', 1)">Check Answer</button>
-    </form>
-    <div class="quiz-result" id="quiz1-result"></div>
-  </div>
-  <div class="quiz-block" id="quiz2">
-    <b>2. What does "encapsulation" help with?</b>
-    <form>
-      <label><input type="radio" name="q2" value="0"> It lets anyone change a student's age to -12</label>
-      <label><input type="radio" name="q2" value="1"> Keeps all a student’s data and actions safely together</label>
-      <label><input type="radio" name="q2" value="0"> Makes objects turn invisible</label>
-      <button type="button" class="check-btn" onclick="checkQuiz('quiz2', 1)">Check Answer</button>
-    </form>
-    <div class="quiz-result" id="quiz2-result"></div>
-  </div>
-  <div class="quiz-block" id="quiz3">
-    <b>3. Inheritance lets you...?</b>
-    <form>
-      <label><input type="radio" name="q3" value="1"> Make new student types that already have basic student abilities</label>
-      <label><input type="radio" name="q3" value="0"> Delete students from the class</label>
-      <label><input type="radio" name="q3" value="0"> Randomize everyone's grades</label>
-      <button type="button" class="check-btn" onclick="checkQuiz('quiz3', 1)">Check Answer</button>
-    </form>
-    <div class="quiz-result" id="quiz3-result"></div>
-  </div>
-  <div class="quiz-block" id="quiz4">
-    <b>4. Polymorphism means...?</b>
-    <form>
-      <label><input type="radio" name="q4" value="0"> Making objects really colorful</label>
-      <label><input type="radio" name="q4" value="1"> The same action can work differently for each student type</label>
-      <label><input type="radio" name="q4" value="0"> Copying your friend's homework</label>
-      <button type="button" class="check-btn" onclick="checkQuiz('quiz4', 1)">Check Answer</button>
-    </form>
-    <div class="quiz-result" id="quiz4-result"></div>
-  </div>
+    <span class="comment"># Instance method operating on instance state</span>
+    <span class="keyword">def</span> <span class="def">study</span>(<span class="self">self</span>, subject, hours):
+        <span class="keyword">return</span> <span class="string">f"{self.name} studied {subject} for {hours} hours."</span>
 
-  <div class="tip">
-    See? OOP = making digital life models! You can build games, manage a soccer team, design your own classroom management app, and more—all by bundling real-world “things” into objects that remember info and take action.
-    <br><br>
-    What else can you model? Pets, superheroes, books in a library—the sky’s the limit!
-  </div>
+    <span class="keyword">def</span> <span class="def">record_gpa</span>(<span class="self">self</span>, new_gpa):
+        <span class="self">self</span>.gpa = new_gpa
+
+<span class="comment"># Instantiating concrete objects from the Student class:</span>
+student_1 = Student(<span class="string">"Alice Hansen"</span>, <span class="number">101</span>, <span class="number">10</span>)
+student_2 = Student(<span class="string">"Bob Jensen"</span>, <span class="number">102</span>, <span class="number">11</span>)
+
+<span class="comment"># Both share the same method definitions, but mutate separate state:</span>
+student_1.record_gpa(<span class="number">3.8</span>)
+student_2.record_gpa(<span class="number">3.2</span>)
+
+print(student_1.study(<span class="string">"Chemistry"</span>, <span class="number">2</span>))  <span class="comment"># Alice Hansen studied Chemistry for 2 hours.</span></pre>
+
+      <div class="callout">
+        <strong>Key Distinction:</strong> <code>Student</code> is a data type (stored once in code memory). <code>student_1</code> and <code>student_2</code> each occupy distinct memory addresses with their own independent instance variables.
+      </div>
+    </div>
+
+    <!-- Pillar 2 -->
+    <div class="concept-item">
+      <h3>II. Encapsulation</h3>
+      <p>
+        Encapsulation is the mechanism of restricting direct access to some of an object's components and bundling data with the methods that operate on that data. It prevents the internal state of an object from being left in an invalid or corrupt state.
+      </p>
+
+      <h4>Why Encapsulation Matters:</h4>
+      <ul>
+        <li><strong>Invariant Protection:</strong> Enforces business logic (e.g., a student's age cannot be set to negative or impossible values).</li>
+        <li><strong>Implementation Hiding:</strong> Internal storage structures can change without breaking callers using public interfaces.</li>
+      </ul>
+
+      <pre><span class="keyword">class</span> <span class="def">EnrolledStudent</span>:
+    <span class="keyword">def</span> <span class="def">__init__</span>(<span class="self">self</span>, name, age):
+        <span class="self">self</span>.name = name
+        <span class="comment"># Leading underscore denotes private/protected attribute by convention</span>
+        <span class="self">self</span>._age = age
+        <span class="self">self</span>._attendance_days = <span class="number">0</span>
+
+    <span class="comment"># Controlled Getter</span>
+    <span class="decorator">@property</span>
+    <span class="keyword">def</span> <span class="def">age</span>(<span class="self">self</span>):
+        <span class="keyword">return</span> <span class="self">self</span>._age
+
+    <span class="comment"># Controlled Setter with validation boundary</span>
+    <span class="decorator">@age.setter</span>
+    <span class="keyword">def</span> <span class="def">age</span>(<span class="self">self</span>, value):
+        <span class="keyword">if</span> <span class="keyword">not</span> isinstance(value, int) <span class="keyword">or</span> value &lt; <span class="number">5</span> <span class="keyword">or</span> value &gt; <span class="number">100</span>:
+            <span class="keyword">raise</span> ValueError(<span class="string">"Invalid student age. Must be an integer between 5 and 100."</span>)
+        <span class="self">self</span>._age = value
+
+    <span class="comment"># Methods modify internal counters safely</span>
+    <span class="keyword">def</span> <span class="def">mark_attendance</span>(<span class="self">self</span>):
+        <span class="self">self</span>._attendance_days += <span class="number">1</span>
+
+    <span class="keyword">def</span> <span class="def">get_attendance_record</span>(<span class="self">self</span>):
+        <span class="keyword">return</span> <span class="self">self</span>._attendance_days
+
+student = EnrolledStudent(<span class="string">"Clara"</span>, <span class="number">15</span>)
+student.age = <span class="number">16</span>        <span class="comment"># Allowed: passes through setter validation</span>
+<span class="comment"># student.age = -5      # Throws ValueError: prevents invalid state</span></pre>
+
+      <div class="callout">
+        <strong>Rule of Thumb:</strong> Never expose raw internal variables directly if invalid values could break application integrity. Protect them using getters/setters or properties.
+      </div>
+    </div>
+
+    <!-- Pillar 3 -->
+    <div class="concept-item">
+      <h3>III. Inheritance</h3>
+      <p>
+        Inheritance allows a new class (derived/child class) to inherit attributes and methods from an existing class (base/parent class). It enables code reuse and establishes an "is-a" taxonomic relationship.
+      </p>
+
+      <h4>Technical Mechanics:</h4>
+      <ul>
+        <li><code>Base Class</code>: The generalized parent entity that implements shared foundational logic.</li>
+        <li><code>Derived Class</code>: The specialized child entity that automatically receives base methods and can add unique behaviors.</li>
+        <li><code>super()</code>: Calls the parent class constructor and methods, preventing duplicate initialization code.</li>
+      </ul>
+
+      <pre><span class="comment"># General Base Class</span>
+<span class="keyword">class</span> <span class="def">Student</span>:
+    <span class="keyword">def</span> <span class="def">__init__</span>(<span class="self">self</span>, name, student_id):
+        <span class="self">self</span>.name = name
+        <span class="self">self</span>.student_id = student_id
+
+    <span class="keyword">def</span> <span class="def">check_in</span>(<span class="self">self</span>):
+        <span class="keyword">return</span> <span class="string">f"Student {self.name} checked into school grounds."</span>
+
+<span class="comment"># Specialized Child Class (ScienceStudent IS A Student)</span>
+<span class="keyword">class</span> <span class="def">ScienceStudent</span>(Student):
+    <span class="keyword">def</span> <span class="def">__init__</span>(<span class="self">self</span>, name, student_id, lab_bench_number):
+        <span class="comment"># Delegate base field assignment to parent</span>
+        <span class="keyword">super</span>().__init__(name, student_id)
+        <span class="self">self</span>.lab_bench_number = lab_bench_number
+
+    <span class="comment"># Unique behavior specific only to ScienceStudent</span>
+    <span class="keyword">def</span> <span class="def">perform_titration</span>(<span class="self">self</span>):
+        <span class="keyword">return</span> <span class="string">f"{self.name} is running an acid-base experiment at Bench {self.lab_bench_number}."</span>
+
+sci_student = ScienceStudent(<span class="string">"David"</span>, <span class="number">201</span>, <span class="number">4</span>)
+print(sci_student.check_in())           <span class="comment"># Inherited from Student parent</span>
+print(sci_student.perform_titration())  <span class="comment"># Defined in ScienceStudent child</span></pre>
+    </div>
+
+    <!-- Pillar 4 -->
+    <div class="concept-item">
+      <h3>IV. Polymorphism</h3>
+      <p>
+        Polymorphism means "many forms." It allows different object types to respond to the <em>same method call</em> in their own specialized way. The caller does not need to know the specific concrete class type at runtime—only that it implements the common interface.
+      </p>
+
+      <h4>Technical Mechanics:</h4>
+      <ul>
+        <li><strong>Method Overriding:</strong> A child class provides a custom implementation of a method that is already defined in its parent class.</li>
+        <li><strong>Unified Dispatch:</strong> A client loop or service can iterate over mixed collection types and invoke the same method signature on all of them without type branching (<code>if/else</code> checks).</li>
+      </ul>
+
+      <pre><span class="keyword">class</span> <span class="def">Student</span>:
+    <span class="keyword">def</span> <span class="def">__init__</span>(<span class="self">self</span>, name):
+        <span class="self">self</span>.name = name
+
+    <span class="keyword">def</span> <span class="def">take_assessment</span>(<span class="self">self</span>):
+        <span class="keyword">raise</span> NotImplementedError(<span class="string">"Subclasses must implement take_assessment"</span>)
+
+<span class="keyword">class</span> <span class="def">MathStudent</span>(Student):
+    <span class="keyword">def</span> <span class="def">take_assessment</span>(<span class="self">self</span>):
+        <span class="keyword">return</span> <span class="string">f"{self.name} is solving 25 calculus integrals under timed conditions."</span>
+
+<span class="keyword">class</span> <span class="def">ArtStudent</span>(Student):
+    <span class="keyword">def</span> <span class="def">take_assessment</span>(<span class="self">self</span>):
+        <span class="keyword">return</span> <span class="string">f"{self.name} is presenting a portfolio of acrylic landscape studies."</span>
+
+<span class="keyword">class</span> <span class="def">DramaStudent</span>(Student):
+    <span class="keyword">def</span> <span class="def">take_assessment</span>(<span class="self">self</span>):
+        <span class="keyword">return</span> <span class="string">f"{self.name} is performing a Shakespearean soliloquy in the auditorium."</span>
+
+<span class="comment"># Polymorphic Execution: The caller treats all items identically as 'Student'</span>
+exam_hall = [
+    MathStudent(<span class="string">"Marcus"</span>),
+    ArtStudent(<span class="string">"Elena"</span>),
+    DramaStudent(<span class="string">"Lucas"</span>)
+]
+
+<span class="keyword">for</span> student <span class="keyword">in</span> exam_hall:
+    <span class="comment"># Single uniform method call, distinct runtime execution:</span>
+    print(student.take_assessment())</pre>
+
+      <div class="callout">
+        <strong>Design Benefit:</strong> Adding a <code>MusicStudent</code> class requires zero changes to the evaluation loop. The loop calls <code>student.take_assessment()</code>, maintaining open/closed architectural design.
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Supporting Concepts -->
+  <section>
+    <h2>3. Supporting OOP Concepts: Abstraction & Composition</h2>
+    <p>
+      Complete mastery of OOP requires understanding two companion architectural principles that accompany the four primary pillars:
+    </p>
+
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Concept</th>
+            <th>Relationship Type</th>
+            <th>Core Purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Inheritance</strong></td>
+            <td>"Is-A" (e.g., ScienceStudent <em>is a</em> Student)</td>
+            <td>Hierarchical specialization and foundational code reuse.</td>
+          </tr>
+          <tr>
+            <td><strong>Composition</strong></td>
+            <td>"Has-A" (e.g., Classroom <em>has a</em> Student roster)</td>
+            <td>Combining independent decoupled objects into higher-level systems.</td>
+          </tr>
+          <tr>
+            <td><strong>Abstraction</strong></td>
+            <td>Interface Contract</td>
+            <td>Hiding internal complexity while exposing only necessary operational controls.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <pre><span class="keyword">class</span> <span class="def">Locker</span>:
+    <span class="keyword">def</span> <span class="def">__init__</span>(<span class="self">self</span>, number):
+        <span class="self">self</span>.number = number
+
+<span class="comment"># Composition: Student HAS A Locker (loose coupling)</span>
+<span class="keyword">class</span> <span class="def">ResidentStudent</span>:
+    <span class="keyword">def</span> <span class="def">__init__</span>(<span class="self">self</span>, name, locker_num):
+        <span class="self">self</span>.name = name
+        <span class="self">self</span>.locker = Locker(locker_num)  <span class="comment"># Composed object instance</span></pre>
+  </section>
+
+  <!-- Section 4: Interactive Validation -->
+  <section>
+    <h2>4. Interactive Knowledge Assessment</h2>
+    
+    <div class="quiz-block" id="quiz1">
+      <div class="quiz-title">1. What is the fundamental difference between a Class and an Object?</div>
+      <form>
+        <label><input type="radio" name="q1" value="1"> A class is an abstract blueprint; an object is a concrete, allocated instance with actual state values.</label>
+        <label><input type="radio" name="q1" value="0"> A class holds live data in memory; an object is a function that parses strings.</label>
+        <label><input type="radio" name="q1" value="0"> Classes only exist in procedural code, while objects are only used in functional languages.</label>
+        <button type="button" class="check-btn" onclick="checkQuiz('quiz1', 1, 'A class describes structure and behavior templates; runtime objects contain the actual state values in memory.')">Verify Answer</button>
+      </form>
+      <div class="quiz-result" id="quiz1-result"></div>
+    </div>
+
+    <div class="quiz-block" id="quiz2">
+      <div class="quiz-title">2. How does Encapsulation guard software against runtime corruption?</div>
+      <form>
+        <label><input type="radio" name="q2" value="0"> It encrypts source files on disk before compilation.</label>
+        <label><input type="radio" name="q2" value="1"> It restricts direct modification of internal variables, routing updates through validated setters and methods.</label>
+        <label><input type="radio" name="q2" value="0"> It forces the operating system to allocate objects across multiple network servers.</label>
+        <button type="button" class="check-btn" onclick="checkQuiz('quiz2', 1, 'Encapsulation restricts unrestricted direct state changes, preventing external code from placing objects into illegal or contradictory states.')">Verify Answer</button>
+      </form>
+      <div class="quiz-result" id="quiz2-result"></div>
+    </div>
+
+    <div class="quiz-block" id="quiz3">
+      <div class="quiz-title">3. When is Inheritance appropriate over raw repetition?</div>
+      <form>
+        <label><input type="radio" name="q3" value="1"> When child classes share a clear is-a relationship with a parent class and require its foundational logic.</label>
+        <label><input type="radio" name="q3" value="0"> Whenever you want two unrelated objects to share database connection credentials.</label>
+        <label><input type="radio" name="q3" value="0"> Only when writing script programs that contain fewer than 50 lines of code.</label>
+        <button type="button" class="check-btn" onclick="checkQuiz('quiz3', 1, 'Inheritance models taxonomic specialization (ScienceStudent is a Student), eliminating duplicate definitions for common behaviors.')">Verify Answer</button>
+      </form>
+      <div class="quiz-result" id="quiz3-result"></div>
+    </div>
+
+    <div class="quiz-block" id="quiz4">
+      <div class="quiz-title">4. Which situation best illustrates Polymorphic behavior?</div>
+      <form>
+        <label><input type="radio" name="q4" value="0"> Declaring ten different variables that all store identical integer numbers.</label>
+        <label><input type="radio" name="q4" value="1"> Executing student.take_assessment() on a list of mixed student types and having each run its specific implementation.</label>
+        <label><input type="radio" name="q4" value="0"> Making an object write its internal data to an external log file.</label>
+        <button type="button" class="check-btn" onclick="checkQuiz('quiz4', 1, 'Polymorphism allows uniform callers to invoke a single shared interface while distinct runtime objects execute their unique overrides.')">Verify Answer</button>
+      </form>
+      <div class="quiz-result" id="quiz4-result"></div>
+    </div>
+  </section>
 </div>
+
 <script>
-  function checkQuiz(quizId, correctVal) {
+  function checkQuiz(quizId, correctVal, explanationText) {
     const container = document.getElementById(quizId);
     const answers = container.querySelectorAll('input[type="radio"]');
     const result = container.querySelector('.quiz-result');
     let selected = false;
+
+    result.className = 'quiz-result';
+
     for (let i = 0; i < answers.length; i++) {
       if (answers[i].checked) {
         selected = true;
-        if(parseInt(answers[i].value) === correctVal) {
-          result.textContent = "Correct!";
-          result.style.color = "#007acc";
+        if (parseInt(answers[i].value, 10) === correctVal) {
+          result.textContent = "Correct. " + explanationText;
+          result.classList.add('show', 'correct');
         } else {
-          result.textContent = "Try again!";
-          result.style.color = "#cc0000";
+          result.textContent = "Incorrect. Review the technical requirements for this concept above and try again.";
+          result.classList.add('show', 'incorrect');
         }
         break;
       }
     }
-    if(!selected) {
-      result.textContent = "❗ Please select an answer!";
-      result.style.color = "#cc6600";
+
+    if (!selected) {
+      result.textContent = "Please select an answer choice before verifying.";
+      result.classList.add('show', 'warning');
     }
   }
 </script>
