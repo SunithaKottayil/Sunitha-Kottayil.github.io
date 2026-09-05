@@ -5,532 +5,237 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>C# Programming Fundamentals - Complete Guide</title>
   <style>
+    :root {
+      --bg: #ffffff;
+      --text: #171717;
+      --text-muted: #525252;
+      --border: #e5e5e5;
+      --code-bg: #0d1117;
+      --code-text: #e6edf3;
+      --surface: #fafafa;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    }
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-    
+
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, system-ui, sans-serif;
-      line-height: 1.7;
-      color: #2d3748;
-      background: #f8fafc;
-    }
-    
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      background: white;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-      min-height: 100vh;
-    }
-    
-    header {
-      background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
-      color: white;
-      padding: 60px 50px;
-      text-align: center;
-    }
-    
-    header::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, #06b6d4, #3b82f6);
-    }
-    
-    h1 {
-      font-size: 2.8em;
-      font-weight: 700;
-      margin-bottom: 20px;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      position: relative;
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      color: var(--text);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
     }
 
-    h1::after {
-      content: '';
-      position: absolute;
-      bottom: -8px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 80px;
-      height: 4px;
-      background: linear-gradient(90deg, #4f46e5, #7c3aed);
-      border-radius: 2px;
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 48px 24px 80px 24px;
     }
-    
-    .subtitle {
-      font-size: 1.3em;
-      opacity: 0.95;
-      margin-bottom: 25px;
-      font-weight: 300;
-    }
-    
-    .author-info {
-      font-size: 1em;
-      opacity: 0.85;
-      background: rgba(255,255,255,0.15);
-      padding: 12px 25px;
-      border-radius: 25px;
-      display: inline-block;
-      backdrop-filter: blur(10px);
-    }
-    
-    .content {
-      padding: 60px 50px;
-    }
-    
-    .section {
-      margin-bottom: 80px;
-    }
-    
-    .section:last-child {
+
+    header {
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
       margin-bottom: 40px;
     }
-    
-    h2 {
-      color: #1e293b;
-      font-size: 2em;
-      margin-bottom: 30px;
-      font-weight: 600;
-      position: relative;
-      padding-bottom: 15px;
-    }
-    
-    h2::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 80px;
-      height: 4px;
-      background: linear-gradient(90deg, #4f46e5, #7c3aed);
-      border-radius: 2px;
-    }
-    
-    h3 {
-      color: #334155;
-      font-size: 1.4em;
-      margin: 40px 0 20px 0;
-      font-weight: 600;
-    }
-    
-    p {
-      margin-bottom: 20px;
-      font-size: 1.1em;
-      line-height: 1.8;
-    }
-    
-    .section-intro {
-      background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
-      padding: 30px;
-      border-radius: 12px;
-      margin: 30px 0;
-      border-left: 5px solid #4f46e5;
-      font-style: italic;
-      color: #475569;
-    }
-    
-    .code-block {
-      background: #1e1e1e;
-      color: #d4d4d4;
-      border-radius: 10px;
-      padding: 30px;
-      margin: 30px 0;
-      font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
-      overflow-x: auto;
-      position: relative;
-      white-space: pre;
-      line-height: 1.6;
-      font-size: 14px;
-      border: 1px solid #374151;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-      transition: all 0.3s ease;
-    }
 
-    .code-block::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 0;
-      height: 0;
-      border-style: solid;
-      border-width: 0 20px 20px 0;
-      border-color: transparent #4f46e5 transparent transparent;
-      border-radius: 0 10px 0 0;
-    }
-    
-    .code-block::before {
-      content: "C#";
-      position: absolute;
-      top: 15px;
-      right: 20px;
-      font-size: 11px;
-      color: #9ca3af;
-      background: #374151;
-      padding: 6px 12px;
-      border-radius: 6px;
-      font-weight: 600;
-    }
-    
-    /* C# Syntax Highlighting */
-    .keyword { color: #569cd6; font-weight: 500; }
-    .string { color: #ce9178; }
-    .comment { color: #6a9955; font-style: italic; }
-    .type { color: #4ec9b0; }
-    .method { color: #dcdcaa; }
-    .number { color: #b5cea8; }
-    .operator { color: #d4d4d4; }
-    .brace { color: #ffd700; }
-    .namespace { color: #4fc1ff; }
-    
-    .inline-code {
-      background: #f1f5f9;
-      color: #1e293b;
-      padding: 4px 8px;
-      border-radius: 4px;
-      font-family: 'SF Mono', Monaco, Consolas, monospace;
-      font-size: 0.9em;
-      font-weight: 500;
-      border: 1px solid #e2e8f0;
-      position: relative;
-      transition: all 0.3s ease;
-    }
-
-    .inline-code::before {
-      content: '>';
-      position: absolute;
-      top: -1px;
-      left: -1px;
-      color: #4f46e5;
-      font-weight: bold;
-      font-size: 10px;
-      opacity: 0.6;
-    }
-    
-    .info-box {
-      background: #eff6ff;
-      border-left: 5px solid #3b82f6;
-      padding: 25px 30px;
-      margin: 30px 0;
-      border-radius: 0 10px 10px 0;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-      position: relative;
-      transition: all 0.3s ease;
-    }
-
-    .info-box::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 5px;
-      height: 100%;
-      background: linear-gradient(to bottom, #3b82f6, #1d4ed8);
-      border-radius: 0 2px 2px 0;
-    }
-    
-    .info-box-title {
+    h1 {
+      font-size: 2.25rem;
       font-weight: 700;
-      color: #1e40af;
-      margin-bottom: 15px;
-      font-size: 1.1em;
-    }
-    
-    .warning-box {
-      background: #fefce8;
-      border-left: 5px solid #eab308;
-      padding: 25px 30px;
-      margin: 30px 0;
-      border-radius: 0 10px 10px 0;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-      position: relative;
-      transition: all 0.3s ease;
-    }
-
-    .warning-box::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 5px;
-      height: 100%;
-      background: linear-gradient(to bottom, #eab308, #ca8a04);
-      border-radius: 0 2px 2px 0;
-    }
-    
-    .warning-box-title {
-      font-weight: 700;
-      color: #a16207;
-      margin-bottom: 15px;
-      font-size: 1.1em;
-    }
-    
-    .tip-box {
-      background: #f0fdf4;
-      border-left: 5px solid #22c55e;
-      padding: 25px 30px;
-      margin: 30px 0;
-      border-radius: 0 10px 10px 0;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-      position: relative;
-      transition: all 0.3s ease;
-    }
-
-    .tip-box::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 5px;
-      height: 100%;
-      background: linear-gradient(to bottom, #22c55e, #16a34a);
-      border-radius: 0 2px 2px 0;
-    }
-    
-    .tip-box-title {
-      font-weight: 700;
-      color: #15803d;
-      margin-bottom: 15px;
-      font-size: 1.1em;
-    }
-    
-    .practice-section {
-      background: #fafafa;
-      border: 2px solid #e5e7eb;
-      border-radius: 12px;
-      padding: 35px;
-      margin: 40px 0;
-      position: relative;
-      transition: all 0.3s ease;
-    }
-
-    .practice-section::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 0;
-      height: 0;
-      border-style: solid;
-      border-width: 0 25px 25px 0;
-      border-color: transparent #4f46e5 transparent transparent;
-      border-radius: 0 12px 0 0;
-    }
-    
-    .practice-title {
-      color: #1f2937;
-      font-weight: 700;
-      margin-bottom: 20px;
-      font-size: 1.3em;
-      position: relative;
-    }
-
-    .practice-title::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: -15px;
-      transform: translateY(-50%);
-      width: 8px;
-      height: 8px;
-      background: #4f46e5;
-      border-radius: 50%;
-    }
-    
-    ul, ol {
-      margin: 25px 0 25px 40px;
-    }
-    
-    li {
+      letter-spacing: -0.025em;
       margin-bottom: 12px;
-      font-size: 1.1em;
+      color: #000000;
     }
-    
+
+    .subtitle {
+      font-size: 1.125rem;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .author-info {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+    }
+
+    .section {
+      margin-bottom: 56px;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      margin-top: 40px;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+      color: #000000;
+    }
+
+    h3 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin: 28px 0 12px 0;
+    }
+
+    p {
+      margin-bottom: 16px;
+      color: #262626;
+    }
+
+    ul, ol {
+      margin: 16px 0 20px 28px;
+      color: #262626;
+    }
+
+    li {
+      margin-bottom: 6px;
+    }
+
+    .section-intro {
+      padding: 16px;
+      margin: 20px 0;
+      border-left: 3px solid #737373;
+      background: var(--surface);
+      color: #404040;
+    }
+
+    .beginner-note {
+      padding: 16px;
+      margin: 20px 0;
+      border-left: 3px solid #171717;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .beginner-note-title {
+      font-weight: 600;
+      margin-bottom: 6px;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
     .concepts-overview {
-      background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
-      color: white;
-      padding: 50px;
-      border-radius: 15px;
-      margin: 50px 0;
-      box-shadow: 0 20px 40px rgba(79, 70, 229, 0.3);
+      margin: 32px 0;
+      padding: 24px;
+      border: 1px solid var(--border);
+      background: var(--surface);
     }
-    
+
     .concepts-overview h3 {
-      color: white;
-      margin-bottom: 30px;
-      font-size: 1.6em;
-      text-align: center;
+      margin-top: 0;
+      margin-bottom: 20px;
     }
-    
+
     .concepts-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 25px;
-      margin-top: 30px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
     }
-    
+
     .concept-card {
-      background: rgba(255, 255, 255, 0.15);
-      padding: 30px;
-      border-radius: 10px;
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      position: relative;
-      transition: all 0.3s ease;
+      border: 1px solid var(--border);
+      background: #ffffff;
+      padding: 16px;
     }
 
-    .concept-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, rgba(255,255,255,0.8), rgba(255,255,255,0.4));
-      border-radius: 10px 10px 0 0;
-    }
-    
     .concept-card h4 {
-      margin-bottom: 15px;
-      font-size: 1.2em;
+      font-size: 1rem;
       font-weight: 600;
-      position: relative;
+      margin-bottom: 8px;
     }
 
-    .concept-card h4::after {
-      content: '';
-      position: absolute;
-      bottom: -5px;
-      left: 0;
-      width: 30px;
-      height: 2px;
-      background: rgba(255, 255, 255, 0.6);
-      border-radius: 1px;
-    }
-    
     .concept-card p {
-      font-size: 1em;
+      font-size: 0.875rem;
+      color: var(--text-muted);
       margin: 0;
-      opacity: 0.9;
-      line-height: 1.6;
     }
 
-    .concept-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(79, 70, 229, 0.2);
+    .code-block {
+      background: var(--code-bg);
+      color: var(--code-text);
+      border-radius: 4px;
+      padding: 20px;
+      margin: 20px 0;
+      font-family: var(--font-mono);
+      overflow-x: auto;
+      line-height: 1.5;
+      font-size: 0.875rem;
+      border: 1px solid #30363d;
+      white-space: pre;
     }
 
-    .code-block:hover {
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+    /* Standard syntax highlighting tokens */
+    .keyword { color: #ff7b72; font-weight: 600; }
+    .string { color: #a5d6ff; }
+    .comment { color: #8b949e; }
+    .type { color: #79c0ff; }
+    .method { color: #d2a8ff; }
+    .number { color: #79c0ff; }
+    .operator { color: #ff7b72; }
+    .brace { color: #e6edf3; }
+    .namespace { color: #e6edf3; }
+
+    .inline-code {
+      background: #f4f4f5;
+      color: #18181b;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: var(--font-mono);
+      font-size: 0.875em;
+      border: 1px solid #e4e4e7;
     }
 
-    .info-box:hover,
-    .warning-box:hover,
-    .tip-box:hover {
-      transform: translateX(2px);
-      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+    .info-box, .warning-box, .tip-box, .practice-section {
+      padding: 16px 20px;
+      margin: 24px 0;
+      border-left: 3px solid #171717;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
     }
 
-    .practice-section:hover {
-      border-color: #4f46e5;
-      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.1);
+    .info-box-title, .warning-box-title, .tip-box-title, .practice-title {
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #171717;
     }
 
-    .inline-code:hover {
-      background: #e2e8f0;
-      border-color: #4f46e5;
-    }
-    
-    .beginner-note {
-      background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
-      border: 2px solid #f87171;
-      padding: 25px;
-      border-radius: 12px;
-      margin: 30px 0;
-      text-align: center;
-    }
-    
-    .beginner-note-title {
-      color: #dc2626;
-      font-weight: 700;
-      margin-bottom: 15px;
-      font-size: 1.2em;
-    }
-    
     .next-steps {
-      background: linear-gradient(135deg, #059669 0%, #047857 100%);
-      color: white;
-      padding: 50px;
-      border-radius: 15px;
-      margin: 60px 0;
-      box-shadow: 0 20px 40px rgba(5, 150, 105, 0.3);
+      border: 1px solid var(--border);
+      background: var(--surface);
+      padding: 32px;
+      margin-top: 40px;
     }
-    
+
     .next-steps h3 {
-      color: white;
-      margin-bottom: 25px;
-      font-size: 1.6em;
+      margin-top: 16px;
+      margin-bottom: 12px;
     }
-    
-    .next-steps ul {
-      margin-left: 30px;
+
+    .next-steps h3:first-child {
+      margin-top: 0;
     }
-    
-    .next-steps a {
-      color: #d1fae5;
-      text-decoration: none;
-      font-weight: 500;
-    }
-    
-    .next-steps a:hover {
-      text-decoration: underline;
-    }
-    
+
     footer {
-      background: #1f2937;
-      color: #d1d5db;
-      padding: 50px;
-      text-align: center;
-      margin-top: 80px;
-    }
-    
-    footer p {
-      margin: 0;
-      font-size: 1.1em;
-      line-height: 1.7;
-    }
-    
-    @media (max-width: 768px) {
-      .container {
-        margin: 0;
-      }
-      
-      header {
-        padding: 40px 25px;
-      }
-      
-      .content {
-        padding: 40px 25px;
-      }
-      
-      h1 {
-        font-size: 2.2em;
-      }
-      
-      .concepts-grid {
-        grid-template-columns: 1fr;
-      }
-      
-      .code-block {
-        padding: 20px;
-        font-size: 13px;
-      }
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+      margin-top: 60px;
+      font-size: 0.875rem;
+      color: var(--text-muted);
     }
   </style>
 </head>
@@ -551,7 +256,7 @@
         </div>
 
         <div class="beginner-note">
-          <div class="beginner-note-title">👋 New to programming?</div>
+          <div class="beginner-note-title">New to programming?</div>
           <p>That's totally fine! I wrote this assuming you've never seen code before. We'll start with the basics and work our way up. If something doesn't make sense, just re-read it - that's normal!</p>
         </div>
 
@@ -559,27 +264,27 @@
           <h3>What we'll cover</h3>
           <div class="concepts-grid">
             <div class="concept-card">
-                              <h4>The basics</h4>
+              <h4>The basics</h4>
               <p>Variables, data types, and how to make your computer do stuff</p>
             </div>
             <div class="concept-card">
-              <h4>🤔 Making decisions</h4>
+              <h4>Making decisions</h4>
               <p>Teaching your program to think with if statements and loops</p>
             </div>
             <div class="concept-card">
-              <h4>📦 Storing stuff</h4>
+              <h4>Storing stuff</h4>
               <p>Arrays and lists - like having multiple boxes for your data</p>
             </div>
             <div class="concept-card">
-                              <h4>Building tools</h4>
+              <h4>Building tools</h4>
               <p>Methods - like creating your own tools to reuse</p>
             </div>
             <div class="concept-card">
-                              <h4>Objects</h4>
+              <h4>Objects</h4>
               <p>Classes and objects - organizing code like real-world things</p>
             </div>
             <div class="concept-card">
-                              <h4>Handling mistakes</h4>
+              <h4>Handling mistakes</h4>
               <p>What to do when things go wrong (they will!)</p>
             </div>
           </div>
@@ -678,7 +383,7 @@
 <span class="brace">}</span></div>
 
         <div class="info-box">
-          <div class="info-box-title">✨ String Interpolation</div>
+          <div class="info-box-title">String Interpolation</div>
           <p>The <span class="inline-code">$</span> before a string and <span class="inline-code">{}</span> brackets create "string interpolation" - a clean way to insert variable values into text. It's much more readable than older concatenation methods!</p>
         </div>
 
@@ -844,17 +549,17 @@
         <span class="comment">// AND operator (&&) - both conditions must be true</span>
         <span class="keyword">if</span> (age <span class="operator">>=</span> <span class="number">18</span> <span class="operator">&&</span> hasLicense)
         <span class="brace">{</span>
-            <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"You can drive! 🚗"</span>);
+            <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"You can drive!"</span>);
         <span class="brace">}</span>
         <span class="keyword">else</span>
         <span class="brace">{</span>
-            <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"You cannot drive! 🚫"</span>);
+            <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"You cannot drive!"</span>);
         <span class="brace">}</span>
         
         <span class="comment">// OR operator (||) - at least one condition must be true</span>
         <span class="keyword">if</span> (hasLicense <span class="operator">||</span> hasInsurance)
         <span class="brace">{</span>
-            <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"You have some form of driving documentation! 📄"</span>);
+            <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"You have some form of driving documentation!"</span>);
         <span class="brace">}</span>
         
         <span class="comment">// NOT operator (!) - reverses the condition</span>
@@ -874,7 +579,7 @@
         <span class="brace">}</span>
         <span class="keyword">else</span>
         <span class="brace">{</span>
-            <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"Maybe stay inside today! 🏠"</span>);
+            <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"Maybe stay inside today!"</span>);
         <span class="brace">}</span>
     <span class="brace">}</span>
 <span class="brace">}</span></div>
@@ -925,7 +630,7 @@
         <span class="brace">{</span>
             <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"</span><span class="brace">{</span>countdown<span class="brace">}</span><span class="string">..."</span>);
         <span class="brace">}</span>
-                    <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"Blast off!"</span>);
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"Blast off!"</span>);
         
         <span class="comment">// Skip by 2s (even numbers)</span>
         <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"</span><span class="operator">\n</span><span class="string">Even numbers from 2 to 10:"</span>);
@@ -1148,7 +853,7 @@
         <span class="comment">// Checking if element exists</span>
         <span class="keyword">if</span> (names.<span class="method">Contains</span>(<span class="string">"Charlie"</span>))
         <span class="brace">{</span>
-            <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"Charlie is in the list! 👋"</span>);
+            <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"Charlie is in the list!"</span>);
         <span class="brace">}</span>
         
         <span class="comment">// Displaying list contents</span>
@@ -1281,7 +986,7 @@
     <span class="comment">// Method that displays stars</span>
     <span class="keyword">static</span> <span class="keyword">void</span> <span class="method">DisplayStars</span>()
     <span class="brace">{</span>
-                    <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"*****"</span>);
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"*****"</span>);
     <span class="brace">}</span>
     
     <span class="comment">// Method with one parameter</span>
@@ -1370,7 +1075,7 @@
     <span class="comment">// Method that returns a string</span>
     <span class="keyword">static</span> <span class="keyword">string</span> <span class="method">CreateGreeting</span>(<span class="keyword">string</span> name, <span class="keyword">int</span> age)
     <span class="brace">{</span>
-        <span class="keyword">return</span> <span class="string">$"Hello </span><span class="brace">{</span>name<span class="brace">}</span><span class="string">! You are </span><span class="brace">{</span>age<span class="brace">}</span><span class="string"> years old. 🎂"</span>;
+        <span class="keyword">return</span> <span class="string">$"Hello </span><span class="brace">{</span>name<span class="brace">}</span><span class="string">! You are </span><span class="brace">{</span>age<span class="brace">}</span><span class="string"> years old."</span>;
     <span class="brace">}</span>
     
     <span class="comment">// Method that returns a boolean</span>
@@ -1424,7 +1129,7 @@
     <span class="comment">// Overloaded methods with same name but different parameters</span>
     <span class="keyword">static</span> <span class="keyword">void</span> <span class="method">DisplayMessage</span>()
     <span class="brace">{</span>
-        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"Default message! 📢"</span>);
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">"Default message!"</span>);
     <span class="brace">}</span>
     
     <span class="keyword">static</span> <span class="keyword">void</span> <span class="method">DisplayMessage</span>(<span class="keyword">string</span> message)
@@ -1687,7 +1392,7 @@
     
     <span class="keyword">public</span> <span class="keyword">void</span> <span class="method">Sleep</span>()
     <span class="brace">{</span>
-        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"</span><span class="brace">{</span>Name<span class="brace">}</span><span class="string"> is sleeping... 😴"</span>);
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"</span><span class="brace">{</span>Name<span class="brace">}</span><span class="string"> is sleeping..."</span>);
     <span class="brace">}</span>
 <span class="brace">}</span>
 
@@ -1704,12 +1409,12 @@
     <span class="comment">// Override the MakeSound method</span>
     <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="method">MakeSound</span>()
     <span class="brace">{</span>
-        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"</span><span class="brace">{</span>Name<span class="brace">}</span><span class="string"> says: Woof! Woof! 🐕"</span>);
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"</span><span class="brace">{</span>Name<span class="brace">}</span><span class="string"> says: Woof! Woof!"</span>);
     <span class="brace">}</span>
     
     <span class="keyword">public</span> <span class="keyword">void</span> <span class="method">Fetch</span>()
     <span class="brace">{</span>
-        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"</span><span class="brace">{</span>Name<span class="brace">}</span><span class="string"> is fetching the ball! 🎾"</span>);
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"</span><span class="brace">{</span>Name<span class="brace">}</span><span class="string"> is fetching the ball!"</span>);
     <span class="brace">}</span>
 <span class="brace">}</span>
 
@@ -1725,12 +1430,12 @@
     
     <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="method">MakeSound</span>()
     <span class="brace">{</span>
-        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"</span><span class="brace">{</span>Name<span class="brace">}</span><span class="string"> says: Meow! 🐱"</span>);
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"</span><span class="brace">{</span>Name<span class="brace">}</span><span class="string"> says: Meow!"</span>);
     <span class="brace">}</span>
     
     <span class="keyword">public</span> <span class="keyword">void</span> <span class="method">Purr</span>()
     <span class="brace">{</span>
-        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"</span><span class="brace">{</span>Name<span class="brace">}</span><span class="string"> is purring... 😺"</span>);
+        <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"</span><span class="brace">{</span>Name<span class="brace">}</span><span class="string"> is purring..."</span>);
     <span class="brace">}</span>
 <span class="brace">}</span>
 
@@ -1935,6 +1640,7 @@
         <span class="method">ProcessData</span>(<span class="operator">-</span><span class="number">5</span>);  <span class="comment">// This will cause an exception</span>
     <span class="brace">}</span>
     
+    <span class="comment">// Method that uses finally</span>
     <span class="keyword">static</span> <span class="keyword">void</span> <span class="method">ProcessData</span>(<span class="keyword">int</span> value)
     <span class="brace">{</span>
         <span class="type">Console</span>.<span class="method">WriteLine</span>(<span class="string">$"</span><span class="operator">\n</span><span class="string">Processing value: </span><span class="brace">{</span>value<span class="brace">}</span><span class="string">"</span>);
@@ -2021,3 +1727,11 @@
           </ul>
         </div>
       </div>
+    </div>
+
+    <footer>
+      <p>C# Programming Fundamentals Documentation.</p>
+    </footer>
+  </div>
+</body>
+</html>
